@@ -3,286 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Branching & Consequence — VG101 Knowledge Base</title>
+  <title>Branching & Consequence - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Narrative</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link active">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="branching-consequence.html" class="nav-link active">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Narrative</a> / Branching & Consequence</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Narrative</span>
-          <span class="tag">narrative</span> <span class="tag">choice</span> <span class="tag">structure</span> <span class="tag">agency</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Narrative</a> / Branching & Consequence
+        </nav>
+
         <h1>Branching & Consequence</h1>
-<strong>Branching</strong> is when player choices create different paths. <strong>Consequence</strong> is when those choices matter — when the path you took shapes what happens later.
-Every choice-based videogame grapples with these: How much do choices diverge? How long do consequences echo? And crucially: how do you create the <em>feeling</em> of consequence when you can't actually build infinite permutations?
-<hr>
-<h2>The Illusion Problem</h2>
-Players want their choices to matter. Developers have finite resources. This creates tension.
-A videogame with 10 meaningful binary choices has 1,024 possible endings. That's unshippable. So designers cheat — and the good ones cheat well.
-<strong>The goal isn't maximum branching. It's maximum <em>felt</em> consequence.</strong>
-<hr>
-<h2>Branching Structures</h2>
-<h3>Linear with Flavor</h3>
-The story goes one place, but dialogue and details change based on choices.
-<pre><code>    ──●──●──●──●──●──●→ [One ending]
-       ↑  ↑  ↑
-     Different dialogue at each point
-</code></pre>
-<p><em>Example: Most RPGs with "good/evil" dialogue that don't actually change the plot</em></p>
-<h3>Foldback (Bottleneck)</h3>
-Paths diverge, then converge at key points before diverging again.
-<pre><code>        ╱──●──╲
-    ──●        ●──●──●→
-        ╲──●──╱
-</code></pre>
-<p><em>Example: Mass Effect (many choices, but main story beats are fixed)</em></p>
-<h3>Parallel Paths</h3>
-Genuinely different routes that occasionally touch.
-<pre><code>    ──●──●──●──●→
-              ╲╱
-    ──○──○──○──○→
-</code></pre>
-<p><em>Example: Silent Hill 2 (different endings based on accumulated behavior)</em></p>
-<h3>Branching Tree</h3>
-Exponential divergence. Expensive, rare.
-<pre><code>           ╱●──●
-      ╱──●
-    ●      ╲●
-      ╲──●──●
-</code></pre>
-<p><em>Example: Visual novels with many true routes</em></p>
-<hr>
-<h2>Types of Consequence</h2>
-<table>
-<thead><tr>
-<th>Type</th><th>When it appears</th><th>Player experience</th><th>Cost to produce</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><strong>Immediate</strong></td><td>Right after choice</td><td>"That affected something"</td><td>Low</td> <thead><tr> <th><strong>Delayed</strong></th><th>Hours later</th><th>"My earlier choice mattered"</th><th>Medium</th> <tr> <td><strong>Cumulative</strong></td><td>Based on pattern of choices</td><td>"Who I've been matters"</td><td>Medium</td> <thead><tr> <th><strong>Ending-only</strong></th><th>Only at conclusion</th><th>"The whole journey led here"</th><th>Medium</th> <tr> <td><strong>Cosmetic</strong></td><td>Different details, same outcome</td><td>"I customized my experience"</td><td>Low</td> <thead><tr> <th><strong>Structural</strong></th><th>Different content entirely</th><th>"This is a different game"</th><th>High</th></p>
-<p><strong>Key insight:</strong> Players often can't tell the difference between structural and cosmetic consequences — especially on a single playthrough. This is your ally.</p>
-<hr>
-<h2>Making Consequences Feel Real</h2>
-<h3>Acknowledgment</h3>
-Have the videogame recognize what the player did. An NPC mentions your earlier choice. The world shows a scar from your decision.
-<em>"I heard about what you did in the village."</em> — This costs almost nothing and makes choices feel witnessed.
-<h3>Delayed Callback</h3>
-Reference an early choice late in the game. The longer the delay, the more impactful the callback.
-<em>Mass Effect 2's suicide mission draws on choices made 40+ hours earlier.</em>
-<h3>Irreversibility</h3>
-Make some choices genuinely permanent. No save-scumming, no backsies.
-<em>Undertale's Genocide route permanently marks your save file.</em>
-<h3>Character Reaction</h3>
-Have characters respond emotionally, not just informationally. Disappointment. Gratitude. Betrayal.
-<em>Reactions make choices feel moral, not just strategic.</em>
-<h3>Absence</h3>
-Remove something. A character who dies is <em>gone</em>. A path not taken is closed.
-<em>The most expensive consequence, but the most felt.</em>
-<hr>
-<h2>The False Choice Problem</h2>
-A <strong>false choice</strong> is one where both options lead to the same outcome.
-False choices aren't always bad — they can let players express themselves without ballooning scope. But players resent them when they feel deceived.
-<strong>Good false choice:</strong> Dialogue options that express your character's personality without changing plot
-<strong>Bad false choice:</strong> "Save the village or save the city" where both end up saved anyway
-The difference is expectation. If a choice <em>seems</em> significant, it needs at least cosmetic consequence.
-<hr>
-<h2>Emergent vs. Authored Consequence</h2>
-<table>
-<thead><tr>
-<th>Authored</th><th>Emergent</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td>Designer crafted this outcome</td><td>Outcome emerged from systems</td> <thead><tr> <th>Predictable, polished</th><th>Surprising, rough edges</th> <tr> <td>Limited permutations</td><td>Potentially infinite permutations</td> <thead><tr> <th>Story-shaped</th><th>Anecdote-shaped</th></p>
-<p><em>Authored: Mass Effect's loyalty missions affecting the ending</em> <em>Emergent: Dwarf Fortress's fortress collapsing from a butterfly effect of decisions</em></p>
-<p>Both are valuable. Authored consequence feels intentional; emergent consequence feels personal.</p>
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Branching & Consequence is where narrative design meets systems design. Choices are systems; consequences are feedback.
-<strong>The key insight:</strong> Consequence is about <em>feeling</em>, not <em>scope</em>. Students often think more branching = better. Show them how smaller videogames create powerful consequences with minimal divergence.
-<strong>Exercise: Consequence Mapping</strong>
-Take a choice from a published game. Map:
-1. What choices does the player have?
-2. What immediate consequences follow?
-3. What delayed consequences appear?
-4. How much does the content actually diverge?
-Often, the perceived divergence far exceeds the actual divergence. That's good design.
-<strong>Exercise: Minimal Viable Branch</strong>
-Students design a 3-choice sequence where each choice has a consequence, but total content is limited to 5 scenes. Forces creative use of callbacks, acknowledgments, and cosmetic variation.
-<strong>Warning:</strong> Students often design unsustainable branch trees. Make them <em>count</em> their nodes before building.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-Branching & Consequence sits at the intersection of narratology, videogame studies, and production reality.
-<strong>Key influences:</strong>
-<strong>Sam Barlow</strong> — Designer of <em>Her Story</em> and <em>Immortality</em>. His work explores non-linear discovery rather than branching choices. The player constructs the story from fragments.
-<strong>Emily Short</strong> — Interactive fiction pioneer. Her work on conversation systems and quality-based narrative (Failbetter's StoryNexus) offers alternatives to simple branching.
-<strong>Chris Gardiner</strong> — Failbetter Games. "Quality-based narrative" uses accumulating stats rather than branch points. Your history is a set of qualities, not a tree.
-<strong>What I'm taking:</strong>
-The reframe from "branch points" to "consequence systems." Stop thinking about Y-shaped paths and start thinking about how player history is tracked and surfaced.
-<strong>What I'm resisting:</strong>
-<strong>Branch fetishism:</strong> The assumption that more branching = better game. Some of the best narrative videogames (<em>Brothers: A Tale of Two Sons</em>) are almost entirely linear.
-<strong>The "player control" ideology:</strong> The idea that players should control the story. Sometimes the most powerful experiences come from <em>lack</em> of control — from being complicit in something you couldn't prevent.
-<strong>Unresolved questions:</strong>
-- How do we balance player agency with authored meaning? If the player can choose anything, how does the author say anything?
-- Is consequence even possible in a save/reload paradigm? Can choices "really" matter when the player can undo them?
-- What's the relationship between branching and replayability? Some videogames are better experienced once; does branching serve them?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="permissions.html">Permissions</a> — choices are permissions granted or withheld
-- <a href="narrative-dialogue-systems.html">Dialogue Systems</a> — where many branches happen
-- <a href="meaning-from-dynamics.html">Meaning From Dynamics</a> — consequence as meaning-generating system
-- <a href="case-studies-mass-effect-suicide-mission.html">Suicide Mission</a> — masterclass in delayed consequence
-- <a href="case-studies-undertale-genocide-route.html">Genocide Route</a> — consequence with teeth
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-foldback-structure.html">Foldback Structure</a> — branches that reconverge  
-→ <a href="glossary-false-choice.html">False Choice</a> — choices without real consequence  
-→ <a href="glossary-quality-based-narrative.html">Quality Based Narrative</a> — tracking player history as stats
-        
+
+        <p class="lead">
+          The technique of writing multiple passes of an event - usually a conversation or action - with the goal of creating more tailored player expression and more varied playthroughs.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Branching vs. Consequence</h3>
+            <p>
+              <strong>Branching</strong> is when player choices create different paths.
+              <strong>Consequence</strong> is when those choices matter - when the path you took shapes what happens later.
+            </p>
+            <p>
+              Every choice-based videogame grapples with these: How much do choices diverge?
+              How long do consequences echo? And crucially: how do you create the <em>feeling</em>
+              of consequence when you can't actually build infinite permutations?
+            </p>
+
+            <h3>Meaningful Choice vs. Illusion of Choice</h3>
+            <p>
+              <strong>Meaningful choice</strong> has an actual effect on the player's character, world, or story.
+              <strong>Illusion of choice</strong> ensures the same narrative occurs no matter what your moment-to-moment choices are.
+            </p>
+            <p>
+              Neither is inherently bad. Illusion of choice can let players express themselves without ballooning scope.
+              But players resent it when they feel deceived - when a choice <em>seems</em> significant but leads nowhere.
+            </p>
+
+            <h3>What Makes Consequence Feel Real</h3>
+            <p>
+              A consequence feels real when the player believes their decisions put them where they are -
+              <em>even if they actually didn't</em>. This is the designer's advantage: perception matters more than structure.
+            </p>
+            <p>Techniques for felt consequence:</p>
+            <ul>
+              <li><strong>Acknowledgment:</strong> Have the videogame recognize what the player did. An NPC mentions your earlier choice. The world shows a scar from your decision.</li>
+              <li><strong>Delayed Callback:</strong> Reference an early choice late in the videogame. The longer the delay, the more impactful.</li>
+              <li><strong>Character Reaction:</strong> Have characters respond emotionally, not just informationally. Disappointment. Gratitude. Betrayal.</li>
+              <li><strong>Absence:</strong> Remove something. A character who dies is <em>gone</em>. A path not taken is closed.</li>
+            </ul>
+
+            <h3>Branching Structures</h3>
+            <p><strong>Linear with Flavor:</strong> The story goes one place, but dialogue and details change based on choices.</p>
+            <p><strong>Foldback (Bottleneck):</strong> Paths diverge, then converge at key points before diverging again. (Mass Effect)</p>
+            <p><strong>Parallel Paths:</strong> Genuinely different routes that occasionally touch. (Silent Hill 2)</p>
+            <p><strong>Branching Tree:</strong> Exponential divergence. Expensive, rare. (Some visual novels)</p>
+
+            <h3>Types of Consequence</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>When it appears</th>
+                  <th>Player experience</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Immediate</strong></td>
+                  <td>Right after choice</td>
+                  <td>"That affected something"</td>
+                  <td>Low</td>
+                </tr>
+                <tr>
+                  <td><strong>Delayed</strong></td>
+                  <td>Hours later</td>
+                  <td>"My earlier choice mattered"</td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td><strong>Cumulative</strong></td>
+                  <td>Based on pattern</td>
+                  <td>"Who I've been matters"</td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td><strong>Cosmetic</strong></td>
+                  <td>Different details, same outcome</td>
+                  <td>"I customized my experience"</td>
+                  <td>Low</td>
+                </tr>
+                <tr>
+                  <td><strong>Structural</strong></td>
+                  <td>Different content entirely</td>
+                  <td>"This is a different game"</td>
+                  <td>High</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>Key insight:</strong> Players often can't tell the difference between structural and cosmetic consequences on a single playthrough. This is your ally.</p>
+
+            <h3>Exercise: Study Existing Videogames</h3>
+            <p>Play through key sequences from:</p>
+            <ul>
+              <li><em>Fable 2</em> - Good/evil system with cosmetic and structural consequences</li>
+              <li><em>Tales from the Borderlands</em> - Telltale's strongest work on felt consequence</li>
+              <li><em>The Walking Dead</em> - Classic example of illusion of choice done well (and sometimes poorly)</li>
+            </ul>
+            <p>For each: What choices did you make? What consequences followed? How much did the content actually diverge?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Students often think branching narrative means creating massive branching conversations and choices.
+              But that approach is exponential in scope - a videogame with 10 meaningful binary choices has 1,024 possible endings.
+              That's unshippable.
+            </p>
+            <p>
+              Teaching branching and consequence properly prevents the "scope trap": designing systems that are
+              theoretically interesting but practically impossible to execute. We must find smarter, more refined solutions.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Every choice should have entirely bespoke experiences"</strong></p>
+            <p>
+              Students want to make every choice lead to completely unique content. This is admirable but unsustainable.
+              The skill is creating <em>felt</em> uniqueness with <em>actual</em> modularity.
+            </p>
+
+            <p><strong>"More branches = better narrative"</strong></p>
+            <p>
+              Some of the best narrative videogames (<em>Brothers: A Tale of Two Sons</em>) are almost entirely linear.
+              Branching is a tool, not a virtue.
+            </p>
+
+            <h3>Assessment</h3>
+            <p>Test understanding through analysis questions on different types of narrative branching:</p>
+            <ul>
+              <li>What are the strengths and shortcomings of foldback structure?</li>
+              <li>When is illusion of choice appropriate? When is it harmful?</li>
+              <li>Map a sequence from a published videogame: perceived branches vs. actual branches</li>
+            </ul>
+
+            <h3>Teaching Exercise: Minimal Viable Branch</h3>
+            <p>
+              Students design a 3-choice sequence where each choice has a consequence, but total content is limited to 5 scenes.
+              Forces creative use of callbacks, acknowledgments, and cosmetic variation.
+            </p>
+            <p><strong>Warning:</strong> Make students <em>count their nodes</em> before building. Scope awareness is the lesson.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Genre Expectations</h3>
+            <p>
+              What players expect from branching depends heavily on genre. RPGs expect a lot of meaningful choices.
+              Roguelikes expect high variation but accept strong modularity and repetition.
+              Linear action videogames expect almost none.
+            </p>
+            <p>
+              Study the choices your genre makes. What do players of this genre expect?
+              What conventions can you inherit, and where can you transform them?
+            </p>
+
+            <h3>Authored vs. Emergent Consequence</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Authored</th>
+                  <th>Emergent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Designer crafted this outcome</td>
+                  <td>Outcome emerged from systems</td>
+                </tr>
+                <tr>
+                  <td>Predictable, polished</td>
+                  <td>Surprising, rough edges</td>
+                </tr>
+                <tr>
+                  <td>Limited permutations</td>
+                  <td>Potentially infinite permutations</td>
+                </tr>
+                <tr>
+                  <td>Story-shaped</td>
+                  <td>Anecdote-shaped</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              <em>Authored: Mass Effect's loyalty missions affecting the ending</em><br>
+              <em>Emergent: Dwarf Fortress's fortress collapsing from a butterfly effect of decisions</em>
+            </p>
+            <p>Both are valuable. Authored consequence feels intentional; emergent consequence feels personal.</p>
+
+            <h3>Key References</h3>
+            <ul>
+              <li><strong>Sam Barlow</strong> - <em>Her Story</em>, <em>Immortality</em>. Non-linear discovery rather than branching choices.</li>
+              <li><strong>Emily Short</strong> - Interactive fiction pioneer. Quality-based narrative as alternative to simple branching.</li>
+              <li><strong>Chris Gardiner</strong> - Failbetter Games. "Quality-based narrative" uses accumulating stats rather than branch points.</li>
+            </ul>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How do we balance player agency with authored meaning? If the player can choose anything, how does the author say anything?</li>
+              <li>Is consequence even possible in a save/reload paradigm? Can choices "really" matter when the player can undo them?</li>
+              <li>What's the relationship between branching and replayability? Some videogames are better experienced once.</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/permissions.html">Permissions</a> - choices are permissions granted or withheld</li>
+          <li><a href="dialogue-systems.html">Dialogue Systems</a> - where many branches happen</li>
+          <li><a href="ludonarrative-harmony.html">Ludonarrative Harmony</a> - when story and mechanics align</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#foldback-structure" class="term">Foldback Structure</a> - branches that reconverge</li>
+          <li><a href="../glossary.html#false-choice" class="term">False Choice</a> - choices without real consequence</li>
+          <li><a href="../glossary.html#quality-based-narrative" class="term">Quality-Based Narrative</a> - tracking player history as stats</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>
