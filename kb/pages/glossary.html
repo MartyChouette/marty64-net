@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .glossary-section { margin-bottom: 2rem; }
-    .glossary-section h2 { 
-      color: #f59e0b; 
+    .glossary-section h2 {
+      color: #f59e0b;
       border-bottom: 2px solid #e5e7eb;
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
@@ -19,9 +19,15 @@
     .glossary-term {
       margin-bottom: 0.75rem;
       line-height: 1.6;
+      scroll-margin-top: 2rem;
     }
     .glossary-term strong {
       color: #1a1a1a;
+    }
+    .glossary-term a {
+      color: #f59e0b;
+      text-decoration: underline;
+      text-decoration-style: dotted;
     }
   </style>
 </head>
@@ -30,7 +36,9 @@
     <nav class="sidebar">
       <a href="../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
+
+      <a href="../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
@@ -40,7 +48,7 @@
           <li class="nav-item"><a href="framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
@@ -49,7 +57,7 @@
           <li class="nav-item"><a href="foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
@@ -60,147 +68,167 @@
         </ul>
       </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb">
-          <a href="../index.html">Home</a> / Glossary
+          <a href="../index.html">VG101</a> / Glossary
         </nav>
-        
+
         <h1>Glossary</h1>
         <p>Key terms and definitions, cross-referenced with main entries.</p>
-        
+
         <hr>
-        
+
         <div class="glossary-section">
           <h2>A</h2>
-          <p class="glossary-term"><strong>Accessibility</strong>: Designing videogames to be playable by people with diverse abilities. See <a href="pedagogy/accessibility-as-craft.html">Accessibility as Craft</a>.</p>
-          <p class="glossary-term"><strong>Action</strong>: One of the 4 A's. What the videogame has the player do, including absence of interaction. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
-          <p class="glossary-term"><strong>Aesthetic</strong>: One of the 4 A's. Art direction, lighting, staging, camera grammar, composition, and their heritage. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
-          <p class="glossary-term"><strong>Aesthetic Heritage</strong>: Where the choices in each A come from. The lineage. See <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</p>
-          <p class="glossary-term"><strong>Affordance</strong>: What an object suggests you can do with it. A button affords pressing; a lever affords pulling.</p>
-          <p class="glossary-term"><strong>Agency</strong>: The player's capacity to make meaningful choices and affect outcomes.</p>
-          <p class="glossary-term"><strong>Arc</strong>: One of the 4 A's. The amount of time. A micro-moment, a long moment, or an entire videogame. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
-          <p class="glossary-term"><strong>Atmosphere</strong>: One of the 4 A's. The feeling and vibe experienced from the videogame. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="accessibility"><strong>Accessibility</strong>: Designing videogames to be playable by people with diverse abilities. See <a href="pedagogy/accessibility-as-craft.html">Accessibility as Craft</a>.</p>
+          <p class="glossary-term" id="action"><strong>Action</strong>: One of the <a href="#the-four-as">4 A's</a>. What the videogame has the player do, including absence of interaction. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="aesthetic-heritage"><strong>Aesthetic Heritage</strong>: Where the choices in each A come from. The lineage. See <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</p>
+          <p class="glossary-term" id="affordance"><strong>Affordance</strong>: What an object suggests you can do with it. A button affords pressing; a lever affords pulling.</p>
+          <p class="glossary-term" id="agency"><strong>Agency</strong>: The player's capacity to make meaningful choices and affect outcomes.</p>
+          <p class="glossary-term" id="arc"><strong>Arc</strong>: One of the <a href="#the-four-as">4 A's</a>. The amount of time. A micro-moment, a long moment, or an entire videogame. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="art"><strong>Art</strong>: One of the <a href="#the-four-as">4 A's</a>. Art direction, lighting, staging, camera grammar, composition, sound design, and their heritage. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="atmosphere"><strong>Atmosphere</strong>: One of the <a href="#the-four-as">4 A's</a>. The feeling and vibe experienced from the videogame. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>B</h2>
-          <p class="glossary-term"><strong>Barks</strong>: Short, contextual voice lines that respond to videogame events ("Enemy spotted!", "I'm hit!").</p>
-          <p class="glossary-term"><strong>Beat</strong>: A single unit of pacing. A moment of tension or release.</p>
+          <p class="glossary-term" id="barks"><strong>Barks</strong>: Short, contextual voice lines that respond to videogame events ("Enemy spotted!", "I'm hit!").</p>
+          <p class="glossary-term" id="beat"><strong>Beat</strong>: A single unit of pacing. A moment of tension or release.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>C</h2>
-          <p class="glossary-term"><strong>Cancel Window</strong>: The time during which one action can be interrupted by another.</p>
-          <p class="glossary-term"><strong>Checkpoint</strong>: A saved progress point the player returns to on failure.</p>
-          <p class="glossary-term"><strong>Coyote Time</strong>: Grace period after leaving a platform during which the player can still jump. Example of player-fair design.</p>
-          <p class="glossary-term"><strong>Curb Cut Effect</strong>: Accessibility features that help specific users often help everyone. Named for sidewalk curb cuts.</p>
+          <p class="glossary-term" id="cancel-window"><strong>Cancel Window</strong>: The time during which one action can be interrupted by another.</p>
+          <p class="glossary-term" id="checkpoint"><strong>Checkpoint</strong>: A saved progress point the player returns to on failure.</p>
+          <p class="glossary-term" id="coyote-time"><strong>Coyote Time</strong>: Grace period after leaving a platform during which the player can still jump. Example of player-fair design. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="curb-cut-effect"><strong>Curb Cut Effect</strong>: Accessibility features that help specific users often help everyone. Named for sidewalk curb cuts. See <a href="pedagogy/accessibility-as-craft.html">Accessibility as Craft</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>D</h2>
-          <p class="glossary-term"><strong>Diegetic</strong>: Existing within the videogame world (vs. UI that exists outside it).</p>
-          <p class="glossary-term"><strong>Dialogue Tree</strong>: Branching conversation structure where player choices lead to different responses.</p>
-          <p class="glossary-term"><strong>Dynamics</strong>: Emergent patterns from player-system interaction.</p>
-          <p class="glossary-term"><strong>Debugging</strong>: Finding and fixing errors in code or design. See <a href="pedagogy/debugging-as-literacy.html">Debugging as Literacy</a>.</p>
+          <p class="glossary-term" id="diegetic"><strong>Diegetic</strong>: Existing within the videogame world (vs. UI that exists outside it).</p>
+          <p class="glossary-term" id="dialogue-tree"><strong>Dialogue Tree</strong>: Branching conversation structure where player choices lead to different responses. See <a href="narrative/dialogue-systems.html">Dialogue Systems</a>.</p>
+          <p class="glossary-term" id="dynamics"><strong>Dynamics</strong>: Emergent patterns from player-system interaction.</p>
+          <p class="glossary-term" id="debugging"><strong>Debugging</strong>: Finding and fixing errors in code or design. See <a href="pedagogy/debugging-as-literacy.html">Debugging as Literacy</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>E</h2>
-          <p class="glossary-term"><strong>Emergence</strong>: Complex, unexpected behaviors arising from simple rule interactions. See <a href="systems/emergent-behavior.html">Emergent Behavior</a>.</p>
-          <p class="glossary-term"><strong>Extrinsic Motivation</strong>: Playing for external rewards (XP, unlocks, achievements).</p>
+          <p class="glossary-term" id="emergence"><strong>Emergence</strong>: Complex, unexpected behaviors arising from simple rule interactions. See <a href="systems/emergent-behavior.html">Emergent Behavior</a>.</p>
+          <p class="glossary-term" id="extrinsic-motivation"><strong>Extrinsic Motivation</strong>: Playing for external rewards (XP, unlocks, achievements). See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>F</h2>
-          <p class="glossary-term"><strong>Feedback</strong>: How the videogame responds to player action.</p>
-          <p class="glossary-term"><strong>Feedback Loop</strong>: When output of a system becomes input to that system. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
-          <p class="glossary-term"><strong>Flow</strong>: State of complete absorption where challenge matches skill (Csikszentmihalyi). See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
-          <p class="glossary-term"><strong>Frame Data</strong>: The exact timing of actions measured in animation frames (common in fighting videogames).</p>
+          <p class="glossary-term" id="false-choice"><strong>False Choice</strong>: A choice that appears meaningful but leads to the same outcome. See <a href="narrative/branching-consequence.html">Branching & Consequence</a>.</p>
+          <p class="glossary-term" id="feedback"><strong>Feedback</strong>: How the videogame responds to player action.</p>
+          <p class="glossary-term" id="feedback-loop"><strong>Feedback Loop</strong>: When output of a system becomes input to that system. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="flow"><strong>Flow</strong>: State of complete absorption where challenge matches skill (Csikszentmihalyi). See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="foldback-structure"><strong>Foldback Structure</strong>: Branching narrative that reconverges at key points before diverging again. See <a href="narrative/branching-consequence.html">Branching & Consequence</a>.</p>
+          <p class="glossary-term" id="found-narrative"><strong>Found Narrative</strong>: Story discovered through exploration rather than delivered through cutscenes. See <a href="narrative/environmental-storytelling.html">Environmental Storytelling</a>.</p>
+          <p class="glossary-term" id="frame-data"><strong>Frame Data</strong>: The exact timing of actions measured in animation frames (common in fighting videogames).</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>G</h2>
-          <p class="glossary-term"><strong>Gesture</strong>: The surface area of contact between player and videogame. Composed of the 4 A's. See <a href="framework/gesture.html">Gesture</a>.</p>
+          <p class="glossary-term" id="gesture"><strong>Gesture</strong>: The surface area of contact between player and videogame. Composed of the <a href="#the-four-as">4 A's</a>. See <a href="framework/gesture.html">Gesture</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>H</h2>
-          <p class="glossary-term"><strong>Hitstop</strong>: Brief freeze when attacks connect, emphasizing impact.</p>
-          <p class="glossary-term"><strong>Human Random vs. Computer Random</strong>: True randomness feels unfair to humans. Many videogames use weighted randomness that feels more fair. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="hard-currency"><strong>Hard Currency</strong>: Difficult to obtain, premium currency, often monetized. See <a href="systems/economy-resources.html">Economy & Resources</a>.</p>
+          <p class="glossary-term" id="hitstop"><strong>Hitstop</strong>: Brief freeze when attacks connect, emphasizing impact.</p>
+          <p class="glossary-term" id="hub-and-spoke"><strong>Hub and Spoke</strong>: Conversation structure where player returns to a central menu after each topic. See <a href="narrative/dialogue-systems.html">Dialogue Systems</a>.</p>
+          <p class="glossary-term" id="human-random"><strong>Human Random vs. Computer Random</strong>: True randomness feels unfair to humans. Many videogames use weighted randomness that feels more fair. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>I</h2>
-          <p class="glossary-term"><strong>Input Buffer</strong>: System that remembers inputs for a grace period, improving responsiveness.</p>
-          <p class="glossary-term"><strong>Intrinsic Motivation</strong>: Playing because the activity itself is rewarding.</p>
+          <p class="glossary-term" id="immersive-sim"><strong>Immersive Sim</strong>: Genre built around systemic emergence and player choice (Deus Ex, Dishonored, Prey). See <a href="systems/emergent-behavior.html">Emergent Behavior</a>.</p>
+          <p class="glossary-term" id="inflation"><strong>Inflation</strong>: Too many sources, too few sinks in an economy. Resources pile up, value collapses. See <a href="systems/economy-resources.html">Economy & Resources</a>.</p>
+          <p class="glossary-term" id="inheritance"><strong>Inheritance</strong>: Using a solution because it works, without necessarily referencing its origin. See <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</p>
+          <p class="glossary-term" id="input-buffer"><strong>Input Buffer</strong>: System that remembers inputs for a grace period, improving responsiveness. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="intrinsic-motivation"><strong>Intrinsic Motivation</strong>: Playing because the activity itself is rewarding. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>J</h2>
-          <p class="glossary-term"><strong>Juice</strong>: Extra feedback beyond what's necessary, making actions feel satisfying. Particles, sounds, screen shake.</p>
+          <p class="glossary-term" id="juice"><strong>Juice</strong>: Extra feedback beyond what's necessary, making actions feel satisfying. Particles, sounds, screen shake. See <a href="code-bank/screen-shake.html">Screen Shake</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>L</h2>
-          <p class="glossary-term"><strong>Leading Lines</strong>: Visual elements (paths, edges, beams) that direct the player's eye.</p>
-          <p class="glossary-term"><strong>Ludonarrative Dissonance</strong>: When gameplay and story contradict. See <a href="narrative/ludonarrative-harmony.html">Ludonarrative Harmony</a>.</p>
+          <p class="glossary-term" id="leading-lines"><strong>Leading Lines</strong>: Visual elements (paths, edges, beams) that direct the player's eye. See <a href="level-design/spatial-communication.html">Spatial Communication</a>.</p>
+          <p class="glossary-term" id="ludonarrative-dissonance"><strong>Ludonarrative Dissonance</strong>: When gameplay and story contradict. See <a href="narrative/ludonarrative-harmony.html">Ludonarrative Harmony</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>M</h2>
-          <p class="glossary-term"><strong>Magic Circle</strong>: The boundary between play and ordinary life (Huizinga). A theoretical device that doesn't especially matter for videogame analysis.</p>
-          <p class="glossary-term"><strong>Mechanic</strong>: A rule governing player action.</p>
+          <p class="glossary-term" id="magic-circle"><strong>Magic Circle</strong>: The boundary between play and ordinary life (Huizinga). A theoretical device that doesn't especially matter for videogame analysis.</p>
+          <p class="glossary-term" id="mechanic"><strong>Mechanic</strong>: A rule governing player action.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>N</h2>
-          <p class="glossary-term"><strong>Negative Feedback Loop</strong>: Feedback that dampens change, pulling toward equilibrium (e.g., rubber-banding).</p>
+          <p class="glossary-term" id="negative-feedback-loop"><strong>Negative Feedback Loop</strong>: Feedback that dampens change, pulling toward equilibrium (e.g., rubber-banding). See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>P</h2>
-          <p class="glossary-term"><strong>Pacing</strong>: Rhythm of intensity over time. See <a href="level-design/pacing-flow.html">Pacing & Flow</a>.</p>
-          <p class="glossary-term"><strong>Permissions</strong>: What a videogame allows, requires, and forbids. See <a href="framework/permissions.html">Permissions</a>.</p>
-          <p class="glossary-term"><strong>Player Fair vs. Computer Fair</strong>: What feels fair to the player is not always mathematically fair. Good design often prioritizes player-fair. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
-          <p class="glossary-term"><strong>Positive Feedback Loop</strong>: Feedback that amplifies change (rich get richer).</p>
-          <p class="glossary-term"><strong>Procedural Rhetoric</strong>: Arguments made through videogame rules (Bogost).</p>
+          <p class="glossary-term" id="pacing"><strong>Pacing</strong>: Rhythm of intensity over time. See <a href="level-design/pacing-flow.html">Pacing & Flow</a>.</p>
+          <p class="glossary-term" id="permissions"><strong>Permissions</strong>: What a videogame allows, requires, and forbids. Discovered through the <a href="#the-four-as">4 A's</a> as we play. See <a href="framework/permissions.html">Permissions</a>.</p>
+          <p class="glossary-term" id="player-fair"><strong>Player Fair vs. Computer Fair</strong>: What feels fair to the player is not always mathematically fair. Good design often prioritizes player-fair. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="positive-feedback-loop"><strong>Positive Feedback Loop</strong>: Feedback that amplifies change (rich get richer). See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="procedural-rhetoric"><strong>Procedural Rhetoric</strong>: Arguments made through videogame rules (Bogost). See <a href="narrative/ludonarrative-harmony.html">Ludonarrative Harmony</a>.</p>
         </div>
-        
+
+        <div class="glossary-section">
+          <h2>Q</h2>
+          <p class="glossary-term" id="quality-based-narrative"><strong>Quality-Based Narrative</strong>: Tracking player history as accumulating stats rather than branch points (Failbetter Games). See <a href="narrative/branching-consequence.html">Branching & Consequence</a>.</p>
+          <p class="glossary-term" id="quotation"><strong>Quotation</strong>: Deliberately referencing a source. See <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</p>
+        </div>
+
         <div class="glossary-section">
           <h2>R</h2>
-          <p class="glossary-term"><strong>Readability</strong>: Whether the player can understand what they're looking at.</p>
+          <p class="glossary-term" id="readability"><strong>Readability</strong>: Whether the player can understand what they're looking at. See <a href="level-design/spatial-communication.html">Spatial Communication</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>S</h2>
-          <p class="glossary-term"><strong>Screen Shake</strong>: Camera shake as feedback for impact or intensity.</p>
-          <p class="glossary-term"><strong>Squash and Stretch</strong>: Animation principle: compression on impact, extension during movement.</p>
+          <p class="glossary-term" id="screen-shake"><strong>Screen Shake</strong>: Camera shake as feedback for impact or intensity. See <a href="code-bank/screen-shake.html">Screen Shake</a>.</p>
+          <p class="glossary-term" id="sight-line"><strong>Sight Line</strong>: What's visible from a given position. Control of sight lines = control of information. See <a href="level-design/verticality-sightlines.html">Verticality & Sight Lines</a>.</p>
+          <p class="glossary-term" id="sink"><strong>Sink</strong>: Where resources go in an economy. Drains. See <a href="systems/economy-resources.html">Economy & Resources</a>.</p>
+          <p class="glossary-term" id="soft-currency"><strong>Soft Currency</strong>: Easily obtained in-game currency, earned through play. See <a href="systems/economy-resources.html">Economy & Resources</a>.</p>
+          <p class="glossary-term" id="source"><strong>Source</strong>: Where resources come from in an economy. Faucets. See <a href="systems/economy-resources.html">Economy & Resources</a>.</p>
+          <p class="glossary-term" id="squash-and-stretch"><strong>Squash and Stretch</strong>: Animation principle: compression on impact, extension during movement.</p>
+          <p class="glossary-term" id="systemic-design"><strong>Systemic Design</strong>: Designing systems that interact with each other to produce emergent behavior. See <a href="systems/emergent-behavior.html">Emergent Behavior</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>T</h2>
-          <p class="glossary-term"><strong>Tetris Effect</strong>: When intensive play bleeds into non-play life. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
-          <p class="glossary-term"><strong>The 4 A's</strong>: Action, Aesthetic, Arc, Atmosphere. The components of a Gesture. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="tetris-effect"><strong>Tetris Effect</strong>: When intensive play bleeds into non-play life. See <a href="foundations/player-psychology.html">Player Psychology</a>.</p>
+          <p class="glossary-term" id="the-four-as"><strong>The 4 A's</strong>: Action, Art, Arc, Atmosphere. The components of a <a href="#gesture">Gesture</a>. See <a href="framework/the-four-as.html">The 4 A's</a>.</p>
+          <p class="glossary-term" id="transformation"><strong>Transformation</strong>: Taking something and making it new. See <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>V</h2>
-          <p class="glossary-term"><strong>Verbs</strong>: The actions available to players.</p>
-          <p class="glossary-term"><strong>Verticality</strong>: Use of height in level design.</p>
-          <p class="glossary-term"><strong>Vista</strong>: Dramatic revealing view; moment of seeing far.</p>
+          <p class="glossary-term" id="verbs"><strong>Verbs</strong>: The actions available to players. What the videogame lets you do.</p>
+          <p class="glossary-term" id="verticality"><strong>Verticality</strong>: Use of height in level design. See <a href="level-design/verticality-sightlines.html">Verticality & Sight Lines</a>.</p>
+          <p class="glossary-term" id="vista"><strong>Vista</strong>: Dramatic revealing view; moment of seeing far. See <a href="level-design/verticality-sightlines.html">Verticality & Sight Lines</a>.</p>
         </div>
-        
+
         <div class="glossary-section">
           <h2>W</h2>
-          <p class="glossary-term"><strong>Weenie</strong>: Disney term: tall, visible landmark that draws players forward.</p>
+          <p class="glossary-term" id="weenie"><strong>Weenie</strong>: Disney Imagineering term: tall, visible landmark that draws players forward. See <a href="level-design/verticality-sightlines.html">Verticality & Sight Lines</a>.</p>
         </div>
-        
+
       </div>
     </main>
   </div>
-  
+
   <script src="../js/main.js"></script>
 </body>
 </html>
