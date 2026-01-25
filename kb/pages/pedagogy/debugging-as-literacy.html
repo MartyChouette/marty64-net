@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debugging as Literacy — VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-box" placeholder="Search...">
+        <div id="search-results" class="search-results"></div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
+          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
+          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
+          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Narrative</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Level Design</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Systems</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link active">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+    
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Pedagogy</a> / Debugging as Literacy</nav>
+        
+        <div class="register-legend">
+          <div class="legend-item">
+            <div class="legend-swatch student"></div>
+            <span>Student</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch pedagogy"></div>
+            <span>Pedagogy</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch philosophy"></div>
+            <span>Philosophy</span>
+          </div>
+        </div>
+        
+        
+        <div class="page-meta">
+          <span>Pedagogy</span>
+          <span class="tag">pedagogy</span> <span class="tag">code</span> <span class="tag">failure</span> <span class="tag">learning</span>
+        </div>
+    
+        
+        <h1>Debugging as Literacy</h1>
+<strong>Debugging</strong> isn't just fixing code. It's a mode of thinking — a literacy in the root sense: the ability to read, understand, and respond to systems.
+Treating debugging as literacy changes how we teach code in videogame design.
+<hr>
+<h2>The Conventional View</h2>
+In CS education, debugging is remediation. You wrote a bug; now fix it. Debugging is failure recovery.
+This framing makes debugging shameful. Students hide their bugs. They feel dumb when code doesn't work.
+<hr>
+<h2>The Literacy View</h2>
+Debugging is <strong>reading.</strong> When code breaks, you read what it's actually doing (vs. what you intended). That reading skill transfers: you can read code you didn't write, read systems you didn't design, read behavior you didn't expect.
+Debugging is <strong>inquiry.</strong> "Why doesn't this work?" is a research question. You form hypotheses, test them, revise. This is scientific thinking applied to systems.
+Debugging is <strong>craft.</strong> Every craft has failure. Potters have collapsed pots. Writers have bad drafts. Debugging is normal, not shameful.
+<hr>
+<h2>Why This Matters for Videogame Design</h2>
+Game designers who can't debug are dependent on engineers. They can't prototype. They can't tweak feel. They can't understand why their design isn't working.
+Game designers who <em>can</em> debug have:
+- <strong>Prototyping independence:</strong> Build rough versions without waiting for engineers
+- <strong>Feel intuition:</strong> Tweak values, see results, iterate fast
+- <strong>System literacy:</strong> Understand how videogame systems actually work
+- <strong>Communication ability:</strong> Talk to engineers in their language
+You don't need to be a great programmer. You need to be a competent debugger.
+<hr>
+<h2>Teaching Debugging</h2>
+<h3>Normalize Failure</h3>
+Code not working isn't failure — it's the normal state. Nobody writes perfect code first try. Professional developers spend most of their time debugging.
+<h3>Read Before Fix</h3>
+Before changing anything, understand what's happening. Read the error message. Read the code. Articulate (in words) what you think is wrong.
+<h3>One Change at a Time</h3>
+Change one thing, test, repeat. If you change five things and it works, you don't know which change fixed it.
+<h3>Print Statements Are Your Friend</h3>
+The simplest debugging tool: print the value. See what's actually happening, not what you think is happening.
+<h3>Rubber Duck Debugging</h3>
+Explain the code to someone (or something — a rubber duck). The act of articulating often reveals the bug.
+<h3>Use the Error Message</h3>
+Error messages tell you something. Read them. They're not random noise.
+<hr>
+<h2>The Code Bank and Debugging</h2>
+The Code Bank scaffolds are designed for <strong>reading and modification</strong>, not just execution.
+When a scaffold doesn't produce the feel you want:
+1. <strong>Read</strong> the scaffold code
+2. <strong>Identify</strong> which variable controls the aspect you want to change
+3. <strong>Hypothesize</strong> what changing it will do
+4. <strong>Test</strong> by changing and running
+5. <strong>Iterate</strong> until it feels right
+This is debugging as design process.
+<hr>
+<h2>Debugging Without Coding</h2>
+The debugging mindset applies beyond code:
+<strong>Debugging a design:</strong> Something doesn't work. Why? Form hypothesis. Test. Revise.
+<strong>Debugging feedback:</strong> Playtesters report frustration. Where? Why? What's the root cause?
+<strong>Debugging communication:</strong> Message isn't landing. What's being misunderstood? Where's the gap?
+The skill transfers. Learning to debug code teaches you to debug everything.
+<hr>
+<div class="pedagogy">
+<div class="pedagogy-header" onclick="toggleSection(this)">
+<span class="pedagogy-label">📘 Pedagogy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="pedagogy-content">
+<h2>Teaching Notes</h2>
+I introduce debugging explicitly in <strong>Week 2</strong>, the first time students use the Code Bank. We talk about debugging <em>before</em> they encounter bugs, to normalize it.
+<strong>Key move:</strong> When students get stuck, don't give the answer. Guide them through debugging:
+- "What's the error message say?"
+- "What do you <em>think</em> is happening?"
+- "How could you test that?"
+This is slower. It's also where learning happens.
+<strong>Exercise: Intentional Bugs</strong>
+Give students code with intentional bugs. Have them debug without seeing the working version. Then discuss: how did you find it? What strategies did you use?
+<strong>Exercise: Explain the Code</strong>
+Students present someone else's Code Bank scaffold to the class. Forces reading and articulating unfamiliar code.
+<strong>Assessment:</strong> I assess debugging process, not just outcome. "How did you approach the problem?" matters as much as "did you fix it?"
+</div>
+</div>
+<hr>
+<div class="philosophy">
+<div class="philosophy-header" onclick="toggleSection(this)">
+<span class="philosophy-label">🔮 Philosophy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="philosophy-content">
+<h2>Theoretical Background</h2>
+<strong>Key influences:</strong>
+<strong>Seymour Papert</strong> — <em>Mindstorms</em>. The idea that programming teaches thinking. Debugging is the thinking.
+<strong>Brian Cantwell Smith</strong> — <em>On the Origin of Objects</em>. Computational thinking as a distinct mode of understanding.
+<strong>Annette Vee</strong> — <em>Coding Literacy</em>. The argument for coding as a form of literacy, not just a technical skill.
+<strong>What I'm taking:</strong>
+The literacy frame fundamentally changes the pedagogical stance. If debugging is literacy, it's a core skill, not a remedial one.
+<strong>What I'm resisting:</strong>
+<strong>The "debugging is for engineers" view.</strong> Designers debug too. Just differently.
+<strong>The shame around failure.</strong> CS culture often makes bugs shameful. That's counterproductive.
+<strong>Unresolved questions:</strong>
+- How much debugging literacy is enough for designers? They don't need to be engineers. Where's the line?
+- Does debugging literacy develop specific cognitive skills? The claim that "coding teaches thinking" is contested.
+- How do we assess debugging? It's process-oriented, hard to grade.
+</div>
+</div>
+<hr>
+<h2>See Also</h2>
+- <a href="pedagogy-code-as-material.html">Code As Material</a> — code as design material
+- <a href="code-bank.html">Code Bank</a> — scaffolds designed for reading
+- <a href="play-name-make-reflect.html">Play Name Make Reflect</a> — debugging in the "make" phase
+- <a href="feedback-readability.html">Feedback Readability</a> — debugging as feedback interpretation
+<hr>
+<h2>Glossary Connections</h2>
+→ <a href="glossary-debugging.html">Debugging</a> — finding and fixing errors  
+→ <a href="glossary-print-statement.html">Print Statement</a> — simplest debugging tool  
+→ <a href="glossary-hypothesis-testing.html">Hypothesis Testing</a> — debugging as scientific method
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.toggle-icon');
+      content.classList.toggle('collapsed');
+      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
+    }
+  </script>
+</body>
+</html>

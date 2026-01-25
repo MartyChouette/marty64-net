@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance Philosophy — VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-box" placeholder="Search...">
+        <div id="search-results" class="search-results"></div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
+          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
+          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
+          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Narrative</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Level Design</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Systems</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link active">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+    
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Systems</a> / Balance Philosophy</nav>
+        
+        <div class="register-legend">
+          <div class="legend-item">
+            <div class="legend-swatch student"></div>
+            <span>Student</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch pedagogy"></div>
+            <span>Pedagogy</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch philosophy"></div>
+            <span>Philosophy</span>
+          </div>
+        </div>
+        
+        
+        <div class="page-meta">
+          <span>Systems</span>
+          <span class="tag">systems</span> <span class="tag">balance</span> <span class="tag">tuning</span> <span class="tag">fairness</span>
+        </div>
+    
+        
+        <h1>Balance Philosophy</h1>
+<strong>Balance</strong> is one of the most misunderstood concepts in videogame design. It doesn't mean "everything is equal." It means "everything is <em>right</em> for the experience you're creating."
+Balance is a philosophy, not a formula.
+<hr>
+<h2>What Does "Balanced" Mean?</h2>
+Balance has multiple, sometimes conflicting meanings:
+<h3>Fairness</h3>
+No player/option has unfair advantage. "Balanced" = "not broken."
+<h3>Variety</h3>
+Multiple strategies are viable. "Balanced" = "diverse meta."
+<h3>Intentional Hierarchy</h3>
+Some things are supposed to be better. "Balanced" = "power curve is correct."
+<h3>Felt Rightness</h3>
+It <em>feels</em> fair, even if numbers aren't equal. "Balanced" = "satisfying."
+A videogame can be balanced in one sense and imbalanced in another. The first question: balanced <em>for what</em>?
+<hr>
+<h2>Balance Is Context-Dependent</h2>
+<table>
+<thead><tr>
+<th>Game Type</th><th>What "balance" means</th>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tbody></table>
+<p><tr> <td><strong>Competitive</strong></td><td>No dominant strategy; skill decides</td> <thead><tr> <th><strong>Cooperative</strong></th><th>Each role contributes; no one carries alone</th> <tr> <td><strong>Single-player</strong></td><td>Challenge matches player progression; fair difficulty</td> <thead><tr> <th><strong>Asymmetric</strong></th><th>Different sides have different strengths; overall match is even</th> <tr> <td><strong>Casual</strong></td><td>Feels good; specifics don't matter much</td></p>
+<p><em>Chess</em> needs different balance than <em>Mario Kart</em>. <em>League of Legends</em> needs different balance than <em>Stardew Valley</em>.</p>
+<hr>
+<h2>Perfect Balance Is Impossible (And Maybe Undesirable)</h2>
+Reasons perfect balance fails:
+<h3>Complexity</h3>
+Any system complex enough to be interesting is too complex to perfectly balance analytically.
+<h3>Player Diversity</h3>
+Different players have different skills. "Balanced for pros" ≠ "balanced for casuals."
+<h3>Meta Evolution</h3>
+Players discover new strategies. What's balanced today is broken tomorrow.
+<h3>Discovery Value</h3>
+Finding what's strong is part of the fun. A perfectly flat meta is boring.
+<strong>The goal isn't perfect balance. It's <em>good enough</em> balance — where imbalances don't ruin the experience.</strong>
+<hr>
+<h2>The Balance Process</h2>
+<h3>1. Set Goals</h3>
+What experience are you balancing for? "Competitive fairness" vs. "power fantasy" vs. "strategic diversity."
+<h3>2. Identify Pain Points</h3>
+What's actually breaking? Not everything needs tuning. Tune what hurts the experience.
+<h3>3. Change One Thing</h3>
+Single variable changes. If you change multiple things, you won't know which fixed (or broke) it.
+<h3>4. Playtest</h3>
+Theory doesn't catch everything. Watch real players. Especially skilled ones.
+<h3>5. Iterate</h3>
+Balance is never done. Especially in live games. Expect ongoing tuning.
+<hr>
+<h2>Balance Tools</h2>
+<h3>Numbers</h3>
+Stats, damage, cooldowns, costs. The obvious levers.
+<h3>Access</h3>
+When you can get something. A powerful item is less dominant if it comes late.
+<h3>Counters</h3>
+Rock-paper-scissors. Strength A beats B beats C beats A. Nothing dominates.
+<h3>Opportunity Cost</h3>
+Choosing X means not choosing Y. If X is strong but costs more, that's balance.
+<h3>Skill Requirement</h3>
+Powerful things that are hard to use are self-balancing. Skill floors and ceilings.
+<h3>Information</h3>
+Knowledge as balance. A strategy that works only if opponents don't know about it.
+<hr>
+<h2>Imbalance as Design</h2>
+Some imbalance is intentional:
+<h3>Power Curve</h3>
+Early videogame is weak; late videogame is strong. That's the point.
+<h3>Asymmetric Design</h3>
+Different factions/classes <em>should</em> feel different. Equal is boring.
+<h3>Discovery</h3>
+If everything is equally viable, there's nothing to discover. Some imbalance creates exploration.
+<h3>Narrative</h3>
+Story might want you to feel weak, then strong. "Balance" undermines the arc.
+The question: is this imbalance <em>serving the design</em> or <em>breaking it</em>?
+<hr>
+<h2>The Metagame</h2>
+<strong>Metagame</strong> = the strategies players converge on given current balance.
+A "healthy meta" has:
+- Multiple viable strategies
+- Counters to dominant strategies
+- Room for innovation
+- No single dominant "solved" approach
+An "unhealthy meta" has:
+- One or few dominant strategies
+- High barrier to competing
+- Stagnation
+- Player frustration/exodus
+Balance patches reshape the meta. But heavy-handed patching alienates players who invested in now-nerfed strategies.
+<hr>
+<h2>Balance vs. Feel</h2>
+Numbers can be balanced but feel wrong.
+A 50% win rate option that feels terrible to play is "balanced" but bad.
+<strong>Feel matters more than math.</strong> Players experience feel, not numbers. If it feels broken, it's broken — even if the spreadsheet says otherwise.
+<hr>
+<div class="pedagogy">
+<div class="pedagogy-header" onclick="toggleSection(this)">
+<span class="pedagogy-label">📘 Pedagogy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="pedagogy-content">
+<h2>Teaching Notes</h2>
+Balance is often taught as math. I teach it as philosophy first, math second.
+<strong>The provocation:</strong> "Perfect balance is not the goal. Good enough balance that serves the experience is."
+<strong>Exercise: Balance Autopsy</strong>
+Find a videogame with a notorious balance problem (any competitive videogame will do). Research:
+- What was broken?
+- How did players discover it?
+- How did designers respond?
+- Was the fix successful?
+<strong>Exercise: Asymmetric Balance</strong>
+Design a 2-player asymmetric videogame where players have completely different abilities. Playtest for fairness. What makes it <em>feel</em> fair even when capabilities differ?
+<strong>Key insight:</strong> Balance is about player experience, not spreadsheets.
+</div>
+</div>
+<hr>
+<div class="philosophy">
+<div class="philosophy-header" onclick="toggleSection(this)">
+<span class="philosophy-label">🔮 Philosophy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="philosophy-content">
+<h2>Theoretical Background</h2>
+<strong>Key influences:</strong>
+<strong>David Sirlin</strong> — <em>Playing to Win</em>. The competitive player's perspective on balance. What it means for a videogame to be "solvable."
+<strong>Extra Credits</strong> — Their series on balance is accessible and solid.
+<strong>Frank Lantz</strong> — Writings on elegance and depth. Sometimes imbalance creates depth.
+<strong>What I'm taking:</strong>
+The "balance for what" question. Balance isn't an objective property — it's relative to goals.
+<strong>What I'm resisting:</strong>
+<strong>The nerf-hammer approach:</strong> Constantly adjusting based on complaints. Sometimes players are wrong. Sometimes the meta needs time to develop.
+<strong>The "math will save us" fantasy:</strong> Spreadsheets can't capture feel, strategy, or player psychology. Playtesting is irreplaceable.
+<strong>Unresolved questions:</strong>
+- How do you balance for different skill levels simultaneously?
+- When is imbalance acceptable? When does it become unacceptable?
+- How do you know when to trust player complaints vs. when to wait for the meta to evolve?
+</div>
+</div>
+<hr>
+<h2>See Also</h2>
+- <a href="player-psychology.html">Feedback Loops</a> — loops often cause balance problems
+- <a href="economy-resources.html">Economy Resources</a> — economic balance
+- <a href="player-psychology.html">Player Psychology</a> — why balance <em>feels</em> the way it does
+- <a href="glossary-metagame.html">Metagame</a> — emergent strategy landscape
+<hr>
+<h2>Glossary Connections</h2>
+→ <a href="glossary-metagame.html">Metagame</a> — dominant strategies in competitive play  
+→ <a href="glossary-power-creep.html">Power Creep</a> — gradual strengthening over updates  
+→ <a href="glossary-rock-paper-scissors.html">Rock Paper Scissors</a> — balance through counters  
+→ <a href="glossary-skill-floor.html">Skill Floor</a> — minimum skill to use something effectively
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.toggle-icon');
+      content.classList.toggle('collapsed');
+      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
+    }
+  </script>
+</body>
+</html>

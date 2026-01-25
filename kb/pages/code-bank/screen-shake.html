@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen Shake — VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-box" placeholder="Search...">
+        <div id="search-results" class="search-results"></div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
+          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
+          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
+          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Narrative</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Level Design</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Systems</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+    
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Code Bank</a> / Screen Shake</nav>
+        
+        <div class="register-legend">
+          <div class="legend-item">
+            <div class="legend-swatch student"></div>
+            <span>Student</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch pedagogy"></div>
+            <span>Pedagogy</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch philosophy"></div>
+            <span>Philosophy</span>
+          </div>
+        </div>
+        
+        
+        <div class="page-meta">
+          <span>Code Bank</span>
+          <span class="tag">feedback</span> <span class="tag">juice</span> <span class="tag">feel</span> <span class="tag">camera</span>
+        </div>
+    
+        
+        <h1>Screen Shake</h1>
+Camera shake on impact, explosion, or emphasis. One of the most powerful feedback tools — and one of the most overused.
+<hr>
+<h2>The Feel</h2>
+Screen shake says: <strong>something important happened</strong>. It's emphasis. Exclamation point. Used well, it makes impacts feel weighty. Used poorly, it makes videogames feel noisy.
+<hr>
+<h2>Exposed Variables</h2>
+<table>
+<thead><tr>
+<th>Variable</th><th>Type</th><th>Default</th><th>What it does</th>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tbody></table>
+<p><tr> <td><code>intensity</code></td><td>float</td><td>5.0</td><td>Maximum pixel offset from center</td> <thead><tr> <th><code>duration</code></th><th>float</th><th>0.2</th><th>How long shake lasts (seconds)</th> <tr> <td><code>decayType</code></td><td>enum</td><td>Linear</td><td>How intensity decreases (Linear, Exponential, None)</td> <thead><tr> <th><code>frequency</code></th><th>float</th><th>30.0</th><th>How many shake "hits" per second</th> <tr> <td><code>rotationIntensity</code></td><td>float</td><td>0.0</td><td>Camera rotation shake (degrees)</td> <thead><tr> <th><code>shakePattern</code></th><th>enum</th><th>Random</th><th>Pattern of offset (Random, Perlin, Directional)</th> <tr> <td><code>direction</code></td><td>Vector2</td><td>null</td><td>For Directional pattern: bias direction</td></p>
+<hr>
+<h2>Tuning Guide</h2>
+<h3>Subtle impact (footsteps, small hits):</h3>
+- <code>intensity</code>: 1-3
+- <code>duration</code>: 0.05-0.1
+- <code>decayType</code>: Exponential
+- <code>rotationIntensity</code>: 0
+<h3>Medium impact (melee hits, jumps landing):</h3>
+- <code>intensity</code>: 5-10
+- <code>duration</code>: 0.1-0.2
+- <code>decayType</code>: Linear
+- <code>rotationIntensity</code>: 0-1
+<h3>Heavy impact (explosions, boss hits):</h3>
+- <code>intensity</code>: 15-25
+- <code>duration</code>: 0.2-0.4
+- <code>decayType</code>: Exponential
+- <code>rotationIntensity</code>: 1-3
+<h3>Directional impact (knockback, recoil):</h3>
+- <code>shakePattern</code>: Directional
+- <code>direction</code>: Opposite of force direction
+- Shorter <code>duration</code>, higher initial <code>intensity</code>
+<hr>
+<h2>How It Works</h2>
+<pre><code>On Shake Trigger:
+  - Set shake timer to duration
+  - Store base intensity
+Every Frame (while shaking):
+  - Calculate current intensity (based on decayType)
+  - Generate offset based on shakePattern
+  - Apply offset to camera position
+  - If rotationIntensity > 0: apply rotation offset
+  - Decrement timer
+On Shake End:
+  - Smoothly return camera to base position
+</code></pre>
+<hr>
+<h2>Common Issues</h2>
+<strong>"The shake is nauseating"</strong>
+→ Reduce <code>intensity</code> and <code>duration</code>. Add <code>decayType</code>: Exponential so it calms quickly.
+<strong>"Everything shakes and nothing feels special"</strong>
+→ Shake less often. Reserve for meaningful moments. Create intensity hierarchy.
+<strong>"The shake feels jittery/wrong"</strong>
+→ Try <code>shakePattern</code>: Perlin for smoother noise. Or reduce <code>frequency</code>.
+<strong>"Players with motion sensitivity can't play"</strong>
+→ <strong>Always</strong> include a shake disable option. This is accessibility, not preference.
+<hr>
+<h2>Shake Hierarchy</h2>
+Not all shakes should be equal. Create a hierarchy:
+<table>
+<thead><tr>
+<th>Event Type</th><th>Intensity</th><th>Duration</th>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tbody></table>
+<p><tr> <td>Ambient (footsteps)</td><td>1-2</td><td>0.03</td> <thead><tr> <th>Minor impact</th><th>3-5</th><th>0.1</th> <tr> <td>Standard impact</td><td>8-12</td><td>0.15</td> <thead><tr> <th>Major impact</th><th>15-20</th><th>0.2</th> <tr> <td>Boss/explosion</td><td>25+</td><td>0.3+</td></p>
+<p>If everything is at "standard impact" level, nothing stands out.</p>
+<hr>
+<h2>When NOT to Shake</h2>
+- Every jump landing (unless you want that)
+- Background events player didn't cause
+- Menu interactions
+- Constant effects (rain, wind) — use subtle camera drift instead
+- If the player has shake disabled
+<hr>
+<h2>Combine With</h2>
+- <a href="hitstop.html">Hitstop</a> — freeze THEN shake for maximum impact
+- <a href="squash-stretch.html">Squash Stretch</a> — visual deformation matches shake
+- <a href="landing-impact.html">Landing Impact</a> — shake as part of landing feedback
+- Sound — shake without audio feels hollow
+<hr>
+<h2>Accessibility Note</h2>
+<strong>Screen shake can cause motion sickness, nausea, and disorientation for many players.</strong>
+Always provide:
+- Shake intensity slider (0-100%)
+- Or disable option
+- Ideally both
+This isn't optional. This is basic accessibility.
+<hr>
+<h2>Heritage Notes</h2>
+Screen shake entered videogame design from:
+<strong>Film</strong> — Handheld camera shake for intensity (Saving Private Ryan, etc.)
+<strong>Arcade games</strong> — Physical cabinet shake on certain events
+<strong>Modern "juicing"</strong> — Vlambeer popularized aggressive shake in indie games
+Post-2010, screen shake became standard. Post-2015, the backlash reminded designers to use it judiciously.
+<hr>
+<h2>See Also</h2>
+- <a href="feedback-readability.html">Feedback Readability</a> — shake as feedback
+- <a href="hitstop.html">Hitstop</a> — common pairing
+- <a href="accessibility-as-craft.html">Accessibility As Craft</a> — shake accessibility
+- <a href="glossary-juice.html">Juice</a> — shake as juice technique
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.toggle-icon');
+      content.classList.toggle('collapsed');
+      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
+    }
+  </script>
+</body>
+</html>

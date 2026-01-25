@@ -1,0 +1,676 @@
+/* ========================================
+   Marty64 Knowledge Base - Main Styles
+   ======================================== */
+
+:root {
+  /* Colors */
+  --bg: #fafafa;
+  --bg-alt: #f5f5f5;
+  --text: #1a1a1a;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --link: #2563eb;
+  --link-hover: #1d4ed8;
+  
+  /* Register colors */
+  --pedagogy-bg: #eff6ff;
+  --pedagogy-border: #3b82f6;
+  --pedagogy-text: #1e3a5f;
+  
+  --philosophy-bg: #faf5ff;
+  --philosophy-border: #8b5cf6;
+  --philosophy-text: #3b1f5c;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  
+  /* Layout */
+  --content-width: 720px;
+  --sidebar-width: 260px;
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   Layout
+   ======================================== */
+
+.site-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: white;
+  border-right: 1px solid var(--border);
+  padding: var(--space-lg);
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: var(--space-2xl);
+  max-width: calc(var(--content-width) + var(--space-2xl) * 2 + var(--sidebar-width));
+}
+
+.content-wrapper {
+  max-width: var(--content-width);
+}
+
+/* ========================================
+   Sidebar Navigation
+   ======================================== */
+
+.site-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.nav-home {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0 1rem 0;
+  color: #f59e0b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid #f59e0b;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.nav-home:hover {
+  background: #f59e0b;
+  color: white;
+}
+
+.site-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-xl);
+}
+
+.search-box {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: var(--link);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.nav-section {
+  margin-bottom: var(--space-lg);
+}
+
+.nav-section-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.nav-item {
+  margin-bottom: var(--space-xs);
+}
+
+.nav-link {
+  display: block;
+  padding: var(--space-xs) var(--space-sm);
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.nav-link:hover {
+  background: var(--bg-alt);
+}
+
+.nav-link.active {
+  background: var(--bg-alt);
+  font-weight: 500;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
+h1 {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-alt);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: var(--space-md);
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: var(--text-sm);
+}
+
+blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: var(--space-md);
+  color: var(--text-muted);
+  font-style: italic;
+  margin: var(--space-md) 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-xl) 0;
+}
+
+/* ========================================
+   Lists
+   ======================================== */
+
+ul, ol {
+  margin: var(--space-md) 0;
+  padding-left: var(--space-xl);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+/* ========================================
+   Tables
+   ======================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: var(--text-sm);
+}
+
+th, td {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+  background: var(--bg-alt);
+}
+
+/* ========================================
+   Meta & Breadcrumbs
+   ======================================== */
+
+.breadcrumb {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--link);
+}
+
+.page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--bg-alt);
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+  font-size: var(--text-sm);
+}
+
+/* ========================================
+   Register Legend
+   ======================================== */
+
+.register-legend {
+  display: flex;
+  gap: var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.legend-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legend-swatch.student {
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.legend-swatch.pedagogy {
+  background: var(--pedagogy-bg);
+  border-left: 3px solid var(--pedagogy-border);
+}
+
+.legend-swatch.philosophy {
+  background: var(--philosophy-bg);
+  border-left: 3px solid var(--philosophy-border);
+}
+
+/* ========================================
+   Three Registers
+   ======================================== */
+
+/* Pedagogy Register */
+.pedagogy {
+  background: var(--pedagogy-bg);
+  border-left: 4px solid var(--pedagogy-border);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.pedagogy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: var(--space-md);
+  user-select: none;
+}
+
+.pedagogy-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pedagogy-border);
+}
+
+.pedagogy .toggle-icon {
+  color: var(--pedagogy-border);
+  font-size: var(--text-sm);
+}
+
+.pedagogy-content {
+  color: var(--pedagogy-text);
+}
+
+.pedagogy-content.collapsed {
+  display: none;
+}
+
+.pedagogy h3 {
+  color: var(--pedagogy-border);
+  margin-top: var(--space-lg);
+}
+
+.pedagogy h3:first-child {
+  margin-top: 0;
+}
+
+/* Philosophy Register */
+.philosophy {
+  font-family: var(--font-serif);
+  background: var(--philosophy-bg);
+  border-left: 4px solid var(--philosophy-border);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.8;
+}
+
+.philosophy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: var(--space-md);
+  user-select: none;
+  font-family: var(--font-sans);
+}
+
+.philosophy-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--philosophy-border);
+  font-family: var(--font-sans);
+}
+
+.philosophy .toggle-icon {
+  color: var(--philosophy-border);
+  font-size: var(--text-sm);
+}
+
+.philosophy-content {
+  color: var(--philosophy-text);
+}
+
+.philosophy-content.collapsed {
+  display: none;
+}
+
+.philosophy h3 {
+  color: var(--philosophy-border);
+  font-family: var(--font-sans);
+  margin-top: var(--space-lg);
+}
+
+.philosophy h3:first-child {
+  margin-top: 0;
+}
+
+/* ========================================
+   See Also / Related Links
+   ======================================== */
+
+.see-also {
+  background: var(--bg-alt);
+  padding: var(--space-lg);
+  border-radius: 8px;
+  margin: var(--space-xl) 0;
+}
+
+.see-also h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+.see-also ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.see-also li {
+  margin-bottom: var(--space-sm);
+}
+
+.see-also .arrow {
+  color: var(--text-muted);
+  margin-right: var(--space-sm);
+}
+
+/* ========================================
+   Exercises Box
+   ======================================== */
+
+.exercises {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.exercises h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ========================================
+   Search Results
+   ======================================== */
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+}
+
+.search-results.active {
+  display: block;
+}
+
+.search-result-item {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: var(--bg-alt);
+}
+
+.search-result-title {
+  font-weight: 500;
+}
+
+.search-result-section {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: var(--space-lg);
+  }
+  
+  .mobile-nav {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* ========================================
+   Index Page Specific
+   ======================================== */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.section-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  text-decoration: none;
+  color: var(--text);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.section-card:hover {
+  border-color: var(--link);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-decoration: none;
+}
+
+.section-card h3 {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--link);
+}
+
+.section-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+  .sidebar {
+    display: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .pedagogy-content,
+  .philosophy-content {
+    display: block !important;
+  }
+}

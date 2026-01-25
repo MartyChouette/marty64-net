@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 4 A's - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="the-four-as.html" class="nav-link active">The 4 A's</a></li>
+          <li class="nav-item"><a href="aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Framework</a> / The 4 A's
+        </nav>
+        
+        <h1>The 4 A's</h1>
+        
+        <p class="lead">
+          Action, Art, Arc, Atmosphere. The four components of a <a href="gesture.html" class="term">Gesture</a>.
+        </p>
+        
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>How the 4 A's Work</h3>
+            <p>
+              When playing, the 4 A's are inseparable. You experience them as one thing.
+              When analyzing, you pull them apart to understand how each contributes to the whole.
+            </p>
+            
+            <h3>Action</h3>
+            <p>
+              What the videogame has the player do.
+            </p>
+            <p>
+              This includes direct interaction: pressing buttons, moving a character, making choices.
+              But it also includes absence of interaction: waiting, watching, being still.
+              A cutscene is an Action (the action of watching). A pause is an Action (the action of not acting).
+            </p>
+            <p>
+              Action is not just "<a href="../glossary.html#V" class="term">verbs</a>" or "<a href="../glossary.html#M" class="term">mechanics</a>." 
+              It is whatever the videogame asks of the player, whether that asking is explicit or implicit, active or passive.
+            </p>
+            
+            <h3>Art</h3>
+            <p>
+              Art direction, lighting, staging, camera grammar, composition, and sound design.
+            </p>
+            <p>
+              Art is not just "how it looks." It is the full vocabulary of visual and audio craft:
+              art direction and style, lighting and color, staging and blocking, camera grammar (angles, movement, cuts),
+              composition (what's in frame, what's emphasized), sound design and music.
+            </p>
+            <p>
+              Every Art choice has an <a href="aesthetic-heritage.html" class="term">Aesthetic Heritage</a>. 
+              A Dutch angle comes from somewhere. A synth soundtrack comes from somewhere.
+              Understanding where these choices come from helps you understand why they work (or don't).
+            </p>
+            
+            <h3>Arc</h3>
+            <p>
+              The amount of time. The shape of the experience over duration.
+            </p>
+            <p>
+              An Arc can be a micro-moment: the 0.2 seconds of a jump's apex.
+              Or it can be a long moment: the 10-minute drive through the desert.
+              Or it can be the entire videogame: the 40-hour journey from start to credits.
+            </p>
+            <p>
+              Arc is not the same as "<a href="../glossary.html#P" class="term">pacing</a>," though pacing is part of it.
+              Arc is the temporal container of the <a href="gesture.html" class="term">Gesture</a>. 
+              It answers: how long does this last, and what shape does it take?
+            </p>
+            <p>
+              A Gesture can nest inside another Gesture. The Arc of a single jump exists inside the Arc of a level,
+              which exists inside the Arc of the whole videogame.
+            </p>
+            
+            <h3>Atmosphere</h3>
+            <p>
+              The feeling and vibe experienced from the videogame.
+            </p>
+            <p>
+              Atmosphere is what emerges when Action, Art, and Arc combine.
+              It is the emotional texture of the experience. The mood. The tone.
+            </p>
+            <p>
+              Atmosphere is not something designers add on top. It is what players feel as a result of everything else.
+              But designers can and do craft toward specific Atmospheres by shaping the other three A's.
+            </p>
+            <p>
+              Words for Atmosphere: tense, melancholy, cozy, uncanny, triumphant, lonely, frantic, peaceful.
+              These are not prescriptions. They are observations of what emerges.
+            </p>
+            
+            <h3>Exercise</h3>
+            <p>
+              Pick a videogame you know well. Identify one <a href="gesture.html" class="term">Gesture</a> (any scale).
+              Write one sentence for each A:
+            </p>
+            <ul>
+              <li><strong>Action:</strong> What is the videogame having me do?</li>
+              <li><strong>Art:</strong> What do I see and hear? What traditions is it drawing from?</li>
+              <li><strong>Arc:</strong> How long does this last? What's its shape?</li>
+              <li><strong>Atmosphere:</strong> What does it feel like?</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching the 4 A's</h3>
+            <p>
+              Introduce the 4 A's only after students have grasped <a href="gesture.html" class="term">Gesture</a> as a holistic concept.
+              The danger is students treating the 4 A's as a checklist rather than lenses for understanding.
+            </p>
+            
+            <h3>Order of Introduction</h3>
+            <p>
+              <strong>Action</strong> first. It's the most intuitive: "What are you doing?"
+            </p>
+            <p>
+              <strong>Art</strong> second. Students are often visual-first, so this connects quickly.
+            </p>
+            <p>
+              <strong>Atmosphere</strong> third. Once they can identify Action and Art, 
+              ask "What does it feel like?" This synthesizes the first two.
+            </p>
+            <p>
+              <strong>Arc</strong> last. Time is the hardest to see. Students need practice with the other three 
+              before they can attend to temporal shape.
+            </p>
+            
+            <h3>Common Pitfalls</h3>
+            <p><strong>"Action = button press"</strong></p>
+            <p>
+              Students reduce Action to input. Push them: What about waiting? What about choosing not to act? 
+              What about the action of reading text? Watching a cutscene?
+            </p>
+            
+            <p><strong>"Art = graphics quality"</strong></p>
+            <p>
+              Students may conflate Art with fidelity or polish. Redirect: a pixel art videogame has 
+              Art choices just as much as a AAA title. What traditions is it drawing from?
+            </p>
+            
+            <p><strong>"Atmosphere is just Art"</strong></p>
+            <p>
+              Students may collapse Atmosphere into Art. Distinguish: Art is what you see/hear; 
+              Atmosphere is what you <em>feel</em>. Same Art can produce different Atmospheres with different Actions.
+            </p>
+            
+            <h3>Assessment</h3>
+            <p>
+              Have students analyze the same videogame moment. Compare their 4 A's breakdowns.
+              Differences reveal interpretation, not error. Discuss why different students foreground different A's.
+            </p>
+          </div>
+        </div>
+        
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Four?</h3>
+            <p>
+              The 4 A's are not exhaustive. They are a heuristic: four lenses that together cover most of 
+              what matters in a <a href="gesture.html" class="term">Gesture</a>. Other frameworks slice differently.
+            </p>
+            <p>
+              MDA uses three (Mechanics, Dynamics, Aesthetics). Swink's <em>Game Feel</em> focuses on 
+              real-time control. The 4 A's emphasize that Action and Art are equally important, 
+              and that time (Arc) and feeling (Atmosphere) deserve explicit attention.
+            </p>
+            
+            <h3>Why "Art" and Not "Aesthetics"?</h3>
+            <p>
+              We use "Art" for the visual/audio component and reserve "Aesthetic" for 
+              <a href="aesthetic-heritage.html" class="term">Aesthetic Heritage</a>, which refers to videogames as 
+              an aesthetic medium where all 4 A's have lineages.
+            </p>
+            <p>
+              This avoids confusion: "Art" is one of the four components; "Aesthetic Heritage" is 
+              the concept that all four have traditions they inherit from.
+            </p>
+            
+            <h3>The Problem of Separation</h3>
+            <p>
+              The 4 A's are analytically distinct but experientially unified. This creates a pedagogical tension:
+              we teach students to separate what play unifies.
+            </p>
+            <p>
+              The solution is to always return to <a href="gesture.html" class="term">Gesture</a>. 
+              The 4 A's are tools for understanding Gesture, not replacements for it.
+              Analysis serves experience, not the other way around.
+            </p>
+            
+            <h3>References</h3>
+            <ul>
+              <li>Swink, Steve. <em>Game Feel</em> (2009)</li>
+              <li>Anthropy, Anna & Clark, Naomi. <em>A Game Design Vocabulary</em> (2014)</li>
+              <li>Hunicke, LeBlanc, Zubek. "MDA: A Formal Approach to Game Design" (2004)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <h2>Related</h2>
+        <ul>
+          <li><a href="gesture.html">Gesture</a></li>
+          <li><a href="aesthetic-heritage.html">Aesthetic Heritage</a></li>
+          <li><a href="permissions.html">Permissions</a></li>
+        </ul>
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+</body>
+</html>

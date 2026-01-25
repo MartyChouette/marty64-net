@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility as Craft — VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-box" placeholder="Search...">
+        <div id="search-results" class="search-results"></div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
+          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
+          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
+          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
+          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Narrative</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Level Design</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Systems</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link active">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+    
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Pedagogy</a> / Accessibility as Craft</nav>
+        
+        <div class="register-legend">
+          <div class="legend-item">
+            <div class="legend-swatch student"></div>
+            <span>Student</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch pedagogy"></div>
+            <span>Pedagogy</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch philosophy"></div>
+            <span>Philosophy</span>
+          </div>
+        </div>
+        
+        
+        <div class="page-meta">
+          <span>Pedagogy</span>
+          <span class="tag">pedagogy</span> <span class="tag">accessibility</span> <span class="tag">inclusive-design</span> <span class="tag">ethics</span>
+        </div>
+    
+        
+        <h1>Accessibility as Craft</h1>
+<strong>Accessibility</strong> isn't compliance. It isn't a checklist at the end of development. It's <strong>craft</strong> — a design skill that makes videogames playable by more people without compromising vision.
+Treating accessibility as craft changes everything: when you consider it, how you implement it, and what you think it means.
+<hr>
+<h2>The Compliance View</h2>
+Conventional accessibility work looks like:
+- Subtitles
+- Colorblind modes
+- Remappable controls
+- Done at the end
+This is necessary. It's not sufficient.
+The compliance view treats accessibility as <strong>adding features for disabled players.</strong> It's additive, late, often underfunded.
+<hr>
+<h2>The Craft View</h2>
+The craft view sees accessibility as <strong>design quality.</strong> Accessible videogames are well-designed games.
+- Clear visual hierarchy → good design AND readable for low vision
+- Responsive controls → good feel AND usable for motor impairments
+- Multiple difficulty options → respects player time AND enables more players
+- Clear audio cues → good feedback AND playable without sight
+Good design <em>is</em> accessible design. They're not separate goals.
+<hr>
+<h2>Why "Craft" Not "Feature"?</h2>
+A <strong>feature</strong> is bolted on. It has a scope, a budget, a checkbox.
+A <strong>craft</strong> is woven through. It's a way of thinking, not a deliverable.
+Calling accessibility a craft means:
+- It's considered from the start
+- It's everyone's responsibility (not one specialist's)
+- It's ongoing (not one release milestone)
+- It's skilled work (not just implementation)
+<hr>
+<h2>Core Accessibility Domains</h2>
+<table>
+<thead><tr>
+<th>Domain</th><th>What it addresses</th><th>Craft questions</th>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tr>
+</tr></thead><tbody>
+</tbody></table>
+<p><tr> <td><strong>Visual</strong></td><td>Low vision, blindness, colorblindness</td><td>Is the screen readable at a glance? Does color alone convey information?</td> <thead><tr> <th><strong>Auditory</strong></th><th>Deafness, hard of hearing</th><th>Is audio information redundantly presented? Are subtitles good?</th> <tr> <td><strong>Motor</strong></td><td>Limited mobility, precision, fatigue</td><td>Are controls flexible? Are time-sensitive moments adjustable?</td> <thead><tr> <th><strong>Cognitive</strong></th><th>Learning differences, attention, memory</th><th>Is information clearly presented? Can pace be controlled?</th></p>
+<p>Every player exists on spectrums in all four domains. "Disabled" isn't a binary.</p>
+<hr>
+<h2>Accessibility as Design Constraint</h2>
+Constraints drive creativity. Accessibility constraints are design constraints.
+"This videogame must be playable with one hand" isn't a limitation — it's a prompt. What designs emerge from that constraint?
+- <em>Celeste</em>'s assist mode emerged from thinking about who gets to finish games
+- <em>The Last of Us Part II</em>'s accessibility options were designed alongside core mechanics
+- <em>Hades</em>'s "God Mode" respects player time without removing challenge
+These aren't compromises. They're design innovations.
+<hr>
+<h2>Common Objections (And Responses)</h2>
+<strong>"Accessibility undermines artistic vision."</strong>
+Does difficulty selection undermine vision? Does subtitles undermine vision? Accessibility is player options, not mandate. The core experience is still there.
+<strong>"Our audience doesn't need it."</strong>
+Your audience includes disabled players. 20-25% of people have some form of disability. You just don't see them because they can't play your game.
+<strong>"We don't have the budget."</strong>
+Accessibility built from the start costs less than accessibility retrofitted. The cheapest accessibility is considered design.
+<strong>"Some videogames are meant to be hard."</strong>
+Hard <em>for whom</em>? A timing-based videogame is harder for someone with motor impairments. Is that the challenge you intended? <em>Celeste</em> is hard AND accessible.
+<hr>
+<h2>Practical Accessibility Craft</h2>
+<h3>Visual</h3>
+- Don't rely on color alone (shape, pattern, position as redundant cues)
+- Scalable text
+- High contrast option
+- Screen reader support for menus
+<h3>Auditory</h3>
+- Subtitles (good ones: speaker identification, sound effects)
+- Visual cues for important sounds
+- Adjustable audio channels
+<h3>Motor</h3>
+- Remappable controls
+- Toggle vs. hold options
+- Adjustable timing windows
+- One-handed control schemes
+<h3>Cognitive</h3>
+- Clear objectives
+- Adjustable speed/pace
+- Save anywhere
+- Minimize memory load
+<hr>
+<h2>Accessibility in VG101</h2>
+I integrate accessibility throughout the course, not as a single topic:
+- <strong>Week 5 (Feedback & Readability):</strong> Feedback channels as accessibility — if all feedback is audio, deaf players are excluded
+- <strong>Week 7 (Feel Experiment):</strong> Adjust timing variables. How does changing them change who can play?
+- <strong>Case studies:</strong> Analyze how videogames handle accessibility
+<strong>Key message:</strong> Accessibility isn't extra. It's part of craft.
+<hr>
+<div class="pedagogy">
+<div class="pedagogy-header" onclick="toggleSection(this)">
+<span class="pedagogy-label">📘 Pedagogy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="pedagogy-content">
+<h2>Teaching Notes</h2>
+Accessibility can feel like a checklist or like a moral imperative. I try to frame it as <em>interesting design work</em>.
+<strong>Exercise: Accessibility Audit</strong>
+Audit a game's accessibility features. What's there? What's missing? What would it take to improve? How would those improvements affect the core design?
+<strong>Exercise: Constraint Design</strong>
+Design a videogame concept around an accessibility constraint: playable with no audio, playable with one button, playable with no text. What emerges?
+<strong>Guest speakers:</strong> I bring in disabled players and accessibility consultants. Students hear directly from people affected.
+<strong>Danger:</strong> Accessibility can become performative ("we care about disabled people") without substance. Push for <em>specific</em> craft work.
+</div>
+</div>
+<hr>
+<div class="philosophy">
+<div class="philosophy-header" onclick="toggleSection(this)">
+<span class="philosophy-label">🔮 Philosophy</span>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="philosophy-content">
+<h2>Theoretical Background</h2>
+<strong>Key influences:</strong>
+<strong>Ian Hamilton</strong> — Accessibility specialist. His work on <em>The Last of Us Part II</em> is a reference point.
+<strong>Cherry Thompson / AbleGamers</strong> — Advocacy and practical guidance.
+<strong>Universal Design</strong> — Architecture's "design for all" principle. Videogames inherit this.
+<strong>What I'm taking:</strong>
+The "curb cut effect": accessibility features benefit everyone. Curb cuts help wheelchairs, but also strollers, luggage, bikes. Accessibility is good design.
+<strong>What I'm resisting:</strong>
+<strong>The charity model:</strong> "Let's help the disabled." Accessibility isn't charity. It's design quality.
+<strong>The minimum viable compliance:</strong> Checking boxes isn't craft.
+<strong>Unresolved questions:</strong>
+- Where's the line between accessibility and core design? Some argue certain experiences require certain abilities. I'm skeptical, but the debate exists.
+- How do we handle accessibility in competitive games? If accessibility options change difficulty, what's fair in competitive contexts?
+- Resource reality: accessibility is skilled work. How do small teams do it well?
+</div>
+</div>
+<hr>
+<h2>See Also</h2>
+- <a href="feedback-readability.html">Feedback Readability</a> — feedback channels as accessibility
+- <a href="permissions.html">Permissions</a> — who gets to play
+- <a href="guidance-without-handholding.html">Guidance Without Handholding</a> — guidance as accessibility
+- <a href="case-studies-celeste-assist-mode.html">Assist Mode</a> — accessibility as design
+<hr>
+<h2>Glossary Connections</h2>
+→ <a href="glossary-accessibility.html">Accessibility</a> — designing for diverse abilities  
+→ <a href="glossary-universal-design.html">Universal Design</a> — design for all  
+→ <a href="glossary-curb-cut-effect.html">Curb Cut Effect</a> — accessibility benefits everyone
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.toggle-icon');
+      content.classList.toggle('collapsed');
+      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
+    }
+  </script>
+</body>
+</html>

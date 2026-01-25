@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permissions - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+      
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="permissions.html" class="nav-link active">Permissions</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Framework</a> / Permissions
+        </nav>
+        
+        <h1>Permissions</h1>
+        
+        <p class="lead">
+          The boundaries of interface, contact, system, and mechanic. What the videogame allows, requires, and forbids.
+        </p>
+        
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>What Permissions Are</h3>
+            <p>
+              Permissions are the boundaries of the experience. They define what's allowed, what's required, 
+              and what's forbidden within the videogame's systems.
+            </p>
+            <p>
+              Every videogame has Permissions, whether the designers intended them or not.
+              Some are explicit (you cannot go through this wall). Some are implicit (you would never think to try).
+              Some are designed. Some are accidents. All of them shape the experience.
+            </p>
+            
+            <h3>Three Types of Permissions</h3>
+            
+            <p><strong>Allowed</strong></p>
+            <p>
+              What the videogame lets you do. The possibility space. 
+              Can you jump? Can you talk to NPCs? Can you save anywhere?
+            </p>
+            
+            <p><strong>Required</strong></p>
+            <p>
+              What the videogame makes you do. The demands of progression.
+              Must you defeat the boss? Must you watch the cutscene? Must you wait for the timer?
+            </p>
+            
+            <p><strong>Forbidden</strong></p>
+            <p>
+              What the videogame prevents you from doing. The boundaries.
+              Cannot harm children NPCs. Cannot skip the tutorial. Cannot return to the previous area.
+            </p>
+            
+            <h3>Discovering Permissions</h3>
+            <p>
+              We often don't know the Permissions preemptively. We discover them through play, 
+              through the <a href="the-four-as.html" class="term">4 A's</a>. It's like feeling in the dark.
+            </p>
+            <p>
+              The Action shows us what we can do. The Art signals what might be possible. 
+              The Arc reveals what's required to progress. The Atmosphere hints at what kind of 
+              experience this is. Through all of these, we come to understand the Permissions.
+            </p>
+            <p>
+              Sometimes we know the Permissions before playing: from genre conventions, from marketing, 
+              from other players. But even then, the specific boundaries are felt out through the 
+              <a href="gesture.html" class="term">Gesture</a> itself.
+            </p>
+            
+            <h3>Permissions and Meaning</h3>
+            <p>
+              Permissions carry meaning. What a videogame allows, requires, and forbids 
+              communicates values, priorities, and worldview.
+            </p>
+            <p>
+              A videogame that forbids killing communicates something different than one that requires it.
+              A videogame that allows nonlinear exploration communicates something different than one that requires linear progression.
+              These are not neutral technical decisions. They are statements.
+            </p>
+            
+            <h3>Exercise</h3>
+            <p>
+              Pick a videogame. List:
+            </p>
+            <ul>
+              <li>3 things the videogame <strong>allows</strong> (but doesn't require)</li>
+              <li>3 things the videogame <strong>requires</strong></li>
+              <li>3 things the videogame <strong>forbids</strong></li>
+            </ul>
+            <p>
+              For each: How did you discover this Permission? Through what Action, Art, Arc, or Atmosphere?
+            </p>
+          </div>
+        </div>
+        
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach Permissions</h3>
+            <p>
+              Students often focus on what they're building (features, content) without thinking about 
+              what they're constraining. Permissions reframes design: you're not just adding possibilities, 
+              you're defining a space of possibility.
+            </p>
+            
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Start with "Forbidden." It's often invisible but powerful. Ask: what can't you do in [videogame]?</li>
+              <li>Move to "Required." What must you do to progress? What has no alternative?</li>
+              <li>End with "Allowed." This is the space between Required and Forbidden. The space of <a href="../glossary.html#A" class="term">agency</a>.</li>
+            </ol>
+            
+            <h3>The "Permissions Remix" Exercise</h3>
+            <p>
+              Have students take a videogame and change one Permission:
+            </p>
+            <ul>
+              <li>What if <em>Mario</em> couldn't jump? (Forbidden something that was Allowed)</li>
+              <li>What if <em>Dark Souls</em> let you pause? (Allowed something that was Forbidden)</li>
+              <li>What if <em>Tetris</em> didn't require pieces to fall? (Removed a Requirement)</li>
+            </ul>
+            <p>
+              Discuss: How does this single change affect the whole experience?
+            </p>
+            
+            <h3>Common Pitfalls</h3>
+            <p><strong>"More Allowed = better"</strong></p>
+            <p>
+              Students may assume more player freedom is always good. Counter this: 
+              constraints create meaning. A videogame that allows everything requires nothing 
+              and often feels empty.
+            </p>
+            
+            <p><strong>"Required = bad"</strong></p>
+            <p>
+              Students may feel Requirements are limitations to avoid. Counter this: 
+              Requirements are how videogames create shared experiences. Without them, 
+              there's no guarantee any two players experience the same thing.
+            </p>
+            
+            <h3>Assessment</h3>
+            <p>
+              Have students write a "Permissions document" for a videogame they're designing.
+              Look for: Do they articulate all three types? Do they explain why each Permission exists?
+            </p>
+          </div>
+        </div>
+        
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Permissions and Procedural Rhetoric</h3>
+            <p>
+              Ian Bogost's <a href="../glossary.html#P" class="term">procedural rhetoric</a> argues that videogames make arguments through 
+              their rules. Permissions are a primary mechanism of this: what you allow, require, 
+              and forbid says something.
+            </p>
+            <p>
+              A videogame about war that forbids civilian casualties makes a different argument than 
+              one that allows or requires them. The Permission itself is rhetorical.
+            </p>
+            
+            <h3>Permissions and Agency</h3>
+            <p>
+              <a href="../glossary.html#A" class="term">Agency</a> exists in the space between Required and Forbidden. 
+              If everything is Required, there's no agency. If nothing is Forbidden, agency may feel meaningless 
+              (there are no stakes to choosing one path over another).
+            </p>
+            <p>
+              The art of Permission design is finding the right constraints: enough Required and Forbidden 
+              to give choices weight, enough Allowed to give players room to express themselves.
+            </p>
+            
+            <h3>Permissions vs. Affordances</h3>
+            <p>
+              <a href="../glossary.html#A" class="term">Affordances</a> (what objects suggest you can do with them) are not the same as Permissions 
+              (what the system actually allows). A door may afford opening (it looks like a door) 
+              but be Forbidden (the system won't let you open it).
+            </p>
+            <p>
+              Good design often aligns affordance and Permission. When they diverge, players feel frustrated 
+              ("why can't I open this door that looks openable?").
+            </p>
+            
+            <h3>Permissions and the 4 A's</h3>
+            <p>
+              Permissions are not separate from the <a href="gesture.html" class="term">Gesture</a>. They are discovered 
+              through it. The 4 A's are how we come to understand what's allowed, required, and forbidden.
+            </p>
+            <p>
+              This means Permissions are not purely abstract rules. They are felt, encountered, tested.
+              A Permission you never bump against might as well not exist. A Permission you discover 
+              through play becomes part of the experience.
+            </p>
+            
+            <h3>References</h3>
+            <ul>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007)</li>
+              <li>Sicart, Miguel. <em>Beyond Choices: The Design of Ethical Gameplay</em> (2013)</li>
+              <li>Anthropy, Anna & Clark, Naomi. <em>A Game Design Vocabulary</em> (2014)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <h2>Related</h2>
+        <ul>
+          <li><a href="gesture.html">Gesture</a></li>
+          <li><a href="the-four-as.html">The 4 A's</a></li>
+          <li><a href="aesthetic-heritage.html">Aesthetic Heritage</a></li>
+        </ul>
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+</body>
+</html>

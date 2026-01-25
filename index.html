@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marty Scott | Game Designer & Developer</title>
+  <meta name="description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, and Cold Flame. MFA NYU Game Center.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">marty64</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#writings" class="nav-link">Writings</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="kb/index.html" class="nav-link">VG101</a></li>
+        <li><a href="https://github.com/MartyChouette" class="nav-link" target="_blank">GitHub</a></li>
+        <li><a href="https://martychouette.itch.io/" class="nav-link" target="_blank">Itch.io</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-label">Game Designer • Developer • Musician</span>
+        <h1>I make videogames about the human experience.</h1>
+        <p class="lead">
+          The surreal, serene, and sincere. I'm exploring new design approaches and 
+          more expansive accessibility tooling for the videogames of tomorrow. 
+          Accessibility of concepts, of art, of design itself.
+        </p>
+        <div class="hero-cta">
+          <a href="#work" class="btn btn--primary">See My Work</a>
+          <a href="kb/index.html" class="btn btn--secondary">VG101 Knowledge Base</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section section--alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Selected Work</span>
+        <h2 class="section-title">Videogames & Prototypes</h2>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Featured: Iris -->
+        <article class="project-card project-card--featured">
+          <div class="project-card__image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, #be185d 0%, #9333ea 50%, #4f46e5 100%);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:5rem;">🌸</span>
+            </div>
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Unity</span>
+              <span class="project-card__tag">Cozy Horror</span>
+              <span class="project-card__tag">In Development</span>
+            </div>
+            <h3 class="project-card__title">Iris</h3>
+            <p class="project-card__desc">
+              A cozy psychological horror videogame. Nema has a secret. She goes on dates and trims her flowers. 
+              Features a custom flower trimming mechanic inspired by real ikebana mathematics. 
+              Perspective shifts between third and first person as you explore her house and her life.
+            </p>
+            <p class="project-card__desc" style="font-style: italic; color: var(--text-muted);">
+              Just remember: love is hard.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-md);">
+              2-person team (code/design/sound + art/design/3D) • 4 months in • Prototype
+            </p>
+          </div>
+        </article>
+
+        <!-- RhodesTrip -->
+        <article class="project-card">
+          <div class="project-card__image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:3rem;">🚗</span>
+            </div>
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Unity</span>
+              <span class="project-card__tag">Narrative</span>
+              <span class="project-card__tag">2025</span>
+            </div>
+            <h3 class="project-card__title">RhodesTrip</h3>
+            <p class="project-card__desc">
+              A third-person narrative videogame about driving, talking, and listening to music 
+              on a road trip back home. Meet quirky characters as you journey through beautiful 
+              biomes and reminisce about the things we miss.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
+              4-person team (2 artists, 2 coder/designers) • Created custom state machine scripting language for narrative pacing • Music & SFX
+            </p>
+            <a href="https://martychouette.itch.io/rhodestrip" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
+              Play Demo on Itch.io →
+            </a>
+          </div>
+        </article>
+
+        <!-- Blackout -->
+        <article class="project-card">
+          <div class="project-card__image">
+            <img src="images/blackout.png" alt="Blackout - a sightless 2D platformer" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Unity</span>
+              <span class="project-card__tag">Accessibility</span>
+              <span class="project-card__tag">2025</span>
+            </div>
+            <h3 class="project-card__title">Blackout</h3>
+            <p class="project-card__desc">
+              A sightless 2D platformer where you must use sounds and NPC directions to navigate. 
+              A study in blind videogames and alternate design theory to address the lack of thoughtful 
+              crafting in videogames outside of their visual component.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
+              Solo developed • Accompanied by research and <a href="https://sites.google.com/nyu.edu/blackout/" target="_blank">whitepaper</a>
+            </p>
+            <a href="https://martychouette.itch.io/blackout" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
+              Play on Itch.io →
+            </a>
+          </div>
+        </article>
+
+        <!-- Solus -->
+        <article class="project-card">
+          <div class="project-card__image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:3rem;">🌑</span>
+            </div>
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Unity</span>
+              <span class="project-card__tag">Walking Sim</span>
+              <span class="project-card__tag">2024</span>
+            </div>
+            <h3 class="project-card__title">Solus</h3>
+            <p class="project-card__desc">
+              A walking sim about working for <em>Ego Vacations</em>, a vacation simulation company. 
+              The Batavia is a lonely ship, just you and a thousand souls plugged into simulations. 
+              You need to find out how to reboot the system, even if there is something else here.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
+              Solo developed • 5-10 min • Features a secret dream level with a monologue about technology, isolationism, and the ever-increasing gap between us
+            </p>
+            <a href="https://martychouette.itch.io/solus" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
+              Play on Itch.io →
+            </a>
+          </div>
+        </article>
+
+        <!-- Cold Flame -->
+        <article class="project-card">
+          <div class="project-card__image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, #1e3a5f 0%, #0c4a6e 50%, #0369a1 100%);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:3rem;">🪓</span>
+            </div>
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Unity</span>
+              <span class="project-card__tag">Autobiographical</span>
+              <span class="project-card__tag">2024</span>
+            </div>
+            <h3 class="project-card__title">Cold Flame</h3>
+            <p class="project-card__desc">
+              A physics videogame about life, loss, and chopping wood. Three of the most heart-wrenching 
+              moments of heartbreak from my life. The idea that happiness was never part of my family tree, 
+              and that exercising self-worth is hard in a world that tells you you're too sharp, too loud, too much.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
+              Solo developed • 9 min with voiceover • Chop wood, stack wood, maybe chop down the ties of self-sabotage
+            </p>
+            <a href="https://martychouette.itch.io/coldflame" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
+              Play on Itch.io →
+            </a>
+          </div>
+        </article>
+
+        <!-- VG101 -->
+        <article class="project-card">
+          <div class="project-card__image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:3rem;">📚</span>
+            </div>
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Pedagogy</span>
+              <span class="project-card__tag">Framework</span>
+              <span class="project-card__tag">In Development</span>
+            </div>
+            <h3 class="project-card__title">VG101 Knowledge Base</h3>
+            <p class="project-card__desc">
+              A videogame design pedagogy built on the Gesture + Aesthetic Heritage framework. 
+              About the accessibility of videogames. Breaking the gamer taboo and accepting 
+              the medium in its entirety. Not just product or entertainment, not just art. 
+              Both and neither. The creations that take full advantage of the medium know this.
+            </p>
+            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
+              Online resource first, then book, then workshops
+            </p>
+            <a href="kb/index.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
+              Explore →
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writings -->
+  <section id="writings" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Writings</span>
+        <h2 class="section-title">Essays, Research & Commentary</h2>
+        <p style="color: var(--text-muted); margin-top: var(--space-sm);">Academic writing, technical breakdowns, and videogame commentary.</p>
+      </div>
+
+      <div class="writings-grid">
+        <!-- Placeholder writing 1 -->
+        <article class="writing-card">
+          <div class="writing-card__meta">
+            <span class="writing-card__type">Research</span>
+            <span class="writing-card__date">2025</span>
+          </div>
+          <h3 class="writing-card__title">Blackout: Designing for Sightless Play</h3>
+          <p class="writing-card__excerpt">
+            A study in blind videogames and alternate design theory. How do we craft meaningful 
+            experiences outside of the visual component?
+          </p>
+          <a href="https://sites.google.com/nyu.edu/blackout/" class="writing-card__link" target="_blank">Read Whitepaper →</a>
+        </article>
+
+        <!-- Placeholder for future writings -->
+        <article class="writing-card writing-card--placeholder">
+          <div class="writing-card__meta">
+            <span class="writing-card__type">Coming Soon</span>
+          </div>
+          <h3 class="writing-card__title">More writings on the way</h3>
+          <p class="writing-card__excerpt">
+            Essays on videogame design, technical breakdowns, and commentary on the medium.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section section--alt">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="images/vox_self_portrait_2024.png" alt="Marty - pixel art self portrait" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;background:#f5f5f4;">
+        </div>
+        <div class="about-content">
+          <h2>About Me</h2>
+          <p>
+            Hi there! I'm <strong>Marty</strong>, a computer scientist, videogame developer, and musician 
+            who loves old, new, and future technologies.
+          </p>
+          <p>
+            I try to make videogames about the human experience: the surreal, serene, and sincere. 
+            I'm infinitely interested in what is to come for the medium of videogames.
+          </p>
+          <p>
+            My accessibility work isn't just about disability. It's about accessibility of concepts, 
+            accessibility of art, accessibility of design itself. I love diving into design challenges 
+            that require rigor.
+          </p>
+          <p>
+            I also make music as <a href="https://www.beargatsby.com" target="_blank"><strong>Bear Gatsby</strong></a>: 
+            DIY synth bedroom indie rock, a bit avant-garde, and some chiptune.
+          </p>
+          
+          <h3 style="margin-top: var(--space-xl); margin-bottom: var(--space-md);">Education</h3>
+          <ul style="list-style: none; color: var(--text-muted);">
+            <li style="margin-bottom: var(--space-sm);"><strong>NYU Game Center</strong>, MFA in Game Design (2024-2026)</li>
+            <li style="margin-bottom: var(--space-sm);"><strong>Cal Poly Pomona</strong>, BS in Computer Science (2021-2023)</li>
+            <li style="margin-bottom: var(--space-sm);"><strong>Mt. San Antonio College</strong>, AS in Programming & Database Management (2018-2021)</li>
+            <li><strong>Musicians Institute</strong>, Piano Technology & Audio Engineering (2009-2011)</li>
+          </ul>
+          
+          <div class="about-links" style="margin-top: var(--space-xl);">
+            <a href="https://martychouette.itch.io/" class="btn btn--primary" target="_blank">Itch.io</a>
+            <a href="https://github.com/MartyChouette" class="btn btn--secondary" target="_blank">GitHub</a>
+            <a href="https://www.beargatsby.com" class="btn btn--secondary" target="_blank">Music</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container container--narrow">
+      <div class="section-header text-center">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">Get in Touch</h2>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-xl);">
+        <p style="font-size: var(--text-lg); margin-bottom: var(--space-xl);">
+          <a href="mailto:greatmartyscott@gmail.com" style="color: var(--secondary);">greatmartyscott@gmail.com</a>
+        </p>
+        
+        <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
+          <a href="https://github.com/MartyChouette" class="btn btn--secondary" target="_blank">GitHub</a>
+          <a href="https://martychouette.itch.io/" class="btn btn--secondary" target="_blank">Itch.io</a>
+          <a href="https://www.linkedin.com/in/martyscott64/" class="btn btn--secondary" target="_blank">LinkedIn</a>
+          <a href="https://www.beargatsby.com" class="btn btn--secondary" target="_blank">Music</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <ul class="footer-links">
+        <li><a href="index.html" class="footer-link">Home</a></li>
+        <li><a href="#work" class="footer-link">Work</a></li>
+        <li><a href="#writings" class="footer-link">Writings</a></li>
+        <li><a href="kb/index.html" class="footer-link">VG101</a></li>
+        <li><a href="https://www.beargatsby.com" class="footer-link" target="_blank">Music</a></li>
+        <li><a href="#contact" class="footer-link">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Marty Scott</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
