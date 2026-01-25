@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code as Material - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Pedagogy Overview</a></li>
+          <li class="nav-item"><a href="play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="code-as-material.html" class="nav-link active">Code as Material</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Pedagogy</a> / Code as Material
+        </nav>
+
+        <h1>Code as Material</h1>
+
+        <p class="lead">
+          Code is a material. Like clay or paint, it has properties, resistances, and possibilities.
+          Treating code as material - rather than as instruction or logic - changes how designers relate to implementation.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Conventional View</h3>
+            <p>
+              In traditional education, code is treated as <strong>instruction</strong>: you tell the computer what to do, it does it.
+              Code is a means to an end - the end being the running program.
+            </p>
+            <p>
+              This frames code as transparent. You think about what you want; code makes it happen.
+              The code itself is irrelevant; only the result matters.
+            </p>
+
+            <h3>The Material View</h3>
+            <p>
+              In the material view, code has its own properties - like clay, wood, or paint.
+              You work <em>with</em> it, not just through it. It pushes back. It suggests possibilities.
+              It resists certain things and enables others.
+            </p>
+
+            <h4>Properties</h4>
+            <p>Code has inherent properties:</p>
+            <ul>
+              <li><strong>It runs:</strong> Unlike a sketch, code executes. You can feel it.</li>
+              <li><strong>It's exact:</strong> No ambiguity. 0.5 is not "about half."</li>
+              <li><strong>It's repeatable:</strong> Same input, same output (usually). You can iterate precisely.</li>
+              <li><strong>It's modular:</strong> Pieces can be combined, separated, reused.</li>
+              <li><strong>It's fragile:</strong> Small changes can break everything. Syntax matters.</li>
+            </ul>
+
+            <h4>Resistances</h4>
+            <p>Code resists certain things:</p>
+            <ul>
+              <li>Vagueness ("make it feel good" isn't code)</li>
+              <li>Simultaneity (things happen in sequence, not at once)</li>
+              <li>Continuous values (you pick a number; the material doesn't)</li>
+              <li>Inconsistency (it does exactly what you said, even if you didn't mean it)</li>
+            </ul>
+
+            <h4>Possibilities</h4>
+            <p>Code enables things other materials can't:</p>
+            <ul>
+              <li>Instant variation (change a number, see different behavior)</li>
+              <li>Parametric design (expose values, make them tunable)</li>
+              <li>Interactivity (the material responds to input)</li>
+              <li>Reproduction (copy infinitely, share globally)</li>
+              <li>Combination (stack systems on systems)</li>
+            </ul>
+
+            <h3>What This Changes</h3>
+
+            <h4>Design Through Implementation</h4>
+            <p>
+              If code is material, you design <em>through</em> implementation, not before it.
+              You discover possibilities by working with the material.
+              A painter doesn't fully plan the painting before touching canvas; a designer doesn't fully plan the feel before touching code.
+            </p>
+
+            <h4>Prototyping as Sketching</h4>
+            <p>
+              Code prototypes are sketches in material. Rough, exploratory, meant to be thrown away.
+              Like a sculptor's maquette, the prototype reveals what the material can do.
+            </p>
+
+            <h4>Feel Is Found</h4>
+            <p>
+              <a href="../framework/gesture.html" class="term">Gesture</a> emerges from the code.
+              You can imagine how a jump should feel, but the actual feel comes from gravity values,
+              jump velocities, frame timing. The code gives you the feel; you refine it.
+            </p>
+
+            <h4>Parameters Are Handles</h4>
+            <p>
+              Good code exposes parameters - handles you can grab to change the behavior.
+              The Code Bank scaffolds are designed this way: exposed variables at the top,
+              tunable without understanding the implementation.
+            </p>
+
+            <h3>The Code Bank as Material Library</h3>
+            <p>
+              The <a href="../code-bank/index.html">Code Bank</a> provides pre-shaped materials.
+              Like buying lumber instead of felling trees, or using premixed paint instead of grinding pigments.
+            </p>
+            <p>
+              You're not cheating by using scaffolds. You're starting with refined material
+              so you can focus on design decisions, not implementation details.
+            </p>
+            <p>Use scaffolds to:</p>
+            <ul>
+              <li>Get something running fast</li>
+              <li>Feel the behavior before deciding if it's right</li>
+              <li>Tune parameters to find the feel you want</li>
+              <li>Learn by reading working code</li>
+            </ul>
+
+            <h3>Knowing vs. Feeling</h3>
+            <p>
+              Knowing what you want is not the same as feeling it.
+              "I want a floaty jump" is knowledge. The actual floaty jump - the gravity, the hang time,
+              the landing - is feel. Code makes the jump real. Then you react to the real thing.
+            </p>
+            <p>
+              This is why prototyping matters. You don't know if your idea works until you feel it in material form.
+            </p>
+
+            <h3>Exercise: Material Exploration</h3>
+            <p>Take any Code Bank scaffold. Don't try to make anything specific. Instead:</p>
+            <ol>
+              <li>Change every exposed variable to see what it does</li>
+              <li>Push values to extremes (gravity = 10000? gravity = 0.1?)</li>
+              <li>Note which changes produce interesting behaviors</li>
+              <li>Find a feel you didn't expect but like</li>
+            </ol>
+            <p>This is material exploration - discovery through manipulation.</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              The "code as instruction" framing makes students afraid of code.
+              It's abstract, logical, demanding. You have to know exactly what you want before you start.
+            </p>
+            <p>
+              The "code as material" framing invites exploration.
+              You don't need to know what you're making - you need to start making and see what happens.
+              This is how artists work. It's less intimidating.
+            </p>
+
+            <h3>Introducing the Concept</h3>
+            <p>
+              I introduce "code as material" in Week 1, before any coding.
+              We talk about other materials: clay, paint, wood, fabric.
+              What are their properties? What do they resist? What do they enable?
+            </p>
+            <p>
+              Then: code is the same. It has properties. We're going to learn them by working with the material.
+            </p>
+
+            <h3>Scaffolds as Entry Point</h3>
+            <p>
+              The Code Bank scaffolds let students work with code-as-material without writing code from scratch.
+              They start by tuning, then modifying, then eventually building.
+            </p>
+            <p>
+              This is how apprentices learn crafts: start with prepared materials,
+              focus on one skill at a time, gradually take on more of the process.
+            </p>
+
+            <h3>Common Challenges</h3>
+
+            <p><strong>"I don't know what values to use":</strong></p>
+            <p>
+              Good. That's the point. You find them by trying. Start somewhere. See what it feels like.
+              Adjust. The material tells you when you're close.
+            </p>
+
+            <p><strong>"I want to do something the scaffold doesn't support":</strong></p>
+            <p>
+              Perfect. This is when you start modifying the scaffold - or writing new code.
+              The material is telling you it wants to grow. Follow it.
+            </p>
+
+            <p><strong>"The code broke and I don't know why":</strong></p>
+            <p>
+              This is <a href="debugging-as-literacy.html">debugging</a>. The material pushed back.
+              Now you read it to understand what happened.
+            </p>
+
+            <h3>Assessment</h3>
+            <p>
+              Assess process, not just product. Did the student explore the material?
+              Did they discover something unexpected? Can they articulate what the code does and why?
+            </p>
+            <p>
+              The material exploration exercise above works as an assessment:
+              document what you found by manipulating the material.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Background</h3>
+
+            <h4>Key Influences</h4>
+            <p>
+              <strong>Donald Schon</strong>: <em>The Reflective Practitioner</em>. Designing as a conversation with materials.
+              The designer proposes; the material responds; the designer adjusts.
+            </p>
+            <p>
+              <strong>Seymour Papert</strong>: <em>Mindstorms</em>. Constructionism - learning by building.
+              The computer as a material for thinking.
+            </p>
+            <p>
+              <strong>Richard Sennett</strong>: <em>The Craftsman</em>. Material engagement as a form of thought.
+              The hand and the head are not separate.
+            </p>
+
+            <h3>The Phenomenology of Materials</h3>
+            <p>
+              Every material has a phenomenology - a way it presents itself to the person working with it.
+              Wood has grain. Clay has plasticity. Paint has viscosity.
+            </p>
+            <p>
+              Code's phenomenology includes: instantness (changes appear immediately), precision (exact values),
+              fragility (syntax errors break everything), and depth (layers of abstraction).
+            </p>
+            <p>
+              Learning a material means learning its phenomenology - how it feels to work with,
+              what it wants to do, where it resists.
+            </p>
+
+            <h3>What I'm Taking</h3>
+            <p>
+              The insight that design happens <em>in dialogue with material</em>, not before touching it.
+              This licenses exploration, reduces the pressure to "know what you want" in advance,
+              and positions prototyping as central to design.
+            </p>
+
+            <h3>What I'm Resisting</h3>
+            <p>
+              <strong>The "code is just a tool" view:</strong> Tools are extensions of intention.
+              Materials have their own agency. Code shapes design, not just executes it.
+            </p>
+            <p>
+              <strong>The "design documents first" approach:</strong> Documents have their place,
+              but they're not design. The design is in the material. Docs are plans; material is reality.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much should designers know about the material's internal structure? You can work with clay without knowing chemistry - but is code the same?</li>
+              <li>At what point does "material exploration" become "random messing around"? How do we scaffold productive exploration?</li>
+              <li>Does the material metaphor work for non-programmers? Or does it require enough code literacy to "feel" the material?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Schon, Donald. <em>The Reflective Practitioner</em> (1983)</li>
+              <li>Papert, Seymour. <em>Mindstorms</em> (1980)</li>
+              <li>Sennett, Richard. <em>The Craftsman</em> (2008)</li>
+              <li>Ingold, Tim. <em>Making: Anthropology, Archaeology, Art and Architecture</em> (2013)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="debugging-as-literacy.html">Debugging as Literacy</a> - reading the material when it pushes back</li>
+          <li><a href="../code-bank/index.html">Code Bank</a> - pre-shaped materials for design</li>
+          <li><a href="play-name-make-reflect.html">Play → Name → Make → Reflect</a> - the "make" phase is material work</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - what emerges from the material</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
