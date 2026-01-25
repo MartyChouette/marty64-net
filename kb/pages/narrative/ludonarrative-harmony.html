@@ -3,247 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ludonarrative Harmony — VG101 Knowledge Base</title>
+  <title>Ludonarrative Harmony - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Narrative</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link active">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="ludonarrative-harmony.html" class="nav-link active">Ludonarrative Harmony</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Narrative</a> / Ludonarrative Harmony</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Narrative</span>
-          <span class="tag">narrative</span> <span class="tag">meaning</span> <span class="tag">coherence</span> <span class="tag">design-philosophy</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Narrative</a> / Ludonarrative Harmony
+        </nav>
+
         <h1>Ludonarrative Harmony</h1>
-<strong>Ludonarrative harmony</strong> is when what you <em>do</em> (ludo) and what you're <em>told</em> (narrative) reinforce each other. The mechanics and the story say the same thing.
-Its opposite — <strong>ludonarrative dissonance</strong> — is when they contradict: the story says one thing, the gameplay says another.
-<hr>
-<h2>The Classic Dissonance</h2>
-<em>Uncharted</em>'s Nathan Drake is a likable everyman in cutscenes. In gameplay, he kills hundreds of people without hesitation or consequence.
-The story says: charming adventurer.  
-The gameplay says: mass murderer.
-This contradiction is ludonarrative dissonance. The two channels of meaning are out of sync.
-<hr>
-<h2>Harmony in Practice</h2>
-<table>
-<thead><tr>
-<th>Game</th><th>How mechanics reinforce narrative</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><em>Journey</em></td><td>Cooperation mechanics support theme of connection</td> <thead><tr> <th><em>Brothers: A Tale of Two Sons</em></th><th>Control scheme embodies the relationship</th> <tr> <td><em>Papers, Please</em></td><td>Bureaucratic mechanics create complicity</td> <thead><tr> <th><em>Celeste</em></th><th>Difficulty mechanics mirror struggle with mental health</th> <tr> <td><em>Shadow of the Colossus</em></td><td>Mounting and stabbing creates ambivalence about killing</td></p>
-<p>In each case, the <em>feeling</em> of playing matches the <em>meaning</em> of the story.</p>
-<hr>
-<h2>Three Relationships</h2>
-<h3>Harmony</h3>
-Mechanics and narrative point the same direction. What you do <em>is</em> what the story is about.
-<em>Journey</em>: You walk toward a mountain. You meet strangers. You help each other. The mechanics ARE the theme.
-<h3>Dissonance</h3>
-Mechanics and narrative contradict. What you do undermines or complicates what you're told.
-<em>BioShock</em>: "A man chooses, a slave obeys" — but you have no choice but to follow the objective markers.
-<h3>Productive Tension</h3>
-The contradiction is the point. The dissonance creates meaning.
-<em>Spec Ops: The Line</em>: You play a shooter, but the videogame wants you to feel sick about shooting. The dissonance indicts the genre.
-<hr>
-<h2>Dissonance Isn't Always Bad</h2>
-Dissonance is a problem when it's accidental — when the designer didn't notice the contradiction.
-Dissonance is a tool when it's intentional — when the contradiction makes you uncomfortable in a meaningful way.
-<strong>The question:</strong> Does the player <em>notice</em> the gap? Does noticing it add something?
-If players don't notice, it's failed dissonance (the critique doesn't land) or non-issue (it doesn't matter).  
-If players notice and it deepens the experience, it's productive tension.  
-If players notice and it undercuts the experience, it's harmful dissonance.
-<hr>
-<h2>Achieving Harmony</h2>
-<h3>Start with verbs</h3>
-What will the player <em>do</em> most? That's what your videogame is about, regardless of your narrative intentions. Design story to match.
-<h3>Audit your mechanics</h3>
-For each mechanic, ask: what does this <em>say</em>? A regenerating health system says "damage is temporary." A permanent death system says "death is final." Do those statements match your story?
-<h3>Use mechanics for theme</h3>
-Don't just tell a story about loss — make the player lose something. Don't just tell a story about connection — make the player depend on someone.
-<h3>Accept constraints</h3>
-If your videogame is a shooter, it's about shooting. You can critique shooting (Spec Ops), but you can't pretend you're not making a videogame about shooting.
-<hr>
-<h2>The "Fun" Problem</h2>
-Sometimes mechanics are fun but thematically wrong. <em>Uncharted</em>'s shooting is satisfying — that's the problem. If it weren't fun, the dissonance wouldn't exist.
-<strong>Approaches:</strong>
-1. <strong>Lean into fun:</strong> Accept that your videogame is partly power fantasy. Don't pretend otherwise in cutscenes.
-2. <strong>Make the theme fun:</strong> Design mechanics where the thematic action IS the satisfying one. <em>Portal</em>'s puzzle-solving is both fun and thematically coherent.
-3. <strong>Make fun uncomfortable:</strong> Design mechanics that are satisfying and then make you feel bad about that satisfaction (<em>Spec Ops</em>, <em>Undertale</em>).
-4. <strong>Reduce fun dissonance:</strong> If violence is thematically weighty, make combat difficult, costly, or rare.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Ludonarrative harmony comes up in <strong>Meaning from Dynamics</strong> (Layer 3) and is a key concept for the final project.
-<strong>The provocation:</strong> "Your mechanics are your story. If they contradict your cutscenes, your mechanics win."
-Students often want to add narrative to justify mechanics they've already designed. Push them to ask whether the mechanics <em>should</em> be what they are.
-<strong>Exercise: Dissonance Hunt</strong>
-Students play a videogame and identify every instance of ludonarrative dissonance they can find. Then classify: accidental, harmful, or productive?
-<strong>Exercise: Harmony Redesign</strong>
-Take a videogame with clear dissonance. Redesign EITHER the narrative to match the mechanics OR the mechanics to match the narrative. What's lost in each direction?
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-"Ludonarrative dissonance" was coined by Clint Hocking in a 2007 blog post about <em>BioShock</em>. It became one of the most-used (and sometimes overused) terms in videogame criticism.
-<strong>Key influences:</strong>
-<strong>Clint Hocking</strong> — The original formulation. His critique of <em>BioShock</em> remains sharp.
-<strong>Ian Bogost</strong> — Procedural rhetoric provides the theoretical backing: videogames make arguments through mechanics.
-<strong>What I'm taking:</strong>
-The core insight that mechanics <em>mean something</em>, and that meaning should be in dialogue with explicit narrative. This is basic but often ignored.
-<strong>What I'm resisting:</strong>
-<strong>Dissonance policing:</strong> The idea that all dissonance is bad. Sometimes it's fine. <em>Mario</em> rescues Peach through violence; no one cares. Context matters.
-<strong>The harmony fetish:</strong> The idea that perfect harmony is always the goal. Tension, contradiction, and discomfort are valid artistic choices.
-<strong>Unresolved questions:</strong>
-- How much dissonance can players tolerate before it breaks immersion?
-- Is dissonance a Western critical concern? Do players from different traditions parse the ludo/narrative relationship differently?
-- Can systemic videogames (Dwarf Fortress, Rimworld) have ludonarrative dissonance if they have no authored narrative?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="meaning-from-dynamics.html">Meaning From Dynamics</a> — how mechanics create meaning
-- <a href="permissions.html">Permissions</a> — what you're allowed to do shapes what the story can be
-- <a href="case-studies-spec-ops-white-phosphorus.html">White Phosphorus</a> — productive dissonance
-- <a href="case-studies-journey-cooperation.html">Cooperation</a> — harmony through mechanics
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-ludonarrative-dissonance.html">Ludonarrative Dissonance</a> — when mechanics and story contradict  
-→ <a href="glossary-procedural-rhetoric.html">Procedural Rhetoric</a> — arguments made through rules  
-→ <a href="glossary-thematic-coherence.html">Thematic Coherence</a> — all elements supporting one meaning
-        
+
+        <p class="lead">
+          When what you <em>do</em> (ludo) and what you're <em>told</em> (narrative) reinforce each other. The mechanics and the story say the same thing.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Harmony vs. Dissonance</h3>
+            <p>
+              <strong>Ludonarrative harmony</strong> is when mechanics and narrative point the same direction. What you do <em>is</em> what the story is about.
+            </p>
+            <p>
+              <strong>Ludonarrative dissonance</strong> is when they contradict: the story says one thing, the gameplay says another.
+            </p>
+
+            <h3>The Classic Dissonance</h3>
+            <p>
+              <em>Uncharted</em>'s Nathan Drake is a likable everyman in cutscenes. In gameplay, he kills hundreds of people without hesitation or consequence.
+            </p>
+            <p>
+              The story says: charming adventurer.<br>
+              The gameplay says: mass murderer.
+            </p>
+            <p>This contradiction is ludonarrative dissonance. The two channels of meaning are out of sync.</p>
+
+            <h3>Harmony in Practice</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Videogame</th>
+                  <th>How mechanics reinforce narrative</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><em>Journey</em></td>
+                  <td>Cooperation mechanics support theme of connection</td>
+                </tr>
+                <tr>
+                  <td><em>Brothers: A Tale of Two Sons</em></td>
+                  <td>Control scheme embodies the relationship</td>
+                </tr>
+                <tr>
+                  <td><em>Papers, Please</em></td>
+                  <td>Bureaucratic mechanics create complicity</td>
+                </tr>
+                <tr>
+                  <td><em>Celeste</em></td>
+                  <td>Difficulty mechanics mirror struggle with mental health</td>
+                </tr>
+                <tr>
+                  <td><em>Shadow of the Colossus</em></td>
+                  <td>Mounting and stabbing creates ambivalence about killing</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>In each case, the <em>feeling</em> of playing matches the <em>meaning</em> of the story.</p>
+
+            <h3>Three Relationships</h3>
+            <p><strong>Harmony:</strong> Mechanics and narrative point the same direction. <em>Journey</em>: You walk toward a mountain. You meet strangers. You help each other. The mechanics ARE the theme.</p>
+            <p><strong>Dissonance:</strong> Mechanics and narrative contradict. <em>BioShock</em>: "A man chooses, a slave obeys" - but you have no choice but to follow the objective markers.</p>
+            <p><strong>Productive Tension:</strong> The contradiction is the point. <em>Spec Ops: The Line</em>: You play a shooter, but the videogame wants you to feel sick about shooting. The dissonance indicts the genre.</p>
+
+            <h3>Achieving Harmony</h3>
+            <p><strong>Start with verbs:</strong> What will the player <em>do</em> most? That's what your videogame is about, regardless of your narrative intentions. Design story to match.</p>
+            <p><strong>Audit your mechanics:</strong> For each mechanic, ask: what does this <em>say</em>? A regenerating health system says "damage is temporary." A permanent death system says "death is final." Do those statements match your story?</p>
+            <p><strong>Use mechanics for theme:</strong> Don't just tell a story about loss - make the player lose something. Don't just tell a story about connection - make the player depend on someone.</p>
+            <p><strong>Accept constraints:</strong> If your videogame is a shooter, it's about shooting. You can critique shooting (Spec Ops), but you can't pretend you're not making a videogame about shooting.</p>
+
+            <h3>Exercise: Dissonance Hunt</h3>
+            <p>Play a videogame and identify every instance of ludonarrative dissonance you can find. Then classify each: accidental, harmful, or productive?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              The core provocation: "Your mechanics are your story. If they contradict your cutscenes, your mechanics win."
+            </p>
+            <p>
+              Students often want to add narrative to justify mechanics they've already designed. This concept pushes them to ask whether the mechanics <em>should</em> be what they are.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"All dissonance is bad"</strong></p>
+            <p>
+              Dissonance is a problem when it's accidental - when the designer didn't notice the contradiction. Dissonance is a tool when it's intentional - when the contradiction makes you uncomfortable in a meaningful way.
+            </p>
+
+            <p><strong>"Perfect harmony is always the goal"</strong></p>
+            <p>
+              Tension, contradiction, and discomfort are valid artistic choices. <em>Mario</em> rescues Peach through violence; no one cares. Context matters.
+            </p>
+
+            <h3>The "Fun" Problem</h3>
+            <p>Sometimes mechanics are fun but thematically wrong. <em>Uncharted</em>'s shooting is satisfying - that's the problem. If it weren't fun, the dissonance wouldn't exist.</p>
+            <p>Approaches:</p>
+            <ul>
+              <li><strong>Lean into fun:</strong> Accept that your videogame is partly power fantasy. Don't pretend otherwise in cutscenes.</li>
+              <li><strong>Make the theme fun:</strong> Design mechanics where the thematic action IS the satisfying one. <em>Portal</em>'s puzzle-solving is both fun and thematically coherent.</li>
+              <li><strong>Make fun uncomfortable:</strong> Design mechanics that are satisfying and then make you feel bad about that satisfaction (<em>Spec Ops</em>, <em>Undertale</em>).</li>
+              <li><strong>Reduce fun dissonance:</strong> If violence is thematically weighty, make combat difficult, costly, or rare.</li>
+            </ul>
+
+            <h3>Assessment</h3>
+            <p><strong>Exercise: Harmony Redesign</strong></p>
+            <p>
+              Take a videogame with clear dissonance. Redesign EITHER the narrative to match the mechanics OR the mechanics to match the narrative. What's lost in each direction?
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Origin of the Term</h3>
+            <p>
+              "Ludonarrative dissonance" was coined by Clint Hocking in a 2007 blog post about <em>BioShock</em>. It became one of the most-used (and sometimes overused) terms in videogame criticism.
+            </p>
+            <p>
+              Hocking's original critique remains sharp: <em>BioShock</em> asks you to question blind obedience while the gameplay requires blind obedience to objective markers.
+            </p>
+
+            <h3>Key Influences</h3>
+            <p>
+              <strong>Clint Hocking</strong> - The original formulation.
+            </p>
+            <p>
+              <strong>Ian Bogost</strong> - Procedural rhetoric provides the theoretical backing: videogames make arguments through mechanics.
+            </p>
+
+            <h3>What I'm Taking</h3>
+            <p>
+              The core insight that mechanics <em>mean something</em>, and that meaning should be in dialogue with explicit narrative. This is basic but often ignored.
+            </p>
+
+            <h3>What I'm Resisting</h3>
+            <p>
+              <strong>Dissonance policing:</strong> The idea that all dissonance is bad. Sometimes it's fine. Context matters more than consistency.
+            </p>
+            <p>
+              <strong>The harmony fetish:</strong> The idea that perfect harmony is always the goal. Tension, contradiction, and discomfort are valid artistic choices.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much dissonance can players tolerate before it breaks immersion?</li>
+              <li>Is dissonance a Western critical concern? Do players from different traditions parse the ludo/narrative relationship differently?</li>
+              <li>Can systemic videogames (<em>Dwarf Fortress</em>, <em>Rimworld</em>) have ludonarrative dissonance if they have no authored narrative?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Hocking, Clint. "Ludonarrative Dissonance in Bioshock" (2007)</li>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - the whole experience, including this tension</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - what you're allowed to do shapes what the story can be</li>
+          <li><a href="branching-consequence.html">Branching & Consequence</a> - when choices create meaning</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#ludonarrative-dissonance" class="term">Ludonarrative Dissonance</a> - when mechanics and story contradict</li>
+          <li><a href="../glossary.html#procedural-rhetoric" class="term">Procedural Rhetoric</a> - arguments made through rules</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>
