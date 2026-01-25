@@ -3,197 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case Studies — VG101 Knowledge Base</title>
+  <title>Case Studies - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link active">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Case Studies</a> / Case Studies</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Case Studies</span>
-          <span class="tag">case-studies</span> <span class="tag">analysis</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / Case Studies
+        </nav>
+
         <h1>Case Studies</h1>
-Deep dives into specific games, analyzing how they implement the concepts in this knowledge base.
-<hr>
-<h2>By Game</h2>
-<h3>Celeste</h3>
-- <a href="case-studies-celeste-dash.html">Dash</a> — The dash as perfect gesture
-- <a href="case-studies-celeste-assist-mode.html">Assist Mode</a> — Accessibility as design
-- <a href="case-studies-celeste-chapter-structure.html">Chapter Structure</a> — Pacing and progression
-<h3>Dark Souls</h3>
-- <a href="case-studies-dark-souls-bonfire.html">Bonfire</a> — The bonfire as transformed heritage
-- <a href="case-studies-dark-souls-interconnected-world.html">Interconnected World</a> — Spatial communication masterclass
-- <a href="case-studies-dark-souls-difficulty-as-meaning.html">Difficulty As Meaning</a> — Permissions and meaning
-<h3>Portal</h3>
-- <a href="case-studies-portal-level-1.html">Level 1</a> — Implicit teaching
-- <a href="case-studies-portal-momentum.html">Momentum</a> — Gesture and physics feel
-<h3>Undertale</h3>
-- <a href="case-studies-undertale-genocide-route.html">Genocide Route</a> — Consequence with teeth
-- <a href="case-studies-undertale-mercy-mechanic.html">Mercy Mechanic</a> — Permissions as moral architecture
-<h3>Breath of the Wild</h3>
-- <a href="case-studies-breath-of-the-wild-physics-systems.html">Physics Systems</a> — Designed emergence
-- <a href="case-studies-breath-of-the-wild-great-plateau.html">Great Plateau</a> — Tutorial through world
-<h3>Disco Elysium</h3>
-- <a href="case-studies-disco-elysium-internal-dialogue.html">Internal Dialogue</a> — Dialogue as gameplay
-- <a href="case-studies-disco-elysium-skill-system.html">Skill System</a> — Character as conversation
-<h3>Journey</h3>
-- <a href="case-studies-journey-cooperation.html">Cooperation</a> — Mechanics as theme
-<h3>Hades</h3>
-- <a href="case-studies-hades-narrative-repetition.html">Narrative Repetition</a> — Story through roguelike structure
-- <a href="case-studies-hades-god-mode.html">God Mode</a> — Accessibility philosophy
-<hr>
-<h2>By Concept</h2>
-<table>
-<thead><tr>
-<th>Concept</th><th>Case Studies</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td>Gesture</td><td>Celeste/dash, Portal/momentum</td> <thead><tr> <th>Aesthetic Heritage</th><th>Dark Souls/bonfire, Shovel Knight/NES</th> <tr> <td>Permissions</td><td>Undertale/genocide, Papers Please/choices</td> <thead><tr> <th>Feedback</th><th>Celeste/dash, Hades/combat</th> <tr> <td>Meaning</td><td>Dark Souls/difficulty, Spec Ops/violence</td> <thead><tr> <th>Accessibility</th><th>Celeste/assist-mode, Hades/god-mode</th> <tr> <td>Emergence</td><td>Breath of the Wild/physics, Dwarf Fortress</td> <thead><tr> <th>Environmental Storytelling</th><th>Gone Home, Dark Souls/item-descriptions</th> <tr> <td>Dialogue</td><td>Disco Elysium, Hades</td></p>
-<hr>
-<h2>How to Read Case Studies</h2>
-Each case study:
-1. <strong>Describes</strong> the specific design element
-2. <strong>Analyzes</strong> how it implements concepts from this KB
-3. <strong>Connects</strong> to broader principles
-4. <strong>Questions</strong> what's unresolved or debatable
-Case studies aren't celebrations. They're examinations. Even great videogames have questionable choices.
-<hr>
-<h2>Contributing Case Studies</h2>
-If you want to add a case study:
-1. Pick a specific element (not "Dark Souls is good" but "the bonfire as checkpoint")
-2. Use concepts from this KB
-3. Include your interpretation but also acknowledge other readings
-4. Connect to at least 2-3 other entries
-        
+
+        <p class="lead">
+          Deep dives into specific videogames, analyzing how they implement the concepts in this knowledge base.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what to analyze</span>
+          </div>
+          <div class="register-content">
+            <h3>By Videogame</h3>
+
+            <h4>Celeste</h4>
+            <ul>
+              <li><a href="celeste-dash.html">Dash</a> - The dash as perfect <a href="../framework/gesture.html" class="term">Gesture</a></li>
+              <li><a href="celeste-assist-mode.html">Assist Mode</a> - Accessibility as design</li>
+              <li><a href="celeste-chapter-structure.html">Chapter Structure</a> - Pacing and progression</li>
+            </ul>
+
+            <h4>Dark Souls</h4>
+            <ul>
+              <li><a href="dark-souls-bonfire.html">Bonfire</a> - The bonfire as transformed <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></li>
+              <li><a href="dark-souls-interconnected-world.html">Interconnected World</a> - Spatial communication masterclass</li>
+              <li><a href="dark-souls-difficulty-as-meaning.html">Difficulty As Meaning</a> - <a href="../framework/permissions.html" class="term">Permissions</a> and meaning</li>
+            </ul>
+
+            <h4>Portal</h4>
+            <ul>
+              <li><a href="portal-level-1.html">Level 1</a> - Implicit teaching</li>
+              <li><a href="portal-momentum.html">Momentum</a> - <a href="../framework/gesture.html" class="term">Gesture</a> and physics feel</li>
+            </ul>
+
+            <h4>Undertale</h4>
+            <ul>
+              <li><a href="undertale-genocide-route.html">Genocide Route</a> - Consequence with teeth</li>
+              <li><a href="undertale-mercy-mechanic.html">Mercy Mechanic</a> - <a href="../framework/permissions.html" class="term">Permissions</a> as moral architecture</li>
+            </ul>
+
+            <h4>Breath of the Wild</h4>
+            <ul>
+              <li><a href="breath-of-the-wild-physics-systems.html">Physics Systems</a> - Designed emergence</li>
+              <li><a href="breath-of-the-wild-great-plateau.html">Great Plateau</a> - Tutorial through world</li>
+            </ul>
+
+            <h4>Disco Elysium</h4>
+            <ul>
+              <li><a href="disco-elysium-internal-dialogue.html">Internal Dialogue</a> - Dialogue as gameplay</li>
+              <li><a href="disco-elysium-skill-system.html">Skill System</a> - Character as conversation</li>
+            </ul>
+
+            <h4>Journey</h4>
+            <ul>
+              <li><a href="journey-cooperation.html">Cooperation</a> - Mechanics as theme</li>
+            </ul>
+
+            <h4>Hades</h4>
+            <ul>
+              <li><a href="hades-narrative-repetition.html">Narrative Repetition</a> - Story through roguelike structure</li>
+              <li><a href="hades-god-mode.html">God Mode</a> - Accessibility philosophy</li>
+            </ul>
+
+            <h3>By Concept</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>Case Studies</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="../framework/gesture.html" class="term">Gesture</a></td>
+                  <td>Celeste/Dash, Portal/Momentum</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></td>
+                  <td>Dark Souls/Bonfire, Shovel Knight/NES</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/permissions.html" class="term">Permissions</a></td>
+                  <td>Undertale/Genocide, Papers Please/Choices</td>
+                </tr>
+                <tr>
+                  <td>Feedback</td>
+                  <td>Celeste/Dash, Hades/Combat</td>
+                </tr>
+                <tr>
+                  <td>Meaning</td>
+                  <td>Dark Souls/Difficulty, Spec Ops/Violence</td>
+                </tr>
+                <tr>
+                  <td>Accessibility</td>
+                  <td>Celeste/Assist Mode, Hades/God Mode</td>
+                </tr>
+                <tr>
+                  <td>Emergence</td>
+                  <td>Breath of the Wild/Physics, Dwarf Fortress</td>
+                </tr>
+                <tr>
+                  <td>Environmental Storytelling</td>
+                  <td>Gone Home, Dark Souls/Item Descriptions</td>
+                </tr>
+                <tr>
+                  <td>Dialogue</td>
+                  <td>Disco Elysium, Hades</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>How to Read Case Studies</h3>
+            <p>Each case study follows a consistent structure:</p>
+            <ol>
+              <li><strong>Describes</strong> the specific design element</li>
+              <li><strong>Analyzes</strong> how it implements concepts from this KB</li>
+              <li><strong>Connects</strong> to broader principles</li>
+              <li><strong>Questions</strong> what's unresolved or debatable</li>
+            </ol>
+            <p>
+              Case studies aren't celebrations. They're examinations. Even great videogames have questionable choices.
+            </p>
+
+            <h3>Using Case Studies in Teaching</h3>
+            <p>
+              Case studies work best when students have already played the videogame. If that's not possible,
+              video footage can substitute, but the haptic experience is lost.
+            </p>
+            <p>Teaching sequence:</p>
+            <ol>
+              <li>Students play the relevant section (or watch footage)</li>
+              <li>Discuss: What did you notice? What did you feel?</li>
+              <li>Read the case study together</li>
+              <li>Discuss: Did the analysis match your experience? What did it miss?</li>
+              <li>Connect to framework concepts (<a href="../framework/gesture.html" class="term">Gesture</a>, <a href="../framework/the-four-as.html" class="term">The 4 A's</a>, etc.)</li>
+            </ol>
+
+            <h3>Writing Case Studies</h3>
+            <p>If you want to add a case study:</p>
+            <ol>
+              <li>Pick a specific element (not "Dark Souls is good" but "the bonfire as checkpoint")</li>
+              <li>Use concepts from this KB - especially <a href="../framework/gesture.html" class="term">Gesture</a>, <a href="../framework/the-four-as.html" class="term">The 4 A's</a>, <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a>, and <a href="../framework/permissions.html" class="term">Permissions</a></li>
+              <li>Include your interpretation but also acknowledge other readings</li>
+              <li>Connect to at least 2-3 other entries</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Case Studies</h3>
+            <p>
+              Videogame design knowledge is often tacit - designers know what works but struggle to articulate why.
+              Case studies make tacit knowledge explicit by examining specific decisions in context.
+            </p>
+            <p>
+              The case study method comes from business and law education, where students learn through detailed
+              analysis of real situations rather than abstract principles. For videogames, this means examining
+              actual design decisions rather than hypothetical scenarios.
+            </p>
+
+            <h3>The Specificity Principle</h3>
+            <p>
+              Case studies must be specific. "Dark Souls has good level design" teaches nothing.
+              "The bonfire creates a checkpoint with meaningful cost" teaches a principle.
+            </p>
+            <p>
+              Specificity enables transfer: once you understand how the bonfire transforms checkpoint heritage,
+              you can apply that thinking to your own work.
+            </p>
+
+            <h3>Limitations</h3>
+            <p>
+              Case studies are retrospective. They explain what worked, not how to discover what will work.
+              They're tools for analysis and vocabulary, not prediction.
+            </p>
+            <p>
+              Case studies also risk canonization - treating analyzed videogames as "correct" examples rather than
+              one set of choices among many. Every case study implicitly argues for the importance of its subject.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>Fullerton, Tracy. <em>A Playful Production Process</em> (2024) - on iterative analysis</li>
+              <li>Schon, Donald. <em>The Reflective Practitioner</em> (1983) - on tacit knowledge</li>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007) - procedural analysis method</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

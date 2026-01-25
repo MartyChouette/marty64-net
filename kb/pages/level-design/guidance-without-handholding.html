@@ -3,257 +3,295 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guidance Without Hand-Holding — VG101 Knowledge Base</title>
+  <title>Guidance Without Hand-Holding - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Level Design</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link active">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+          <li class="nav-item"><a href="spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="guidance-without-handholding.html" class="nav-link active">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Level Design</a> / Guidance Without Hand-Holding</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Level Design</span>
-          <span class="tag">level-design</span> <span class="tag">tutorials</span> <span class="tag">discovery</span> <span class="tag">player-respect</span>
-        </div>
-    
-        
+
         <h1>Guidance Without Hand-Holding</h1>
-The best videogames teach you everything you need without making you feel taught. You discover; you're not told. You figure it out; you're not shown the answer.
-This is <strong>guidance without hand-holding</strong>: creating conditions for learning without removing the satisfaction of learning.
-<hr>
-<h2>The Hand-Holding Problem</h2>
-Hand-holding damages the player experience:
-- <strong>Removes discovery:</strong> If the videogame tells you where the secret is, it's not a secret
-- <strong>Undercuts mastery:</strong> If the solution is given, solving it isn't an achievement
-- <strong>Breaks immersion:</strong> Tutorial prompts remind you you're playing a game
-- <strong>Insults intelligence:</strong> "Press A to jump" to a player who has jumped in 100 games
-But insufficient guidance damages it too:
-- <strong>Frustration:</strong> Players stuck without knowing why
-- <strong>Abandonment:</strong> Players quit rather than guess
-- <strong>Missed content:</strong> Players don't know features exist
-The goal is guidance that doesn't <em>feel</em> like guidance.
-<hr>
-<h2>Principles</h2>
-<h3>Teach Through Play</h3>
-The best tutorial is a level designed so the correct action is the natural action.
-<em>Portal</em>: First room has one exit. The portal is already there. You walk through it. Tutorial complete.
-<h3>Establish Then Test</h3>
-Introduce a concept in a safe environment, then test it with stakes.
-<em>Mega Man</em>: First encounter with a new enemy is usually in a safe spot. Later encounters are over pits.
-<h3>Progressive Disclosure</h3>
-Don't teach everything at once. Introduce complexity as the player demonstrates readiness.
-<em>Zelda: Breath of the Wild</em>: Great Plateau teaches core systems before releasing you to the world.
-<h3>Failure as Teaching</h3>
-Let players fail in low-stakes ways that teach the lesson.
-<em>Dark Souls</em>: You're supposed to die to the first boss. The death teaches that death is part of the game.
-<h3>Consistent Rules</h3>
-If the player understands the rules, they can reason from them. Consistent rules reduce hand-holding needs.
-<em>Baba Is You</em>: Rules are explicitly stated on screen. Everything follows from them.
-<hr>
-<h2>Techniques</h2>
-<h3>Environmental Cues</h3>
-Use space, light, color, and objects to suggest correct action. (See: <a href="spatial-communication.html">Spatial Communication</a>)
-<h3>Gated Learning</h3>
-Put a skill-gate where the player can't proceed until they've demonstrated understanding.
-<h3>Observational Learning</h3>
-Show NPCs or enemies doing the thing before the player must do it.
-<h3>Safe Experimentation Zones</h3>
-Spaces where the player can try things without consequence.
-<h3>Just-in-Time Information</h3>
-Provide information at the moment of need, not before.
-<h3>Optional Hints</h3>
-Hints that the player can access if stuck, but aren't forced on them. Preserves player agency.
-<hr>
-<h2>The Tooltip Problem</h2>
-Tooltips, button prompts, and tutorial pop-ups work — but at a cost:
-<table>
-<thead><tr>
-<th>Pro</th><th>Con</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td>Clear, unambiguous</td><td>Breaks immersion</td> <thead><tr> <th>Accessible</th><th>Can feel patronizing</th> <tr> <td>Localization-friendly</td><td>Clutters screen</td> <thead><tr> <th>Doesn't require level design for teaching</th><th>Doesn't use level design for teaching</th></p>
-<p>The best videogames minimize explicit instruction. But when necessary, make it: - Skippable for experienced players - Contextual (appears when relevant) - Brief (don't overexplain) - Diegetic if possible (character speech, in-world signs)</p>
-<hr>
-<h2>Onboarding vs. Ongoing Teaching</h2>
-<strong>Onboarding:</strong> Teaching new players the basics. First hour. Can be more explicit.
-<strong>Ongoing:</strong> Teaching new systems mid-game. Should feel like discovery.
-The tolerance for hand-holding decreases as the videogame progresses. Early prompts are expected; mid-game prompts are intrusive.
-<hr>
-<h2>Reading Player Skill</h2>
-Games can adapt guidance to player skill:
-- <strong>Death count:</strong> Many deaths = add hints
-- <strong>Time stuck:</strong> Long time in one area = offer help
-- <strong>Explicit setting:</strong> "Show hints" option in menu
-- <strong>Behavioral analysis:</strong> Player isn't using a mechanic = prompt about it
-<em>Resident Evil 4</em> adjusts difficulty based on performance, invisibly. <em>Celeste</em> offers explicit assist mode. Both respect the player.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-This topic is deeply connected to <strong>accessibility</strong> — guidance is an accessibility issue. Players with different backgrounds, abilities, and available time need different guidance.
-<strong>Exercise: Blind Playtest</strong>
-Have someone unfamiliar with the videogame play your prototype with no instruction. Watch silently. Where do they struggle? What did they miss?
-Then: redesign to teach those things without adding explicit instruction.
-<strong>Exercise: De-Tutorializing</strong>
-Take a videogame with heavy tutorials. Redesign the first 10 minutes to teach the same things through level design, not text. What has to change?
-<strong>Key insight:</strong> Every tutorial prompt is a design failure — something that could have been communicated through play but wasn't. (This is purist and sometimes impractical, but it's a useful frame.)
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Shigeru Miyamoto</strong> — Nintendo's design philosophy: players should figure things out. <em>Mario</em> and <em>Zelda</em> are masterclasses in implicit teaching.
-<strong>Fumito Ueda</strong> — <em>Ico</em> and <em>Shadow of the Colossus</em> famously stripped out tutorials. Trust the player.
-<strong>Jenova Chen</strong> — <em>Journey</em> teaches through encounter design, not prompts.
-<strong>What I'm resisting:</strong>
-<strong>The "accessibility means more prompts" assumption.</strong> Accessibility can mean better level design, not more tooltips. The most accessible teaching is the teaching that happens through play.
-<strong>The "hardcore = no guidance" assumption.</strong> <em>Dark Souls</em> is famously hard but it <em>does</em> teach. It just teaches through death rather than text.
-<strong>Unresolved questions:</strong>
-- How do we balance teaching through design with accessibility needs for players who genuinely need explicit instruction?
-- Is there a cultural component? Are players from different gaming traditions more or less tolerant of explicit guidance?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="spatial-communication.html">Spatial Communication</a> — using space to teach
-- <a href="feedback-readability.html">Feedback Readability</a> — how videogames communicate
-- <a href="pedagogy-debugging-as-literacy.html">Debugging As Literacy</a> — learning through failure
-- <a href="case-studies-portal-level-1.html">Level 1</a> — implicit teaching masterclass
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-gating.html">Gating</a> — blocking progress until skill is demonstrated  
-→ <a href="glossary-diegetic-ui.html">Diegetic Ui</a> — information that exists within the videogame world  
-→ <a href="glossary-progressive-disclosure.html">Progressive Disclosure</a> — revealing complexity gradually
-        
+        <p>The best videogames teach you everything you need without making you feel taught. You discover; you're not told. You figure it out; you're not shown the answer.</p>
+        <p>This is <strong>guidance without hand-holding</strong>: creating conditions for learning without removing the satisfaction of learning.</p>
+
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Hand-Holding Problem</h3>
+            <p>Hand-holding damages the player experience:</p>
+            <ul>
+              <li><strong>Removes discovery:</strong> If the videogame tells you where the secret is, it's not a secret</li>
+              <li><strong>Undercuts mastery:</strong> If the solution is given, solving it isn't an achievement</li>
+              <li><strong>Breaks immersion:</strong> Tutorial prompts remind you you're playing a videogame</li>
+              <li><strong>Insults intelligence:</strong> "Press A to jump" to a player who has jumped in 100 videogames</li>
+            </ul>
+            <p>But insufficient guidance damages it too:</p>
+            <ul>
+              <li><strong>Frustration:</strong> Players stuck without knowing why</li>
+              <li><strong>Abandonment:</strong> Players quit rather than guess</li>
+              <li><strong>Missed content:</strong> Players don't know features exist</li>
+            </ul>
+            <p>The goal is guidance that doesn't <em>feel</em> like guidance.</p>
+
+            <h3>Principles</h3>
+
+            <h4>Teach Through Play</h4>
+            <p>The best tutorial is a level designed so the correct action is the natural action.</p>
+            <p><em>Portal</em>: First room has one exit. The portal is already there. You walk through it. Tutorial complete.</p>
+
+            <h4>Establish Then Test</h4>
+            <p>Introduce a concept in a safe environment, then test it with stakes.</p>
+            <p><em>Mega Man</em>: First encounter with a new enemy is usually in a safe spot. Later encounters are over pits.</p>
+
+            <h4>Progressive Disclosure</h4>
+            <p>Don't teach everything at once. Introduce complexity as the player demonstrates readiness.</p>
+            <p><em>Zelda: Breath of the Wild</em>: Great Plateau teaches core systems before releasing you to the world.</p>
+
+            <h4>Failure as Teaching</h4>
+            <p>Let players fail in low-stakes ways that teach the lesson.</p>
+            <p><em>Dark Souls</em>: You're supposed to die to the first boss. The death teaches that death is part of the videogame.</p>
+
+            <h4>Consistent Rules</h4>
+            <p>If the player understands the rules, they can reason from them. Consistent rules reduce hand-holding needs.</p>
+            <p><em>Baba Is You</em>: Rules are explicitly stated on screen. Everything follows from them.</p>
+
+            <h3>Techniques</h3>
+
+            <h4>Environmental Cues</h4>
+            <p>Use space, light, color, and objects to suggest correct action. (See: <a href="spatial-communication.html">Spatial Communication</a>)</p>
+
+            <h4>Gated Learning</h4>
+            <p>Put a skill-gate where the player can't proceed until they've demonstrated understanding.</p>
+
+            <h4>Observational Learning</h4>
+            <p>Show NPCs or enemies doing the thing before the player must do it.</p>
+
+            <h4>Safe Experimentation Zones</h4>
+            <p>Spaces where the player can try things without consequence.</p>
+
+            <h4>Just-in-Time Information</h4>
+            <p>Provide information at the moment of need, not before.</p>
+
+            <h4>Optional Hints</h4>
+            <p>Hints that the player can access if stuck, but aren't forced on them. Preserves player agency.</p>
+
+            <h3>The Tooltip Problem</h3>
+            <p>Tooltips, button prompts, and tutorial pop-ups work - but at a cost:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Pro</th>
+                  <th>Con</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Clear, unambiguous</td>
+                  <td>Breaks immersion</td>
+                </tr>
+                <tr>
+                  <td>Accessible</td>
+                  <td>Can feel patronizing</td>
+                </tr>
+                <tr>
+                  <td>Localization-friendly</td>
+                  <td>Clutters screen</td>
+                </tr>
+                <tr>
+                  <td>Doesn't require level design for teaching</td>
+                  <td>Doesn't use level design for teaching</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>The best videogames minimize explicit instruction. But when necessary, make it:</p>
+            <ul>
+              <li>Skippable for experienced players</li>
+              <li>Contextual (appears when relevant)</li>
+              <li>Brief (don't overexplain)</li>
+              <li>Diegetic if possible (character speech, in-world signs)</li>
+            </ul>
+
+            <h3>Onboarding vs. Ongoing Teaching</h3>
+            <p><strong>Onboarding:</strong> Teaching new players the basics. First hour. Can be more explicit.</p>
+            <p><strong>Ongoing:</strong> Teaching new systems mid-game. Should feel like discovery.</p>
+            <p>The tolerance for hand-holding decreases as the videogame progresses. Early prompts are expected; mid-game prompts are intrusive.</p>
+
+            <h3>Reading Player Skill</h3>
+            <p>Videogames can adapt guidance to player skill:</p>
+            <ul>
+              <li><strong>Death count:</strong> Many deaths = add hints</li>
+              <li><strong>Time stuck:</strong> Long time in one area = offer help</li>
+              <li><strong>Explicit setting:</strong> "Show hints" option in menu</li>
+              <li><strong>Behavioral analysis:</strong> Player isn't using a mechanic = prompt about it</li>
+            </ul>
+            <p><em>Resident Evil 4</em> adjusts difficulty based on performance, invisibly. <em>Celeste</em> offers explicit assist mode. Both respect the player.</p>
+
+            <h3>See Also</h3>
+            <ul>
+              <li><a href="spatial-communication.html">Spatial Communication</a> - using space to teach</li>
+              <li><a href="../framework/feedback-readability.html">Feedback & Readability</a> - how videogames communicate</li>
+              <li><a href="../pedagogy/debugging-as-literacy.html">Debugging as Literacy</a> - learning through failure</li>
+            </ul>
+
+            <h3>Glossary Connections</h3>
+            <ul>
+              <li><a href="../glossary.html" class="term">Gating</a> - blocking progress until skill is demonstrated</li>
+              <li><a href="../glossary.html" class="term">Diegetic UI</a> - information that exists within the videogame world</li>
+              <li><a href="../glossary.html" class="term">Progressive Disclosure</a> - revealing complexity gradually</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Notes</h3>
+            <p>This topic is deeply connected to <strong>accessibility</strong> - guidance is an accessibility issue. Players with different backgrounds, abilities, and available time need different guidance.</p>
+
+            <h3>Exercise: Blind Playtest</h3>
+            <p>Have someone unfamiliar with the videogame play your prototype with no instruction. Watch silently. Where do they struggle? What did they miss?</p>
+            <p>Then: redesign to teach those things without adding explicit instruction.</p>
+
+            <h3>Exercise: De-Tutorializing</h3>
+            <p>Take a videogame with heavy tutorials. Redesign the first 10 minutes to teach the same things through level design, not text. What has to change?</p>
+
+            <h3>Key Insight</h3>
+            <p>Every tutorial prompt is a design failure - something that could have been communicated through play but wasn't. (This is purist and sometimes impractical, but it's a useful frame.)</p>
+
+            <h3>Common Misconceptions</h3>
+            <ul>
+              <li><strong>"Players will figure it out."</strong> Some will, many won't. The question is whether the failure is theirs or yours.</li>
+              <li><strong>"Tutorials are always bad."</strong> Explicit instruction has its place, especially for accessibility. The goal is minimizing unnecessary prompts, not eliminating all guidance.</li>
+              <li><strong>"Hard videogames don't need tutorials."</strong> <em>Dark Souls</em> teaches constantly - just through death rather than text. Teaching and difficulty are orthogonal.</li>
+            </ul>
+
+            <h3>Assessment Approaches</h3>
+            <ul>
+              <li><strong>Blind playtest:</strong> Watch new players without intervening. Document where they struggle.</li>
+              <li><strong>Tutorial audit:</strong> List every explicit instruction in a prototype. For each, ask: could this be taught through design?</li>
+              <li><strong>Completion rates:</strong> Track where players abandon the videogame. Correlate with tutorial density.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Background</h3>
+
+            <h4>Shigeru Miyamoto</h4>
+            <p>Nintendo's design philosophy: players should figure things out. <em>Mario</em> and <em>Zelda</em> are masterclasses in implicit teaching.</p>
+
+            <h4>Fumito Ueda</h4>
+            <p><em>Ico</em> and <em>Shadow of the Colossus</em> famously stripped out tutorials. Trust the player.</p>
+
+            <h4>Jenova Chen</h4>
+            <p><em>Journey</em> teaches through encounter design, not prompts. The other players teach you.</p>
+
+            <h3>What This Framework Resists</h3>
+            <p><strong>The "accessibility means more prompts" assumption.</strong> Accessibility can mean better level design, not more tooltips. The most accessible teaching is the teaching that happens through play.</p>
+            <p><strong>The "hardcore = no guidance" assumption.</strong> <em>Dark Souls</em> is famously hard but it <em>does</em> teach. It just teaches through death rather than text.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li><strong>Accessibility tension:</strong> How do we balance teaching through design with accessibility needs for players who genuinely need explicit instruction?</li>
+              <li><strong>Cultural variation:</strong> Are players from different gaming traditions more or less tolerant of explicit guidance?</li>
+              <li><strong>Genre expectations:</strong> Some genres (puzzle games, strategy) may require more explicit information than others. Where's the line?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Anthropy, Anna. "Level Design Lesson: To the Right, Hold On Tight" (2012)</li>
+              <li>Brown, Mark. "What Makes Celeste's Assist Mode Special" (Game Maker's Toolkit, 2018)</li>
+              <li>Nutt, Christian. "The Game Design of Dark Souls" (Gamasutra, 2012)</li>
+              <li>Valve Developer Commentary (Portal series)</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

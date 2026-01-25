@@ -3,252 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spatial Communication — VG101 Knowledge Base</title>
+  <title>Spatial Communication - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Level Design</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link active">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+          <li class="nav-item"><a href="spatial-communication.html" class="nav-link active">Spatial Communication</a></li>
+          <li class="nav-item"><a href="pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Level Design</a> / Spatial Communication</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Level Design</span>
-          <span class="tag">level-design</span> <span class="tag">communication</span> <span class="tag">guidance</span> <span class="tag">space</span>
-        </div>
-    
-        
+
         <h1>Spatial Communication</h1>
-<strong>Spatial communication</strong> is how level design talks to the player — guiding attention, suggesting paths, establishing importance, all without words.
-Space isn't neutral. Every room, corridor, vista, and dead end is saying something. The question is whether it's saying what you intended.
-<hr>
-<h2>Space as Language</h2>
-Level design is communication design. You're trying to tell the player:
-- Where they are
-- Where they can go
-- Where they should go
-- What matters
-- What's dangerous
-- What's safe
-You do this through the arrangement of space and the objects within it.
-<hr>
-<h2>The Vocabulary of Space</h2>
-<h3>Framing</h3>
-What you put in the player's line of sight. A doorway frames what's beyond. A window frames a destination. A narrow passage focuses attention.
-<h3>Contrast</h3>
-Difference draws the eye. A red door in a gray room. A lit area in darkness. An open space after tight corridors.
-<h3>Scale</h3>
-Size indicates importance. A huge door suggests something significant behind it. A tiny crawlspace suggests secret.
-<h3>Repetition</h3>
-Patterns establish expectations. Repeated columns create rhythm. Breaking the pattern draws attention.
-<h3>Landmarks</h3>
-Distinctive, memorable elements that help orientation. The Citadel in <em>Half-Life 2</em>. The volcano in <em>Breath of the Wild</em>.
-<h3>Lines</h3>
-Leading lines — paths, edges, beams of light — direct the eye. Railway tracks, rivers, rows of pillars.
-<hr>
-<h2>The Critical Path</h2>
-The <strong>critical path</strong> is the route through the game. Spatial communication should make it findable without making it compulsory.
-<strong>Techniques:</strong>
-- Light the critical path more brightly
-- Make it wider or more inviting
-- Place it in the player's natural eye line
-- Use enemies or pickups as breadcrumbs
-<strong>Danger:</strong> If the critical path is too obvious, the world feels like a corridor. If it's too hidden, players get lost.
-The art is making the critical path feel <em>discovered</em> rather than <em>prescribed</em>.
-<hr>
-<h2>Negative Space</h2>
-What you <em>don't</em> put in a space matters.
-- Empty rooms feel ominous or contemplative
-- Missing objects (gaps in a lineup, empty pedestals) suggest something was taken
-- Blocked paths show where you <em>can't</em> go, defining where you can
-<hr>
-<h2>Teaching Through Space</h2>
-The best tutorials are levels that teach without text.
-<em>World 1-1</em> of <em>Super Mario Bros.</em> teaches:
-- Run right (empty left, enemies from right)
-- Hit blocks (first block has a mushroom)
-- Avoid enemies (Goomba in your path)
-- Jump (first pit requires it)
-No text. Just spatial arrangement.
-<strong>Principle:</strong> Put players in situations where the correct action is the natural action.
-<hr>
-<h2>Orientation Systems</h2>
-Players need to know where they are. Spatial communication supports this through:
-<table>
-<thead><tr>
-<th>Technique</th><th>How it works</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><strong>Distinct zones</strong></td><td>Each area looks different (ice level, fire level)</td> <thead><tr> <th><strong>Visible landmarks</strong></th><th>You can always see the mountain</th> <tr> <td><strong>Sightlines</strong></td><td>You can see where you came from, where you're going</td> <thead><tr> <th><strong>Logical geography</strong></th><th>The world makes spatial sense</th> <tr> <td><strong>Environmental cues</strong></td><td>Moss grows on north sides, water flows downhill</td></p>
-<p>Disorientation is sometimes the goal (horror, maze puzzles). But it should be chosen, not accidental.</p>
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Spatial Communication is the bridge between <strong>Level Design</strong> and <strong>Feedback & Readability</strong>. Space is a feedback system.
-<strong>Exercise: Screenshot Analysis</strong>
-Students screenshot 5 moments where they knew where to go without being told. Analyze: what spatial cues did the designer use?
-Then screenshot 5 moments where they were lost. What cues were missing or misleading?
-<strong>Exercise: Paper Prototype</strong>
-Design a level on paper (top-down). Identify the critical path. Then mark every spatial cue that will guide the player along it. Have someone else trace what they think the path is.
-Where they diverge = communication failure.
-<strong>Key insight:</strong> Players don't read your intentions. They read your spaces.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Christopher Alexander</strong> — <em>A Pattern Language</em>. Architecture as communication. Rooms shape behavior. Videogames inherited heavily.
-<strong>Rudolf Arnheim</strong> — <em>Art and Visual Perception</em>. How humans parse visual space. Applies directly to level design.
-<strong>Valve's developer commentaries</strong> — The <em>Half-Life</em> and <em>Portal</em> teams are masters of spatial communication. Their GDC talks and in-game commentary explain their techniques.
-<strong>What I'm taking:</strong>
-Level design is visual communication design. You're designing how eyes move, how attention is directed, how space is read.
-<strong>Unresolved questions:</strong>
-- How do different camera perspectives change spatial communication? First-person, third-person, top-down each have different vocabularies.
-- Cultural variation: do players from different visual cultures read space differently?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="feedback-readability.html">Feedback Readability</a> — spatial communication as feedback
-- <a href="level-design-guidance-without-handholding.html">Guidance Without Handholding</a> — adjacent concept
-- <a href="environmental-storytelling.html">Environmental Storytelling</a> — space as narrative
-- <a href="case-studies-dark-souls-interconnected-world.html">Interconnected World</a> — masterclass in spatial communication
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-critical-path.html">Critical Path</a> — the main route through a level  
-→ <a href="glossary-weenie.html">Weenie</a> — Disney term for a visible landmark that draws you forward  
-→ <a href="glossary-leading-lines.html">Leading Lines</a> — visual elements that direct the eye
-        
+        <p><strong>Spatial communication</strong> is how level design talks to the player - guiding attention, suggesting paths, establishing importance, all without words.</p>
+        <p>Space isn't neutral. Every room, corridor, vista, and dead end is saying something. The question is whether it's saying what you intended.</p>
+
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Space as Language</h3>
+            <p>Level design is communication design. You're trying to tell the player:</p>
+            <ul>
+              <li>Where they are</li>
+              <li>Where they can go</li>
+              <li>Where they should go</li>
+              <li>What matters</li>
+              <li>What's dangerous</li>
+              <li>What's safe</li>
+            </ul>
+            <p>You do this through the arrangement of space and the objects within it.</p>
+
+            <h3>The Vocabulary of Space</h3>
+
+            <h4>Framing</h4>
+            <p>What you put in the player's line of sight. A doorway frames what's beyond. A window frames a destination. A narrow passage focuses attention.</p>
+
+            <h4>Contrast</h4>
+            <p>Difference draws the eye. A red door in a gray room. A lit area in darkness. An open space after tight corridors.</p>
+
+            <h4>Scale</h4>
+            <p>Size indicates importance. A huge door suggests something significant behind it. A tiny crawlspace suggests secret.</p>
+
+            <h4>Repetition</h4>
+            <p>Patterns establish expectations. Repeated columns create rhythm. Breaking the pattern draws attention.</p>
+
+            <h4>Landmarks</h4>
+            <p>Distinctive, memorable elements that help orientation. The Citadel in <em>Half-Life 2</em>. The volcano in <em>Breath of the Wild</em>.</p>
+
+            <h4>Lines</h4>
+            <p>Leading lines - paths, edges, beams of light - direct the eye. Railway tracks, rivers, rows of pillars.</p>
+
+            <h3>The Critical Path</h3>
+            <p>The <strong>critical path</strong> is the route through the videogame. Spatial communication should make it findable without making it compulsory.</p>
+            <p><strong>Techniques:</strong></p>
+            <ul>
+              <li>Light the critical path more brightly</li>
+              <li>Make it wider or more inviting</li>
+              <li>Place it in the player's natural eye line</li>
+              <li>Use enemies or pickups as breadcrumbs</li>
+            </ul>
+            <p><strong>Danger:</strong> If the critical path is too obvious, the world feels like a corridor. If it's too hidden, players get lost.</p>
+            <p>The art is making the critical path feel <em>discovered</em> rather than <em>prescribed</em>.</p>
+
+            <h3>Negative Space</h3>
+            <p>What you <em>don't</em> put in a space matters.</p>
+            <ul>
+              <li>Empty rooms feel ominous or contemplative</li>
+              <li>Missing objects (gaps in a lineup, empty pedestals) suggest something was taken</li>
+              <li>Blocked paths show where you <em>can't</em> go, defining where you can</li>
+            </ul>
+
+            <h3>Teaching Through Space</h3>
+            <p>The best tutorials are levels that teach without text.</p>
+            <p><em>World 1-1</em> of <em>Super Mario Bros.</em> teaches:</p>
+            <ul>
+              <li>Run right (empty left, enemies from right)</li>
+              <li>Hit blocks (first block has a mushroom)</li>
+              <li>Avoid enemies (Goomba in your path)</li>
+              <li>Jump (first pit requires it)</li>
+            </ul>
+            <p>No text. Just spatial arrangement.</p>
+            <p><strong>Principle:</strong> Put players in situations where the correct action is the natural action.</p>
+
+            <h3>Orientation Systems</h3>
+            <p>Players need to know where they are. Spatial communication supports this through:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Technique</th>
+                  <th>How it works</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Distinct zones</strong></td>
+                  <td>Each area looks different (ice level, fire level)</td>
+                </tr>
+                <tr>
+                  <td><strong>Visible landmarks</strong></td>
+                  <td>You can always see the mountain</td>
+                </tr>
+                <tr>
+                  <td><strong>Sightlines</strong></td>
+                  <td>You can see where you came from, where you're going</td>
+                </tr>
+                <tr>
+                  <td><strong>Logical geography</strong></td>
+                  <td>The world makes spatial sense</td>
+                </tr>
+                <tr>
+                  <td><strong>Environmental cues</strong></td>
+                  <td>Moss grows on north sides, water flows downhill</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Disorientation is sometimes the goal (horror, maze puzzles). But it should be chosen, not accidental.</p>
+
+            <h3>See Also</h3>
+            <ul>
+              <li><a href="../framework/feedback-readability.html">Feedback & Readability</a> - spatial communication as feedback</li>
+              <li><a href="guidance-without-handholding.html">Guidance Without Hand-Holding</a> - adjacent concept</li>
+              <li><a href="../narrative/environmental-storytelling.html">Environmental Storytelling</a> - space as narrative</li>
+            </ul>
+
+            <h3>Glossary Connections</h3>
+            <ul>
+              <li><a href="../glossary.html" class="term">Critical Path</a> - the main route through a level</li>
+              <li><a href="../glossary.html" class="term">Weenie</a> - Disney term for a visible landmark that draws you forward</li>
+              <li><a href="../glossary.html" class="term">Leading Lines</a> - visual elements that direct the eye</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Notes</h3>
+            <p>Spatial Communication is the bridge between <strong>Level Design</strong> and <strong>Feedback & Readability</strong>. Space is a feedback system.</p>
+
+            <h3>Exercise: Screenshot Analysis</h3>
+            <p>Students screenshot 5 moments where they knew where to go without being told. Analyze: what spatial cues did the designer use?</p>
+            <p>Then screenshot 5 moments where they were lost. What cues were missing or misleading?</p>
+
+            <h3>Exercise: Paper Prototype</h3>
+            <p>Design a level on paper (top-down). Identify the critical path. Then mark every spatial cue that will guide the player along it. Have someone else trace what they think the path is.</p>
+            <p>Where they diverge = communication failure.</p>
+
+            <h3>Key Insight</h3>
+            <p>Players don't read your intentions. They read your spaces.</p>
+
+            <h3>Common Misconceptions</h3>
+            <ul>
+              <li><strong>"Good design means players never get lost."</strong> Sometimes disorientation is the goal. Horror, maze puzzles, and exploration videogames use confusion intentionally.</li>
+              <li><strong>"More landmarks = better navigation."</strong> Too many landmarks compete for attention and become noise. The right number is fewer than you think.</li>
+              <li><strong>"The critical path should be obvious."</strong> Too obvious feels like a corridor. The goal is discoverable, not obvious.</li>
+            </ul>
+
+            <h3>Assessment Approaches</h3>
+            <ul>
+              <li><strong>Blind playtest:</strong> Watch someone navigate a level with no instruction. Where do they go? Where do they hesitate?</li>
+              <li><strong>Heat mapping:</strong> Track player paths through spaces. Do they match intended flow?</li>
+              <li><strong>Eye tracking:</strong> What do players look at? Does it match what you're trying to communicate?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Background</h3>
+
+            <h4>Christopher Alexander - A Pattern Language</h4>
+            <p>Architecture as communication. Rooms shape behavior. Videogames inherited heavily from Alexander's work on how spatial patterns affect human experience.</p>
+
+            <h4>Rudolf Arnheim - Art and Visual Perception</h4>
+            <p>How humans parse visual space. The principles of visual weight, balance, and tension apply directly to level design.</p>
+
+            <h4>Valve's Developer Commentaries</h4>
+            <p>The <em>Half-Life</em> and <em>Portal</em> teams are masters of spatial communication. Their GDC talks and in-game commentary explain their techniques in detail.</p>
+
+            <h3>What This Framework Takes</h3>
+            <p>Level design is visual communication design. You're designing how eyes move, how attention is directed, how space is read.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li><strong>Camera perspective:</strong> How do different camera perspectives change spatial communication? First-person, third-person, top-down each have different vocabularies.</li>
+              <li><strong>Cultural variation:</strong> Do players from different visual cultures read space differently? Does architectural tradition affect how players navigate?</li>
+              <li><strong>Accessibility:</strong> How do players with visual impairments navigate spatial communication? What alternatives exist to visual cues?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Alexander, Christopher. <em>A Pattern Language</em> (1977)</li>
+              <li>Arnheim, Rudolf. <em>Art and Visual Perception</em> (1974)</li>
+              <li>Totten, Christopher. <em>An Architectural Approach to Level Design</em> (2014)</li>
+              <li>Valve Developer Commentary (Half-Life 2, Portal series)</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

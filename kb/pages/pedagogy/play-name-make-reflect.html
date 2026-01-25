@@ -3,276 +3,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Play → Name → Make → Reflect — VG101 Knowledge Base</title>
+  <title>Play → Name → Make → Reflect - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Resources</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Pedagogy</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link active">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Pedagogy Overview</a></li>
+          <li class="nav-item"><a href="play-name-make-reflect.html" class="nav-link active">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="code-as-material.html" class="nav-link">Code as Material</a></li>
         </ul>
       </div>
-    
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Pedagogy</a> / Play → Name → Make → Reflect</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Pedagogy</span>
-          <span class="tag">pedagogy</span> <span class="tag">methodology</span> <span class="tag">teaching</span> <span class="tag">rhythm</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Pedagogy</a> / Play → Name → Make → Reflect
+        </nav>
+
         <h1>Play → Name → Make → Reflect</h1>
-This is the weekly rhythm of VG101 — and my core pedagogical method. Learning videogame design isn't about reading theory first. It's about <strong>feeling, then naming, then making, then understanding</strong>.
-<hr>
-<h2>The Sequence</h2>
-<h3>1. Play</h3>
-Experience videogames firsthand. Not analyzing yet — just playing. Letting the videogame affect you.
-<strong>What students do:</strong> Play assigned videogames with journaling prompts. Notice what they feel. Don't explain yet.
-<h3>2. Name</h3>
-Give vocabulary to the experience. "That feeling when you dash" becomes "the dash gesture." "Where did that mechanic come from?" becomes "aesthetic heritage."
-<strong>What students do:</strong> Learn concepts that name what they've already felt. Discuss. Make connections.
-<h3>3. Make</h3>
-Create something that embodies the concept. Not just talk about gestures — build one. Use the Code Bank scaffolds.
-<strong>What students do:</strong> Small, focused making exercises. Recreation, modification, original work.
-<h3>4. Reflect</h3>
-Step back and understand. What did you make? Why did it work or not? How does this change how you see games?
-<strong>What students do:</strong> Written reflection, critique sessions, connecting to larger ideas.
-Then repeat. Each week, a new cycle.
-<hr>
-<h2>Why This Order?</h2>
-The conventional order — theory first, application second — doesn't work for videogame design.
-<table>
-<thead><tr>
-<th>Conventional</th><th>Play → Name → Make → Reflect</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td>Read about jumping</td><td>Jump in a game, feel it</td> <thead><tr> <th>Learn "game feel" vocabulary</th><th>Give name to what you felt</th> <tr> <td>Try to implement jump</td><td>Build a jump that matches the feeling</td> <thead><tr> <th>Grade the implementation</th><th>Reflect on what you learned</th></p>
-<p>The problem with theory-first: students learn words without referents. "Ludonarrative dissonance" means nothing until you've <em>felt</em> the dissonance.</p>
-<p>The Play → Name → Make → Reflect sequence ensures that <strong>vocabulary attaches to felt experience</strong>, and that <strong>understanding emerges from making</strong>.</p>
-<hr>
-<h2>Play: What Counts?</h2>
-"Play" isn't just passing time with games. It's <strong>active, attentive engagement</strong>.
-<strong>Good playing:</strong>
-- Playing with a question in mind ("What makes this jump feel good?")
-- Journaling while or after playing
-- Playing something unfamiliar (not just comfort games)
-- Playing critically (noticing choices, not just reacting)
-<strong>Less useful playing:</strong>
-- Mindless grinding
-- Checking phone while playing
-- Only playing what you already know
-The assignment matters: what question are students taking into play?
-<hr>
-<h2>Name: Vocabulary That Fits</h2>
-Naming should feel like relief, not burden.
-If I've shown students <em>Celeste</em> and had them write about the dash, then I introduce "gesture" — they should think "oh, that's what that was!"
-If they're confused by "gesture," I introduced it too early. They needed more play.
-<strong>Naming principles:</strong>
-- Name what they've experienced
-- Use terms that help, not impress
-- Let naming emerge from discussion, not just lecture
-- Connect new names to old names
-<hr>
-<h2>Make: Constrained Creating</h2>
-Making should be <strong>scoped and focused</strong>, not open-ended.
-"Make a game" is paralyzing.  
-"Recreate the <em>Celeste</em> dash using the dash scaffold in 30 minutes" is actionable.
-<strong>Good making prompts:</strong>
-- Clear scope (one gesture, one system, one level)
-- Available tools (Code Bank scaffolds, not raw engine)
-- Time limit (forces prioritization)
-- Evaluable criteria (what does "done" mean?)
-The constraint is the gift. Freedom overwhelms; constraint enables.
-<hr>
-<h2>Reflect: Closing the Loop</h2>
-Reflection is where learning consolidates. Without it, students do but don't understand.
-<strong>Reflection prompts:</strong>
-- "What surprised you in the making process?"
-- "How is what you made different from what you planned?"
-- "What would you do differently?"
-- "How does this change how you see the original game?"
-Written reflection is valuable, but so is critique: presenting work and receiving feedback.
-<hr>
-<h2>The Rhythm Across VG101</h2>
-<table>
-<thead><tr>
-<th>Week</th><th>Play</th><th>Name</th><th>Make</th><th>Reflect</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td>2</td><td><em>Celeste</em>, <em>Katamari</em></td><td>Gesture</td><td>Recreate a gesture</td><td>What is a gesture?</td> <thead><tr> <th>3</th><th>Trace gestures backward</th><th>Aesthetic Heritage</th><th>Heritage Translation</th><th>What's inherited?</th> <tr> <td>4</td><td>Permission-heavy games</td><td>Permissions</td><td>Permission Audit</td><td>What does this allow?</td> <thead><tr> <th>5</th><th>Feel-focused games</th><th>Feedback & Readability</th><th>30-Minute Action</th><th>What makes feel?</th> <tr> <td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></p>
-<p>Each week cycles through the sequence with different content.</p>
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Meta-Pedagogy</h2>
-This entry is <em>about</em> pedagogy, so the "pedagogy" section is meta.
-<strong>Why I designed this rhythm:</strong>
-I came from music education, where the sequence is obvious: listen, name (theory), practice, reflect. You don't teach music theory before students have heard music. Videogames should work the same.
-<strong>Challenges:</strong>
-Students trained in lecture-first education sometimes resist playing before reading. They want to "know the answer" before engaging. The rhythm requires unlearning that expectation.
-<strong>Assessment alignment:</strong>
-If the rhythm is play → name → make → reflect, assessment should match. I assess reflection and making, not vocabulary recall.
-<strong>The role of failure:</strong>
-"Make" often involves failure. That's intentional. Reflection on failure is some of the best learning. (See: <a href="debugging-as-literacy.html">Debugging As Literacy</a>)
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>John Dewey</strong> — Learning by doing. Experience precedes abstraction. The philosophical backbone of this approach.
-<strong>Donald Schön</strong> — <em>The Reflective Practitioner</em>. Reflection-in-action and reflection-on-action. The idea that professionals learn by reflecting on what they do.
-<strong>Kolb's Experiential Learning Cycle</strong> — Concrete experience → reflective observation → abstract conceptualization → active experimentation. My rhythm maps loosely to Kolb.
-<strong>Studio pedagogy</strong> — Art, architecture, design schools all use variations of this rhythm. Make, critique, reflect, iterate.
-<strong>What I'm resisting:</strong>
-<strong>The lecture-exam model.</strong> Videogame design isn't learned by absorbing information. It's learned by making things and understanding what you made.
-<strong>The "naturalistic" fallacy.</strong> Just playing doesn't teach design. Unstructured play is valuable, but it's not education. The structure (naming, focused making, reflection) is essential.
-<strong>Unresolved questions:</strong>
-- How do you assess the "play" and "name" phases? Can they be graded without distorting them?
-- Does this rhythm work for all students? Some may need more structure, more theory, more time.
-- How does this scale? Studio pedagogy is labor-intensive. How do you run this with 100 students?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="gesture.html">Gesture</a> — Week 2 concept, first "name" in the sequence
-- <a href="aesthetic-heritage.html">Aesthetic Heritage</a> — Week 3 concept
-- <a href="pedagogy-debugging-as-literacy.html">Debugging As Literacy</a> — failure as learning
-- <a href="code-bank.html">Code Bank</a> — tools for the "make" phase
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-experiential-learning.html">Experiential Learning</a> — learning through experience and reflection  
-→ <a href="glossary-studio-pedagogy.html">Studio Pedagogy</a> — learning through making and critique
-        
+
+        <p class="lead">
+          The weekly rhythm of VG101 - and my core pedagogical method. Learning videogame design isn't about
+          reading theory first. It's about <strong>feeling, then naming, then making, then understanding</strong>.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Sequence</h3>
+
+            <h4>1. Play</h4>
+            <p>
+              Experience videogames firsthand. Not analyzing yet - just playing. Letting the videogame affect you.
+            </p>
+            <p>
+              <strong>What students do:</strong> Play assigned videogames with journaling prompts.
+              Notice what they feel. Don't explain yet.
+            </p>
+
+            <h4>2. Name</h4>
+            <p>
+              Give vocabulary to the experience. "That feeling when you dash" becomes "the dash <a href="../framework/gesture.html" class="term">gesture</a>."
+              "Where did that mechanic come from?" becomes "<a href="../framework/aesthetic-heritage.html" class="term">aesthetic heritage</a>."
+            </p>
+            <p>
+              <strong>What students do:</strong> Learn concepts that name what they've already felt. Discuss. Make connections.
+            </p>
+
+            <h4>3. Make</h4>
+            <p>
+              Create something that embodies the concept. Not just talk about gestures - build one. Use the Code Bank scaffolds.
+            </p>
+            <p>
+              <strong>What students do:</strong> Small, focused making exercises. Recreation, modification, original work.
+            </p>
+
+            <h4>4. Reflect</h4>
+            <p>
+              Step back and understand. What did you make? Why did it work or not? How does this change how you see videogames?
+            </p>
+            <p>
+              <strong>What students do:</strong> Written reflection, critique sessions, connecting to larger ideas.
+            </p>
+            <p>Then repeat. Each week, a new cycle.</p>
+
+            <h3>Why This Order?</h3>
+            <p>The conventional order - theory first, application second - doesn't work for videogame design.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Conventional</th>
+                  <th>Play → Name → Make → Reflect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Read about jumping</td>
+                  <td>Jump in a videogame, feel it</td>
+                </tr>
+                <tr>
+                  <td>Learn "game feel" vocabulary</td>
+                  <td>Give name to what you felt</td>
+                </tr>
+                <tr>
+                  <td>Try to implement jump</td>
+                  <td>Build a jump that matches the feeling</td>
+                </tr>
+                <tr>
+                  <td>Grade the implementation</td>
+                  <td>Reflect on what you learned</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              The problem with theory-first: students learn words without referents. "Ludonarrative dissonance"
+              means nothing until you've <em>felt</em> the dissonance.
+            </p>
+            <p>
+              The Play → Name → Make → Reflect sequence ensures that <strong>vocabulary attaches to felt experience</strong>,
+              and that <strong>understanding emerges from making</strong>.
+            </p>
+
+            <h3>Play: What Counts?</h3>
+            <p>"Play" isn't just passing time with videogames. It's <strong>active, attentive engagement</strong>.</p>
+            <p><strong>Good playing:</strong></p>
+            <ul>
+              <li>Playing with a question in mind ("What makes this jump feel good?")</li>
+              <li>Journaling while or after playing</li>
+              <li>Playing something unfamiliar (not just comfort videogames)</li>
+              <li>Playing critically (noticing choices, not just reacting)</li>
+            </ul>
+            <p><strong>Less useful playing:</strong></p>
+            <ul>
+              <li>Mindless grinding</li>
+              <li>Checking phone while playing</li>
+              <li>Only playing what you already know</li>
+            </ul>
+            <p>The assignment matters: what question are students taking into play?</p>
+
+            <h3>Name: Vocabulary That Fits</h3>
+            <p>Naming should feel like relief, not burden.</p>
+            <p>
+              If I've shown students <em>Celeste</em> and had them write about the dash, then I introduce
+              "<a href="../framework/gesture.html" class="term">gesture</a>" - they should think "oh, that's what that was!"
+            </p>
+            <p>If they're confused by "gesture," I introduced it too early. They needed more play.</p>
+            <p><strong>Naming principles:</strong></p>
+            <ul>
+              <li>Name what they've experienced</li>
+              <li>Use terms that help, not impress</li>
+              <li>Let naming emerge from discussion, not just lecture</li>
+              <li>Connect new names to old names</li>
+            </ul>
+
+            <h3>Make: Constrained Creating</h3>
+            <p>Making should be <strong>scoped and focused</strong>, not open-ended.</p>
+            <p>"Make a videogame" is paralyzing.</p>
+            <p>"Recreate the <em>Celeste</em> dash using the dash scaffold in 30 minutes" is actionable.</p>
+            <p><strong>Good making prompts:</strong></p>
+            <ul>
+              <li>Clear scope (one gesture, one system, one level)</li>
+              <li>Available tools (Code Bank scaffolds, not raw engine)</li>
+              <li>Time limit (forces prioritization)</li>
+              <li>Evaluable criteria (what does "done" mean?)</li>
+            </ul>
+            <p>The constraint is the gift. Freedom overwhelms; constraint enables.</p>
+
+            <h3>Reflect: Closing the Loop</h3>
+            <p>Reflection is where learning consolidates. Without it, students do but don't understand.</p>
+            <p><strong>Reflection prompts:</strong></p>
+            <ul>
+              <li>"What surprised you in the making process?"</li>
+              <li>"How is what you made different from what you planned?"</li>
+              <li>"What would you do differently?"</li>
+              <li>"How does this change how you see the original videogame?"</li>
+            </ul>
+            <p>Written reflection is valuable, but so is critique: presenting work and receiving feedback.</p>
+
+            <h3>The Rhythm Across VG101</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Week</th>
+                  <th>Play</th>
+                  <th>Name</th>
+                  <th>Make</th>
+                  <th>Reflect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2</td>
+                  <td><em>Celeste</em>, <em>Katamari</em></td>
+                  <td>Gesture</td>
+                  <td>Recreate a gesture</td>
+                  <td>What is a gesture?</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Trace gestures backward</td>
+                  <td>Aesthetic Heritage</td>
+                  <td>Heritage Translation</td>
+                  <td>What's inherited?</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Permission-heavy videogames</td>
+                  <td>Permissions</td>
+                  <td>Permission Audit</td>
+                  <td>What does this allow?</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Feel-focused videogames</td>
+                  <td>Feedback & Readability</td>
+                  <td>30-Minute Action</td>
+                  <td>What makes feel?</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Each week cycles through the sequence with different content.</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Meta-Pedagogy</h3>
+            <p>This entry is <em>about</em> pedagogy, so the "craft" section is meta.</p>
+
+            <h3>Why I Designed This Rhythm</h3>
+            <p>
+              I came from music education, where the sequence is obvious: listen, name (theory), practice, reflect.
+              You don't teach music theory before students have heard music. Videogames should work the same.
+            </p>
+
+            <h3>Challenges</h3>
+            <p>
+              Students trained in lecture-first education sometimes resist playing before reading.
+              They want to "know the answer" before engaging. The rhythm requires unlearning that expectation.
+            </p>
+
+            <h3>Assessment Alignment</h3>
+            <p>
+              If the rhythm is play → name → make → reflect, assessment should match.
+              I assess reflection and making, not vocabulary recall.
+            </p>
+
+            <h3>The Role of Failure</h3>
+            <p>
+              "Make" often involves failure. That's intentional. Reflection on failure is some of the best learning.
+              (See: <a href="debugging-as-literacy.html">Debugging as Literacy</a>)
+            </p>
+
+            <h3>Common Pitfalls</h3>
+            <p><strong>"Play" becomes passive consumption:</strong></p>
+            <p>
+              Without journaling prompts or questions, "play" can become just playing.
+              The assignment structure matters. Give students something to attend to.
+            </p>
+
+            <p><strong>"Name" becomes lecture:</strong></p>
+            <p>
+              Naming works best as dialogue, not delivery. Ask students what they noticed,
+              then provide vocabulary for what they're describing.
+            </p>
+
+            <p><strong>"Make" becomes overwhelming:</strong></p>
+            <p>
+              Scope aggressively. A 30-minute constraint is better than a week-long project.
+              Small wins build confidence.
+            </p>
+
+            <p><strong>"Reflect" gets skipped:</strong></p>
+            <p>
+              When time is short, reflection goes first. Resist this. Reflection is where
+              learning consolidates. Build it into class time, not just homework.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Background</h3>
+
+            <h4>Key Influences</h4>
+            <p>
+              <strong>John Dewey</strong>: Learning by doing. Experience precedes abstraction.
+              The philosophical backbone of this approach.
+            </p>
+            <p>
+              <strong>Donald Schön</strong>: <em>The Reflective Practitioner</em>. Reflection-in-action and
+              reflection-on-action. The idea that professionals learn by reflecting on what they do.
+            </p>
+            <p>
+              <strong>Kolb's Experiential Learning Cycle</strong>: Concrete experience → reflective observation →
+              abstract conceptualization → active experimentation. My rhythm maps loosely to Kolb.
+            </p>
+            <p>
+              <strong>Studio pedagogy</strong>: Art, architecture, design schools all use variations of this rhythm.
+              Make, critique, reflect, iterate.
+            </p>
+
+            <h3>What I'm Resisting</h3>
+            <p>
+              <strong>The lecture-exam model.</strong> Videogame design isn't learned by absorbing information.
+              It's learned by making things and understanding what you made.
+            </p>
+            <p>
+              <strong>The "naturalistic" fallacy.</strong> Just playing doesn't teach design.
+              Unstructured play is valuable, but it's not education.
+              The structure (naming, focused making, reflection) is essential.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How do you assess the "play" and "name" phases? Can they be graded without distorting them?</li>
+              <li>Does this rhythm work for all students? Some may need more structure, more theory, more time.</li>
+              <li>How does this scale? Studio pedagogy is labor-intensive. How do you run this with 100 students?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Dewey, John. <em>Experience and Education</em> (1938)</li>
+              <li>Schön, Donald. <em>The Reflective Practitioner</em> (1983)</li>
+              <li>Kolb, David. <em>Experiential Learning</em> (1984)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - Week 2 concept, first "name" in the sequence</li>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - Week 3 concept</li>
+          <li><a href="debugging-as-literacy.html">Debugging as Literacy</a> - failure as learning</li>
+          <li><a href="../code-bank/index.html">Code Bank</a> - tools for the "make" phase</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

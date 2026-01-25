@@ -3,269 +3,291 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emergent Behavior — VG101 Knowledge Base</title>
+  <title>Emergent Behavior - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Systems</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link active">Emergent Behavior</a></li>
+          <li class="nav-item"><a href="economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="emergent-behavior.html" class="nav-link active">Emergent Behavior</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Systems</a> / Emergent Behavior</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Systems</span>
-          <span class="tag">systems</span> <span class="tag">emergence</span> <span class="tag">complexity</span> <span class="tag">player-stories</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Systems</a> / Emergent Behavior
+        </nav>
+
         <h1>Emergent Behavior</h1>
-<strong>Emergence</strong> is when simple rules combine to produce complex, unexpected behaviors. It's when the videogame surprises its own designer.
-Emergent behavior is why <em>Dwarf Fortress</em> creates tragedies no author wrote, why <em>Breath of the Wild</em> enables solutions no designer anticipated, and why <em>multiplayer games</em> generate stories that single-player videogames can't.
-<hr>
-<h2>What Is Emergence?</h2>
-<strong>Emergence</strong> = macro-level patterns arising from micro-level rules.
-The rules of chess are simple: how pieces move, capture, check. The strategies that emerge — openings, defenses, endgames — are not written in the rules. They <em>emerge</em> from players interacting with rules over time.
-Emergence means the videogame has more possibility than you explicitly designed.
-<hr>
-<h2>Why Designers Love Emergence</h2>
-<h3>Content Multiplication</h3>
-Designers create rules. Players create content by combining those rules.
-<em>Breath of the Wild</em>: Physics + fire + wind + enemies = infinite videos of creative kills.
-<h3>Replayability</h3>
-Emergent systems aren't solved. Each playthrough produces different patterns.
-<h3>Player Authorship</h3>
-Players feel like co-creators. The story that emerges is <em>their</em> story.
-<h3>Surprise</h3>
-Even the designer discovers new behaviors. The videogame is bigger than its creator.
-<hr>
-<h2>Why Emergence Is Hard</h2>
-<h3>Unpredictability</h3>
-You can't fully predict what will emerge. Playtesting reveals, but can't cover everything.
-<h3>Exploits</h3>
-Players find emergent behaviors that break the game. "Emergent" can mean "broken."
-<h3>Balance Difficulty</h3>
-Emergence + balance = nightmare. Systems interact in untestable combinations.
-<h3>Narrative Dilution</h3>
-Authored meaning requires control. Emergence cedes control. Hard to have both.
-<hr>
-<h2>Designing for Emergence</h2>
-You can't design emergent behaviors directly — you design the <strong>conditions</strong> for emergence.
-<h3>Combinable Elements</h3>
-Systems that interact with each other. Fire spreads. Water conducts electricity. Enemies have physics.
-<h3>Consistent Rules</h3>
-Rules that always apply. If fire burns wood, it burns ALL wood — barrels, bridges, weapons.
-<h3>Player-Readable Interactions</h3>
-Players can predict (roughly) how combinations will work. Transparency enables experimentation.
-<h3>Forgiving Failure</h3>
-If experimenting is punished, players don't experiment. Emergence needs safety to explore.
-<h3>Sandbox Spaces</h3>
-Areas where players can test combinations without stakes.
-<hr>
-<h2>Emergence vs. Randomness</h2>
-Emergence isn't randomness.
-<table>
-<thead><tr>
-<th>Emergence</th><th>Randomness</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td>Deterministic rules → unpredictable outcomes</td><td>Non-deterministic events</td> <thead><tr> <th>Player understands why it happened</th><th>Player doesn't control</th> <tr> <td>Replayable (same inputs → same outputs)</td><td>Variable (same inputs → different outputs)</td> <thead><tr> <th>Surprising but explicable</th><th>Surprising and arbitrary</th></p>
-<p>Emergence feels like <em>discovery</em>. Randomness feels like <em>luck</em> (or bad luck).</p>
-<hr>
-<h2>Emergent Narrative</h2>
-<strong>Emergent narrative</strong> = stories that arise from systems rather than scripts.
-<em>Dwarf Fortress</em> generates stories: a dwarf loses their spouse, falls into despair, drinks too much, stumbles into the forge, starts a fire, destroys the fort.
-No author wrote that. The systems produced it.
-<h3>What Enables Emergent Narrative</h3>
-- Agents with goals and states (characters who want things)
-- Systems that create consequences (actions affect world state)
-- Player interpretation (humans find stories in patterns)
-<h3>Limits of Emergent Narrative</h3>
-- Rarely has dramatic structure (no rising action, climax)
-- Can feel arbitrary or meaningless
-- Lacks authored emotional arc
-- Requires player investment to "see" the story
-Emergent narrative supplements, but rarely replaces, authored narrative.
-<hr>
-<h2>Case Studies</h2>
-<h3>Dwarf Fortress</h3>
-Maximum emergence. Simple AI rules for dwarves, complex interactions with environment, no authored story. Players project narrative onto simulated events.
-<h3>Breath of the Wild</h3>
-Constrained emergence. Physics systems interact predictably. Players discover combinations. Authored story exists alongside emergent play.
-<h3>Hitman</h3>
-Curated emergence. Systems enable many solutions, but levels are designed to suggest specific emergent moments.
-<h3>Chess</h3>
-Pure emergence. No narrative, just strategy arising from rules.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Emergence is where systems design becomes exciting — and where it gets hard to predict.
-<strong>Exercise: Emergence Observation</strong>
-Play a systemic videogame (<em>Breath of the Wild</em>, <em>Noita</em>, <em>Divinity: Original Sin</em>). Document three emergent moments:
-- What happened?
-- What rules combined to produce it?
-- Could the designer have predicted this?
-<strong>Exercise: Emergent System Design</strong>
-Design a simple system (5-7 rules) that you believe will produce emergent behavior. Then test with classmates. Did expected emergence appear? What surprised you?
-<strong>Key insight:</strong> You design rules, not emergence. Emergence is a gift from the rules to the players.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Steven Johnson</strong> — <em>Emergence</em>. Accessible introduction to emergence as a phenomenon.
-<strong>Jesper Juul</strong> — <em>Half-Real</em>. The relationship between rules and fiction; emergence as a game-specific concept.
-<strong>Warren Spector / Deus Ex</strong> — Immersive sim design philosophy: authored spaces, emergent solutions.
-<strong>What I'm taking:</strong>
-The humility emergence requires. You can't control everything. Good design creates conditions and lets go.
-<strong>What I'm resisting:</strong>
-<strong>The "emergence is always good" myth.</strong> Emergence can produce broken games, meaningless noise, or exploitative behaviors. Emergence is a tool, not a virtue.
-<strong>Unresolved questions:</strong>
-- How much emergence is enough? Too little = linear; too much = chaos.
-- Can emergence and authored meaning coexist? Or are they in tension?
-- Whose story is an emergent narrative? Designer's? Player's? System's?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="player-psychology.html">Feedback Loops</a> — loops drive emergence
-- <a href="meaning-from-dynamics.html">Meaning From Dynamics</a> — emergent meaning
-- <a href="action-grammar.html">Action Grammar</a> — verbs that combine
-- <a href="case-studies-breath-of-the-wild-physics-systems.html">Physics Systems</a> — designed emergence
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-emergence.html">Emergence</a> — complex from simple  
-→ <a href="glossary-immersive-sim.html">Immersive Sim</a> — genre built around emergence  
-→ <a href="glossary-systemic-design.html">Systemic Design</a> — designing for interaction
-        
+
+        <p class="lead">
+          <strong>Emergence</strong> is when simple rules combine to produce complex, unexpected behaviors. It's when the videogame surprises its own designer. Emergent behavior is why <em>Dwarf Fortress</em> creates tragedies no author wrote, why <em>Breath of the Wild</em> enables solutions no designer anticipated, and why multiplayer videogames generate stories that single-player videogames can't.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>What Is Emergence?</h3>
+            <p><strong>Emergence</strong> = macro-level patterns arising from micro-level rules.</p>
+            <p>The rules of chess are simple: how pieces move, capture, check. The strategies that emerge - openings, defenses, endgames - are not written in the rules. They <em>emerge</em> from players interacting with rules over time.</p>
+            <p>Emergence means the videogame has more possibility than you explicitly designed.</p>
+
+            <h3>Why Designers Love Emergence</h3>
+
+            <p><strong>Content Multiplication:</strong> Designers create rules. Players create content by combining those rules.</p>
+            <p><em>Breath of the Wild</em>: Physics + fire + wind + enemies = infinite videos of creative kills.</p>
+
+            <p><strong>Replayability:</strong> Emergent systems aren't solved. Each playthrough produces different patterns.</p>
+
+            <p><strong>Player Authorship:</strong> Players feel like co-creators. The story that emerges is <em>their</em> story.</p>
+
+            <p><strong>Surprise:</strong> Even the designer discovers new behaviors. The videogame is bigger than its creator.</p>
+
+            <h3>Why Emergence Is Hard</h3>
+
+            <p><strong>Unpredictability:</strong> You can't fully predict what will emerge. Playtesting reveals, but can't cover everything.</p>
+
+            <p><strong>Exploits:</strong> Players find emergent behaviors that break the videogame. "Emergent" can mean "broken."</p>
+
+            <p><strong>Balance Difficulty:</strong> Emergence + balance = nightmare. Systems interact in untestable combinations.</p>
+
+            <p><strong>Narrative Dilution:</strong> Authored meaning requires control. Emergence cedes control. Hard to have both.</p>
+
+            <h3>Designing for Emergence</h3>
+            <p>You can't design emergent behaviors directly - you design the <strong>conditions</strong> for emergence.</p>
+
+            <p><strong>Combinable Elements:</strong> Systems that interact with each other. Fire spreads. Water conducts electricity. Enemies have physics.</p>
+
+            <p><strong>Consistent Rules:</strong> Rules that always apply. If fire burns wood, it burns ALL wood - barrels, bridges, weapons.</p>
+
+            <p><strong>Player-Readable Interactions:</strong> Players can predict (roughly) how combinations will work. Transparency enables experimentation.</p>
+
+            <p><strong>Forgiving Failure:</strong> If experimenting is punished, players don't experiment. Emergence needs safety to explore.</p>
+
+            <p><strong>Sandbox Spaces:</strong> Areas where players can test combinations without stakes.</p>
+
+            <h3>Emergence vs. Randomness</h3>
+            <p>Emergence isn't randomness.</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Emergence</th>
+                  <th>Randomness</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Deterministic rules → unpredictable outcomes</td>
+                  <td>Non-deterministic events</td>
+                </tr>
+                <tr>
+                  <td>Player understands why it happened</td>
+                  <td>Player doesn't control</td>
+                </tr>
+                <tr>
+                  <td>Replayable (same inputs → same outputs)</td>
+                  <td>Variable (same inputs → different outputs)</td>
+                </tr>
+                <tr>
+                  <td>Surprising but explicable</td>
+                  <td>Surprising and arbitrary</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Emergence feels like <em>discovery</em>. Randomness feels like <em>luck</em> (or bad luck).</p>
+
+            <h3>Emergent Narrative</h3>
+            <p><strong>Emergent narrative</strong> = stories that arise from systems rather than scripts.</p>
+            <p><em>Dwarf Fortress</em> generates stories: a dwarf loses their spouse, falls into despair, drinks too much, stumbles into the forge, starts a fire, destroys the fort.</p>
+            <p>No author wrote that. The systems produced it.</p>
+
+            <p><strong>What Enables Emergent Narrative:</strong></p>
+            <ul>
+              <li>Agents with goals and states (characters who want things)</li>
+              <li>Systems that create consequences (actions affect world state)</li>
+              <li>Player interpretation (humans find stories in patterns)</li>
+            </ul>
+
+            <p><strong>Limits of Emergent Narrative:</strong></p>
+            <ul>
+              <li>Rarely has dramatic structure (no rising action, climax)</li>
+              <li>Can feel arbitrary or meaningless</li>
+              <li>Lacks authored emotional arc</li>
+              <li>Requires player investment to "see" the story</li>
+            </ul>
+
+            <p>Emergent narrative supplements, but rarely replaces, authored narrative.</p>
+
+            <h3>Case Studies</h3>
+
+            <p><strong>Dwarf Fortress:</strong> Maximum emergence. Simple AI rules for dwarves, complex interactions with environment, no authored story. Players project narrative onto simulated events.</p>
+
+            <p><strong>Breath of the Wild:</strong> Constrained emergence. Physics systems interact predictably. Players discover combinations. Authored story exists alongside emergent play.</p>
+
+            <p><strong>Hitman:</strong> Curated emergence. Systems enable many solutions, but levels are designed to suggest specific emergent moments.</p>
+
+            <p><strong>Chess:</strong> Pure emergence. No narrative, just strategy arising from rules.</p>
+
+            <h3>Exercise: Emergence Observation</h3>
+            <p>Play a systemic videogame (<em>Breath of the Wild</em>, <em>Noita</em>, <em>Divinity: Original Sin</em>). Document three emergent moments:</p>
+            <ul>
+              <li>What happened?</li>
+              <li>What rules combined to produce it?</li>
+              <li>Could the designer have predicted this?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Emergence is where systems design becomes exciting - and where it gets hard to predict. Students need to understand both the promise (content multiplication, player authorship) and the challenge (exploits, balance nightmares).
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Emergence = good design"</strong></p>
+            <p>Students sometimes treat emergence as inherently positive. But emergence can produce broken games, meaningless noise, or exploitative behaviors. Emergence is a tool, not a virtue.</p>
+
+            <p><strong>"Add more systems = more emergence"</strong></p>
+            <p>Emergence requires systems that <em>interact</em>. Parallel systems that don't touch each other don't create emergence - they create complexity without depth.</p>
+
+            <h3>Assessment</h3>
+            <ul>
+              <li>Can students distinguish emergence from randomness?</li>
+              <li>Can students identify the conditions that enable emergence in a videogame?</li>
+              <li>Can students predict potential emergent behaviors (and potential exploits) from a rule set?</li>
+            </ul>
+
+            <h3>Teaching Exercise: Emergent System Design</h3>
+            <p>Design a simple system (5-7 rules) that you believe will produce emergent behavior. Then test with classmates. Did expected emergence appear? What surprised you?</p>
+
+            <p><strong>Key insight:</strong> You design rules, not emergence. Emergence is a gift from the rules to the players.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Key References</h3>
+            <p><strong>Steven Johnson</strong> - <em>Emergence</em>. Accessible introduction to emergence as a phenomenon.</p>
+            <p><strong>Jesper Juul</strong> - <em>Half-Real</em>. The relationship between rules and fiction; emergence as a game-specific concept.</p>
+            <p><strong>Warren Spector / Deus Ex</strong> - Immersive sim design philosophy: authored spaces, emergent solutions.</p>
+
+            <h3>The Humility of Emergence</h3>
+            <p>Emergence requires letting go. You can't control everything. Good design creates conditions and then steps back. This is philosophically challenging for designers who want to author specific experiences.</p>
+
+            <h3>The "Emergence Is Always Good" Myth</h3>
+            <p>Emergence can produce broken videogames, meaningless noise, or exploitative behaviors. Emergence is a tool, not a virtue. The question isn't "does this videogame have emergence?" but "does this emergence serve the experience?"</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much emergence is enough? Too little = linear; too much = chaos.</li>
+              <li>Can emergence and authored meaning coexist? Or are they in tension?</li>
+              <li>Whose story is an emergent narrative? Designer's? Player's? System's?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - feedback loops drive emergence</li>
+          <li><a href="balance-philosophy.html">Balance Philosophy</a> - emergence complicates balance</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - emergence emerges from what's allowed</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#emergence" class="term">Emergence</a> - complex from simple</li>
+          <li><a href="../glossary.html#immersive-sim" class="term">Immersive Sim</a> - genre built around emergence</li>
+          <li><a href="../glossary.html#systemic-design" class="term">Systemic Design</a> - designing for interaction</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

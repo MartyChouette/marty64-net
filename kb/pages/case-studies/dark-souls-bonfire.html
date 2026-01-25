@@ -3,224 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dark Souls: The Bonfire — VG101 Knowledge Base</title>
+  <title>Dark Souls: The Bonfire - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Case Studies</a> / Dark Souls: The Bonfire</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Case Studies</span>
-          <span class="tag">case-study</span> <span class="tag">aesthetic-heritage</span> <span class="tag">checkpoint</span> <span class="tag">atmosphere</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Case Studies</a> / Dark Souls: The Bonfire
+        </nav>
+
         <h1>Dark Souls: The Bonfire</h1>
-The bonfire is <em>Dark Souls</em>' most iconic design element — a checkpoint system that became a symbol. It transforms inherited mechanics into something new: a checkpoint you might <em>not</em> want to use.
-<hr>
-<h2>What the Bonfire Does</h2>
-- Restores health and Estus (healing) charges
-- Serves as respawn point on death
-- Allows leveling up, attuning spells, fast travel (in some games)
-- <strong>Respawns all non-boss enemies</strong>
-That last point changes everything.
-<hr>
-<h2>The Inherited Problem</h2>
-<strong>Checkpoints in most games:</strong>
-- Save progress
-- No downside
-- Use as soon as possible
-The design problem: checkpoints remove tension. Once you hit a checkpoint, you're safe. Everything before it doesn't matter anymore.
-Horror videogames solved this with limited saves (<em>Resident Evil</em> typewriters, <em>Resident Evil</em> ink ribbons). But survival horror creates different tension than action RPGs.
-<hr>
-<h2>The Transformation</h2>
-<em>Dark Souls</em> keeps checkpoints as healing/respawn points but adds <strong>cost</strong>: enemies return.
-This creates decisions:
-<strong>"Should I use this bonfire?"</strong>
-- Pro: I'll respawn here, and I have full heals
-- Con: Every enemy between here and my goal is back
-<strong>"Should I push forward?"</strong>
-- Pro: I might find another bonfire, skip these enemies
-- Con: If I die, I lose souls and start further back
-The checkpoint becomes <strong>strategic choice</strong>, not automatic relief.
-<hr>
-<h2>Permission Structure</h2>
-The bonfire grants permission to:
-- Rest safely
-- Refill resources
-- Save progress
-The bonfire <em>requires</em>:
-- Accepting enemy respawn
-- Committing to a new respawn point
-The bonfire <em>forbids</em>:
-- Nothing (you can always use it)
-But "can" and "should" differ. You <em>can</em> always rest. You <em>should</em> think first.
-This is <a href="permissions.html">Permissions</a> in action: the gap between technical possibility and wise action.
-<hr>
-<h2>Aesthetic Elements</h2>
-The bonfire isn't just mechanical. It's <em>atmospheric</em>.
-- <strong>Visual:</strong> Warm light in a dark world. Safety made visible.
-- <strong>Audio:</strong> Crackling fire, ambient shift to peaceful.
-- <strong>Animation:</strong> Sitting down, reaching toward warmth.
-- <strong>Narrative:</strong> The flame is central to Dark Souls' mythology.
-The bonfire <em>feels</em> like respite because it looks, sounds, and behaves like respite. The mechanics and aesthetics align.
-<hr>
-<h2>Spatial Design</h2>
-Bonfire placement is level design:
-- <strong>Before boss:</strong> Classic. Reduces repetition of easy content.
-- <strong>After tough section:</strong> Reward for completion.
-- <strong>In hidden area:</strong> Reward for exploration.
-- <strong>Seemingly close but far:</strong> Bonfires visible but unreachable create longing.
-- <strong>Multiple in same area:</strong> Choice about which to commit to.
-The interconnected world means bonfires anchor your <strong>mental map</strong>. You navigate by bonfire.
-<hr>
-<h2>What <em>Dark Souls</em> Teaches</h2>
-1. <strong>Heritage can be transformed by cost.</strong> Checkpoints are old. Checkpoints with enemy respawn are new. One change, new meaning.
-2. <strong>Mechanics and aesthetics align.</strong> The bonfire feels like safety because it is safety — and because it looks/sounds like warmth in a cold world.
-3. <strong>Decisions beat convenience.</strong> A checkpoint that's always-use is convenience. A checkpoint that's sometimes-use is design.
-4. <strong>Spatial meaning:</strong> Where you put mechanical elements matters. Bonfire placement <em>is</em> level design.
-5. <strong>Symbols emerge from systems.</strong> Nobody designed "the bonfire as iconic symbol." It emerged from the mechanics being good.
-<hr>
-<h2>The Dark Souls Legacy</h2>
-Post-<em>Dark Souls</em>, many videogames use the bonfire pattern:
-- <em>Hollow Knight</em>: Benches (similar enemy respawn logic)
-- <em>Sekiro</em>: Sculptor's Idols
-- <em>Elden Ring</em>: Sites of Grace (expanded systems)
-- Many "Souls-likes"
-The bonfire became its own <strong>aesthetic heritage</strong>. Designers now inherit from <em>Dark Souls</em>.
-<hr>
-<h2>Try This</h2>
-<h3>Play Without Resting</h3>
-Play a section of Dark Souls without using a bonfire. How does this change your decision-making? Your tension level?
-<h3>Analyze Placement</h3>
-Map the bonfire locations in one area. Why are they where they are? What choices do they create?
-<h3>Design a Checkpoint System</h3>
-Create a checkpoint system with a cost. What cost? How does it change player behavior?
-<hr>
-<h2>See Also</h2>
-- <a href="aesthetic-heritage.html">Aesthetic Heritage</a> — bonfire as transformed inheritance
-- <a href="permissions.html">Permissions</a> — can vs. should
-- <a href="meaning-from-dynamics.html">Meaning From Dynamics</a> — meaning from mechanics
-- <a href="environmental-storytelling.html">Environmental Storytelling</a> — bonfire as spatial meaning
-- <a href="level-design-spatial-communication.html">Spatial Communication</a> — bonfire as landmark
-        
+
+        <p class="lead">
+          The bonfire is <em>Dark Souls</em>' most iconic design element - a checkpoint system that became a symbol.
+          It transforms inherited mechanics into something new: a checkpoint you might <em>not</em> want to use.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what the bonfire does</span>
+          </div>
+          <div class="register-content">
+            <h3>What the Bonfire Does</h3>
+            <ul>
+              <li>Restores health and Estus (healing) charges</li>
+              <li>Serves as respawn point on death</li>
+              <li>Allows leveling up, attuning spells, fast travel (in some entries)</li>
+              <li><strong>Respawns all non-boss enemies</strong></li>
+            </ul>
+            <p>That last point changes everything.</p>
+
+            <h3>The Inherited Problem</h3>
+            <p><strong>Checkpoints in most videogames:</strong></p>
+            <ul>
+              <li>Save progress</li>
+              <li>No downside</li>
+              <li>Use as soon as possible</li>
+            </ul>
+            <p>
+              The design problem: checkpoints remove tension. Once you hit a checkpoint, you're safe.
+              Everything before it doesn't matter anymore.
+            </p>
+            <p>
+              Horror videogames solved this with limited saves (<em>Resident Evil</em> typewriters, ink ribbons).
+              But survival horror creates different tension than action RPGs.
+            </p>
+
+            <h3>The Transformation</h3>
+            <p><em>Dark Souls</em> keeps checkpoints as healing/respawn points but adds <strong>cost</strong>: enemies return.</p>
+            <p>This creates decisions:</p>
+            <p><strong>"Should I use this bonfire?"</strong></p>
+            <ul>
+              <li>Pro: I'll respawn here, and I have full heals</li>
+              <li>Con: Every enemy between here and my goal is back</li>
+            </ul>
+            <p><strong>"Should I push forward?"</strong></p>
+            <ul>
+              <li>Pro: I might find another bonfire, skip these enemies</li>
+              <li>Con: If I die, I lose souls and start further back</li>
+            </ul>
+            <p>The checkpoint becomes <strong>strategic choice</strong>, not automatic relief.</p>
+
+            <h3>The 4 A's of the Bonfire</h3>
+            <p>Analyzing the bonfire through the <a href="../framework/the-four-as.html" class="term">4 A's</a>:</p>
+            <ul>
+              <li><strong>Action</strong>: Sit, rest, make decisions (level up, attune, etc.). The action is deliberately slow - you choose to stop.</li>
+              <li><strong>Art</strong>: Warm light in a dark world. Crackling fire, ambient shift to peaceful. The visual and audio contrast with the hostile environment.</li>
+              <li><strong>Arc</strong>: A pause in the action. The bonfire creates rhythm - explore, fight, rest, repeat. The arc of a play session is structured around bonfire visits.</li>
+              <li><strong>Atmosphere</strong>: Safety, respite, but with awareness of what waits outside. The bonfire <em>feels</em> like refuge because the mechanics and aesthetics align.</li>
+            </ul>
+
+            <h3>Permission Structure</h3>
+            <p>The bonfire grants <a href="../framework/permissions.html" class="term">permission</a> to:</p>
+            <ul>
+              <li>Rest safely</li>
+              <li>Refill resources</li>
+              <li>Save progress</li>
+            </ul>
+            <p>The bonfire <em>requires</em>:</p>
+            <ul>
+              <li>Accepting enemy respawn</li>
+              <li>Committing to a new respawn point</li>
+            </ul>
+            <p>The bonfire <em>forbids</em>:</p>
+            <ul>
+              <li>Nothing (you can always use it)</li>
+            </ul>
+            <p>
+              But "can" and "should" differ. You <em>can</em> always rest. You <em>should</em> think first.
+              This is <a href="../framework/permissions.html" class="term">Permissions</a> in action: the gap between technical possibility and wise action.
+            </p>
+
+            <h3>Spatial Design</h3>
+            <p>Bonfire placement is level design:</p>
+            <ul>
+              <li><strong>Before boss:</strong> Classic. Reduces repetition of easy content.</li>
+              <li><strong>After tough section:</strong> Reward for completion.</li>
+              <li><strong>In hidden area:</strong> Reward for exploration.</li>
+              <li><strong>Seemingly close but far:</strong> Bonfires visible but unreachable create longing.</li>
+              <li><strong>Multiple in same area:</strong> Choice about which to commit to.</li>
+            </ul>
+            <p>The interconnected world means bonfires anchor your <strong>mental map</strong>. You navigate by bonfire.</p>
+
+            <h3>Try This</h3>
+            <p><strong>Play Without Resting</strong></p>
+            <p>Play a section of <em>Dark Souls</em> without using a bonfire. How does this change your decision-making? Your tension level?</p>
+            <p><strong>Analyze Placement</strong></p>
+            <p>Map the bonfire locations in one area. Why are they where they are? What choices do they create?</p>
+            <p><strong>Design a Checkpoint System</strong></p>
+            <p>Create a checkpoint system with a cost. What cost? How does it change player behavior?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Applications</h3>
+            <p>The bonfire is an excellent case study for several reasons:</p>
+            <ol>
+              <li><strong>Clear transformation</strong>: Students can compare to traditional checkpoints</li>
+              <li><strong>Visible trade-off</strong>: The cost (enemy respawn) is immediately understandable</li>
+              <li><strong>Multi-layered</strong>: Works as mechanic, atmosphere, spatial design, and narrative</li>
+            </ol>
+
+            <h3>Discussion Prompts</h3>
+            <ul>
+              <li>What if enemies didn't respawn? How would that change the videogame?</li>
+              <li>What if you could only use each bonfire once? What would that create?</li>
+              <li>Compare to checkpoints in a videogame students know. What does each system prioritize?</li>
+            </ul>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"The bonfire is just difficulty"</strong></p>
+            <p>
+              Students often reduce the bonfire to "makes the videogame harder." Redirect: the bonfire makes the videogame
+              <em>more thoughtful</em>. It turns automatic actions (hit checkpoint) into decisions (should I rest?).
+            </p>
+            <p><strong>"Dark Souls is about punishment"</strong></p>
+            <p>
+              The bonfire actually reduces punishment - you always have a safe place. The videogame is about
+              meaningful consequence, not arbitrary difficulty.
+            </p>
+
+            <h3>Exercise: Redesign a Checkpoint</h3>
+            <p>Have students redesign a checkpoint system from a videogame they know:</p>
+            <ol>
+              <li>Identify the current checkpoint behavior</li>
+              <li>Add a meaningful cost (not arbitrary difficulty)</li>
+              <li>Consider how this changes player psychology</li>
+              <li>Prototype in paper or describe in detail</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>What <em>Dark Souls</em> Teaches</h3>
+            <ol>
+              <li><strong><a href="../framework/aesthetic-heritage.html" class="term">Heritage</a> can be transformed by cost.</strong> Checkpoints are old. Checkpoints with enemy respawn are new. One change, new meaning.</li>
+              <li><strong>Mechanics and aesthetics align.</strong> The bonfire feels like safety because it is safety - and because it looks/sounds like warmth in a cold world.</li>
+              <li><strong>Decisions beat convenience.</strong> A checkpoint that's always-use is convenience. A checkpoint that's sometimes-use is design.</li>
+              <li><strong>Spatial meaning:</strong> Where you put mechanical elements matters. Bonfire placement <em>is</em> level design.</li>
+              <li><strong>Symbols emerge from systems.</strong> Nobody designed "the bonfire as iconic symbol." It emerged from the mechanics being good.</li>
+            </ol>
+
+            <h3>The Dark Souls Legacy</h3>
+            <p>Post-<em>Dark Souls</em>, many videogames use the bonfire pattern:</p>
+            <ul>
+              <li><em>Hollow Knight</em>: Benches (similar enemy respawn logic)</li>
+              <li><em>Sekiro</em>: Sculptor's Idols</li>
+              <li><em>Elden Ring</em>: Sites of Grace (expanded systems)</li>
+              <li>Many "Souls-likes"</li>
+            </ul>
+            <p>
+              The bonfire became its own <strong><a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></strong>.
+              Designers now inherit from <em>Dark Souls</em>.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Is the bonfire system exclusionary? Does meaningful checkpoint cost inherently conflict with accessibility?</li>
+              <li>How much of the bonfire's impact comes from the interconnected world vs. the mechanic itself?</li>
+              <li>Could a "cost-based checkpoint" work in genres other than action RPGs?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Swink, Steve. <em>Game Feel</em> (2009) - on how mechanics create feeling</li>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007) - on meaning through systems</li>
+              <li>Bloom, Harold. <em>The Anxiety of Influence</em> (1973) - on how creators transform what they inherit</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - bonfire as transformed inheritance</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - can vs. should</li>
+          <li><a href="../framework/the-four-as.html">The 4 A's</a> - analyzing the bonfire's components</li>
+          <li><a href="../narrative/environmental-storytelling.html">Environmental Storytelling</a> - bonfire as spatial meaning</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

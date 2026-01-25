@@ -3,223 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Variable Jump — VG101 Knowledge Base</title>
+  <title>Variable Jump - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
+        <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link active">Variable Jump</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Code Bank</a> / Variable Jump</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Code Bank</span>
-          <span class="tag">jump</span> <span class="tag">feel</span> <span class="tag">platformer</span> <span class="tag">vg101-week-2</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Variable Jump
+        </nav>
+
         <h1>Variable Jump</h1>
-A jump where <strong>height depends on how long you hold the button.</strong> Tap for a short hop, hold for a full jump. This is the standard for modern platformers — it gives players expressive control over their arc.
-<hr>
-<h2>The Feel</h2>
-Variable jump creates a sense of <strong>responsive precision.</strong> The player feels like the character is listening to their intention, not just executing a canned animation.
-Compare:
-- <strong>Fixed jump:</strong> "I pressed jump and it happened"
-- <strong>Variable jump:</strong> "I <em>shaped</em> that jump"
-The difference is ownership.
-<hr>
-<h2>Exposed Variables</h2>
-<table>
-<thead><tr>
-<th>Variable</th><th>Type</th><th>Default</th><th>What it does</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><code>minJumpForce</code></td><td>float</td><td>8.0</td><td>Jump height if you tap (minimum)</td> <thead><tr> <th><code>maxJumpForce</code></th><th>float</th><th>16.0</th><th>Jump height if you hold (maximum)</th> <tr> <td><code>holdTimeForMax</code></td><td>float</td><td>0.2</td><td>Seconds of hold to reach max height</td> <thead><tr> <th><code>gravity</code></th><th>float</th><th>40.0</th><th>Downward acceleration</th> <tr> <td><code>fallGravityMultiplier</code></td><td>float</td><td>1.5</td><td>Extra gravity when falling (for snappier descent)</td> <thead><tr> <th><code>jumpCutMultiplier</code></th><th>float</th><th>0.5</th><th>How much to reduce velocity when you release early</th></p>
-<hr>
-<h2>Tuning Guide</h2>
-<h3>For a floaty, forgiving feel:</h3>
-- Lower <code>gravity</code> (25-30)
-- Lower <code>fallGravityMultiplier</code> (1.0-1.2)
-- Longer <code>holdTimeForMax</code> (0.3-0.4)
-- Higher <code>maxJumpForce</code>
-<em>Reference: Kirby, Little Big Planet</em>
-<h3>For a tight, precise feel:</h3>
-- Higher <code>gravity</code> (45-60)
-- Higher <code>fallGravityMultiplier</code> (1.8-2.5)
-- Shorter <code>holdTimeForMax</code> (0.1-0.15)
-- More dramatic ratio between min and max force
-<em>Reference: Celeste, Super Meat Boy</em>
-<h3>For a weighty, committed feel:</h3>
-- Smaller gap between <code>minJumpForce</code> and <code>maxJumpForce</code>
-- Lower <code>jumpCutMultiplier</code> (0.7-0.8) so releasing early doesn't change much
-- Higher <code>gravity</code>
-<em>Reference: Dark Souls, Castlevania</em>
-<hr>
-<h2>How It Works</h2>
-<pre><code>On Jump Press:
+
+        <p class="lead">
+          A jump where <strong>height depends on how long you hold the button.</strong> Tap for a short hop, hold for a full jump. This is the standard for modern platformers - it gives players expressive control over their arc.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Variable jump creates a sense of <strong>responsive precision.</strong> The player feels like the character is listening to their intention, not just executing a canned animation.</p>
+            <p>Compare:</p>
+            <ul>
+              <li><strong>Fixed jump:</strong> "I pressed jump and it happened"</li>
+              <li><strong>Variable jump:</strong> "I <em>shaped</em> that jump"</li>
+            </ul>
+            <p>The difference is ownership.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>minJumpForce</code></td>
+                  <td>float</td>
+                  <td>8.0</td>
+                  <td>Jump height if you tap (minimum)</td>
+                </tr>
+                <tr>
+                  <td><code>maxJumpForce</code></td>
+                  <td>float</td>
+                  <td>16.0</td>
+                  <td>Jump height if you hold (maximum)</td>
+                </tr>
+                <tr>
+                  <td><code>holdTimeForMax</code></td>
+                  <td>float</td>
+                  <td>0.2</td>
+                  <td>Seconds of hold to reach max height</td>
+                </tr>
+                <tr>
+                  <td><code>gravity</code></td>
+                  <td>float</td>
+                  <td>40.0</td>
+                  <td>Downward acceleration</td>
+                </tr>
+                <tr>
+                  <td><code>fallGravityMultiplier</code></td>
+                  <td>float</td>
+                  <td>1.5</td>
+                  <td>Extra gravity when falling (for snappier descent)</td>
+                </tr>
+                <tr>
+                  <td><code>jumpCutMultiplier</code></td>
+                  <td>float</td>
+                  <td>0.5</td>
+                  <td>How much to reduce velocity when you release early</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For a floaty, forgiving feel:</strong></p>
+            <ul>
+              <li>Lower <code>gravity</code> (25-30)</li>
+              <li>Lower <code>fallGravityMultiplier</code> (1.0-1.2)</li>
+              <li>Longer <code>holdTimeForMax</code> (0.3-0.4)</li>
+              <li>Higher <code>maxJumpForce</code></li>
+            </ul>
+            <p><em>Reference: Kirby, Little Big Planet</em></p>
+
+            <p><strong>For a tight, precise feel:</strong></p>
+            <ul>
+              <li>Higher <code>gravity</code> (45-60)</li>
+              <li>Higher <code>fallGravityMultiplier</code> (1.8-2.5)</li>
+              <li>Shorter <code>holdTimeForMax</code> (0.1-0.15)</li>
+              <li>More dramatic ratio between min and max force</li>
+            </ul>
+            <p><em>Reference: Celeste, Super Meat Boy</em></p>
+
+            <p><strong>For a weighty, committed feel:</strong></p>
+            <ul>
+              <li>Smaller gap between <code>minJumpForce</code> and <code>maxJumpForce</code></li>
+              <li>Lower <code>jumpCutMultiplier</code> (0.7-0.8) so releasing early doesn't change much</li>
+              <li>Higher <code>gravity</code></li>
+            </ul>
+            <p><em>Reference: Dark Souls, Castlevania</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>On Jump Press:
   - Apply minJumpForce upward
   - Start tracking hold time
+
 While Holding (and still rising):
   - Interpolate toward maxJumpForce based on hold time
+
 On Jump Release (while rising):
   - Multiply current upward velocity by jumpCutMultiplier
   - Stop adding force
+
 While Falling:
-  - Apply gravity * fallGravityMultiplier
-</code></pre>
-<p>The key insight: <strong>you're not choosing jump height at the start.</strong> You're shaping the arc in real-time by continuing or releasing the button.</p>
-<hr>
-<h2>Common Issues</h2>
-<strong>"The jump feels mushy"</strong>
-→ Increase <code>fallGravityMultiplier</code>. The descent should be snappier than the ascent.
-<strong>"I can't do small hops"</strong>
-→ Lower <code>minJumpForce</code> or increase <code>jumpCutMultiplier</code> effect.
-<strong>"The max jump takes too long to reach"</strong>
-→ Shorten <code>holdTimeForMax</code>. Most players hold for 0.1-0.2 seconds max.
-<strong>"It feels like two different jumps instead of a range"</strong>
-→ The interpolation might be too binary. Check that you're smoothly blending, not just switching at a threshold.
-<hr>
-<h2>Combine With</h2>
-- <a href="coyote-time.html">Coyote Time</a> — grace period makes variable jump more forgiving
-- <a href="input-buffer.html">Input Buffer</a> — catch jump presses just before landing
-- <a href="squash-stretch.html">Squash Stretch</a> — visual feedback that matches the jump's force
-- <a href="air-control.html">Air Control</a> — what you can do while in the arc you shaped
-<hr>
-<h2>Heritage Notes</h2>
-Variable jump emerged in the <strong>early 1980s</strong> as designers realized fixed jumps felt unresponsive. <em>Super Mario Bros.</em> (1985) is the canonical example, but the technique appeared earlier in various forms.
-The problem it solved: <strong>fixed jumps force level design to accommodate the jump, not the player.</strong> With variable jump, the player adapts to the level. This enables tighter, more demanding platforming.
-Modern platformers have refined the technique with additions like:
-- <strong>Jump buffering</strong> (input forgiveness)
-- <strong>Coyote time</strong> (spatial forgiveness)  
-- <strong>Fall gravity multiplier</strong> (making descent feel distinct from ascent)
-When you tune a variable jump, you're participating in forty years of accumulated craft knowledge about how jumps should feel.
-<hr>
-<h2>See Also</h2>
-- <a href="gesture.html">Gesture</a> — the variable jump as a complete gesture, not just a mechanic
-- <a href="basic-jump.html">Basic Jump</a> — simpler version without variable height
-- <a href="double-jump.html">Double Jump</a> — extending the variable jump vocabulary
-- <a href="case-studies-celeste-jump.html">Jump</a> — how Celeste perfects this scaffold
-        
+  - Apply gravity * fallGravityMultiplier</code></pre>
+            <p>The key insight: <strong>you're not choosing jump height at the start.</strong> You're shaping the arc in real-time by continuing or releasing the button.</p>
+
+            <h3>Common Issues</h3>
+            <p><strong>"The jump feels mushy"</strong><br>
+            Increase <code>fallGravityMultiplier</code>. The descent should be snappier than the ascent.</p>
+
+            <p><strong>"I can't do small hops"</strong><br>
+            Lower <code>minJumpForce</code> or increase <code>jumpCutMultiplier</code> effect.</p>
+
+            <p><strong>"The max jump takes too long to reach"</strong><br>
+            Shorten <code>holdTimeForMax</code>. Most players hold for 0.1-0.2 seconds max.</p>
+
+            <p><strong>"It feels like two different jumps instead of a range"</strong><br>
+            The interpolation might be too binary. Check that you're smoothly blending, not just switching at a threshold.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="coyote-time.html">Coyote Time</a> - grace period makes variable jump more forgiving</li>
+              <li><a href="input-buffer.html">Input Buffer</a> - catch jump presses just before landing</li>
+              <li><a href="squash-stretch.html">Squash Stretch</a> - visual feedback that matches the jump's force</li>
+              <li><a href="air-control.html">Air Control</a> - what you can do while in the arc you shaped</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why This Matters</h3>
+            <p>Variable jump is where students first encounter <strong>input as expression</strong>. The same button press can mean different things based on how it's performed. This is fundamental to understanding how videogames create nuanced control.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Start with Basic Jump - establish baseline</li>
+              <li>Switch to Variable Jump with same base parameters</li>
+              <li>Have students <em>feel</em> the difference before explaining</li>
+              <li>Then explain the mechanism</li>
+            </ol>
+
+            <h3>Common Student Misconceptions</h3>
+            <p><strong>"Variable jump is just two jump heights":</strong> Students sometimes implement it as binary (tap = short, hold = tall). The real technique is continuous interpolation.</p>
+
+            <p><strong>"The player decides at jump start":</strong> No - the player decides <em>during</em> the jump. The arc is shaped in real-time. This is what makes it feel responsive.</p>
+
+            <h3>Assessment</h3>
+            <ul>
+              <li>Can they explain why jumpCutMultiplier matters for responsiveness?</li>
+              <li>Can they tune for a specific feel (floaty vs. snappy) deliberately?</li>
+              <li>Can they articulate when basic jump would be better than variable jump?</li>
+            </ul>
+
+            <h3>Exercise: Jump Matching</h3>
+            <p>Give students a video of a jump from a published videogame. Have them tune the variable jump scaffold to match. They must document:</p>
+            <ul>
+              <li>What values they changed</li>
+              <li>Why those values created that feel</li>
+              <li>What heritage the original jump draws from</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Variable jump emerged in the <strong>early 1980s</strong> as designers realized fixed jumps felt unresponsive. <em>Super Mario Bros.</em> (1985) is the canonical example, but the technique appeared earlier in various forms.</p>
+
+            <p>The problem it solved: <strong>fixed jumps force level design to accommodate the jump, not the player.</strong> With variable jump, the player adapts to the level. This enables tighter, more demanding platforming.</p>
+
+            <p>Modern platformers have refined the technique with additions like:</p>
+            <ul>
+              <li><strong>Jump buffering</strong> (input forgiveness)</li>
+              <li><strong>Coyote time</strong> (spatial forgiveness)</li>
+              <li><strong>Fall gravity multiplier</strong> (making descent feel distinct from ascent)</li>
+            </ul>
+
+            <p>When you tune a variable jump, you're participating in forty years of accumulated craft knowledge about how jumps should feel.</p>
+
+            <h3>The Expression Problem</h3>
+            <p>Variable jump raises a design question: <strong>how much should the player be able to express through a single input?</strong></p>
+
+            <p>A single button press can produce many different outcomes based on:</p>
+            <ul>
+              <li>How long it's held</li>
+              <li>When it's pressed (coyote time)</li>
+              <li>What direction is held simultaneously</li>
+              <li>What state the character is in</li>
+            </ul>
+
+            <p>This is the beginning of <a href="../framework/gesture.html" class="term">Gesture</a> as a concept - the player's input and the videogame's response form a complete expressive unit.</p>
+
+            <h3>The Celeste Refinement</h3>
+            <p><em>Celeste</em> (2018) represents the current state of the art for variable jump. It combines:</p>
+            <ul>
+              <li>Variable height with jump cut</li>
+              <li>Generous coyote time</li>
+              <li>Input buffering</li>
+              <li>Distinct fall gravity</li>
+              <li>Air dash integration</li>
+            </ul>
+            <p>The result is a jump that feels <strong>precise but forgiving</strong> - a tension that earlier platformers struggled with.</p>
+
+            <h3>Why Not Always Variable?</h3>
+            <p>Some design contexts benefit from fixed jumps:</p>
+            <ul>
+              <li><strong>Puzzle platformers:</strong> When the challenge is figuring out <em>where</em> to jump, not <em>how</em></li>
+              <li><strong>Retro aesthetic:</strong> Variable jump feels modern; fixed jump feels classic</li>
+              <li><strong>High commitment:</strong> When you want choices to be irreversible (Dark Souls)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - the variable jump as a complete gesture, not just a mechanic</li>
+          <li><a href="basic-jump.html">Basic Jump</a> - simpler version without variable height</li>
+          <li><a href="double-jump.html">Double Jump</a> - extending the variable jump vocabulary</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#coyote-time" class="term">Coyote Time</a> - grace period for jump input</li>
+          <li><a href="../glossary.html#input-buffer" class="term">Input Buffer</a> - remembering inputs for grace</li>
+          <li><a href="../glossary.html#game-feel" class="term">Game Feel</a> - the experience of controlling a videogame</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

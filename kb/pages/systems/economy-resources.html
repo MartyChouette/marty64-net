@@ -3,287 +3,333 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Economy & Resources — VG101 Knowledge Base</title>
+  <title>Economy & Resources - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Systems</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link active">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+          <li class="nav-item"><a href="economy-resources.html" class="nav-link active">Economy & Resources</a></li>
+          <li class="nav-item"><a href="progression-systems.html" class="nav-link">Progression Systems</a></li>
+          <li class="nav-item"><a href="balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Systems</a> / Economy & Resources</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Systems</span>
-          <span class="tag">systems</span> <span class="tag">economy</span> <span class="tag">resources</span> <span class="tag">balance</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Systems</a> / Economy & Resources
+        </nav>
+
         <h1>Economy & Resources</h1>
-An <strong>economy</strong> is any system where resources flow — created, spent, exchanged, lost. Most videogames have economies, even if they don't look like money.
-Understanding economy design is understanding how <strong>value</strong> moves through your game.
-<hr>
-<h2>Resources</h2>
-A <strong>resource</strong> is anything the player has, wants, or manages:
-<table>
-<thead><tr>
-<th>Type</th><th>Examples</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><strong>Currencies</strong></td><td>Gold, coins, credits, gems</td> <thead><tr> <th><strong>Consumables</strong></th><th>Health potions, ammo, food</th> <tr> <td><strong>Durables</strong></td><td>Weapons, armor, tools</td> <thead><tr> <th><strong>Stats</strong></th><th>Health, mana, stamina, experience</th> <tr> <td><strong>Time</strong></td><td>Real time, in-game time, cooldowns</td> <thead><tr> <th><strong>Attention</strong></th><th>What the player can track and manage</th> <tr> <td><strong>Space</strong></td><td>Inventory slots, building area</td> <thead><tr> <th><strong>Information</strong></th><th>Map knowledge, enemy patterns</th></p>
-<p>If the player cares about having more or less of it, it's a resource.</p>
-<hr>
-<h2>The Four Flows</h2>
-Resources do four things:
-<h3>Sources</h3>
-Where resources come from. Faucets.
-- Enemy drops
-- Mission rewards
-- Time-based generation
-- Purchase/crafting
-<h3>Sinks</h3>
-Where resources go. Drains.
-- Spending on items
-- Consumable use
-- Decay/maintenance costs
-- Death penalties
-<h3>Converters</h3>
-One resource becomes another.
-- Crafting (materials → items)
-- Training (gold → stats)
-- Trading (one currency → another)
-<h3>Storage</h3>
-Where resources wait.
-- Inventory
-- Banks
-- Stockpiles
-Healthy economies have <strong>balanced flows</strong> — sources and sinks in rough equilibrium over time.
-<hr>
-<h2>Economic Health</h2>
-<h3>Inflation</h3>
-Too many sources, too few sinks. Resources pile up. Value collapses. Nothing feels precious.
-<em>Signs: Players have more gold than they can spend. Shops become irrelevant.</em>
-<h3>Deflation</h3>
-Too many sinks, too few sources. Resources are scarce. Progress stalls. Players feel punished.
-<em>Signs: Players can never afford anything. Hoarding becomes mandatory.</em>
-<h3>Dead Currencies</h3>
-A resource with no meaningful use. Takes up space, adds no decisions.
-<em>Signs: You collect something but never spend it. "What is this even for?"</em>
-<h3>Optimal Path</h3>
-One strategy dominates. Choice becomes illusion.
-<em>Signs: Players always buy the same thing. Other options are "traps."</em>
-<hr>
-<h2>Designing Economies</h2>
-<h3>Start with Verbs</h3>
-What do you want players to <em>do</em>? The economy should reward those actions.
-<h3>Create Decisions</h3>
-Resources should force interesting choices. "Save or spend?" "This upgrade or that?"
-<h3>Tie to Progression</h3>
-Resource flow should track player progress. Early scarcity, late abundance (or vice versa, strategically).
-<h3>Playtest Relentlessly</h3>
-Economies are emergent. You won't know the real balance until players optimize.
-<hr>
-<h2>Soft vs. Hard Currencies</h2>
-<strong>Hard currency:</strong> Difficult to get, premium, often monetized. Real-money purchases, rare drops.
-<strong>Soft currency:</strong> Easy to get, common, earned through play. Gold, experience.
-In F2P design, the relationship between hard and soft currencies is the business model. Handle with ethical care.
-<hr>
-<h2>Single-Resource vs. Multi-Resource</h2>
-<strong>Single-resource</strong> economies are simpler:
-- One thing to track
-- Clear value
-- Limited depth
-<strong>Multi-resource</strong> economies add complexity:
-- Trade-offs between resources
-- Conversion decisions
-- More possible strategies
-- Harder to balance
-More isn't always better. Some videogames thrive on elegant single-resource economies (<em>Into the Breach</em>: just managing unit positioning).
-<hr>
-<h2>Closed vs. Open Economies</h2>
-<strong>Closed:</strong> Fixed resource pool. What exists is what exists. Zero-sum.
-<em>Example: Chess — pieces don't regenerate.</em>
-<strong>Open:</strong> Resources generated over time. Not zero-sum.
-<em>Example: Most RPGs — gold keeps dropping.</em>
-<strong>Multiplayer consideration:</strong> Open economies in multiplayer create inflation over server lifetime. Closed economies create scarcity competition.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Economy design is where videogame design meets systems thinking. I often use board videogames to teach this before moving to digital.
-<strong>Exercise: Economy Mapping</strong>
-Map the economy of any game:
-- What are the resources?
-- What are the sources for each?
-- What are the sinks?
-- What are the converters?
-- Are flows balanced?
-Diagram it. Then play more and see if your map was accurate.
-<strong>Exercise: Economy Breaking</strong>
-Take a working economy. Introduce one change (double a source, halve a sink, add a converter). What happens? Play it forward.
-This builds intuition for systemic effects.
-<strong>Key insight:</strong> Economies are feedback systems. Change one part, the whole system responds.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Joris Dormans</strong> — <em>Game Mechanics: Advanced Videogame Design</em>. The Machinations framework for diagramming economies. Essential reading.
-<strong>Raph Koster</strong> — Writings on virtual economies. The insight that player behavior in economies is economically rational, even in games.
-<strong>Real economics</strong> — Videogames are simulations of economic behavior. Supply and demand, marginal utility, inflation — these concepts apply directly.
-<strong>What I'm taking:</strong>
-The systems lens. Economies aren't designed by tuning individual numbers — they're designed by understanding flows.
-<strong>What I'm resisting:</strong>
-<strong>Exploitative economy design</strong> — Economies designed to frustrate players into spending money. This is skilled work, but ethically troubled.
-<strong>Unresolved questions:</strong>
-- How do we design economies that are satisfying but not exploitable?
-- What's the relationship between videogame economies and real economic intuitions? Do videogames teach economic thinking?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="player-psychology.html">Feedback Loops</a> — economies are loop systems
-- <a href="systems-progression-systems.html">Progression Systems</a> — economies drive progression
-- <a href="systems-balance-philosophy.html">Balance Philosophy</a> — balancing economies
-- <a href="player-psychology.html">Player Psychology</a> — why resource gathering feels good
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-source.html">Source</a> — where resources come from  
-→ <a href="glossary-sink.html">Sink</a> — where resources go  
-→ <a href="glossary-inflation.html">Inflation</a> — too much resource generation  
-→ <a href="glossary-soft-currency.html">Soft Currency</a> — easily obtained in-game currency
-        
+
+        <p class="lead">
+          An <strong>economy</strong> is any system where resources flow - created, spent, exchanged, lost. Most videogames have economies, even if they don't look like money. Understanding economy design is understanding how <strong>value</strong> moves through your videogame.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Resources</h3>
+            <p>A <strong>resource</strong> is anything the player has, wants, or manages:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Examples</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Currencies</strong></td>
+                  <td>Gold, coins, credits, gems</td>
+                </tr>
+                <tr>
+                  <td><strong>Consumables</strong></td>
+                  <td>Health potions, ammo, food</td>
+                </tr>
+                <tr>
+                  <td><strong>Durables</strong></td>
+                  <td>Weapons, armor, tools</td>
+                </tr>
+                <tr>
+                  <td><strong>Stats</strong></td>
+                  <td>Health, mana, stamina, experience</td>
+                </tr>
+                <tr>
+                  <td><strong>Time</strong></td>
+                  <td>Real time, in-game time, cooldowns</td>
+                </tr>
+                <tr>
+                  <td><strong>Attention</strong></td>
+                  <td>What the player can track and manage</td>
+                </tr>
+                <tr>
+                  <td><strong>Space</strong></td>
+                  <td>Inventory slots, building area</td>
+                </tr>
+                <tr>
+                  <td><strong>Information</strong></td>
+                  <td>Map knowledge, enemy patterns</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>If the player cares about having more or less of it, it's a resource.</p>
+
+            <h3>The Four Flows</h3>
+            <p>Resources do four things:</p>
+
+            <p><strong>Sources</strong> - Where resources come from. Faucets.</p>
+            <ul>
+              <li>Enemy drops</li>
+              <li>Mission rewards</li>
+              <li>Time-based generation</li>
+              <li>Purchase/crafting</li>
+            </ul>
+
+            <p><strong>Sinks</strong> - Where resources go. Drains.</p>
+            <ul>
+              <li>Spending on items</li>
+              <li>Consumable use</li>
+              <li>Decay/maintenance costs</li>
+              <li>Death penalties</li>
+            </ul>
+
+            <p><strong>Converters</strong> - One resource becomes another.</p>
+            <ul>
+              <li>Crafting (materials → items)</li>
+              <li>Training (gold → stats)</li>
+              <li>Trading (one currency → another)</li>
+            </ul>
+
+            <p><strong>Storage</strong> - Where resources wait.</p>
+            <ul>
+              <li>Inventory</li>
+              <li>Banks</li>
+              <li>Stockpiles</li>
+            </ul>
+
+            <p>Healthy economies have <strong>balanced flows</strong> - sources and sinks in rough equilibrium over time.</p>
+
+            <h3>Economic Health</h3>
+
+            <p><strong>Inflation:</strong> Too many sources, too few sinks. Resources pile up. Value collapses. Nothing feels precious.</p>
+            <p><em>Signs: Players have more gold than they can spend. Shops become irrelevant.</em></p>
+
+            <p><strong>Deflation:</strong> Too many sinks, too few sources. Resources are scarce. Progress stalls. Players feel punished.</p>
+            <p><em>Signs: Players can never afford anything. Hoarding becomes mandatory.</em></p>
+
+            <p><strong>Dead Currencies:</strong> A resource with no meaningful use. Takes up space, adds no decisions.</p>
+            <p><em>Signs: You collect something but never spend it. "What is this even for?"</em></p>
+
+            <p><strong>Optimal Path:</strong> One strategy dominates. Choice becomes illusion.</p>
+            <p><em>Signs: Players always buy the same thing. Other options are "traps."</em></p>
+
+            <h3>Designing Economies</h3>
+
+            <p><strong>Start with Verbs:</strong> What do you want players to <em>do</em>? The economy should reward those actions.</p>
+
+            <p><strong>Create Decisions:</strong> Resources should force interesting choices. "Save or spend?" "This upgrade or that?"</p>
+
+            <p><strong>Tie to Progression:</strong> Resource flow should track player progress. Early scarcity, late abundance (or vice versa, strategically).</p>
+
+            <p><strong>Playtest Relentlessly:</strong> Economies are emergent. You won't know the real balance until players optimize.</p>
+
+            <h3>Soft vs. Hard Currencies</h3>
+            <p><strong>Hard currency:</strong> Difficult to get, premium, often monetized. Real-money purchases, rare drops.</p>
+            <p><strong>Soft currency:</strong> Easy to get, common, earned through play. Gold, experience.</p>
+            <p>In F2P design, the relationship between hard and soft currencies is the business model. Handle with ethical care.</p>
+
+            <h3>Single-Resource vs. Multi-Resource</h3>
+            <p><strong>Single-resource</strong> economies are simpler:</p>
+            <ul>
+              <li>One thing to track</li>
+              <li>Clear value</li>
+              <li>Limited depth</li>
+            </ul>
+
+            <p><strong>Multi-resource</strong> economies add complexity:</p>
+            <ul>
+              <li>Trade-offs between resources</li>
+              <li>Conversion decisions</li>
+              <li>More possible strategies</li>
+              <li>Harder to balance</li>
+            </ul>
+
+            <p>More isn't always better. Some videogames thrive on elegant single-resource economies (<em>Into the Breach</em>: just managing unit positioning).</p>
+
+            <h3>Closed vs. Open Economies</h3>
+            <p><strong>Closed:</strong> Fixed resource pool. What exists is what exists. Zero-sum.</p>
+            <p><em>Example: Chess - pieces don't regenerate.</em></p>
+
+            <p><strong>Open:</strong> Resources generated over time. Not zero-sum.</p>
+            <p><em>Example: Most RPGs - gold keeps dropping.</em></p>
+
+            <p><strong>Multiplayer consideration:</strong> Open economies in multiplayer create inflation over server lifetime. Closed economies create scarcity competition.</p>
+
+            <h3>Exercise: Economy Mapping</h3>
+            <p>Map the economy of any videogame:</p>
+            <ul>
+              <li>What are the resources?</li>
+              <li>What are the sources for each?</li>
+              <li>What are the sinks?</li>
+              <li>What are the converters?</li>
+              <li>Are flows balanced?</li>
+            </ul>
+            <p>Diagram it. Then play more and see if your map was accurate.</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Economy design is where videogame design meets systems thinking. Students often start by adding currencies without understanding flows. This leads to inflation, dead currencies, and economies that don't serve gameplay.
+            </p>
+            <p>
+              Teaching economy mapping before economy design prevents these mistakes. I often use board videogames to teach this before moving to digital - the systems are more visible.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"More currencies = deeper economy"</strong></p>
+            <p>Students add currencies because they seem "RPG-like." But currencies without meaningful sinks become clutter. Teach subtraction before addition.</p>
+
+            <p><strong>"Balance means equal numbers"</strong></p>
+            <p>Economy balance isn't about making all resources equivalent. It's about creating flows that support the desired experience.</p>
+
+            <h3>Assessment</h3>
+            <ul>
+              <li>Can students identify sources/sinks/converters in an existing videogame?</li>
+              <li>Can students predict what happens when a flow is disrupted?</li>
+              <li>Can students design an economy that creates a specific experience (scarcity, abundance, trade-offs)?</li>
+            </ul>
+
+            <h3>Teaching Exercise: Economy Breaking</h3>
+            <p>Take a working economy. Introduce one change (double a source, halve a sink, add a converter). What happens? Play it forward.</p>
+            <p>This builds intuition for systemic effects.</p>
+
+            <p><strong>Key insight:</strong> Economies are feedback systems. Change one part, the whole system responds.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Key References</h3>
+            <p><strong>Joris Dormans</strong> - <em>Game Mechanics: Advanced Videogame Design</em>. The Machinations framework for diagramming economies. Essential reading.</p>
+            <p><strong>Raph Koster</strong> - Writings on virtual economies. The insight that player behavior in economies is economically rational, even in videogames.</p>
+            <p><strong>Real economics</strong> - Videogames are simulations of economic behavior. Supply and demand, marginal utility, inflation - these concepts apply directly.</p>
+
+            <h3>The Systems Lens</h3>
+            <p>Economies aren't designed by tuning individual numbers - they're designed by understanding flows. A single number change can cascade through the entire system.</p>
+
+            <h3>Ethical Considerations</h3>
+            <p><strong>Exploitative economy design</strong> - Economies designed to frustrate players into spending money. This is skilled work, but ethically troubled. The same techniques that create satisfying economies can be weaponized.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How do we design economies that are satisfying but not exploitable?</li>
+              <li>What's the relationship between videogame economies and real economic intuitions? Do videogames teach economic thinking?</li>
+              <li>How do we balance player expression with economic coherence in multiplayer?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - economies are loop systems; why resource gathering feels good</li>
+          <li><a href="progression-systems.html">Progression Systems</a> - economies drive progression</li>
+          <li><a href="balance-philosophy.html">Balance Philosophy</a> - balancing economies</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#source" class="term">Source</a> - where resources come from</li>
+          <li><a href="../glossary.html#sink" class="term">Sink</a> - where resources go</li>
+          <li><a href="../glossary.html#inflation" class="term">Inflation</a> - too much resource generation</li>
+          <li><a href="../glossary.html#soft-currency" class="term">Soft Currency</a> - easily obtained in-game currency</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>
