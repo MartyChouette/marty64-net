@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Final Project - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    .big-quote{font-size:1.5rem;font-weight:600;color:#1a1a1a;text-align:center;padding:2rem;margin:2rem 0;background:#f8fafc;border-left:4px solid #14b8a6}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Pedagogy Overview</a></li>
+          <li class="nav-item"><a href="play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="why-unity.html" class="nav-link">Why Unity</a></li>
+          <li class="nav-item"><a href="the-final-project.html" class="nav-link active">The Final Project</a></li>
+          <li class="nav-item"><a href="debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Pedagogy</a> / The Final Project
+        </nav>
+
+        <h1>The Final Project</h1>
+
+        <p class="lead">
+          The final is not "make a big videogame."
+        </p>
+
+        <div class="big-quote">
+          Make one action feel undeniable.
+        </div>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Requirement</h3>
+            <p>
+              One or two verbs, maximum. Strong feedback. Clear <a href="../framework/the-four-as.html" class="term">Arc</a>.
+              A small slice with a real identity.
+            </p>
+            <p>
+              The final is proof that you understand videogames as a medium, not as a mood board.
+            </p>
+
+            <h3>What "Undeniable" Means</h3>
+            <p>
+              When you play the final, the action should feel <strong>right</strong>.
+              Not "good enough." Not "it works." <em>Right.</em>
+            </p>
+            <p>
+              The jump lands exactly when it should. The dash has exactly the punch it needs.
+              The feedback tells you exactly what happened. The <a href="../framework/gesture.html" class="term">Gesture</a>
+              is complete.
+            </p>
+            <p>
+              You'll know it when you feel it. So will we.
+            </p>
+
+            <h3>What the Final Is NOT</h3>
+
+            <p><strong>It's not a complete videogame.</strong></p>
+            <p>
+              No one expects levels, progression, menus, or polish. Those are production concerns.
+              This is a design course. We're looking for design clarity, not shipping readiness.
+            </p>
+
+            <p><strong>It's not a tech demo.</strong></p>
+            <p>
+              Implementing five mechanics poorly is worse than implementing one mechanic well.
+              Restraint is the skill. Saying "this is what my videogame IS" requires saying
+              "this is what my videogame ISN'T."
+            </p>
+
+            <p><strong>It's not a concept.</strong></p>
+            <p>
+              "I wanted it to feel like..." is not the final. The final is what it actually feels like.
+              Intent without execution is not design.
+            </p>
+
+            <h3>The Components</h3>
+
+            <p><strong>The Build</strong></p>
+            <p>
+              A playable prototype. Ideally 30 seconds to 2 minutes of focused experience.
+              Long enough to feel the action. Short enough to be tight.
+            </p>
+
+            <p><strong>The Articulation</strong></p>
+            <p>
+              A brief written or verbal explanation of:
+            </p>
+            <ul>
+              <li>What is the core <a href="../framework/gesture.html" class="term">Gesture</a>?</li>
+              <li>How do the <a href="../framework/the-four-as.html" class="term">4 A's</a> work together?</li>
+              <li>What <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> are you drawing from?</li>
+              <li>What <a href="../framework/permissions.html" class="term">Permissions</a> did you design?</li>
+            </ul>
+            <p>
+              The articulation proves you can name what you made - that you understand it,
+              not just that you stumbled into it.
+            </p>
+
+            <h3>Examples of Scope</h3>
+
+            <p><strong>A platformer final might be:</strong></p>
+            <ul>
+              <li>One character</li>
+              <li>Walk, jump, maybe one more ability</li>
+              <li>A single room or short sequence</li>
+              <li>Clear feedback on every action</li>
+              <li>30 seconds of intentional experience</li>
+            </ul>
+
+            <p><strong>An action final might be:</strong></p>
+            <ul>
+              <li>One attack, one enemy type</li>
+              <li>A single arena</li>
+              <li>Hitstop, screen shake, sound design</li>
+              <li>Clear consequences for hitting and being hit</li>
+            </ul>
+
+            <p><strong>A puzzle final might be:</strong></p>
+            <ul>
+              <li>One mechanic</li>
+              <li>Three puzzles that teach and test it</li>
+              <li>Clear feedback when the solution clicks</li>
+            </ul>
+
+            <p>Notice: all of these are small. Small is the point.</p>
+
+            <h3>The Question We're Asking</h3>
+            <p>
+              When we play your final, we're asking one question:
+            </p>
+            <p>
+              <strong>Does this person understand what a videogame is?</strong>
+            </p>
+            <p>
+              Not "is this marketable?" Not "is this finished?" Not even "is this fun?"
+            </p>
+            <p>
+              Does this person understand that videogames are a medium of action?
+              That the design lives in the <a href="../framework/gesture.html" class="term">Gesture</a>?
+              That the feel is the form?
+            </p>
+            <p>
+              If yes, you've succeeded. If no, we talk about why.
+            </p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why This Format</h3>
+            <p>
+              Students come in wanting to make "their dream game." That's beautiful, but it's not learnable
+              in one course. The dream game is a multi-year, multi-person project.
+            </p>
+            <p>
+              The "one undeniable action" constraint forces focus. It's achievable in the time available.
+              It requires all the skills we teach. And it produces something that can actually be felt.
+            </p>
+
+            <h3>The Scope Conversation</h3>
+            <p>
+              You will have scope conversations. Students will want to add more.
+            </p>
+            <p>
+              The answer is always: "Is the core action undeniable yet? If not, adding more won't help.
+              If yes, you're done."
+            </p>
+            <p>
+              This is hard for students who equate "more" with "better." The final teaches that
+              "complete" is better than "more."
+            </p>
+
+            <h3>Assessment Criteria</h3>
+
+            <p><strong>Does the action feel intentional?</strong></p>
+            <p>
+              Not "does it work" but "does it feel designed." There's a difference between
+              functional and intentional. We're looking for intentional.
+            </p>
+
+            <p><strong>Can the student articulate their choices?</strong></p>
+            <p>
+              Using the framework vocabulary. If they can name it, they understand it.
+              If they can't, they may have stumbled into something without learning from it.
+            </p>
+
+            <p><strong>Is the scope appropriate?</strong></p>
+            <p>
+              Did they resist the urge to add more? Did they focus? Restraint is a skill we're assessing.
+            </p>
+
+            <h3>Common Pitfalls</h3>
+
+            <p><strong>"It's almost done, I just need to add..."</strong></p>
+            <p>
+              If the core isn't there, adding won't save it. Redirect to the core.
+            </p>
+
+            <p><strong>"I know it doesn't feel right, but the idea is..."</strong></p>
+            <p>
+              The idea is not the final. The feel is the final. Help them close the gap or reduce scope.
+            </p>
+
+            <p><strong>"I want to show range by doing multiple things"</strong></p>
+            <p>
+              Range is demonstrated by doing one thing deeply, not many things shallowly.
+              One undeniable action shows more skill than five mediocre ones.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Why "Undeniable"</h3>
+            <p>
+              The word matters. Not "good." Not "fun." Not "polished." <em>Undeniable.</em>
+            </p>
+            <p>
+              Undeniable means: when you experience it, you can't deny what it is.
+              The action has identity. It's not generic. It's not "a jump" - it's <em>this</em> jump.
+            </p>
+            <p>
+              This is the threshold for design. Below it, you have implementation.
+              At it and above, you have something that could only be what it is.
+            </p>
+
+            <h3>The Proof of Understanding</h3>
+            <p>
+              The final is not about making something great. It's about proving understanding.
+            </p>
+            <p>
+              A student who makes a small, clear, intentional thing understands videogames.
+              A student who makes a sprawling, unfocused, accidental thing does not - yet.
+            </p>
+            <p>
+              The final reveals where the student is. That's its pedagogical purpose.
+            </p>
+
+            <h3>Medium Specificity</h3>
+            <p>
+              The final is specifically a <em>videogame</em> final. Not a document about a videogame.
+              Not a presentation about a videogame. A videogame.
+            </p>
+            <p>
+              This is because videogames are a medium of action. The proof of understanding must be
+              in the medium itself. You can't prove you understand painting by writing about painting.
+              You paint.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How do we assess students with different technical starting points fairly? The constraint helps, but gaps remain.</li>
+              <li>Is "undeniable" too subjective? How do we calibrate across assessors?</li>
+              <li>What about students whose strength is systems, not feel? Is this final format biased toward action videogames?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - what the final demonstrates</li>
+          <li><a href="why-unity.html">Why Unity</a> - why implementation matters</li>
+          <li><a href="play-name-make-reflect.html">Play → Name → Make → Reflect</a> - the process that leads here</li>
+          <li><a href="../code-bank/index.html">Code Bank</a> - scaffolds for building the final</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
