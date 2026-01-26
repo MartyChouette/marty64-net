@@ -3,237 +3,143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>References — VG101 Knowledge Base</title>
+  <title>References - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
-      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <a href="../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="references.html" class="nav-link active">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">References</a> / References</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>References</span>
-          <span class="tag">references</span> <span class="tag">theory</span> <span class="tag">reading</span>
-        </div>
-    
-        
+        <nav class="breadcrumb"><a href="../index.html">VG101</a> / References</nav>
+
         <h1>References</h1>
-The intellectual lineage behind this knowledge base — key thinkers, texts, and traditions that inform the Gesture + Lineage approach.
-<hr>
-<h2>Thinkers</h2>
-<h3>Game Studies & Design</h3>
-<strong>Ian Bogost</strong> — <em>Persuasive Games</em>, <em>How to Do Things with Videogames</em>. Procedural rhetoric: videogames make arguments through rules. Foundational for <a href="framework-meaning-from-dynamics.html">Meaning From Dynamics</a>.
-<strong>Brendan Keogh</strong> — <em>A Play of Bodies</em>. Phenomenological approach to videogames. The body as site of meaning. Influences my emphasis on embodied experience.
-<strong>Kristine Jørgensen</strong> — <em>Gameworld Interfaces</em>. UI as part of the fiction. Influences <a href="framework-feedback-readability.html">Feedback Readability</a>.
-<strong>Steve Swink</strong> — <em>Game Feel</em>. The definitive text on real-time control feel. Essential for understanding <a href="framework-gesture.html">Gesture</a>.
-<strong>Anna Anthropy</strong> — <em>Rise of the Videogame Zinesters</em>, <em>Game Design Vocabulary</em>. Player-centric vocabulary, accessible design language.
-<strong>Jesse Schell</strong> — <em>The Art of Videogame Design</em>. The lenses framework. See <a href="foundations-the-design-lens.html">The Design Lens</a>.
-<strong>Jesper Juul</strong> — <em>Half-Real</em>. Rules and fiction in games. Foundational videogame studies text.
-<strong>Janet Murray</strong> — <em>Hamlet on the Holodeck</em>. Early digital media theory, still relevant for procedurality and agency.
-<h3>Design Theory</h3>
-<strong>Donald Schön</strong> — <em>The Reflective Practitioner</em>. Design as conversation with materials. Core to <a href="pedagogy-code-as-material.html">Code As Material</a>.
-<strong>Christopher Alexander</strong> — <em>A Pattern Language</em>. Architecture as communication. Influences level design thinking.
-<strong>Don Norman</strong> — <em>The Design of Everyday Things</em>. Affordances, feedback in physical design. Applies directly to videogame interfaces.
-<h3>Psychology & Learning</h3>
-<strong>Mihaly Csikszentmihalyi</strong> — <em>Flow</em>. The optimal experience that good pacing supports. See <a href="foundations-player-psychology.html">Player Psychology</a>.
-<strong>John Dewey</strong> — <em>Experience and Education</em>. Learning by doing. Philosophical backbone of <a href="pedagogy-play-name-make-reflect.html">Play Name Make Reflect</a>.
-<strong>Seymour Papert</strong> — <em>Mindstorms</em>. Coding as thinking tool. Influences <a href="pedagogy-debugging-as-literacy.html">Debugging As Literacy</a>.
-<h3>Classic Videogame Studies</h3>
-<strong>Johan Huizinga</strong> — <em>Homo Ludens</em>. The "magic circle." Influential but contested. See <a href="foundations-what-makes-a-videogame.html">What Makes A Game</a>.
-<strong>Roger Caillois</strong> — <em>Man, Play and Games</em>. Taxonomy of play (agon, alea, mimicry, ilinx).
-<strong>Bernard Suits</strong> — <em>The Grasshopper</em>. "Games as voluntary attempt to overcome unnecessary obstacles."
-<hr>
-<h2>Key Texts</h2>
-<h3>Essential Reading</h3>
-<table>
-<thead><tr>
-<th>Text</th><th>Author</th><th>Why It Matters</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><em>Persuasive Games</em></td><td>Bogost</td><td>Procedural rhetoric foundation</td> <thead><tr> <th><em>A Play of Bodies</em></th><th>Keogh</th><th>Phenomenology of games</th> <tr> <td><em>Game Feel</em></td><td>Swink</td><td>Feel as design material</td> <thead><tr> <th><em>The Art of Videogame Design</em></th><th>Schell</th><th>Lenses, comprehensive overview</th> <tr> <td><em>The Reflective Practitioner</em></td><td>Schön</td><td>Design as material dialogue</td></p>
-<h3>Deep Dives</h3>
-<table>
-<thead><tr>
-<th>Text</th><th>Author</th><th>For</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><em>Half-Real</em></td><td>Juul</td><td>Rules vs. fiction</td> <thead><tr> <th><em>How to Do Things with Videogames</em></th><th>Bogost</th><th>Games as medium</th> <tr> <td><em>Gameworld Interfaces</em></td><td>Jørgensen</td><td>UI as fiction</td> <thead><tr> <th><em>Rise of the Videogame Zinesters</em></th><th>Anthropy</th><th>Democratizing game-making</th> <tr> <td><em>Thinking in Systems</em></td><td>Meadows</td><td>Systems theory primer</td></p>
-<h3>Historical Context</h3>
-<table>
-<thead><tr>
-<th>Text</th><th>Author</th><th>For</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><em>Homo Ludens</em></td><td>Huizinga</td><td>Classic definition of play</td> <thead><tr> <th><em>Man, Play and Games</em></th><th>Caillois</th><th>Play categories</th> <tr> <td><em>Hamlet on the Holodeck</em></td><td>Murray</td><td>Digital media possibilities</td></p>
-<hr>
-<h2>Traditions</h2>
-<h3>Phenomenology</h3>
-The philosophical tradition focused on lived experience. Key idea: meaning is bodied, not just mental. Videogames are experienced through hands and bodies, not just interpreted by minds.
-<strong>Key figures:</strong> Merleau-Ponty, Husserl  
-<strong>Game studies application:</strong> Keogh's work on embodiment
-<h3>Pragmatism</h3>
-American philosophical tradition. Key idea: truth is what works for a purpose. Design knowledge is validated through making, not just theorizing.
-<strong>Key figures:</strong> Dewey, James, Peirce  
-<strong>Game studies application:</strong> Design as practical knowledge
-<h3>Systems Theory</h3>
-The study of complex systems and their behaviors. Key idea: systems have emergent properties not predictable from parts.
-<strong>Key figures:</strong> Meadows, Forrester  
-<strong>Game studies application:</strong> <a href="foundations-player-psychology.html">Feedback Loops</a>, <a href="systems-emergent-behavior.html">Emergent Behavior</a>
-<h3>Studio Pedagogy</h3>
-Teaching through making and critique, from art and architecture schools. Key idea: you learn by doing and reflecting.
-<strong>Application:</strong> <a href="pedagogy-play-name-make-reflect.html">Play Name Make Reflect</a>
-<hr>
-<h2>GDC Talks Worth Watching</h2>
-- Valve's developer commentaries (in-game, <em>Portal</em> and <em>Half-Life</em> series)
-- Mark Brown's Videogame Maker's Toolkit series (YouTube)
-- Itay Keren — "Scroll Back: The Theory and Practice of Cameras in Side-Scrollers"
-- Jan Willem Nijman — "The Art of Screenshake" (Vlambeer's juicing philosophy)
-- Sid Meier — various talks on strategy videogame design
-- Tim Rogers — Action Button Reviews (long-form analysis)
-<hr>
-<h2>What I Take, What I Leave</h2>
-This knowledge base doesn't adopt any theory wholesale. For each thinker/tradition:
-<strong>From Bogost:</strong> Procedural rhetoric, games-as-arguments. <em>Leaving:</em> Sometimes too formalist.
-<strong>From Keogh:</strong> Embodiment, phenomenology. <em>Leaving:</em> Can be inaccessible writing.
-<strong>From Swink:</strong> Feel vocabulary, real-time control. <em>Leaving:</em> Narrow focus on action games.
-<strong>From Schell:</strong> Lenses, comprehensive view. <em>Leaving:</em> Can be encyclopedic without depth.
-<strong>From Huizinga:</strong> Magic circle concept. <em>Leaving:</em> The hard separation between videogame and life is false.
-<strong>From videogame studies generally:</strong> Rigorous analysis. <em>Leaving:</em> Often divorced from making.
-This is a <strong>maker's</strong> knowledge base, not a scholar's. Theory serves practice.
-<hr>
-<h2>See Also</h2>
-- <a href="the-design-lens.html">The Design Lens</a> — how to use multiple perspectives
-- <a href="meaning-from-dynamics.html">Meaning From Dynamics</a> — where theory meets practice
-- <a href="pedagogy-play-name-make-reflect.html">Play Name Make Reflect</a> — learning philosophy
-        
+
+        <p class="lead">
+          The intellectual lineage behind this knowledge base - key thinkers, texts, and traditions that inform the Gesture + Aesthetic Heritage approach.
+        </p>
+
+        <hr>
+
+        <h2>Core Videogame-Focused Books</h2>
+        <ul>
+          <li><strong>Steve Swink</strong> - <em>Game Feel</em> (2009). The definitive text on real-time control feel. Essential for understanding <a href="framework/gesture.html">Gesture</a>.</li>
+          <li><strong>Ian Bogost</strong> - <em>Persuasive Games</em> (2007). Procedural rhetoric: videogames make arguments through rules.</li>
+          <li><strong>Brendan Keogh</strong> - <em>A Play of Bodies</em> (2018). Phenomenological approach to videogames. The body as site of meaning.</li>
+          <li><strong>Anna Anthropy & Naomi Clark</strong> - <em>A Game Design Vocabulary</em> (2014). Player-centric vocabulary, accessible design language.</li>
+          <li><strong>Raph Koster</strong> - <em>A Theory of Fun for Game Design</em> (2004). Connects learning and pattern recognition to player enjoyment.</li>
+          <li><strong>Tracy Fullerton</strong> - <em>A Playful Production Process</em> (2024). On iterative design and playtesting.</li>
+        </ul>
+
+        <hr>
+
+        <h2>Key Thinkers</h2>
+
+        <h3>Game Studies & Design</h3>
+        <ul>
+          <li><strong>Jesse Schell</strong> - <em>The Art of Game Design: A Book of Lenses</em>. The lenses framework. See <a href="foundations/the-design-lens.html">The Design Lens</a>.</li>
+          <li><strong>Jesper Juul</strong> - <em>Half-Real</em>. Rules and fiction in videogames. Foundational videogame studies text.</li>
+          <li><strong>Miguel Sicart</strong> - <em>Beyond Choices: The Design of Ethical Gameplay</em> (2013). Ethics in videogame design.</li>
+        </ul>
+
+        <h3>Design Theory</h3>
+        <ul>
+          <li><strong>Donald Schon</strong> - <em>The Reflective Practitioner</em> (1983). Design as conversation with materials. Core to <a href="pedagogy/code-as-material.html">Code as Material</a>.</li>
+          <li><strong>Christopher Alexander</strong> - <em>A Pattern Language</em>. Architecture as communication. Influences level design thinking.</li>
+        </ul>
+
+        <h3>Psychology & Learning</h3>
+        <ul>
+          <li><strong>Mihaly Csikszentmihalyi</strong> - <em>Flow: The Psychology of Optimal Experience</em> (1990). The optimal experience that good pacing supports. See <a href="foundations/player-psychology.html">Player Psychology</a>.</li>
+          <li><strong>Seymour Papert</strong> - <em>Mindstorms</em> (1980). Coding as thinking tool. Influences <a href="pedagogy/debugging-as-literacy.html">Debugging as Literacy</a>.</li>
+        </ul>
+
+        <h3>Heritage</h3>
+        <ul>
+          <li><strong>Harold Bloom</strong> - <em>The Anxiety of Influence</em> (1973). Literary influence theory. Informs our approach to <a href="framework/aesthetic-heritage.html">Aesthetic Heritage</a>.</li>
+        </ul>
+
+        <hr>
+
+        <h2>Academic Papers</h2>
+        <ul>
+          <li><strong>Hunicke, LeBlanc, Zubek</strong> - "MDA: A Formal Approach to Game Design" (2004). The Mechanics-Dynamics-Aesthetics framework.</li>
+        </ul>
+
+        <hr>
+
+        <h2>GDC Talks Worth Watching</h2>
+        <ul>
+          <li>Valve's developer commentaries (in-game, <em>Portal</em> and <em>Half-Life</em> series)</li>
+          <li>Mark Brown's Game Maker's Toolkit series (YouTube)</li>
+          <li>Itay Keren - "Scroll Back: The Theory and Practice of Cameras in Side-Scrollers"</li>
+          <li>Jan Willem Nijman - "The Art of Screenshake" (Vlambeer's juicing philosophy)</li>
+          <li>Tim Rogers - Action Button Reviews (long-form analysis)</li>
+        </ul>
+
+        <hr>
+
+        <h2>What I Take, What I Leave</h2>
+        <p>This knowledge base doesn't adopt any theory wholesale. For each thinker/tradition:</p>
+        <ul>
+          <li><strong>From Bogost:</strong> Procedural rhetoric, videogames-as-arguments. <em>Leaving:</em> Sometimes too formalist.</li>
+          <li><strong>From Keogh:</strong> Embodiment, phenomenology. <em>Leaving:</em> Can be inaccessible writing.</li>
+          <li><strong>From Swink:</strong> Feel vocabulary, real-time control. <em>Leaving:</em> Narrow focus on action videogames.</li>
+          <li><strong>From Schell:</strong> Lenses, comprehensive view. <em>Leaving:</em> Can be encyclopedic without depth.</li>
+        </ul>
+        <p>This is a <strong>maker's</strong> knowledge base, not a scholar's. Theory serves practice.</p>
+
+        <hr>
+
+        <h2>See Also</h2>
+        <ul>
+          <li><a href="foundations/the-design-lens.html">The Design Lens</a> - how to use multiple perspectives</li>
+          <li><a href="pedagogy/play-name-make-reflect.html">Play → Name → Make → Reflect</a> - learning philosophy</li>
+          <li><a href="glossary.html">Glossary</a> - terminology used in this KB</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
-  <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
+
+  <script src="../js/main.js"></script>
 </body>
 </html>

@@ -8,13 +8,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
@@ -24,7 +48,7 @@
           <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
@@ -33,135 +57,222 @@
           <li class="nav-item"><a href="the-design-lens.html" class="nav-link active">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
           <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
           <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb">
-          <a href="../../index.html">Home</a> / <a href="index.html">Foundations</a> / The Design Lens
+          <a href="../../index.html">VG101</a> / <a href="index.html">Foundations</a> / The Design Lens
         </nav>
-        
+
         <h1>The Design Lens</h1>
-        
+
         <p class="lead">
           A way of seeing videogames as they are, not cherry-picking their purpose.
         </p>
-        
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>What a Lens Does</h3>
+            <p>
+              A lens focuses attention. It brings some things into clarity while letting
+              others blur into background.
+            </p>
+            <p>
+              Every framework is a lens. MDA (Mechanics, Dynamics, Aesthetics) is a lens.
+              Formal analysis is a lens. Player experience models are lenses.
+              The <a href="../framework/the-four-as.html" class="term">4 A's</a> and <a href="../framework/gesture.html" class="term">Gesture</a> are a lens.
+            </p>
+            <p>No lens shows everything. The question is what a particular lens helps you see.</p>
+
+            <h3>What This Lens Helps You See</h3>
+            <p>The VG101 lens focuses on:</p>
+            <ul>
+              <li><strong>Experience over abstraction.</strong> We start with what the player feels, not with systems diagrams.</li>
+              <li><strong>Heritage over invention.</strong> We trace where choices come from, not pretend they emerged from nothing.</li>
+              <li><strong>Craft over theory.</strong> We develop practical vocabulary for making and analyzing, not just categorizing.</li>
+              <li><strong>Wholeness over dissection.</strong> We study the Gesture as a whole before pulling it apart into components.</li>
+            </ul>
+
+            <h3>Using Multiple Lenses</h3>
+            <p>
+              You don't have to pick one lens and ignore all others. Different lenses serve
+              different purposes.
+            </p>
+            <p>
+              If you're balancing an economy, MDA might help. If you're studying player behavior,
+              psychology frameworks might help. If you're analyzing narrative, literary theory might help.
+            </p>
+            <p>The VG101 lens is particularly useful for:</p>
+            <ul>
+              <li>Analyzing why a moment feels the way it does</li>
+              <li>Understanding where a design choice comes from</li>
+              <li>Developing vocabulary to talk about videogame craft</li>
+              <li>Creating intentional experiences rather than accidental ones</li>
+            </ul>
+
+            <h3>The Goal</h3>
+            <p>
+              The goal is not to become a theorist. The goal is to become someone who can
+              play a videogame and understand why it feels the way it does. And then make
+              something that feels intentional.
+            </p>
+            <p>Theory serves practice. Analysis serves creation. The lens is a tool, not an end.</p>
+
+            <h3>Exercise: Lens Comparison</h3>
+            <p>Take a single videogame moment (e.g., landing a jump in Celeste). Analyze it through:</p>
+            <ul>
+              <li><strong>MDA:</strong> What mechanics create this dynamic? What aesthetic results?</li>
+              <li><strong>VG101:</strong> What is the <a href="../framework/gesture.html" class="term">Gesture</a>? What are the <a href="../framework/the-four-as.html" class="term">4 A's</a>? What <a href="../framework/aesthetic-heritage.html" class="term">heritage</a> is present?</li>
+            </ul>
+            <p>What does each lens reveal? What does each miss?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Respecting What Came Before</h3>
+            <p>
+              This framework is not about erasing the work of other videogame designers,
+              theorists, or scholars. All of that knowledge is respected and in play.
+            </p>
+            <p>
+              Academic perspectives matter. Social perspectives matter. Entertainment perspectives matter.
+              Product perspectives matter. We are not here to dismiss any of these.
+            </p>
+            <p>
+              We are here to see videogames as they are unto themselves. To analyze them
+              without cherry-picking which framing serves our argument. To take them seriously
+              as a medium with its own properties, its own traditions, its own craft.
+            </p>
+
+            <h3>Why Another Framework</h3>
+            <p>
+              Students may ask: "Why not just use MDA?" or "Why do we need new vocabulary?"
+            </p>
+            <p>
+              The answer: existing frameworks are valuable but often privilege certain perspectives.
+              MDA privileges system thinking. Formal analysis privileges structure. Player experience
+              models privilege psychology.
+            </p>
+            <p>
+              The VG101 framework privileges the felt experience and its heritage. This is a different
+              entry point, not a replacement.
+            </p>
+
+            <h3>Teaching Lens-Switching</h3>
+            <p>
+              Students should learn to switch between lenses fluently. An exercise:
+              analyze the same videogame moment three ways (MDA, player psychology, VG101).
+              What does each reveal?
+            </p>
+            <p>
+              The goal is flexibility, not orthodoxy. No single lens is "correct."
+            </p>
+
+            <h3>Common Challenges</h3>
+            <p><strong>"This is too abstract":</strong></p>
+            <p>
+              Ground everything in specific videogame moments. Never discuss Gesture without pointing
+              to a concrete Gesture. Theory without examples is empty.
+            </p>
+            <p><strong>"I just want to make, not analyze":</strong></p>
+            <p>
+              Analysis serves making. You can't intentionally create a feeling you can't name.
+              The vocabulary is a tool for creation, not a replacement for it.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Why "Lens"</h3>
+            <p>
+              The lens metaphor comes from Jesse Schell's <em>The Art of Game Design</em>,
+              which presents 100+ lenses for examining videogames. Each lens asks different questions.
+            </p>
+            <p>
+              We use "lens" to emphasize that frameworks are tools, not truths. You look through them;
+              you don't worship them.
+            </p>
+
+            <h3>Phenomenology and Experience</h3>
+            <p>
+              The emphasis on felt experience connects to phenomenological traditions in philosophy -
+              starting from how things appear to consciousness rather than from abstract structures.
+            </p>
+            <p>
+              Brendan Keogh's work applies this to videogames explicitly. We start with the body
+              playing the videogame, not with the system that the body interacts with.
+            </p>
+
+            <h3>What I'm Taking</h3>
+            <p>
+              The insight that frameworks are lenses, not truths. The permission to develop vocabulary
+              suited to what we're studying. The commitment to experience as the starting point.
+            </p>
+
+            <h3>What I'm Resisting</h3>
+            <p>
+              <strong>Framework wars:</strong> "MDA is wrong, VG101 is right." No. Different lenses for different purposes.
+            </p>
+            <p>
+              <strong>Theory for theory's sake:</strong> The vocabulary serves making. If it doesn't help you create,
+              it's not doing its job.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Can we ever see a videogame "as it is" or only through lenses? Is there a lens-free view?</li>
+              <li>How do we know when a framework is useful vs. when it's imposing structure that isn't there?</li>
+              <li>What's the relationship between analyzing videogames and making them? Do they require the same skills?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Schell, Jesse. <em>The Art of Game Design: A Book of Lenses</em> (2008)</li>
+              <li>Hunicke, LeBlanc, Zubek. "MDA: A Formal Approach to Game Design" (2004)</li>
+              <li>Keogh, Brendan. <em>A Play of Bodies</em> (2018)</li>
+            </ul>
+          </div>
+        </div>
+
         <hr>
-        
-        <h2>Respecting What Came Before</h2>
-        
-        <p>
-          This framework is not about erasing the work of other videogame designers, 
-          theorists, or scholars. All of that knowledge is respected and in play.
-        </p>
-        
-        <p>
-          Academic perspectives matter. Social perspectives matter. Entertainment perspectives matter. 
-          Product perspectives matter. We are not here to dismiss any of these.
-        </p>
-        
-        <p>
-          We are here to see videogames as they are unto themselves. To analyze them 
-          without cherry-picking which framing serves our argument. To take them seriously 
-          as a medium with its own properties, its own traditions, its own craft.
-        </p>
-        
-        <hr>
-        
-        <h2>What a Lens Does</h2>
-        
-        <p>
-          A lens focuses attention. It brings some things into clarity while letting 
-          others blur into background.
-        </p>
-        
-        <p>
-          Every framework is a lens. MDA (Mechanics, Dynamics, Aesthetics) is a lens. 
-          Formal analysis is a lens. Player experience models are lenses. 
-          The 4 A's and Gesture are a lens.
-        </p>
-        
-        <p>
-          No lens shows everything. The question is what a particular lens helps you see.
-        </p>
-        
-        <hr>
-        
-        <h2>What This Lens Helps You See</h2>
-        
-        <p>
-          The VG101 lens focuses on:
-        </p>
-        
-        <ul>
-          <li><strong>Experience over abstraction.</strong> We start with what the player feels, not with systems diagrams.</li>
-          <li><strong>Heritage over invention.</strong> We trace where choices come from, not pretend they emerged from nothing.</li>
-          <li><strong>Craft over theory.</strong> We develop practical vocabulary for making and analyzing, not just categorizing.</li>
-          <li><strong>Wholeness over dissection.</strong> We study the Gesture as a whole before pulling it apart into components.</li>
-        </ul>
-        
-        <hr>
-        
-        <h2>Using Multiple Lenses</h2>
-        
-        <p>
-          You don't have to pick one lens and ignore all others. Different lenses serve 
-          different purposes.
-        </p>
-        
-        <p>
-          If you're balancing an economy, MDA might help. If you're studying player behavior, 
-          psychology frameworks might help. If you're analyzing narrative, literary theory might help.
-        </p>
-        
-        <p>
-          The VG101 lens is particularly useful for:
-        </p>
-        
-        <ul>
-          <li>Analyzing why a moment feels the way it does</li>
-          <li>Understanding where a design choice comes from</li>
-          <li>Developing vocabulary to talk about videogame craft</li>
-          <li>Creating intentional experiences rather than accidental ones</li>
-        </ul>
-        
-        <hr>
-        
-        <h2>The Goal</h2>
-        
-        <p>
-          The goal is not to become a theorist. The goal is to become someone who can 
-          play a videogame and understand why it feels the way it does. And then make 
-          something that feels intentional.
-        </p>
-        
-        <p>
-          Theory serves practice. Analysis serves creation. The lens is a tool, not an end.
-        </p>
-        
-        <hr>
-        
+
         <h2>Related</h2>
         <ul>
-          <li><a href="what-makes-a-videogame.html">What Makes a Videogame</a></li>
-          <li><a href="player-psychology.html">Player Psychology</a></li>
-          <li><a href="../framework/gesture.html">Gesture</a></li>
-          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a></li>
+          <li><a href="what-makes-a-videogame.html">What Makes a Videogame</a> - what we're looking at</li>
+          <li><a href="player-psychology.html">Player Psychology</a> - another lens on players</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - the core concept of this lens</li>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - tracing where choices come from</li>
         </ul>
-        
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
 </body>
 </html>

@@ -29,6 +29,9 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
   </style>
 </head>
 <body>
@@ -108,7 +111,7 @@
             </ol>
             <p>Every variable has a tooltip explaining what it does and what changing it affects.</p>
 
-            <h3>Character & Movement Scaffolds</h3>
+            <h3>Available Scaffolds</h3>
             <table>
               <thead>
                 <tr>
@@ -129,168 +132,40 @@
                   <td><code>minJumpForce</code>, <code>maxJumpForce</code>, <code>holdTime</code></td>
                 </tr>
                 <tr>
-                  <td><a href="double-jump.html">Double Jump</a></td>
-                  <td>Air jump with separate feel</td>
-                  <td><code>airJumpForce</code>, <code>airControl</code>, <code>airGravity</code></td>
-                </tr>
-                <tr>
-                  <td><a href="coyote-time.html">Coyote Time</a></td>
-                  <td>Grace period after leaving platform</td>
-                  <td><code>coyoteWindow</code>, <code>inputBuffer</code></td>
-                </tr>
-                <tr>
                   <td><a href="dash.html">Dash</a></td>
                   <td>Burst movement with recovery</td>
                   <td><code>dashSpeed</code>, <code>dashDuration</code>, <code>cooldown</code>, <code>cancelWindow</code></td>
                 </tr>
                 <tr>
-                  <td><a href="ground-movement.html">Ground Movement</a></td>
-                  <td>Walk/run with acceleration</td>
-                  <td><code>maxSpeed</code>, <code>acceleration</code>, <code>deceleration</code>, <code>friction</code></td>
-                </tr>
-                <tr>
-                  <td><a href="air-control.html">Air Control</a></td>
-                  <td>How much you can steer mid-air</td>
-                  <td><code>airAcceleration</code>, <code>airMaxSpeed</code>, <code>airFriction</code></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h3>Feel & Feedback Scaffolds</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Scaffold</th>
-                  <th>What it does</th>
-                  <th>Key variables</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   <td><a href="screen-shake.html">Screen Shake</a></td>
                   <td>Camera shake on impact</td>
                   <td><code>intensity</code>, <code>duration</code>, <code>decay</code></td>
                 </tr>
-                <tr>
-                  <td><a href="hitstop.html">Hitstop</a></td>
-                  <td>Frame freeze on contact</td>
-                  <td><code>freezeFrames</code>, <code>recoverySmoothing</code></td>
-                </tr>
-                <tr>
-                  <td><a href="squash-stretch.html">Squash Stretch</a></td>
-                  <td>Sprite deformation for weight</td>
-                  <td><code>squashAmount</code>, <code>stretchAmount</code>, <code>returnSpeed</code></td>
-                </tr>
-                <tr>
-                  <td><a href="trail-effect.html">Trail Effect</a></td>
-                  <td>Ghost images during fast movement</td>
-                  <td><code>trailCount</code>, <code>fadeSpeed</code>, <code>spacing</code></td>
-                </tr>
-                <tr>
-                  <td><a href="landing-impact.html">Landing Impact</a></td>
-                  <td>Dust, sound, shake on land</td>
-                  <td><code>dustParticles</code>, <code>shakeOnLand</code>, <code>soundTrigger</code></td>
-                </tr>
               </tbody>
             </table>
 
-            <h3>Camera Scaffolds</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Scaffold</th>
-                  <th>What it does</th>
-                  <th>Key variables</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a href="follow-camera.html">Follow Camera</a></td>
-                  <td>Camera tracks player</td>
-                  <td><code>followSpeed</code>, <code>lookAhead</code>, <code>deadzone</code></td>
-                </tr>
-                <tr>
-                  <td><a href="camera-bounds.html">Camera Bounds</a></td>
-                  <td>Constrain camera to level</td>
-                  <td><code>boundsRect</code>, <code>edgePadding</code></td>
-                </tr>
-                <tr>
-                  <td><a href="focus-point.html">Focus Point</a></td>
-                  <td>Camera shifts toward look direction</td>
-                  <td><code>focusOffset</code>, <code>transitionSpeed</code></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h3>Timing & Input Scaffolds</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Scaffold</th>
-                  <th>What it does</th>
-                  <th>Key variables</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a href="input-buffer.html">Input Buffer</a></td>
-                  <td>Remember inputs for grace</td>
-                  <td><code>bufferWindow</code></td>
-                </tr>
-                <tr>
-                  <td><a href="cooldown-timer.html">Cooldown Timer</a></td>
-                  <td>Prevent action spam</td>
-                  <td><code>cooldownDuration</code>, <code>showUI</code></td>
-                </tr>
-                <tr>
-                  <td><a href="charge-mechanic.html">Charge Mechanic</a></td>
-                  <td>Hold to charge, release to act</td>
-                  <td><code>chargeRate</code>, <code>maxCharge</code>, <code>releaseThreshold</code></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h3>Combat & Interaction Scaffolds</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Scaffold</th>
-                  <th>What it does</th>
-                  <th>Key variables</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a href="melee-attack.html">Melee Attack</a></td>
-                  <td>Hitbox with timing windows</td>
-                  <td><code>startup</code>, <code>active</code>, <code>recovery</code>, <code>hitboxSize</code></td>
-                </tr>
-                <tr>
-                  <td><a href="knockback.html">Knockback</a></td>
-                  <td>Push on hit</td>
-                  <td><code>knockbackForce</code>, <code>knockbackAngle</code>, <code>hitstun</code></td>
-                </tr>
-                <tr>
-                  <td><a href="health-system.html">Health System</a></td>
-                  <td>Damage, invincibility frames</td>
-                  <td><code>maxHealth</code>, <code>iFrames</code>, <code>flashOnHit</code></td>
-                </tr>
-              </tbody>
-            </table>
+            <h3>Scaffolds In Development</h3>
+            <p>Future scaffolds will include:</p>
+            <ul>
+              <li><strong>Movement:</strong> Double Jump, Coyote Time, Ground Movement, Air Control</li>
+              <li><strong>Feedback:</strong> Hitstop, Squash Stretch, Trail Effect, Landing Impact</li>
+              <li><strong>Camera:</strong> Follow Camera, Camera Bounds, Focus Point</li>
+              <li><strong>Timing:</strong> Input Buffer, Cooldown Timer, Charge Mechanic</li>
+              <li><strong>Combat:</strong> Melee Attack, Knockback, Health System</li>
+            </ul>
 
             <h3>Starting Points by Exercise</h3>
 
             <p><strong>Gesture Recreation (Week 2)</strong></p>
-            <p>Start with: <code>basic-jump</code> or <code>ground-movement</code><br>
-            Add: <code>squash-stretch</code>, <code>landing-impact</code></p>
+            <p>Start with: <a href="basic-jump.html">Basic Jump</a><br>
+            Add: Screen Shake for landing feedback</p>
 
             <p><strong>Heritage Translation (Week 3)</strong></p>
             <p>Start with: the scaffold closest to your source gesture<br>
             Modify: tune until it matches, then deliberately transform one variable set</p>
 
             <p><strong>The 30-Minute Action (Week 5)</strong></p>
-            <p>Start with: <code>ground-movement</code> + one action scaffold<br>
-            Add: one feedback scaffold<br>
+            <p>Combine: <a href="dash.html">Dash</a> + <a href="screen-shake.html">Screen Shake</a><br>
             Constraint: only tune what's exposed, no new code</p>
 
             <p><strong>Feel Experiment (Week 7)</strong></p>
