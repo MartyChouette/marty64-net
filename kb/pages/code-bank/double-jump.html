@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Double Jump - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link active">Double Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Double Jump
+        </nav>
+
+        <h1>Double Jump</h1>
+
+        <p class="lead">
+          An extra jump in mid-air. Press jump again before landing to get additional height or change direction. The most common platformer upgrade.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Double jump adds <strong>aerial control and recovery</strong>. It lets players correct mistakes, reach higher platforms, and feel more expressive in the air.</p>
+            <p>It's also a psychological safety net - players feel less committed to their first jump because they have a second chance.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>extraJumps</code></td>
+                  <td>int</td>
+                  <td>1</td>
+                  <td>Number of air jumps allowed</td>
+                </tr>
+                <tr>
+                  <td><code>airJumpForce</code></td>
+                  <td>float</td>
+                  <td>10.0</td>
+                  <td>Force of air jump (often less than ground)</td>
+                </tr>
+                <tr>
+                  <td><code>jumpsRemaining</code></td>
+                  <td>int</td>
+                  <td>-</td>
+                  <td>Current available air jumps</td>
+                </tr>
+                <tr>
+                  <td><code>resetVelocity</code></td>
+                  <td>bool</td>
+                  <td>true</td>
+                  <td>Cancel downward velocity before air jump</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For same-height double jump:</strong></p>
+            <ul>
+              <li><code>airJumpForce</code> = same as <code>jumpForce</code></li>
+              <li><code>resetVelocity</code> = true</li>
+              <li>Each jump feels equal</li>
+            </ul>
+
+            <p><strong>For diminishing jumps:</strong></p>
+            <ul>
+              <li><code>airJumpForce</code> = 70-80% of <code>jumpForce</code></li>
+              <li>Second jump is weaker, encourages using first jump wisely</li>
+            </ul>
+            <p><em>Reference: Hollow Knight, many Metroidvanias</em></p>
+
+            <p><strong>For boosted air jump:</strong></p>
+            <ul>
+              <li><code>airJumpForce</code> > <code>jumpForce</code></li>
+              <li><code>resetVelocity</code> = true</li>
+              <li>Air jump is the powerful one; first jump is setup</li>
+            </ul>
+
+            <h3>How It Works</h3>
+            <pre><code>On Landing:
+  - Set jumpsRemaining = extraJumps
+
+On Jump Press:
+  - If grounded: do normal jump
+  - Else if jumpsRemaining > 0:
+    - If resetVelocity: set vertical velocity to 0
+    - Apply airJumpForce upward
+    - Decrement jumpsRemaining
+    - Play air jump effect</code></pre>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Double jump doesn't feel different from first jump"</strong><br>
+            Add distinct feedback: different sound, particle effect, animation. Players should know they used their air jump.</p>
+
+            <p><strong>"It feels like I have infinite jumps"</strong><br>
+            Make sure you're only resetting jumpsRemaining on landing, not on jump. Also check that the counter actually decrements.</p>
+
+            <p><strong>"Air jump barely helps when falling fast"</strong><br>
+            If <code>resetVelocity</code> is false, the jump force fights existing downward velocity. Set it to true to always get full air jump height.</p>
+
+            <p><strong>"Players are reaching places they shouldn't"</strong><br>
+            Double jump significantly increases vertical reach. Redesign level geometry or reduce airJumpForce.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="variable-jump.html">Variable Jump</a> - both jumps can be variable height</li>
+              <li><a href="coyote-time.html">Coyote Time</a> - coyote jump shouldn't consume air jump</li>
+              <li><a href="dash.html">Dash</a> - dash + double jump for maximum air mobility</li>
+              <li><a href="squash-stretch.html">Squash & Stretch</a> - unique deformation for air jump</li>
+            </ul>
+
+            <h3>Design Decisions</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Options</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>When to unlock double jump?</td>
+                  <td>Start with it, ability pickup, permanent upgrade</td>
+                </tr>
+                <tr>
+                  <td>Should coyote time use an air jump?</td>
+                  <td>Most videogames: no. Coyote is a grace period, not a true air jump.</td>
+                </tr>
+                <tr>
+                  <td>Reset air jump on wall touch?</td>
+                  <td>Yes for wall-jump videogames, creates infinite climbing</td>
+                </tr>
+                <tr>
+                  <td>Reset air jump on taking damage?</td>
+                  <td>Generous design choice, prevents unfair deaths</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Double jump teaches <strong>ability management</strong>. Students learn to track state (jumps remaining), reset conditions (landing), and provide feedback (air jump effects). It's more complex than basic jump but still approachable.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Start with basic jump working</li>
+              <li>Add counter for remaining jumps</li>
+              <li>Allow jump when jumpsRemaining > 0 and in air</li>
+              <li>Add distinct visual/audio feedback for air jump</li>
+              <li>Tune the feel (force, velocity reset)</li>
+            </ol>
+
+            <h3>The Feedback Lesson</h3>
+            <p>Double jump is a great place to teach <strong>feedback differentiation</strong>. The air jump needs to feel different from the ground jump so players know they've used their resource. This could be:</p>
+            <ul>
+              <li>Different sound effect</li>
+              <li>Different particle effect (wings, sparkles)</li>
+              <li>Different animation</li>
+              <li>Brief screen flash or shake</li>
+            </ul>
+            <p>Without distinct feedback, players lose track of their jumps.</p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>Why might you want the air jump to be weaker than the ground jump?</li>
+              <li>What feedback tells the player they've used their double jump?</li>
+              <li>How does double jump change level design requirements?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>The double jump has murky origins but became codified in the 1980s-90s. Dragon Buster (1984) is often cited as an early example. The technique spread through action-platformers and Metroidvanias.</p>
+            <p>It's now so common that players expect it. Many videogames start without double jump and grant it as an upgrade - following the Metroidvania tradition of ability-gated progression.</p>
+
+            <h3>The Abstraction Question</h3>
+            <p>Double jump is <strong>physically impossible</strong>. You can't push off nothing. This is fine - videogames aren't physics simulations. But it raises the question: how much do videogame physics need to make sense?</p>
+            <p>The answer is usually: they need to be internally consistent, not realistic. If double jump exists, it should work the same way every time. Players learn videogame physics, not real physics.</p>
+
+            <h3>Permission and Progression</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, double jump expands what's <strong>allowed</strong>. Before the upgrade, certain heights are forbidden. After, they're reachable. This is the Metroidvania formula: new abilities = new permissions = new areas.</p>
+
+            <h3>Triple Jump and Beyond</h3>
+            <p>Why stop at two? Some videogames allow triple jumps or more. But there's diminishing returns:</p>
+            <ul>
+              <li>More jumps = more to track mentally</li>
+              <li>More jumps = harder to design levels for</li>
+              <li>More jumps = less meaningful each jump becomes</li>
+            </ul>
+            <p>Double jump is the sweet spot for most videogames. It adds expression without overwhelming.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="basic-jump.html">Basic Jump</a> - the foundation this builds on</li>
+          <li><a href="variable-jump.html">Variable Jump</a> - can be combined with double jump</li>
+          <li><a href="dash.html">Dash</a> - another air mobility option</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#coyote-time" class="term">Coyote Time</a></li>
+          <li><a href="../glossary.html#metroidvania" class="term">Metroidvania</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

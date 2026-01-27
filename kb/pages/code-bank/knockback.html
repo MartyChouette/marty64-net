@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knockback - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link active">Knockback</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Knockback
+        </nav>
+
+        <h1>Knockback</h1>
+
+        <p class="lead">
+          Push an entity away when hit. The physical consequence of damage. Creates space, shows impact, and can create environmental hazards.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Knockback creates <strong>physical consequence</strong>. Damage isn't just a number going down - it's being pushed back, losing ground, potentially falling into danger. It makes combat spatial.</p>
+            <p>Good knockback also creates opportunities: knock an enemy off a ledge, into spikes, or into another enemy.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>knockbackForce</code></td>
+                  <td>float</td>
+                  <td>8.0</td>
+                  <td>Horizontal push force</td>
+                </tr>
+                <tr>
+                  <td><code>knockbackUp</code></td>
+                  <td>float</td>
+                  <td>4.0</td>
+                  <td>Vertical lift during knockback</td>
+                </tr>
+                <tr>
+                  <td><code>hitstunDuration</code></td>
+                  <td>float</td>
+                  <td>0.2</td>
+                  <td>Time target can't act after hit</td>
+                </tr>
+                <tr>
+                  <td><code>knockbackDecay</code></td>
+                  <td>float</td>
+                  <td>10.0</td>
+                  <td>How fast knockback velocity decays</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For light hit reactions:</strong></p>
+            <ul>
+              <li><code>knockbackForce</code> = 3 - 5</li>
+              <li><code>knockbackUp</code> = 0 - 2</li>
+              <li><code>hitstunDuration</code> = 0.1</li>
+              <li>Quick recovery, fast combat</li>
+            </ul>
+            <p><em>Reference: Hack-and-slash, character action games</em></p>
+
+            <p><strong>For heavy, consequential hits:</strong></p>
+            <ul>
+              <li><code>knockbackForce</code> = 10 - 15</li>
+              <li><code>knockbackUp</code> = 5 - 8</li>
+              <li><code>hitstunDuration</code> = 0.3 - 0.5</li>
+              <li>Major displacement, time to reposition</li>
+            </ul>
+            <p><em>Reference: Smash Bros., platform fighters</em></p>
+
+            <p><strong>For environmental kill potential:</strong></p>
+            <ul>
+              <li>High <code>knockbackForce</code></li>
+              <li>Significant <code>knockbackUp</code> (launches into air)</li>
+              <li>Design levels with hazards at edges</li>
+            </ul>
+
+            <h3>How It Works</h3>
+            <pre><code>On Hit:
+  - Calculate direction from attacker to target
+  - Apply velocity: (direction * knockbackForce) + (up * knockbackUp)
+  - Start hitstun timer
+  - Disable target's movement/actions
+
+Every Frame during hitstun:
+  - Decay knockback velocity
+  - Prevent target actions
+
+On hitstun end:
+  - Restore target control</code></pre>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Knockback goes the wrong direction"</strong><br>
+            Make sure you're calculating direction FROM attacker TO target, not the reverse. Also check if target's facing direction affects the calculation.</p>
+
+            <p><strong>"Target gets stuck in walls"</strong><br>
+            Add collision checks or reduce knockback when near walls. Some videogames "slide" along walls; others cancel knockback.</p>
+
+            <p><strong>"Combat feels floaty"</strong><br>
+            <code>knockbackUp</code> might be too high relative to gravity. Also check <code>knockbackDecay</code> - slow decay = floaty.</p>
+
+            <p><strong>"Player gets knocked into pits unfairly"</strong><br>
+            Consider invincibility frames or reduced knockback near hazards. Or lean into it - environmental kills can be a feature, not a bug.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="hitstop.html">Hitstop</a> - pause before knockback begins</li>
+              <li><a href="screen-shake.html">Screen Shake</a> - emphasize the impact</li>
+              <li><a href="squash-stretch.html">Squash & Stretch</a> - deform on impact</li>
+              <li><a href="input-buffer.html">Input Buffer</a> - buffer recovery actions during hitstun</li>
+            </ul>
+
+            <h3>Knockback Variations</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fixed knockback</td>
+                  <td>Same force regardless of damage dealt</td>
+                </tr>
+                <tr>
+                  <td>Damage-scaled</td>
+                  <td>More damage = more knockback (Smash Bros.)</td>
+                </tr>
+                <tr>
+                  <td>Weight-modified</td>
+                  <td>Heavier targets fly less far</td>
+                </tr>
+                <tr>
+                  <td>Directional</td>
+                  <td>Different attacks knock in different directions</td>
+                </tr>
+                <tr>
+                  <td>Wall bounce</td>
+                  <td>Hitting a wall bounces you back into play</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Knockback teaches <strong>combat as space control</strong>. It connects damage to positioning, making combat about territory, not just health bars. Students learn that good combat systems have physical consequences.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Implement basic knockback (force away from attacker)</li>
+              <li>Add hitstun to disable target temporarily</li>
+              <li>Tune for different attack types</li>
+              <li>Add environmental hazards to make knockback consequential</li>
+            </ol>
+
+            <h3>The Smash Bros. Lesson</h3>
+            <p>Super Smash Bros. is the ultimate knockback-focused design. Damage increases knockback instead of reducing health. The only way to lose is to be knocked off the stage. This design makes positioning central to everything.</p>
+            <p>Even if students aren't making platform fighters, they can learn from this: <strong>what if knockback was the primary threat?</strong></p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>How does knockback change where combat happens in a level?</li>
+              <li>Why pair hitstun with knockback? What goes wrong without it?</li>
+              <li>How would you balance knockback near instant-death hazards?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Knockback existed in early videogames (Castlevania's infamous knockback into pits) but became a design focus with fighting games. Street Fighter II's corner pressure, where knockback traps opponents at screen edge, showed that positioning could be a resource.</p>
+            <p>Platform fighters like Smash Bros. made knockback the entire victory condition, replacing health bars entirely.</p>
+
+            <h3>Knockback as Permissions</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, knockback temporarily revokes permission to act (hitstun) and forcibly repositions the target. It's one of the most aggressive permission changes in action videogames.</p>
+            <p>This can feel fair (you got hit, you pay the price) or unfair (chain knockback that never lets you act). Tuning knockback is tuning fairness.</p>
+
+            <h3>The Castlevania Problem</h3>
+            <p>Classic Castlevania is notorious for knockback into pits - one hit sends you flying backwards into instant death. This was partly technical limitation, partly intentional difficulty.</p>
+            <p>Modern videogames usually provide either:</p>
+            <ul>
+              <li>Invincibility frames to escape after one hit</li>
+              <li>Reduced knockback near hazards</li>
+              <li>Ledge grabbing or recovery mechanics</li>
+            </ul>
+            <p>The Castlevania approach is a <strong>heritage choice</strong>: using it quotes that tradition, with all its implications.</p>
+
+            <h3>Knockback and Atmosphere</h3>
+            <p>Knockback force communicates power. A weak slap might push you slightly; a massive hit launches you across the screen. The <a href="../framework/the-four-as.html" class="term">Atmosphere</a> of a weapon is partially defined by its knockback. A weighty hammer should send enemies flying; a quick dagger shouldn't.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="hitstop.html">Hitstop</a> - pause before the knockback</li>
+          <li><a href="screen-shake.html">Screen Shake</a> - visual impact feedback</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - knockback as permission revocation</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#hitstun" class="term">Hitstun</a></li>
+          <li><a href="../glossary.html#invincibility-frames" class="term">Invincibility Frames</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
