@@ -29,9 +29,38 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective Tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:0}
+    .tab-labels label{padding:0.75rem 1.25rem;cursor:pointer;font-weight:500;font-size:0.875rem;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+    .tab-labels label:hover{color:#334155;background:#f8fafc}
+    .tab-content{display:none;padding:1.5rem;background:#f8fafc;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d-tp:checked ~ .tab-labels label[for="tab-3d-tp"],
+    #tab-3d-fp:checked ~ .tab-labels label[for="tab-3d-fp"],
+    #tab-iso:checked ~ .tab-labels label[for="tab-iso"]{color:#14b8a6;border-bottom-color:#14b8a6;background:#f0fdfa}
+    #tab-2d:checked ~ .content-2d,
+    #tab-3d-tp:checked ~ .content-3d-tp,
+    #tab-3d-fp:checked ~ .content-3d-fp,
+    #tab-iso:checked ~ .content-iso{display:block}
+    .prereq-note{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin-bottom:1.5rem;font-size:0.9rem}
+    .prereq-note a{color:#d97706;font-weight:500}
+    pre{background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.8rem;line-height:1.5}
+    code{font-family:'JetBrains Mono',monospace}
+    pre code{color:#e2e8f0}
+    :not(pre)>code{background:#e2e8f0;padding:0.125rem 0.375rem;border-radius:3px;font-size:0.85em;color:#334155}
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -63,9 +92,16 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link active">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
@@ -89,7 +125,7 @@
         <h1>Basic Jump</h1>
 
         <p class="lead">
-          A simple, fixed-height jump. Press button, go up, come down. The foundation of platformer movement.
+          A simple, fixed-height jump. Press button, go up, come down. The foundation of character movement across all perspectives.
         </p>
 
         <!-- PRACTICE REGISTER -->
@@ -132,10 +168,10 @@
                   <td>Extra gravity when falling</td>
                 </tr>
                 <tr>
-                  <td><code>groundCheckDistance</code></td>
+                  <td><code>groundCheckRadius</code></td>
                   <td>float</td>
-                  <td>0.1</td>
-                  <td>How far to check for ground</td>
+                  <td>0.2</td>
+                  <td>Size of ground detection sphere/circle</td>
                 </tr>
               </tbody>
             </table>
@@ -166,15 +202,728 @@
             </ul>
             <p><em>Reference: Castlevania, simulation-leaning videogames</em></p>
 
-            <h3>How It Works</h3>
-            <pre><code>On Jump Press (if grounded):
-  - Apply jumpForce upward immediately
+            <h3>Perspective Scripts</h3>
 
-Every Frame:
-  - If rising: apply gravity
-  - If falling: apply gravity * fallGravityMultiplier
-  - Check for ground contact</code></pre>
-            <p>The <code>fallGravityMultiplier</code> is the key insight: making descent faster than ascent creates a satisfying arc without the floaty falling that pure physics produces.</p>
+            <div class="prereq-note">
+              <strong>Prerequisite:</strong> All scripts below require the <a href="input-setup.html">InputReader</a> to be set up in your scene. Complete the Input Setup first.
+            </div>
+
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d-tp">
+              <input type="radio" name="perspective" id="tab-3d-fp">
+              <input type="radio" name="perspective" id="tab-iso">
+
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d-tp">3D Third-Person</label>
+                <label for="tab-3d-fp">3D First-Person</label>
+                <label for="tab-iso">Isometric</label>
+              </div>
+
+              <!-- 2D PLATFORMER -->
+              <div class="tab-content content-2d">
+                <h4>BasicJump2D.cs</h4>
+                <p>Classic 2D platformer jump. Uses <code>Rigidbody2D</code> and <code>Physics2D.OverlapCircle</code> for ground detection.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>Rigidbody2D</code> to your player (Freeze Rotation Z)</li>
+                  <li>Add a <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
+                  <li>Create an empty child GameObject at the feet, name it "GroundCheck"</li>
+                  <li>Add this script and configure in Inspector</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// BASIC JUMP 2D - Fixed height jump for 2D platformers
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(Rigidbody2D))]
+public class BasicJump2D : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Tooltip("How hard we push off the ground. Higher = taller jump.")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 12f;
+
+    [Tooltip("How fast we fall. Higher = snappier, less floaty.")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Tooltip("Extra gravity when falling. Makes descent faster than ascent.")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    [Header("Ground Detection")]
+    [Tooltip("Empty GameObject at character's feet")]
+    [SerializeField] private Transform groundCheckPoint;
+
+    [Tooltip("Size of the ground check circle")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.2f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private Rigidbody2D rb;
+    private float verticalVelocity;
+    private bool isGrounded;
+
+    private void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+        rb.gravityScale = 0f; // We handle gravity ourselves
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe to InputReader jump event
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckRadius,
+            groundLayer
+        );
+
+        if (isGrounded && verticalVelocity &lt; 0)
+        {
+            verticalVelocity = 0f;
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            verticalVelocity = jumpForce;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck && groundCheckPoint != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- 3D THIRD-PERSON -->
+              <div class="tab-content content-3d-tp">
+                <h4>BasicJump3D.cs</h4>
+                <p>Third-person 3D jump. Uses <code>CharacterController</code> for smooth movement integration. Works with camera-relative movement.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Set Ground Layer to your environment's layer</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// BASIC JUMP 3D - Fixed height jump for third-person 3D games
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// Uses CharacterController for movement integration
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class BasicJump3D : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Tooltip("How hard we push off the ground. Higher = taller jump.")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 10f;
+
+    [Tooltip("How fast we fall. Higher = snappier, less floaty.")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 30f;
+
+    [Tooltip("Extra gravity when falling. Makes descent faster than ascent.")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Ground Detection")]
+    [Tooltip("Offset from center for ground check sphere")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+
+    [Tooltip("Size of the ground check sphere")]
+    [Range(0.1f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.3f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement (Optional)")]
+    [Tooltip("Movement speed on ground")]
+    [SerializeField] private float moveSpeed = 8f;
+
+    [Tooltip("How much control in the air (0-1)")]
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private Transform cameraTransform;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        cameraTransform = Camera.main?.transform;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleMovement();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f; // Small downward force to stay grounded
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        // Camera-relative movement
+        Vector3 forward = cameraTransform != null ? cameraTransform.forward : transform.forward;
+        Vector3 right = cameraTransform != null ? cameraTransform.right : transform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * input.y + right * input.x);
+
+        float currentSpeed = moveSpeed;
+        if (!isGrounded)
+        {
+            currentSpeed *= airControl;
+        }
+
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        // Rotate to face movement direction
+        if (moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = jumpForce;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- 3D FIRST-PERSON -->
+              <div class="tab-content content-3d-fp">
+                <h4>BasicJumpFPS.cs</h4>
+                <p>First-person jump with classic FPS movement. Includes mouse look integration. The camera is the player's viewpoint.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Create a child Camera (or use Main Camera as child)</li>
+                  <li>Add this script to the player root</li>
+                  <li>Assign the Camera reference in Inspector</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// BASIC JUMP FPS - First-person jump with integrated mouselook
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// Complete FPS controller with jumping
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class BasicJumpFPS : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Tooltip("How hard we push off the ground.")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 8f;
+
+    [Tooltip("How fast we fall.")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 25f;
+
+    [Tooltip("Extra gravity when falling.")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement")]
+    [Tooltip("Walking speed")]
+    [SerializeField] private float moveSpeed = 6f;
+
+    [Tooltip("Air control multiplier")]
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.3f;
+
+    [Header("Mouse Look")]
+    [Tooltip("The camera to rotate for vertical look")]
+    [SerializeField] private Transform playerCamera;
+
+    [Tooltip("Mouse sensitivity for gamepad")]
+    [SerializeField] private float gamepadLookSpeed = 150f;
+
+    [Tooltip("Mouse sensitivity multiplier")]
+    [SerializeField] private float mouseSensitivity = 0.15f;
+
+    [Tooltip("Maximum up/down look angle")]
+    [Range(45f, 90f)]
+    [SerializeField] private float maxLookAngle = 85f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private float cameraPitch;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+
+        // Lock and hide cursor for FPS
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleLook();
+        HandleMovement();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+
+    private void HandleLook()
+    {
+        if (InputReader.Instance == null) return;
+
+        Vector2 lookInput = InputReader.Instance.LookInput;
+
+        // Apply different sensitivity for mouse vs gamepad
+        float lookSpeedX, lookSpeedY;
+        if (InputReader.Instance.IsUsingGamepad)
+        {
+            lookSpeedX = gamepadLookSpeed * Time.deltaTime;
+            lookSpeedY = gamepadLookSpeed * Time.deltaTime;
+        }
+        else
+        {
+            // Mouse input is already deltaTime-independent
+            lookSpeedX = mouseSensitivity;
+            lookSpeedY = mouseSensitivity;
+        }
+
+        // Horizontal rotation - rotate the whole player
+        transform.Rotate(Vector3.up * lookInput.x * lookSpeedX);
+
+        // Vertical rotation - rotate just the camera
+        cameraPitch -= lookInput.y * lookSpeedY;
+        cameraPitch = Mathf.Clamp(cameraPitch, -maxLookAngle, maxLookAngle);
+
+        if (playerCamera != null)
+        {
+            playerCamera.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        // Movement relative to player facing direction
+        Vector3 moveDirection = transform.forward * input.y + transform.right * input.x;
+
+        float currentSpeed = moveSpeed;
+        if (!isGrounded)
+        {
+            currentSpeed *= airControl;
+        }
+
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = jumpForce;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- ISOMETRIC -->
+              <div class="tab-content content-iso">
+                <h4>BasicJumpIsometric.cs</h4>
+                <p>Isometric/top-down jump. Movement is world-axis aligned (or rotated 45 degrees for true isometric). Jump adds vertical motion separate from XZ movement.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Set up isometric camera (typically 45-degree Y rotation, 30-45 degree X tilt)</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Choose rotation mode: World Axis or Isometric (45-degree rotated)</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// BASIC JUMP ISOMETRIC - Jump for isometric/top-down games
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// Movement on XZ plane with jump on Y axis
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class BasicJumpIsometric : MonoBehaviour
+{
+    public enum MovementMode
+    {
+        WorldAxis,      // Up = +Z, Right = +X (standard top-down)
+        Isometric45     // Up = +Z+X, Right = +X-Z (true isometric)
+    }
+
+    [Header("Jump Feel")]
+    [Tooltip("How hard we push off the ground.")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 10f;
+
+    [Tooltip("How fast we fall.")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 35f;
+
+    [Tooltip("Extra gravity when falling.")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.5f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement")]
+    [Tooltip("How movement input maps to world space")]
+    [SerializeField] private MovementMode movementMode = MovementMode.Isometric45;
+
+    [Tooltip("Movement speed on ground")]
+    [SerializeField] private float moveSpeed = 7f;
+
+    [Tooltip("Air control multiplier")]
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+
+    [Tooltip("Rotate character to face movement direction")]
+    [SerializeField] private bool rotateToMovement = true;
+
+    [Tooltip("How fast character rotates to face movement")]
+    [SerializeField] private float rotationSpeed = 720f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    // Isometric conversion matrix (45-degree rotation)
+    private static readonly Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleMovement();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        // Convert 2D input to 3D movement direction
+        Vector3 inputDirection = new Vector3(input.x, 0, input.y);
+
+        // Apply isometric rotation if needed
+        Vector3 moveDirection;
+        if (movementMode == MovementMode.Isometric45)
+        {
+            moveDirection = isoMatrix.MultiplyVector(inputDirection);
+        }
+        else
+        {
+            moveDirection = inputDirection;
+        }
+
+        float currentSpeed = moveSpeed;
+        if (!isGrounded)
+        {
+            currentSpeed *= airControl;
+        }
+
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        // Rotate to face movement direction
+        if (rotateToMovement && moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = jumpForce;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+            </div>
 
             <h3>Common Issues</h3>
             <p><strong>"It feels floaty"</strong><br>
@@ -183,18 +932,18 @@ Every Frame:
             <p><strong>"It's too short/tall"</strong><br>
             Adjust <code>jumpForce</code> and <code>gravity</code> together. Higher force + higher gravity = same height, different speed.</p>
 
-            <p><strong>"It feels like I'm on the moon"</strong><br>
-            Gravity is too low. Real platformers use 2-4x Earth gravity.</p>
-
             <p><strong>"I can jump in the air"</strong><br>
-            Ground check isn't working. Check <code>groundCheckDistance</code> and your collision layers.</p>
+            Ground check isn't working. Check <code>groundCheckRadius</code> and your collision layers.</p>
+
+            <p><strong>"InputReader.Instance is null"</strong><br>
+            Make sure you have the InputReader prefab in your scene. See <a href="input-setup.html">Input Setup</a>.</p>
 
             <h3>Combine With</h3>
             <ul>
               <li><a href="coyote-time.html">Coyote Time</a> - grace period makes basic jump more forgiving</li>
               <li><a href="input-buffer.html">Input Buffer</a> - catches jumps pressed slightly before landing</li>
-              <li><a href="squash-stretch.html">Squash Stretch</a> - visual feedback for the jump</li>
-              <li><a href="landing-impact.html">Landing Impact</a> - feedback when you land</li>
+              <li><a href="squash-stretch.html">Squash Stretch</a> - visual feedback for the jump (2D)</li>
+              <li><a href="variable-jump.html">Variable Jump</a> - height control alternative</li>
             </ul>
 
             <h3>When to Use Basic vs. Variable</h3>
@@ -243,6 +992,15 @@ Every Frame:
               <li>Try to match a reference videogame's jump feel</li>
               <li>Document what they changed and why</li>
             </ol>
+
+            <h3>Perspective Choice</h3>
+            <p>Let students pick their perspective based on the videogame they're studying:</p>
+            <ul>
+              <li><strong>2D:</strong> Celeste, Hollow Knight, Mario</li>
+              <li><strong>3D Third-Person:</strong> Dark Souls, Zelda, platforming collectathons</li>
+              <li><strong>3D First-Person:</strong> Half-Life, Titanfall, classic FPS</li>
+              <li><strong>Isometric:</strong> Hades, Diablo, action RPGs with verticality</li>
+            </ul>
 
             <h3>Common Student Mistakes</h3>
             <p><strong>Changing too many variables at once:</strong> They can't isolate what's causing the feel. Enforce single-variable changes first.</p>
@@ -295,6 +1053,7 @@ Every Frame:
         <ul>
           <li><a href="variable-jump.html">Variable Jump</a> - more expressive alternative</li>
           <li><a href="coyote-time.html">Coyote Time</a> - makes any jump more forgiving</li>
+          <li><a href="input-setup.html">Input Setup</a> - required InputReader system</li>
           <li><a href="../framework/gesture.html">Gesture</a> - the jump as gesture</li>
         </ul>
 

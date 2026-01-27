@@ -151,8 +151,10 @@
               <li>Very forgiving, might be noticeable to skilled players</li>
             </ul>
 
-            <h3>How It Works</h3>
-            <pre><code>On Leaving Ground (not from jumping):
+            <h3>Pseudocode</h3>
+            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+
+On Leaving Ground (not from jumping):
   - Start coyoteTimer at coyoteTime value
 
 Every Frame:
@@ -164,6 +166,268 @@ On Jump:
   - Reset coyoteTimer to 0 (prevent double use)</code></pre>
 
             <p><strong>Critical:</strong> Coyote time should NOT activate if you left the ground by jumping. Only when you walk or fall off an edge.</p>
+
+            <h3>Unity Setup (2D)</h3>
+            <p>Coyote Time is typically <strong>added to your existing jump script</strong>, not a separate component. Here's a complete jump script with coyote time built in.</p>
+
+            <h3>The Script (2D)</h3>
+            <p>Create a new C# script called <code>JumpWithCoyoteTime2D.cs</code> and paste this:</p>
+            <pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// &lt;summary&gt;
+/// JUMP WITH COYOTE TIME - Grace period after leaving ledge
+/// VG101 Code Bank - For learning and prototyping
+///
+/// Allows jumping for a brief window after walking off a platform.
+/// Players won't notice it helping, but they'll notice without it.
+/// &lt;/summary&gt;
+[RequireComponent(typeof(Rigidbody2D))]
+public class JumpWithCoyoteTime2D : MonoBehaviour
+{
+    // ========================================
+    // INPUT SETUP
+    // ========================================
+    [Header("Input Setup")]
+
+    [Tooltip("Your Input Actions asset")]
+    [SerializeField] private InputActionAsset inputActions;
+
+    [Tooltip("Name of your jump action")]
+    [SerializeField] private string jumpActionName = "Jump";
+
+    // ========================================
+    // JUMP FEEL
+    // ========================================
+    [Header("Jump Feel")]
+
+    [Tooltip("How hard we push off")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 12f;
+
+    [Tooltip("Gravity while airborne")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Tooltip("Extra gravity when falling")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    // ========================================
+    // COYOTE TIME - The magic happens here
+    // ========================================
+    [Header("Coyote Time")]
+
+    [Tooltip("Seconds after leaving ground when jump still works. 0.1 is a good default.")]
+    [Range(0.01f, 0.3f)]
+    [SerializeField] private float coyoteTime = 0.1f;
+
+    // ========================================
+    // GROUND DETECTION
+    // ========================================
+    [Header("Ground Detection")]
+
+    [Tooltip("Empty GameObject at character's feet")]
+    [SerializeField] private Transform groundCheckPoint;
+
+    [Tooltip("How far down to check for ground")]
+    [Range(0.01f, 0.5f)]
+    [SerializeField] private float groundCheckDistance = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    [Header("Debug")]
+
+    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool debugCoyote = false;
+
+    [Tooltip("Show ground check in Scene view")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    // ========================================
+    // PRIVATE VARIABLES
+    // ========================================
+    private Rigidbody2D rb;
+    private InputAction jumpAction;
+    private float verticalVelocity;
+    private bool isGrounded;
+    private bool wasGrounded;        // Was grounded last frame?
+    private float coyoteTimer;       // Time left in coyote window
+    private bool usedCoyoteJump;     // Did we use coyote this airtime?
+
+    // ========================================
+    // SETUP
+    // ========================================
+    private void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+        rb.gravityScale = 0f;
+
+        if (inputActions != null)
+        {
+            jumpAction = inputActions.FindAction(jumpActionName);
+            jumpAction?.Enable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJumpPressed;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJumpPressed;
+        }
+    }
+
+    // ========================================
+    // MAIN LOOP
+    // ========================================
+    private void FixedUpdate()
+    {
+        wasGrounded = isGrounded;
+        CheckGrounded();
+        HandleCoyoteTime();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    // ========================================
+    // GROUND CHECK
+    // ========================================
+    private void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckDistance,
+            groundLayer
+        );
+
+        if (isGrounded && verticalVelocity &lt; 0)
+        {
+            verticalVelocity = 0f;
+            usedCoyoteJump = false; // Reset for next airtime
+        }
+    }
+
+    // ========================================
+    // COYOTE TIME LOGIC
+    // ========================================
+    private void HandleCoyoteTime()
+    {
+        // Did we just leave the ground (without jumping)?
+        if (wasGrounded && !isGrounded && verticalVelocity &lt;= 0)
+        {
+            // We walked/fell off - start coyote timer
+            coyoteTimer = coyoteTime;
+
+            if (debugCoyote) Debug.Log("Coyote time started!");
+        }
+
+        // Count down the timer
+        if (coyoteTimer &gt; 0)
+        {
+            coyoteTimer -= Time.fixedDeltaTime;
+        }
+    }
+
+    // ========================================
+    // CAN WE JUMP RIGHT NOW?
+    // ========================================
+    private bool CanJump()
+    {
+        // Normal grounded jump
+        if (isGrounded) return true;
+
+        // Coyote jump - in the air but timer still active
+        if (coyoteTimer &gt; 0 && !usedCoyoteJump) return true;
+
+        return false;
+    }
+
+    // ========================================
+    // JUMP INPUT
+    // ========================================
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        if (CanJump())
+        {
+            verticalVelocity = jumpForce;
+
+            // If this was a coyote jump, mark it used
+            if (!isGrounded)
+            {
+                usedCoyoteJump = true;
+                coyoteTimer = 0;
+                if (debugCoyote) Debug.Log("COYOTE JUMP!");
+            }
+        }
+    }
+
+    // ========================================
+    // GRAVITY
+    // ========================================
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
+        }
+    }
+
+    // ========================================
+    // APPLY MOVEMENT
+    // ========================================
+    private void ApplyVelocity()
+    {
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck && groundCheckPoint != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+        }
+    }
+}</code></pre>
+
+            <h3>Key Implementation Details</h3>
+            <ul>
+              <li><strong>wasGrounded tracking:</strong> We compare current vs. last frame to detect leaving ground</li>
+              <li><strong>Only on passive exit:</strong> Coyote only starts if velocity &lt;= 0 (walking off, not jumping off)</li>
+              <li><strong>usedCoyoteJump flag:</strong> Prevents using coyote time twice in one airtime</li>
+              <li><strong>Timer reset on jump:</strong> Once you use it, it's gone</li>
+            </ul>
+
+            <h3>Testing Coyote Time</h3>
+            <ol>
+              <li>Enable "Debug Coyote" in the Inspector</li>
+              <li>Walk off a platform and press jump slightly late</li>
+              <li>Console should show "COYOTE JUMP!" if it worked</li>
+              <li>Set coyoteTime to 0.5 to make it very visible, then tune down to 0.1</li>
+            </ol>
 
             <h3>Common Issues</h3>
             <p><strong>"Player can double jump with coyote time"</strong><br>

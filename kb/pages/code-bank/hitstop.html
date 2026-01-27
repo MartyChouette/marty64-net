@@ -160,7 +160,7 @@
             </ul>
             <p><em>Reference: God of War finishers, Smash Bros. killing blows</em></p>
 
-            <h3>How It Works</h3>
+            <h3>Pseudocode</h3>
             <pre><code>On Hit:
   - Store original Time.timeScale
   - Set Time.timeScale to 0 (or near-zero)
@@ -173,6 +173,284 @@ Every Frame (using unscaledDeltaTime):
       - Restore original Time.timeScale</code></pre>
 
             <p><strong>Critical:</strong> Use <code>Time.unscaledDeltaTime</code> for the hitstop timer, so it counts down even when time is frozen.</p>
+
+            <h3>Unity Setup</h3>
+            <ol>
+              <li><strong>Add the HitstopManager:</strong>
+                <ul>
+                  <li>Create empty GameObject named "HitstopManager"</li>
+                  <li>Add the <code>HitstopManager.cs</code> script below</li>
+                  <li>This is a singleton - only need one in the scene</li>
+                </ul>
+              </li>
+              <li><strong>Call from Attack Scripts:</strong>
+                <ul>
+                  <li>When an attack connects, call <code>HitstopManager.Instance.TriggerHitstop(duration)</code></li>
+                  <li>Pass different durations for light (0.03), medium (0.06), heavy (0.12) attacks</li>
+                </ul>
+              </li>
+              <li><strong>Optional - Fixed Timestep:</strong>
+                <ul>
+                  <li>Edit → Project Settings → Time</li>
+                  <li>Consider adjusting Fixed Timestep if physics behaves oddly during slow-mo</li>
+                </ul>
+              </li>
+              <li><strong>Audio Note:</strong>
+                <ul>
+                  <li>Audio pitch may scale with timeScale</li>
+                  <li>Set <code>minTimeScale</code> to 0.01 instead of 0 if audio sounds wrong</li>
+                  <li>Or use AudioSource.ignoreListenerPause = true</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script</h3>
+            <pre><code>// ============================================================
+// HitstopManager.cs
+// A global hitstop system using Time.timeScale.
+// Singleton pattern - add to one empty GameObject in scene.
+// Unity 6.x
+// ============================================================
+
+using UnityEngine;
+
+public class HitstopManager : MonoBehaviour
+{
+    // ========================================================
+    // SINGLETON - Access from anywhere via HitstopManager.Instance
+    // ========================================================
+
+    public static HitstopManager Instance { get; private set; }
+
+    // ========================================================
+    // HITSTOP PARAMETERS - Tune these in the Inspector
+    // ========================================================
+
+    [Header("Hitstop Settings")]
+    [Tooltip("Time scale during hitstop (0 = full freeze, 0.01 = near-freeze)")]
+    [SerializeField] [Range(0f, 0.1f)] private float minTimeScale = 0f;
+
+    [Tooltip("Default hitstop duration if not specified")]
+    [SerializeField] [Range(0.01f, 0.5f)] private float defaultDuration = 0.05f;
+
+    [Header("Preset Durations (for convenience)")]
+    [Tooltip("Duration for light/fast attacks")]
+    [SerializeField] [Range(0.01f, 0.1f)] private float lightHitDuration = 0.03f;
+
+    [Tooltip("Duration for medium attacks")]
+    [SerializeField] [Range(0.03f, 0.15f)] private float mediumHitDuration = 0.06f;
+
+    [Tooltip("Duration for heavy/finishing attacks")]
+    [SerializeField] [Range(0.05f, 0.3f)] private float heavyHitDuration = 0.12f;
+
+    [Header("Debug")]
+    [Tooltip("Show debug messages in console")]
+    [SerializeField] private bool debugMode = false;
+
+    // ========================================================
+    // INTERNAL STATE
+    // ========================================================
+
+    private float hitstopTimer = 0f;
+    private float originalTimeScale = 1f;
+    private bool inHitstop = false;
+
+    // ========================================================
+    // PUBLIC PROPERTIES
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// True while hitstop is active
+    /// &lt;/summary&gt;
+    public bool InHitstop =&gt; inHitstop;
+
+    /// &lt;summary&gt;
+    /// Remaining hitstop time in seconds
+    /// &lt;/summary&gt;
+    public float RemainingTime =&gt; hitstopTimer;
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        // Singleton setup - destroy duplicates
+        if (Instance != null &amp;&amp; Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        // Optional: persist across scenes
+        // DontDestroyOnLoad(gameObject);
+    }
+
+    void Update()
+    {
+        // Process hitstop timer
+        // CRITICAL: Use unscaledDeltaTime so timer works during freeze!
+        if (inHitstop)
+        {
+            hitstopTimer -= Time.unscaledDeltaTime;
+
+            if (hitstopTimer &lt;= 0f)
+            {
+                EndHitstop();
+            }
+        }
+    }
+
+    // ========================================================
+    // PUBLIC METHODS - Call these to trigger hitstop
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Trigger hitstop with a custom duration
+    /// &lt;/summary&gt;
+    /// &lt;param name="duration"&gt;How long to freeze (seconds)&lt;/param&gt;
+    public void TriggerHitstop(float duration)
+    {
+        // Don't interrupt a longer hitstop with a shorter one
+        if (inHitstop &amp;&amp; hitstopTimer &gt; duration)
+        {
+            if (debugMode) Debug.Log($"Hitstop ignored: existing ({hitstopTimer:F3}s) &gt; new ({duration:F3}s)");
+            return;
+        }
+
+        // Store original time scale (only if not already in hitstop)
+        if (!inHitstop)
+        {
+            originalTimeScale = Time.timeScale;
+        }
+
+        // Start hitstop
+        inHitstop = true;
+        hitstopTimer = duration;
+        Time.timeScale = minTimeScale;
+
+        if (debugMode)
+        {
+            Debug.Log($"Hitstop triggered: {duration:F3}s (timeScale: {minTimeScale})");
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Trigger hitstop with default duration
+    /// &lt;/summary&gt;
+    public void TriggerHitstop()
+    {
+        TriggerHitstop(defaultDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Trigger light attack hitstop
+    /// &lt;/summary&gt;
+    public void TriggerLightHit()
+    {
+        TriggerHitstop(lightHitDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Trigger medium attack hitstop
+    /// &lt;/summary&gt;
+    public void TriggerMediumHit()
+    {
+        TriggerHitstop(mediumHitDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Trigger heavy attack hitstop
+    /// &lt;/summary&gt;
+    public void TriggerHeavyHit()
+    {
+        TriggerHitstop(heavyHitDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Immediately end hitstop (e.g., on scene change)
+    /// &lt;/summary&gt;
+    public void ForceEndHitstop()
+    {
+        if (inHitstop)
+        {
+            EndHitstop();
+        }
+    }
+
+    // ========================================================
+    // INTERNAL METHODS
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// End hitstop and restore normal time
+    /// &lt;/summary&gt;
+    private void EndHitstop()
+    {
+        inHitstop = false;
+        hitstopTimer = 0f;
+        Time.timeScale = originalTimeScale;
+
+        if (debugMode)
+        {
+            Debug.Log($"Hitstop ended. Time restored to {originalTimeScale}");
+        }
+    }
+
+    // ========================================================
+    // CLEANUP
+    // ========================================================
+
+    void OnDestroy()
+    {
+        // Always restore time scale when destroyed
+        if (inHitstop)
+        {
+            Time.timeScale = originalTimeScale;
+        }
+    }
+}
+
+// ============================================================
+// USAGE EXAMPLES:
+//
+// 1. From an attack script when hit connects:
+//    void OnHitEnemy(Enemy enemy)
+//    {
+//        // Trigger hitstop based on attack type
+//        HitstopManager.Instance.TriggerMediumHit();
+//
+//        // Do damage, knockback, etc.
+//        enemy.TakeDamage(damage);
+//    }
+//
+// 2. Custom duration for special attacks:
+//    void OnFinalBlow()
+//    {
+//        // Extra long hitstop for dramatic effect
+//        HitstopManager.Instance.TriggerHitstop(0.2f);
+//    }
+//
+// 3. Combine with other effects:
+//    void OnCriticalHit()
+//    {
+//        HitstopManager.Instance.TriggerHeavyHit();
+//        ScreenShake.Instance.TriggerShake(0.3f, 0.5f);
+//        SpawnHitEffect(hitPosition);
+//        PlaySound(criticalHitSound);
+//    }
+//
+// 4. Check if in hitstop (for UI, input buffering):
+//    if (HitstopManager.Instance.InHitstop)
+//    {
+//        // Buffer this input for after hitstop ends
+//    }
+//
+// 5. For objects that should move during hitstop (like UI),
+//    use Time.unscaledDeltaTime for their movement:
+//    transform.position += direction * speed * Time.unscaledDeltaTime;
+// ============================================================</code></pre>
 
             <h3>Common Issues</h3>
             <p><strong>"Nothing happens during hitstop"</strong><br>

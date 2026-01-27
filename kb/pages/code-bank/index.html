@@ -35,6 +35,14 @@
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -66,6 +74,7 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link active">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
           <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
@@ -103,6 +112,8 @@
 
         <p>The goal: <strong>tune, don't code.</strong> You're learning to shape gestures, not learning to program. The scaffolds handle the engineering; you handle the design.</p>
 
+        <p><strong>Multi-perspective support:</strong> Each scaffold includes variants for <strong>2D</strong>, <strong>3D Third-Person</strong>, <strong>3D First-Person</strong>, and <strong>Isometric</strong> perspectives where applicable. All scripts use the same <a href="input-setup.html">InputReader pattern</a> for seamless gamepad and keyboard+mouse support.</p>
+
         <!-- PRACTICE REGISTER -->
         <div class="register register--practice">
           <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
@@ -119,6 +130,24 @@
             <p>Every variable has a tooltip explaining what it does and what changing it affects.</p>
 
             <h3>Available Scaffolds</h3>
+
+            <h4>Setup & Foundations</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Scaffold</th>
+                  <th>What it does</th>
+                  <th>Key components</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="input-setup.html">Input Setup</a></td>
+                  <td>Unified input system for all perspectives</td>
+                  <td><code>InputReader</code>, New Input System, device detection</td>
+                </tr>
+              </tbody>
+            </table>
 
             <h4>Movement</h4>
             <table>
@@ -291,7 +320,7 @@
             <p>The <strong>black-box tool critique</strong> - yes, scaffolds hide complexity. That's the point. You can always open the box later. But if you never get to the design layer because you're stuck in the implementation layer, the box might as well not exist.</p>
 
             <h3>Unresolved Tension</h3>
-            <p>When do students graduate from scaffolds to raw implementation? I don't have a clean answer. Current approach: scaffolds for the intro course, increasing implementation in intermediate courses, full implementation in advanced. But some students never need full implementation - they're designers, not engineers. Is that okay? I think yes, but the industry often disagrees.</p>
+            <p>When do students graduate from scaffolds to raw implementation? We don't have a clean answer. Current approach: scaffolds for the intro course, increasing implementation in intermediate courses, full implementation in advanced. But some students never need full implementation - they're designers, not engineers. Is that okay? We think yes, but the industry often disagrees.</p>
 
             <h3>Contributing</h3>
             <p>The Code Bank is a living library. If you build a scaffold that others might use:</p>

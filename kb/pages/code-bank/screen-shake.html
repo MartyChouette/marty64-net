@@ -190,7 +190,7 @@
               <li>Shorter <code>duration</code>, higher initial <code>intensity</code></li>
             </ul>
 
-            <h3>How It Works</h3>
+            <h3>Pseudocode</h3>
             <pre><code>On Shake Trigger:
   - Set shake timer to duration
   - Store base intensity
@@ -204,6 +204,446 @@ Every Frame (while shaking):
 
 On Shake End:
   - Smoothly return camera to base position</code></pre>
+
+            <h3>Unity Setup</h3>
+            <ol>
+              <li><strong>Add to Camera:</strong>
+                <ul>
+                  <li>Add <code>ScreenShake.cs</code> to your Main Camera</li>
+                  <li>Or create an empty "CameraShake" child of Camera</li>
+                  <li>The script uses singleton pattern - easy access from anywhere</li>
+                </ul>
+              </li>
+              <li><strong>Call from Game Events:</strong>
+                <ul>
+                  <li><code>ScreenShake.Instance.Shake(intensity, duration);</code></li>
+                  <li>Or use presets: <code>ScreenShake.Instance.ShakeLight();</code></li>
+                </ul>
+              </li>
+              <li><strong>IMPORTANT - Accessibility:</strong>
+                <ul>
+                  <li>Connect the <code>globalIntensityMultiplier</code> to your settings menu</li>
+                  <li>Set to 0 to disable shake entirely</li>
+                  <li>Expose as a slider (0-100%)</li>
+                  <li>This is required accessibility, not optional polish</li>
+                </ul>
+              </li>
+              <li><strong>Camera Follow Note:</strong>
+                <ul>
+                  <li>If using Cinemachine, use their impulse system instead</li>
+                  <li>If using custom camera follow, apply shake AFTER follow logic</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script</h3>
+            <pre><code>// ============================================================
+// ScreenShake.cs
+// Camera shake with multiple patterns, decay types, and
+// accessibility support. Singleton for easy access.
+// Unity 6.x
+// ============================================================
+
+using UnityEngine;
+
+public enum ShakeDecayType
+{
+    None,        // Constant intensity throughout
+    Linear,      // Steady decrease
+    Exponential  // Fast decrease that slows down
+}
+
+public enum ShakePattern
+{
+    Random,      // Random direction each frame
+    Perlin,      // Smooth noise (less jittery)
+    Directional  // Biased toward a direction
+}
+
+public class ScreenShake : MonoBehaviour
+{
+    // ========================================================
+    // SINGLETON
+    // ========================================================
+
+    public static ScreenShake Instance { get; private set; }
+
+    // ========================================================
+    // ACCESSIBILITY - CRITICAL!
+    // ========================================================
+
+    [Header("Accessibility Settings")]
+    [Tooltip("Global shake intensity multiplier (0 = disabled). Connect to settings menu!")]
+    [SerializeField] [Range(0f, 1f)] private float globalIntensityMultiplier = 1f;
+
+    // ========================================================
+    // PRESET INTENSITIES
+    // ========================================================
+
+    [Header("Preset Values")]
+    [Tooltip("Light shake: intensity")]
+    [SerializeField] private float lightIntensity = 0.1f;
+    [Tooltip("Light shake: duration")]
+    [SerializeField] private float lightDuration = 0.05f;
+
+    [Tooltip("Medium shake: intensity")]
+    [SerializeField] private float mediumIntensity = 0.3f;
+    [Tooltip("Medium shake: duration")]
+    [SerializeField] private float mediumDuration = 0.15f;
+
+    [Tooltip("Heavy shake: intensity")]
+    [SerializeField] private float heavyIntensity = 0.6f;
+    [Tooltip("Heavy shake: duration")]
+    [SerializeField] private float heavyDuration = 0.25f;
+
+    [Header("Default Settings")]
+    [Tooltip("Default decay type for all shakes")]
+    [SerializeField] private ShakeDecayType defaultDecayType = ShakeDecayType.Exponential;
+
+    [Tooltip("Default shake pattern")]
+    [SerializeField] private ShakePattern defaultPattern = ShakePattern.Perlin;
+
+    [Header("Rotation Shake")]
+    [Tooltip("Enable rotation shake (can cause more motion sickness)")]
+    [SerializeField] private bool enableRotationShake = false;
+
+    [Tooltip("Maximum rotation in degrees")]
+    [SerializeField] [Range(0f, 5f)] private float maxRotation = 1f;
+
+    [Header("Smoothing")]
+    [Tooltip("How fast shake returns to zero when done")]
+    [SerializeField] [Range(1f, 30f)] private float recoverySpeed = 15f;
+
+    [Header("Debug")]
+    [SerializeField] private bool debugMode = false;
+
+    // ========================================================
+    // INTERNAL STATE
+    // ========================================================
+
+    private Vector3 originalPosition;
+    private Quaternion originalRotation;
+
+    // Current shake state
+    private float currentIntensity = 0f;
+    private float currentDuration = 0f;
+    private float shakeTimer = 0f;
+    private ShakeDecayType currentDecayType;
+    private ShakePattern currentPattern;
+    private Vector2 shakeDirection = Vector2.zero;
+
+    // Perlin noise seeds (for smooth shake)
+    private float perlinSeedX;
+    private float perlinSeedY;
+
+    // Current offset (for smooth recovery)
+    private Vector3 currentOffset = Vector3.zero;
+    private float currentRotationOffset = 0f;
+
+    // ========================================================
+    // PUBLIC PROPERTIES
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// True while shake is active
+    /// &lt;/summary&gt;
+    public bool IsShaking =&gt; shakeTimer &gt; 0f;
+
+    /// &lt;summary&gt;
+    /// Get/set the global intensity (for settings menu)
+    /// &lt;/summary&gt;
+    public float GlobalIntensity
+    {
+        get =&gt; globalIntensityMultiplier;
+        set =&gt; globalIntensityMultiplier = Mathf.Clamp01(value);
+    }
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        // Singleton setup
+        if (Instance != null &amp;&amp; Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        // Store original transform
+        originalPosition = transform.localPosition;
+        originalRotation = transform.localRotation;
+
+        // Random perlin seeds
+        perlinSeedX = Random.Range(0f, 100f);
+        perlinSeedY = Random.Range(0f, 100f);
+    }
+
+    void LateUpdate()
+    {
+        // LateUpdate so shake happens AFTER camera follow
+
+        if (shakeTimer &gt; 0f)
+        {
+            ProcessShake();
+        }
+        else
+        {
+            // Smooth recovery to original position
+            RecoverFromShake();
+        }
+    }
+
+    // ========================================================
+    // SHAKE PROCESSING
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Process active shake
+    /// &lt;/summary&gt;
+    private void ProcessShake()
+    {
+        shakeTimer -= Time.deltaTime;
+
+        // Calculate current intensity based on decay type
+        float progress = 1f - (shakeTimer / currentDuration);
+        float intensityMultiplier = CalculateDecay(progress);
+        float finalIntensity = currentIntensity * intensityMultiplier * globalIntensityMultiplier;
+
+        // Skip if accessibility disabled shake
+        if (globalIntensityMultiplier &lt;= 0f)
+        {
+            return;
+        }
+
+        // Generate offset based on pattern
+        Vector2 offset = CalculateOffset(finalIntensity);
+        currentOffset = new Vector3(offset.x, offset.y, 0f);
+
+        // Apply position offset
+        transform.localPosition = originalPosition + currentOffset;
+
+        // Apply rotation if enabled
+        if (enableRotationShake &amp;&amp; maxRotation &gt; 0f)
+        {
+            currentRotationOffset = CalculateRotation(finalIntensity);
+            transform.localRotation = originalRotation * Quaternion.Euler(0f, 0f, currentRotationOffset);
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Calculate decay multiplier based on type
+    /// &lt;/summary&gt;
+    private float CalculateDecay(float progress)
+    {
+        switch (currentDecayType)
+        {
+            case ShakeDecayType.None:
+                return 1f;
+
+            case ShakeDecayType.Linear:
+                return 1f - progress;
+
+            case ShakeDecayType.Exponential:
+                // Fast falloff that slows down
+                return Mathf.Pow(1f - progress, 2f);
+
+            default:
+                return 1f - progress;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Calculate position offset based on pattern
+    /// &lt;/summary&gt;
+    private Vector2 CalculateOffset(float intensity)
+    {
+        switch (currentPattern)
+        {
+            case ShakePattern.Random:
+                return new Vector2(
+                    Random.Range(-1f, 1f) * intensity,
+                    Random.Range(-1f, 1f) * intensity
+                );
+
+            case ShakePattern.Perlin:
+                // Smooth noise that changes over time
+                float time = Time.time * 20f; // Speed of noise change
+                float x = (Mathf.PerlinNoise(perlinSeedX + time, 0f) - 0.5f) * 2f * intensity;
+                float y = (Mathf.PerlinNoise(0f, perlinSeedY + time) - 0.5f) * 2f * intensity;
+                return new Vector2(x, y);
+
+            case ShakePattern.Directional:
+                // Bias toward direction, with some perpendicular noise
+                float parallel = Random.Range(0.5f, 1f) * intensity;
+                float perpendicular = Random.Range(-0.3f, 0.3f) * intensity;
+                Vector2 perp = new Vector2(-shakeDirection.y, shakeDirection.x);
+                return (shakeDirection * parallel) + (perp * perpendicular);
+
+            default:
+                return Vector2.zero;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Calculate rotation offset
+    /// &lt;/summary&gt;
+    private float CalculateRotation(float intensity)
+    {
+        float normalizedIntensity = intensity / currentIntensity;
+        return Random.Range(-1f, 1f) * maxRotation * normalizedIntensity;
+    }
+
+    /// &lt;summary&gt;
+    /// Smooth return to original position
+    /// &lt;/summary&gt;
+    private void RecoverFromShake()
+    {
+        // Lerp back to original
+        currentOffset = Vector3.Lerp(currentOffset, Vector3.zero, recoverySpeed * Time.deltaTime);
+        transform.localPosition = originalPosition + currentOffset;
+
+        if (enableRotationShake)
+        {
+            currentRotationOffset = Mathf.Lerp(currentRotationOffset, 0f, recoverySpeed * Time.deltaTime);
+            transform.localRotation = originalRotation * Quaternion.Euler(0f, 0f, currentRotationOffset);
+        }
+    }
+
+    // ========================================================
+    // PUBLIC METHODS - Call these to trigger shake
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Trigger shake with full control
+    /// &lt;/summary&gt;
+    public void Shake(float intensity, float duration,
+                      ShakeDecayType decayType = ShakeDecayType.Exponential,
+                      ShakePattern pattern = ShakePattern.Perlin,
+                      Vector2? direction = null)
+    {
+        // Don't override stronger shake with weaker one
+        if (shakeTimer &gt; 0f &amp;&amp; currentIntensity &gt; intensity)
+        {
+            return;
+        }
+
+        currentIntensity = intensity;
+        currentDuration = duration;
+        shakeTimer = duration;
+        currentDecayType = decayType;
+        currentPattern = pattern;
+
+        if (direction.HasValue)
+        {
+            shakeDirection = direction.Value.normalized;
+        }
+        else
+        {
+            shakeDirection = Vector2.right;
+        }
+
+        // New perlin seeds for variety
+        perlinSeedX = Random.Range(0f, 100f);
+        perlinSeedY = Random.Range(0f, 100f);
+
+        if (debugMode)
+        {
+            Debug.Log($"Shake triggered: intensity={intensity}, duration={duration}, pattern={pattern}");
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Simple shake with just intensity and duration (uses defaults)
+    /// &lt;/summary&gt;
+    public void Shake(float intensity, float duration)
+    {
+        Shake(intensity, duration, defaultDecayType, defaultPattern);
+    }
+
+    /// &lt;summary&gt;
+    /// Light shake preset
+    /// &lt;/summary&gt;
+    public void ShakeLight()
+    {
+        Shake(lightIntensity, lightDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Medium shake preset
+    /// &lt;/summary&gt;
+    public void ShakeMedium()
+    {
+        Shake(mediumIntensity, mediumDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Heavy shake preset
+    /// &lt;/summary&gt;
+    public void ShakeHeavy()
+    {
+        Shake(heavyIntensity, heavyDuration);
+    }
+
+    /// &lt;summary&gt;
+    /// Directional shake (e.g., recoil, knockback)
+    /// &lt;/summary&gt;
+    public void ShakeDirectional(float intensity, float duration, Vector2 direction)
+    {
+        Shake(intensity, duration, ShakeDecayType.Exponential, ShakePattern.Directional, direction);
+    }
+
+    /// &lt;summary&gt;
+    /// Immediately stop shake
+    /// &lt;/summary&gt;
+    public void StopShake()
+    {
+        shakeTimer = 0f;
+    }
+}
+
+// ============================================================
+// USAGE EXAMPLES:
+//
+// 1. Basic shake on hit:
+//    void OnEnemyHit()
+//    {
+//        ScreenShake.Instance.ShakeMedium();
+//    }
+//
+// 2. Scaled shake based on damage:
+//    void TakeDamage(int damage)
+//    {
+//        float intensity = Mathf.Clamp(damage * 0.1f, 0.1f, 1f);
+//        ScreenShake.Instance.Shake(intensity, 0.15f);
+//    }
+//
+// 3. Directional shake for recoil:
+//    void FireWeapon(Vector2 fireDirection)
+//    {
+//        // Shake opposite to fire direction
+//        ScreenShake.Instance.ShakeDirectional(0.2f, 0.1f, -fireDirection);
+//    }
+//
+// 4. Combine with hitstop:
+//    void OnBigHit()
+//    {
+//        HitstopManager.Instance.TriggerHeavyHit();
+//        ScreenShake.Instance.ShakeHeavy();
+//    }
+//
+// 5. In your settings menu (REQUIRED!):
+//    void OnShakeSliderChanged(float value)
+//    {
+//        ScreenShake.Instance.GlobalIntensity = value;
+//        PlayerPrefs.SetFloat("ScreenShakeIntensity", value);
+//    }
+//
+// 6. For 3D: Same script works, just uses XY offset by default.
+//    For full 3D shake, add Z offset in CalculateOffset.
+// ============================================================</code></pre>
 
             <h3>Common Issues</h3>
             <p><strong>"The shake is nauseating"</strong><br>
