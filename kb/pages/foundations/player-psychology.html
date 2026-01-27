@@ -8,13 +8,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
@@ -24,7 +48,7 @@
           <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
@@ -33,164 +57,259 @@
           <li class="nav-item"><a href="the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
           <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
           <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb">
-          <a href="../../index.html">Home</a> / <a href="index.html">Foundations</a> / Player Psychology
+          <a href="../../index.html">VG101</a> / <a href="index.html">Foundations</a> / Player Psychology
         </nav>
-        
+
         <h1>Player Psychology</h1>
-        
+
         <p class="lead">
           Understanding how players think, feel, and respond to videogames.
         </p>
-        
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Flow State</h3>
+            <p>
+              <a href="../glossary.html#flow" class="term">Flow</a> is a state of complete absorption where challenge matches skill.
+              Mihaly Csikszentmihalyi identified this state across many activities,
+              but videogames are particularly good at inducing it.
+            </p>
+            <p>
+              When challenge exceeds skill, players feel anxiety. When skill exceeds challenge,
+              players feel boredom. Flow lives in the channel between.
+            </p>
+            <p>
+              Videogames can dynamically adjust difficulty, pacing, and feedback to keep
+              players in flow. This is part of why they are so engaging.
+            </p>
+
+            <h3>Motivation</h3>
+            <p>Players are motivated by different things:</p>
+            <ul>
+              <li><strong>Intrinsic motivation</strong>: Playing because the activity itself is rewarding. The joy of movement, discovery, mastery.</li>
+              <li><strong>Extrinsic motivation</strong>: Playing for external rewards. Achievements, unlocks, leaderboards, social recognition.</li>
+            </ul>
+            <p>
+              Neither is better. Most players experience both. But understanding which
+              motivations your videogame serves helps you design more intentionally.
+            </p>
+
+            <h3>The Tetris Effect</h3>
+            <p>
+              When you play a videogame intensely, it can bleed into your non-play life.
+              You see Tetris shapes when you close your eyes. You think about optimal routes
+              while walking. You dream about the videogame.
+            </p>
+            <p>
+              This phenomenon, named after Tetris, shows how deeply videogames can embed
+              themselves in cognition. It's a testament to how effectively videogames
+              train patterns of thought and perception.
+            </p>
+
+            <h3>Feedback Loops</h3>
+            <p>
+              <a href="../glossary.html#feedback-loop" class="term">Feedback loops</a> occur when the output of a system becomes input to that system.
+              Videogames are full of them.
+            </p>
+
+            <p><strong>Positive Feedback Loops</strong></p>
+            <p>
+              Amplify change. The rich get richer. A player who is winning gains advantages
+              that help them win more. This creates snowballing, runaway leaders, decisive endings.
+            </p>
+
+            <p><strong>Negative Feedback Loops</strong></p>
+            <p>
+              Dampen change. Pull toward equilibrium. A player who is losing gains advantages
+              (rubber-banding). This keeps competition close, extends play, can feel unfair.
+            </p>
+            <p>Neither is inherently good or bad. The question is what experience you want to create.</p>
+
+            <h3>Human Random vs. Computer Random</h3>
+            <p>
+              Humans are bad at perceiving true randomness. A truly random sequence often
+              looks "streaky" to humans, who expect more alternation.
+            </p>
+            <p>
+              Computer random is mathematically fair. But it can feel unfair to players.
+              Three critical hits in a row is possible and will happen eventually.
+              When it happens to players, they feel cheated.
+            </p>
+            <p>
+              Many videogames use weighted randomness that feels more fair to humans
+              while sacrificing mathematical purity. This is a design choice, not a bug.
+            </p>
+
+            <h3>Player Fair vs. Computer Fair</h3>
+            <p>
+              Related: what feels fair to the player is not always what is mathematically fair.
+            </p>
+            <p>
+              <a href="../glossary.html#coyote-time" class="term">Coyote time</a> (letting players jump slightly after leaving a platform) is not
+              "fair" in a strict sense. The player is jumping from midair. But it feels fair
+              because it matches player intention.
+            </p>
+            <p>
+              <a href="../glossary.html#input-buffer" class="term">Input buffering</a> (remembering inputs for a grace period) is not "fair" either.
+              But it makes the videogame feel responsive rather than demanding frame-perfect precision.
+            </p>
+            <p>
+              Good videogame design often prioritizes player-fair over computer-fair.
+              The goal is an experience that feels right, not one that is mathematically pure.
+            </p>
+
+            <h3>Exercise: Identify the Loops</h3>
+            <p>Pick a competitive videogame (Burnout, Mario Kart, any fighting videogame). Identify:</p>
+            <ul>
+              <li>One positive feedback loop (winners get stronger)</li>
+              <li>One negative feedback loop (losers get help)</li>
+              <li>How these loops shape the experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Flow</h3>
+            <p>
+              Flow is often taught abstractly (the "flow channel" diagram). Make it concrete:
+              have students play Tetris at increasing speeds and articulate when they feel
+              anxious, bored, or absorbed.
+            </p>
+            <p>
+              The goal is recognizing flow as a felt state, not just a theoretical concept.
+            </p>
+
+            <h3>The Fairness Conversation</h3>
+            <p>
+              Students often think "fair" means "mathematically equal." Coyote time and
+              input buffering are excellent examples to show that fairness is about
+              matching player expectation, not mathematical purity.
+            </p>
+            <p>
+              The deeper lesson: design serves experience, not abstract correctness.
+            </p>
+
+            <h3>Feedback Loops in the Classroom</h3>
+            <p>
+              Students may initially think positive feedback loops are "good" and negative
+              ones are "bad." Use examples:
+            </p>
+            <ul>
+              <li><strong>Burnout Paradise</strong>: Takedowns give boost (positive loop), but crashed players respawn near the pack (negative loop)</li>
+              <li><strong>Mario Kart</strong>: Blue shells and item distribution favor trailing players (negative loop)</li>
+            </ul>
+            <p>
+              Neither is inherently better. Each creates different experiences.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Flow means the videogame is too easy":</strong></p>
+            <p>
+              Flow requires challenge. Too easy is boredom, not flow. The key is matching
+              challenge to skill, not removing challenge.
+            </p>
+            <p><strong>"Extrinsic motivation is manipulative":</strong></p>
+            <p>
+              It can be. But it's also natural - we like achievements, recognition, progress markers.
+              The question is whether rewards enhance or replace the core experience.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Key Influences</h3>
+            <p>
+              <strong>Mihaly Csikszentmihalyi</strong>: <em>Flow: The Psychology of Optimal Experience</em> (1990).
+              The foundational work on flow state, applied across many domains including videogames.
+            </p>
+            <p>
+              <strong>Raph Koster</strong>: <em>A Theory of Fun for Game Design</em> (2004).
+              Connects learning and pattern recognition to player enjoyment.
+            </p>
+            <p>
+              <strong>Self-Determination Theory</strong> (Deci & Ryan): Identifies autonomy, competence,
+              and relatedness as core psychological needs. Widely applied to videogame motivation research.
+            </p>
+
+            <h3>The Tetris Effect in Research</h3>
+            <p>
+              The Tetris effect is real and documented. Studies show that intensive videogame play
+              creates mental imagery, dreams, and perceptual changes related to the videogame.
+              This is sometimes called "game transfer phenomena."
+            </p>
+            <p>
+              It raises interesting questions about what videogames do to cognition - not in
+              a moral panic sense, but in terms of how deeply they shape perception and thought.
+            </p>
+
+            <h3>What I'm Taking</h3>
+            <p>
+              The practical tools: flow as a design target, feedback loops as structural elements,
+              player-fair as a design principle. These are immediately applicable to making and analyzing.
+            </p>
+
+            <h3>What I'm Resisting</h3>
+            <p>
+              <strong>Over-psychologizing:</strong> Player psychology is useful, but videogames
+              are not just psychological manipulation machines. The framework matters more than
+              the psychology.
+            </p>
+            <p>
+              <strong>Gamification discourse:</strong> Applying these concepts to "gamify" non-videogame
+              contexts often misses what makes videogames work. Points and badges are not the insight.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How do cultural differences affect these psychological concepts? Is flow universal?</li>
+              <li>Where is the line between engaging design and exploitative design?</li>
+              <li>Does understanding these mechanisms make us more or less susceptible to them?</li>
+            </ul>
+          </div>
+        </div>
+
         <hr>
-        
-        <h2>Flow State</h2>
-        
-        <p>
-          Flow is a state of complete absorption where challenge matches skill. 
-          Mihaly Csikszentmihalyi identified this state across many activities, 
-          but videogames are particularly good at inducing it.
-        </p>
-        
-        <p>
-          When challenge exceeds skill, players feel anxiety. When skill exceeds challenge, 
-          players feel boredom. Flow lives in the channel between.
-        </p>
-        
-        <p>
-          Videogames can dynamically adjust difficulty, pacing, and feedback to keep 
-          players in flow. This is part of why they are so engaging.
-        </p>
-        
-        <hr>
-        
-        <h2>Motivation</h2>
-        
-        <p>
-          Players are motivated by different things:
-        </p>
-        
-        <ul>
-          <li><strong>Intrinsic motivation</strong>: Playing because the activity itself is rewarding. The joy of movement, discovery, mastery.</li>
-          <li><strong>Extrinsic motivation</strong>: Playing for external rewards. Achievements, unlocks, leaderboards, social recognition.</li>
-        </ul>
-        
-        <p>
-          Neither is better. Most players experience both. But understanding which 
-          motivations your videogame serves helps you design more intentionally.
-        </p>
-        
-        <hr>
-        
-        <h2>The Tetris Effect</h2>
-        
-        <p>
-          When you play a videogame intensely, it can bleed into your non-play life. 
-          You see Tetris shapes when you close your eyes. You think about optimal routes 
-          while walking. You dream about the videogame.
-        </p>
-        
-        <p>
-          This phenomenon, named after Tetris, shows how deeply videogames can embed 
-          themselves in cognition. It's a testament to how effectively videogames 
-          train patterns of thought and perception.
-        </p>
-        
-        <hr>
-        
-        <h2>Feedback Loops</h2>
-        
-        <p>
-          Feedback loops occur when the output of a system becomes input to that system. 
-          Videogames are full of them.
-        </p>
-        
-        <h3>Positive Feedback Loops</h3>
-        <p>
-          Amplify change. The rich get richer. A player who is winning gains advantages 
-          that help them win more. This creates snowballing, runaway leaders, decisive endings.
-        </p>
-        
-        <h3>Negative Feedback Loops</h3>
-        <p>
-          Dampen change. Pull toward equilibrium. A player who is losing gains advantages 
-          (rubber-banding). This keeps competition close, extends play, can feel unfair.
-        </p>
-        
-        <p>
-          Neither is inherently good or bad. The question is what experience you want to create.
-        </p>
-        
-        <hr>
-        
-        <h2>Human Random vs. Computer Random</h2>
-        
-        <p>
-          Humans are bad at perceiving true randomness. A truly random sequence often 
-          looks "streaky" to humans, who expect more alternation.
-        </p>
-        
-        <p>
-          Computer random is mathematically fair. But it can feel unfair to players. 
-          Three critical hits in a row is possible and will happen eventually. 
-          When it happens to players, they feel cheated.
-        </p>
-        
-        <p>
-          Many videogames use weighted randomness that feels more fair to humans 
-          while sacrificing mathematical purity. This is a design choice, not a bug.
-        </p>
-        
-        <hr>
-        
-        <h2>Player Fair vs. Computer Fair</h2>
-        
-        <p>
-          Related: what feels fair to the player is not always what is mathematically fair.
-        </p>
-        
-        <p>
-          Coyote time (letting players jump slightly after leaving a platform) is not 
-          "fair" in a strict sense. The player is jumping from midair. But it feels fair 
-          because it matches player intention.
-        </p>
-        
-        <p>
-          Input buffering (remembering inputs for a grace period) is not "fair" either. 
-          But it makes the videogame feel responsive rather than demanding frame-perfect precision.
-        </p>
-        
-        <p>
-          Good videogame design often prioritizes player-fair over computer-fair. 
-          The goal is an experience that feels right, not one that is mathematically pure.
-        </p>
-        
-        <hr>
-        
+
         <h2>Related</h2>
         <ul>
-          <li><a href="what-makes-a-videogame.html">What Makes a Videogame</a></li>
-          <li><a href="the-design-lens.html">The Design Lens</a></li>
-          <li><a href="../framework/gesture.html">Gesture</a></li>
+          <li><a href="what-makes-a-videogame.html">What Makes a Videogame</a> - the medium we're studying</li>
+          <li><a href="the-design-lens.html">The Design Lens</a> - our framework for analysis</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - where psychology meets design</li>
         </ul>
-        
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
 </body>
 </html>

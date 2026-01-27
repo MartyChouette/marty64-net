@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Unity - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    .constraint-list{list-style:none;padding:0;margin:1.5rem 0}
+    .constraint-list li{padding:0.75rem 1rem;margin-bottom:0.5rem;background:#f8fafc;border-left:4px solid #14b8a6;font-weight:500}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Pedagogy</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Pedagogy Overview</a></li>
+          <li class="nav-item"><a href="play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="why-unity.html" class="nav-link active">Why Unity</a></li>
+          <li class="nav-item"><a href="the-final-project.html" class="nav-link">The Final Project</a></li>
+          <li class="nav-item"><a href="debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="code-as-material.html" class="nav-link">Code as Material</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Pedagogy</a> / Why Unity
+        </nav>
+
+        <h1>Why Unity</h1>
+
+        <p class="lead">
+          Unity isn't in this course "because industry." Unity is in this course because
+          <strong>videogames are a medium of implementation</strong>.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Your Idea Is Not a Videogame</h3>
+            <p>
+              A design document is not a videogame. A concept is not a videogame. A mood board is not a videogame.
+            </p>
+            <p>
+              Your idea only becomes a videogame when you commit to <strong>constraints</strong>.
+              Until then, it's potential. Implementation makes it real.
+            </p>
+
+            <h3>The Constraints</h3>
+            <p>When you build in an engine, you must decide:</p>
+
+            <ul class="constraint-list">
+              <li><strong>Input</strong> - What buttons? What timing? What feels responsive?</li>
+              <li><strong>Timing</strong> - How many frames? How fast? What duration?</li>
+              <li><strong>State</strong> - What can happen when? What prevents what?</li>
+              <li><strong>Feedback</strong> - What does the player see, hear, feel?</li>
+              <li><strong>Camera</strong> - What's visible? What's framed? What's hidden?</li>
+              <li><strong>Audio</strong> - What sounds? When? How loud? How layered?</li>
+              <li><strong>Iteration</strong> - What do you change? How do you test?</li>
+            </ul>
+
+            <p>
+              These aren't implementation details - they ARE the design.
+              A jump with 0.2 seconds of hang time is a different videogame than a jump with 0.4 seconds.
+              The engine is where you discover which one is yours.
+            </p>
+
+            <h3>The Workshop</h3>
+            <p>
+              Unity is the workshop where those constraints become real.
+              The engine teaches you what your videogame design actually is.
+            </p>
+            <p>
+              You can imagine a jump. You can describe a jump. But until you build a jump -
+              set the gravity, the velocity, the animation frames, the landing sound -
+              you don't know what your jump <em>is</em>.
+            </p>
+            <p>
+              This is why we use an engine in a design course, not a prototyping tool.
+              Prototyping tools let you sketch. Engines let you commit.
+            </p>
+
+            <h3>Why Unity Specifically</h3>
+            <p>Unity is not the only engine. It's not necessarily the "best" engine. We use it because:</p>
+            <ul>
+              <li><strong>2D and 3D:</strong> Handles both without switching tools</li>
+              <li><strong>C# scripting:</strong> Real programming language, transferable skills</li>
+              <li><strong>Documentation:</strong> Extensive, searchable, beginner-friendly</li>
+              <li><strong>Community:</strong> Large enough that most problems are solved somewhere</li>
+              <li><strong>Free tier:</strong> No cost barrier to entry</li>
+              <li><strong>Industry presence:</strong> Skills transfer to jobs (this matters, even if it's not the reason)</li>
+            </ul>
+            <p>
+              Godot, Unreal, GameMaker - all valid choices. The pedagogy transfers.
+              The point is having a real engine, not which real engine.
+            </p>
+
+            <h3>What Unity Is Not</h3>
+            <p><strong>Unity is not the course.</strong></p>
+            <p>
+              This is not "learn Unity." This is "learn videogame design, using Unity as the workshop."
+              We don't cover every Unity feature. We cover what you need to implement your designs.
+            </p>
+            <p>
+              The goal is not Unity proficiency. The goal is design thinking that happens to be
+              implemented in Unity.
+            </p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Students often resist implementation. They want to stay in the idea phase,
+              where everything is possible and nothing is tested.
+            </p>
+            <p>
+              Explaining <em>why</em> we use an engine - not just <em>how</em> - helps students
+              understand that implementation is not a chore after design. Implementation IS design.
+            </p>
+
+            <h3>The "I'm Not a Programmer" Problem</h3>
+            <p>
+              Many design students identify as "not programmers." They see code as someone else's job.
+            </p>
+            <p>Our response:</p>
+            <ul>
+              <li>You don't need to be a programmer. You need to commit to constraints.</li>
+              <li>The <a href="../code-bank/index.html">Code Bank</a> scaffolds let you design without writing from scratch.</li>
+              <li><a href="debugging-as-literacy.html">Debugging</a> is the skill, not authoring.</li>
+              <li>Every parameter you tune is a design decision. That's the work.</li>
+            </ul>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"We use Unity because that's what the industry uses"</strong></p>
+            <p>
+              Industry relevance is a side effect, not the reason. We use an engine because
+              videogames are implemented things. The industry connection is bonus, not justification.
+            </p>
+
+            <p><strong>"I can design without an engine"</strong></p>
+            <p>
+              You can concept without an engine. You can document without an engine.
+              You cannot design a <a href="../framework/gesture.html" class="term">Gesture</a> without feeling it,
+              and you cannot feel it without building it.
+            </p>
+
+            <h3>Assessment</h3>
+            <p>
+              We assess the design, not the technical implementation.
+              A buggy prototype with clear design intent passes.
+              A polished prototype with no design thinking fails.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Implementation as Epistemology</h3>
+            <p>
+              There are things you can only know by building. The feel of a jump. The timing of feedback.
+              The camera distance that makes a space readable. These are not specifiable in advance.
+            </p>
+            <p>
+              This is not anti-intellectual. It's recognizing that videogames are a medium where
+              knowledge lives in the implementation. The engine is not just a tool - it's where you
+              learn what your design actually is.
+            </p>
+
+            <h3>The Sketch vs. the Commitment</h3>
+            <p>
+              Paper prototypes, Figma mockups, design documents - these are sketches.
+              Valuable, but uncommitted. They preserve optionality.
+            </p>
+            <p>
+              Engine implementation is commitment. You must choose: this gravity, this frame count,
+              this sound. The constraint is the design. The sketch proposes; the engine disposes.
+            </p>
+
+            <h3>Material Engagement</h3>
+            <p>
+              This connects to <a href="code-as-material.html">Code as Material</a>.
+              The engine is the workshop where you work with the material.
+              You discover what the material can do by working with it.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much engine proficiency is enough? Where's the line between "can implement designs" and "is an engineer"?</li>
+              <li>Do visual scripting tools (Bolt, Blueprints) change this equation? Is text code necessary?</li>
+              <li>What do we lose when students only know one engine? Is engine-agnostic thinking possible or desirable?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="code-as-material.html">Code as Material</a> - code has properties you work with</li>
+          <li><a href="debugging-as-literacy.html">Debugging as Literacy</a> - the skill that makes engine work possible</li>
+          <li><a href="../code-bank/index.html">Code Bank</a> - scaffolds for implementation</li>
+          <li><a href="the-final-project.html">The Final Project</a> - what implementation leads to</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

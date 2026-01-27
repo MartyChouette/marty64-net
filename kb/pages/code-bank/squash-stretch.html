@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squash & Stretch - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link active">Squash & Stretch</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Squash & Stretch
+        </nav>
+
+        <h1>Squash & Stretch</h1>
+
+        <p class="lead">
+          Deform the character sprite or model to emphasize motion. Stretch when moving fast, squash on impact. The oldest animation principle, applied to videogames.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Squash and stretch adds <strong>life and weight</strong>. A rigid character feels robotic. A squashing/stretching character feels organic, even when it's a geometric shape.</p>
+            <p>It communicates physics through shape: "I'm compressing because I hit something" or "I'm elongating because I'm moving fast."</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>stretchAmount</code></td>
+                  <td>float</td>
+                  <td>0.2</td>
+                  <td>Maximum stretch (1.2 = 20% taller)</td>
+                </tr>
+                <tr>
+                  <td><code>squashAmount</code></td>
+                  <td>float</td>
+                  <td>0.2</td>
+                  <td>Maximum squash (0.8 = 20% shorter)</td>
+                </tr>
+                <tr>
+                  <td><code>returnSpeed</code></td>
+                  <td>float</td>
+                  <td>10.0</td>
+                  <td>How fast to return to normal</td>
+                </tr>
+                <tr>
+                  <td><code>velocityThreshold</code></td>
+                  <td>float</td>
+                  <td>5.0</td>
+                  <td>Velocity needed to trigger stretch</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For subtle realism:</strong></p>
+            <ul>
+              <li><code>stretchAmount</code> = 0.05 - 0.1</li>
+              <li><code>squashAmount</code> = 0.05 - 0.1</li>
+              <li>Barely noticeable but adds life</li>
+            </ul>
+            <p><em>Reference: Celeste (subtle character deformation)</em></p>
+
+            <p><strong>For cartoony feel:</strong></p>
+            <ul>
+              <li><code>stretchAmount</code> = 0.2 - 0.4</li>
+              <li><code>squashAmount</code> = 0.2 - 0.4</li>
+              <li>Obvious, playful, bouncy</li>
+            </ul>
+            <p><em>Reference: Hollow Knight, Ori</em></p>
+
+            <p><strong>For extreme stylization:</strong></p>
+            <ul>
+              <li><code>stretchAmount</code> = 0.5+</li>
+              <li><code>squashAmount</code> = 0.4+</li>
+              <li>Very exaggerated, full cartoon</li>
+            </ul>
+            <p><em>Reference: Cuphead, classic Disney</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>Every Frame:
+  - Get vertical velocity
+  - If falling fast: stretch vertically, compress horizontally
+  - If rising fast: stretch vertically, compress horizontally
+  - If grounded: return to normal scale
+
+On Land:
+  - Apply squash (compress vertically, expand horizontally)
+  - Lerp back to normal over time
+
+Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
+
+            <h3>Common Issues</h3>
+            <p><strong>"It looks wrong/distorted"</strong><br>
+            You're probably not preserving volume. When you stretch on Y, compress on X by the inverse amount. Total area should stay roughly constant.</p>
+
+            <p><strong>"It happens too suddenly"</strong><br>
+            Use lerp/smoothing for the return to normal. The squash can be instant, but recovery should ease out.</p>
+
+            <p><strong>"It doesn't match the movement"</strong><br>
+            Make sure stretch is based on velocity, not just "jumping" state. A slow rise shouldn't stretch as much as a fast dash.</p>
+
+            <p><strong>"Colliders are getting messed up"</strong><br>
+            Only deform the visual, not the physics collider. Keep your hitbox at constant size.</p>
+
+            <h3>When to Apply</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Moment</th>
+                  <th>Deformation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fast falling</td>
+                  <td>Stretch vertically</td>
+                </tr>
+                <tr>
+                  <td>Landing</td>
+                  <td>Squash on impact</td>
+                </tr>
+                <tr>
+                  <td>Jump anticipation</td>
+                  <td>Brief squash before launch</td>
+                </tr>
+                <tr>
+                  <td>At jump apex</td>
+                  <td>Return to normal briefly</td>
+                </tr>
+                <tr>
+                  <td>Dash/fast horizontal</td>
+                  <td>Stretch horizontally</td>
+                </tr>
+                <tr>
+                  <td>Hit/damage</td>
+                  <td>Squash in hit direction</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="basic-jump.html">Basic Jump</a> / <a href="variable-jump.html">Variable Jump</a> - squash/stretch the jump arc</li>
+              <li><a href="dash.html">Dash</a> - stretch during dash</li>
+              <li><a href="hitstop.html">Hitstop</a> - squash at moment of impact</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Squash and stretch is the first of Disney's 12 Principles of Animation. It's been making things look alive since the 1930s. Teaching it connects videogame development to a century of animation craft.</p>
+
+            <h3>The Volume Principle</h3>
+            <p>The key insight: <strong>preserve volume</strong>. A ball that squashes down must expand outward. This mimics how real soft objects deform and makes the deformation feel physically plausible even when exaggerated.</p>
+            <p>Mathematically: if you scale Y by 0.8, scale X by 1/0.8 = 1.25</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Show animation references (bouncing ball tutorial)</li>
+              <li>Implement basic squash on landing</li>
+              <li>Add stretch based on velocity</li>
+              <li>Tune for different aesthetic goals (realistic vs. cartoony)</li>
+            </ol>
+
+            <h3>The Aesthetic Choice</h3>
+            <p>Amount of squash/stretch is a <strong>style choice</strong>, not a technical one. A realistic military shooter might use almost none. A cartoon platformer might use extreme amounts. Students should calibrate to their intended aesthetic.</p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>Why does preserving volume matter?</li>
+              <li>How would you adjust squash/stretch for a realistic vs. cartoony videogame?</li>
+              <li>What other animation principles apply to videogame characters?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Squash and stretch was codified by Disney animators in the 1930s. The bouncing ball exercise - still taught to animators today - is pure squash and stretch training. The principle predates videogames by decades.</p>
+            <p>Videogames inherited this from animation, but with a difference: in videogames, the deformation responds to <strong>player input</strong>, not predetermined keyframes. This makes it feel reactive and alive in a new way.</p>
+
+            <h3>Why It Works</h3>
+            <p>Our eyes track motion through shape change. A rigid object moving looks mechanical. A deforming object looks organic because real living things (and soft materials) deform under force.</p>
+            <p>Even geometric shapes like circles seem "alive" when they squash and stretch. This is why the bouncing ball is such an effective demonstration - a circle becomes a character just through deformation.</p>
+
+            <h3>The 4 A's Application</h3>
+            <p>Squash and stretch is pure <a href="../framework/the-four-as.html" class="term">Art</a> - it doesn't change the Action or the Arc, only how things look. But by changing the Art, it transforms the <a href="../framework/the-four-as.html" class="term">Atmosphere</a>. The same jump feels playful or weighty depending on deformation style.</p>
+
+            <h3>The 12 Principles in Videogames</h3>
+            <p>Disney's 12 Principles of Animation all apply to videogames:</p>
+            <ol>
+              <li>Squash and Stretch (this page)</li>
+              <li>Anticipation (wind-up before jump)</li>
+              <li>Staging (camera, composition)</li>
+              <li>Straight Ahead / Pose to Pose (animation approach)</li>
+              <li>Follow Through / Overlapping Action (secondary motion)</li>
+              <li>Slow In / Slow Out (easing)</li>
+              <li>Arcs (movement paths)</li>
+              <li>Secondary Action (hair, clothes)</li>
+              <li>Timing (speed of actions)</li>
+              <li>Exaggeration (stylization)</li>
+              <li>Solid Drawing (3D form)</li>
+              <li>Appeal (character design)</li>
+            </ol>
+            <p>Videogame animators learn these principles and apply them to interactive contexts.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="basic-jump.html">Basic Jump</a> - where squash/stretch is most visible</li>
+          <li><a href="hitstop.html">Hitstop</a> - squash at impact moment</li>
+          <li><a href="../framework/the-four-as.html">The 4 A's</a> - Art component</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#juice" class="term">Juice</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -3,270 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dialogue Systems — VG101 Knowledge Base</title>
+  <title>Dialogue Systems - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Narrative</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link active">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
+          <li class="nav-item"><a href="branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
+          <li class="nav-item"><a href="dialogue-systems.html" class="nav-link active">Dialogue Systems</a></li>
+          <li class="nav-item"><a href="ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Narrative</a> / Dialogue Systems</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Narrative</span>
-          <span class="tag">narrative</span> <span class="tag">conversation</span> <span class="tag">ui</span> <span class="tag">character</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Narrative</a> / Dialogue Systems
+        </nav>
+
         <h1>Dialogue Systems</h1>
-A <strong>dialogue system</strong> is the interface and logic that governs conversation in a game. It determines how players talk to characters, how characters respond, and how conversations flow.
-Dialogue systems are where narrative meets interface design. The <em>structure</em> of conversation shapes what kinds of stories you can tell.
-<hr>
-<h2>Core Components</h2>
-Every dialogue system has:
-<h3>Triggering</h3>
-How do conversations start? 
-- Automatic (enter area, story triggers)
-- Player-initiated (talk button near NPC)
-- Contextual (interrupt after certain actions)
-<h3>Display</h3>
-How is dialogue presented?
-- Text boxes
-- Voiced audio
-- Subtitles
-- Speech bubbles
-- Full-screen conversational UI
-<h3>Player Input</h3>
-How does the player participate?
-- Advance text (passive)
-- Select from options
-- Type responses
-- Timed choices
-- No input (cinematic)
-<h3>Flow Control</h3>
-How does conversation progress?
-- Linear (one path)
-- Branching (multiple paths)
-- Hub-and-spoke (return to menu of topics)
-- State-based (available options depend on flags)
-<hr>
-<h2>Common Structures</h2>
-<h3>Simple Linear</h3>
-Player advances through fixed text. No choices.
-<pre><code>NPC: "The bridge is out."
-NPC: "You'll have to find another way."
-[End]
-</code></pre>
-<p><em>Use for: exposition, atmospheric flavor, world-building</em></p>
-<h3>Menu Selection</h3>
-Player chooses from a list of topics/responses.
-<pre><code>> Ask about the bridge
-> Ask about the village
-> Say goodbye
-</code></pre>
-<p><em>Use for: information gathering, controlled exploration</em></p>
-<h3>Branching Tree</h3>
-Choices lead to different dialogue paths that may reconverge or diverge.
-<pre><code>> "I'll help you" → [Grateful response] → ...
-> "Not my problem" → [Annoyed response] → ...
-</code></pre>
-<p><em>Use for: roleplaying, consequence, character expression</em></p>
-<h3>Hub and Spoke</h3>
-Keep returning to a central menu after each topic is explored.
-<pre><code>[Hub: What do you want to ask?]
-  └→ Topic A → [return to hub]
-  └→ Topic B → [return to hub]
-  └→ Leave
-</code></pre>
-<p><em>Use for: investigation, lore dumps, optional depth</em></p>
-<hr>
-<h2>The Option Problem</h2>
-<strong>What the player sees</strong> vs. <strong>what the character says</strong> is a design choice.
-<table>
-<thead><tr>
-<th>Approach</th><th>Example</th><th>Pro</th><th>Con</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><strong>Full preview</strong></td><td>"I'll help you find your daughter"</td><td>Player knows exactly what they're choosing</td><td>Long, can break flow</td> <thead><tr> <th><strong>Paraphrase</strong></th><th>"[Agree to help]"</th><th>Clean, brief</th><th>Player may disagree with actual delivery</th> <tr> <td><strong>Tone tag</strong></td><td>"[Sympathetic]"</td><td>Expresses character without spoiling</td><td>Ambiguous</td> <thead><tr> <th><strong>First words</strong></th><th>"I'll help you..."</th><th>Natural, like real conversation</th><th>Can be misleading</th></p>
-<p><em>Mass Effect</em> famously used a tone-based wheel that sometimes delivered lines players didn't expect. <em>Disco Elysium</em> shows full text. Neither is "correct" — they serve different experiences.</p>
-<hr>
-<h2>Conversation as Gameplay</h2>
-Dialogue can be more than information delivery — it can be <strong>play</strong>.
-<strong>Examples:</strong>
-<em>Ace Attorney</em>: Present evidence during testimony, catch contradictions
-<em>Disco Elysium</em>: Skill checks embedded in dialogue, your thoughts argue with each other
-<em>Hades</em>: Brief, contextual exchanges that deepen over dozens of runs
-When dialogue is gameplay, it needs:
-- Stakes (what can I win or lose?)
-- Player agency (what decisions matter?)
-- Feedback (how do I know what worked?)
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Dialogue systems are where writing meets UI/UX. I teach this in the <strong>Narrative Design</strong> section but emphasize the systems aspect.
-<strong>Exercise: Dialogue Autopsy</strong>
-Take a dialogue sequence from a game. Map:
-1. What's the structure? (Linear, branching, hub?)
-2. How is text displayed?
-3. What player input is required?
-4. How are options presented?
-<strong>Exercise: Conversation as Game</strong>
-Design a dialogue encounter where conversation IS the gameplay — there's a win/lose state, player decisions matter, and there's feedback.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Infocom</strong> — Parser-based interactive fiction that pioneered computer conversation.
-<strong>BioWare</strong> — The dialogue wheel, romance options, companion relationships.
-<strong>ZA/UM (Disco Elysium)</strong> — Pushed dialogue as gameplay. Your skills are characters in the conversation.
-<strong>What I'm taking:</strong>
-Dialogue is interface. The <em>structure</em> of conversation enables or constrains what stories can be told.
-<strong>Unresolved questions:</strong>
-- How will LLMs change dialogue systems? Potentially infinite variation, but loss of authorial control.
-- Is there a "natural" dialogue pacing?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="branching-consequence.html">Branching Consequence</a> — how dialogue choices create story paths
-- <a href="permissions.html">Permissions</a> — dialogue as permission system
-- <a href="case-studies-disco-elysium-internal-dialogue.html">Internal Dialogue</a> — dialogue as gameplay
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-dialogue-tree.html">Dialogue Tree</a> — branching conversation structure  
-→ <a href="glossary-barks.html">Barks</a> — short contextual voice lines  
-→ <a href="glossary-hub-and-spoke.html">Hub And Spoke</a> — menu-based conversation structure
-        
+
+        <p class="lead">
+          Any system that supplies conversation or interaction in your videogame's world. The need to create systems that support communication and guidance is paramount.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>What Dialogue Systems Are</h3>
+            <p>
+              A dialogue system is the interface and logic that governs conversation in a videogame. It determines how players talk to characters, how characters respond, and how conversations flow.
+            </p>
+            <p>
+              Dialogue systems are where narrative meets interface design. The <em>structure</em> of conversation shapes what kinds of stories you can tell.
+            </p>
+
+            <h3>Core Components</h3>
+            <p><strong>Triggering:</strong> How do conversations start?</p>
+            <ul>
+              <li>Automatic (enter area, story triggers)</li>
+              <li>Player-initiated (talk button near NPC)</li>
+              <li>Contextual (interrupt after certain actions)</li>
+            </ul>
+
+            <p><strong>Display:</strong> How is dialogue presented?</p>
+            <ul>
+              <li>Text boxes</li>
+              <li>Voiced audio with subtitles</li>
+              <li>Speech bubbles</li>
+              <li>Full-screen conversational UI</li>
+            </ul>
+
+            <p><strong>Player Input:</strong> How does the player participate?</p>
+            <ul>
+              <li>Advance text (passive)</li>
+              <li>Select from options</li>
+              <li>Type responses (parser)</li>
+              <li>Timed choices</li>
+              <li>No input (cinematic)</li>
+            </ul>
+
+            <p><strong>Flow Control:</strong> How does conversation progress?</p>
+            <ul>
+              <li>Linear (one path)</li>
+              <li>Branching (multiple paths)</li>
+              <li>Hub-and-spoke (return to menu of topics)</li>
+              <li>State-based (available options depend on flags)</li>
+            </ul>
+
+            <h3>Common Structures</h3>
+            <p><strong>Simple Linear:</strong> Player advances through fixed text. No choices. Use for exposition, atmospheric flavor, world-building.</p>
+            <p><strong>Menu Selection:</strong> Player chooses from a list of topics/responses. Use for information gathering, controlled exploration.</p>
+            <p><strong>Branching Tree:</strong> Choices lead to different dialogue paths that may reconverge or diverge. Use for roleplaying, consequence, character expression.</p>
+            <p><strong>Hub and Spoke:</strong> Keep returning to a central menu after each topic is explored. Use for investigation, lore, optional depth.</p>
+
+            <h3>The Option Problem</h3>
+            <p>What the player sees vs. what the character says is a design choice:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Approach</th>
+                  <th>Example</th>
+                  <th>Pro</th>
+                  <th>Con</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Full preview</strong></td>
+                  <td>"I'll help you find your daughter"</td>
+                  <td>Player knows exactly what they're choosing</td>
+                  <td>Long, can break flow</td>
+                </tr>
+                <tr>
+                  <td><strong>Paraphrase</strong></td>
+                  <td>"[Agree to help]"</td>
+                  <td>Clean, brief</td>
+                  <td>Player may disagree with delivery</td>
+                </tr>
+                <tr>
+                  <td><strong>Tone tag</strong></td>
+                  <td>"[Sympathetic]"</td>
+                  <td>Expresses character without spoiling</td>
+                  <td>Ambiguous</td>
+                </tr>
+                <tr>
+                  <td><strong>First words</strong></td>
+                  <td>"I'll help you..."</td>
+                  <td>Natural, like real conversation</td>
+                  <td>Can be misleading</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><em>Mass Effect</em> used a tone-based wheel that sometimes delivered lines players didn't expect. <em>Disco Elysium</em> shows full text. Neither is "correct" - they serve different experiences.</p>
+
+            <h3>Conversation as Gameplay</h3>
+            <p>Dialogue can be more than information delivery - it can be <strong>play</strong>.</p>
+            <ul>
+              <li><em>Ace Attorney</em>: Present evidence during testimony, catch contradictions</li>
+              <li><em>Disco Elysium</em>: Skill checks embedded in dialogue, your thoughts argue with each other</li>
+              <li><em>Hades</em>: Brief, contextual exchanges that deepen over dozens of runs</li>
+            </ul>
+            <p>When dialogue is gameplay, it needs stakes (what can I win or lose?), player agency (what decisions matter?), and feedback (how do I know what worked?).</p>
+
+            <h3>Exercise: Dialogue Autopsy</h3>
+            <p>Take a dialogue sequence from a published videogame. Map:</p>
+            <ol>
+              <li>What's the structure? (Linear, branching, hub?)</li>
+              <li>How is text displayed?</li>
+              <li>What player input is required?</li>
+              <li>How are options presented?</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Dialogue systems are where writing meets UI/UX. Students often think about dialogue as pure writing, ignoring that the <em>structure</em> of conversation constrains what stories can be told.
+            </p>
+            <p>
+              The right approach depends entirely on design goals and <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> of the genre. A visual novel, an action RPG, and a puzzle videogame all need fundamentally different dialogue systems.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"More options = better dialogue"</strong></p>
+            <p>
+              Students often want to add more choices without considering scope or whether choices matter. A few meaningful choices beat many meaningless ones.
+            </p>
+
+            <p><strong>"Voice acting is always better"</strong></p>
+            <p>
+              Voice acting is expensive and constrains iteration. Text-only dialogue allows for more content, faster changes, and player projection onto characters.
+            </p>
+
+            <h3>Assessment</h3>
+            <p>Ask students to:</p>
+            <ul>
+              <li>Map the dialogue structure of an existing videogame</li>
+              <li>Redesign a linear dialogue sequence as branching (and vice versa)</li>
+              <li>Design a dialogue encounter where conversation IS the gameplay</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Historical Lineage</h3>
+            <p>
+              <strong>Infocom</strong> - Parser-based interactive fiction that pioneered computer conversation. "Ask about" and "tell about" as primary verbs.
+            </p>
+            <p>
+              <strong>BioWare</strong> - The dialogue wheel, romance options, companion relationships. Defined modern RPG conversation expectations.
+            </p>
+            <p>
+              <strong>ZA/UM (Disco Elysium)</strong> - Pushed dialogue as gameplay. Your skills are characters in the conversation. Showed that text-heavy videogames can succeed commercially and critically.
+            </p>
+
+            <h3>Current Questions</h3>
+            <p>
+              <strong>LLMs and procedural dialogue:</strong> How will large language models change dialogue systems? Potentially infinite variation, but loss of authorial control. The tradeoff between authored precision and generative flexibility is unresolved.
+            </p>
+            <p>
+              <strong>Pacing:</strong> Is there a "natural" dialogue pacing? How long should text stay on screen? How fast should it scroll? These are UX questions with narrative implications.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>Emily Short's blog - Extensive writing on interactive fiction and conversation systems</li>
+              <li>Jon Ingold (Inkle) - GDC talks on narrative scripting languages</li>
+              <li><em>Character Development and Storytelling for Games</em> by Lee Sheldon</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="branching-consequence.html">Branching & Consequence</a> - how dialogue choices create story paths</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - dialogue as permission system</li>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - genre determines approach</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#dialogue-tree" class="term">Dialogue Tree</a> - branching conversation structure</li>
+          <li><a href="../glossary.html#barks" class="term">Barks</a> - short contextual voice lines</li>
+          <li><a href="../glossary.html#hub-and-spoke" class="term">Hub and Spoke</a> - menu-based conversation structure</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

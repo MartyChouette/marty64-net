@@ -8,13 +8,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
@@ -24,7 +48,7 @@
           <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
@@ -33,108 +57,193 @@
           <li class="nav-item"><a href="the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
           <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
           <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
         <nav class="breadcrumb">
-          <a href="../../index.html">Home</a> / <a href="index.html">Foundations</a> / What Makes a Videogame
+          <a href="../../index.html">VG101</a> / <a href="index.html">Foundations</a> / What Makes a Videogame
         </nav>
-        
+
         <h1>What Makes a Videogame</h1>
-        
+
         <p class="lead">
           Videogames are a medium of action. They are played, not just watched or read.
         </p>
-        
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Videogames Are Their Own Medium</h3>
+            <p>
+              Videogames borrow from cinema, music, literature, theatre, visual art. But they are not
+              reducible to any of these. What makes videogames distinct is that the player acts.
+            </p>
+            <p>
+              A film asks you to watch. A book asks you to read. A videogame asks you to <strong>do</strong>.
+            </p>
+            <p>
+              This doing can be pressing buttons, making choices, moving through space, or even
+              choosing to be still. But the player is always implicated in what happens.
+              The videogame cannot exist without being played.
+            </p>
+
+            <h3>Not Just Product, Not Just Art</h3>
+            <p>
+              Videogames are often framed as products (entertainment, consumer goods) or as art
+              (expressive works, cultural artifacts). Both framings capture something true.
+            </p>
+            <p>
+              But videogames are neither just products nor just art. They are both and neither.
+              The creations that take full advantage of the medium understand this. They don't
+              pick one framing and ignore the other. They embrace the full complexity of what
+              videogames are.
+            </p>
+
+            <h3>What We Study</h3>
+            <p>
+              In VG101, we study videogames as they are. We analyze the <a href="../framework/gesture.html" class="term">Gesture</a>,
+              the surface area of contact between player and videogame. We trace
+              <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a>, where design choices come from.
+              We examine <a href="../framework/permissions.html" class="term">Permissions</a>, what the system allows and forbids.
+            </p>
+            <p>
+              We do this not to reduce videogames to formulas, but to develop vocabulary for
+              what we experience. The goal is to play with more awareness, analyze with more precision,
+              and create with more intention.
+            </p>
+
+            <h3>Exercise: Medium Comparison</h3>
+            <p>Pick a videogame you've played recently. Ask:</p>
+            <ul>
+              <li>What does this videogame ask me to DO that a film couldn't?</li>
+              <li>What experience emerges from my doing, not just my watching?</li>
+              <li>How would this be fundamentally different if I weren't playing?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Start Here</h3>
+            <p>
+              Students arrive with assumptions about what videogames are - often from marketing,
+              reviews, or casual conversation. This page establishes the foundation: videogames
+              are a medium of action, distinct from other media.
+            </p>
+            <p>
+              The product-vs-art framing helps students see that both perspectives have value,
+              and neither is complete. This prevents the "videogames are just entertainment"
+              dismissal AND the "videogames are high art" overclaim.
+            </p>
+
+            <h3>The Magic Circle Note</h3>
+            <p>
+              You may have heard of the "magic circle," a concept from Johan Huizinga describing
+              the boundary between play and ordinary life. It's a useful theoretical device for
+              thinking about play in general.
+            </p>
+            <p>
+              But for our purposes, it doesn't especially matter. We're not here to debate definitions
+              of play or where the boundary between videogame and not-videogame lies. We're here to
+              understand videogames as they exist, as they are experienced, as they are made.
+            </p>
+            <p>
+              If students ask about it, acknowledge it and move on. Don't let definitional debates
+              derail the practical work.
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Videogames are interactive movies":</strong></p>
+            <p>
+              This privileges the cinematic elements over the action. Even story-heavy videogames
+              like visual novels require the player to act (advance text, make choices). The action
+              is the medium, not an add-on.
+            </p>
+            <p><strong>"The story is what matters":</strong></p>
+            <p>
+              Story can matter deeply. But the story is delivered through action - the player's
+              and the videogame's. A videogame's story is inseparable from its <a href="../framework/gesture.html" class="term">Gesture</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Medium Specificity</h3>
+            <p>
+              The argument that videogames are their own medium draws on medium specificity -
+              the idea that each medium has properties unique to it, and the best works in that
+              medium leverage those properties.
+            </p>
+            <p>
+              For videogames, the unique property is player action. Not interactivity as an abstract
+              concept, but the concrete reality that the player does things, and those doings
+              constitute the experience.
+            </p>
+
+            <h3>Key Influences</h3>
+            <p>
+              <strong>Brendan Keogh</strong>: <em>A Play of Bodies</em> (2018) - argues for understanding
+              videogames through embodied engagement, not just cognitive processing.
+            </p>
+            <p>
+              <strong>Ian Bogost</strong>: <em>Persuasive Games</em> (2007) - develops "procedural rhetoric,"
+              how videogames make arguments through their systems and rules.
+            </p>
+            <p>
+              <strong>Steve Swink</strong>: <em>Game Feel</em> (2009) - focuses on the tactile, embodied
+              experience of playing, what he calls "game feel."
+            </p>
+
+            <h3>What I'm Taking</h3>
+            <p>
+              The insight that videogames are fundamentally about action, and that this action
+              is not secondary to other elements (story, visuals, sound) but constitutive of them.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Where do idle videogames, walking simulators, and other minimal-action videogames fit? Are they edge cases or do they reveal something about action we're missing?</li>
+              <li>Is "action" the right word? Or does it privilege physical doing over cognitive/emotional engagement?</li>
+            </ul>
+          </div>
+        </div>
+
         <hr>
-        
-        <h2>The Magic Circle (And Why It Doesn't Matter Much Here)</h2>
-        
-        <p>
-          You may have heard of the "magic circle," a concept from Johan Huizinga describing the boundary 
-          between play and ordinary life. It's a useful theoretical device for thinking about play in general.
-        </p>
-        
-        <p>
-          But for our purposes, it doesn't especially matter. We're not here to debate definitions of play 
-          or where the boundary between videogame and not-videogame lies. We're here to understand 
-          videogames as they exist, as they are experienced, as they are made.
-        </p>
-        
-        <hr>
-        
-        <h2>Videogames Are Their Own Medium</h2>
-        
-        <p>
-          Videogames borrow from cinema, music, literature, theatre, visual art. But they are not 
-          reducible to any of these. What makes videogames distinct is that the player acts.
-        </p>
-        
-        <p>
-          A film asks you to watch. A book asks you to read. A videogame asks you to do.
-        </p>
-        
-        <p>
-          This doing can be pressing buttons, making choices, moving through space, or even 
-          choosing to be still. But the player is always implicated in what happens. 
-          The videogame cannot exist without being played.
-        </p>
-        
-        <hr>
-        
-        <h2>Not Just Product, Not Just Art</h2>
-        
-        <p>
-          Videogames are often framed as products (entertainment, consumer goods) or as art 
-          (expressive works, cultural artifacts). Both framings capture something true.
-        </p>
-        
-        <p>
-          But videogames are neither just products nor just art. They are both and neither. 
-          The creations that take full advantage of the medium understand this. They don't 
-          pick one framing and ignore the other. They embrace the full complexity of what 
-          videogames are.
-        </p>
-        
-        <hr>
-        
-        <h2>What We Study</h2>
-        
-        <p>
-          In VG101, we study videogames as they are. We analyze the <a href="../framework/gesture.html">Gesture</a>, 
-          the surface area of contact between player and videogame. We trace 
-          <a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a>, where design choices come from. 
-          We examine <a href="../framework/permissions.html">Permissions</a>, what the system allows and forbids.
-        </p>
-        
-        <p>
-          We do this not to reduce videogames to formulas, but to develop vocabulary for 
-          what we experience. The goal is to play with more awareness, analyze with more precision, 
-          and create with more intention.
-        </p>
-        
-        <hr>
-        
+
         <h2>Related</h2>
         <ul>
-          <li><a href="../framework/gesture.html">Gesture</a></li>
-          <li><a href="player-psychology.html">Player Psychology</a></li>
-          <li><a href="the-design-lens.html">The Design Lens</a></li>
+          <li><a href="../framework/gesture.html">Gesture</a> - the surface area of contact</li>
+          <li><a href="player-psychology.html">Player Psychology</a> - how players think and respond</li>
+          <li><a href="the-design-lens.html">The Design Lens</a> - our framework for seeing videogames</li>
         </ul>
-        
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
 </body>
 </html>

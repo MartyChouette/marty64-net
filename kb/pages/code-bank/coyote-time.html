@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coyote Time - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link active">Coyote Time</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Coyote Time
+        </nav>
+
+        <h1>Coyote Time</h1>
+
+        <p class="lead">
+          A brief grace period after walking off a ledge where you can still jump. Named for Wile E. Coyote, who doesn't fall until he looks down.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Coyote time is <strong>invisible forgiveness</strong>. Players don't notice when it helps them - they just feel like the videogame is fair. Without it, players constantly "miss" jumps they thought they made.</p>
+            <p>This is "player fair" vs. "computer fair." The computer knows exactly when you left the ground. The player doesn't. Coyote time bridges that gap.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>coyoteTime</code></td>
+                  <td>float</td>
+                  <td>0.1</td>
+                  <td>Seconds after leaving ground when jump still works</td>
+                </tr>
+                <tr>
+                  <td><code>coyoteTimer</code></td>
+                  <td>float</td>
+                  <td>-</td>
+                  <td>Internal timer tracking time since leaving ground</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For tight precision (hardcore):</strong></p>
+            <ul>
+              <li><code>coyoteTime</code> = 0.05 - 0.08</li>
+              <li>Just enough to prevent frustration</li>
+            </ul>
+            <p><em>Reference: Super Meat Boy (uses minimal coyote time)</em></p>
+
+            <p><strong>For accessible play:</strong></p>
+            <ul>
+              <li><code>coyoteTime</code> = 0.1 - 0.15</li>
+              <li>Generous but not exploitable</li>
+            </ul>
+            <p><em>Reference: Celeste (prioritizes accessibility)</em></p>
+
+            <p><strong>For casual/beginner-friendly:</strong></p>
+            <ul>
+              <li><code>coyoteTime</code> = 0.15 - 0.2</li>
+              <li>Very forgiving, might be noticeable to skilled players</li>
+            </ul>
+
+            <h3>How It Works</h3>
+            <pre><code>On Leaving Ground (not from jumping):
+  - Start coyoteTimer at coyoteTime value
+
+Every Frame:
+  - If coyoteTimer > 0:
+    - Decrease coyoteTimer by deltaTime
+    - Allow jump input to trigger jump
+
+On Jump:
+  - Reset coyoteTimer to 0 (prevent double use)</code></pre>
+
+            <p><strong>Critical:</strong> Coyote time should NOT activate if you left the ground by jumping. Only when you walk or fall off an edge.</p>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Player can double jump with coyote time"</strong><br>
+            You're not resetting the timer after jump. Or you're triggering coyote time on jump. Only trigger when leaving ground passively.</p>
+
+            <p><strong>"It feels like I can jump in mid-air"</strong><br>
+            coyoteTime is too long. Keep it under 0.15 for most videogames. Players shouldn't consciously notice it.</p>
+
+            <p><strong>"It doesn't seem to help"</strong><br>
+            coyoteTime might be too short, or you might have a ground-check issue. Test by setting it to 0.5 temporarily - if that works, your implementation is fine.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="input-buffer.html">Input Buffer</a> - catches jumps pressed slightly early; coyote catches jumps pressed slightly late</li>
+              <li><a href="basic-jump.html">Basic Jump</a> or <a href="variable-jump.html">Variable Jump</a> - the jump it enables</li>
+            </ul>
+
+            <h3>The Complete Forgiveness Package</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Technique</th>
+                  <th>What it forgives</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Coyote Time</td>
+                  <td>Pressing jump slightly AFTER leaving edge</td>
+                </tr>
+                <tr>
+                  <td>Input Buffer</td>
+                  <td>Pressing jump slightly BEFORE landing</td>
+                </tr>
+                <tr>
+                  <td>Both together</td>
+                  <td>Nearly all "unfair" missed jumps</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Coyote time is the perfect introduction to <strong>player-fair design</strong>. It's simple to implement but teaches a profound lesson: what the computer knows and what the player experiences are different things. Good design bridges that gap.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play a platformer without coyote time - note frustrations</li>
+              <li>Add coyote time - notice how complaints disappear</li>
+              <li>Make coyote time too long (0.5s) - notice how it breaks immersion</li>
+              <li>Find the sweet spot where it helps without being noticed</li>
+            </ol>
+
+            <h3>The Key Insight</h3>
+            <p>The best player-fair techniques are <strong>invisible</strong>. Players don't thank you for coyote time - they just don't complain about unfair deaths. Absence of frustration is the goal.</p>
+
+            <h3>Common Student Mistakes</h3>
+            <p><strong>Making it too generous:</strong> Students often set coyoteTime too high because they think "more forgiving = better." But players notice when they can visibly jump in mid-air.</p>
+
+            <p><strong>Activating on jump:</strong> The most common bug. Coyote time should only start when you walk/fall off an edge, not when you jump off.</p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>Why is the best coyote time invisible to players?</li>
+              <li>What's the difference between "player fair" and "computer fair"?</li>
+              <li>Why does coyote time pair well with input buffering?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Coyote time wasn't named until the 2010s, but the technique is much older. Early platformers often had generous ground detection that produced the same effect accidentally.</p>
+            <p>The name comes from the Looney Tunes trope where Wile E. Coyote runs off a cliff and hangs in the air until he looks down. The videogame version gives players a moment of "cartoon physics."</p>
+
+            <h3>Player Fair vs. Computer Fair</h3>
+            <p>This is a fundamental tension in videogame design:</p>
+            <ul>
+              <li><strong>Computer fair:</strong> The rules are applied exactly as programmed. You left the ground at frame 47; you cannot jump after frame 47.</li>
+              <li><strong>Player fair:</strong> The rules feel fair to the player. If they intended to jump at the edge, the videogame should respect that intent.</li>
+            </ul>
+            <p>Coyote time is the videogame <strong>lying to be kind</strong>. The player isn't technically on the ground, but the videogame pretends they are for a moment.</p>
+
+            <h3>The Permissions Angle</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, coyote time expands what's <strong>allowed</strong>. It says: "You're allowed to jump for 0.1 seconds after leaving the ground." This permission is hidden - players don't know it exists - but it shapes their experience of fairness.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Should coyote time scale with difficulty? Harder modes = less forgiveness?</li>
+              <li>Does coyote time diminish the value of precision? Does it make mastery feel less meaningful?</li>
+              <li>How much invisible assistance is too much? Where does accessibility end and babysitting begin?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="input-buffer.html">Input Buffer</a> - the other half of jump forgiveness</li>
+          <li><a href="basic-jump.html">Basic Jump</a> - the jump system to pair with</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - why fairness matters</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#coyote-time" class="term">Coyote Time</a></li>
+          <li><a href="../glossary.html#input-buffer" class="term">Input Buffer</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

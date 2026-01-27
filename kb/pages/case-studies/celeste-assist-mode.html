@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celeste: Assist Mode - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Case Studies</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="celeste-dash.html" class="nav-link">Celeste: Dash</a></li>
+          <li class="nav-item"><a href="celeste-assist-mode.html" class="nav-link active">Celeste: Assist Mode</a></li>
+          <li class="nav-item"><a href="dark-souls-bonfire.html" class="nav-link">Dark Souls: Bonfire</a></li>
+          <li class="nav-item"><a href="hades-god-mode.html" class="nav-link">Hades: God Mode</a></li>
+          <li class="nav-item"><a href="portal-level-one.html" class="nav-link">Portal: Level One</a></li>
+          <li class="nav-item"><a href="undertale-genocide.html" class="nav-link">Undertale: Genocide</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Case Studies</a> / Celeste: Assist Mode
+        </nav>
+
+        <h1>Celeste: Assist Mode</h1>
+
+        <p class="lead">
+          <em>Celeste</em>'s Assist Mode lets players customize difficulty with granular options.
+          It's become a model for accessibility in challenging videogames - proving that difficulty
+          and accessibility aren't opposites.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what Assist Mode does</span>
+          </div>
+          <div class="register-content">
+            <h3>The Options</h3>
+            <p>Assist Mode provides granular control over difficulty:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>What it changes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Game Speed</td>
+                  <td>Slow the videogame to 50%, 60%, 70%, 80%, 90%</td>
+                </tr>
+                <tr>
+                  <td>Invincibility</td>
+                  <td>Hazards don't kill you</td>
+                </tr>
+                <tr>
+                  <td>Infinite Stamina</td>
+                  <td>Climbing doesn't drain stamina</td>
+                </tr>
+                <tr>
+                  <td>Air Dashes</td>
+                  <td>Add extra dashes (2, 3, or infinite)</td>
+                </tr>
+                <tr>
+                  <td>Dash Assist</td>
+                  <td>Skip precise inputs, hold direction</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Critically: these can be mixed. Want normal speed but two dashes? That's possible. Want invincibility but no extra dashes? Also possible.</p>
+
+            <h3>How It's Presented</h3>
+            <p>When entering Assist Mode, the videogame shows this message:</p>
+            <blockquote>
+              "Celeste was designed to be a challenging and rewarding experience. We believe that its difficulty is essential to the experience. However, we understand that everyone's skills and needs are different. So we've provided these tools to help you play the game in a way that works for you. We hope that you'll find the right balance between challenge and accessibility."
+            </blockquote>
+            <p>Key elements:</p>
+            <ul>
+              <li>Acknowledges difficulty is intentional</li>
+              <li>Affirms player autonomy ("works for you")</li>
+              <li>No shame, no "easy mode" label</li>
+              <li>Framed as tools, not concessions</li>
+            </ul>
+
+            <h3>What Doesn't Change</h3>
+            <p>Assist Mode doesn't:</p>
+            <ul>
+              <li>Skip content (you still play every room)</li>
+              <li>Change the narrative</li>
+              <li>Reduce visual fidelity</li>
+              <li>Lock achievements (there are no achievements)</li>
+              <li>Mark your save file as "assisted"</li>
+            </ul>
+            <p>The experience is yours. Nobody else knows how you played.</p>
+
+            <h3>The 4 A's Perspective</h3>
+            <p>Assist Mode primarily modifies <a href="../framework/the-four-as.html" class="term">Action</a> and <a href="../framework/the-four-as.html" class="term">Arc</a>:</p>
+            <ul>
+              <li><strong>Action:</strong> More dashes = more options. Invincibility = removed failure state.</li>
+              <li><strong>Arc:</strong> Slower speed = longer duration for the same content.</li>
+              <li><strong>Art:</strong> Unchanged. The videogame looks and sounds the same.</li>
+              <li><strong>Atmosphere:</strong> Changed - but intentionally. Less stress, more exploration.</li>
+            </ul>
+            <p>The core <a href="../framework/gesture.html" class="term">Gestures</a> remain intact. The dash is still the dash. The levels are still the levels.</p>
+
+            <h3>Try This</h3>
+            <p><strong>Play the same room twice</strong></p>
+            <p>Play Chapter 2's hotel section normally, then with 70% speed. How does the experience differ? What's preserved?</p>
+
+            <p><strong>Audit your own videogame</strong></p>
+            <p>What could you make optional without breaking your core experience? What can't be changed without losing the point?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Use This Case Study</h3>
+            <p><em>Celeste</em>'s Assist Mode is the clearest modern example of accessibility done right in a challenging videogame. It proves:</p>
+            <ul>
+              <li>Difficulty and accessibility can coexist</li>
+              <li>Granular options beat binary "easy/hard"</li>
+              <li>Framing matters (tools vs. cheats)</li>
+              <li>Player trust is possible</li>
+            </ul>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play <em>Celeste</em> without Assist Mode (experience the challenge)</li>
+              <li>Introduce Assist Mode; read the message together</li>
+              <li>Discuss: How is this different from traditional "easy mode"?</li>
+              <li>Play with different assist combinations - what feels right?</li>
+              <li>Design exercise: Create an Assist Mode for a hypothetical videogame</li>
+            </ol>
+
+            <h3>Discussion Prompts</h3>
+            <ul>
+              <li>Why doesn't <em>Celeste</em> call it "Easy Mode"?</li>
+              <li>What's the difference between "lowering difficulty" and "providing tools"?</li>
+              <li>Should achievements be disabled when using Assist Mode? Why or why not?</li>
+              <li>How does the framing message affect how players feel about using it?</li>
+            </ul>
+
+            <h3>The Curb Cut Principle</h3>
+            <p>Curb cuts (ramps at sidewalk edges) were designed for wheelchairs but help everyone - parents with strollers, delivery workers with carts, travelers with luggage.</p>
+            <p><em>Celeste</em>'s Assist Mode is a curb cut:</p>
+            <ul>
+              <li>Designed for players with disabilities</li>
+              <li>Also helps: players with limited time, players who want story, players learning, players streaming</li>
+              <li>Makes the videogame more accessible to all without removing the core challenge for those who want it</li>
+            </ul>
+            <p>This is the <a href="../pedagogy/accessibility-as-craft.html">Accessibility as Craft</a> principle in action.</p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Assist Mode waters down the experience"</strong></p>
+            <p>The experience changes, but the core remains. A player using Assist Mode still climbs the mountain. The metaphor holds.</p>
+
+            <p><strong>"Players will always take the easy way"</strong></p>
+            <p>Studies and anecdotes suggest otherwise. Many players use Assist Mode briefly, then turn it off. Others use specific options (like slower speed) while keeping others default. Trust works.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Permissions and Accessibility</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, Assist Mode expands what's <strong>allowed</strong> without changing what's <strong>required</strong>:</p>
+            <ul>
+              <li><strong>Required:</strong> Still must traverse each room. Still must reach the summit.</li>
+              <li><strong>Allowed:</strong> More tools to do so. More attempts. More recovery options.</li>
+              <li><strong>Forbidden:</strong> Nothing new is forbidden. No punishment for using assistance.</li>
+            </ul>
+            <p>This is key: accessibility expands permissions. It doesn't shrink requirements (you still play the videogame) or forbid anything (no shame, no marks).</p>
+
+            <h3>The Difficulty Discourse</h3>
+            <p><em>Celeste</em> launched during heated debates about difficulty in videogames (often centered on <em>Dark Souls</em> and "should it have easy mode"). Assist Mode offers a response:</p>
+            <ul>
+              <li>Difficulty can be optional without being absent</li>
+              <li>The "intended" experience can coexist with alternatives</li>
+              <li>Designer intent and player need aren't opposites</li>
+            </ul>
+
+            <h3>What Makes Assist Mode Work</h3>
+            <ol>
+              <li><strong>Granularity:</strong> Options are specific, not binary. This respects that accessibility needs vary.</li>
+              <li><strong>Framing:</strong> "Tools" not "cheats." Language matters.</li>
+              <li><strong>No punishment:</strong> No achievement locks, no save file marks, no public shaming.</li>
+              <li><strong>Preserved core:</strong> The <a href="../framework/gesture.html" class="term">Gestures</a> remain. The level design remains. Only constraints change.</li>
+              <li><strong>Trust:</strong> Players are trusted to find their own balance.</li>
+            </ol>
+
+            <h3>Compare: Hades God Mode</h3>
+            <p><em>Hades</em> takes a different approach: God Mode grants increasing damage resistance with each death. It's automatic escalation rather than manual tuning.</p>
+            <p>Both work. <em>Celeste</em>'s approach requires more player agency. <em>Hades</em>'s approach requires less menu navigation. Different videogames, different solutions.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Where's the line between "accessibility option" and "different videogame"? Does infinite dashes fundamentally change <em>Celeste</em>?</li>
+              <li>Should competitive videogames have Assist Mode? What about multiplayer?</li>
+              <li>Is there a risk that Assist Mode becomes expected, pressuring developers who can't implement it?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Matt Thorson and Noel Berry's talks on <em>Celeste</em> development</li>
+              <li>Game Accessibility Guidelines (gameaccessibilityguidelines.com)</li>
+              <li>Keogh, Brendan. <em>A Play of Bodies</em> (2018) - on embodied accessibility</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="celeste-dash.html">Celeste: Dash</a> - the core mechanic that Assist Mode modifies</li>
+          <li><a href="hades-god-mode.html">Hades: God Mode</a> - another accessibility approach</li>
+          <li><a href="../pedagogy/accessibility-as-craft.html">Accessibility as Craft</a> - the philosophy behind this</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - how accessibility changes permission structures</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -3,272 +3,320 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Bank — VG101 Knowledge Base</title>
+  <title>Code Bank - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
+        <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link active">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Code Bank</a> / Code Bank</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Code Bank</span>
-          <span class="tag">unity</span> <span class="tag">scaffolds</span> <span class="tag">implementation</span> <span class="tag">exercises</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / Code Bank
+        </nav>
+
         <h1>Code Bank</h1>
-The Code Bank is a library of <strong>Unity script scaffolds</strong> for recreating and experimenting with videogame gestures. Each scaffold exposes the variables that matter for <em>feel</em> without requiring you to write code from scratch.
-The goal: <strong>tune, don't code.</strong> You're learning to shape gestures, not learning to program. The scaffolds handle the engineering; you handle the design.
-<hr>
-<h2>How to Use</h2>
-1. <strong>Find the scaffold</strong> that matches the gesture you're recreating
-2. <strong>Drop it into Unity</strong> (drag the prefab or attach the script)
-3. <strong>Tune the exposed variables</strong> in the Inspector until it <em>feels</em> right
-4. <strong>Document what you changed</strong> and why — this is the learning
-Every variable has a tooltip explaining what it does and what changing it affects.
-<hr>
-<h2>Scaffold Categories</h2>
-<h3>Character & Movement</h3>
-<table>
-<thead><tr>
-<th>Scaffold</th><th>What it does</th><th>Key variables</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><a href="code-bank-basic-jump.html">Basic Jump</a></td><td>Single jump with tunable arc</td><td><code>jumpForce</code>, <code>gravity</code>, <code>hangTime</code></td> <thead><tr> <th><a href="code-bank-variable-jump.html">Variable Jump</a></th><th>Jump height based on button hold</th><th><code>minJumpForce</code>, <code>maxJumpForce</code>, <code>holdTime</code></th> <tr> <td><a href="code-bank-double-jump.html">Double Jump</a></td><td>Air jump with separate feel</td><td><code>airJumpForce</code>, <code>airControl</code>, <code>airGravity</code></td> <thead><tr> <th><a href="code-bank-coyote-time.html">Coyote Time</a></th><th>Grace period after leaving platform</th><th><code>coyoteWindow</code>, <code>inputBuffer</code></th> <tr> <td><a href="code-bank-dash.html">Dash</a></td><td>Burst movement with recovery</td><td><code>dashSpeed</code>, <code>dashDuration</code>, <code>cooldown</code>, <code>cancelWindow</code></td> <thead><tr> <th><a href="code-bank-ground-movement.html">Ground Movement</a></th><th>Walk/run with acceleration</th><th><code>maxSpeed</code>, <code>acceleration</code>, <code>deceleration</code>, <code>friction</code></th> <tr> <td><a href="code-bank-air-control.html">Air Control</a></td><td>How much you can steer mid-air</td><td><code>airAcceleration</code>, <code>airMaxSpeed</code>, <code>airFriction</code></td></p>
-<h3>Feel & Feedback</h3>
-<table>
-<thead><tr>
-<th>Scaffold</th><th>What it does</th><th>Key variables</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><a href="code-bank-screen-shake.html">Screen Shake</a></td><td>Camera shake on impact</td><td><code>intensity</code>, <code>duration</code>, <code>decay</code></td> <thead><tr> <th><a href="code-bank-hitstop.html">Hitstop</a></th><th>Frame freeze on contact</th><th><code>freezeFrames</code>, <code>recoverySmoothing</code></th> <tr> <td><a href="code-bank-squash-stretch.html">Squash Stretch</a></td><td>Sprite deformation for weight</td><td><code>squashAmount</code>, <code>stretchAmount</code>, <code>returnSpeed</code></td> <thead><tr> <th><a href="code-bank-trail-effect.html">Trail Effect</a></th><th>Ghost images during fast movement</th><th><code>trailCount</code>, <code>fadeSpeed</code>, <code>spacing</code></th> <tr> <td><a href="code-bank-landing-impact.html">Landing Impact</a></td><td>Dust, sound, shake on land</td><td><code>dustParticles</code>, <code>shakeOnLand</code>, <code>soundTrigger</code></td></p>
-<h3>Camera</h3>
-<table>
-<thead><tr>
-<th>Scaffold</th><th>What it does</th><th>Key variables</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><a href="code-bank-follow-camera.html">Follow Camera</a></td><td>Camera tracks player</td><td><code>followSpeed</code>, <code>lookAhead</code>, <code>deadzone</code></td> <thead><tr> <th><a href="code-bank-camera-bounds.html">Camera Bounds</a></th><th>Constrain camera to level</th><th><code>boundsRect</code>, <code>edgePadding</code></th> <tr> <td><a href="code-bank-focus-point.html">Focus Point</a></td><td>Camera shifts toward look direction</td><td><code>focusOffset</code>, <code>transitionSpeed</code></td></p>
-<h3>Timing & Input</h3>
-<table>
-<thead><tr>
-<th>Scaffold</th><th>What it does</th><th>Key variables</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><a href="code-bank-input-buffer.html">Input Buffer</a></td><td>Remember inputs for grace</td><td><code>bufferWindow</code></td> <thead><tr> <th><a href="code-bank-cooldown-timer.html">Cooldown Timer</a></th><th>Prevent action spam</th><th><code>cooldownDuration</code>, <code>showUI</code></th> <tr> <td><a href="code-bank-charge-mechanic.html">Charge Mechanic</a></td><td>Hold to charge, release to act</td><td><code>chargeRate</code>, <code>maxCharge</code>, <code>releaseThreshold</code></td></p>
-<h3>Combat & Interaction</h3>
-<table>
-<thead><tr>
-<th>Scaffold</th><th>What it does</th><th>Key variables</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><a href="code-bank-melee-attack.html">Melee Attack</a></td><td>Hitbox with timing windows</td><td><code>startup</code>, <code>active</code>, <code>recovery</code>, <code>hitboxSize</code></td> <thead><tr> <th><a href="code-bank-knockback.html">Knockback</a></th><th>Push on hit</th><th><code>knockbackForce</code>, <code>knockbackAngle</code>, <code>hitstun</code></th> <tr> <td><a href="code-bank-health-system.html">Health System</a></td><td>Damage, invincibility frames</td><td><code>maxHealth</code>, <code>iFrames</code>, <code>flashOnHit</code></td></p>
-<hr>
-<h2>Starting Points by Exercise</h2>
-<h3>Gesture Recreation (Week 2)</h3>
-Start with: <code>basic-jump</code> or <code>ground-movement</code>  
-Add: <code>squash-stretch</code>, <code>landing-impact</code>
-<h3>Heritage Translation (Week 3)</h3>
-Start with: the scaffold closest to your source gesture  
-Modify: tune until it matches, then deliberately transform one variable set
-<h3>The 30-Minute Action (Week 5)</h3>
-Start with: <code>ground-movement</code> + one action scaffold  
-Add: one feedback scaffold  
-Constraint: only tune what's exposed, no new code
-<h3>Feel Experiment (Week 7)</h3>
-Pick any scaffold. Change one variable dramatically. Document:
-- What changed in the feel?
-- What <em>didn't</em> change that you expected to?
-- What does this tell you about how the components interact?
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-The Code Bank exists because <strong>code is a barrier to feel exploration.</strong> Students who have to write their own jump code spend all their time debugging, not designing. The scaffolds remove that barrier.
-<strong>Key principle:</strong> Expose the <em>design</em> variables, hide the <em>engineering</em> variables. Students don't need to know how the physics integration works; they need to know what <code>hangTime</code> does to the jump arc.
-<strong>Tooltip discipline:</strong> Every exposed variable has a tooltip. This is non-negotiable. Students should be able to hover and understand without leaving Unity.
-<strong>Scaffold philosophy:</strong>
-- <strong>Modular:</strong> Each scaffold does one thing. Combine them for complex behaviors.
-- <strong>Readable:</strong> Variable names should be self-explanatory.
-- <strong>Tunable:</strong> Default values should produce a "neutral" feel. Students move from there.
-<strong>Common issue:</strong> Students want to dive into the code. Redirect: "First get it feeling right by tuning. <em>Then</em> you can look under the hood." The sequence matters — feel before implementation.
-<strong>Assessment:</strong> Can they articulate <em>why</em> they changed a variable, not just <em>that</em> they changed it? "I increased coyote time because the original felt punishing" is good. "I set it to 0.15" is insufficient.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Design Philosophy</h2>
-The Code Bank embodies the idea that <strong>code is material, not prerequisite.</strong>
-Traditional videogame education often teaches programming first, design second. Students spend semesters learning to make things move before they can ask whether the movement <em>feels</em> right. This gets it backwards. Designers need to develop feel intuition early, even if they can't yet implement from scratch.
-The scaffolds are like <strong>woodworking jigs</strong> — tools that let you focus on the craft decision (the cut, the joint) without rebuilding the saw each time. Eventually you learn how the saw works, but not before you've made some furniture.
-<strong>What I'm resisting:</strong>
-The <strong>"real programmers write from scratch" mentality</strong> that pervades CS-adjacent education. Using scaffolds isn't cheating; it's working at the right level of abstraction for the learning goal.
-The <strong>black-box tool critique</strong> — yes, scaffolds hide complexity. That's the point. You can always open the box later. But if you never get to the design layer because you're stuck in the implementation layer, the box might as well not exist.
-<strong>Unresolved tension:</strong>
-When do students graduate from scaffolds to raw implementation? I don't have a clean answer. Current approach: scaffolds for the intro course, increasing implementation in intermediate courses, full implementation in advanced. But some students never need full implementation — they're designers, not engineers. Is that okay? I think yes, but the industry often disagrees.
-</div>
-</div>
-<hr>
-<h2>Contributing</h2>
-The Code Bank is a living library. If you build a scaffold that others might use:
-1. Follow the naming conventions
-2. Add tooltips to every exposed variable
-3. Set sensible defaults
-4. Document in the same format as existing scaffolds
-5. Tag with relevant concepts
-<hr>
-<h2>See Also</h2>
-- <a href="gesture.html">Gesture</a> — what you're recreating with these scaffolds
-- <a href="aesthetic-heritage.html">Aesthetic Heritage</a> — using scaffolds to trace and transform inherited gestures
-- <a href="resources-unity-setup.html">Unity Setup</a> — getting your environment ready
-- <a href="pedagogy-code-as-material.html">Code As Material</a> — the philosophy behind this approach
-        
+
+        <p class="lead">
+          A library of <strong>Unity script scaffolds</strong> for recreating and experimenting with videogame gestures. Each scaffold exposes the variables that matter for <em>feel</em> without requiring you to write code from scratch.
+        </p>
+
+        <p>The goal: <strong>tune, don't code.</strong> You're learning to shape gestures, not learning to program. The scaffolds handle the engineering; you handle the design.</p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>How to Use</h3>
+            <ol>
+              <li><strong>Find the scaffold</strong> that matches the gesture you're recreating</li>
+              <li><strong>Drop it into Unity</strong> (drag the prefab or attach the script)</li>
+              <li><strong>Tune the exposed variables</strong> in the Inspector until it <em>feels</em> right</li>
+              <li><strong>Document what you changed</strong> and why - this is the learning</li>
+            </ol>
+            <p>Every variable has a tooltip explaining what it does and what changing it affects.</p>
+
+            <h3>Available Scaffolds</h3>
+
+            <h4>Movement</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Scaffold</th>
+                  <th>What it does</th>
+                  <th>Key variables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="basic-jump.html">Basic Jump</a></td>
+                  <td>Single jump with tunable arc</td>
+                  <td><code>jumpForce</code>, <code>gravity</code>, <code>fallGravityMultiplier</code></td>
+                </tr>
+                <tr>
+                  <td><a href="variable-jump.html">Variable Jump</a></td>
+                  <td>Jump height based on button hold</td>
+                  <td><code>minJumpForce</code>, <code>maxJumpForce</code>, <code>holdTime</code></td>
+                </tr>
+                <tr>
+                  <td><a href="double-jump.html">Double Jump</a></td>
+                  <td>Extra jump in mid-air</td>
+                  <td><code>extraJumps</code>, <code>airJumpForce</code>, <code>resetVelocity</code></td>
+                </tr>
+                <tr>
+                  <td><a href="coyote-time.html">Coyote Time</a></td>
+                  <td>Grace period after leaving ledge</td>
+                  <td><code>coyoteTime</code></td>
+                </tr>
+                <tr>
+                  <td><a href="dash.html">Dash</a></td>
+                  <td>Burst movement with recovery</td>
+                  <td><code>dashSpeed</code>, <code>dashDuration</code>, <code>cooldown</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Feedback & Feel</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Scaffold</th>
+                  <th>What it does</th>
+                  <th>Key variables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="screen-shake.html">Screen Shake</a></td>
+                  <td>Camera shake on impact</td>
+                  <td><code>intensity</code>, <code>duration</code>, <code>decay</code></td>
+                </tr>
+                <tr>
+                  <td><a href="hitstop.html">Hitstop</a></td>
+                  <td>Freeze frame on hit</td>
+                  <td><code>hitstopDuration</code>, <code>timeScale</code></td>
+                </tr>
+                <tr>
+                  <td><a href="squash-stretch.html">Squash & Stretch</a></td>
+                  <td>Deform sprite based on motion</td>
+                  <td><code>stretchAmount</code>, <code>squashAmount</code>, <code>returnSpeed</code></td>
+                </tr>
+                <tr>
+                  <td><a href="knockback.html">Knockback</a></td>
+                  <td>Push away on hit</td>
+                  <td><code>knockbackForce</code>, <code>knockbackUp</code>, <code>hitstunDuration</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Timing & Input</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Scaffold</th>
+                  <th>What it does</th>
+                  <th>Key variables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="input-buffer.html">Input Buffer</a></td>
+                  <td>Remember inputs for grace window</td>
+                  <td><code>bufferTime</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Scaffolds In Development</h3>
+            <p>Future scaffolds will include:</p>
+            <ul>
+              <li><strong>Movement:</strong> Ground Movement, Air Control, Wall Jump</li>
+              <li><strong>Feedback:</strong> Trail Effect, Landing Impact</li>
+              <li><strong>Camera:</strong> Follow Camera, Camera Bounds, Focus Point</li>
+              <li><strong>Timing:</strong> Cooldown Timer, Charge Mechanic</li>
+              <li><strong>Combat:</strong> Melee Attack, Health System</li>
+            </ul>
+
+            <h3>Starting Points by Exercise</h3>
+
+            <p><strong>Gesture Recreation (Week 2)</strong></p>
+            <p>Start with: <a href="basic-jump.html">Basic Jump</a><br>
+            Add: Screen Shake for landing feedback</p>
+
+            <p><strong>Heritage Translation (Week 3)</strong></p>
+            <p>Start with: the scaffold closest to your source gesture<br>
+            Modify: tune until it matches, then deliberately transform one variable set</p>
+
+            <p><strong>The 30-Minute Action (Week 5)</strong></p>
+            <p>Combine: <a href="dash.html">Dash</a> + <a href="screen-shake.html">Screen Shake</a><br>
+            Constraint: only tune what's exposed, no new code</p>
+
+            <p><strong>Feel Experiment (Week 7)</strong></p>
+            <p>Pick any scaffold. Change one variable dramatically. Document:</p>
+            <ul>
+              <li>What changed in the feel?</li>
+              <li>What <em>didn't</em> change that you expected to?</li>
+              <li>What does this tell you about how the components interact?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why the Code Bank Exists</h3>
+            <p>The Code Bank exists because <strong>code is a barrier to feel exploration.</strong> Students who have to write their own jump code spend all their time debugging, not designing. The scaffolds remove that barrier.</p>
+
+            <h3>Key Principles</h3>
+            <p><strong>Expose the design variables, hide the engineering variables.</strong> Students don't need to know how the physics integration works; they need to know what <code>hangTime</code> does to the jump arc.</p>
+
+            <p><strong>Tooltip discipline:</strong> Every exposed variable has a tooltip. This is non-negotiable. Students should be able to hover and understand without leaving Unity.</p>
+
+            <h3>Scaffold Philosophy</h3>
+            <ul>
+              <li><strong>Modular:</strong> Each scaffold does one thing. Combine them for complex behaviors.</li>
+              <li><strong>Readable:</strong> Variable names should be self-explanatory.</li>
+              <li><strong>Tunable:</strong> Default values should produce a "neutral" feel. Students move from there.</li>
+            </ul>
+
+            <h3>Common Issue</h3>
+            <p>Students want to dive into the code. Redirect: "First get it feeling right by tuning. <em>Then</em> you can look under the hood." The sequence matters - feel before implementation.</p>
+
+            <h3>Assessment</h3>
+            <p>Can they articulate <em>why</em> they changed a variable, not just <em>that</em> they changed it? "I increased coyote time because the original felt punishing" is good. "I set it to 0.15" is insufficient.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Code as Material</h3>
+            <p>The Code Bank embodies the idea that <strong>code is material, not prerequisite.</strong></p>
+
+            <p>Traditional videogame education often teaches programming first, design second. Students spend semesters learning to make things move before they can ask whether the movement <em>feels</em> right. This gets it backwards. Designers need to develop feel intuition early, even if they can't yet implement from scratch.</p>
+
+            <p>The scaffolds are like <strong>woodworking jigs</strong> - tools that let you focus on the craft decision (the cut, the joint) without rebuilding the saw each time. Eventually you learn how the saw works, but not before you've made some furniture.</p>
+
+            <h3>What This Approach Resists</h3>
+            <p>The <strong>"real programmers write from scratch" mentality</strong> that pervades CS-adjacent education. Using scaffolds isn't cheating; it's working at the right level of abstraction for the learning goal.</p>
+
+            <p>The <strong>black-box tool critique</strong> - yes, scaffolds hide complexity. That's the point. You can always open the box later. But if you never get to the design layer because you're stuck in the implementation layer, the box might as well not exist.</p>
+
+            <h3>Unresolved Tension</h3>
+            <p>When do students graduate from scaffolds to raw implementation? I don't have a clean answer. Current approach: scaffolds for the intro course, increasing implementation in intermediate courses, full implementation in advanced. But some students never need full implementation - they're designers, not engineers. Is that okay? I think yes, but the industry often disagrees.</p>
+
+            <h3>Contributing</h3>
+            <p>The Code Bank is a living library. If you build a scaffold that others might use:</p>
+            <ol>
+              <li>Follow the naming conventions</li>
+              <li>Add tooltips to every exposed variable</li>
+              <li>Set sensible defaults</li>
+              <li>Document in the same format as existing scaffolds</li>
+              <li>Tag with relevant concepts</li>
+            </ol>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - what you're recreating with these scaffolds</li>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - using scaffolds to trace and transform inherited gestures</li>
+          <li><a href="../pedagogy/code-as-material.html">Code as Material</a> - the philosophy behind this approach</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

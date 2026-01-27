@@ -3,272 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pacing & Flow — VG101 Knowledge Base</title>
+  <title>Pacing & Flow - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Level Design</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link active">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
+          <li class="nav-item"><a href="spatial-communication.html" class="nav-link">Spatial Communication</a></li>
+          <li class="nav-item"><a href="pacing-flow.html" class="nav-link active">Pacing & Flow</a></li>
+          <li class="nav-item"><a href="guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
+          <li class="nav-item"><a href="verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Level Design</a> / Pacing & Flow</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Level Design</span>
-          <span class="tag">level-design</span> <span class="tag">rhythm</span> <span class="tag">tension</span> <span class="tag">pacing</span>
-        </div>
-    
-        
+        <nav class="breadcrumb"><a href="../../index.html">VG101</a> / <a href="index.html">Level Design</a> / Pacing & Flow</nav>
+
         <h1>Pacing & Flow</h1>
-<strong>Pacing</strong> is the rhythm of intensity over time — when the videogame pushes, when it relaxes, how those alternate.
-Good pacing isn't constant intensity. It's contrast. The quiet moment makes the loud one louder. The rest makes the exertion meaningful.
-<hr>
-<h2>The Intensity Curve</h2>
-Every videogame session has an <strong>intensity curve</strong> — how engaged/stressed/active the player is over time.
+        <p><strong>Pacing</strong> is the rhythm of intensity over time - when the videogame pushes, when it relaxes, how those alternate.</p>
+        <p>Good pacing isn't constant intensity. It's contrast. The quiet moment makes the loud one louder. The rest makes the exertion meaningful.</p>
+
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Intensity Curve</h3>
+            <p>Every videogame session has an <strong>intensity curve</strong> - how engaged/stressed/active the player is over time.</p>
 <pre><code>Intensity
-   │
-   │    ╭─╮     ╭──╮    ╭────╮
-   │   ╱   ╲   ╱    ╲  ╱      ╲
-   │  ╱     ╲─╱      ╲╱        ╲─── ← Finale/Resolution
-   │ ╱                              
-   │╱ ← Opening hook
-   └──────────────────────────────── Time
+   |
+   |    ,-,     ,--,    ,----,
+   |   /   \   /    \  /      \
+   |  /     \-/      \/        \--- &lt;- Finale/Resolution
+   | /
+   |/ &lt;- Opening hook
+   +-------------------------------- Time
 </code></pre>
-<p>The pattern: hook, build, release, build higher, release, climax, resolution.</p>
-<hr>
-<h2>Components of Pacing</h2>
-<h3>Tension</h3>
-What creates stakes, pressure, uncertainty.
-- Combat
-- Time pressure
-- Resource scarcity
-- Unknown threat
-- Decision weight
-<h3>Release</h3>
-What relieves tension, allows recovery.
-- Safe zones
-- Story beats
-- Rewards
-- Humor
-- Beauty
-<h3>Rhythm</h3>
-The alternation pattern. Fast-slow-fast. Push-rest-push.
-<em>Resident Evil</em> understood this: every monster encounter is followed by a puzzle or exploration segment. <em>Dark Souls</em> has brutal bosses and peaceful bonfires.
-<hr>
-<h2>Macro vs. Micro Pacing</h2>
-<table>
-<thead><tr>
-<th>Scale</th><th>What it affects</th><th>Example</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><strong>Macro</strong></td><td>Hours, entire game</td><td>Act structure, chapter pacing</td> <thead><tr> <th><strong>Meso</strong></th><th>Minutes to hour</th><th>Level pacing, mission structure</th> <tr> <td><strong>Micro</strong></td><td>Seconds to minutes</td><td>Combat encounters, puzzle flow</td></p>
-<p>Good pacing exists at all three scales. A well-paced combat encounter in a poorly-paced level still feels wrong.</p>
-<hr>
-<h2>Pacing Tools</h2>
-<h3>Gates</h3>
-Points where the player can't proceed until something is done. Bosses, puzzles, story triggers. Gates punctuate.
-<h3>Escalation</h3>
-Gradually increasing intensity. More enemies, faster pace, harder challenges. Creates the build.
-<h3>Respite</h3>
-Deliberate low-intensity moments. Walking sections, safe rooms, campfire scenes. Creates the release.
-<h3>Climax</h3>
-Maximum intensity. Everything converges. The boss fight, the final chase, the revelation.
-<h3>Denouement</h3>
-Post-climax cool-down. The credits walk, the epilogue. Prevents emotional whiplash.
-<hr>
-<h2>Player-Controlled vs. Designer-Controlled Pacing</h2>
-Some videogames give pacing to the player:
-- Open-world videogames (you decide when to do the main quest)
-- Sandbox videogames (no imposed rhythm)
-- Roguelikes (player sets their own pace through runs)
-Some videogames control pacing tightly:
-- Linear action videogames (this fight, then this cutscene, then this exploration)
-- Horror videogames (tension carefully managed)
-- Narrative videogames (story beats are sequenced)
-Neither is superior. But know which you're doing.
-<hr>
-<h2>Pacing Killers</h2>
-<strong>Grind:</strong> Repetitive, low-meaning activity that pads time without building intensity.
-<strong>Cutscene overload:</strong> Too much non-interactive time breaks the player's agency rhythm.
-<strong>Difficulty spikes:</strong> Sudden, unexpected intensity without buildup.
-<strong>Backtracking:</strong> Returning through low-content areas deflates momentum.
-<strong>Information dumps:</strong> Pausing action for lore breaks the flow.
-These aren't always bad — but they disrupt pacing. Use deliberately.
-<hr>
-<h2>Flow State and Pacing</h2>
-<em>Flow</em> (Csikszentmihalyi) is the state of complete absorption. Pacing supports or disrupts flow.
-- <strong>Too much tension without release:</strong> Player can't reach flow (too anxious)
-- <strong>Too little tension:</strong> Player can't reach flow (too bored)
-- <strong>Poor rhythm:</strong> Flow keeps breaking (interrupted)
-The goal isn't constant flow — it's appropriate oscillation between flow, tension, and rest.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Pacing is best understood through comparison. Have students map intensity curves for different videogames and see the different shapes.
-<strong>Exercise: Intensity Mapping</strong>
-Play a videogame for 30 minutes. Every 2 minutes, rate your intensity (1-10). Plot the graph. Where are peaks? Valleys? What caused them?
-Compare graphs across different videogames and genres.
-<strong>Exercise: Pacing Autopsy</strong>
-Identify a moment where pacing felt <em>wrong</em> — dragging, rushed, jarring. Diagnose:
-- What was the intensity just before?
-- What was the intensity during?
-- What transition was missing?
-<strong>Key insight:</strong> Pacing isn't about constant excitement. It's about purposeful contrast.
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Three-act structure</strong> — Screenwriting's tension model. Setup, confrontation, resolution. Videogames inherit and adapt.
-<strong>Music theory</strong> — Dynamics (loud/soft), tempo (fast/slow), phrasing. Videogames are temporal experiences; musical concepts apply.
-<strong>Csikszentmihalyi</strong> — Flow theory. The optimal experience that pacing should support.
-<strong>What I'm taking:</strong>
-The centrality of contrast. Intensity without relief is exhausting, not exciting. Rest without tension is boring, not peaceful.
-<strong>Unresolved questions:</strong>
-- How do open-world videogames pace when players control sequence?
-- Is there a "natural" human rhythm that videogames should match? Circadian? Breathing? Heartbeat?
-- Accessibility: different players have different fatigue thresholds. How do we pace inclusively?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="player-psychology.html">Player Psychology</a> — flow state and engagement
-- <a href="feedback-readability.html">Feedback Readability</a> — pacing of information
-- <a href="level-design-spatial-communication.html">Spatial Communication</a> — spatial pacing (corridor vs. arena)
-- <a href="case-studies-resident-evil-tension-release.html">Tension Release</a> — pacing master class
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-flow.html">Flow</a> — optimal engagement state  
-→ <a href="glossary-intensity-curve.html">Intensity Curve</a> — pacing over time  
-→ <a href="glossary-beat.html">Beat</a> — single pacing unit
-        
+            <p>The pattern: hook, build, release, build higher, release, climax, resolution.</p>
+
+            <h3>Components of Pacing</h3>
+
+            <h4>Tension</h4>
+            <p>What creates stakes, pressure, uncertainty.</p>
+            <ul>
+              <li>Combat</li>
+              <li>Time pressure</li>
+              <li>Resource scarcity</li>
+              <li>Unknown threat</li>
+              <li>Decision weight</li>
+            </ul>
+
+            <h4>Release</h4>
+            <p>What relieves tension, allows recovery.</p>
+            <ul>
+              <li>Safe zones</li>
+              <li>Story beats</li>
+              <li>Rewards</li>
+              <li>Humor</li>
+              <li>Beauty</li>
+            </ul>
+
+            <h4>Rhythm</h4>
+            <p>The alternation pattern. Fast-slow-fast. Push-rest-push.</p>
+            <p><em>Burnout Paradise</em> understood this: the intensity of racing followed by free cruising creates satisfying oscillation. <em>Tetris</em> has natural rhythm in its escalation and momentary relief when clearing lines. Even a musical solo follows this pattern - tension builds, then resolves.</p>
+
+            <h3>Macro vs. Micro Pacing</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Scale</th>
+                  <th>What it affects</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Macro</strong></td>
+                  <td>Hours, entire videogame</td>
+                  <td>Act structure, chapter pacing</td>
+                </tr>
+                <tr>
+                  <td><strong>Meso</strong></td>
+                  <td>Minutes to hour</td>
+                  <td>Level pacing, mission structure</td>
+                </tr>
+                <tr>
+                  <td><strong>Micro</strong></td>
+                  <td>Seconds to minutes</td>
+                  <td>Combat encounters, puzzle flow</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Good pacing exists at all three scales. A well-paced combat encounter in a poorly-paced level still feels wrong.</p>
+
+            <h3>Pacing Tools</h3>
+
+            <h4>Gates</h4>
+            <p>Points where the player can't proceed until something is done. Bosses, puzzles, story triggers. Gates punctuate.</p>
+
+            <h4>Escalation</h4>
+            <p>Gradually increasing intensity. More enemies, faster pace, harder challenges. Creates the build.</p>
+
+            <h4>Respite</h4>
+            <p>Deliberate low-intensity moments. Walking sections, safe rooms, campfire scenes. Creates the release.</p>
+
+            <h4>Climax</h4>
+            <p>Maximum intensity. Everything converges. The boss fight, the final chase, the revelation.</p>
+
+            <h4>Denouement</h4>
+            <p>Post-climax cool-down. The credits walk, the epilogue. Prevents emotional whiplash.</p>
+
+            <h3>Player-Controlled vs. Designer-Controlled Pacing</h3>
+            <p>Some videogames give pacing to the player:</p>
+            <ul>
+              <li>Open-world videogames (you decide when to do the main quest)</li>
+              <li>Sandbox videogames (no imposed rhythm)</li>
+              <li>Roguelikes (player sets their own pace through runs)</li>
+            </ul>
+            <p>Some videogames control pacing tightly:</p>
+            <ul>
+              <li>Linear action videogames (this fight, then this cutscene, then this exploration)</li>
+              <li>Horror videogames (tension carefully managed)</li>
+              <li>Narrative videogames (story beats are sequenced)</li>
+            </ul>
+            <p>Neither is superior. But know which you're doing.</p>
+
+            <h3>Pacing Killers</h3>
+            <p><strong>Grind:</strong> Repetitive, low-meaning activity that pads time without building intensity.</p>
+            <p><strong>Cutscene overload:</strong> Too much non-interactive time breaks the player's agency rhythm.</p>
+            <p><strong>Difficulty spikes:</strong> Sudden, unexpected intensity without buildup.</p>
+            <p><strong>Backtracking:</strong> Returning through low-content areas deflates momentum.</p>
+            <p><strong>Information dumps:</strong> Pausing action for lore breaks the flow.</p>
+            <p>These aren't always bad - but they disrupt pacing. Use deliberately.</p>
+
+            <h3>Flow State and Pacing</h3>
+            <p><em>Flow</em> (Csikszentmihalyi) is the state of complete absorption. Pacing supports or disrupts flow.</p>
+            <ul>
+              <li><strong>Too much tension without release:</strong> Player can't reach flow (too anxious)</li>
+              <li><strong>Too little tension:</strong> Player can't reach flow (too bored)</li>
+              <li><strong>Poor rhythm:</strong> Flow keeps breaking (interrupted)</li>
+            </ul>
+            <p>The goal isn't constant flow - it's appropriate oscillation between flow, tension, and rest.</p>
+
+            <h3>See Also</h3>
+            <ul>
+              <li><a href="../foundations/player-psychology.html">Player Psychology</a> - flow state and engagement</li>
+              <li><a href="../framework/the-four-as.html">The 4 A's</a> - Arc as the time component of pacing</li>
+              <li><a href="spatial-communication.html">Spatial Communication</a> - spatial pacing (corridor vs. arena)</li>
+            </ul>
+
+            <h3>Glossary Connections</h3>
+            <ul>
+              <li><a href="../glossary.html" class="term">Flow</a> - optimal engagement state</li>
+              <li><a href="../glossary.html" class="term">Intensity Curve</a> - pacing over time</li>
+              <li><a href="../glossary.html" class="term">Beat</a> - single pacing unit</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Notes</h3>
+            <p>Pacing is best understood through comparison. Have students map intensity curves for different videogames and see the different shapes.</p>
+
+            <h3>Exercise: Intensity Mapping</h3>
+            <p>Play a videogame for 30 minutes. Every 2 minutes, rate your intensity (1-10). Plot the graph. Where are peaks? Valleys? What caused them?</p>
+            <p>Compare graphs across different videogames and genres.</p>
+
+            <h3>Exercise: Pacing Autopsy</h3>
+            <p>Identify a moment where pacing felt <em>wrong</em> - dragging, rushed, jarring. Diagnose:</p>
+            <ul>
+              <li>What was the intensity just before?</li>
+              <li>What was the intensity during?</li>
+              <li>What transition was missing?</li>
+            </ul>
+
+            <h3>Key Insight</h3>
+            <p>Pacing isn't about constant excitement. It's about purposeful contrast.</p>
+
+            <h3>Common Misconceptions</h3>
+            <ul>
+              <li><strong>"More action = better pacing."</strong> Constant action becomes monotonous. The release makes the tension matter.</li>
+              <li><strong>"Slow sections are boring."</strong> Slow sections are necessary. Without valleys, peaks aren't peaks.</li>
+              <li><strong>"Pacing is just for linear videogames."</strong> Open-world videogames have pacing too - it's just emergent rather than authored.</li>
+            </ul>
+
+            <h3>Assessment Approaches</h3>
+            <ul>
+              <li><strong>Intensity graph:</strong> Have students create intensity graphs for their own levels or videogames.</li>
+              <li><strong>Playtest observation:</strong> Watch where players seem engaged vs. disengaged. Does it match intended pacing?</li>
+              <li><strong>Comparative analysis:</strong> Compare pacing across different videogames in the same genre.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Background</h3>
+
+            <h4>Three-Act Structure</h4>
+            <p>Screenwriting's tension model. Setup, confrontation, resolution. Videogames inherit and adapt this structure, though the interactive nature creates different possibilities.</p>
+
+            <h4>Music Theory</h4>
+            <p>Dynamics (loud/soft), tempo (fast/slow), phrasing. Videogames are temporal experiences; musical concepts apply directly to understanding pacing.</p>
+
+            <h4>Csikszentmihalyi - Flow</h4>
+            <p>Flow theory describes the optimal experience that pacing should support. The balance between challenge and skill creates engagement.</p>
+
+            <h3>What This Framework Takes</h3>
+            <p>The centrality of contrast. Intensity without relief is exhausting, not exciting. Rest without tension is boring, not peaceful.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li><strong>Open-world pacing:</strong> How do open-world videogames pace when players control sequence? Is emergent pacing as satisfying as authored pacing?</li>
+              <li><strong>Natural rhythms:</strong> Is there a "natural" human rhythm that videogames should match? Circadian? Breathing? Heartbeat?</li>
+              <li><strong>Accessibility:</strong> Different players have different fatigue thresholds. How do we pace inclusively? Should difficulty options affect pacing, not just challenge?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Csikszentmihalyi, Mihaly. <em>Flow: The Psychology of Optimal Experience</em> (1990)</li>
+              <li>Field, Syd. <em>Screenplay: The Foundations of Screenwriting</em> (1979)</li>
+              <li>Schell, Jesse. <em>The Art of Game Design</em> (2008) - Chapter on Flow</li>
+              <li>Swink, Steve. <em>Game Feel</em> (2009) - Chapter on Pacing</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

@@ -3,284 +3,324 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progression Systems — VG101 Knowledge Base</title>
+  <title>Progression Systems - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Systems</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link active">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
+          <li class="nav-item"><a href="economy-resources.html" class="nav-link">Economy & Resources</a></li>
+          <li class="nav-item"><a href="progression-systems.html" class="nav-link active">Progression Systems</a></li>
+          <li class="nav-item"><a href="balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
+          <li class="nav-item"><a href="emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Systems</a> / Progression Systems</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Systems</span>
-          <span class="tag">systems</span> <span class="tag">progression</span> <span class="tag">leveling</span> <span class="tag">unlocks</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Systems</a> / Progression Systems
+        </nav>
+
         <h1>Progression Systems</h1>
-A <strong>progression system</strong> is any structure that tracks and displays player advancement. Levels, unlocks, skill trees, gear scores — all the ways videogames say "you're getting somewhere."
-Progression systems answer the question: <strong>how does the player know they're advancing?</strong>
-<hr>
-<h2>Why Progression Matters</h2>
-<h3>Extrinsic Motivation</h3>
-Visible progress toward goals. The XP bar filling. The new ability unlocking.
-<h3>Pacing Control</h3>
-Gates content behind progression. Ensures players don't access everything immediately.
-<h3>Investment Creation</h3>
-The more you've leveled up, the more you have to lose by quitting.
-<h3>Skill Scaffolding</h3>
-New abilities introduce new complexity. Progression can match mechanical depth to player readiness.
-<h3>Power Fantasy</h3>
-Numbers go up. Character gets stronger. Feels good.
-<hr>
-<h2>Types of Progression</h2>
-<h3>Character Progression</h3>
-The avatar improves: stats, abilities, gear.
-<em>Example: RPG leveling, skill trees, equipment upgrades</em>
-<h3>Player Progression</h3>
-The human improves: skill, knowledge, mastery.
-<em>Example: Getting better at Dark Souls. No character stats changed — you changed.</em>
-<h3>World Progression</h3>
-The videogame world changes: areas unlock, story advances, state evolves.
-<em>Example: Metroidvania unlocks, NPC relationships, world state</em>
-<h3>Meta Progression</h3>
-Unlocks that persist across runs/sessions.
-<em>Example: Roguelike permanent upgrades, account-wide unlocks</em>
-Most videogames combine multiple types.
-<hr>
-<h2>Progression Structures</h2>
-<h3>Linear</h3>
-Everyone follows the same path. Level 1 → 2 → 3...
-<em>Pro: Easy to balance. Con: No player expression.</em>
-<h3>Branching</h3>
-Choose your path through a tree.
-<em>Pro: Player agency, replayability. Con: Balance complexity.</em>
-<h3>Open</h3>
-Any ability accessible (if you have currency/points).
-<em>Pro: Maximum freedom. Con: Trap options, analysis paralysis.</em>
-<h3>Gated</h3>
-Progression unlocked by achievements, not just time/XP.
-<em>Pro: Ties advancement to accomplishment. Con: Can feel arbitrary.</em>
-<hr>
-<h2>The Leveling Curve</h2>
-How fast does the player progress? The <strong>leveling curve</strong> determines feel:
-<h3>Linear Leveling</h3>
-Same XP for each level. Predictable, but can feel grindy late-game.
-<h3>Exponential Leveling</h3>
-Each level takes more XP. Early levels fly by; late levels slow down. Creates extended endgame.
-<h3>Logarithmic Leveling</h3>
-Early levels are slow; later levels come faster. Rare, but used to extend early game.
-<h3>Soft Cap / Hard Cap</h3>
-Progression slows dramatically (soft) or stops entirely (hard) at a certain point.
-The curve should match your pacing goals. Fast early = hook players. Slow late = extend engagement.
-<hr>
-<h2>Progression vs. Power</h2>
-<strong>Progression</strong> = visible advancement  
-<strong>Power</strong> = actual capability increase
-These aren't the same:
-<table>
-<thead><tr>
-<th>High Progression, Low Power</th><th>Level numbers go up, but enemies scale. You're not stronger, just "higher level."</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td>Low Progression, High Power</td><td>Few visible markers, but you feel much more capable. <em>Dark Souls</em>: same "level," but you learned the boss.</td> <thead><tr> <th>Matched</th><th>Progression markers correspond to actual power increase. Traditional RPGs.</th> <tr> <td>Mismatched</td><td>Feels bad when you level up but don't feel stronger, or feel stronger but don't see it reflected.</td></p>
-<hr>
-<h2>Skill Trees & Build Diversity</h2>
-Skill trees create <strong>build diversity</strong> — different players develop different characters.
-<h3>Good Skill Trees</h3>
-- Meaningful choices at each node
-- Multiple viable builds
-- Clear identity for each path
-- Synergies to discover
-<h3>Bad Skill Trees</h3>
-- One obviously optimal path
-- Nodes that are never worth taking ("trap" options)
-- Too many small incremental bonuses ("+1% damage")
-- Choices that can't be understood until late-game
-The test: do different players actually choose differently? Do those choices feel meaningfully distinct?
-<hr>
-<h2>Prestige Systems</h2>
-<strong>Prestige</strong> = resetting progress to start again, usually with some persistent bonus.
-<em>Examples: Call of Duty prestige, roguelike meta-progression, New Game+</em>
-Why it works:
-- Extends content without new content
-- Provides long-term goals
-- Lets players re-experience early videogame with mastery
-- Creates visible status markers
-Danger: Can feel like treadmill without meaning.
-<hr>
-<div class="pedagogy">
-<div class="pedagogy-header" onclick="toggleSection(this)">
-<span class="pedagogy-label">📘 Pedagogy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="pedagogy-content">
-<h2>Teaching Notes</h2>
-Progression systems are where videogame design meets psychology research. This is where the "manipulation" critique is strongest — and where ethical design matters most.
-<strong>Discussion:</strong> What's the difference between a satisfying progression system and an exploitative one? Both use the same techniques. The difference is <em>whose interest is served</em>.
-<strong>Exercise: Progression Audit</strong>
-Play a videogame for 2 hours. Log every progression marker:
-- What leveled up?
-- What unlocked?
-- How did you feel at each marker?
-- Did progression match power?
-<strong>Exercise: Design a Skill Tree</strong>
-Design a skill tree with 3 branches and 12 total nodes. Ensure at least 4 viable builds with distinct playstyles. Then have classmates evaluate — is it actually balanced?
-</div>
-</div>
-<hr>
-<div class="philosophy">
-<div class="philosophy-header" onclick="toggleSection(this)">
-<span class="philosophy-label">🔮 Philosophy</span>
-<span class="toggle-icon">▼</span>
-</div>
-<div class="philosophy-content">
-<h2>Theoretical Background</h2>
-<strong>Key influences:</strong>
-<strong>Nick Yee</strong> — Early research on MMORPG motivation. Achievement, social, immersion motivations map to progression system design.
-<strong>Sebastian Deterding</strong> — Gamification research. The critique of progression-as-manipulation.
-<strong>Amy Jo Kim</strong> — Videogame thinking for product design. Progression as engagement loop.
-<strong>What I'm taking:</strong>
-Progression is a communication system. It tells players where they are and where they're going. Good progression is honest communication.
-<strong>What I'm resisting:</strong>
-<strong>Progression as addiction machine.</strong> Skinner box critiques apply. When progression systems are designed to maximize time-in-game rather than player satisfaction, something has gone wrong.
-<strong>The "numbers go up" design default.</strong> Not every videogame needs visible progression. Some of the best videogames have none. Progression is a choice, not a requirement.
-<strong>Unresolved questions:</strong>
-- Where's the line between satisfying progression and exploitative engagement?
-- How do we design progression that respects player time?
-- Is character progression necessary if player progression is rich?
-</div>
-</div>
-<hr>
-<h2>See Also</h2>
-- <a href="economy-resources.html">Economy Resources</a> — progression often tied to resource systems
-- <a href="player-psychology.html">Player Psychology</a> — why progression feels good
-- <a href="player-psychology.html">Feedback Loops</a> — progression as positive feedback
-- <a href="glossary-meta-progression.html">Meta Progression</a> — cross-run progression
-<hr>
-<h2>Glossary Connections</h2>
-→ <a href="glossary-skill-tree.html">Skill Tree</a> — branching ability unlocks  
-→ <a href="glossary-meta-progression.html">Meta Progression</a> — persistent cross-session advancement  
-→ <a href="glossary-level-scaling.html">Level Scaling</a> — world adjusting to player level
-        
+
+        <p class="lead">
+          A <strong>progression system</strong> is any structure that tracks and displays player advancement. Levels, unlocks, skill trees, gear scores - all the ways videogames say "you're getting somewhere." Progression systems answer the question: <strong>how does the player know they're advancing?</strong>
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Progression Matters</h3>
+
+            <p><strong>Extrinsic Motivation:</strong> Visible progress toward goals. The XP bar filling. The new ability unlocking.</p>
+
+            <p><strong>Pacing Control:</strong> Gates content behind progression. Ensures players don't access everything immediately.</p>
+
+            <p><strong>Investment Creation:</strong> The more you've leveled up, the more you have to lose by quitting.</p>
+
+            <p><strong>Skill Scaffolding:</strong> New abilities introduce new complexity. Progression can match mechanical depth to player readiness.</p>
+
+            <p><strong>Power Fantasy:</strong> Numbers go up. Character gets stronger. Feels good.</p>
+
+            <h3>Types of Progression</h3>
+
+            <p><strong>Character Progression:</strong> The avatar improves: stats, abilities, gear.</p>
+            <p><em>Example: RPG leveling, skill trees, equipment upgrades</em></p>
+
+            <p><strong>Player Progression:</strong> The human improves: skill, knowledge, mastery.</p>
+            <p><em>Example: Getting better at Dark Souls. No character stats changed - you changed.</em></p>
+
+            <p><strong>World Progression:</strong> The videogame world changes: areas unlock, story advances, state evolves.</p>
+            <p><em>Example: Metroidvania unlocks, NPC relationships, world state</em></p>
+
+            <p><strong>Meta Progression:</strong> Unlocks that persist across runs/sessions.</p>
+            <p><em>Example: Roguelike permanent upgrades, account-wide unlocks</em></p>
+
+            <p>Most videogames combine multiple types.</p>
+
+            <h3>Progression Structures</h3>
+
+            <p><strong>Linear:</strong> Everyone follows the same path. Level 1 → 2 → 3...</p>
+            <p><em>Pro: Easy to balance. Con: No player expression.</em></p>
+
+            <p><strong>Branching:</strong> Choose your path through a tree.</p>
+            <p><em>Pro: Player agency, replayability. Con: Balance complexity.</em></p>
+
+            <p><strong>Open:</strong> Any ability accessible (if you have currency/points).</p>
+            <p><em>Pro: Maximum freedom. Con: Trap options, analysis paralysis.</em></p>
+
+            <p><strong>Gated:</strong> Progression unlocked by achievements, not just time/XP.</p>
+            <p><em>Pro: Ties advancement to accomplishment. Con: Can feel arbitrary.</em></p>
+
+            <h3>The Leveling Curve</h3>
+            <p>How fast does the player progress? The <strong>leveling curve</strong> determines feel:</p>
+
+            <p><strong>Linear Leveling:</strong> Same XP for each level. Predictable, but can feel grindy late-game.</p>
+
+            <p><strong>Exponential Leveling:</strong> Each level takes more XP. Early levels fly by; late levels slow down. Creates extended endgame.</p>
+
+            <p><strong>Logarithmic Leveling:</strong> Early levels are slow; later levels come faster. Rare, but used to extend early game.</p>
+
+            <p><strong>Soft Cap / Hard Cap:</strong> Progression slows dramatically (soft) or stops entirely (hard) at a certain point.</p>
+
+            <p>The curve should match your pacing goals. Fast early = hook players. Slow late = extend engagement.</p>
+
+            <h3>Progression vs. Power</h3>
+            <p><strong>Progression</strong> = visible advancement<br>
+            <strong>Power</strong> = actual capability increase</p>
+
+            <p>These aren't the same:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Experience</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>High Progression, Low Power</strong></td>
+                  <td>Level numbers go up, but enemies scale. You're not stronger, just "higher level."</td>
+                </tr>
+                <tr>
+                  <td><strong>Low Progression, High Power</strong></td>
+                  <td>Few visible markers, but you feel much more capable. <em>Dark Souls</em>: same "level," but you learned the boss.</td>
+                </tr>
+                <tr>
+                  <td><strong>Matched</strong></td>
+                  <td>Progression markers correspond to actual power increase. Traditional RPGs.</td>
+                </tr>
+                <tr>
+                  <td><strong>Mismatched</strong></td>
+                  <td>Feels bad when you level up but don't feel stronger, or feel stronger but don't see it reflected.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Skill Trees & Build Diversity</h3>
+            <p>Skill trees create <strong>build diversity</strong> - different players develop different characters.</p>
+
+            <p><strong>Good Skill Trees:</strong></p>
+            <ul>
+              <li>Meaningful choices at each node</li>
+              <li>Multiple viable builds</li>
+              <li>Clear identity for each path</li>
+              <li>Synergies to discover</li>
+            </ul>
+
+            <p><strong>Bad Skill Trees:</strong></p>
+            <ul>
+              <li>One obviously optimal path</li>
+              <li>Nodes that are never worth taking ("trap" options)</li>
+              <li>Too many small incremental bonuses ("+1% damage")</li>
+              <li>Choices that can't be understood until late-game</li>
+            </ul>
+
+            <p>The test: do different players actually choose differently? Do those choices feel meaningfully distinct?</p>
+
+            <h3>Platform Differences</h3>
+            <p>Progression philosophy varies significantly by platform and genre:</p>
+            <p><strong>Mobile:</strong> Often engagement-focused. Session-length progression. Daily rewards. Real-money shortcuts. Designed around interruption.</p>
+            <p><strong>Console/PC Single-player:</strong> Experience-focused. Progression tied to authored content. Respects player time (ideally). Designed around immersion.</p>
+            <p><strong>Crafting/Survival:</strong> Economy compounding as progression. <em>Valheim</em>, <em>Satisfactory</em> - your infrastructure IS your progression. Building capability compounds: better tools enable better resources enable better tools.</p>
+            <p>These aren't moral judgments - they're different design goals. But know which paradigm you're working in.</p>
+
+            <h3>Prestige Systems</h3>
+            <p><strong>Prestige</strong> = resetting progress to start again, usually with some persistent bonus.</p>
+            <p><em>Examples: Call of Duty prestige, roguelike meta-progression, New Game+</em></p>
+
+            <p>Why it works:</p>
+            <ul>
+              <li>Extends content without new content</li>
+              <li>Provides long-term goals</li>
+              <li>Lets players re-experience early videogame with mastery</li>
+              <li>Creates visible status markers</li>
+            </ul>
+
+            <p>Danger: Can feel like treadmill without meaning.</p>
+
+            <h3>Exercise: Progression Audit</h3>
+            <p>Play a videogame for 2 hours. Log every progression marker:</p>
+            <ul>
+              <li>What leveled up?</li>
+              <li>What unlocked?</li>
+              <li>How did you feel at each marker?</li>
+              <li>Did progression match power?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>
+              Progression systems are where videogame design meets psychology research. This is where the "manipulation" critique is strongest - and where ethical design matters most.
+            </p>
+            <p>
+              Students need to understand both the craft (how to create satisfying progression) and the ethics (when progression becomes exploitation).
+            </p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"More progression = better videogame"</strong></p>
+            <p>Some students add leveling systems to everything. But progression without purpose is noise. A platformer doesn't need XP. A puzzle videogame doesn't need skill trees.</p>
+
+            <p><strong>"Players want to feel powerful"</strong></p>
+            <p>Some players do. Others want challenge. Progression that trivializes content can ruin experiences for mastery-oriented players.</p>
+
+            <h3>Key Discussion</h3>
+            <p>What's the difference between a satisfying progression system and an exploitative one? Both use the same techniques. The difference is <em>whose interest is served</em>.</p>
+
+            <h3>Assessment</h3>
+            <ul>
+              <li>Can students identify progression types in existing videogames?</li>
+              <li>Can students design a skill tree with genuine build diversity?</li>
+              <li>Can students articulate when progression serves the player vs. the business model?</li>
+            </ul>
+
+            <h3>Teaching Exercise: Design a Skill Tree</h3>
+            <p>Design a skill tree with 3 branches and 12 total nodes. Ensure at least 4 viable builds with distinct playstyles. Then have classmates evaluate - is it actually balanced?</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Key References</h3>
+            <p><strong>Nick Yee</strong> - Early research on MMORPG motivation. Achievement, social, immersion motivations map to progression system design.</p>
+            <p><strong>Sebastian Deterding</strong> - Gamification research. The critique of progression-as-manipulation.</p>
+            <p><strong>Amy Jo Kim</strong> - Videogame thinking for product design. Progression as engagement loop.</p>
+
+            <h3>Progression as Communication</h3>
+            <p>Progression is a communication system. It tells players where they are and where they're going. Good progression is honest communication.</p>
+
+            <h3>Ethical Considerations</h3>
+            <p><strong>Progression as addiction machine:</strong> Skinner box critiques apply. When progression systems are designed to maximize time-in-game rather than player satisfaction, something has gone wrong.</p>
+            <p><strong>The "numbers go up" design default:</strong> Not every videogame needs visible progression. Some of the best videogames have none. Progression is a choice, not a requirement.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Where's the line between satisfying progression and exploitative engagement?</li>
+              <li>How do we design progression that respects player time?</li>
+              <li>Is character progression necessary if player progression is rich?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="economy-resources.html">Economy & Resources</a> - progression often tied to resource systems</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - why progression feels good; progression as positive feedback</li>
+          <li><a href="balance-philosophy.html">Balance Philosophy</a> - balancing progression curves</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#skill-tree" class="term">Skill Tree</a> - branching ability unlocks</li>
+          <li><a href="../glossary.html#meta-progression" class="term">Meta Progression</a> - persistent cross-session advancement</li>
+          <li><a href="../glossary.html#level-scaling" class="term">Level Scaling</a> - world adjusting to player level</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

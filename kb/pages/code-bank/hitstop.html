@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hitstop - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link active">Hitstop</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Hitstop
+        </nav>
+
+        <h1>Hitstop</h1>
+
+        <p class="lead">
+          A brief freeze when an attack connects, giving visual weight to the impact. The world pauses for a split second to emphasize the hit.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Hitstop creates <strong>weight and impact</strong>. Without it, attacks feel like they pass through enemies. With it, you feel the collision. The pause says: "This mattered."</p>
+            <p>It's counterintuitive - you're making the videogame slower to make it feel more powerful. But the pause creates contrast that makes the surrounding motion feel faster.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>hitstopDuration</code></td>
+                  <td>float</td>
+                  <td>0.05</td>
+                  <td>How long to freeze (seconds)</td>
+                </tr>
+                <tr>
+                  <td><code>timeScale</code></td>
+                  <td>float</td>
+                  <td>0.0</td>
+                  <td>What to set Time.timeScale to during hitstop</td>
+                </tr>
+                <tr>
+                  <td><code>affectBoth</code></td>
+                  <td>bool</td>
+                  <td>true</td>
+                  <td>Freeze both attacker and target (or just target)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For light/fast attacks:</strong></p>
+            <ul>
+              <li><code>hitstopDuration</code> = 0.02 - 0.04</li>
+              <li>Brief stutter, maintains speed</li>
+            </ul>
+            <p><em>Reference: Devil May Cry (light attacks)</em></p>
+
+            <p><strong>For medium attacks:</strong></p>
+            <ul>
+              <li><code>hitstopDuration</code> = 0.05 - 0.08</li>
+              <li>Noticeable pause, solid impact</li>
+            </ul>
+            <p><em>Reference: Most action games' standard attacks</em></p>
+
+            <p><strong>For heavy/finishing attacks:</strong></p>
+            <ul>
+              <li><code>hitstopDuration</code> = 0.1 - 0.2</li>
+              <li>Dramatic pause, emphasizes power</li>
+            </ul>
+            <p><em>Reference: God of War finishers, Smash Bros. killing blows</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>On Hit:
+  - Store original Time.timeScale
+  - Set Time.timeScale to 0 (or near-zero)
+  - Start hitstopTimer
+
+Every Frame (using unscaledDeltaTime):
+  - If in hitstop:
+    - Decrease hitstopTimer
+    - If hitstopTimer <= 0:
+      - Restore original Time.timeScale</code></pre>
+
+            <p><strong>Critical:</strong> Use <code>Time.unscaledDeltaTime</code> for the hitstop timer, so it counts down even when time is frozen.</p>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Nothing happens during hitstop"</strong><br>
+            Make sure your timer uses unscaledDeltaTime. Regular deltaTime will be 0 during the freeze.</p>
+
+            <p><strong>"Hitstop affects things it shouldn't"</strong><br>
+            Time.timeScale is global. For selective freezing, use per-object pause states instead of timeScale.</p>
+
+            <p><strong>"It feels choppy, not impactful"</strong><br>
+            Hitstop alone isn't enough. Combine with screen shake, hit effects, and sound. The pause is one part of a larger impact moment.</p>
+
+            <p><strong>"Audio sounds wrong during hitstop"</strong><br>
+            Audio pitch may scale with timeScale. Either use unscaledTime for audio or keep timeScale at a low value (0.01) instead of 0.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="screen-shake.html">Screen Shake</a> - visual impact alongside temporal impact</li>
+              <li><a href="knockback.html">Knockback</a> - movement after the pause</li>
+              <li><a href="input-buffer.html">Input Buffer</a> - catch inputs during freeze</li>
+              <li><a href="squash-stretch.html">Squash & Stretch</a> - deform on impact</li>
+            </ul>
+
+            <h3>The Impact Stack</h3>
+            <p>Great combat feel comes from layering techniques. A satisfying hit often includes:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hitstop</td>
+                  <td>Temporal emphasis - time acknowledges the hit</td>
+                </tr>
+                <tr>
+                  <td>Screen Shake</td>
+                  <td>Visual emphasis - camera reacts to hit</td>
+                </tr>
+                <tr>
+                  <td>Hit VFX</td>
+                  <td>Sparks, flashes, particles</td>
+                </tr>
+                <tr>
+                  <td>Sound</td>
+                  <td>Impact audio, voice</td>
+                </tr>
+                <tr>
+                  <td>Knockback</td>
+                  <td>Physical consequence</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Hitstop is the perfect example of <strong>counterintuitive design</strong>. Slowing things down makes them feel faster. Students learn that feel doesn't come from literal representation - it comes from emphasis and contrast.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Show two versions of the same attack - with and without hitstop</li>
+              <li>Have students describe the difference in feel (not mechanics)</li>
+              <li>Implement basic hitstop - observe the transformation</li>
+              <li>Vary duration per attack type - learn to calibrate impact</li>
+            </ol>
+
+            <h3>The "Juice" Conversation</h3>
+            <p>Hitstop is often grouped under "juice" or "game feel." This is a good entry point for discussing:</p>
+            <ul>
+              <li>What is juice? (Feedback that makes actions feel satisfying)</li>
+              <li>Why does juice matter? (It's the difference between functional and delightful)</li>
+              <li>How much is too much? (When it obscures rather than emphasizes)</li>
+            </ul>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>Why does pausing the game make an attack feel stronger?</li>
+              <li>How would you vary hitstop for different attack types?</li>
+              <li>What other effects should accompany hitstop for maximum impact?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Hitstop originated in fighting games, likely accidentally. Early Street Fighter games had processing delays when calculating hit effects. Players grew to associate the pause with impact. When hardware got faster, developers intentionally preserved the pause because removing it made hits feel weak.</p>
+            <p>This is <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> at work: a technical limitation became an aesthetic expectation.</p>
+
+            <h3>Why Pause = Power</h3>
+            <p>Several psychological mechanisms explain hitstop's effectiveness:</p>
+            <ul>
+              <li><strong>Contrast:</strong> The pause makes surrounding motion feel faster by comparison</li>
+              <li><strong>Attention:</strong> A sudden stop captures attention at the moment of impact</li>
+              <li><strong>Anticipation:</strong> The pause creates micro-tension before the consequence (knockback)</li>
+              <li><strong>Film language:</strong> Slow motion in film emphasizes important moments; hitstop is extreme slow motion</li>
+            </ul>
+
+            <h3>The 4 A's of Hitstop</h3>
+            <p>Hitstop is a micro-<a href="../framework/gesture.html" class="term">Gesture</a> with all four A's:</p>
+            <ul>
+              <li><strong>Action:</strong> The attack input and its connection</li>
+              <li><strong>Art:</strong> The frozen frame, often accompanied by VFX</li>
+              <li><strong>Arc:</strong> The brief duration of the pause</li>
+              <li><strong>Atmosphere:</strong> The feeling of weight, impact, power</li>
+            </ul>
+            <p>Even this tiny moment contains the full framework.</p>
+
+            <h3>When Not to Use Hitstop</h3>
+            <p>Hitstop isn't always appropriate:</p>
+            <ul>
+              <li><strong>Continuous damage:</strong> Hitstop on every tick of poison would be annoying</li>
+              <li><strong>Environmental hazards:</strong> Walking into spikes might not need dramatic pause</li>
+              <li><strong>Story emphasis:</strong> Sometimes you want the violence to feel quick and brutal, not dramatic</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="screen-shake.html">Screen Shake</a> - visual impact feedback</li>
+          <li><a href="knockback.html">Knockback</a> - what happens after the pause</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - hitstop as micro-gesture</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#hitstop" class="term">Hitstop</a></li>
+          <li><a href="../glossary.html#juice" class="term">Juice</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

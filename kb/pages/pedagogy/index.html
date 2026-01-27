@@ -3,171 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedagogy — VG101 Knowledge Base</title>
+  <title>Pedagogy - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Resources</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Pedagogy</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Pedagogy Overview</a></li>
+          <li class="nav-item"><a href="play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
+          <li class="nav-item"><a href="why-unity.html" class="nav-link">Why Unity</a></li>
+          <li class="nav-item"><a href="the-final-project.html" class="nav-link">The Final Project</a></li>
+          <li class="nav-item"><a href="debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
+          <li class="nav-item"><a href="accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
+          <li class="nav-item"><a href="code-as-material.html" class="nav-link">Code as Material</a></li>
         </ul>
       </div>
-    
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Pedagogy</a> / Pedagogy</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Pedagogy</span>
-          
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / Pedagogy
+        </nav>
+
         <h1>Pedagogy</h1>
-Meta-content about teaching and learning videogame design.
-<hr>
-<h2>Entries</h2>
-<table>
-<thead><tr>
-<th>Entry</th><th>What it covers</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><a href="play-name-make-reflect.html">Play Name Make Reflect</a></td><td>The weekly rhythm of VG101</td> <thead><tr> <th><a href="debugging-as-literacy.html">Debugging As Literacy</a></th><th>Reading and responding to systems</th> <tr> <td><a href="accessibility-as-craft.html">Accessibility As Craft</a></td><td>Inclusive design as design quality</td> <thead><tr> <th><a href="code-as-material.html">Code As Material</a></th><th>Design through implementation</th></p>
-<hr>
-<h2>Core Insight</h2>
-Game design is learned by <strong>making</strong>, not by absorbing theory.
-The pedagogical approach here is: experience first, vocabulary second, making third, understanding fourth. The Play → Name → Make → Reflect cycle.
-Code isn't a prerequisite; it's a material. Debugging isn't remediation; it's literacy. Accessibility isn't compliance; it's craft.
-<hr>
-<h2>For Educators</h2>
-These entries explain <em>how</em> I teach the Framework concepts, not just <em>what</em> they are. If you're adapting this material for your own teaching, the Pedagogy section tells you the reasoning behind the sequence.
-<hr>
-<h2>VG101 Structure</h2>
-The full VG101 course structure lives in the course materials, but the rough shape:
-<table>
-<thead><tr>
-<th>Weeks</th><th>Layer</th><th>Core Concept</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td>1-4</td><td>Action Grammar</td><td>Gesture, Aesthetic Heritage, Permissions</td> <thead><tr> <th>5-8</th><th>Feedback & Readability</th><th>Feel, Communication, The 30-Minute Action</th> <tr> <td>9-12</td><td>Meaning from Dynamics</td><td>Ludonarrative, Procedural Rhetoric, Final Project</td></p>
-<p>Each week follows Play → Name → Make → Reflect.</p>
-        
+
+        <p class="lead">
+          Meta-content about teaching and learning videogame design.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">— what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Pedagogy Entries</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Entry</th>
+                  <th>What it covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="play-name-make-reflect.html">Play → Name → Make → Reflect</a></td>
+                  <td>The weekly rhythm of VG101</td>
+                </tr>
+                <tr>
+                  <td><a href="why-unity.html">Why Unity</a></td>
+                  <td>The engine as workshop for constraints</td>
+                </tr>
+                <tr>
+                  <td><a href="the-final-project.html">The Final Project</a></td>
+                  <td>Make one action feel undeniable</td>
+                </tr>
+                <tr>
+                  <td><a href="debugging-as-literacy.html">Debugging as Literacy</a></td>
+                  <td>Reading and responding to systems</td>
+                </tr>
+                <tr>
+                  <td><a href="accessibility-as-craft.html">Accessibility as Craft</a></td>
+                  <td>Inclusive design as design quality</td>
+                </tr>
+                <tr>
+                  <td><a href="code-as-material.html">Code as Material</a></td>
+                  <td>Design through implementation</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Core Insight</h3>
+            <p>
+              Videogame design is learned by <strong>making</strong>, not by absorbing theory.
+              The pedagogical approach here is: experience first, vocabulary second, making third, understanding fourth.
+              The Play → Name → Make → Reflect cycle.
+            </p>
+            <p>
+              Code isn't a prerequisite; it's a material. Debugging isn't remediation; it's literacy.
+              Accessibility isn't compliance; it's craft.
+            </p>
+
+            <h3>VG101 Structure</h3>
+            <p>The full VG101 course structure lives in the course materials, but the rough shape:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Weeks</th>
+                  <th>Focus</th>
+                  <th>Core Concept</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1-4</td>
+                  <td>Core Framework</td>
+                  <td><a href="../framework/gesture.html" class="term">Gesture</a>, <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a>, <a href="../framework/permissions.html" class="term">Permissions</a></td>
+                </tr>
+                <tr>
+                  <td>5-8</td>
+                  <td>Feel & Communication</td>
+                  <td>Feedback, Readability, The 30-Minute Action</td>
+                </tr>
+                <tr>
+                  <td>9-12</td>
+                  <td>Meaning & Synthesis</td>
+                  <td>Ludonarrative, Procedural Rhetoric, Final Project</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Each week follows Play → Name → Make → Reflect.</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">— for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>For Educators</h3>
+            <p>
+              These entries explain <em>how</em> I teach the Framework concepts, not just <em>what</em> they are.
+              If you're adapting this material for your own teaching, the Pedagogy section tells you the reasoning
+              behind the sequence.
+            </p>
+
+            <h3>Why This Section Exists</h3>
+            <p>
+              Most videogame design resources present content as if teaching it is straightforward:
+              here's the knowledge, now students know it. But teaching videogame design is its own craft.
+            </p>
+            <p>
+              The Pedagogy section makes explicit what's often implicit: why concepts are sequenced the way they are,
+              what common misconceptions arise, how to assess design thinking rather than rote recall.
+            </p>
+
+            <h3>Using These Pages</h3>
+            <p>Each Pedagogy page has:</p>
+            <ul>
+              <li><strong>Practice:</strong> The approach itself - what students do</li>
+              <li><strong>Craft:</strong> Teaching notes - how to implement it</li>
+              <li><strong>Theory:</strong> Theoretical grounding - why it works</li>
+            </ul>
+            <p>
+              The Craft register on Pedagogy pages is meta-pedagogy: teaching teachers how to teach the approach.
+            </p>
+
+            <h3>Assessment Philosophy</h3>
+            <p>
+              VG101 assesses reflection and making, not vocabulary recall. If the rhythm is
+              play → name → make → reflect, assessment should match. Students demonstrate understanding
+              by making things and articulating what they learned, not by defining terms on a test.
+            </p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">— deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Theoretical Foundations</h3>
+            <p>
+              The VG101 pedagogical approach draws from several traditions:
+            </p>
+            <p>
+              <strong>Experiential Learning (John Dewey, David Kolb)</strong>: Learning by doing.
+              Experience precedes abstraction. The philosophical backbone of the Play → Name → Make → Reflect cycle.
+            </p>
+            <p>
+              <strong>Studio Pedagogy</strong>: Art, architecture, and design schools use variations of
+              make-critique-reflect-iterate. VG101 adapts this for videogame design.
+            </p>
+            <p>
+              <strong>Constructionism (Seymour Papert)</strong>: Learning happens through making things.
+              The Code Bank and making exercises reflect this.
+            </p>
+
+            <h3>What We're Resisting</h3>
+            <p>
+              <strong>The lecture-exam model:</strong> Videogame design isn't learned by absorbing information.
+              It's learned by making things and understanding what you made.
+            </p>
+            <p>
+              <strong>Theory-first approaches:</strong> Students learning words without referents.
+              "Ludonarrative dissonance" means nothing until you've felt the dissonance.
+            </p>
+            <p>
+              <strong>The naturalistic fallacy:</strong> Just playing doesn't teach design.
+              Unstructured play is valuable, but it's not education. Structure (naming, focused making, reflection) is essential.
+            </p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How does this approach scale? Studio pedagogy is labor-intensive. How do you run it with 100 students?</li>
+              <li>Does every concept benefit from the full cycle, or are some better taught directly?</li>
+              <li>How do we assess process-oriented learning without distorting it?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Dewey, John. <em>Experience and Education</em> (1938)</li>
+              <li>Kolb, David. <em>Experiential Learning</em> (1984)</li>
+              <li>Schön, Donald. <em>The Reflective Practitioner</em> (1983)</li>
+              <li>Papert, Seymour. <em>Mindstorms</em> (1980)</li>
+              <li>Fullerton, Tracy. <em>A Playful Production Process</em> (2024)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="play-name-make-reflect.html">Play → Name → Make → Reflect</a> - the core weekly rhythm</li>
+          <li><a href="why-unity.html">Why Unity</a> - the engine as design workshop</li>
+          <li><a href="the-final-project.html">The Final Project</a> - make one action feel undeniable</li>
+          <li><a href="debugging-as-literacy.html">Debugging as Literacy</a> - failure as learning</li>
+          <li><a href="accessibility-as-craft.html">Accessibility as Craft</a> - inclusive design</li>
+          <li><a href="code-as-material.html">Code as Material</a> - design through implementation</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

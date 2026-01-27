@@ -3,220 +3,309 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Jump — VG101 Knowledge Base</title>
+  <title>Basic Jump - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
+        <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link active">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Code Bank</a> / Basic Jump</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Code Bank</span>
-          <span class="tag">jump</span> <span class="tag">feel</span> <span class="tag">platformer</span> <span class="tag">beginner</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Basic Jump
+        </nav>
+
         <h1>Basic Jump</h1>
-A simple, fixed-height jump. Press button, go up, come down. The foundation of platformer movement.
-<hr>
-<h2>The Feel</h2>
-Basic jump is <strong>committed and consistent</strong>. Same height every time. The player knows exactly what they'll get.
-Compare to <a href="variable-jump.html">Variable Jump</a>: less expressive, but more predictable. Some videogames want that predictability.
-<hr>
-<h2>Exposed Variables</h2>
-<table>
-<thead><tr>
-<th>Variable</th><th>Type</th><th>Default</th><th>What it does</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td><code>jumpForce</code></td><td>float</td><td>12.0</td><td>Initial upward velocity</td> <thead><tr> <th><code>gravity</code></th><th>float</th><th>40.0</th><th>Downward acceleration</th> <tr> <td><code>fallGravityMultiplier</code></td><td>float</td><td>1.5</td><td>Extra gravity when falling</td> <thead><tr> <th><code>groundCheckDistance</code></th><th>float</th><th>0.1</th><th>How far to check for ground</th></p>
-<hr>
-<h2>Tuning Guide</h2>
-<h3>For a floaty feel:</h3>
-- Lower <code>gravity</code> (20-30)
-- Lower <code>fallGravityMultiplier</code> (1.0-1.2)
-- Higher <code>jumpForce</code>
-<em>Reference: Kirby, early Mario</em>
-<h3>For a snappy feel:</h3>
-- Higher <code>gravity</code> (50-70)
-- Higher <code>fallGravityMultiplier</code> (2.0-3.0)
-- Moderate <code>jumpForce</code>
-<em>Reference: Super Meat Boy, modern precision platformers</em>
-<h3>For a weighty feel:</h3>
-- High <code>gravity</code>
-- Low <code>jumpForce</code>
-- Minimal <code>fallGravityMultiplier</code> (1.0)
-<em>Reference: Castlevania, simulation-leaning games</em>
-<hr>
-<h2>How It Works</h2>
-<pre><code>On Jump Press (if grounded):
+
+        <p class="lead">
+          A simple, fixed-height jump. Press button, go up, come down. The foundation of platformer movement.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Basic jump is <strong>committed and consistent</strong>. Same height every time. The player knows exactly what they'll get.</p>
+            <p>Compare to <a href="variable-jump.html">Variable Jump</a>: less expressive, but more predictable. Some videogames want that predictability.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>jumpForce</code></td>
+                  <td>float</td>
+                  <td>12.0</td>
+                  <td>Initial upward velocity</td>
+                </tr>
+                <tr>
+                  <td><code>gravity</code></td>
+                  <td>float</td>
+                  <td>40.0</td>
+                  <td>Downward acceleration</td>
+                </tr>
+                <tr>
+                  <td><code>fallGravityMultiplier</code></td>
+                  <td>float</td>
+                  <td>1.5</td>
+                  <td>Extra gravity when falling</td>
+                </tr>
+                <tr>
+                  <td><code>groundCheckDistance</code></td>
+                  <td>float</td>
+                  <td>0.1</td>
+                  <td>How far to check for ground</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For a floaty feel:</strong></p>
+            <ul>
+              <li>Lower <code>gravity</code> (20-30)</li>
+              <li>Lower <code>fallGravityMultiplier</code> (1.0-1.2)</li>
+              <li>Higher <code>jumpForce</code></li>
+            </ul>
+            <p><em>Reference: Kirby, early Mario</em></p>
+
+            <p><strong>For a snappy feel:</strong></p>
+            <ul>
+              <li>Higher <code>gravity</code> (50-70)</li>
+              <li>Higher <code>fallGravityMultiplier</code> (2.0-3.0)</li>
+              <li>Moderate <code>jumpForce</code></li>
+            </ul>
+            <p><em>Reference: Super Meat Boy, modern precision platformers</em></p>
+
+            <p><strong>For a weighty feel:</strong></p>
+            <ul>
+              <li>High <code>gravity</code></li>
+              <li>Low <code>jumpForce</code></li>
+              <li>Minimal <code>fallGravityMultiplier</code> (1.0)</li>
+            </ul>
+            <p><em>Reference: Castlevania, simulation-leaning videogames</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>On Jump Press (if grounded):
   - Apply jumpForce upward immediately
+
 Every Frame:
   - If rising: apply gravity
   - If falling: apply gravity * fallGravityMultiplier
-  - Check for ground contact
-</code></pre>
-<p>The <code>fallGravityMultiplier</code> is the key insight: making descent faster than ascent creates a satisfying arc without the floaty falling that pure physics produces.</p>
-<hr>
-<h2>Common Issues</h2>
-<strong>"It feels floaty"</strong>
-→ Increase <code>fallGravityMultiplier</code>. Most good-feeling jumps have faster descent than ascent.
-<strong>"It's too short/tall"</strong>
-→ Adjust <code>jumpForce</code> and <code>gravity</code> together. Higher force + higher gravity = same height, different speed.
-<strong>"It feels like I'm on the moon"</strong>
-→ Gravity is too low. Real platformers use 2-4x Earth gravity.
-<strong>"I can jump in the air"</strong>
-→ Ground check isn't working. Check <code>groundCheckDistance</code> and your collision layers.
-<hr>
-<h2>Combine With</h2>
-- <a href="coyote-time.html">Coyote Time</a> — grace period makes basic jump more forgiving
-- <a href="input-buffer.html">Input Buffer</a> — catches jumps pressed slightly before landing
-- <a href="squash-stretch.html">Squash Stretch</a> — visual feedback for the jump
-- <a href="landing-impact.html">Landing Impact</a> — feedback when you land
-<hr>
-<h2>When to Use Basic vs. Variable</h2>
-<table>
-<thead><tr>
-<th>Use Basic Jump when...</th><th>Use Variable Jump when...</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tbody></table>
-<p><tr> <td>Predictability matters (puzzle platformers)</td><td>Expression matters (action platformers)</td> <thead><tr> <th>Jump height is carefully designed per obstacle</th><th>Player should adapt jump to situation</th> <tr> <td>Simplicity is a virtue</td><td>Depth is a virtue</td> <thead><tr> <th>Retro aesthetic</th><th>Modern platformer aesthetic</th></p>
-<hr>
-<h2>Heritage Notes</h2>
-The basic jump predates videogames — it's how jumping works in reality. But videogame jumps have always been exaggerated:
-- <em>Donkey Kong</em> (1981): Fixed arc jump
-- <em>Super Mario Bros.</em> (1985): Introduced variable jump, but basic enemies still use fixed jump
-- Modern games: Variable is default, but basic persists in certain contexts
-<hr>
-<h2>See Also</h2>
-- <a href="variable-jump.html">Variable Jump</a> — more expressive alternative
-- <a href="coyote-time.html">Coyote Time</a> — makes any jump more forgiving
-- <a href="gesture.html">Gesture</a> — the jump as gesture
-        
+  - Check for ground contact</code></pre>
+            <p>The <code>fallGravityMultiplier</code> is the key insight: making descent faster than ascent creates a satisfying arc without the floaty falling that pure physics produces.</p>
+
+            <h3>Common Issues</h3>
+            <p><strong>"It feels floaty"</strong><br>
+            Increase <code>fallGravityMultiplier</code>. Most good-feeling jumps have faster descent than ascent.</p>
+
+            <p><strong>"It's too short/tall"</strong><br>
+            Adjust <code>jumpForce</code> and <code>gravity</code> together. Higher force + higher gravity = same height, different speed.</p>
+
+            <p><strong>"It feels like I'm on the moon"</strong><br>
+            Gravity is too low. Real platformers use 2-4x Earth gravity.</p>
+
+            <p><strong>"I can jump in the air"</strong><br>
+            Ground check isn't working. Check <code>groundCheckDistance</code> and your collision layers.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="coyote-time.html">Coyote Time</a> - grace period makes basic jump more forgiving</li>
+              <li><a href="input-buffer.html">Input Buffer</a> - catches jumps pressed slightly before landing</li>
+              <li><a href="squash-stretch.html">Squash Stretch</a> - visual feedback for the jump</li>
+              <li><a href="landing-impact.html">Landing Impact</a> - feedback when you land</li>
+            </ul>
+
+            <h3>When to Use Basic vs. Variable</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Use Basic Jump when...</th>
+                  <th>Use Variable Jump when...</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Predictability matters (puzzle platformers)</td>
+                  <td>Expression matters (action platformers)</td>
+                </tr>
+                <tr>
+                  <td>Jump height is carefully designed per obstacle</td>
+                  <td>Player should adapt jump to situation</td>
+                </tr>
+                <tr>
+                  <td>Simplicity is a virtue</td>
+                  <td>Depth is a virtue</td>
+                </tr>
+                <tr>
+                  <td>Retro aesthetic</td>
+                  <td>Modern platformer aesthetic</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Start Here</h3>
+            <p>Basic jump is the ideal first scaffold because it's <strong>simple enough to understand completely</strong> but <strong>expressive enough to teach tuning</strong>. Four variables create hundreds of distinct feels.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play with defaults first - establish baseline</li>
+              <li>Change ONE variable dramatically - notice the difference</li>
+              <li>Try to match a reference videogame's jump feel</li>
+              <li>Document what they changed and why</li>
+            </ol>
+
+            <h3>Common Student Mistakes</h3>
+            <p><strong>Changing too many variables at once:</strong> They can't isolate what's causing the feel. Enforce single-variable changes first.</p>
+
+            <p><strong>Only adjusting jumpForce:</strong> Students often miss that gravity is equally important. Same height can feel completely different with different gravity/force ratios.</p>
+
+            <p><strong>Ignoring fallGravityMultiplier:</strong> This is the secret ingredient that makes platformer jumps feel good. Pure physics feels wrong.</p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>Why does increasing both jumpForce and gravity maintain the same height but change the feel?</li>
+              <li>What real-world physics does fallGravityMultiplier violate, and why is that violation important?</li>
+              <li>When would you choose basic jump over variable jump for a design?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>The basic jump predates videogames - it's how jumping works in reality. But videogame jumps have always been exaggerated:</p>
+            <ul>
+              <li><em>Donkey Kong</em> (1981): Fixed arc jump, limited air control</li>
+              <li><em>Super Mario Bros.</em> (1985): Introduced variable jump, but basic enemies still use fixed jump</li>
+              <li>Modern videogames: Variable is default, but basic persists in certain contexts</li>
+            </ul>
+
+            <h3>The Physics Lie</h3>
+            <p>Real physics would produce symmetrical parabolas. Videogame jumps almost universally use asymmetrical arcs - faster falling than rising. This started as a technical necessity (faster gameplay on limited hardware) and became an aesthetic expectation.</p>
+
+            <p>When students ask "why doesn't it use real physics?" the answer is: <strong>real physics feels wrong because we've been trained by decades of videogame physics</strong>. The heritage has shaped our expectations.</p>
+
+            <h3>The Jump as Gesture</h3>
+            <p>A basic jump is a complete <a href="../framework/gesture.html" class="term">Gesture</a> - it has Action (the input and resulting movement), Art (the visual arc, any animation), Arc (the duration of the jump), and Atmosphere (the feel of weightiness or lightness). Even this "simple" mechanic contains all four A's.</p>
+
+            <h3>Aesthetic Heritage of Jump Parameters</h3>
+            <p>When you choose a floaty jump, you're inheriting from Kirby's tradition. When you choose a snappy jump, you're inheriting from Super Meat Boy. These aren't just technical choices - they're <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> choices that connect your videogame to lineages of feel.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="variable-jump.html">Variable Jump</a> - more expressive alternative</li>
+          <li><a href="coyote-time.html">Coyote Time</a> - makes any jump more forgiving</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - the jump as gesture</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#coyote-time" class="term">Coyote Time</a> - grace period for jump input</li>
+          <li><a href="../glossary.html#input-buffer" class="term">Input Buffer</a> - remembering inputs for grace</li>
+          <li><a href="../glossary.html#juice" class="term">Juice</a> - feedback and feel techniques</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>

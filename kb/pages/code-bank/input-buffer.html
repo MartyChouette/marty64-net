@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Buffer - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link active">Input Buffer</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Input Buffer
+        </nav>
+
+        <h1>Input Buffer</h1>
+
+        <p class="lead">
+          Remember button presses for a short window, executing them when possible. If you press jump just before landing, the jump happens when you land.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Input buffering makes actions feel <strong>responsive and forgiving</strong>. Without it, players need frame-perfect timing. With it, they can queue up their next action and trust it will happen.</p>
+            <p>This is especially important in fast-paced videogames where players are thinking ahead of their character.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>bufferTime</code></td>
+                  <td>float</td>
+                  <td>0.1</td>
+                  <td>How long to remember an input</td>
+                </tr>
+                <tr>
+                  <td><code>jumpBuffered</code></td>
+                  <td>bool</td>
+                  <td>false</td>
+                  <td>Whether a jump is waiting to execute</td>
+                </tr>
+                <tr>
+                  <td><code>bufferTimer</code></td>
+                  <td>float</td>
+                  <td>-</td>
+                  <td>Time remaining on buffered input</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>For precision gameplay:</strong></p>
+            <ul>
+              <li><code>bufferTime</code> = 0.05 - 0.08</li>
+              <li>Just enough to catch near-misses</li>
+            </ul>
+
+            <p><strong>For accessible/casual:</strong></p>
+            <ul>
+              <li><code>bufferTime</code> = 0.1 - 0.15</li>
+              <li>Generous window for queuing actions</li>
+            </ul>
+
+            <p><strong>For fighting games:</strong></p>
+            <ul>
+              <li><code>bufferTime</code> = 0.1 - 0.2</li>
+              <li>Longer buffers for combo inputs</li>
+            </ul>
+            <p><em>Reference: Street Fighter, Guilty Gear</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>On Jump Press:
+  - If can jump now: jump immediately
+  - Else: set jumpBuffered = true, start bufferTimer
+
+Every Frame:
+  - If bufferTimer > 0:
+    - Decrease bufferTimer by deltaTime
+  - Else:
+    - Set jumpBuffered = false
+
+  - If jumpBuffered AND can jump:
+    - Execute jump
+    - Set jumpBuffered = false</code></pre>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Buffered input executes multiple times"</strong><br>
+            You're not clearing the buffer when the action executes. Always set jumpBuffered = false after executing.</p>
+
+            <p><strong>"Buffer doesn't seem to work"</strong><br>
+            Check that you're recording the input even when the action can't execute. The buffer should capture the press, not the action.</p>
+
+            <p><strong>"Inputs feel delayed"</strong><br>
+            You might be waiting for the buffer instead of executing immediately when possible. Buffer should only delay inputs that CAN'T execute immediately.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="coyote-time.html">Coyote Time</a> - together they cover both directions of timing error</li>
+              <li><a href="hitstop.html">Hitstop</a> - buffer inputs during freeze frames</li>
+              <li><a href="dash.html">Dash</a> - buffer dash during other actions</li>
+            </ul>
+
+            <h3>Beyond Jump: What Else to Buffer</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Why Buffer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jump</td>
+                  <td>Press before landing, executes on land</td>
+                </tr>
+                <tr>
+                  <td>Attack</td>
+                  <td>Queue next attack during current one</td>
+                </tr>
+                <tr>
+                  <td>Dash</td>
+                  <td>Press during jump, executes when able</td>
+                </tr>
+                <tr>
+                  <td>Dodge</td>
+                  <td>Press during hitstun, executes on recovery</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach This</h3>
+            <p>Input buffering teaches students that <strong>player intent matters more than precise timing</strong>. It's a design philosophy as much as a technique: the videogame should try to understand what the player wanted to do.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play a platformer and note when jumps "don't work"</li>
+              <li>Add jump buffering - note how those failures disappear</li>
+              <li>Extend to other actions (attacks, dashes)</li>
+              <li>Discuss: where would buffering be unwanted?</li>
+            </ol>
+
+            <h3>The Complementary Pair</h3>
+            <p>Teach input buffer alongside coyote time. Together they illustrate a complete approach to timing forgiveness:</p>
+            <ul>
+              <li><strong>Coyote Time:</strong> Forgives pressing jump AFTER leaving a platform</li>
+              <li><strong>Input Buffer:</strong> Forgives pressing jump BEFORE being able to</li>
+            </ul>
+            <p>Most "unfair" missed jumps are one of these two cases.</p>
+
+            <h3>Assessment Questions</h3>
+            <ul>
+              <li>When would you NOT want to buffer an input?</li>
+              <li>How does buffer time interact with action rhythm in combat?</li>
+              <li>Why is it important that immediate execution still works?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>Input buffering became essential with fighting games in the 1990s. Street Fighter II's combo system required players to input moves during other moves' animations. Without buffering, combos would be nearly impossible.</p>
+            <p>Modern action games inherit this tradition. The buffer is invisible infrastructure that makes complex action sequences feel achievable.</p>
+
+            <h3>The Intent Problem</h3>
+            <p>Input buffering is an attempt to solve the <strong>intent problem</strong>: the player knows what they want to do, but the videogame only sees button presses. Timing errors don't mean the player changed their mind - they mean the player's timing was imperfect.</p>
+            <p>A generous buffer says: "I trust that you meant to do this, so I'll do it when I can."</p>
+
+            <h3>When Buffering Is Wrong</h3>
+            <p>Not all actions should be buffered:</p>
+            <ul>
+              <li><strong>Defensive actions:</strong> Blocking/dodging should often require precise timing. Buffering removes the skill expression.</li>
+              <li><strong>Commitment actions:</strong> If the videogame wants you to commit to a decision, buffering undermines that.</li>
+              <li><strong>Context-sensitive actions:</strong> If the same button does different things based on situation, buffering can cause wrong actions.</li>
+            </ul>
+
+            <h3>Fighting Game Philosophy</h3>
+            <p>Fighting games have deep input buffer traditions. Different videogames use different buffer windows, and this is a design choice:</p>
+            <ul>
+              <li>Long buffer = easier combos, more forgiving, less precise feel</li>
+              <li>Short buffer = harder combos, more skill expression, tighter feel</li>
+            </ul>
+            <p>Street Fighter V has longer buffers than Street Fighter III. This is intentional accessibility vs. skill ceiling tradeoff.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="coyote-time.html">Coyote Time</a> - the complementary forgiveness technique</li>
+          <li><a href="hitstop.html">Hitstop</a> - buffer inputs during freeze</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - why intent matters</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#input-buffer" class="term">Input Buffer</a></li>
+          <li><a href="../glossary.html#coyote-time" class="term">Coyote Time</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

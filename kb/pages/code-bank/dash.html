@@ -3,249 +3,404 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dash — VG101 Knowledge Base</title>
+  <title>Dash - VG101 Knowledge Base</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+  </style>
 </head>
 <body>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
-      
-      <div class="search-wrapper">
-        <input type="text" id="search-input" class="search-box" placeholder="Search...">
-        <div id="search-results" class="search-results"></div>
-      </div>
-      
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
       <div class="nav-section">
-        <div class="nav-section-title">Framework</div>
+        <div class="nav-section-title">Core Framework</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="../../pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="../../pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-          <li class="nav-item"><a href="../../pages/framework/action-grammar.html" class="nav-link">Action Grammar</a></li>
-          <li class="nav-item"><a href="../../pages/framework/feedback-readability.html" class="nav-link">Feedback & Readability</a></li>
-          <li class="nav-item"><a href="../../pages/framework/meaning-from-dynamics.html" class="nav-link">Meaning from Dynamics</a></li>
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Foundations</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Game</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/player-psychology.html" class="nav-link">Feedback Loops</a></li>
-          <li class="nav-item"><a href="../../pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
         </ul>
       </div>
-      
+
       <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
+        <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="../../pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link active">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="../../pages/level-design/verticality-sightlines.html" class="nav-link">Verticality & Sight Lines</a></li>
-        </ul>
-      </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/systems/economy-resources.html" class="nav-link">Economy & Resources</a></li>
-          <li class="nav-item"><a href="../../pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="../../pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="../../pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-      
+
       <div class="nav-section">
         <div class="nav-section-title">Resources</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/code-bank/index.html" class="nav-link">Code Bank</a></li>
-          <li class="nav-item"><a href="../../pages/case-studies/index.html" class="nav-link">Case Studies</a></li>
-          <li class="nav-item"><a href="../../pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="../../pages/references.html" class="nav-link">References</a></li>
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
         </ul>
       </div>
-      
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../../pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play → Name → Make → Reflect</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="../../pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-    
     </nav>
-    
+
     <main class="main-content">
       <div class="content-wrapper">
-        <nav class="breadcrumb"><a href="../../index.html">Home</a> / <a href="index.html">Code Bank</a> / Dash</nav>
-        
-        <div class="register-legend">
-          <div class="legend-item">
-            <div class="legend-swatch student"></div>
-            <span>Student</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch pedagogy"></div>
-            <span>Pedagogy</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch philosophy"></div>
-            <span>Philosophy</span>
-          </div>
-        </div>
-        
-        
-        <div class="page-meta">
-          <span>Code Bank</span>
-          <span class="tag">dash</span> <span class="tag">feel</span> <span class="tag">action</span> <span class="tag">intermediate</span>
-        </div>
-    
-        
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Dash
+        </nav>
+
         <h1>Dash</h1>
-A burst of movement in a direction. Quick, committed, often with invincibility. The defining gesture of modern action platformers.
-<hr>
-<h2>The Feel</h2>
-Dash is <strong>explosive and committed</strong>. You press, you move, no take-backs. The commitment creates tension; the burst creates power.
-<hr>
-<h2>Exposed Variables</h2>
-<table>
-<thead><tr>
-<th>Variable</th><th>Type</th><th>Default</th><th>What it does</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><code>dashSpeed</code></td><td>float</td><td>25.0</td><td>How fast you move during dash</td> <thead><tr> <th><code>dashDuration</code></th><th>float</th><th>0.15</th><th>How long the dash lasts (seconds)</th> <tr> <td><code>dashCooldown</code></td><td>float</td><td>0.0</td><td>Time before you can dash again</td> <thead><tr> <th><code>dashDirection</code></th><th>enum</th><th>EightWay</th><th>Which directions are valid</th> <tr> <td><code>dashCount</code></td><td>int</td><td>1</td><td>Dashes available per air period</td> <thead><tr> <th><code>refreshOnGround</code></th><th>bool</th><th>true</th><th>Does landing restore dash?</th> <tr> <td><code>invincibleDuringDash</code></td><td>bool</td><td>false</td><td>Ignore damage while dashing?</td> <thead><tr> <th><code>cancelWindow</code></th><th>float</th><th>0.0</th><th>When can you cancel into other actions?</th> <tr> <td><code>momentumTransfer</code></td><td>float</td><td>0.0</td><td>How much dash speed carries into normal movement</td></p>
-<hr>
-<h2>Tuning Guide</h2>
-<h3>Celeste-style (precise, resource-based):</h3>
-- <code>dashSpeed</code>: 25
-- <code>dashDuration</code>: 0.12-0.15
-- <code>dashCount</code>: 1
-- <code>dashDirection</code>: EightWay
-- <code>refreshOnGround</code>: true
-- <code>invincibleDuringDash</code>: true (brief)
-- <code>momentumTransfer</code>: 0
-<em>One dash per airtime, eight directions, full commitment</em>
-<h3>Hades-style (combat, spammable):</h3>
-- <code>dashSpeed</code>: 18
-- <code>dashDuration</code>: 0.1
-- <code>dashCooldown</code>: 0.3
-- <code>dashCount</code>: unlimited (via cooldown)
-- <code>dashDirection</code>: EightWay
-- <code>invincibleDuringDash</code>: true
-- <code>cancelWindow</code>: 0.05
-<em>Faster, shorter dashes you can chain</em>
-<h3>Mega Man X-style (ground only, forward):</h3>
-- <code>dashSpeed</code>: 15
-- <code>dashDuration</code>: 0.3
-- <code>dashDirection</code>: Horizontal
-- <code>dashCooldown</code>: 0
-- <code>groundOnly</code>: true (separate variable)
-<em>Longer duration, ground-based</em>
-<hr>
-<h2>How It Works</h2>
-<pre><code>On Dash Press (if dashCount > 0):
+
+        <p class="lead">
+          A burst of movement in a direction. Quick, committed, often with invincibility. The defining gesture of modern action platformers.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>The Feel</h3>
+            <p>Dash is <strong>explosive and committed</strong>. You press, you move, no take-backs. The commitment creates tension; the burst creates power.</p>
+
+            <h3>Exposed Variables</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>dashSpeed</code></td>
+                  <td>float</td>
+                  <td>25.0</td>
+                  <td>How fast you move during dash</td>
+                </tr>
+                <tr>
+                  <td><code>dashDuration</code></td>
+                  <td>float</td>
+                  <td>0.15</td>
+                  <td>How long the dash lasts (seconds)</td>
+                </tr>
+                <tr>
+                  <td><code>dashCooldown</code></td>
+                  <td>float</td>
+                  <td>0.0</td>
+                  <td>Time before you can dash again</td>
+                </tr>
+                <tr>
+                  <td><code>dashDirection</code></td>
+                  <td>enum</td>
+                  <td>EightWay</td>
+                  <td>Which directions are valid</td>
+                </tr>
+                <tr>
+                  <td><code>dashCount</code></td>
+                  <td>int</td>
+                  <td>1</td>
+                  <td>Dashes available per air period</td>
+                </tr>
+                <tr>
+                  <td><code>refreshOnGround</code></td>
+                  <td>bool</td>
+                  <td>true</td>
+                  <td>Does landing restore dash?</td>
+                </tr>
+                <tr>
+                  <td><code>invincibleDuringDash</code></td>
+                  <td>bool</td>
+                  <td>false</td>
+                  <td>Ignore damage while dashing?</td>
+                </tr>
+                <tr>
+                  <td><code>cancelWindow</code></td>
+                  <td>float</td>
+                  <td>0.0</td>
+                  <td>When can you cancel into other actions?</td>
+                </tr>
+                <tr>
+                  <td><code>momentumTransfer</code></td>
+                  <td>float</td>
+                  <td>0.0</td>
+                  <td>How much dash speed carries into normal movement</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Tuning Guide</h3>
+
+            <p><strong>Celeste-style (precise, resource-based):</strong></p>
+            <ul>
+              <li><code>dashSpeed</code>: 25</li>
+              <li><code>dashDuration</code>: 0.12-0.15</li>
+              <li><code>dashCount</code>: 1</li>
+              <li><code>dashDirection</code>: EightWay</li>
+              <li><code>refreshOnGround</code>: true</li>
+              <li><code>invincibleDuringDash</code>: true (brief)</li>
+              <li><code>momentumTransfer</code>: 0</li>
+            </ul>
+            <p><em>One dash per airtime, eight directions, full commitment</em></p>
+
+            <p><strong>Hades-style (combat, spammable):</strong></p>
+            <ul>
+              <li><code>dashSpeed</code>: 18</li>
+              <li><code>dashDuration</code>: 0.1</li>
+              <li><code>dashCooldown</code>: 0.3</li>
+              <li><code>dashCount</code>: unlimited (via cooldown)</li>
+              <li><code>dashDirection</code>: EightWay</li>
+              <li><code>invincibleDuringDash</code>: true</li>
+              <li><code>cancelWindow</code>: 0.05</li>
+            </ul>
+            <p><em>Faster, shorter dashes you can chain</em></p>
+
+            <p><strong>Mega Man X-style (ground only, forward):</strong></p>
+            <ul>
+              <li><code>dashSpeed</code>: 15</li>
+              <li><code>dashDuration</code>: 0.3</li>
+              <li><code>dashDirection</code>: Horizontal</li>
+              <li><code>dashCooldown</code>: 0</li>
+              <li><code>groundOnly</code>: true (separate variable)</li>
+            </ul>
+            <p><em>Longer duration, ground-based</em></p>
+
+            <h3>How It Works</h3>
+            <pre><code>On Dash Press (if dashCount > 0):
   - Record dash direction from input
   - Set dash state
   - Start dash timer
   - If invincible: enable invincibility frames
+
 During Dash:
   - Override normal movement with dashSpeed in dashDirection
   - Ignore gravity (optional)
   - Check for cancel window inputs
+
 On Dash End:
   - Return to normal movement
   - Apply momentum transfer if any
   - Start cooldown timer if applicable
   - Decrement dashCount
+
 On Ground Contact:
-  - If refreshOnGround: restore dashCount
-</code></pre>
-<hr>
-<h2>Common Issues</h2>
-<strong>"The dash feels weak"</strong>
-→ Increase <code>dashSpeed</code>. Dash should feel noticeably faster than running.
-<strong>"I can't control where I'm going"</strong>
-→ Check <code>dashDirection</code>. If set to four-way, you might expect eight. Also check input handling for diagonals.
-<strong>"The dash is too short/long"</strong>
-→ Adjust <code>dashDuration</code>. 0.1-0.2 is typical. Shorter = snappier; longer = more distance.
-<strong>"It feels like I have infinite dashes"</strong>
-→ Check <code>refreshOnGround</code> and <code>dashCount</code>. If grounded resets dash instantly, add a brief window.
-<strong>"I'm taking damage during dash"</strong>
-→ <code>invincibleDuringDash</code> needs to be true, and your damage system needs to check for invincibility frames.
-<hr>
-<h2>Direction Systems</h2>
-<table>
-<thead><tr>
-<th>System</th><th>Directions</th><th>Use Case</th>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tr></thead><tbody>
-</tr>
-</tbody></table>
-<p><tr> <td><strong>FourWay</strong></td><td>Up, Down, Left, Right</td><td>Simple, classic</td> <thead><tr> <th><strong>EightWay</strong></th><th>+ Diagonals</th><th>Precise, modern platformers</th> <tr> <td><strong>Horizontal</strong></td><td>Left, Right only</td><td>Ground-focused games</td> <thead><tr> <th><strong>Aim-Based</strong></th><th>Follows mouse/stick direction</th><th>Twin-stick, shooters</th> <tr> <td><strong>Movement-Based</strong></td><td>Follows current velocity</td><td>Momentum-focused</td></p>
-<hr>
-<h2>Combine With</h2>
-- <a href="air-control.html">Air Control</a> — what you can do after the dash
-- <a href="coyote-time.html">Coyote Time</a> — brief dash window after leaving platform
-- <a href="hitstop.html">Hitstop</a> — freeze when dash-attack connects
-- <a href="trail-effect.html">Trail Effect</a> — ghost images during dash
-- <a href="screen-shake.html">Screen Shake</a> — on dash-attack impact
-<hr>
-<h2>Heritage Notes</h2>
-The dash evolved from:
-<strong>Mega Man X (1993)</strong> — Ground dash that changed the pace of action platformers
-<strong>Fighting games</strong> — Air dashes in <em>Marvel vs. Capcom</em>, <em>Guilty Gear</em>
-<strong>Modern platformers</strong> — <em>Celeste</em> refined the single-dash-per-air model
-The dash is now so standard that its <em>absence</em> is notable.
-<hr>
-<h2>See Also</h2>
-- <a href="case-studies-celeste-dash.html">Dash</a> — the Celeste dash analyzed
-- <a href="gesture.html">Gesture</a> — dash as canonical gesture
-- <a href="aesthetic-heritage.html">Aesthetic Heritage</a> — dash lineage
-- <a href="trail-effect.html">Trail Effect</a> — common visual pairing
-        
+  - If refreshOnGround: restore dashCount</code></pre>
+
+            <h3>Common Issues</h3>
+            <p><strong>"The dash feels weak"</strong><br>
+            Increase <code>dashSpeed</code>. Dash should feel noticeably faster than running.</p>
+
+            <p><strong>"I can't control where I'm going"</strong><br>
+            Check <code>dashDirection</code>. If set to four-way, you might expect eight. Also check input handling for diagonals.</p>
+
+            <p><strong>"The dash is too short/long"</strong><br>
+            Adjust <code>dashDuration</code>. 0.1-0.2 is typical. Shorter = snappier; longer = more distance.</p>
+
+            <p><strong>"It feels like I have infinite dashes"</strong><br>
+            Check <code>refreshOnGround</code> and <code>dashCount</code>. If grounded resets dash instantly, add a brief window.</p>
+
+            <p><strong>"I'm taking damage during dash"</strong><br>
+            <code>invincibleDuringDash</code> needs to be true, and your damage system needs to check for invincibility frames.</p>
+
+            <h3>Direction Systems</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>System</th>
+                  <th>Directions</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>FourWay</strong></td>
+                  <td>Up, Down, Left, Right</td>
+                  <td>Simple, classic</td>
+                </tr>
+                <tr>
+                  <td><strong>EightWay</strong></td>
+                  <td>+ Diagonals</td>
+                  <td>Precise, modern platformers</td>
+                </tr>
+                <tr>
+                  <td><strong>Horizontal</strong></td>
+                  <td>Left, Right only</td>
+                  <td>Ground-focused videogames</td>
+                </tr>
+                <tr>
+                  <td><strong>Aim-Based</strong></td>
+                  <td>Follows mouse/stick direction</td>
+                  <td>Twin-stick, shooters</td>
+                </tr>
+                <tr>
+                  <td><strong>Movement-Based</strong></td>
+                  <td>Follows current velocity</td>
+                  <td>Momentum-focused</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="air-control.html">Air Control</a> - what you can do after the dash</li>
+              <li><a href="coyote-time.html">Coyote Time</a> - brief dash window after leaving platform</li>
+              <li><a href="hitstop.html">Hitstop</a> - freeze when dash-attack connects</li>
+              <li><a href="trail-effect.html">Trail Effect</a> - ghost images during dash</li>
+              <li><a href="screen-shake.html">Screen Shake</a> - on dash-attack impact</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Teach Dash</h3>
+            <p>Dash introduces students to <strong>resource management in movement</strong>. Unlike jump (which is almost always available), dash often has a count or cooldown. This creates decisions: "Should I dash now or save it?"</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Start with unlimited dashes, no cooldown - feel the basic mechanic</li>
+              <li>Add dashCount = 1 with refreshOnGround - introduces resource thinking</li>
+              <li>Add invincibility - changes how dash is used (evasion vs. movement)</li>
+              <li>Experiment with direction systems</li>
+            </ol>
+
+            <h3>Common Student Mistakes</h3>
+            <p><strong>Making dash too similar to running:</strong> If dash speed is only 1.5x run speed, it doesn't feel special. It needs to feel like a distinct mode.</p>
+
+            <p><strong>Forgetting cancel windows:</strong> Students implement dash that can't be interrupted. This feels unresponsive. Even committed dashes usually have late cancel windows.</p>
+
+            <p><strong>Ignoring the resource:</strong> When dashCount is treated as infinite, students miss the design opportunity. One dash per airtime creates meaningful choices.</p>
+
+            <h3>Assessment</h3>
+            <ul>
+              <li>Can they articulate why Celeste uses one dash per airtime?</li>
+              <li>Can they explain how invincibility changes the dash's role?</li>
+              <li>Can they design a dash that fits a specific videogame genre?</li>
+            </ul>
+
+            <h3>Exercise: Dash Role Analysis</h3>
+            <p>Have students play three videogames with dashes (Celeste, Hades, Mega Man X). For each:</p>
+            <ul>
+              <li>What role does the dash serve? (Traversal? Evasion? Combat?)</li>
+              <li>How does the resource system support that role?</li>
+              <li>What would change if you removed dash invincibility?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Heritage Notes</h3>
+            <p>The dash evolved from several sources:</p>
+
+            <p><strong>Mega Man X (1993)</strong> - Ground dash that changed the pace of action platformers. Made movement itself feel aggressive.</p>
+
+            <p><strong>Fighting games</strong> - Air dashes in <em>Marvel vs. Capcom</em>, <em>Guilty Gear</em> created aerial mobility that felt distinct from jumping.</p>
+
+            <p><strong>Modern platformers</strong> - <em>Celeste</em> refined the single-dash-per-air model into a precise tool.</p>
+
+            <p>The dash is now so standard that its <em>absence</em> is notable. A platformer without dash feels deliberately retro.</p>
+
+            <h3>Dash as Commitment</h3>
+            <p>Dash represents a design philosophy: <strong>powerful but costly</strong>. Unlike jump (low commitment, low power), dash trades control for speed. You're locked into a direction.</p>
+
+            <p>This connects to <a href="../framework/permissions.html" class="term">Permissions</a>: dash <em>allows</em> burst movement but <em>requires</em> commitment. It <em>forbids</em> changing direction mid-dash. The permissions shape the feel.</p>
+
+            <h3>The Invincibility Question</h3>
+            <p>Adding invincibility to dash transforms it from <em>movement tool</em> to <em>survival tool</em>. This changes everything:</p>
+            <ul>
+              <li>Players dash <em>through</em> attacks, not around them</li>
+              <li>Dash timing becomes a core skill</li>
+              <li>Enemy design must account for i-frames</li>
+            </ul>
+            <p>The decision to include invincibility is one of the most impactful in action videogame design.</p>
+
+            <h3>The Celeste Model</h3>
+            <p><em>Celeste</em> made the dash-per-airtime model canonical for precision platformers. Key insights:</p>
+            <ul>
+              <li>One dash per air period creates meaningful scarcity</li>
+              <li>Eight directions enables precise positioning</li>
+              <li>Refreshing on ground makes failure recoverable</li>
+              <li>Brief invincibility forgives close calls</li>
+            </ul>
+            <p>This model is now the default expectation. Deviating from it is a deliberate choice.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much should momentum carry after dash? Full stop vs. smooth transition creates very different feels.</li>
+              <li>Should dash refresh on other surfaces (walls, enemies)? Each refresh point changes level design possibilities.</li>
+              <li>Is the Celeste model becoming too dominant? Are we losing variety in dash design?</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/gesture.html">Gesture</a> - dash as canonical gesture</li>
+          <li><a href="../framework/aesthetic-heritage.html">Aesthetic Heritage</a> - dash lineage</li>
+          <li><a href="trail-effect.html">Trail Effect</a> - common visual pairing</li>
+        </ul>
+
+        <h2>Glossary Terms</h2>
+        <ul>
+          <li><a href="../glossary.html#invincibility-frames" class="term">Invincibility Frames</a> - damage immunity period</li>
+          <li><a href="../glossary.html#cancel-window" class="term">Cancel Window</a> - when you can interrupt an action</li>
+          <li><a href="../glossary.html#juice" class="term">Juice</a> - feedback techniques that make dash feel powerful</li>
+        </ul>
+
       </div>
     </main>
   </div>
-  
+
   <script src="../../js/main.js"></script>
-  <script>
-    function toggleSection(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      content.classList.toggle('collapsed');
-      icon.textContent = content.classList.contains('collapsed') ? '▶' : '▼';
-    }
-  </script>
 </body>
 </html>
