@@ -199,6 +199,62 @@ function initActiveNav() {
 }
 
 // ========================================
+// Mobile Navigation
+// ========================================
+
+function initMobileNav() {
+  const toggle = document.querySelector('.mobile-nav-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.mobile-nav-overlay');
+
+  if (!toggle || !sidebar) return;
+
+  // Create overlay if it doesn't exist
+  let navOverlay = overlay;
+  if (!navOverlay) {
+    navOverlay = document.createElement('div');
+    navOverlay.className = 'mobile-nav-overlay';
+    document.body.appendChild(navOverlay);
+  }
+
+  function openMenu() {
+    toggle.classList.add('active');
+    sidebar.classList.add('mobile-open');
+    navOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    toggle.classList.remove('active');
+    sidebar.classList.remove('mobile-open');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', function() {
+    if (sidebar.classList.contains('mobile-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  navOverlay.addEventListener('click', closeMenu);
+
+  // Close on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && sidebar.classList.contains('mobile-open')) {
+      closeMenu();
+    }
+  });
+
+  // Close when clicking a nav link (for same-page navigation)
+  sidebar.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+}
+
+// ========================================
 // Initialize on DOM Ready
 // ========================================
 
@@ -206,6 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initSearch();
   initToggles();
   initActiveNav();
+  initMobileNav();
 });
 
 // ========================================

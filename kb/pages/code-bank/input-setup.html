@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Setup - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+    .callout{background:#fef3c7;border-left:4px solid #f59e0b;padding:1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+    .callout-important{background:#fee2e2;border-left-color:#ef4444}
+  </style>
+</head>
+<body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/the-weekly-rhythm.html" class="nav-link">The Weekly Rhythm</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Code Bank</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link active">Input Setup</a></li>
+          <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
+          <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../case-studies/index.html" class="nav-link">Case Studies</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Code Bank</a> / Input Setup
+        </nav>
+
+        <h1>Input Setup</h1>
+
+        <p class="lead">
+          The foundation for all Code Bank scripts. Set this up once, and all other scaffolds will work with <strong>both gamepad and keyboard+mouse</strong> automatically.
+        </p>
+
+        <div class="callout">
+          <strong>Do this first!</strong> All Code Bank scripts expect this input setup. Complete this page before using any other scaffold.
+        </div>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what you do</span>
+          </div>
+          <div class="register-content">
+            <h3>Step 1: Create the Input Actions Asset</h3>
+            <ol>
+              <li>In Unity: <strong>Assets → Create → Input Actions</strong></li>
+              <li>Name it <code>GameInputActions</code></li>
+              <li>Double-click to open the Input Actions editor</li>
+            </ol>
+
+            <h3>Step 2: Create Action Maps</h3>
+            <p>We'll create two action maps: <strong>Gameplay</strong> (movement, actions) and <strong>UI</strong> (menus).</p>
+            <ol>
+              <li>Click <strong>+</strong> next to "Action Maps"</li>
+              <li>Name it <code>Gameplay</code></li>
+              <li>Click <strong>+</strong> again, name it <code>UI</code></li>
+            </ol>
+
+            <h3>Step 3: Add Actions to Gameplay Map</h3>
+            <p>Select the <strong>Gameplay</strong> action map, then add these actions:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Action Name</th>
+                  <th>Action Type</th>
+                  <th>Control Type</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Move</code></td>
+                  <td>Value</td>
+                  <td>Vector2</td>
+                  <td>WASD / Left Stick movement</td>
+                </tr>
+                <tr>
+                  <td><code>Look</code></td>
+                  <td>Value</td>
+                  <td>Vector2</td>
+                  <td>Mouse / Right Stick camera</td>
+                </tr>
+                <tr>
+                  <td><code>Jump</code></td>
+                  <td>Button</td>
+                  <td>-</td>
+                  <td>Space / South Button (A/X)</td>
+                </tr>
+                <tr>
+                  <td><code>Dash</code></td>
+                  <td>Button</td>
+                  <td>-</td>
+                  <td>Shift / Right Trigger</td>
+                </tr>
+                <tr>
+                  <td><code>Attack</code></td>
+                  <td>Button</td>
+                  <td>-</td>
+                  <td>Left Click / West Button (X/Square)</td>
+                </tr>
+                <tr>
+                  <td><code>Interact</code></td>
+                  <td>Button</td>
+                  <td>-</td>
+                  <td>E / East Button (B/Circle)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Step 4: Add Bindings</h3>
+            <p>For each action, add bindings for keyboard+mouse AND gamepad:</p>
+
+            <h4>Move Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Move</code> action</li>
+              <li>Click <strong>+</strong> → Add 2D Vector Composite → name it "WASD"</li>
+              <li>Bind: Up=W, Down=S, Left=A, Right=D</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/leftStick</code></li>
+            </ol>
+
+            <h4>Look Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Look</code> action</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Mouse/delta</code></li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/rightStick</code></li>
+            </ol>
+
+            <h4>Jump Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Jump</code> action</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Keyboard/space</code></li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/buttonSouth</code></li>
+            </ol>
+
+            <h4>Dash Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Dash</code> action</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Keyboard/leftShift</code></li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/rightTrigger</code></li>
+            </ol>
+
+            <h4>Attack Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Attack</code> action</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Mouse/leftButton</code></li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/buttonWest</code></li>
+            </ol>
+
+            <h4>Interact Action Bindings:</h4>
+            <ol>
+              <li>Select <code>Interact</code> action</li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Keyboard/e</code></li>
+              <li>Click <strong>+</strong> → Add Binding → path: <code>Gamepad/buttonEast</code></li>
+            </ol>
+
+            <h3>Step 5: Save and Generate C# Class</h3>
+            <ol>
+              <li>Click <strong>Save Asset</strong> in the Input Actions window</li>
+              <li>Select your <code>GameInputActions</code> asset in the Project window</li>
+              <li>In the Inspector, check <strong>Generate C# Class</strong></li>
+              <li>Click <strong>Apply</strong></li>
+            </ol>
+            <p>Unity generates <code>GameInputActions.cs</code> - you won't edit this directly.</p>
+
+            <h3>Step 6: Create the InputReader Script</h3>
+            <p>This is the <strong>bridge</strong> between Unity's Input System and your gameplay scripts. All Code Bank scripts read from this.</p>
+
+            <p>Create a new C# script called <code>InputReader.cs</code>:</p>
+
+            <pre><code>// ============================================================
+// InputReader.cs
+// Central input hub - all gameplay scripts read from this.
+// Handles gamepad, keyboard, and mouse seamlessly.
+// Unity 6.x + New Input System
+// ============================================================
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+using System;
+
+/// &lt;summary&gt;
+/// Reads input from the New Input System and exposes it
+/// in a clean, device-agnostic way. Attach to a GameObject
+/// and reference from other scripts.
+/// &lt;/summary&gt;
+public class InputReader : MonoBehaviour
+{
+    // ========================================================
+    // SINGLETON (optional - convenient for prototyping)
+    // ========================================================
+
+    public static InputReader Instance { get; private set; }
+
+    [Header("Settings")]
+    [Tooltip("Use singleton pattern for easy global access")]
+    [SerializeField] private bool useSingleton = true;
+
+    [Tooltip("Mouse look sensitivity multiplier")]
+    [SerializeField] [Range(0.1f, 5f)] private float mouseSensitivity = 1f;
+
+    [Tooltip("Gamepad look sensitivity multiplier")]
+    [SerializeField] [Range(0.1f, 10f)] private float gamepadLookSensitivity = 3f;
+
+    // ========================================================
+    // INPUT VALUES - Read these from other scripts
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Movement input as Vector2 (-1 to 1 on each axis)
+    /// WASD or Left Stick
+    /// &lt;/summary&gt;
+    public Vector2 MoveInput { get; private set; }
+
+    /// &lt;summary&gt;
+    /// Look/camera input as Vector2
+    /// Mouse delta or Right Stick (sensitivity-adjusted)
+    /// &lt;/summary&gt;
+    public Vector2 LookInput { get; private set; }
+
+    /// &lt;summary&gt;
+    /// True while jump button is held
+    /// &lt;/summary&gt;
+    public bool JumpHeld { get; private set; }
+
+    /// &lt;summary&gt;
+    /// True while dash button is held
+    /// &lt;/summary&gt;
+    public bool DashHeld { get; private set; }
+
+    /// &lt;summary&gt;
+    /// True while attack button is held
+    /// &lt;/summary&gt;
+    public bool AttackHeld { get; private set; }
+
+    /// &lt;summary&gt;
+    /// True while interact button is held
+    /// &lt;/summary&gt;
+    public bool InteractHeld { get; private set; }
+
+    // ========================================================
+    // EVENTS - Subscribe for button press/release
+    // ========================================================
+
+    /// &lt;summary&gt;Fired when jump is pressed&lt;/summary&gt;
+    public event Action OnJumpPressed;
+
+    /// &lt;summary&gt;Fired when jump is released&lt;/summary&gt;
+    public event Action OnJumpReleased;
+
+    /// &lt;summary&gt;Fired when dash is pressed&lt;/summary&gt;
+    public event Action OnDashPressed;
+
+    /// &lt;summary&gt;Fired when dash is released&lt;/summary&gt;
+    public event Action OnDashReleased;
+
+    /// &lt;summary&gt;Fired when attack is pressed&lt;/summary&gt;
+    public event Action OnAttackPressed;
+
+    /// &lt;summary&gt;Fired when attack is released&lt;/summary&gt;
+    public event Action OnAttackReleased;
+
+    /// &lt;summary&gt;Fired when interact is pressed&lt;/summary&gt;
+    public event Action OnInteractPressed;
+
+    // ========================================================
+    // INTERNAL
+    // ========================================================
+
+    private GameInputActions inputActions;
+    private bool isGamepad = false;
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        // Singleton setup
+        if (useSingleton)
+        {
+            if (Instance != null &amp;&amp; Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        // Create input actions
+        inputActions = new GameInputActions();
+    }
+
+    void OnEnable()
+    {
+        inputActions.Gameplay.Enable();
+
+        // Subscribe to actions
+        inputActions.Gameplay.Move.performed += OnMove;
+        inputActions.Gameplay.Move.canceled += OnMove;
+
+        inputActions.Gameplay.Look.performed += OnLook;
+        inputActions.Gameplay.Look.canceled += OnLook;
+
+        inputActions.Gameplay.Jump.performed += OnJump;
+        inputActions.Gameplay.Jump.canceled += OnJumpCancel;
+
+        inputActions.Gameplay.Dash.performed += OnDash;
+        inputActions.Gameplay.Dash.canceled += OnDashCancel;
+
+        inputActions.Gameplay.Attack.performed += OnAttack;
+        inputActions.Gameplay.Attack.canceled += OnAttackCancel;
+
+        inputActions.Gameplay.Interact.performed += OnInteract;
+
+        // Track device changes
+        InputSystem.onActionChange += OnActionChange;
+    }
+
+    void OnDisable()
+    {
+        inputActions.Gameplay.Disable();
+
+        inputActions.Gameplay.Move.performed -= OnMove;
+        inputActions.Gameplay.Move.canceled -= OnMove;
+
+        inputActions.Gameplay.Look.performed -= OnLook;
+        inputActions.Gameplay.Look.canceled -= OnLook;
+
+        inputActions.Gameplay.Jump.performed -= OnJump;
+        inputActions.Gameplay.Jump.canceled -= OnJumpCancel;
+
+        inputActions.Gameplay.Dash.performed -= OnDash;
+        inputActions.Gameplay.Dash.canceled -= OnDashCancel;
+
+        inputActions.Gameplay.Attack.performed -= OnAttack;
+        inputActions.Gameplay.Attack.canceled -= OnAttackCancel;
+
+        inputActions.Gameplay.Interact.performed -= OnInteract;
+
+        InputSystem.onActionChange -= OnActionChange;
+    }
+
+    // ========================================================
+    // INPUT HANDLERS
+    // ========================================================
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        MoveInput = ctx.ReadValue&lt;Vector2&gt;();
+    }
+
+    private void OnLook(InputAction.CallbackContext ctx)
+    {
+        Vector2 raw = ctx.ReadValue&lt;Vector2&gt;();
+
+        // Apply appropriate sensitivity based on device
+        float sensitivity = isGamepad ? gamepadLookSensitivity : mouseSensitivity;
+        LookInput = raw * sensitivity;
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        JumpHeld = true;
+        OnJumpPressed?.Invoke();
+    }
+
+    private void OnJumpCancel(InputAction.CallbackContext ctx)
+    {
+        JumpHeld = false;
+        OnJumpReleased?.Invoke();
+    }
+
+    private void OnDash(InputAction.CallbackContext ctx)
+    {
+        DashHeld = true;
+        OnDashPressed?.Invoke();
+    }
+
+    private void OnDashCancel(InputAction.CallbackContext ctx)
+    {
+        DashHeld = false;
+        OnDashReleased?.Invoke();
+    }
+
+    private void OnAttack(InputAction.CallbackContext ctx)
+    {
+        AttackHeld = true;
+        OnAttackPressed?.Invoke();
+    }
+
+    private void OnAttackCancel(InputAction.CallbackContext ctx)
+    {
+        AttackHeld = false;
+        OnAttackReleased?.Invoke();
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        InteractHeld = true;
+        OnInteractPressed?.Invoke();
+        // Auto-release interact after one frame
+        Invoke(nameof(ReleaseInteract), 0.1f);
+    }
+
+    private void ReleaseInteract()
+    {
+        InteractHeld = false;
+    }
+
+    // ========================================================
+    // DEVICE DETECTION
+    // ========================================================
+
+    private void OnActionChange(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            var action = obj as InputAction;
+            if (action?.activeControl?.device != null)
+            {
+                isGamepad = action.activeControl.device is Gamepad;
+            }
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Returns true if current input device is a gamepad
+    /// &lt;/summary&gt;
+    public bool IsUsingGamepad =&gt; isGamepad;
+
+    // ========================================================
+    // PUBLIC METHODS
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Enable gameplay input (call when unpausing)
+    /// &lt;/summary&gt;
+    public void EnableGameplayInput()
+    {
+        inputActions.Gameplay.Enable();
+    }
+
+    /// &lt;summary&gt;
+    /// Disable gameplay input (call when pausing/in menus)
+    /// &lt;/summary&gt;
+    public void DisableGameplayInput()
+    {
+        inputActions.Gameplay.Disable();
+        MoveInput = Vector2.zero;
+        LookInput = Vector2.zero;
+    }
+}
+
+// ============================================================
+// USAGE:
+//
+// 1. Create empty GameObject, add InputReader component
+// 2. Other scripts read input like this:
+//
+//    // Option A: Using singleton (quick prototyping)
+//    Vector2 move = InputReader.Instance.MoveInput;
+//    if (InputReader.Instance.JumpHeld) { ... }
+//
+//    // Option B: Using reference (better for production)
+//    [SerializeField] private InputReader input;
+//    Vector2 move = input.MoveInput;
+//
+//    // Option C: Subscribe to events
+//    void OnEnable() {
+//        InputReader.Instance.OnJumpPressed += HandleJump;
+//    }
+//    void OnDisable() {
+//        InputReader.Instance.OnJumpPressed -= HandleJump;
+//    }
+//
+// 3. Works automatically with both keyboard+mouse and gamepad!
+// ============================================================</code></pre>
+
+            <h3>Step 7: Add InputReader to Your Scene</h3>
+            <ol>
+              <li>Create empty GameObject: <strong>GameObject → Create Empty</strong></li>
+              <li>Name it <code>InputReader</code></li>
+              <li>Add the <code>InputReader</code> component</li>
+              <li>It will persist across scenes if <code>useSingleton</code> is checked</li>
+            </ol>
+
+            <div class="callout">
+              <strong>Done!</strong> All Code Bank scripts can now read from <code>InputReader.Instance</code> and will automatically work with gamepad or keyboard+mouse.
+            </div>
+
+            <h3>Quick Reference: Reading Input</h3>
+            <pre><code>// Movement (WASD or Left Stick)
+Vector2 moveInput = InputReader.Instance.MoveInput;
+float horizontal = moveInput.x;  // -1 to 1
+float vertical = moveInput.y;    // -1 to 1
+
+// Camera (Mouse or Right Stick)
+Vector2 lookInput = InputReader.Instance.LookInput;
+
+// Buttons - check if held
+if (InputReader.Instance.JumpHeld) { }
+if (InputReader.Instance.DashHeld) { }
+if (InputReader.Instance.AttackHeld) { }
+
+// Buttons - subscribe to press events
+InputReader.Instance.OnJumpPressed += MyJumpHandler;
+InputReader.Instance.OnJumpReleased += MyJumpReleaseHandler;</code></pre>
+
+            <h3>Perspective-Specific Notes</h3>
+
+            <h4>2D Platformer</h4>
+            <ul>
+              <li>Use <code>MoveInput.x</code> for horizontal movement</li>
+              <li>Ignore <code>MoveInput.y</code> (or use for ladder climbing)</li>
+              <li><code>LookInput</code> typically unused</li>
+            </ul>
+
+            <h4>3D Third-Person</h4>
+            <ul>
+              <li>Use <code>MoveInput</code> relative to camera forward</li>
+              <li>Use <code>LookInput</code> to orbit camera around player</li>
+            </ul>
+
+            <h4>3D First-Person</h4>
+            <ul>
+              <li>Use <code>MoveInput</code> relative to player forward</li>
+              <li>Use <code>LookInput</code> to rotate player view directly</li>
+              <li>Consider locking and hiding cursor</li>
+            </ul>
+
+            <h4>Isometric / Top-Down</h4>
+            <ul>
+              <li>Use <code>MoveInput</code> directly as world-space direction</li>
+              <li><code>LookInput</code> can aim independently of movement</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why This Architecture</h3>
+            <p>The InputReader pattern serves several pedagogical goals:</p>
+            <ul>
+              <li><strong>Device-agnostic:</strong> Students don't write separate gamepad/keyboard code</li>
+              <li><strong>Single source of truth:</strong> All input flows through one place</li>
+              <li><strong>Event-driven option:</strong> Supports both polling and event patterns</li>
+              <li><strong>Easily mockable:</strong> Can simulate input for testing</li>
+            </ul>
+
+            <h3>Common Student Issues</h3>
+            <p><strong>"My input isn't working"</strong></p>
+            <ol>
+              <li>Check InputReader exists in scene</li>
+              <li>Check GameInputActions asset has bindings saved</li>
+              <li>Check "Generate C# Class" is enabled and applied</li>
+              <li>Check Gameplay action map is enabled</li>
+            </ol>
+
+            <p><strong>"Gamepad works but keyboard doesn't (or vice versa)"</strong></p>
+            <p>Check bindings in the Input Actions asset. Each action needs BOTH keyboard and gamepad bindings.</p>
+
+            <h3>Extending for New Actions</h3>
+            <p>To add a new action (e.g., "Crouch"):</p>
+            <ol>
+              <li>Add action to GameInputActions asset</li>
+              <li>Add bindings for both keyboard and gamepad</li>
+              <li>Save and Apply (regenerates C# class)</li>
+              <li>Add property and handler in InputReader.cs</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Input Abstraction Philosophy</h3>
+            <p>The gap between "player intent" and "hardware signal" is larger than it seems:</p>
+            <ul>
+              <li><strong>Hardware:</strong> "Left stick at (0.7, 0.3)"</li>
+              <li><strong>Intent:</strong> "Move forward-right at moderate speed"</li>
+            </ul>
+            <p>Good input architecture bridges this gap cleanly. The InputReader transforms hardware signals into semantic intent that gameplay code can understand without caring about the source device.</p>
+
+            <h3>Why Events AND Polling</h3>
+            <p>Different systems need input differently:</p>
+            <ul>
+              <li><strong>Polling</strong> (reading MoveInput each frame): Movement, aiming - continuous actions</li>
+              <li><strong>Events</strong> (OnJumpPressed): Jump, attack - discrete actions with timing that matters</li>
+            </ul>
+            <p>Offering both lets each system use the appropriate pattern.</p>
+
+            <h3>The Sensitivity Problem</h3>
+            <p>Mouse delta and stick position are fundamentally different:</p>
+            <ul>
+              <li><strong>Mouse:</strong> "Moved 50 pixels since last frame" (velocity)</li>
+              <li><strong>Stick:</strong> "Currently at 0.8 right" (position)</li>
+            </ul>
+            <p>The sensitivity multipliers help normalize these, but perfect parity is impossible. This is why many videogames have separate mouse and gamepad sensitivity settings - and why we expose both in the InputReader.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="basic-jump.html">Basic Jump</a> - uses this input setup</li>
+          <li><a href="dash.html">Dash</a> - uses this input setup</li>
+          <li><a href="index.html">Code Bank Overview</a></li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
