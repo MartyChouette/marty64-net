@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal: Level One - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Case Studies</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="celeste-dash.html" class="nav-link">Celeste: Dash</a></li>
+          <li class="nav-item"><a href="celeste-assist-mode.html" class="nav-link">Celeste: Assist Mode</a></li>
+          <li class="nav-item"><a href="dark-souls-bonfire.html" class="nav-link">Dark Souls: Bonfire</a></li>
+          <li class="nav-item"><a href="hades-god-mode.html" class="nav-link">Hades: God Mode</a></li>
+          <li class="nav-item"><a href="portal-level-one.html" class="nav-link active">Portal: Level One</a></li>
+          <li class="nav-item"><a href="undertale-genocide.html" class="nav-link">Undertale: Genocide</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Case Studies</a> / Portal: Level One
+        </nav>
+
+        <h1>Portal: Level One</h1>
+
+        <p class="lead">
+          <em>Portal</em>'s first test chamber teaches the core mechanic without a single line of tutorial text.
+          It's a masterclass in implicit instruction - showing instead of telling, constraining instead of explaining.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what Level One does</span>
+          </div>
+          <div class="register-content">
+            <h3>The Setup</h3>
+            <p>You wake up in a glass box. There's a radio, a toilet, and a bed. Outside the glass, you see a room with a door. A timer counts down. When it hits zero, an orange portal opens on the wall outside. Through it, you can see... yourself. From behind.</p>
+
+            <h3>What You Learn (Without Being Told)</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Lesson</th>
+                  <th>How It's Taught</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Portals connect two places</td>
+                  <td>You see yourself through the portal - it's showing you from another angle</td>
+                </tr>
+                <tr>
+                  <td>You can walk through portals</td>
+                  <td>The only exit is through the portal. No other option.</td>
+                </tr>
+                <tr>
+                  <td>Portals preserve orientation</td>
+                  <td>Walking through doesn't disorient you. You exit the way you entered.</td>
+                </tr>
+                <tr>
+                  <td>The blue portal exists too</td>
+                  <td>After exiting, you see the blue portal on the chamber wall</td>
+                </tr>
+                <tr>
+                  <td>Orange and blue are linked</td>
+                  <td>Looking back through blue, you see where you came from</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>What's NOT In Level One</h3>
+            <p>Critically, the first chamber does NOT include:</p>
+            <ul>
+              <li>Text instructions ("Press E to interact")</li>
+              <li>Button prompts on screen</li>
+              <li>A portal gun (you don't get it until later)</li>
+              <li>Multiple paths or choices</li>
+              <li>Enemies or hazards</li>
+              <li>Time pressure (after the initial countdown)</li>
+            </ul>
+            <p>The level is stripped to essentials. One concept. One path. No distractions.</p>
+
+            <h3>The 4 A's Perspective</h3>
+            <ul>
+              <li><strong>Action:</strong> Minimal - walk, look. The simplicity focuses attention on the portal.</li>
+              <li><strong>Art:</strong> Clean, clinical environment. The orange portal glows against sterile white. Visual hierarchy is unmistakable.</li>
+              <li><strong>Arc:</strong> Brief. Maybe 30 seconds for most players. Long enough to understand, short enough to maintain curiosity.</li>
+              <li><strong>Atmosphere:</strong> Curious and slightly unsettling. You're being watched. Tested. The vibe is established immediately.</li>
+            </ul>
+
+            <h3>Try This</h3>
+            <p><strong>Time yourself</strong></p>
+            <p>How long does it take a first-time player to complete Level One? Watch someone who's never played. Where do they pause? What do they examine?</p>
+
+            <p><strong>Reverse engineer it</strong></p>
+            <p>List everything Level One teaches. Now list what it deliberately excludes. What gets introduced in Level Two? Level Three?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Use This Case Study</h3>
+            <p><em>Portal</em>'s first chamber is the canonical example of implicit tutorial design. Valve documented their process extensively in developer commentary, making it perfect for teaching:</p>
+            <ul>
+              <li>The problem: How do you teach a mechanic that doesn't exist in other videogames?</li>
+              <li>The solution: Constrain the space until only the desired action is possible</li>
+              <li>The principle: Show, don't tell. Better yet, make the player do.</li>
+            </ul>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play through first three chambers blind</li>
+              <li>Discuss: What did you learn? When did you learn it?</li>
+              <li>Replay with developer commentary enabled</li>
+              <li>Map each chamber to its teaching goal</li>
+              <li>Design exercise: Create a tutorial for a novel mechanic using only space and constraints</li>
+            </ol>
+
+            <h3>The Valve Method</h3>
+            <p>Valve's tutorial philosophy, refined across <em>Half-Life</em>, <em>Portal</em>, and <em>Left 4 Dead</em>:</p>
+            <ol>
+              <li><strong>Isolate the concept</strong> - Remove everything except what you're teaching</li>
+              <li><strong>Constrain the space</strong> - Make the correct action the only obvious action</li>
+              <li><strong>Let them discover</strong> - Player agency feels better than being told</li>
+              <li><strong>Repeat with variation</strong> - Same concept, different context, increasing complexity</li>
+            </ol>
+            <p>Level One exemplifies all four. The glass box isolates. The single exit constrains. Walking through is discovery. Later chambers repeat with variation.</p>
+
+            <h3>Discussion Prompts</h3>
+            <ul>
+              <li>Why does Level One let you see yourself through the portal? What would change if you couldn't?</li>
+              <li>What's the purpose of the countdown timer?</li>
+              <li>Why include the radio and toilet? (Hint: it's about making the space feel real)</li>
+              <li>How does <em>Portal</em>'s implicit approach compare to explicit tutorial text?</li>
+            </ul>
+
+            <h3>Common Student Mistakes</h3>
+            <p><strong>Over-explaining:</strong> Students often want to add text "just to be safe." Push them to trust spatial design.</p>
+            <p><strong>Adding too much:</strong> The temptation is to teach multiple things at once. <em>Portal</em>'s discipline is one thing per chamber.</p>
+            <p><strong>Forgetting repetition:</strong> One exposure isn't enough. Players need to apply concepts multiple times with variation.</p>
+
+            <h3>Developer Commentary</h3>
+            <p><em>Portal</em> includes built-in developer commentary. Enable it for educational use - Valve's designers explain their decisions at each moment. It's a free masterclass.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Implicit vs Explicit Instruction</h3>
+            <p>Tutorial design falls on a spectrum:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Implicit</th>
+                  <th>Explicit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Player discovers</td>
+                  <td>Videogame explains</td>
+                </tr>
+                <tr>
+                  <td>Spatial constraints</td>
+                  <td>Text/voice instructions</td>
+                </tr>
+                <tr>
+                  <td>Feels like playing</td>
+                  <td>Feels like learning</td>
+                </tr>
+                <tr>
+                  <td>Easy to miss</td>
+                  <td>Hard to miss</td>
+                </tr>
+                <tr>
+                  <td>Memorable through doing</td>
+                  <td>Memorable through reading</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Neither is universally better. <em>Portal</em> uses implicit instruction because its mechanic is spatial - the best way to understand portals is to walk through one.</p>
+
+            <h3>Affordance and Constraint</h3>
+            <p>Level One works through <strong>constraint</strong> more than <strong>affordance</strong>:</p>
+            <ul>
+              <li><strong>Affordance:</strong> The portal looks like something you can walk through</li>
+              <li><strong>Constraint:</strong> The glass box prevents any other action</li>
+            </ul>
+            <p>The affordance invites. The constraint requires. Together, they teach.</p>
+
+            <h3>The Permissions Angle</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective:</p>
+            <ul>
+              <li><strong>Allowed:</strong> Walk, look, exist in the space</li>
+              <li><strong>Required:</strong> Walk through the portal to progress</li>
+              <li><strong>Forbidden:</strong> Everything else (glass walls, no other exits)</li>
+            </ul>
+            <p>By narrowing permissions, Level One makes the desired action inevitable. This is <strong>permission design as tutorial</strong>.</p>
+
+            <h3>Aesthetic Heritage: The Test Chamber</h3>
+            <p>The test chamber format draws from scientific experimentation aesthetics - clean, controlled, observable. This serves multiple purposes:</p>
+            <ul>
+              <li>Justifies the artificiality of isolated teaching spaces</li>
+              <li>Establishes the Aperture Science fiction</li>
+              <li>Creates expectation for increasing complexity (you're being tested)</li>
+              <li>Makes the behind-the-scenes sections more impactful by contrast</li>
+            </ul>
+            <p>The <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> of the laboratory isn't just visual - it's structural.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>How much does implicit instruction rely on player patience? What about players who want to "get to the good part"?</li>
+              <li>Can implicit instruction work for abstract or non-spatial mechanics?</li>
+              <li>Is there a genre bias in implicit design? (Puzzle videogames expect it; action videogames often don't)</li>
+              <li>What's lost when players skip tutorial content? Is that their right?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Valve Developer Commentary (in-game, <em>Portal</em> and <em>Half-Life 2: Episode 2</em>)</li>
+              <li>Kim Swift's GDC talks on <em>Portal</em> development</li>
+              <li>Anna Anthropy's analysis in <em>A Game Design Vocabulary</em> (2014)</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../level-design/index.html">Level Design</a> - spatial teaching principles</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - how constraints create meaning</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - learning and discovery</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

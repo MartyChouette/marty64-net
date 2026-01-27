@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undertale: Genocide Route - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Case Studies</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="celeste-dash.html" class="nav-link">Celeste: Dash</a></li>
+          <li class="nav-item"><a href="celeste-assist-mode.html" class="nav-link">Celeste: Assist Mode</a></li>
+          <li class="nav-item"><a href="dark-souls-bonfire.html" class="nav-link">Dark Souls: Bonfire</a></li>
+          <li class="nav-item"><a href="hades-god-mode.html" class="nav-link">Hades: God Mode</a></li>
+          <li class="nav-item"><a href="portal-level-one.html" class="nav-link">Portal: Level One</a></li>
+          <li class="nav-item"><a href="undertale-genocide.html" class="nav-link active">Undertale: Genocide</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Case Studies</a> / Undertale: Genocide Route
+        </nav>
+
+        <h1>Undertale: Genocide Route</h1>
+
+        <p class="lead">
+          <em>Undertale</em>'s Genocide Route is what happens when a videogame says "you can do this" and means it
+          as a warning, not an invitation. It's a case study in <a href="../framework/permissions.html" class="term">Permissions</a>
+          that carry weight - where what's <strong>allowed</strong> becomes deeply uncomfortable.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what the Genocide Route does</span>
+          </div>
+          <div class="register-content">
+            <h3>The Three Routes</h3>
+            <p><em>Undertale</em> has three primary paths:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Route</th>
+                  <th>How to Trigger</th>
+                  <th>Tone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Neutral</td>
+                  <td>Default - kill some, spare some</td>
+                  <td>Bittersweet</td>
+                </tr>
+                <tr>
+                  <td>Pacifist</td>
+                  <td>Kill nobody, befriend everyone</td>
+                  <td>Hopeful, earned happiness</td>
+                </tr>
+                <tr>
+                  <td>Genocide</td>
+                  <td>Kill everything. Hunt until areas are empty.</td>
+                  <td>Horror, emptiness</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>What Genocide Requires</h3>
+            <p>The Genocide Route isn't just "kill everyone you meet." It requires:</p>
+            <ul>
+              <li><strong>Active hunting:</strong> You must seek out every enemy in every area</li>
+              <li><strong>Grinding:</strong> Random encounters don't stop until you've killed everyone</li>
+              <li><strong>Persistence:</strong> The videogame tells you how many are left ("But nobody came.")</li>
+              <li><strong>No exceptions:</strong> Sparing anyone ends the route</li>
+            </ul>
+            <p>This is tedious by design. You can't stumble into Genocide. You have to want it.</p>
+
+            <h3>What Changes</h3>
+            <p>On the Genocide Route:</p>
+            <ul>
+              <li>Music becomes slower, darker, eventually silent</li>
+              <li>NPCs flee or hide from you</li>
+              <li>Save points change text ("Determination." becomes numbers)</li>
+              <li>Boss fights are replaced with one-sided slaughters - or nightmare difficulty</li>
+              <li>The final boss is one of the hardest fights in any videogame</li>
+              <li>Dialogue reflects what you've become</li>
+            </ul>
+
+            <h3>The Permanent Consequence</h3>
+            <p>Completing Genocide permanently alters your save data. Even after a full reset, the game "remembers." Future Pacifist endings are tainted. The videogame sold your soul - and the transaction persists outside any in-game reset.</p>
+            <p>This consequence extends to your actual computer's save files, not just in-game state.</p>
+
+            <h3>The 4 A's Perspective</h3>
+            <ul>
+              <li><strong>Action:</strong> Combat becomes mandatory grinding. The <a href="../framework/gesture.html" class="term">Gesture</a> shifts from choice-based encounters to repetitive elimination.</li>
+              <li><strong>Art:</strong> Visual and audio design degrades. Music slows. Colors drain. The videogame becomes hostile to look at.</li>
+              <li><strong>Arc:</strong> Much longer than other routes due to required grinding. Intentionally tedious.</li>
+              <li><strong>Atmosphere:</strong> Horror. Not jump-scare horror - existential horror. You're the monster.</li>
+            </ul>
+
+            <h3>Try This</h3>
+            <p><strong>Watch, don't play</strong></p>
+            <p>The Genocide Route is designed to be unpleasant to complete. Consider watching a playthrough first. Notice how the videogame makes you work for every kill.</p>
+
+            <p><strong>Compare the fights</strong></p>
+            <p>Watch the Papyrus fight on Neutral/Pacifist vs. Genocide. Same character, same location. Radically different experience.</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Use This Case Study</h3>
+            <p>The Genocide Route is the clearest example of <strong>Permissions as moral architecture</strong>. Most videogames that let you be evil either:</p>
+            <ul>
+              <li>Reward it (power fantasy, more loot)</li>
+              <li>Ignore it (NPCs respawn, no consequences)</li>
+              <li>Prevent it (invincible children, locked-out options)</li>
+            </ul>
+            <p><em>Undertale</em> does something different: it <strong>allows</strong> evil, but makes you earn it through labor, and makes the consequences permanent. This is permissions design at its most deliberate.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play <em>Undertale</em> blind (most will get Neutral)</li>
+              <li>Discuss the Mercy mechanic and what it represents</li>
+              <li>Introduce the existence of the Genocide Route - without spoiling details</li>
+              <li>Watch key Genocide moments together (boss fights, ending)</li>
+              <li>Discuss: Why did Toby Fox include this? What does allowing it say?</li>
+            </ol>
+
+            <h3>Discussion Prompts</h3>
+            <ul>
+              <li>Why is Genocide tedious? Is that a design flaw or intentional?</li>
+              <li>What's the difference between forbidding evil actions and allowing them with consequences?</li>
+              <li>How does the permanent save alteration change the stakes?</li>
+              <li>Can a videogame judge the player? Should it?</li>
+              <li>What does it mean that most players who start Genocide don't finish it?</li>
+            </ul>
+
+            <h3>The Labor of Evil</h3>
+            <p>Genocide requires grinding - walking around empty areas waiting for encounters that become less frequent. This is intentional friction:</p>
+            <ul>
+              <li>You can't kill casually - you must commit</li>
+              <li>The videogame gives you time to reconsider</li>
+              <li>Boredom becomes part of the horror</li>
+              <li>The effort involved makes completion a choice, not an accident</li>
+            </ul>
+            <p>This is the opposite of how most videogames handle player agency. Usually, evil is easy. Here, evil is work.</p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"The Genocide Route is the 'true' or 'complete' experience"</strong></p>
+            <p>It's one of three routes. Many players (and the creator) consider Pacifist the intended "good" ending. Genocide exists to make a point, not to be played by everyone.</p>
+
+            <p><strong>"You have to play Genocide to understand Undertale"</strong></p>
+            <p>You don't. The route exists for those who choose it. Watching is valid. Not engaging is valid. The videogame respects that choice.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Permissions as Moral Framework</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, the Genocide Route reveals that what a videogame <strong>allows</strong> carries meaning:</p>
+            <ul>
+              <li><strong>Allowed:</strong> Killing everything. The videogame doesn't stop you.</li>
+              <li><strong>Required:</strong> Active hunting. Passive killing won't trigger the route.</li>
+              <li><strong>Forbidden:</strong> Mercy. Any mercy ends Genocide.</li>
+            </ul>
+            <p>The permission to commit genocide exists specifically so the videogame can respond to it. By allowing it, the videogame can judge it.</p>
+
+            <h3>Complicity and Player Agency</h3>
+            <p><em>Undertale</em> makes the player complicit:</p>
+            <ul>
+              <li>You weren't forced - you chose</li>
+              <li>You weren't tricked - the videogame warned you</li>
+              <li>You weren't efficient - you worked for this</li>
+            </ul>
+            <p>This complicity is what makes the permanent consequences feel earned rather than arbitrary. The videogame didn't punish you - you punished yourself.</p>
+
+            <h3>The Fourth Wall Break</h3>
+            <p>Genocide breaks the fourth wall by:</p>
+            <ul>
+              <li>Acknowledging your save/load behavior</li>
+              <li>Persisting consequences in actual files</li>
+              <li>Addressing "you" directly, not the character</li>
+              <li>Making the final boss explicitly aware of meta-game behavior</li>
+            </ul>
+            <p>This transforms Genocide from "playing a villain" to "being judged for playing." The locus of moral evaluation shifts from character to player.</p>
+
+            <h3>Aesthetic Heritage: RPG Violence</h3>
+            <p>The Genocide Route critiques RPG conventions:</p>
+            <ul>
+              <li>Grinding is standard in JRPGs - here it's horrifying</li>
+              <li>Killing for XP is normal - here it's examined</li>
+              <li>Power growth is rewarding - here it's corrupting</li>
+              <li>The "kill everything" player is a common archetype - here, that's the villain</li>
+            </ul>
+            <p><em>Undertale</em> transforms its <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> from celebration to critique. It uses familiar mechanics to ask: why do we do this?</p>
+
+            <h3>The Sans Fight</h3>
+            <p>Sans, the final Genocide boss, is one of the hardest fights in any videogame. This serves multiple purposes:</p>
+            <ul>
+              <li><strong>Mechanical punishment:</strong> You wanted power? Earn it.</li>
+              <li><strong>Narrative coherence:</strong> Someone finally stops you</li>
+              <li><strong>Player psychology:</strong> Most Genocide runs end here</li>
+              <li><strong>Meaning:</strong> The videogame is literally fighting back</li>
+            </ul>
+            <p>The difficulty isn't arbitrary - it's the videogame's last attempt to stop you.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Is the permanent save alteration a violation of player trust, or the ultimate consequence?</li>
+              <li>Can a videogame ethically judge players for engaging with content it provides?</li>
+              <li>Does watching Genocide (via YouTube) carry the same moral weight as playing it?</li>
+              <li>What does it mean that Genocide is the most-discussed route despite being least-played?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Sicart, Miguel. <em>Beyond Choices: The Design of Ethical Gameplay</em> (2013)</li>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007) - procedural rhetoric</li>
+              <li>Toby Fox interviews on Undertale's design intentions</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../framework/permissions.html">Permissions</a> - the framework this case study exemplifies</li>
+          <li><a href="dark-souls-bonfire.html">Dark Souls: Bonfire</a> - another videogame where difficulty carries meaning</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - motivation and moral reasoning</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

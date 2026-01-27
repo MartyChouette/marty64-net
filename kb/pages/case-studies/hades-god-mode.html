@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hades: God Mode - VG101 Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="site-container">
+    <nav class="sidebar">
+      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <p class="site-subtitle">VG101 Knowledge Base</p>
+
+      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Core Framework</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../framework/gesture.html" class="nav-link">Gesture</a></li>
+          <li class="nav-item"><a href="../framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
+          <li class="nav-item"><a href="../framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
+          <li class="nav-item"><a href="../framework/permissions.html" class="nav-link">Permissions</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Foundations</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
+          <li class="nav-item"><a href="../foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
+          <li class="nav-item"><a href="../foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Case Studies</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="celeste-dash.html" class="nav-link">Celeste: Dash</a></li>
+          <li class="nav-item"><a href="celeste-assist-mode.html" class="nav-link">Celeste: Assist Mode</a></li>
+          <li class="nav-item"><a href="dark-souls-bonfire.html" class="nav-link">Dark Souls: Bonfire</a></li>
+          <li class="nav-item"><a href="hades-god-mode.html" class="nav-link active">Hades: God Mode</a></li>
+          <li class="nav-item"><a href="portal-level-one.html" class="nav-link">Portal: Level One</a></li>
+          <li class="nav-item"><a href="undertale-genocide.html" class="nav-link">Undertale: Genocide</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Resources</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../code-bank/index.html" class="nav-link">Code Bank</a></li>
+          <li class="nav-item"><a href="../glossary.html" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="../references.html" class="nav-link">References</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <nav class="breadcrumb">
+          <a href="../../index.html">VG101</a> / <a href="index.html">Case Studies</a> / Hades: God Mode
+        </nav>
+
+        <h1>Hades: God Mode</h1>
+
+        <p class="lead">
+          <em>Hades</em>' God Mode grants escalating damage resistance with each death.
+          Unlike <em>Celeste</em>'s granular options, it's a single toggle that adapts
+          automatically - proving there's more than one way to design accessibility.
+        </p>
+
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what God Mode does</span>
+          </div>
+          <div class="register-content">
+            <h3>How It Works</h3>
+            <p>God Mode is simple:</p>
+            <ul>
+              <li>Toggle it on in settings</li>
+              <li>You start with 20% damage resistance</li>
+              <li>Each time you die, resistance increases by 2%</li>
+              <li>Maximum resistance caps at 80%</li>
+            </ul>
+            <p>That's it. No sliders, no options, no configuration. Just one toggle and an automatic escalation system.</p>
+
+            <h3>The Math</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Deaths</th>
+                  <th>Resistance</th>
+                  <th>Effective Health</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>20%</td>
+                  <td>1.25x</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>40%</td>
+                  <td>1.67x</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>60%</td>
+                  <td>2.5x</td>
+                </tr>
+                <tr>
+                  <td>30</td>
+                  <td>80% (max)</td>
+                  <td>5x</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>The resistance never goes back down. Once earned, it's permanent (unless you toggle God Mode off entirely).</p>
+
+            <h3>How It's Presented</h3>
+            <p>When enabling God Mode, the videogame shows:</p>
+            <blockquote>
+              "God Mode gives you a permanent +20% damage resistance, growing by +2% each time you die (up to 80%). You can turn God Mode off at any time. It doesn't prevent you from unlocking anything or doing anything in the game."
+            </blockquote>
+            <p>Key elements:</p>
+            <ul>
+              <li>Clear mechanical explanation</li>
+              <li>Emphasizes it's reversible</li>
+              <li>Explicitly states no content is locked</li>
+              <li>Framed as a feature, not a concession</li>
+            </ul>
+
+            <h3>What God Mode Changes</h3>
+            <p>God Mode affects:</p>
+            <ul>
+              <li>Damage taken (reduced)</li>
+            </ul>
+            <p>That's all. Everything else remains identical:</p>
+            <ul>
+              <li>Enemy patterns unchanged</li>
+              <li>Damage you deal unchanged</li>
+              <li>Boss mechanics unchanged</li>
+              <li>Story, unlocks, achievements unchanged</li>
+              <li>Visual indicator (subtle glow) appears on health bar</li>
+            </ul>
+
+            <h3>The 4 A's Perspective</h3>
+            <p>God Mode primarily modifies <a href="../framework/the-four-as.html" class="term">Action</a>:</p>
+            <ul>
+              <li><strong>Action:</strong> Combat becomes more forgiving. Mistakes cost less.</li>
+              <li><strong>Arc:</strong> Largely unchanged - runs take similar time. You might attempt harder Heat levels sooner.</li>
+              <li><strong>Art:</strong> Minimal visual change (health bar glow).</li>
+              <li><strong>Atmosphere:</strong> Less punishing, potentially less tense. But still demanding.</li>
+            </ul>
+            <p>The <a href="../framework/gesture.html" class="term">Gesture</a> of combat remains intact. You're still dodging, dashing, and timing attacks. You just survive longer when you mess up.</p>
+
+            <h3>Try This</h3>
+            <p><strong>Compare two runs</strong></p>
+            <p>Play a run without God Mode, then enable it for the next run. What feels different? What stays the same?</p>
+
+            <p><strong>Notice the psychology</strong></p>
+            <p>With God Mode, how does your relationship with death change? Do you play more aggressively? Take more risks?</p>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Why Use This Case Study</h3>
+            <p><em>Hades</em>' God Mode offers a different accessibility philosophy than <em>Celeste</em>. Comparing them illuminates tradeoffs:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>Celeste Assist Mode</th>
+                  <th>Hades God Mode</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Configuration</td>
+                  <td>Granular (5+ options)</td>
+                  <td>Binary (on/off)</td>
+                </tr>
+                <tr>
+                  <td>Adaptation</td>
+                  <td>Manual (player chooses)</td>
+                  <td>Automatic (system responds)</td>
+                </tr>
+                <tr>
+                  <td>Direction</td>
+                  <td>Static</td>
+                  <td>Escalating</td>
+                </tr>
+                <tr>
+                  <td>Cognitive load</td>
+                  <td>Higher (what to enable?)</td>
+                  <td>Lower (just toggle)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Neither is "better." They solve different problems for different videogames.</p>
+
+            <h3>Teaching Sequence</h3>
+            <ol>
+              <li>Have students play <em>Hades</em> normally (experience the roguelike loop)</li>
+              <li>Enable God Mode; play multiple runs</li>
+              <li>Discuss: How does the automatic escalation feel compared to manual options?</li>
+              <li>Compare with <em>Celeste</em>'s Assist Mode</li>
+              <li>Design exercise: Which approach would you use for your videogame, and why?</li>
+            </ol>
+
+            <h3>Discussion Prompts</h3>
+            <ul>
+              <li>Why might <em>Hades</em> have chosen automatic escalation over manual configuration?</li>
+              <li>Does the 2% incremental increase feel different from immediately having 80% resistance?</li>
+              <li>What does the cap at 80% communicate about design intent?</li>
+              <li>Would God Mode work for <em>Celeste</em>? Would Assist Mode work for <em>Hades</em>?</li>
+            </ul>
+
+            <h3>The Roguelike Factor</h3>
+            <p><em>Hades</em>' God Mode works because dying is already part of the videogame. In a roguelike:</p>
+            <ul>
+              <li>Death is expected and frequent</li>
+              <li>Progress persists across deaths (meta-progression)</li>
+              <li>The story frames death as canonical (Zagreus returns from the Styx)</li>
+            </ul>
+            <p>God Mode leverages what's already there. Death counts up resistance automatically because death is already being counted. The system is elegant because it builds on existing mechanics.</p>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"God Mode makes the videogame too easy"</strong></p>
+            <p>At 80% resistance, you still take damage. Bosses still have complex patterns. The videogame is easier, not trivial. And players can turn it off anytime.</p>
+
+            <p><strong>"The escalation is just training wheels"</strong></p>
+            <p>Some players keep God Mode on permanently. That's valid. Others use it temporarily. The design accommodates both without judgment.</p>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Dynamic Difficulty Adjustment</h3>
+            <p>God Mode is a form of <strong>transparent DDA</strong> (Dynamic Difficulty Adjustment). Unlike hidden DDA systems (which secretly make videogames easier), God Mode:</p>
+            <ul>
+              <li>Requires explicit opt-in</li>
+              <li>Shows its numbers clearly</li>
+              <li>Never activates without consent</li>
+            </ul>
+            <p>This transparency matters. Hidden DDA can feel patronizing ("the videogame thinks I need help"). God Mode says: "Here's a tool. Use it if you want."</p>
+
+            <h3>Permissions and Thresholds</h3>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, God Mode shifts what's <strong>required</strong>:</p>
+            <ul>
+              <li><strong>Without God Mode:</strong> Perfect play required for certain challenges. High skill floor.</li>
+              <li><strong>With God Mode:</strong> Imperfect play becomes viable. Lower skill floor.</li>
+            </ul>
+            <p>The videogame still requires combat engagement. It doesn't require mastery.</p>
+
+            <h3>Why 80% Cap?</h3>
+            <p>The 80% cap is deliberate. At 100% resistance, combat would become meaningless - you could ignore all mechanics. At 80%, you're still mortal:</p>
+            <ul>
+              <li>Boss attacks still hurt</li>
+              <li>Attention still required</li>
+              <li>Death still possible (just less likely)</li>
+            </ul>
+            <p>This preserves what makes <em>Hades</em> feel like <em>Hades</em>. The cap protects the core experience while expanding access.</p>
+
+            <h3>The Earned Escalation</h3>
+            <p>God Mode's resistance is "earned" through death. This creates an interesting psychological framing:</p>
+            <ul>
+              <li>You're not given easy mode - you build toward it</li>
+              <li>Each death contributes to future success</li>
+              <li>The videogame acknowledges your struggles by responding to them</li>
+            </ul>
+            <p>Whether this framing is helpful or just narrative sugar depends on the player. Some find it empowering. Others just want the assistance without the theater.</p>
+
+            <h3>Roguelike Accessibility</h3>
+            <p>Roguelikes present unique accessibility challenges:</p>
+            <ul>
+              <li>Long play sessions before checkpoints</li>
+              <li>Loss of progress on death</li>
+              <li>Compound difficulty from randomness</li>
+              <li>Skill checks that gate all content</li>
+            </ul>
+            <p>God Mode addresses the skill check problem without touching the roguelike structure. You still do full runs, still face randomness, still build meta-progress. The videogame just hurts less.</p>
+
+            <h3>Unresolved Questions</h3>
+            <ul>
+              <li>Should God Mode affect damage dealt, or just received? What would change?</li>
+              <li>Is the escalation necessary, or would a fixed resistance work equally well?</li>
+              <li>Does the 2% increment feel like "earning" assistance or just "grinding" it?</li>
+              <li>Would other roguelikes benefit from this approach, or is it specific to <em>Hades</em>' design?</li>
+            </ul>
+
+            <h3>References</h3>
+            <ul>
+              <li>Supergiant Games' various interviews on accessibility design</li>
+              <li>Game Accessibility Guidelines (gameaccessibilityguidelines.com)</li>
+              <li>Juul, Jesper. <em>The Art of Failure</em> (2013) - on death and failure in videogames</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+
+        <h2>Related</h2>
+        <ul>
+          <li><a href="celeste-assist-mode.html">Celeste: Assist Mode</a> - contrasting accessibility approach</li>
+          <li><a href="../pedagogy/accessibility-as-craft.html">Accessibility as Craft</a> - the philosophy behind this</li>
+          <li><a href="../framework/permissions.html">Permissions</a> - how difficulty shapes permission structures</li>
+          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - motivation and frustration</li>
+        </ul>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
