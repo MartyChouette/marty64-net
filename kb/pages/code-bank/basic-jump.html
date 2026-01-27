@@ -166,8 +166,10 @@
             </ul>
             <p><em>Reference: Castlevania, simulation-leaning videogames</em></p>
 
-            <h3>How It Works</h3>
-            <pre><code>On Jump Press (if grounded):
+            <h3>Pseudocode</h3>
+            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+
+On Jump Press (if grounded):
   - Apply jumpForce upward immediately
 
 Every Frame:
@@ -175,6 +177,246 @@ Every Frame:
   - If falling: apply gravity * fallGravityMultiplier
   - Check for ground contact</code></pre>
             <p>The <code>fallGravityMultiplier</code> is the key insight: making descent faster than ascent creates a satisfying arc without the floaty falling that pure physics produces.</p>
+
+            <h3>Unity Setup (2D)</h3>
+            <ol>
+              <li><strong>Create Input Actions:</strong>
+                <ul>
+                  <li>Window → Actions (or find your existing Input Actions asset)</li>
+                  <li>Add an Action called "Jump" → set to Button type</li>
+                  <li>Bind to Space, Gamepad South (A/X button)</li>
+                  <li>Save the asset</li>
+                </ul>
+              </li>
+              <li><strong>Set up your Player:</strong>
+                <ul>
+                  <li>Add a <code>Rigidbody2D</code> component (Freeze Rotation Z)</li>
+                  <li>Add a <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
+                  <li>Add the <code>BasicJump2D</code> script below</li>
+                  <li>Create a child empty GameObject at your character's feet, name it "GroundCheck"</li>
+                </ul>
+              </li>
+              <li><strong>Configure the Script:</strong>
+                <ul>
+                  <li>Drag your Input Actions asset to "Input Actions"</li>
+                  <li>Type "Jump" in the "Jump Action Name" field</li>
+                  <li>Drag your GroundCheck object to "Ground Check Point"</li>
+                  <li>Set "Ground Layer" to whatever layer your ground uses</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script (2D)</h3>
+            <p>Create a new C# script called <code>BasicJump2D.cs</code> and paste this:</p>
+            <pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// &lt;summary&gt;
+/// BASIC JUMP - Fixed height, consistent arc
+/// VG101 Code Bank - For learning and prototyping
+///
+/// This jump always goes the same height. Compare to VariableJump2D
+/// which lets players control height by holding/releasing.
+/// &lt;/summary&gt;
+[RequireComponent(typeof(Rigidbody2D))]
+public class BasicJump2D : MonoBehaviour
+{
+    // ========================================
+    // INPUT SETUP
+    // ========================================
+    [Header("Input Setup")]
+
+    [Tooltip("Your Input Actions asset (create via Window → Actions)")]
+    [SerializeField] private InputActionAsset inputActions;
+
+    [Tooltip("The name of your jump action in the Input Actions asset")]
+    [SerializeField] private string jumpActionName = "Jump";
+
+    // ========================================
+    // JUMP FEEL - These control how the jump FEELS
+    // ========================================
+    [Header("Jump Feel")]
+
+    [Tooltip("How hard we push off the ground. Higher = taller jump.")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 12f;
+
+    [Tooltip("How fast we fall. Higher = snappier, less floaty.")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Tooltip("Extra gravity when falling. Makes descent faster than ascent. 1.0 = symmetrical arc.")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    // ========================================
+    // GROUND DETECTION
+    // ========================================
+    [Header("Ground Detection")]
+
+    [Tooltip("Empty GameObject at character's feet")]
+    [SerializeField] private Transform groundCheckPoint;
+
+    [Tooltip("How far down to check for ground")]
+    [Range(0.01f, 0.5f)]
+    [SerializeField] private float groundCheckDistance = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    // ========================================
+    // DEBUG - Turn on to see what's happening
+    // ========================================
+    [Header("Debug")]
+
+    [Tooltip("Show ground check in Scene view")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    // ========================================
+    // PRIVATE VARIABLES - Don't touch these
+    // ========================================
+    private Rigidbody2D rb;
+    private InputAction jumpAction;
+    private float verticalVelocity;
+    private bool isGrounded;
+
+    // ========================================
+    // SETUP
+    // ========================================
+    private void Awake()
+    {
+        // Get the Rigidbody2D we'll be moving
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+
+        // Tell Rigidbody we're handling gravity ourselves
+        rb.gravityScale = 0f;
+
+        // Find and enable the jump action
+        if (inputActions != null)
+        {
+            jumpAction = inputActions.FindAction(jumpActionName);
+            jumpAction?.Enable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe to jump button press
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJumpPressed;
+        }
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe when disabled
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJumpPressed;
+        }
+    }
+
+    // ========================================
+    // MAIN LOOP
+    // ========================================
+    private void FixedUpdate()
+    {
+        // Step 1: Check if we're on the ground
+        CheckGrounded();
+
+        // Step 2: Apply gravity (different when falling)
+        ApplyGravity();
+
+        // Step 3: Apply our velocity to the Rigidbody
+        ApplyVelocity();
+    }
+
+    // ========================================
+    // GROUND CHECK
+    // ========================================
+    private void CheckGrounded()
+    {
+        // Cast a tiny circle downward from our feet
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckDistance,
+            groundLayer
+        );
+
+        // If we just landed, zero out downward velocity
+        if (isGrounded && verticalVelocity &lt; 0)
+        {
+            verticalVelocity = 0f;
+        }
+    }
+
+    // ========================================
+    // GRAVITY
+    // ========================================
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            // Falling? Apply extra gravity for snappier descent
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+
+            // Subtract gravity from velocity
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
+        }
+    }
+
+    // ========================================
+    // JUMP
+    // ========================================
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        // Only jump if we're on the ground
+        if (isGrounded)
+        {
+            // Apply upward velocity instantly
+            verticalVelocity = jumpForce;
+        }
+    }
+
+    // ========================================
+    // APPLY MOVEMENT
+    // ========================================
+    private void ApplyVelocity()
+    {
+        // Keep horizontal velocity, apply our vertical velocity
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
+
+    // ========================================
+    // DEBUG VISUALIZATION
+    // ========================================
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck && groundCheckPoint != null)
+        {
+            // Green if grounded, red if airborne
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+        }
+    }
+}</code></pre>
+
+            <h3>For 3D Projects</h3>
+            <p>The logic is identical. Changes needed:</p>
+            <ul>
+              <li>Use <code>Rigidbody</code> instead of <code>Rigidbody2D</code></li>
+              <li>Use <code>Physics.SphereCast</code> or <code>Physics.CheckSphere</code> instead of <code>Physics2D.OverlapCircle</code></li>
+              <li>Use <code>Vector3</code> instead of <code>Vector2</code></li>
+              <li>Use <code>rb.linearVelocity</code> (same in Unity 6)</li>
+            </ul>
+            <p>We'll add a separate <code>BasicJump3D.cs</code> script to the asset bank.</p>
 
             <h3>Common Issues</h3>
             <p><strong>"It feels floaty"</strong><br>
