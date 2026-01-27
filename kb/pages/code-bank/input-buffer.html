@@ -157,8 +157,10 @@
             </ul>
             <p><em>Reference: Street Fighter, Guilty Gear</em></p>
 
-            <h3>How It Works</h3>
-            <pre><code>On Jump Press:
+            <h3>Pseudocode</h3>
+            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+
+On Jump Press:
   - If can jump now: jump immediately
   - Else: set jumpBuffered = true, start bufferTimer
 
@@ -171,6 +173,269 @@ Every Frame:
   - If jumpBuffered AND can jump:
     - Execute jump
     - Set jumpBuffered = false</code></pre>
+
+            <h3>Unity Setup (2D)</h3>
+            <p>Like Coyote Time, Input Buffer is typically <strong>built into your jump script</strong>. Here's a complete script with input buffering.</p>
+
+            <h3>The Script (2D)</h3>
+            <p>Create a new C# script called <code>JumpWithInputBuffer2D.cs</code> and paste this:</p>
+            <pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// &lt;summary&gt;
+/// JUMP WITH INPUT BUFFER - Remember inputs pressed slightly early
+/// VG101 Code Bank - For learning and prototyping
+///
+/// Press jump just before landing, and the jump happens when you land.
+/// Players think they timed it perfectly; the buffer did the work.
+/// &lt;/summary&gt;
+[RequireComponent(typeof(Rigidbody2D))]
+public class JumpWithInputBuffer2D : MonoBehaviour
+{
+    // ========================================
+    // INPUT SETUP
+    // ========================================
+    [Header("Input Setup")]
+
+    [Tooltip("Your Input Actions asset")]
+    [SerializeField] private InputActionAsset inputActions;
+
+    [Tooltip("Name of your jump action")]
+    [SerializeField] private string jumpActionName = "Jump";
+
+    // ========================================
+    // JUMP FEEL
+    // ========================================
+    [Header("Jump Feel")]
+
+    [Tooltip("How hard we push off")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 12f;
+
+    [Tooltip("Gravity while airborne")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Tooltip("Extra gravity when falling")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    // ========================================
+    // INPUT BUFFER - The magic happens here
+    // ========================================
+    [Header("Input Buffer")]
+
+    [Tooltip("How long to remember a jump press (seconds). 0.1 is a good default.")]
+    [Range(0.01f, 0.3f)]
+    [SerializeField] private float bufferTime = 0.1f;
+
+    // ========================================
+    // GROUND DETECTION
+    // ========================================
+    [Header("Ground Detection")]
+
+    [Tooltip("Empty GameObject at character's feet")]
+    [SerializeField] private Transform groundCheckPoint;
+
+    [Tooltip("How far down to check for ground")]
+    [Range(0.01f, 0.5f)]
+    [SerializeField] private float groundCheckDistance = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    [Header("Debug")]
+
+    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool debugBuffer = false;
+
+    [Tooltip("Show ground check in Scene view")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    // ========================================
+    // PRIVATE VARIABLES
+    // ========================================
+    private Rigidbody2D rb;
+    private InputAction jumpAction;
+    private float verticalVelocity;
+    private bool isGrounded;
+    private float bufferTimer;       // Time left on buffered input
+    private bool jumpBuffered;       // Is a jump waiting?
+
+    // ========================================
+    // SETUP
+    // ========================================
+    private void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+        rb.gravityScale = 0f;
+
+        if (inputActions != null)
+        {
+            jumpAction = inputActions.FindAction(jumpActionName);
+            jumpAction?.Enable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJumpPressed;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJumpPressed;
+        }
+    }
+
+    // ========================================
+    // MAIN LOOP
+    // ========================================
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        HandleBuffer();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    // ========================================
+    // GROUND CHECK
+    // ========================================
+    private void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckDistance,
+            groundLayer
+        );
+
+        if (isGrounded && verticalVelocity &lt; 0)
+        {
+            verticalVelocity = 0f;
+        }
+    }
+
+    // ========================================
+    // BUFFER LOGIC
+    // ========================================
+    private void HandleBuffer()
+    {
+        // Count down the buffer timer
+        if (bufferTimer &gt; 0)
+        {
+            bufferTimer -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            jumpBuffered = false;
+        }
+
+        // If we have a buffered jump and can now jump, do it!
+        if (jumpBuffered && isGrounded)
+        {
+            ExecuteJump();
+            jumpBuffered = false;
+            bufferTimer = 0;
+
+            if (debugBuffer) Debug.Log("BUFFERED JUMP executed!");
+        }
+    }
+
+    // ========================================
+    // JUMP INPUT
+    // ========================================
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        // Can we jump right now?
+        if (isGrounded)
+        {
+            // Yes - jump immediately
+            ExecuteJump();
+        }
+        else
+        {
+            // No - buffer the input for later
+            jumpBuffered = true;
+            bufferTimer = bufferTime;
+
+            if (debugBuffer) Debug.Log("Jump BUFFERED, waiting for ground...");
+        }
+    }
+
+    // ========================================
+    // THE ACTUAL JUMP
+    // ========================================
+    private void ExecuteJump()
+    {
+        verticalVelocity = jumpForce;
+    }
+
+    // ========================================
+    // GRAVITY
+    // ========================================
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
+        }
+    }
+
+    // ========================================
+    // APPLY MOVEMENT
+    // ========================================
+    private void ApplyVelocity()
+    {
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck && groundCheckPoint != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+        }
+    }
+}</code></pre>
+
+            <h3>Key Implementation Details</h3>
+            <ul>
+              <li><strong>Immediate when possible:</strong> If grounded, jump happens instantly - no delay</li>
+              <li><strong>Buffer when not possible:</strong> If airborne, store the input and a timer</li>
+              <li><strong>Check every frame:</strong> Once grounded + buffered, execute the jump</li>
+              <li><strong>Clear after use:</strong> jumpBuffered = false prevents double jumps</li>
+            </ul>
+
+            <h3>Testing Input Buffer</h3>
+            <ol>
+              <li>Enable "Debug Buffer" in the Inspector</li>
+              <li>Jump, and press jump again while still in the air</li>
+              <li>Console should show "Jump BUFFERED" then "BUFFERED JUMP executed!" on landing</li>
+              <li>Set bufferTime to 0.5 to make it obvious, then tune down</li>
+            </ol>
+
+            <h3>The Complete Package</h3>
+            <p>For the full forgiveness experience, combine Coyote Time + Input Buffer in one script. See the <a href="complete-jump.html">Complete Jump</a> scaffold for a script with both.</p>
 
             <h3>Common Issues</h3>
             <p><strong>"Buffered input executes multiple times"</strong><br>

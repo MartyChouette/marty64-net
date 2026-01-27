@@ -170,7 +170,7 @@
             </ul>
             <p><em>Reference: Cuphead, classic Disney</em></p>
 
-            <h3>How It Works</h3>
+            <h3>Pseudocode</h3>
             <pre><code>Every Frame:
   - Get vertical velocity
   - If falling fast: stretch vertically, compress horizontally
@@ -182,6 +182,377 @@ On Land:
   - Lerp back to normal over time
 
 Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
+
+            <h3>Unity Setup (2D)</h3>
+            <ol>
+              <li><strong>Setup Visual Hierarchy:</strong>
+                <ul>
+                  <li>Your player object has Rigidbody2D and Collider2D</li>
+                  <li>Create a child object called "Visual" or "Sprite"</li>
+                  <li>Move your SpriteRenderer to this child</li>
+                  <li>The script scales the child, not the physics object</li>
+                </ul>
+              </li>
+              <li><strong>Add the Script:</strong>
+                <ul>
+                  <li>Add <code>SquashStretch2D.cs</code> to the player (parent object)</li>
+                  <li>Assign the visual child to <code>visualTransform</code></li>
+                  <li>The physics collider stays unaffected</li>
+                </ul>
+              </li>
+              <li><strong>Create Ground Check (optional for landing squash):</strong>
+                <ul>
+                  <li>Create empty child "GroundCheck" at player's feet</li>
+                  <li>Assign to script's <code>groundCheck</code> field</li>
+                  <li>Configure ground layer mask</li>
+                </ul>
+              </li>
+              <li><strong>Tune the Feel:</strong>
+                <ul>
+                  <li>Subtle: stretchAmount/squashAmount = 0.05-0.1</li>
+                  <li>Cartoony: stretchAmount/squashAmount = 0.2-0.4</li>
+                  <li>Extreme: stretchAmount/squashAmount = 0.5+</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script (2D)</h3>
+            <pre><code>// ============================================================
+// SquashStretch2D.cs
+// Deforms a visual sprite based on velocity and landing.
+// Attach to player, assign child visual transform.
+// Physics collider is NOT affected - only visuals.
+// Unity 6.x
+// ============================================================
+
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class SquashStretch2D : MonoBehaviour
+{
+    // ========================================================
+    // REFERENCES - Assign in Inspector
+    // ========================================================
+
+    [Header("Visual Transform")]
+    [Tooltip("The child transform to scale (NOT the physics object!)")]
+    [SerializeField] private Transform visualTransform;
+
+    [Header("Ground Detection (for landing squash)")]
+    [Tooltip("Empty transform at player's feet")]
+    [SerializeField] private Transform groundCheck;
+
+    [Tooltip("Radius of ground check")]
+    [SerializeField] [Range(0.05f, 0.5f)] private float groundCheckRadius = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    // ========================================================
+    // SQUASH & STRETCH PARAMETERS
+    // ========================================================
+
+    [Header("Stretch (during fast vertical movement)")]
+    [Tooltip("Maximum vertical stretch (0.2 = 20% taller at max velocity)")]
+    [SerializeField] [Range(0f, 1f)] private float stretchAmount = 0.2f;
+
+    [Tooltip("Velocity needed to reach full stretch")]
+    [SerializeField] [Range(1f, 30f)] private float stretchVelocityMax = 15f;
+
+    [Header("Squash (on landing)")]
+    [Tooltip("Maximum squash on landing (0.3 = 30% shorter)")]
+    [SerializeField] [Range(0f, 0.5f)] private float squashAmount = 0.25f;
+
+    [Tooltip("Fall velocity needed for full squash")]
+    [SerializeField] [Range(1f, 30f)] private float squashVelocityMax = 12f;
+
+    [Header("Recovery")]
+    [Tooltip("How fast to return to normal scale")]
+    [SerializeField] [Range(1f, 30f)] private float returnSpeed = 12f;
+
+    [Header("Horizontal Stretch (for dashing)")]
+    [Tooltip("Enable horizontal stretch based on horizontal velocity")]
+    [SerializeField] private bool enableHorizontalStretch = true;
+
+    [Tooltip("Maximum horizontal stretch")]
+    [SerializeField] [Range(0f, 0.5f)] private float horizontalStretchAmount = 0.15f;
+
+    [Tooltip("Horizontal velocity for full stretch")]
+    [SerializeField] [Range(1f, 50f)] private float horizontalStretchVelocityMax = 20f;
+
+    [Header("Debug")]
+    [Tooltip("Show debug info")]
+    [SerializeField] private bool debugMode = false;
+
+    // ========================================================
+    // INTERNAL STATE
+    // ========================================================
+
+    private Rigidbody2D rb;
+    private Vector3 targetScale = Vector3.one;
+    private Vector3 baseScale = Vector3.one;
+    private bool isGrounded = false;
+    private bool wasGrounded = false;
+    private float lastFallVelocity = 0f;
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+
+        // Store the original scale of the visual
+        if (visualTransform != null)
+        {
+            baseScale = visualTransform.localScale;
+        }
+    }
+
+    void Update()
+    {
+        if (visualTransform == null) return;
+
+        // Check ground state
+        CheckGroundState();
+
+        // Calculate target scale based on current state
+        CalculateTargetScale();
+
+        // Smoothly interpolate to target scale
+        visualTransform.localScale = Vector3.Lerp(
+            visualTransform.localScale,
+            targetScale,
+            returnSpeed * Time.deltaTime
+        );
+    }
+
+    // ========================================================
+    // SCALE CALCULATION
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Calculate what the scale should be based on velocity
+    /// &lt;/summary&gt;
+    private void CalculateTargetScale()
+    {
+        float scaleX = baseScale.x;
+        float scaleY = baseScale.y;
+
+        float velocityY = rb.linearVelocity.y;
+        float velocityX = Mathf.Abs(rb.linearVelocity.x);
+
+        // ----------------------------------------
+        // VERTICAL STRETCH (rising or falling fast)
+        // ----------------------------------------
+        if (!isGrounded &amp;&amp; Mathf.Abs(velocityY) &gt; 0.5f)
+        {
+            // Normalize velocity to 0-1 range
+            float stretchFactor = Mathf.Clamp01(
+                Mathf.Abs(velocityY) / stretchVelocityMax
+            );
+
+            // Apply stretch: taller vertically
+            float stretchY = 1f + (stretchAmount * stretchFactor);
+
+            // Preserve volume: compress horizontally
+            // If Y grows by 20%, X shrinks to 1/1.2 = 0.833
+            float stretchX = 1f / stretchY;
+
+            scaleY = baseScale.y * stretchY;
+            scaleX = baseScale.x * stretchX;
+
+            if (debugMode &amp;&amp; stretchFactor &gt; 0.1f)
+            {
+                Debug.Log($"Vertical stretch: {stretchFactor:F2} (vel: {velocityY:F1})");
+            }
+        }
+
+        // ----------------------------------------
+        // HORIZONTAL STRETCH (dashing/running fast)
+        // ----------------------------------------
+        if (enableHorizontalStretch &amp;&amp; velocityX &gt; 1f)
+        {
+            float hStretchFactor = Mathf.Clamp01(
+                velocityX / horizontalStretchVelocityMax
+            );
+
+            // Apply horizontal stretch: wider horizontally
+            float hStretchX = 1f + (horizontalStretchAmount * hStretchFactor);
+
+            // Preserve volume: compress vertically
+            float hStretchY = 1f / hStretchX;
+
+            // Blend with vertical stretch (take the more extreme)
+            scaleX = Mathf.Max(scaleX, baseScale.x * hStretchX);
+            scaleY = Mathf.Min(scaleY, baseScale.y * hStretchY);
+        }
+
+        // Track fall velocity for landing squash
+        if (velocityY &lt; 0)
+        {
+            lastFallVelocity = Mathf.Min(lastFallVelocity, velocityY);
+        }
+
+        targetScale = new Vector3(scaleX, scaleY, baseScale.z);
+    }
+
+    // ========================================================
+    // GROUND DETECTION + LANDING SQUASH
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Check ground and trigger squash on landing
+    /// &lt;/summary&gt;
+    private void CheckGroundState()
+    {
+        wasGrounded = isGrounded;
+
+        if (groundCheck != null)
+        {
+            isGrounded = Physics2D.OverlapCircle(
+                groundCheck.position,
+                groundCheckRadius,
+                groundLayer
+            );
+        }
+
+        // Just landed - trigger squash!
+        if (isGrounded &amp;&amp; !wasGrounded)
+        {
+            ApplyLandingSquash();
+        }
+
+        // Reset fall velocity tracking when grounded
+        if (isGrounded)
+        {
+            lastFallVelocity = 0f;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Apply instant squash when landing
+    /// &lt;/summary&gt;
+    private void ApplyLandingSquash()
+    {
+        // Calculate squash based on fall velocity
+        float squashFactor = Mathf.Clamp01(
+            Mathf.Abs(lastFallVelocity) / squashVelocityMax
+        );
+
+        // Apply squash: shorter vertically, wider horizontally
+        float squashY = 1f - (squashAmount * squashFactor);
+        float squashX = 1f / squashY; // Preserve volume
+
+        // Apply immediately (then returnSpeed lerps back to normal)
+        visualTransform.localScale = new Vector3(
+            baseScale.x * squashX,
+            baseScale.y * squashY,
+            baseScale.z
+        );
+
+        if (debugMode)
+        {
+            Debug.Log($"Landing squash: {squashFactor:F2} (fall vel: {lastFallVelocity:F1})");
+        }
+    }
+
+    // ========================================================
+    // PUBLIC METHODS - Call from other scripts
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Manually trigger a squash (e.g., on hit, on jump anticipation)
+    /// &lt;/summary&gt;
+    /// &lt;param name="intensity"&gt;0-1, how much to squash&lt;/param&gt;
+    public void TriggerSquash(float intensity = 1f)
+    {
+        float squashY = 1f - (squashAmount * intensity);
+        float squashX = 1f / squashY;
+
+        visualTransform.localScale = new Vector3(
+            baseScale.x * squashX,
+            baseScale.y * squashY,
+            baseScale.z
+        );
+    }
+
+    /// &lt;summary&gt;
+    /// Manually trigger a vertical stretch (e.g., on jump launch)
+    /// &lt;/summary&gt;
+    /// &lt;param name="intensity"&gt;0-1, how much to stretch&lt;/param&gt;
+    public void TriggerStretch(float intensity = 1f)
+    {
+        float stretchY = 1f + (stretchAmount * intensity);
+        float stretchX = 1f / stretchY;
+
+        visualTransform.localScale = new Vector3(
+            baseScale.x * stretchX,
+            baseScale.y * stretchY,
+            baseScale.z
+        );
+    }
+
+    /// &lt;summary&gt;
+    /// Immediately reset to normal scale
+    /// &lt;/summary&gt;
+    public void ResetScale()
+    {
+        if (visualTransform != null)
+        {
+            visualTransform.localScale = baseScale;
+            targetScale = baseScale;
+        }
+    }
+
+    // ========================================================
+    // DEBUG VISUALIZATION
+    // ========================================================
+
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+    }
+}
+
+// ============================================================
+// USAGE NOTES:
+//
+// 1. IMPORTANT: Only scale the VISUAL, not the physics object!
+//    Structure your player like this:
+//    - Player (has Rigidbody2D, Collider2D, SquashStretch2D)
+//      - Visual (child with SpriteRenderer - this gets scaled)
+//
+// 2. Volume preservation formula:
+//    If scaleY = 1.2 (20% taller), then scaleX = 1/1.2 = 0.833
+//    This keeps the visual "area" roughly constant
+//
+// 3. Call TriggerSquash() manually for:
+//    - Jump anticipation (brief squash before launch)
+//    - Taking damage
+//    - Charging up an attack
+//
+// 4. Call TriggerStretch() manually for:
+//    - Jump launch moment
+//    - Dash start
+//    - Attack follow-through
+//
+// 5. Combine with other juice:
+//    void OnJump()
+//    {
+//        squashStretch.TriggerSquash(0.5f); // Anticipation
+//        // Small delay, then...
+//        squashStretch.TriggerStretch(0.8f); // Launch
+//    }
+//
+// 6. For 3D: Same principles apply, but scale on local Y axis
+//    and compensate on X and Z to preserve volume
+// ============================================================</code></pre>
 
             <h3>Common Issues</h3>
             <p><strong>"It looks wrong/distorted"</strong><br>

@@ -170,7 +170,7 @@
               <li>Design levels with hazards at edges</li>
             </ul>
 
-            <h3>How It Works</h3>
+            <h3>Pseudocode</h3>
             <pre><code>On Hit:
   - Calculate direction from attacker to target
   - Apply velocity: (direction * knockbackForce) + (up * knockbackUp)
@@ -183,6 +183,358 @@ Every Frame during hitstun:
 
 On hitstun end:
   - Restore target control</code></pre>
+
+            <h3>Unity Setup (2D)</h3>
+            <ol>
+              <li><strong>Setup the Target (entity that receives knockback):</strong>
+                <ul>
+                  <li>Add <code>Rigidbody2D</code> (Gravity Scale: 3, Freeze Rotation Z: checked)</li>
+                  <li>Add <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
+                  <li>Add the <code>KnockbackReceiver2D.cs</code> script below</li>
+                </ul>
+              </li>
+              <li><strong>From Attack Scripts:</strong>
+                <ul>
+                  <li>Get target's KnockbackReceiver2D component</li>
+                  <li>Call <code>ApplyKnockback(attackerPosition, force, upForce)</code></li>
+                  <li>Or use the preset methods for light/medium/heavy hits</li>
+                </ul>
+              </li>
+              <li><strong>Optional - Movement Integration:</strong>
+                <ul>
+                  <li>Your movement script should check <code>IsInHitstun</code></li>
+                  <li>Disable player input while in hitstun</li>
+                </ul>
+              </li>
+              <li><strong>Optional - Weight System:</strong>
+                <ul>
+                  <li>Set <code>weight</code> in Inspector (1 = normal, 2 = heavy, 0.5 = light)</li>
+                  <li>Heavier entities receive less knockback</li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script (2D)</h3>
+            <pre><code>// ============================================================
+// KnockbackReceiver2D.cs
+// Attach to any entity that can be knocked back when hit.
+// Includes hitstun (action disable) and weight system.
+// Unity 6.x
+// ============================================================
+
+using UnityEngine;
+using System;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class KnockbackReceiver2D : MonoBehaviour
+{
+    // ========================================================
+    // KNOCKBACK PARAMETERS - Tune these in the Inspector
+    // ========================================================
+
+    [Header("Weight")]
+    [Tooltip("How resistant to knockback (1 = normal, 2 = half knockback, 0.5 = double)")]
+    [SerializeField] [Range(0.1f, 5f)] private float weight = 1f;
+
+    [Header("Knockback Decay")]
+    [Tooltip("How fast horizontal knockback velocity decays")]
+    [SerializeField] [Range(0f, 20f)] private float horizontalDecay = 8f;
+
+    [Tooltip("Should we apply decay or let physics handle it?")]
+    [SerializeField] private bool useManualDecay = true;
+
+    [Header("Preset Forces (for ApplyLightHit, etc.)")]
+    [Tooltip("Light hit: horizontal force")]
+    [SerializeField] private float lightForce = 4f;
+    [Tooltip("Light hit: upward force")]
+    [SerializeField] private float lightUpForce = 2f;
+    [Tooltip("Light hit: hitstun duration")]
+    [SerializeField] private float lightHitstun = 0.1f;
+
+    [Tooltip("Medium hit: horizontal force")]
+    [SerializeField] private float mediumForce = 8f;
+    [Tooltip("Medium hit: upward force")]
+    [SerializeField] private float mediumUpForce = 4f;
+    [Tooltip("Medium hit: hitstun duration")]
+    [SerializeField] private float mediumHitstun = 0.2f;
+
+    [Tooltip("Heavy hit: horizontal force")]
+    [SerializeField] private float heavyForce = 15f;
+    [Tooltip("Heavy hit: upward force")]
+    [SerializeField] private float heavyUpForce = 8f;
+    [Tooltip("Heavy hit: hitstun duration")]
+    [SerializeField] private float heavyHitstun = 0.4f;
+
+    [Header("Debug")]
+    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool debugMode = false;
+
+    // ========================================================
+    // INTERNAL STATE
+    // ========================================================
+
+    private Rigidbody2D rb;
+    private float hitstunTimer = 0f;
+    private bool inHitstun = false;
+    private Vector2 knockbackVelocity = Vector2.zero;
+
+    // ========================================================
+    // EVENTS - Subscribe to react to knockback
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Fired when knockback starts (direction, force)
+    /// &lt;/summary&gt;
+    public event Action&lt;Vector2, float&gt; OnKnockbackStart;
+
+    /// &lt;summary&gt;
+    /// Fired when hitstun ends
+    /// &lt;/summary&gt;
+    public event Action OnHitstunEnd;
+
+    // ========================================================
+    // PUBLIC PROPERTIES
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// True while in hitstun (cannot act)
+    /// &lt;/summary&gt;
+    public bool IsInHitstun =&gt; inHitstun;
+
+    /// &lt;summary&gt;
+    /// Remaining hitstun time
+    /// &lt;/summary&gt;
+    public float HitstunRemaining =&gt; hitstunTimer;
+
+    /// &lt;summary&gt;
+    /// This entity's weight (affects knockback received)
+    /// &lt;/summary&gt;
+    public float Weight =&gt; weight;
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+    }
+
+    void Update()
+    {
+        // Process hitstun timer
+        if (inHitstun)
+        {
+            hitstunTimer -= Time.deltaTime;
+
+            if (hitstunTimer &lt;= 0f)
+            {
+                EndHitstun();
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Apply manual knockback decay
+        if (useManualDecay &amp;&amp; inHitstun)
+        {
+            // Decay horizontal velocity toward zero
+            float decayAmount = horizontalDecay * Time.fixedDeltaTime;
+            float currentX = rb.linearVelocity.x;
+
+            if (Mathf.Abs(currentX) &gt; decayAmount)
+            {
+                float newX = currentX - Mathf.Sign(currentX) * decayAmount;
+                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+        }
+    }
+
+    // ========================================================
+    // PUBLIC METHODS - Call these to apply knockback
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Apply knockback with full control over parameters
+    /// &lt;/summary&gt;
+    /// &lt;param name="attackerPosition"&gt;Position of the attacker (knockback away from this)&lt;/param&gt;
+    /// &lt;param name="horizontalForce"&gt;Force pushing away horizontally&lt;/param&gt;
+    /// &lt;param name="upwardForce"&gt;Force pushing upward&lt;/param&gt;
+    /// &lt;param name="hitstunDuration"&gt;How long target can't act&lt;/param&gt;
+    public void ApplyKnockback(Vector2 attackerPosition, float horizontalForce,
+                                float upwardForce, float hitstunDuration)
+    {
+        // Calculate direction FROM attacker TO this entity
+        Vector2 direction = ((Vector2)transform.position - attackerPosition).normalized;
+
+        // If directly above/below, default to facing away from attacker's right
+        if (Mathf.Abs(direction.x) &lt; 0.1f)
+        {
+            direction.x = transform.position.x &gt; attackerPosition.x ? 1f : -1f;
+        }
+
+        // Apply weight modifier (heavier = less knockback)
+        float weightModifier = 1f / weight;
+        float finalHorizontal = horizontalForce * weightModifier;
+        float finalUpward = upwardForce * weightModifier;
+
+        // Build knockback velocity
+        knockbackVelocity = new Vector2(
+            Mathf.Sign(direction.x) * finalHorizontal,
+            finalUpward
+        );
+
+        // Apply velocity directly
+        rb.linearVelocity = knockbackVelocity;
+
+        // Start hitstun
+        inHitstun = true;
+        hitstunTimer = hitstunDuration;
+
+        // Fire event
+        OnKnockbackStart?.Invoke(direction, horizontalForce);
+
+        if (debugMode)
+        {
+            Debug.Log($"Knockback applied! Direction: {direction}, " +
+                      $"Force: ({finalHorizontal}, {finalUpward}), " +
+                      $"Hitstun: {hitstunDuration}s");
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Apply knockback in a specific direction (not away from attacker)
+    /// &lt;/summary&gt;
+    public void ApplyKnockbackDirection(Vector2 direction, float horizontalForce,
+                                         float upwardForce, float hitstunDuration)
+    {
+        float weightModifier = 1f / weight;
+        knockbackVelocity = new Vector2(
+            direction.x * horizontalForce * weightModifier,
+            upwardForce * weightModifier
+        );
+
+        rb.linearVelocity = knockbackVelocity;
+
+        inHitstun = true;
+        hitstunTimer = hitstunDuration;
+
+        OnKnockbackStart?.Invoke(direction, horizontalForce);
+    }
+
+    /// &lt;summary&gt;
+    /// Apply a light hit knockback
+    /// &lt;/summary&gt;
+    public void ApplyLightHit(Vector2 attackerPosition)
+    {
+        ApplyKnockback(attackerPosition, lightForce, lightUpForce, lightHitstun);
+    }
+
+    /// &lt;summary&gt;
+    /// Apply a medium hit knockback
+    /// &lt;/summary&gt;
+    public void ApplyMediumHit(Vector2 attackerPosition)
+    {
+        ApplyKnockback(attackerPosition, mediumForce, mediumUpForce, mediumHitstun);
+    }
+
+    /// &lt;summary&gt;
+    /// Apply a heavy hit knockback
+    /// &lt;/summary&gt;
+    public void ApplyHeavyHit(Vector2 attackerPosition)
+    {
+        ApplyKnockback(attackerPosition, heavyForce, heavyUpForce, heavyHitstun);
+    }
+
+    /// &lt;summary&gt;
+    /// Immediately end hitstun (for special recovery moves)
+    /// &lt;/summary&gt;
+    public void CancelHitstun()
+    {
+        if (inHitstun)
+        {
+            EndHitstun();
+        }
+    }
+
+    // ========================================================
+    // INTERNAL METHODS
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// End hitstun and restore control
+    /// &lt;/summary&gt;
+    private void EndHitstun()
+    {
+        inHitstun = false;
+        hitstunTimer = 0f;
+
+        OnHitstunEnd?.Invoke();
+
+        if (debugMode)
+        {
+            Debug.Log("Hitstun ended - control restored");
+        }
+    }
+}
+
+// ============================================================
+// USAGE EXAMPLES:
+//
+// 1. From an attack script when dealing damage:
+//    void DealDamage(GameObject target, int damage)
+//    {
+//        var knockback = target.GetComponent&lt;KnockbackReceiver2D&gt;();
+//        if (knockback != null)
+//        {
+//            knockback.ApplyMediumHit(transform.position);
+//        }
+//        // Also apply damage to health, play effects, etc.
+//    }
+//
+// 2. Custom knockback for special attacks:
+//    void SuperPunch(GameObject target)
+//    {
+//        var knockback = target.GetComponent&lt;KnockbackReceiver2D&gt;();
+//        // Massive knockback with long hitstun
+//        knockback.ApplyKnockback(transform.position, 20f, 12f, 0.6f);
+//    }
+//
+// 3. In your movement script, disable input during hitstun:
+//    void Update()
+//    {
+//        if (knockbackReceiver.IsInHitstun)
+//        {
+//            // Don't process movement input
+//            return;
+//        }
+//        // Normal movement code...
+//    }
+//
+// 4. Subscribe to knockback events:
+//    void Start()
+//    {
+//        GetComponent&lt;KnockbackReceiver2D&gt;().OnKnockbackStart += OnHit;
+//        GetComponent&lt;KnockbackReceiver2D&gt;().OnHitstunEnd += OnRecover;
+//    }
+//    void OnHit(Vector2 dir, float force) { PlayHitAnimation(); }
+//    void OnRecover() { PlayRecoverAnimation(); }
+//
+// 5. Combine with HitstopManager for full impact:
+//    void OnAttackHit(GameObject target)
+//    {
+//        HitstopManager.Instance.TriggerMediumHit();
+//        target.GetComponent&lt;KnockbackReceiver2D&gt;().ApplyMediumHit(transform.position);
+//        ScreenShake.Instance.TriggerShake(0.2f, 0.3f);
+//    }
+//
+// 6. For 3D: Change Rigidbody2D to Rigidbody, Vector2 to Vector3
+// ============================================================</code></pre>
 
             <h3>Common Issues</h3>
             <p><strong>"Knockback goes the wrong direction"</strong><br>

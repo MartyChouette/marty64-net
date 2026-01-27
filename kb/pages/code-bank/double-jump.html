@@ -166,7 +166,7 @@
               <li>Air jump is the powerful one; first jump is setup</li>
             </ul>
 
-            <h3>How It Works</h3>
+            <h3>Pseudocode</h3>
             <pre><code>On Landing:
   - Set jumpsRemaining = extraJumps
 
@@ -177,6 +177,405 @@ On Jump Press:
     - Apply airJumpForce upward
     - Decrement jumpsRemaining
     - Play air jump effect</code></pre>
+
+            <h3>Unity Setup (2D)</h3>
+            <ol>
+              <li><strong>Create Input Actions:</strong>
+                <ul>
+                  <li>Window → Input Actions (or open existing asset)</li>
+                  <li>Create "Jump" action (Button type) - bind to Space and A Button</li>
+                  <li>Save and enable "Generate C# Class"</li>
+                </ul>
+              </li>
+              <li><strong>Setup the Player:</strong>
+                <ul>
+                  <li>Add <code>Rigidbody2D</code> (Gravity Scale: 3, Freeze Rotation Z: checked)</li>
+                  <li>Add <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
+                  <li>Add <code>PlayerInput</code> component, assign your Input Actions asset</li>
+                  <li>Add the <code>DoubleJump2D.cs</code> script below</li>
+                </ul>
+              </li>
+              <li><strong>Create Ground Check:</strong>
+                <ul>
+                  <li>Create empty child object named "GroundCheck"</li>
+                  <li>Position it at the player's feet</li>
+                  <li>Assign to the script's <code>groundCheck</code> field</li>
+                </ul>
+              </li>
+              <li><strong>Configure Layers:</strong>
+                <ul>
+                  <li>Edit → Project Settings → Tags and Layers</li>
+                  <li>Create "Ground" layer, assign to ground objects</li>
+                  <li>Set <code>groundLayer</code> in the script's Inspector</li>
+                </ul>
+              </li>
+              <li><strong>Optional - Air Jump Effects:</strong>
+                <ul>
+                  <li>Create a particle prefab for air jump (wings, sparkles)</li>
+                  <li>Assign to <code>airJumpEffect</code> field</li>
+                  <li>Assign different AudioClip for <code>airJumpSound</code></li>
+                </ul>
+              </li>
+            </ol>
+
+            <h3>The Script (2D)</h3>
+            <pre><code>// ============================================================
+// DoubleJump2D.cs
+// A 2D double jump with configurable air jumps, force options,
+// and distinct feedback for ground vs air jumps.
+// Unity 6.x + New Input System
+// ============================================================
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class DoubleJump2D : MonoBehaviour
+{
+    // ========================================================
+    // JUMP PARAMETERS - Tune these in the Inspector
+    // ========================================================
+
+    [Header("Ground Jump")]
+    [Tooltip("Force applied for ground jump")]
+    [SerializeField] [Range(5f, 25f)] private float jumpForce = 12f;
+
+    [Header("Air Jump")]
+    [Tooltip("Number of air jumps allowed (1 = double jump, 2 = triple, etc.)")]
+    [SerializeField] [Range(1, 5)] private int extraJumps = 1;
+
+    [Tooltip("Force applied for air jump (often less than ground)")]
+    [SerializeField] [Range(5f, 25f)] private float airJumpForce = 10f;
+
+    [Tooltip("Cancel downward velocity before air jump? (Recommended: true)")]
+    [SerializeField] private bool resetVelocity = true;
+
+    [Header("Ground Detection")]
+    [Tooltip("Empty transform at player's feet")]
+    [SerializeField] private Transform groundCheck;
+
+    [Tooltip("Radius of ground check circle")]
+    [SerializeField] [Range(0.05f, 0.5f)] private float groundCheckRadius = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Feedback - Air Jump")]
+    [Tooltip("Particle effect spawned on air jump (optional)")]
+    [SerializeField] private GameObject airJumpEffect;
+
+    [Tooltip("Sound for air jump (should differ from ground jump)")]
+    [SerializeField] private AudioClip airJumpSound;
+
+    [Tooltip("Sound for ground jump")]
+    [SerializeField] private AudioClip groundJumpSound;
+
+    [Header("Input Actions")]
+    [Tooltip("Reference to your Input Actions asset")]
+    [SerializeField] private InputActionAsset inputActions;
+
+    [Header("Debug")]
+    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool debugMode = false;
+
+    // ========================================================
+    // INTERNAL STATE - Don't modify directly
+    // ========================================================
+
+    private Rigidbody2D rb;
+    private AudioSource audioSource;
+    private InputAction jumpAction;
+
+    // Jump state
+    private bool isGrounded = false;
+    private bool wasGrounded = false;
+    private int jumpsRemaining = 0;
+
+    // ========================================================
+    // PUBLIC PROPERTIES - For other scripts to read
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// True if player is on the ground
+    /// &lt;/summary&gt;
+    public bool IsGrounded =&gt; isGrounded;
+
+    /// &lt;summary&gt;
+    /// Current remaining air jumps
+    /// &lt;/summary&gt;
+    public int JumpsRemaining =&gt; jumpsRemaining;
+
+    /// &lt;summary&gt;
+    /// Maximum air jumps (same as extraJumps)
+    /// &lt;/summary&gt;
+    public int MaxAirJumps =&gt; extraJumps;
+
+    /// &lt;summary&gt;
+    /// True if player can currently jump (grounded or has air jumps)
+    /// &lt;/summary&gt;
+    public bool CanJump =&gt; isGrounded || jumpsRemaining &gt; 0;
+
+    // ========================================================
+    // UNITY LIFECYCLE
+    // ========================================================
+
+    void Awake()
+    {
+        // Get required components
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+        audioSource = GetComponent&lt;AudioSource&gt;();
+
+        // Initialize jumps
+        jumpsRemaining = extraJumps;
+
+        // Setup input actions
+        if (inputActions != null)
+        {
+            var gameplay = inputActions.FindActionMap("Gameplay");
+            if (gameplay != null)
+            {
+                jumpAction = gameplay.FindAction("Jump");
+            }
+        }
+    }
+
+    void OnEnable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.Enable();
+            jumpAction.performed += OnJumpPressed;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJumpPressed;
+            jumpAction.Disable();
+        }
+    }
+
+    void Update()
+    {
+        // Check ground state
+        CheckGroundState();
+    }
+
+    // ========================================================
+    // INPUT HANDLING
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Called when jump input is pressed
+    /// &lt;/summary&gt;
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        TryJump();
+    }
+
+    /// &lt;summary&gt;
+    /// Attempt to perform a jump (ground or air)
+    /// &lt;/summary&gt;
+    public void TryJump()
+    {
+        if (isGrounded)
+        {
+            // Ground jump
+            PerformGroundJump();
+        }
+        else if (jumpsRemaining &gt; 0)
+        {
+            // Air jump (double jump)
+            PerformAirJump();
+        }
+        else
+        {
+            if (debugMode) Debug.Log("Jump blocked: not grounded, no air jumps");
+        }
+    }
+
+    // ========================================================
+    // JUMP EXECUTION
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Execute a ground jump
+    /// &lt;/summary&gt;
+    private void PerformGroundJump()
+    {
+        // Apply jump force
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+        // Play ground jump sound
+        PlaySound(groundJumpSound);
+
+        if (debugMode) Debug.Log("Ground jump!");
+    }
+
+    /// &lt;summary&gt;
+    /// Execute an air jump (double jump)
+    /// &lt;/summary&gt;
+    private void PerformAirJump()
+    {
+        // Optionally reset vertical velocity first
+        // This ensures consistent air jump height regardless of fall speed
+        if (resetVelocity)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        }
+
+        // Apply air jump force
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, airJumpForce);
+
+        // Consume one air jump
+        jumpsRemaining--;
+
+        // Spawn air jump effect
+        SpawnAirJumpEffect();
+
+        // Play air jump sound (different from ground jump!)
+        PlaySound(airJumpSound);
+
+        if (debugMode)
+        {
+            Debug.Log($"Air jump! Jumps remaining: {jumpsRemaining}");
+        }
+    }
+
+    // ========================================================
+    // GROUND DETECTION + JUMP REFRESH
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Check ground state and refresh air jumps when landing
+    /// &lt;/summary&gt;
+    private void CheckGroundState()
+    {
+        wasGrounded = isGrounded;
+
+        // Check for ground
+        if (groundCheck != null)
+        {
+            isGrounded = Physics2D.OverlapCircle(
+                groundCheck.position,
+                groundCheckRadius,
+                groundLayer
+            );
+        }
+
+        // Just landed - refresh air jumps!
+        if (isGrounded &amp;&amp; !wasGrounded)
+        {
+            jumpsRemaining = extraJumps;
+
+            if (debugMode)
+            {
+                Debug.Log($"Landed! Air jumps refreshed to {extraJumps}");
+            }
+        }
+    }
+
+    // ========================================================
+    // FEEDBACK
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Spawn visual effect for air jump
+    /// &lt;/summary&gt;
+    private void SpawnAirJumpEffect()
+    {
+        if (airJumpEffect != null)
+        {
+            // Spawn at player position
+            GameObject effect = Instantiate(
+                airJumpEffect,
+                transform.position,
+                Quaternion.identity
+            );
+
+            // Auto-destroy after 2 seconds
+            Destroy(effect, 2f);
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Play a sound clip
+    /// &lt;/summary&gt;
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null &amp;&amp; audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    // ========================================================
+    // PUBLIC METHODS - Call from other scripts
+    // ========================================================
+
+    /// &lt;summary&gt;
+    /// Manually refresh air jumps (e.g., touching wall, taking damage)
+    /// &lt;/summary&gt;
+    public void RefreshAirJumps()
+    {
+        jumpsRemaining = extraJumps;
+    }
+
+    /// &lt;summary&gt;
+    /// Grant bonus air jumps (e.g., power-up)
+    /// &lt;/summary&gt;
+    public void AddAirJump(int amount = 1)
+    {
+        jumpsRemaining = Mathf.Min(jumpsRemaining + amount, extraJumps);
+    }
+
+    // ========================================================
+    // DEBUG VISUALIZATION
+    // ========================================================
+
+    void OnDrawGizmosSelected()
+    {
+        // Show ground check radius
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+    }
+}
+
+// ============================================================
+// USAGE NOTES:
+//
+// 1. The key difference from BasicJump: we track jumpsRemaining
+//    which decrements on air jump and resets on landing.
+//
+// 2. Air jump MUST have different feedback than ground jump!
+//    Players need to know they used their resource. Use:
+//    - Different sound (airJumpSound vs groundJumpSound)
+//    - Visual effect (airJumpEffect - wings, sparkles, etc.)
+//    - Different animation (not shown, but recommended)
+//
+// 3. resetVelocity = true is recommended. Without it, air jump
+//    while falling fast gives much less height than air jump
+//    at apex of first jump. With it, height is consistent.
+//
+// 4. To integrate with coyote time: coyote jump should NOT
+//    consume an air jump. Check "just left ground" separately
+//    from "in air with jumpsRemaining".
+//
+// 5. For wall touch reset, call RefreshAirJumps() on wall contact:
+//    void OnCollisionEnter2D(Collision2D col)
+//    {
+//        if (col.gameObject.layer == LayerMask.NameToLayer("Wall"))
+//            GetComponent&lt;DoubleJump2D&gt;().RefreshAirJumps();
+//    }
+//
+// 6. For 3D: Change Rigidbody2D to Rigidbody, Physics2D to
+//    Physics.CheckSphere, and use rb.linearVelocity with Vector3
+// ============================================================</code></pre>
 
             <h3>Common Issues</h3>
             <p><strong>"Double jump doesn't feel different from first jump"</strong><br>

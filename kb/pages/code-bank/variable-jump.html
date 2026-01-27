@@ -185,8 +185,10 @@
             </ul>
             <p><em>Reference: Dark Souls, Castlevania</em></p>
 
-            <h3>How It Works</h3>
-            <pre><code>On Jump Press:
+            <h3>Pseudocode</h3>
+            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+
+On Jump Press:
   - Apply minJumpForce upward
   - Start tracking hold time
 
@@ -200,6 +202,263 @@ On Jump Release (while rising):
 While Falling:
   - Apply gravity * fallGravityMultiplier</code></pre>
             <p>The key insight: <strong>you're not choosing jump height at the start.</strong> You're shaping the arc in real-time by continuing or releasing the button.</p>
+
+            <h3>Unity Setup (2D)</h3>
+            <ol>
+              <li><strong>Input Actions:</strong> Same as Basic Jump - need a "Jump" action set to Button type</li>
+              <li><strong>Player Setup:</strong> Same as Basic Jump - Rigidbody2D, Collider2D, GroundCheck child object</li>
+              <li><strong>Replace BasicJump2D</strong> with the VariableJump2D script below</li>
+            </ol>
+
+            <h3>The Script (2D)</h3>
+            <p>Create a new C# script called <code>VariableJump2D.cs</code> and paste this:</p>
+            <pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+
+/// &lt;summary&gt;
+/// VARIABLE JUMP - Height depends on how long you hold the button
+/// VG101 Code Bank - For learning and prototyping
+///
+/// Tap for short hop, hold for full jump. The player shapes
+/// the arc in real-time by holding or releasing.
+/// &lt;/summary&gt;
+[RequireComponent(typeof(Rigidbody2D))]
+public class VariableJump2D : MonoBehaviour
+{
+    // ========================================
+    // INPUT SETUP
+    // ========================================
+    [Header("Input Setup")]
+
+    [Tooltip("Your Input Actions asset")]
+    [SerializeField] private InputActionAsset inputActions;
+
+    [Tooltip("Name of your jump action")]
+    [SerializeField] private string jumpActionName = "Jump";
+
+    // ========================================
+    // JUMP FEEL
+    // ========================================
+    [Header("Jump Feel")]
+
+    [Tooltip("Jump force if you tap (minimum height)")]
+    [Range(5f, 15f)]
+    [SerializeField] private float minJumpForce = 8f;
+
+    [Tooltip("Jump force if you hold (maximum height)")]
+    [Range(10f, 25f)]
+    [SerializeField] private float maxJumpForce = 16f;
+
+    [Tooltip("Seconds of holding to reach max height")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float holdTimeForMax = 0.2f;
+
+    [Tooltip("Gravity while rising and falling")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Tooltip("Extra gravity when falling (snappier descent)")]
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    [Tooltip("Velocity multiplier when releasing early (0.5 = cut velocity in half)")]
+    [Range(0.1f, 1f)]
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+
+    // ========================================
+    // GROUND DETECTION
+    // ========================================
+    [Header("Ground Detection")]
+
+    [Tooltip("Empty GameObject at character's feet")]
+    [SerializeField] private Transform groundCheckPoint;
+
+    [Tooltip("How far down to check for ground")]
+    [Range(0.01f, 0.5f)]
+    [SerializeField] private float groundCheckDistance = 0.1f;
+
+    [Tooltip("Which layers count as ground")]
+    [SerializeField] private LayerMask groundLayer;
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    [Header("Debug")]
+
+    [Tooltip("Show ground check in Scene view")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    // ========================================
+    // PRIVATE VARIABLES
+    // ========================================
+    private Rigidbody2D rb;
+    private InputAction jumpAction;
+    private float verticalVelocity;
+    private bool isGrounded;
+
+    // Variable jump state
+    private bool isJumping;           // Are we in a jump?
+    private bool isHoldingJump;       // Is button held?
+    private float jumpHoldTime;       // How long held so far
+
+    // ========================================
+    // SETUP
+    // ========================================
+    private void Awake()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+        rb.gravityScale = 0f;
+
+        if (inputActions != null)
+        {
+            jumpAction = inputActions.FindAction(jumpActionName);
+            jumpAction?.Enable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJumpPressed;
+            jumpAction.canceled += OnJumpReleased;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJumpPressed;
+            jumpAction.canceled -= OnJumpReleased;
+        }
+    }
+
+    // ========================================
+    // MAIN LOOP
+    // ========================================
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        HandleJumpHold();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    // ========================================
+    // GROUND CHECK
+    // ========================================
+    private void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckDistance,
+            groundLayer
+        );
+
+        if (isGrounded && verticalVelocity &lt; 0)
+        {
+            verticalVelocity = 0f;
+            isJumping = false;
+        }
+    }
+
+    // ========================================
+    // JUMP PRESS - Start the jump
+    // ========================================
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        if (isGrounded)
+        {
+            // Start with minimum force
+            verticalVelocity = minJumpForce;
+            isJumping = true;
+            isHoldingJump = true;
+            jumpHoldTime = 0f;
+        }
+    }
+
+    // ========================================
+    // JUMP RELEASE - Cut the jump short
+    // ========================================
+    private void OnJumpReleased(InputAction.CallbackContext context)
+    {
+        isHoldingJump = false;
+
+        // If still rising, cut velocity
+        if (isJumping && verticalVelocity &gt; 0)
+        {
+            verticalVelocity *= jumpCutMultiplier;
+        }
+    }
+
+    // ========================================
+    // HOLD HANDLING - Add force while holding
+    // ========================================
+    private void HandleJumpHold()
+    {
+        if (isJumping && isHoldingJump && verticalVelocity &gt; 0)
+        {
+            jumpHoldTime += Time.fixedDeltaTime;
+
+            // Interpolate from min to max based on hold time
+            float holdPercent = Mathf.Clamp01(jumpHoldTime / holdTimeForMax);
+            float targetForce = Mathf.Lerp(minJumpForce, maxJumpForce, holdPercent);
+
+            // Keep pushing up toward target
+            if (verticalVelocity &lt; targetForce)
+            {
+                verticalVelocity = targetForce;
+            }
+        }
+    }
+
+    // ========================================
+    // GRAVITY
+    // ========================================
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
+        }
+    }
+
+    // ========================================
+    // APPLY MOVEMENT
+    // ========================================
+    private void ApplyVelocity()
+    {
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
+
+    // ========================================
+    // DEBUG
+    // ========================================
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck && groundCheckPoint != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+        }
+    }
+}</code></pre>
+
+            <h3>Key Differences from Basic Jump</h3>
+            <ul>
+              <li><strong>Two force values:</strong> minJumpForce and maxJumpForce define the range</li>
+              <li><strong>Hold tracking:</strong> We track how long the button is held</li>
+              <li><strong>Jump cut:</strong> Releasing early multiplies velocity by jumpCutMultiplier</li>
+              <li><strong>Interpolation:</strong> Force increases smoothly while holding</li>
+            </ul>
 
             <h3>Common Issues</h3>
             <p><strong>"The jump feels mushy"</strong><br>
