@@ -29,15 +29,33 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:1rem}
+    .tab-labels label{padding:.75rem 1.25rem;cursor:pointer;font-weight:500;color:#6b7280;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+    .tab-labels label:hover{color:#374151;background:#f9fafb}
+    .tab-content{display:none;animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d:checked ~ .tab-labels label[for="tab-3d"]{color:#14b8a6;border-bottom-color:#14b8a6}
+    #tab-2d:checked ~ #content-2d,
+    #tab-3d:checked ~ #content-3d{display:block}
+    .input-ref{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin:1rem 0}
+    .input-ref a{color:#d97706;font-weight:500}
   </style>
 </head>
 <body>
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+
   <div class="site-container">
     <nav class="sidebar">
-      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <a href="../../../index.html" class="site-title">marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
 
-      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+      <a href="../../index.html" class="nav-home">VG101 Home</a>
 
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
@@ -63,10 +81,17 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link active">Dash</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
         </ul>
       </div>
 
@@ -226,336 +251,179 @@ On Dash End:
 On Ground Contact:
   - If refreshOnGround: restore dashCount</code></pre>
 
-            <h3>Unity Setup (2D)</h3>
-            <ol>
-              <li><strong>Create Input Actions:</strong>
-                <ul>
-                  <li>Window → Input Actions (or open existing asset)</li>
-                  <li>Create "Dash" action (Button type) - bind to Left Shift or Right Trigger</li>
-                  <li>Create "Move" action (Value, Vector2) - bind to WASD/Arrows and Left Stick</li>
-                  <li>Save and enable "Generate C# Class"</li>
-                </ul>
-              </li>
-              <li><strong>Setup the Player:</strong>
-                <ul>
-                  <li>Add <code>Rigidbody2D</code> (Gravity Scale: 3, Freeze Rotation Z: checked)</li>
-                  <li>Add <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
-                  <li>Add <code>PlayerInput</code> component, assign your Input Actions asset</li>
-                  <li>Add the <code>Dash2D.cs</code> script below</li>
-                </ul>
-              </li>
-              <li><strong>Create Ground Check:</strong>
-                <ul>
-                  <li>Create empty child object named "GroundCheck"</li>
-                  <li>Position it at the player's feet</li>
-                  <li>Assign to the script's <code>groundCheck</code> field</li>
-                </ul>
-              </li>
-              <li><strong>Configure Layers:</strong>
-                <ul>
-                  <li>Edit → Project Settings → Tags and Layers</li>
-                  <li>Create "Ground" layer, assign to ground objects</li>
-                  <li>Set <code>groundLayer</code> in the script's Inspector</li>
-                </ul>
-              </li>
-              <li><strong>Optional - Invincibility Setup:</strong>
-                <ul>
-                  <li>The script exposes <code>IsInvincible</code> property</li>
-                  <li>Your damage system should check this before applying damage</li>
-                </ul>
-              </li>
-            </ol>
+            <div class="input-ref">
+              <strong>Prerequisite:</strong> These scripts use the <a href="input-setup.html">InputReader</a> pattern for device-agnostic input. Set that up first.
+            </div>
 
-            <h3>The Script (2D)</h3>
-            <pre><code>// ============================================================
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d">
+
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d">3D (All Perspectives)</label>
+              </div>
+
+              <!-- 2D CONTENT -->
+              <div class="tab-content" id="content-2d">
+                <h3>Unity Setup (2D)</h3>
+                <ol>
+                  <li><strong>InputReader Setup:</strong> See <a href="input-setup.html">Input Setup</a> page - ensure you have a "Dash" action (Button type) bound to Left Shift and Right Trigger</li>
+                  <li><strong>Player Setup:</strong>
+                    <ul>
+                      <li>Add <code>Rigidbody2D</code> (Gravity Scale: 3, Freeze Rotation Z: checked)</li>
+                      <li>Add <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
+                      <li>Add the <code>Dash2D.cs</code> script below</li>
+                    </ul>
+                  </li>
+                  <li><strong>Ground Check:</strong> Create empty child object at player's feet, assign to <code>groundCheck</code></li>
+                  <li><strong>Layers:</strong> Create "Ground" layer, assign to ground objects, set in script's Inspector</li>
+                </ol>
+
+                <h3>The Script (2D)</h3>
+                <pre><code>// ============================================================
 // Dash2D.cs
-// A comprehensive 2D dash with direction options, resource
-// management, invincibility, and momentum transfer.
+// 2D dash with direction options, resource management,
+// invincibility, and momentum transfer.
+// Uses InputReader for device-agnostic input (gamepad + KB/M).
 // Unity 6.x + New Input System
 // ============================================================
 
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-// Dash direction modes - how we determine which way to dash
-public enum DashDirectionMode
+public enum DashDirectionMode2D
 {
     EightWay,       // All 8 cardinal + diagonal directions
     FourWay,        // Up, Down, Left, Right only
     Horizontal,     // Left and Right only
-    FacingDirection // Dash the way the sprite is facing
+    FacingDirection // Dash the way sprite is facing
 }
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Dash2D : MonoBehaviour
 {
-    // ========================================================
-    // DASH PARAMETERS - Tune these in the Inspector
-    // ========================================================
-
     [Header("Dash Settings")]
-    [Tooltip("How fast you move during dash (units/second)")]
-    [SerializeField] [Range(10f, 50f)] private float dashSpeed = 25f;
+    [Tooltip("Speed during dash (units/second)")]
+    [SerializeField] private float dashSpeed = 25f;
 
-    [Tooltip("How long the dash lasts (seconds)")]
-    [SerializeField] [Range(0.05f, 0.5f)] private float dashDuration = 0.15f;
+    [Tooltip("Duration of the dash (seconds)")]
+    [SerializeField] private float dashDuration = 0.15f;
 
-    [Tooltip("Time before you can dash again (0 = no cooldown)")]
-    [SerializeField] [Range(0f, 2f)] private float dashCooldown = 0f;
+    [Tooltip("Cooldown before next dash (0 = none)")]
+    [SerializeField] private float dashCooldown = 0f;
 
-    [Header("Direction Settings")]
-    [Tooltip("Which directions are valid for dashing")]
-    [SerializeField] private DashDirectionMode directionMode = DashDirectionMode.EightWay;
+    [Header("Direction")]
+    [Tooltip("Which directions are valid")]
+    [SerializeField] private DashDirectionMode2D directionMode = DashDirectionMode2D.EightWay;
 
-    [Tooltip("Default dash direction if no input (1 = right, -1 = left)")]
+    [Tooltip("Default direction if no input (1=right, -1=left)")]
     [SerializeField] private int facingDirection = 1;
 
     [Header("Resource Management")]
-    [Tooltip("How many dashes available per air period")]
-    [SerializeField] [Range(1, 5)] private int maxDashCount = 1;
+    [Tooltip("Dashes available per air period")]
+    [SerializeField] private int maxDashCount = 1;
 
-    [Tooltip("Does landing restore dash charges?")]
+    [Tooltip("Landing restores dashes?")]
     [SerializeField] private bool refreshOnGround = true;
 
-    [Header("Combat Options")]
-    [Tooltip("Invincible (ignore damage) while dashing?")]
+    [Header("Combat")]
+    [Tooltip("Invincible while dashing?")]
     [SerializeField] private bool invincibleDuringDash = false;
 
-    [Tooltip("How much dash speed carries into normal movement (0-1)")]
+    [Tooltip("Momentum carried after dash (0-1)")]
     [SerializeField] [Range(0f, 1f)] private float momentumTransfer = 0f;
 
     [Header("Ground Detection")]
-    [Tooltip("Empty transform at player's feet")]
     [SerializeField] private Transform groundCheck;
-
-    [Tooltip("Radius of ground check circle")]
-    [SerializeField] [Range(0.05f, 0.5f)] private float groundCheckRadius = 0.1f;
-
-    [Tooltip("Which layers count as ground")]
+    [SerializeField] private float groundCheckRadius = 0.1f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Input Actions")]
-    [Tooltip("Reference to your Input Actions asset")]
-    [SerializeField] private InputActionAsset inputActions;
-
-    [Header("Debug")]
-    [Tooltip("Show debug info in console")]
-    [SerializeField] private bool debugMode = false;
-
-    // ========================================================
-    // INTERNAL STATE - Don't modify directly
-    // ========================================================
-
+    // Components
     private Rigidbody2D rb;
-    private InputAction dashAction;
-    private InputAction moveAction;
 
     // Dash state
-    private bool isDashing = false;
-    private float dashTimer = 0f;
-    private float cooldownTimer = 0f;
+    private bool isDashing;
+    private float dashTimer;
+    private float cooldownTimer;
     private int dashesRemaining;
     private Vector2 dashDirection;
     private float storedGravityScale;
 
     // Ground state
-    private bool isGrounded = false;
-    private bool wasGrounded = false;
+    private bool isGrounded;
+    private bool wasGrounded;
 
-    // ========================================================
-    // PUBLIC PROPERTIES - For other scripts to read
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// True while the player is actively dashing
-    /// &lt;/summary&gt;
+    // Public properties
     public bool IsDashing =&gt; isDashing;
-
-    /// &lt;summary&gt;
-    /// True if the player is invincible (dashing + invincibility enabled)
-    /// Use this in your damage system to check before applying damage
-    /// &lt;/summary&gt;
     public bool IsInvincible =&gt; isDashing &amp;&amp; invincibleDuringDash;
-
-    /// &lt;summary&gt;
-    /// Current remaining dash charges
-    /// &lt;/summary&gt;
     public int DashesRemaining =&gt; dashesRemaining;
-
-    /// &lt;summary&gt;
-    /// True if player can dash right now
-    /// &lt;/summary&gt;
-    public bool CanDash =&gt; !isDashing &amp;&amp;
-                          dashesRemaining &gt; 0 &amp;&amp;
-                          cooldownTimer &lt;= 0f;
-
-    // ========================================================
-    // UNITY LIFECYCLE
-    // ========================================================
+    public bool CanDash =&gt; !isDashing &amp;&amp; dashesRemaining &gt; 0 &amp;&amp; cooldownTimer &lt;= 0f;
 
     void Awake()
     {
-        // Get the Rigidbody2D component
         rb = GetComponent&lt;Rigidbody2D&gt;();
         storedGravityScale = rb.gravityScale;
-
-        // Initialize dash charges
         dashesRemaining = maxDashCount;
-
-        // Setup input actions
-        if (inputActions != null)
-        {
-            var gameplay = inputActions.FindActionMap("Gameplay");
-            if (gameplay != null)
-            {
-                dashAction = gameplay.FindAction("Dash");
-                moveAction = gameplay.FindAction("Move");
-            }
-        }
     }
 
     void OnEnable()
     {
-        // Enable input actions and subscribe to dash
-        if (dashAction != null)
-        {
-            dashAction.Enable();
-            dashAction.performed += OnDashPressed;
-        }
-        if (moveAction != null)
-        {
-            moveAction.Enable();
-        }
+        InputReader.Instance.OnDashPressed += TryDash;
     }
 
     void OnDisable()
     {
-        // Unsubscribe to prevent memory leaks
-        if (dashAction != null)
-        {
-            dashAction.performed -= OnDashPressed;
-            dashAction.Disable();
-        }
-        if (moveAction != null)
-        {
-            moveAction.Disable();
-        }
+        InputReader.Instance.OnDashPressed -= TryDash;
     }
 
     void Update()
     {
-        // Update timers
         if (cooldownTimer &gt; 0f)
-        {
             cooldownTimer -= Time.deltaTime;
-        }
 
-        // Check ground state for dash refresh
         CheckGroundState();
     }
 
     void FixedUpdate()
     {
-        // Handle dash movement in FixedUpdate for physics consistency
         if (isDashing)
-        {
             ProcessDash();
-        }
     }
 
-    // ========================================================
-    // INPUT HANDLING
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Called when dash input is pressed
-    /// &lt;/summary&gt;
-    private void OnDashPressed(InputAction.CallbackContext context)
+    private void TryDash()
     {
-        TryDash();
-    }
+        if (!CanDash) return;
 
-    /// &lt;summary&gt;
-    /// Attempt to initiate a dash
-    /// &lt;/summary&gt;
-    public void TryDash()
-    {
-        // Check if we can dash
-        if (!CanDash)
-        {
-            if (debugMode)
-            {
-                if (isDashing) Debug.Log("Dash blocked: already dashing");
-                else if (dashesRemaining &lt;= 0) Debug.Log("Dash blocked: no charges");
-                else if (cooldownTimer &gt; 0) Debug.Log($"Dash blocked: cooldown ({cooldownTimer:F2}s)");
-            }
-            return;
-        }
-
-        // Determine dash direction based on mode
         dashDirection = CalculateDashDirection();
+        if (dashDirection == Vector2.zero) return;
 
-        // If no valid direction, don't dash
-        if (dashDirection == Vector2.zero)
-        {
-            if (debugMode) Debug.Log("Dash blocked: no valid direction");
-            return;
-        }
-
-        // Start the dash!
         StartDash();
     }
 
-    // ========================================================
-    // DIRECTION CALCULATION
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Calculate dash direction based on current mode and input
-    /// &lt;/summary&gt;
     private Vector2 CalculateDashDirection()
     {
-        Vector2 input = Vector2.zero;
-
-        // Get raw input
-        if (moveAction != null)
-        {
-            input = moveAction.ReadValue&lt;Vector2&gt;();
-        }
+        Vector2 input = InputReader.Instance.MoveInput;
 
         switch (directionMode)
         {
-            case DashDirectionMode.EightWay:
-                // Normalize 8-way diagonal input
+            case DashDirectionMode2D.EightWay:
                 if (input.magnitude &gt; 0.1f)
-                {
                     return input.normalized;
-                }
-                // Default to facing direction if no input
                 return new Vector2(facingDirection, 0);
 
-            case DashDirectionMode.FourWay:
-                // Snap to nearest cardinal direction
+            case DashDirectionMode2D.FourWay:
                 if (Mathf.Abs(input.x) &gt; Mathf.Abs(input.y))
-                {
                     return new Vector2(Mathf.Sign(input.x), 0);
-                }
                 else if (Mathf.Abs(input.y) &gt; 0.1f)
-                {
                     return new Vector2(0, Mathf.Sign(input.y));
-                }
                 return new Vector2(facingDirection, 0);
 
-            case DashDirectionMode.Horizontal:
-                // Only left/right
+            case DashDirectionMode2D.Horizontal:
                 if (Mathf.Abs(input.x) &gt; 0.1f)
-                {
                     return new Vector2(Mathf.Sign(input.x), 0);
-                }
                 return new Vector2(facingDirection, 0);
 
-            case DashDirectionMode.FacingDirection:
-                // Always dash the way sprite is facing
+            case DashDirectionMode2D.FacingDirection:
                 return new Vector2(facingDirection, 0);
 
             default:
@@ -563,83 +431,38 @@ public class Dash2D : MonoBehaviour
         }
     }
 
-    // ========================================================
-    // DASH EXECUTION
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Begin the dash
-    /// &lt;/summary&gt;
     private void StartDash()
     {
         isDashing = true;
         dashTimer = dashDuration;
         dashesRemaining--;
 
-        // Disable gravity during dash
         storedGravityScale = rb.gravityScale;
         rb.gravityScale = 0f;
-
-        // Set velocity to dash direction
         rb.linearVelocity = dashDirection * dashSpeed;
-
-        if (debugMode)
-        {
-            Debug.Log($"Dash started! Direction: {dashDirection}, Charges left: {dashesRemaining}");
-        }
     }
 
-    /// &lt;summary&gt;
-    /// Process ongoing dash (called in FixedUpdate)
-    /// &lt;/summary&gt;
     private void ProcessDash()
     {
         dashTimer -= Time.fixedDeltaTime;
-
-        // Keep dash velocity constant
         rb.linearVelocity = dashDirection * dashSpeed;
 
-        // Check if dash is complete
         if (dashTimer &lt;= 0f)
-        {
             EndDash();
-        }
     }
 
-    /// &lt;summary&gt;
-    /// End the dash and return to normal state
-    /// &lt;/summary&gt;
     private void EndDash()
     {
         isDashing = false;
-
-        // Restore gravity
         rb.gravityScale = storedGravityScale;
-
-        // Apply momentum transfer (0 = full stop, 1 = keep all speed)
         rb.linearVelocity *= momentumTransfer;
-
-        // Start cooldown
         cooldownTimer = dashCooldown;
-
-        if (debugMode)
-        {
-            Debug.Log($"Dash ended. Cooldown: {dashCooldown}s, Momentum kept: {momentumTransfer * 100}%");
-        }
     }
 
-    // ========================================================
-    // GROUND DETECTION + DASH REFRESH
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Check if grounded and refresh dash if needed
-    /// &lt;/summary&gt;
     private void CheckGroundState()
     {
         wasGrounded = isGrounded;
 
-        // Check for ground
         if (groundCheck != null)
         {
             isGrounded = Physics2D.OverlapCircle(
@@ -649,63 +472,262 @@ public class Dash2D : MonoBehaviour
             );
         }
 
-        // Refresh dashes when landing
         if (refreshOnGround &amp;&amp; isGrounded &amp;&amp; !wasGrounded)
-        {
             dashesRemaining = maxDashCount;
-
-            if (debugMode)
-            {
-                Debug.Log("Landed! Dash charges refreshed.");
-            }
-        }
     }
 
-    // ========================================================
-    // PUBLIC METHODS - Call from other scripts
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Manually refresh dash charges (e.g., from power-up or special surface)
-    /// &lt;/summary&gt;
-    public void RefreshDashes()
-    {
-        dashesRemaining = maxDashCount;
-    }
-
-    /// &lt;summary&gt;
-    /// Update facing direction (call this from your movement script)
-    /// &lt;/summary&gt;
-    public void SetFacingDirection(int direction)
-    {
-        facingDirection = direction &gt; 0 ? 1 : -1;
-    }
-
-    /// &lt;summary&gt;
-    /// Force end the dash early (for wall collision, etc.)
-    /// &lt;/summary&gt;
-    public void CancelDash()
-    {
-        if (isDashing)
-        {
-            EndDash();
-        }
-    }
-
-    // ========================================================
-    // DEBUG VISUALIZATION
-    // ========================================================
+    // Public API
+    public void RefreshDashes() =&gt; dashesRemaining = maxDashCount;
+    public void SetFacingDirection(int dir) =&gt; facingDirection = dir &gt; 0 ? 1 : -1;
+    public void CancelDash() { if (isDashing) EndDash(); }
 
     void OnDrawGizmosSelected()
     {
-        // Show ground check radius
         if (groundCheck != null)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
+    }
+}</code></pre>
+              </div>
 
-        // Show dash direction when selected
+              <!-- 3D CONTENT -->
+              <div class="tab-content" id="content-3d">
+                <h3>Unity Setup (3D - Third Person, First Person, or Isometric)</h3>
+                <ol>
+                  <li><strong>InputReader Setup:</strong> See <a href="input-setup.html">Input Setup</a> page - ensure you have a "Dash" action (Button type)</li>
+                  <li><strong>Player Setup:</strong>
+                    <ul>
+                      <li>Add <code>CharacterController</code> component</li>
+                      <li>Add the <code>Dash3D.cs</code> script below</li>
+                    </ul>
+                  </li>
+                  <li><strong>Optional - Assign Camera:</strong> For camera-relative dashing, assign your main camera to the <code>playerCamera</code> field</li>
+                </ol>
+
+                <h3>The Script (3D)</h3>
+                <pre><code>// ============================================================
+// Dash3D.cs
+// 3D dash for third-person, first-person, or isometric.
+// Uses CharacterController and InputReader for device-agnostic
+// input (gamepad + KB/M). Works with camera-relative movement.
+// Unity 6.x + New Input System
+// ============================================================
+
+using UnityEngine;
+
+public enum DashDirectionMode3D
+{
+    EightWay,       // 8 directions on XZ plane
+    FourWay,        // Cardinal directions only
+    Forward,        // Always forward
+    CameraRelative  // Based on camera facing
+}
+
+[RequireComponent(typeof(CharacterController))]
+public class Dash3D : MonoBehaviour
+{
+    [Header("Dash Settings")]
+    [Tooltip("Speed during dash (units/second)")]
+    [SerializeField] private float dashSpeed = 25f;
+
+    [Tooltip("Duration of the dash (seconds)")]
+    [SerializeField] private float dashDuration = 0.15f;
+
+    [Tooltip("Cooldown before next dash (0 = none)")]
+    [SerializeField] private float dashCooldown = 0f;
+
+    [Header("Direction")]
+    [Tooltip("Which directions are valid")]
+    [SerializeField] private DashDirectionMode3D directionMode = DashDirectionMode3D.CameraRelative;
+
+    [Tooltip("Camera for relative movement (optional)")]
+    [SerializeField] private Transform playerCamera;
+
+    [Header("Resource Management")]
+    [Tooltip("Dashes available per air period")]
+    [SerializeField] private int maxDashCount = 1;
+
+    [Tooltip("Landing restores dashes?")]
+    [SerializeField] private bool refreshOnGround = true;
+
+    [Header("Combat")]
+    [Tooltip("Invincible while dashing?")]
+    [SerializeField] private bool invincibleDuringDash = false;
+
+    [Tooltip("Momentum carried after dash (0-1)")]
+    [SerializeField] [Range(0f, 1f)] private float momentumTransfer = 0f;
+
+    [Header("Vertical Behavior")]
+    [Tooltip("Ignore gravity during dash?")]
+    [SerializeField] private bool suspendGravity = true;
+
+    [Tooltip("Allow vertical dashing (up/down)?")]
+    [SerializeField] private bool allowVerticalDash = false;
+
+    // Components
+    private CharacterController controller;
+
+    // Dash state
+    private bool isDashing;
+    private float dashTimer;
+    private float cooldownTimer;
+    private int dashesRemaining;
+    private Vector3 dashDirection;
+    private Vector3 dashVelocity;
+
+    // Ground state
+    private bool wasGrounded;
+
+    // Public properties
+    public bool IsDashing =&gt; isDashing;
+    public bool IsInvincible =&gt; isDashing &amp;&amp; invincibleDuringDash;
+    public int DashesRemaining =&gt; dashesRemaining;
+    public bool CanDash =&gt; !isDashing &amp;&amp; dashesRemaining &gt; 0 &amp;&amp; cooldownTimer &lt;= 0f;
+
+    // For external movement scripts to read
+    public Vector3 DashVelocity =&gt; isDashing ? dashVelocity : Vector3.zero;
+
+    void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        dashesRemaining = maxDashCount;
+
+        if (playerCamera == null)
+            playerCamera = Camera.main?.transform;
+    }
+
+    void OnEnable()
+    {
+        InputReader.Instance.OnDashPressed += TryDash;
+    }
+
+    void OnDisable()
+    {
+        InputReader.Instance.OnDashPressed -= TryDash;
+    }
+
+    void Update()
+    {
+        if (cooldownTimer &gt; 0f)
+            cooldownTimer -= Time.deltaTime;
+
+        CheckGroundState();
+
+        if (isDashing)
+            ProcessDash();
+    }
+
+    private void TryDash()
+    {
+        if (!CanDash) return;
+
+        dashDirection = CalculateDashDirection();
+        if (dashDirection == Vector3.zero) return;
+
+        StartDash();
+    }
+
+    private Vector3 CalculateDashDirection()
+    {
+        Vector2 input = InputReader.Instance.MoveInput;
+        Vector3 direction = Vector3.zero;
+
+        switch (directionMode)
+        {
+            case DashDirectionMode3D.CameraRelative:
+                if (playerCamera != null &amp;&amp; input.magnitude &gt; 0.1f)
+                {
+                    Vector3 camForward = playerCamera.forward;
+                    Vector3 camRight = playerCamera.right;
+
+                    if (!allowVerticalDash)
+                    {
+                        camForward.y = 0;
+                        camRight.y = 0;
+                        camForward.Normalize();
+                        camRight.Normalize();
+                    }
+
+                    direction = (camForward * input.y + camRight * input.x).normalized;
+                }
+                else
+                {
+                    direction = transform.forward;
+                }
+                break;
+
+            case DashDirectionMode3D.EightWay:
+                if (input.magnitude &gt; 0.1f)
+                    direction = new Vector3(input.x, 0, input.y).normalized;
+                else
+                    direction = transform.forward;
+                break;
+
+            case DashDirectionMode3D.FourWay:
+                if (Mathf.Abs(input.x) &gt; Mathf.Abs(input.y))
+                    direction = new Vector3(Mathf.Sign(input.x), 0, 0);
+                else if (Mathf.Abs(input.y) &gt; 0.1f)
+                    direction = new Vector3(0, 0, Mathf.Sign(input.y));
+                else
+                    direction = transform.forward;
+                break;
+
+            case DashDirectionMode3D.Forward:
+                direction = transform.forward;
+                break;
+        }
+
+        return direction;
+    }
+
+    private void StartDash()
+    {
+        isDashing = true;
+        dashTimer = dashDuration;
+        dashesRemaining--;
+        dashVelocity = dashDirection * dashSpeed;
+    }
+
+    private void ProcessDash()
+    {
+        dashTimer -= Time.deltaTime;
+
+        Vector3 movement = dashVelocity * Time.deltaTime;
+
+        if (!suspendGravity &amp;&amp; !controller.isGrounded)
+            movement.y -= 9.81f * Time.deltaTime;
+
+        controller.Move(movement);
+
+        if (dashTimer &lt;= 0f)
+            EndDash();
+    }
+
+    private void EndDash()
+    {
+        isDashing = false;
+        dashVelocity *= momentumTransfer;
+        cooldownTimer = dashCooldown;
+    }
+
+    private void CheckGroundState()
+    {
+        bool isGrounded = controller.isGrounded;
+
+        if (refreshOnGround &amp;&amp; isGrounded &amp;&amp; !wasGrounded)
+            dashesRemaining = maxDashCount;
+
+        wasGrounded = isGrounded;
+    }
+
+    // Public API
+    public void RefreshDashes() =&gt; dashesRemaining = maxDashCount;
+    public void CancelDash() { if (isDashing) EndDash(); }
+
+    void OnDrawGizmosSelected()
+    {
         if (isDashing)
         {
             Gizmos.color = Color.cyan;
@@ -715,30 +737,25 @@ public class Dash2D : MonoBehaviour
 }
 
 // ============================================================
-// USAGE NOTES:
+// INTEGRATION WITH YOUR MOVEMENT SCRIPT:
 //
-// 1. Assign Input Actions asset with "Gameplay" action map
-//    containing "Dash" and "Move" actions
+// If you have a separate movement script using CharacterController,
+// check for IsDashing before applying your own movement:
 //
-// 2. For invincibility, check IsInvincible in your damage code:
-//    if (!player.GetComponent&lt;Dash2D&gt;().IsInvincible)
-//    {
-//        player.TakeDamage(amount);
-//    }
+// void Update()
+// {
+//     if (dash.IsDashing) return; // Let dash handle movement
 //
-// 3. To refresh dashes on special surfaces (like Celeste's
-//    crystals), call RefreshDashes() from a trigger:
-//    void OnTriggerEnter2D(Collider2D other)
-//    {
-//        other.GetComponent&lt;Dash2D&gt;()?.RefreshDashes();
-//    }
+//     // Your normal movement code here...
+// }
 //
-// 4. Call SetFacingDirection() from your movement script
-//    when the player turns around
+// Or combine velocities by reading DashVelocity:
 //
-// 5. For 3D: Change Rigidbody2D to Rigidbody, Physics2D to
-//    Physics, and use rb.linearVelocity with Vector3
+// Vector3 totalVelocity = myVelocity + dash.DashVelocity;
+// controller.Move(totalVelocity * Time.deltaTime);
 // ============================================================</code></pre>
+              </div>
+            </div>
 
             <h3>Common Issues</h3>
             <p><strong>"The dash feels weak"</strong><br>
@@ -796,11 +813,11 @@ public class Dash2D : MonoBehaviour
 
             <h3>Combine With</h3>
             <ul>
-              <li><a href="air-control.html">Air Control</a> - what you can do after the dash</li>
               <li><a href="coyote-time.html">Coyote Time</a> - brief dash window after leaving platform</li>
+              <li><a href="double-jump.html">Double Jump</a> - dash extends air mobility</li>
               <li><a href="hitstop.html">Hitstop</a> - freeze when dash-attack connects</li>
-              <li><a href="trail-effect.html">Trail Effect</a> - ghost images during dash</li>
               <li><a href="screen-shake.html">Screen Shake</a> - on dash-attack impact</li>
+              <li><a href="squash-stretch.html">Squash & Stretch</a> - visual stretch during dash</li>
             </ul>
           </div>
         </div>
