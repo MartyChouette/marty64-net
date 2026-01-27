@@ -29,9 +29,34 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective Tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:0}
+    .tab-labels label{padding:0.75rem 1.25rem;cursor:pointer;font-weight:500;font-size:0.875rem;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+    .tab-labels label:hover{color:#334155;background:#f8fafc}
+    .tab-content{display:none;padding:1.5rem;background:#f8fafc;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d:checked ~ .tab-labels label[for="tab-3d"]{color:#14b8a6;border-bottom-color:#14b8a6;background:#f0fdfa}
+    #tab-2d:checked ~ .content-2d,
+    #tab-3d:checked ~ .content-3d{display:block}
+    .prereq-note{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin-bottom:1.5rem;font-size:0.9rem}
+    .prereq-note a{color:#d97706;font-weight:500}
+    pre{background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.8rem;line-height:1.5}
+    code{font-family:'JetBrains Mono',monospace}
+    pre code{color:#e2e8f0}
+    :not(pre)>code{background:#e2e8f0;padding:0.125rem 0.375rem;border-radius:3px;font-size:0.85em;color:#334155}
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -63,10 +88,16 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
           <li class="nav-item"><a href="coyote-time.html" class="nav-link active">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
@@ -120,12 +151,6 @@
                   <td>0.1</td>
                   <td>Seconds after leaving ground when jump still works</td>
                 </tr>
-                <tr>
-                  <td><code>coyoteTimer</code></td>
-                  <td>float</td>
-                  <td>-</td>
-                  <td>Internal timer tracking time since leaving ground</td>
-                </tr>
               </tbody>
             </table>
 
@@ -134,165 +159,110 @@
             <p><strong>For tight precision (hardcore):</strong></p>
             <ul>
               <li><code>coyoteTime</code> = 0.05 - 0.08</li>
-              <li>Just enough to prevent frustration</li>
             </ul>
-            <p><em>Reference: Super Meat Boy (uses minimal coyote time)</em></p>
+            <p><em>Reference: Super Meat Boy</em></p>
 
             <p><strong>For accessible play:</strong></p>
             <ul>
               <li><code>coyoteTime</code> = 0.1 - 0.15</li>
-              <li>Generous but not exploitable</li>
             </ul>
-            <p><em>Reference: Celeste (prioritizes accessibility)</em></p>
+            <p><em>Reference: Celeste</em></p>
 
             <p><strong>For casual/beginner-friendly:</strong></p>
             <ul>
               <li><code>coyoteTime</code> = 0.15 - 0.2</li>
-              <li>Very forgiving, might be noticeable to skilled players</li>
             </ul>
 
-            <h3>Pseudocode</h3>
-            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+            <h3>Perspective Scripts</h3>
 
-On Leaving Ground (not from jumping):
-  - Start coyoteTimer at coyoteTime value
+            <div class="prereq-note">
+              <strong>Prerequisite:</strong> All scripts below require the <a href="input-setup.html">InputReader</a> to be set up in your scene.
+            </div>
 
-Every Frame:
-  - If coyoteTimer > 0:
-    - Decrease coyoteTimer by deltaTime
-    - Allow jump input to trigger jump
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d">
 
-On Jump:
-  - Reset coyoteTimer to 0 (prevent double use)</code></pre>
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d">3D (All Perspectives)</label>
+              </div>
 
-            <p><strong>Critical:</strong> Coyote time should NOT activate if you left the ground by jumping. Only when you walk or fall off an edge.</p>
+              <!-- 2D PLATFORMER -->
+              <div class="tab-content content-2d">
+                <h4>CoyoteJump2D.cs</h4>
+                <p>2D jump with built-in coyote time. Allows jumping briefly after walking off a ledge.</p>
 
-            <h3>Unity Setup (2D)</h3>
-            <p>Coyote Time is typically <strong>added to your existing jump script</strong>, not a separate component. Here's a complete jump script with coyote time built in.</p>
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>Rigidbody2D</code> to your player</li>
+                  <li>Create a child "GroundCheck" at the feet</li>
+                  <li>Add this script and configure in Inspector</li>
+                </ol>
 
-            <h3>The Script (2D)</h3>
-            <p>Create a new C# script called <code>JumpWithCoyoteTime2D.cs</code> and paste this:</p>
-            <pre><code>using UnityEngine;
-using UnityEngine.InputSystem;
+                <pre><code>using UnityEngine;
 
 /// &lt;summary&gt;
-/// JUMP WITH COYOTE TIME - Grace period after leaving ledge
-/// VG101 Code Bank - For learning and prototyping
-///
-/// Allows jumping for a brief window after walking off a platform.
-/// Players won't notice it helping, but they'll notice without it.
+/// COYOTE JUMP 2D - Jump with grace period after leaving ledge
+/// VG101 Code Bank - Requires InputReader from Input Setup
 /// &lt;/summary&gt;
 [RequireComponent(typeof(Rigidbody2D))]
-public class JumpWithCoyoteTime2D : MonoBehaviour
+public class CoyoteJump2D : MonoBehaviour
 {
-    // ========================================
-    // INPUT SETUP
-    // ========================================
-    [Header("Input Setup")]
-
-    [Tooltip("Your Input Actions asset")]
-    [SerializeField] private InputActionAsset inputActions;
-
-    [Tooltip("Name of your jump action")]
-    [SerializeField] private string jumpActionName = "Jump";
-
-    // ========================================
-    // JUMP FEEL
-    // ========================================
     [Header("Jump Feel")]
-
-    [Tooltip("How hard we push off")]
     [Range(5f, 25f)]
     [SerializeField] private float jumpForce = 12f;
 
-    [Tooltip("Gravity while airborne")]
     [Range(20f, 80f)]
     [SerializeField] private float gravity = 40f;
 
-    [Tooltip("Extra gravity when falling")]
     [Range(1f, 4f)]
     [SerializeField] private float fallGravityMultiplier = 1.5f;
 
-    // ========================================
-    // COYOTE TIME - The magic happens here
-    // ========================================
     [Header("Coyote Time")]
-
-    [Tooltip("Seconds after leaving ground when jump still works. 0.1 is a good default.")]
+    [Tooltip("Seconds after leaving ground when jump still works")]
     [Range(0.01f, 0.3f)]
     [SerializeField] private float coyoteTime = 0.1f;
 
-    // ========================================
-    // GROUND DETECTION
-    // ========================================
     [Header("Ground Detection")]
-
-    [Tooltip("Empty GameObject at character's feet")]
     [SerializeField] private Transform groundCheckPoint;
-
-    [Tooltip("How far down to check for ground")]
-    [Range(0.01f, 0.5f)]
-    [SerializeField] private float groundCheckDistance = 0.1f;
-
-    [Tooltip("Which layers count as ground")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    // ========================================
-    // DEBUG
-    // ========================================
     [Header("Debug")]
-
-    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool showGroundCheck = true;
     [SerializeField] private bool debugCoyote = false;
 
-    [Tooltip("Show ground check in Scene view")]
-    [SerializeField] private bool showGroundCheck = true;
-
-    // ========================================
-    // PRIVATE VARIABLES
-    // ========================================
     private Rigidbody2D rb;
-    private InputAction jumpAction;
     private float verticalVelocity;
     private bool isGrounded;
-    private bool wasGrounded;        // Was grounded last frame?
-    private float coyoteTimer;       // Time left in coyote window
-    private bool usedCoyoteJump;     // Did we use coyote this airtime?
+    private bool wasGrounded;
+    private float coyoteTimer;
+    private bool usedCoyoteJump;
 
-    // ========================================
-    // SETUP
-    // ========================================
     private void Awake()
     {
         rb = GetComponent&lt;Rigidbody2D&gt;();
         rb.gravityScale = 0f;
-
-        if (inputActions != null)
-        {
-            jumpAction = inputActions.FindAction(jumpActionName);
-            jumpAction?.Enable();
-        }
     }
 
     private void OnEnable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed += OnJumpPressed;
+            InputReader.Instance.OnJumpPressed += HandleJump;
         }
     }
 
     private void OnDisable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed -= OnJumpPressed;
+            InputReader.Instance.OnJumpPressed -= HandleJump;
         }
     }
 
-    // ========================================
-    // MAIN LOOP
-    // ========================================
     private void FixedUpdate()
     {
         wasGrounded = isGrounded;
@@ -302,69 +272,49 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
         ApplyVelocity();
     }
 
-    // ========================================
-    // GROUND CHECK
-    // ========================================
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(
             groundCheckPoint.position,
-            groundCheckDistance,
+            groundCheckRadius,
             groundLayer
         );
 
         if (isGrounded && verticalVelocity &lt; 0)
         {
             verticalVelocity = 0f;
-            usedCoyoteJump = false; // Reset for next airtime
+            usedCoyoteJump = false;
         }
     }
 
-    // ========================================
-    // COYOTE TIME LOGIC
-    // ========================================
     private void HandleCoyoteTime()
     {
-        // Did we just leave the ground (without jumping)?
+        // Just walked/fell off edge (not jumped off)
         if (wasGrounded && !isGrounded && verticalVelocity &lt;= 0)
         {
-            // We walked/fell off - start coyote timer
             coyoteTimer = coyoteTime;
-
             if (debugCoyote) Debug.Log("Coyote time started!");
         }
 
-        // Count down the timer
         if (coyoteTimer &gt; 0)
         {
             coyoteTimer -= Time.fixedDeltaTime;
         }
     }
 
-    // ========================================
-    // CAN WE JUMP RIGHT NOW?
-    // ========================================
     private bool CanJump()
     {
-        // Normal grounded jump
         if (isGrounded) return true;
-
-        // Coyote jump - in the air but timer still active
         if (coyoteTimer &gt; 0 && !usedCoyoteJump) return true;
-
         return false;
     }
 
-    // ========================================
-    // JUMP INPUT
-    // ========================================
-    private void OnJumpPressed(InputAction.CallbackContext context)
+    private void HandleJump()
     {
         if (CanJump())
         {
             verticalVelocity = jumpForce;
 
-            // If this was a coyote jump, mark it used
             if (!isGrounded)
             {
                 usedCoyoteJump = true;
@@ -374,9 +324,6 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // GRAVITY
-    // ========================================
     private void ApplyGravity()
     {
         if (!isGrounded)
@@ -390,9 +337,6 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // APPLY MOVEMENT
-    // ========================================
     private void ApplyVelocity()
     {
         Vector2 velocity = rb.linearVelocity;
@@ -400,49 +344,240 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    // ========================================
-    // DEBUG
-    // ========================================
     private void OnDrawGizmos()
     {
         if (showGroundCheck && groundCheckPoint != null)
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- 3D (ALL PERSPECTIVES) -->
+              <div class="tab-content content-3d">
+                <h4>CoyoteJump3D.cs</h4>
+                <p>3D jump with coyote time. Works for third-person, first-person, and isometric - just integrate with your camera/movement system.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Integrate with your existing movement script or use the built-in movement</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// COYOTE JUMP 3D - Jump with grace period for all 3D perspectives
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// Works with CharacterController for third-person, FPS, or isometric
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class CoyoteJump3D : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 10f;
+
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 30f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Coyote Time")]
+    [Tooltip("Seconds after leaving ground when jump still works")]
+    [Range(0.01f, 0.3f)]
+    [SerializeField] private float coyoteTime = 0.1f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement (Optional)")]
+    [SerializeField] private float moveSpeed = 8f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+    [SerializeField] private bool useBuiltInMovement = true;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+    [SerializeField] private bool debugCoyote = false;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool wasGrounded;
+    private float coyoteTimer;
+    private bool usedCoyoteJump;
+    private Transform cameraTransform;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        cameraTransform = Camera.main?.transform;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void Update()
+    {
+        wasGrounded = isGrounded;
+        CheckGrounded();
+        HandleCoyoteTime();
+
+        if (useBuiltInMovement)
+        {
+            HandleMovement();
+        }
+
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+            usedCoyoteJump = false;
+        }
+    }
+
+    private void HandleCoyoteTime()
+    {
+        // Just walked/fell off edge (not jumped off)
+        if (wasGrounded && !isGrounded && velocity.y &lt;= 0)
+        {
+            coyoteTimer = coyoteTime;
+            if (debugCoyote) Debug.Log("Coyote time started!");
+        }
+
+        if (coyoteTimer &gt; 0)
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        // Camera-relative movement
+        Vector3 forward = cameraTransform != null ? cameraTransform.forward : transform.forward;
+        Vector3 right = cameraTransform != null ? cameraTransform.right : transform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * input.y + right * input.x);
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        if (moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
+    }
+
+    private bool CanJump()
+    {
+        if (isGrounded) return true;
+        if (coyoteTimer &gt; 0 && !usedCoyoteJump) return true;
+        return false;
+    }
+
+    private void HandleJump()
+    {
+        if (CanJump())
+        {
+            velocity.y = jumpForce;
+
+            if (!isGrounded)
+            {
+                usedCoyoteJump = true;
+                coyoteTimer = 0;
+                if (debugCoyote) Debug.Log("COYOTE JUMP!");
+            }
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    // Call this from external movement scripts if not using built-in movement
+    public void SetHorizontalVelocity(Vector3 horizontalVelocity)
+    {
+        velocity.x = horizontalVelocity.x;
+        velocity.z = horizontalVelocity.z;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
         }
     }
 }</code></pre>
 
+                <h4>Integration Notes</h4>
+                <p>If you have your own movement script:</p>
+                <ol>
+                  <li>Set <code>useBuiltInMovement</code> to false</li>
+                  <li>Call <code>SetHorizontalVelocity()</code> from your movement script each frame</li>
+                  <li>The coyote time and vertical velocity are handled automatically</li>
+                </ol>
+              </div>
+            </div>
+
             <h3>Key Implementation Details</h3>
             <ul>
-              <li><strong>wasGrounded tracking:</strong> We compare current vs. last frame to detect leaving ground</li>
+              <li><strong>wasGrounded tracking:</strong> Compare current vs. last frame to detect leaving ground</li>
               <li><strong>Only on passive exit:</strong> Coyote only starts if velocity &lt;= 0 (walking off, not jumping off)</li>
               <li><strong>usedCoyoteJump flag:</strong> Prevents using coyote time twice in one airtime</li>
-              <li><strong>Timer reset on jump:</strong> Once you use it, it's gone</li>
-            </ul>
-
-            <h3>Testing Coyote Time</h3>
-            <ol>
-              <li>Enable "Debug Coyote" in the Inspector</li>
-              <li>Walk off a platform and press jump slightly late</li>
-              <li>Console should show "COYOTE JUMP!" if it worked</li>
-              <li>Set coyoteTime to 0.5 to make it very visible, then tune down to 0.1</li>
-            </ol>
-
-            <h3>Common Issues</h3>
-            <p><strong>"Player can double jump with coyote time"</strong><br>
-            You're not resetting the timer after jump. Or you're triggering coyote time on jump. Only trigger when leaving ground passively.</p>
-
-            <p><strong>"It feels like I can jump in mid-air"</strong><br>
-            coyoteTime is too long. Keep it under 0.15 for most videogames. Players shouldn't consciously notice it.</p>
-
-            <p><strong>"It doesn't seem to help"</strong><br>
-            coyoteTime might be too short, or you might have a ground-check issue. Test by setting it to 0.5 temporarily - if that works, your implementation is fine.</p>
-
-            <h3>Combine With</h3>
-            <ul>
-              <li><a href="input-buffer.html">Input Buffer</a> - catches jumps pressed slightly early; coyote catches jumps pressed slightly late</li>
-              <li><a href="basic-jump.html">Basic Jump</a> or <a href="variable-jump.html">Variable Jump</a> - the jump it enables</li>
+              <li><strong>Timer reset on jump:</strong> Once used, it's gone</li>
             </ul>
 
             <h3>The Complete Forgiveness Package</h3>
@@ -459,7 +594,7 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
                   <td>Pressing jump slightly AFTER leaving edge</td>
                 </tr>
                 <tr>
-                  <td>Input Buffer</td>
+                  <td><a href="input-buffer.html">Input Buffer</a></td>
                   <td>Pressing jump slightly BEFORE landing</td>
                 </tr>
                 <tr>
@@ -468,6 +603,19 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
                 </tr>
               </tbody>
             </table>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Player can double jump with coyote time"</strong><br>
+            You're not resetting the timer after jump or triggering coyote on jump. Only trigger when leaving ground passively.</p>
+
+            <p><strong>"It feels like I can jump in mid-air"</strong><br>
+            coyoteTime is too long. Keep it under 0.15 for most videogames.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="input-buffer.html">Input Buffer</a> - catches jumps pressed early; coyote catches jumps pressed late</li>
+              <li><a href="variable-jump.html">Variable Jump</a> - coyote time works great with variable height</li>
+            </ul>
           </div>
         </div>
 
@@ -478,7 +626,7 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
           </div>
           <div class="register-content">
             <h3>Why Teach This</h3>
-            <p>Coyote time is the perfect introduction to <strong>player-fair design</strong>. It's simple to implement but teaches a profound lesson: what the computer knows and what the player experiences are different things. Good design bridges that gap.</p>
+            <p>Coyote time is the perfect introduction to <strong>player-fair design</strong>. It's simple to implement but teaches a profound lesson: what the computer knows and what the player experiences are different things.</p>
 
             <h3>Teaching Sequence</h3>
             <ol>
@@ -489,12 +637,7 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
             </ol>
 
             <h3>The Key Insight</h3>
-            <p>The best player-fair techniques are <strong>invisible</strong>. Players don't thank you for coyote time - they just don't complain about unfair deaths. Absence of frustration is the goal.</p>
-
-            <h3>Common Student Mistakes</h3>
-            <p><strong>Making it too generous:</strong> Students often set coyoteTime too high because they think "more forgiving = better." But players notice when they can visibly jump in mid-air.</p>
-
-            <p><strong>Activating on jump:</strong> The most common bug. Coyote time should only start when you walk/fall off an edge, not when you jump off.</p>
+            <p>The best player-fair techniques are <strong>invisible</strong>. Players don't thank you for coyote time - they just don't complain about unfair deaths.</p>
 
             <h3>Assessment Questions</h3>
             <ul>
@@ -513,25 +656,17 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
           <div class="register-content">
             <h3>Heritage Notes</h3>
             <p>Coyote time wasn't named until the 2010s, but the technique is much older. Early platformers often had generous ground detection that produced the same effect accidentally.</p>
-            <p>The name comes from the Looney Tunes trope where Wile E. Coyote runs off a cliff and hangs in the air until he looks down. The videogame version gives players a moment of "cartoon physics."</p>
+            <p>The name comes from the Looney Tunes trope where Wile E. Coyote runs off a cliff and hangs in the air until he looks down.</p>
 
             <h3>Player Fair vs. Computer Fair</h3>
-            <p>This is a fundamental tension in videogame design:</p>
             <ul>
-              <li><strong>Computer fair:</strong> The rules are applied exactly as programmed. You left the ground at frame 47; you cannot jump after frame 47.</li>
-              <li><strong>Player fair:</strong> The rules feel fair to the player. If they intended to jump at the edge, the videogame should respect that intent.</li>
+              <li><strong>Computer fair:</strong> Rules applied exactly. You left the ground at frame 47; you cannot jump after frame 47.</li>
+              <li><strong>Player fair:</strong> Rules feel fair. If they intended to jump at the edge, respect that intent.</li>
             </ul>
-            <p>Coyote time is the videogame <strong>lying to be kind</strong>. The player isn't technically on the ground, but the videogame pretends they are for a moment.</p>
+            <p>Coyote time is the videogame <strong>lying to be kind</strong>.</p>
 
             <h3>The Permissions Angle</h3>
-            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, coyote time expands what's <strong>allowed</strong>. It says: "You're allowed to jump for 0.1 seconds after leaving the ground." This permission is hidden - players don't know it exists - but it shapes their experience of fairness.</p>
-
-            <h3>Unresolved Questions</h3>
-            <ul>
-              <li>Should coyote time scale with difficulty? Harder modes = less forgiveness?</li>
-              <li>Does coyote time diminish the value of precision? Does it make mastery feel less meaningful?</li>
-              <li>How much invisible assistance is too much? Where does accessibility end and babysitting begin?</li>
-            </ul>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, coyote time expands what's <strong>allowed</strong>. It says: "You're allowed to jump for 0.1 seconds after leaving the ground." This permission is hidden but shapes their experience of fairness.</p>
           </div>
         </div>
 
@@ -540,8 +675,8 @@ public class JumpWithCoyoteTime2D : MonoBehaviour
         <h2>Related</h2>
         <ul>
           <li><a href="input-buffer.html">Input Buffer</a> - the other half of jump forgiveness</li>
-          <li><a href="basic-jump.html">Basic Jump</a> - the jump system to pair with</li>
-          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - why fairness matters</li>
+          <li><a href="variable-jump.html">Variable Jump</a> - pairs well with coyote time</li>
+          <li><a href="input-setup.html">Input Setup</a> - required InputReader system</li>
         </ul>
 
         <h2>Glossary Terms</h2>

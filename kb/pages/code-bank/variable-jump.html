@@ -29,9 +29,38 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective Tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:0}
+    .tab-labels label{padding:0.75rem 1.25rem;cursor:pointer;font-weight:500;font-size:0.875rem;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+    .tab-labels label:hover{color:#334155;background:#f8fafc}
+    .tab-content{display:none;padding:1.5rem;background:#f8fafc;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d-tp:checked ~ .tab-labels label[for="tab-3d-tp"],
+    #tab-3d-fp:checked ~ .tab-labels label[for="tab-3d-fp"],
+    #tab-iso:checked ~ .tab-labels label[for="tab-iso"]{color:#14b8a6;border-bottom-color:#14b8a6;background:#f0fdfa}
+    #tab-2d:checked ~ .content-2d,
+    #tab-3d-tp:checked ~ .content-3d-tp,
+    #tab-3d-fp:checked ~ .content-3d-fp,
+    #tab-iso:checked ~ .content-iso{display:block}
+    .prereq-note{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin-bottom:1.5rem;font-size:0.9rem}
+    .prereq-note a{color:#d97706;font-weight:500}
+    pre{background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.8rem;line-height:1.5}
+    code{font-family:'JetBrains Mono',monospace}
+    pre code{color:#e2e8f0}
+    :not(pre)>code{background:#e2e8f0;padding:0.125rem 0.375rem;border-radius:3px;font-size:0.85em;color:#334155}
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -63,9 +92,16 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link active">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
@@ -131,10 +167,10 @@
                   <td>Jump height if you hold (maximum)</td>
                 </tr>
                 <tr>
-                  <td><code>holdTimeForMax</code></td>
+                  <td><code>jumpCutMultiplier</code></td>
                   <td>float</td>
-                  <td>0.2</td>
-                  <td>Seconds of hold to reach max height</td>
+                  <td>0.5</td>
+                  <td>Velocity multiplier when releasing early</td>
                 </tr>
                 <tr>
                   <td><code>gravity</code></td>
@@ -146,13 +182,7 @@
                   <td><code>fallGravityMultiplier</code></td>
                   <td>float</td>
                   <td>1.5</td>
-                  <td>Extra gravity when falling (for snappier descent)</td>
-                </tr>
-                <tr>
-                  <td><code>jumpCutMultiplier</code></td>
-                  <td>float</td>
-                  <td>0.5</td>
-                  <td>How much to reduce velocity when you release early</td>
+                  <td>Extra gravity when falling</td>
                 </tr>
               </tbody>
             </table>
@@ -163,8 +193,7 @@
             <ul>
               <li>Lower <code>gravity</code> (25-30)</li>
               <li>Lower <code>fallGravityMultiplier</code> (1.0-1.2)</li>
-              <li>Longer <code>holdTimeForMax</code> (0.3-0.4)</li>
-              <li>Higher <code>maxJumpForce</code></li>
+              <li>Higher <code>jumpCutMultiplier</code> (0.7-0.8)</li>
             </ul>
             <p><em>Reference: Kirby, Little Big Planet</em></p>
 
@@ -172,75 +201,52 @@
             <ul>
               <li>Higher <code>gravity</code> (45-60)</li>
               <li>Higher <code>fallGravityMultiplier</code> (1.8-2.5)</li>
-              <li>Shorter <code>holdTimeForMax</code> (0.1-0.15)</li>
-              <li>More dramatic ratio between min and max force</li>
+              <li>Lower <code>jumpCutMultiplier</code> (0.3-0.5)</li>
             </ul>
             <p><em>Reference: Celeste, Super Meat Boy</em></p>
 
-            <p><strong>For a weighty, committed feel:</strong></p>
-            <ul>
-              <li>Smaller gap between <code>minJumpForce</code> and <code>maxJumpForce</code></li>
-              <li>Lower <code>jumpCutMultiplier</code> (0.7-0.8) so releasing early doesn't change much</li>
-              <li>Higher <code>gravity</code></li>
-            </ul>
-            <p><em>Reference: Dark Souls, Castlevania</em></p>
+            <h3>Perspective Scripts</h3>
 
-            <h3>Pseudocode</h3>
-            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+            <div class="prereq-note">
+              <strong>Prerequisite:</strong> All scripts below require the <a href="input-setup.html">InputReader</a> to be set up in your scene. Complete the Input Setup first.
+            </div>
 
-On Jump Press:
-  - Apply minJumpForce upward
-  - Start tracking hold time
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d-tp">
+              <input type="radio" name="perspective" id="tab-3d-fp">
+              <input type="radio" name="perspective" id="tab-iso">
 
-While Holding (and still rising):
-  - Interpolate toward maxJumpForce based on hold time
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d-tp">3D Third-Person</label>
+                <label for="tab-3d-fp">3D First-Person</label>
+                <label for="tab-iso">Isometric</label>
+              </div>
 
-On Jump Release (while rising):
-  - Multiply current upward velocity by jumpCutMultiplier
-  - Stop adding force
+              <!-- 2D PLATFORMER -->
+              <div class="tab-content content-2d">
+                <h4>VariableJump2D.cs</h4>
+                <p>Classic 2D variable jump. Hold to go higher, release early to cut the jump short.</p>
 
-While Falling:
-  - Apply gravity * fallGravityMultiplier</code></pre>
-            <p>The key insight: <strong>you're not choosing jump height at the start.</strong> You're shaping the arc in real-time by continuing or releasing the button.</p>
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>Rigidbody2D</code> to your player (Freeze Rotation Z)</li>
+                  <li>Add a <code>Collider2D</code></li>
+                  <li>Create an empty child GameObject at the feet, name it "GroundCheck"</li>
+                  <li>Add this script and configure in Inspector</li>
+                </ol>
 
-            <h3>Unity Setup (2D)</h3>
-            <ol>
-              <li><strong>Input Actions:</strong> Same as Basic Jump - need a "Jump" action set to Button type</li>
-              <li><strong>Player Setup:</strong> Same as Basic Jump - Rigidbody2D, Collider2D, GroundCheck child object</li>
-              <li><strong>Replace BasicJump2D</strong> with the VariableJump2D script below</li>
-            </ol>
-
-            <h3>The Script (2D)</h3>
-            <p>Create a new C# script called <code>VariableJump2D.cs</code> and paste this:</p>
-            <pre><code>using UnityEngine;
-using UnityEngine.InputSystem;
+                <pre><code>using UnityEngine;
 
 /// &lt;summary&gt;
-/// VARIABLE JUMP - Height depends on how long you hold the button
-/// VG101 Code Bank - For learning and prototyping
-///
-/// Tap for short hop, hold for full jump. The player shapes
-/// the arc in real-time by holding or releasing.
+/// VARIABLE JUMP 2D - Height depends on hold duration
+/// VG101 Code Bank - Requires InputReader from Input Setup
 /// &lt;/summary&gt;
 [RequireComponent(typeof(Rigidbody2D))]
 public class VariableJump2D : MonoBehaviour
 {
-    // ========================================
-    // INPUT SETUP
-    // ========================================
-    [Header("Input Setup")]
-
-    [Tooltip("Your Input Actions asset")]
-    [SerializeField] private InputActionAsset inputActions;
-
-    [Tooltip("Name of your jump action")]
-    [SerializeField] private string jumpActionName = "Jump";
-
-    // ========================================
-    // JUMP FEEL
-    // ========================================
     [Header("Jump Feel")]
-
     [Tooltip("Jump force if you tap (minimum height)")]
     [Range(5f, 15f)]
     [SerializeField] private float minJumpForce = 8f;
@@ -249,94 +255,57 @@ public class VariableJump2D : MonoBehaviour
     [Range(10f, 25f)]
     [SerializeField] private float maxJumpForce = 16f;
 
-    [Tooltip("Seconds of holding to reach max height")]
-    [Range(0.05f, 0.5f)]
-    [SerializeField] private float holdTimeForMax = 0.2f;
+    [Tooltip("Velocity multiplier when releasing early")]
+    [Range(0.1f, 1f)]
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
 
     [Tooltip("Gravity while rising and falling")]
     [Range(20f, 80f)]
     [SerializeField] private float gravity = 40f;
 
-    [Tooltip("Extra gravity when falling (snappier descent)")]
+    [Tooltip("Extra gravity when falling")]
     [Range(1f, 4f)]
     [SerializeField] private float fallGravityMultiplier = 1.5f;
 
-    [Tooltip("Velocity multiplier when releasing early (0.5 = cut velocity in half)")]
-    [Range(0.1f, 1f)]
-    [SerializeField] private float jumpCutMultiplier = 0.5f;
-
-    // ========================================
-    // GROUND DETECTION
-    // ========================================
     [Header("Ground Detection")]
-
-    [Tooltip("Empty GameObject at character's feet")]
     [SerializeField] private Transform groundCheckPoint;
-
-    [Tooltip("How far down to check for ground")]
-    [Range(0.01f, 0.5f)]
-    [SerializeField] private float groundCheckDistance = 0.1f;
-
-    [Tooltip("Which layers count as ground")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    // ========================================
-    // DEBUG
-    // ========================================
     [Header("Debug")]
-
-    [Tooltip("Show ground check in Scene view")]
     [SerializeField] private bool showGroundCheck = true;
 
-    // ========================================
-    // PRIVATE VARIABLES
-    // ========================================
     private Rigidbody2D rb;
-    private InputAction jumpAction;
     private float verticalVelocity;
     private bool isGrounded;
+    private bool isJumping;
+    private bool jumpHeld;
 
-    // Variable jump state
-    private bool isJumping;           // Are we in a jump?
-    private bool isHoldingJump;       // Is button held?
-    private float jumpHoldTime;       // How long held so far
-
-    // ========================================
-    // SETUP
-    // ========================================
     private void Awake()
     {
         rb = GetComponent&lt;Rigidbody2D&gt;();
         rb.gravityScale = 0f;
-
-        if (inputActions != null)
-        {
-            jumpAction = inputActions.FindAction(jumpActionName);
-            jumpAction?.Enable();
-        }
     }
 
     private void OnEnable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed += OnJumpPressed;
-            jumpAction.canceled += OnJumpReleased;
+            InputReader.Instance.OnJumpPressed += HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased += HandleJumpReleased;
         }
     }
 
     private void OnDisable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed -= OnJumpPressed;
-            jumpAction.canceled -= OnJumpReleased;
+            InputReader.Instance.OnJumpPressed -= HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased -= HandleJumpReleased;
         }
     }
 
-    // ========================================
-    // MAIN LOOP
-    // ========================================
     private void FixedUpdate()
     {
         CheckGrounded();
@@ -345,14 +314,11 @@ public class VariableJump2D : MonoBehaviour
         ApplyVelocity();
     }
 
-    // ========================================
-    // GROUND CHECK
-    // ========================================
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(
             groundCheckPoint.position,
-            groundCheckDistance,
+            groundCheckRadius,
             groundLayer
         );
 
@@ -363,59 +329,41 @@ public class VariableJump2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // JUMP PRESS - Start the jump
-    // ========================================
-    private void OnJumpPressed(InputAction.CallbackContext context)
+    private void HandleJumpPressed()
     {
         if (isGrounded)
         {
-            // Start with minimum force
             verticalVelocity = minJumpForce;
             isJumping = true;
-            isHoldingJump = true;
-            jumpHoldTime = 0f;
+            jumpHeld = true;
         }
     }
 
-    // ========================================
-    // JUMP RELEASE - Cut the jump short
-    // ========================================
-    private void OnJumpReleased(InputAction.CallbackContext context)
+    private void HandleJumpReleased()
     {
-        isHoldingJump = false;
+        jumpHeld = false;
 
-        // If still rising, cut velocity
+        // Cut the jump if still rising
         if (isJumping && verticalVelocity &gt; 0)
         {
             verticalVelocity *= jumpCutMultiplier;
         }
     }
 
-    // ========================================
-    // HOLD HANDLING - Add force while holding
-    // ========================================
     private void HandleJumpHold()
     {
-        if (isJumping && isHoldingJump && verticalVelocity &gt; 0)
+        // While holding and rising, boost toward max
+        if (isJumping && jumpHeld && verticalVelocity &gt; 0)
         {
-            jumpHoldTime += Time.fixedDeltaTime;
-
-            // Interpolate from min to max based on hold time
-            float holdPercent = Mathf.Clamp01(jumpHoldTime / holdTimeForMax);
-            float targetForce = Mathf.Lerp(minJumpForce, maxJumpForce, holdPercent);
-
-            // Keep pushing up toward target
-            if (verticalVelocity &lt; targetForce)
-            {
-                verticalVelocity = targetForce;
-            }
+            // Smoothly increase force while holding
+            verticalVelocity = Mathf.MoveTowards(
+                verticalVelocity,
+                maxJumpForce,
+                (maxJumpForce - minJumpForce) * Time.fixedDeltaTime * 10f
+            );
         }
     }
 
-    // ========================================
-    // GRAVITY
-    // ========================================
     private void ApplyGravity()
     {
         if (!isGrounded)
@@ -429,9 +377,6 @@ public class VariableJump2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // APPLY MOVEMENT
-    // ========================================
     private void ApplyVelocity()
     {
         Vector2 velocity = rb.linearVelocity;
@@ -439,25 +384,617 @@ public class VariableJump2D : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    // ========================================
-    // DEBUG
-    // ========================================
     private void OnDrawGizmos()
     {
         if (showGroundCheck && groundCheckPoint != null)
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
         }
     }
 }</code></pre>
+              </div>
+
+              <!-- 3D THIRD-PERSON -->
+              <div class="tab-content content-3d-tp">
+                <h4>VariableJump3D.cs</h4>
+                <p>Third-person variable jump with camera-relative movement. Hold for higher jumps.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Set Ground Layer to your environment's layer</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// VARIABLE JUMP 3D - Height depends on hold duration
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class VariableJump3D : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Range(5f, 15f)]
+    [SerializeField] private float minJumpForce = 6f;
+
+    [Range(10f, 25f)]
+    [SerializeField] private float maxJumpForce = 12f;
+
+    [Range(0.1f, 1f)]
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 30f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 8f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool isJumping;
+    private bool jumpHeld;
+    private Transform cameraTransform;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        cameraTransform = Camera.main?.transform;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased += HandleJumpReleased;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased -= HandleJumpReleased;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleMovement();
+        HandleJumpHold();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+            isJumping = false;
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        Vector3 forward = cameraTransform != null ? cameraTransform.forward : transform.forward;
+        Vector3 right = cameraTransform != null ? cameraTransform.right : transform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * input.y + right * input.x);
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        if (moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
+    }
+
+    private void HandleJumpPressed()
+    {
+        if (isGrounded)
+        {
+            velocity.y = minJumpForce;
+            isJumping = true;
+            jumpHeld = true;
+        }
+    }
+
+    private void HandleJumpReleased()
+    {
+        jumpHeld = false;
+
+        if (isJumping && velocity.y &gt; 0)
+        {
+            velocity.y *= jumpCutMultiplier;
+        }
+    }
+
+    private void HandleJumpHold()
+    {
+        if (isJumping && jumpHeld && velocity.y &gt; 0)
+        {
+            velocity.y = Mathf.MoveTowards(
+                velocity.y,
+                maxJumpForce,
+                (maxJumpForce - minJumpForce) * Time.deltaTime * 10f
+            );
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- 3D FIRST-PERSON -->
+              <div class="tab-content content-3d-fp">
+                <h4>VariableJumpFPS.cs</h4>
+                <p>First-person variable jump. Less common in FPS but useful for platforming-focused games like Titanfall.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Create a child Camera</li>
+                  <li>Add this script and assign the Camera reference</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// VARIABLE JUMP FPS - First-person variable jump
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class VariableJumpFPS : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Range(5f, 15f)]
+    [SerializeField] private float minJumpForce = 6f;
+
+    [Range(10f, 25f)]
+    [SerializeField] private float maxJumpForce = 10f;
+
+    [Range(0.1f, 1f)]
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 25f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 6f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.3f;
+
+    [Header("Mouse Look")]
+    [SerializeField] private Transform playerCamera;
+    [SerializeField] private float gamepadLookSpeed = 150f;
+    [SerializeField] private float mouseSensitivity = 0.15f;
+    [Range(45f, 90f)]
+    [SerializeField] private float maxLookAngle = 85f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool isJumping;
+    private bool jumpHeld;
+    private float cameraPitch;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased += HandleJumpReleased;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased -= HandleJumpReleased;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleLook();
+        HandleMovement();
+        HandleJumpHold();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+            isJumping = false;
+        }
+    }
+
+    private void HandleLook()
+    {
+        if (InputReader.Instance == null) return;
+
+        Vector2 lookInput = InputReader.Instance.LookInput;
+
+        float lookSpeedX, lookSpeedY;
+        if (InputReader.Instance.IsUsingGamepad)
+        {
+            lookSpeedX = gamepadLookSpeed * Time.deltaTime;
+            lookSpeedY = gamepadLookSpeed * Time.deltaTime;
+        }
+        else
+        {
+            lookSpeedX = mouseSensitivity;
+            lookSpeedY = mouseSensitivity;
+        }
+
+        transform.Rotate(Vector3.up * lookInput.x * lookSpeedX);
+
+        cameraPitch -= lookInput.y * lookSpeedY;
+        cameraPitch = Mathf.Clamp(cameraPitch, -maxLookAngle, maxLookAngle);
+
+        if (playerCamera != null)
+        {
+            playerCamera.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+        Vector3 moveDirection = transform.forward * input.y + transform.right * input.x;
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+    }
+
+    private void HandleJumpPressed()
+    {
+        if (isGrounded)
+        {
+            velocity.y = minJumpForce;
+            isJumping = true;
+            jumpHeld = true;
+        }
+    }
+
+    private void HandleJumpReleased()
+    {
+        jumpHeld = false;
+
+        if (isJumping && velocity.y &gt; 0)
+        {
+            velocity.y *= jumpCutMultiplier;
+        }
+    }
+
+    private void HandleJumpHold()
+    {
+        if (isJumping && jumpHeld && velocity.y &gt; 0)
+        {
+            velocity.y = Mathf.MoveTowards(
+                velocity.y,
+                maxJumpForce,
+                (maxJumpForce - minJumpForce) * Time.deltaTime * 10f
+            );
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+
+              <!-- ISOMETRIC -->
+              <div class="tab-content content-iso">
+                <h4>VariableJumpIsometric.cs</h4>
+                <p>Isometric variable jump. Useful for action games like Hades where vertical movement adds depth.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Set up isometric camera</li>
+                  <li>Add this script and configure movement mode</li>
+                </ol>
+
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// VARIABLE JUMP ISOMETRIC - Isometric variable jump
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class VariableJumpIsometric : MonoBehaviour
+{
+    public enum MovementMode { WorldAxis, Isometric45 }
+
+    [Header("Jump Feel")]
+    [Range(5f, 15f)]
+    [SerializeField] private float minJumpForce = 8f;
+
+    [Range(10f, 25f)]
+    [SerializeField] private float maxJumpForce = 14f;
+
+    [Range(0.1f, 1f)]
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 35f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.5f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement")]
+    [SerializeField] private MovementMode movementMode = MovementMode.Isometric45;
+    [SerializeField] private float moveSpeed = 7f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+    [SerializeField] private bool rotateToMovement = true;
+    [SerializeField] private float rotationSpeed = 720f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool isJumping;
+    private bool jumpHeld;
+
+    private static readonly Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased += HandleJumpReleased;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJumpPressed;
+            InputReader.Instance.OnJumpReleased -= HandleJumpReleased;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleMovement();
+        HandleJumpHold();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+            isJumping = false;
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        Vector3 inputDirection = new Vector3(input.x, 0, input.y);
+        Vector3 moveDirection = movementMode == MovementMode.Isometric45
+            ? isoMatrix.MultiplyVector(inputDirection)
+            : inputDirection;
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        if (rotateToMovement && moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
+    }
+
+    private void HandleJumpPressed()
+    {
+        if (isGrounded)
+        {
+            velocity.y = minJumpForce;
+            isJumping = true;
+            jumpHeld = true;
+        }
+    }
+
+    private void HandleJumpReleased()
+    {
+        jumpHeld = false;
+
+        if (isJumping && velocity.y &gt; 0)
+        {
+            velocity.y *= jumpCutMultiplier;
+        }
+    }
+
+    private void HandleJumpHold()
+    {
+        if (isJumping && jumpHeld && velocity.y &gt; 0)
+        {
+            velocity.y = Mathf.MoveTowards(
+                velocity.y,
+                maxJumpForce,
+                (maxJumpForce - minJumpForce) * Time.deltaTime * 10f
+            );
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+              </div>
+            </div>
 
             <h3>Key Differences from Basic Jump</h3>
             <ul>
               <li><strong>Two force values:</strong> minJumpForce and maxJumpForce define the range</li>
-              <li><strong>Hold tracking:</strong> We track how long the button is held</li>
+              <li><strong>Hold tracking:</strong> We track whether the button is held</li>
               <li><strong>Jump cut:</strong> Releasing early multiplies velocity by jumpCutMultiplier</li>
-              <li><strong>Interpolation:</strong> Force increases smoothly while holding</li>
+              <li><strong>Real-time shaping:</strong> The arc is determined during the jump, not at the start</li>
             </ul>
 
             <h3>Common Issues</h3>
@@ -465,20 +1002,17 @@ public class VariableJump2D : MonoBehaviour
             Increase <code>fallGravityMultiplier</code>. The descent should be snappier than the ascent.</p>
 
             <p><strong>"I can't do small hops"</strong><br>
-            Lower <code>minJumpForce</code> or increase <code>jumpCutMultiplier</code> effect.</p>
+            Lower <code>minJumpForce</code> or decrease <code>jumpCutMultiplier</code>.</p>
 
-            <p><strong>"The max jump takes too long to reach"</strong><br>
-            Shorten <code>holdTimeForMax</code>. Most players hold for 0.1-0.2 seconds max.</p>
-
-            <p><strong>"It feels like two different jumps instead of a range"</strong><br>
-            The interpolation might be too binary. Check that you're smoothly blending, not just switching at a threshold.</p>
+            <p><strong>"InputReader.Instance is null"</strong><br>
+            Make sure you have the InputReader in your scene. See <a href="input-setup.html">Input Setup</a>.</p>
 
             <h3>Combine With</h3>
             <ul>
               <li><a href="coyote-time.html">Coyote Time</a> - grace period makes variable jump more forgiving</li>
               <li><a href="input-buffer.html">Input Buffer</a> - catch jump presses just before landing</li>
               <li><a href="squash-stretch.html">Squash Stretch</a> - visual feedback that matches the jump's force</li>
-              <li><a href="air-control.html">Air Control</a> - what you can do while in the arc you shaped</li>
+              <li><a href="double-jump.html">Double Jump</a> - extend the vocabulary mid-air</li>
             </ul>
           </div>
         </div>
@@ -501,7 +1035,7 @@ public class VariableJump2D : MonoBehaviour
             </ol>
 
             <h3>Common Student Misconceptions</h3>
-            <p><strong>"Variable jump is just two jump heights":</strong> Students sometimes implement it as binary (tap = short, hold = tall). The real technique is continuous interpolation.</p>
+            <p><strong>"Variable jump is just two jump heights":</strong> Students sometimes implement it as binary (tap = short, hold = tall). The real technique is continuous shaping.</p>
 
             <p><strong>"The player decides at jump start":</strong> No - the player decides <em>during</em> the jump. The arc is shaped in real-time. This is what makes it feel responsive.</p>
 
@@ -510,14 +1044,6 @@ public class VariableJump2D : MonoBehaviour
               <li>Can they explain why jumpCutMultiplier matters for responsiveness?</li>
               <li>Can they tune for a specific feel (floaty vs. snappy) deliberately?</li>
               <li>Can they articulate when basic jump would be better than variable jump?</li>
-            </ul>
-
-            <h3>Exercise: Jump Matching</h3>
-            <p>Give students a video of a jump from a published videogame. Have them tune the variable jump scaffold to match. They must document:</p>
-            <ul>
-              <li>What values they changed</li>
-              <li>Why those values created that feel</li>
-              <li>What heritage the original jump draws from</li>
             </ul>
           </div>
         </div>
@@ -531,16 +1057,7 @@ public class VariableJump2D : MonoBehaviour
             <h3>Heritage Notes</h3>
             <p>Variable jump emerged in the <strong>early 1980s</strong> as designers realized fixed jumps felt unresponsive. <em>Super Mario Bros.</em> (1985) is the canonical example, but the technique appeared earlier in various forms.</p>
 
-            <p>The problem it solved: <strong>fixed jumps force level design to accommodate the jump, not the player.</strong> With variable jump, the player adapts to the level. This enables tighter, more demanding platforming.</p>
-
-            <p>Modern platformers have refined the technique with additions like:</p>
-            <ul>
-              <li><strong>Jump buffering</strong> (input forgiveness)</li>
-              <li><strong>Coyote time</strong> (spatial forgiveness)</li>
-              <li><strong>Fall gravity multiplier</strong> (making descent feel distinct from ascent)</li>
-            </ul>
-
-            <p>When you tune a variable jump, you're participating in forty years of accumulated craft knowledge about how jumps should feel.</p>
+            <p>The problem it solved: <strong>fixed jumps force level design to accommodate the jump, not the player.</strong> With variable jump, the player adapts to the level.</p>
 
             <h3>The Expression Problem</h3>
             <p>Variable jump raises a design question: <strong>how much should the player be able to express through a single input?</strong></p>
@@ -556,23 +1073,7 @@ public class VariableJump2D : MonoBehaviour
             <p>This is the beginning of <a href="../framework/gesture.html" class="term">Gesture</a> as a concept - the player's input and the videogame's response form a complete expressive unit.</p>
 
             <h3>The Celeste Refinement</h3>
-            <p><em>Celeste</em> (2018) represents the current state of the art for variable jump. It combines:</p>
-            <ul>
-              <li>Variable height with jump cut</li>
-              <li>Generous coyote time</li>
-              <li>Input buffering</li>
-              <li>Distinct fall gravity</li>
-              <li>Air dash integration</li>
-            </ul>
-            <p>The result is a jump that feels <strong>precise but forgiving</strong> - a tension that earlier platformers struggled with.</p>
-
-            <h3>Why Not Always Variable?</h3>
-            <p>Some design contexts benefit from fixed jumps:</p>
-            <ul>
-              <li><strong>Puzzle platformers:</strong> When the challenge is figuring out <em>where</em> to jump, not <em>how</em></li>
-              <li><strong>Retro aesthetic:</strong> Variable jump feels modern; fixed jump feels classic</li>
-              <li><strong>High commitment:</strong> When you want choices to be irreversible (Dark Souls)</li>
-            </ul>
+            <p><em>Celeste</em> (2018) represents the current state of the art for variable jump. It combines variable height, generous coyote time, input buffering, distinct fall gravity, and air dash integration. The result feels <strong>precise but forgiving</strong>.</p>
           </div>
         </div>
 
@@ -580,9 +1081,10 @@ public class VariableJump2D : MonoBehaviour
 
         <h2>Related</h2>
         <ul>
-          <li><a href="../framework/gesture.html">Gesture</a> - the variable jump as a complete gesture, not just a mechanic</li>
           <li><a href="basic-jump.html">Basic Jump</a> - simpler version without variable height</li>
           <li><a href="double-jump.html">Double Jump</a> - extending the variable jump vocabulary</li>
+          <li><a href="input-setup.html">Input Setup</a> - required InputReader system</li>
+          <li><a href="../framework/gesture.html">Gesture</a> - the variable jump as a complete gesture</li>
         </ul>
 
         <h2>Glossary Terms</h2>
