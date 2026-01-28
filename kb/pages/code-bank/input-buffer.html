@@ -29,9 +29,34 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective Tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:0}
+    .tab-labels label{padding:0.75rem 1.25rem;cursor:pointer;font-weight:500;font-size:0.875rem;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+    .tab-labels label:hover{color:#334155;background:#f8fafc}
+    .tab-content{display:none;padding:1.5rem;background:#f8fafc;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d:checked ~ .tab-labels label[for="tab-3d"]{color:#14b8a6;border-bottom-color:#14b8a6;background:#f0fdfa}
+    #tab-2d:checked ~ .content-2d,
+    #tab-3d:checked ~ .content-3d{display:block}
+    .prereq-note{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin-bottom:1.5rem;font-size:0.9rem}
+    .prereq-note a{color:#d97706;font-weight:500}
+    pre{background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.8rem;line-height:1.5}
+    code{font-family:'JetBrains Mono',monospace}
+    pre code{color:#e2e8f0}
+    :not(pre)>code{background:#e2e8f0;padding:0.125rem 0.375rem;border-radius:3px;font-size:0.85em;color:#334155}
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -63,11 +88,16 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
           <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
           <li class="nav-item"><a href="input-buffer.html" class="nav-link active">Input Buffer</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
@@ -102,7 +132,6 @@
           <div class="register-content">
             <h3>The Feel</h3>
             <p>Input buffering makes actions feel <strong>responsive and forgiving</strong>. Without it, players need frame-perfect timing. With it, they can queue up their next action and trust it will happen.</p>
-            <p>This is especially important in fast-paced videogames where players are thinking ahead of their character.</p>
 
             <h3>Exposed Variables</h3>
             <table>
@@ -121,18 +150,6 @@
                   <td>0.1</td>
                   <td>How long to remember an input</td>
                 </tr>
-                <tr>
-                  <td><code>jumpBuffered</code></td>
-                  <td>bool</td>
-                  <td>false</td>
-                  <td>Whether a jump is waiting to execute</td>
-                </tr>
-                <tr>
-                  <td><code>bufferTimer</code></td>
-                  <td>float</td>
-                  <td>-</td>
-                  <td>Time remaining on buffered input</td>
-                </tr>
               </tbody>
             </table>
 
@@ -141,164 +158,109 @@
             <p><strong>For precision gameplay:</strong></p>
             <ul>
               <li><code>bufferTime</code> = 0.05 - 0.08</li>
-              <li>Just enough to catch near-misses</li>
             </ul>
 
             <p><strong>For accessible/casual:</strong></p>
             <ul>
               <li><code>bufferTime</code> = 0.1 - 0.15</li>
-              <li>Generous window for queuing actions</li>
             </ul>
 
             <p><strong>For fighting games:</strong></p>
             <ul>
-              <li><code>bufferTime</code> = 0.1 - 0.2</li>
-              <li>Longer buffers for combo inputs</li>
+              <li><code>bufferTime</code> = 0.1 - 0.2 (longer for combo inputs)</li>
             </ul>
-            <p><em>Reference: Street Fighter, Guilty Gear</em></p>
 
-            <h3>Pseudocode</h3>
-            <pre><code>// PSEUDOCODE - This is the logic, not copy-paste code
+            <h3>Perspective Scripts</h3>
 
-On Jump Press:
-  - If can jump now: jump immediately
-  - Else: set jumpBuffered = true, start bufferTimer
+            <div class="prereq-note">
+              <strong>Prerequisite:</strong> All scripts below require the <a href="input-setup.html">InputReader</a> to be set up in your scene.
+            </div>
 
-Every Frame:
-  - If bufferTimer > 0:
-    - Decrease bufferTimer by deltaTime
-  - Else:
-    - Set jumpBuffered = false
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d">
 
-  - If jumpBuffered AND can jump:
-    - Execute jump
-    - Set jumpBuffered = false</code></pre>
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d">3D (All Perspectives)</label>
+              </div>
 
-            <h3>Unity Setup (2D)</h3>
-            <p>Like Coyote Time, Input Buffer is typically <strong>built into your jump script</strong>. Here's a complete script with input buffering.</p>
+              <!-- 2D PLATFORMER -->
+              <div class="tab-content content-2d">
+                <h4>BufferedJump2D.cs</h4>
+                <p>2D jump with input buffering. Press jump before landing and it executes on landing.</p>
 
-            <h3>The Script (2D)</h3>
-            <p>Create a new C# script called <code>JumpWithInputBuffer2D.cs</code> and paste this:</p>
-            <pre><code>using UnityEngine;
-using UnityEngine.InputSystem;
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>Rigidbody2D</code> to your player</li>
+                  <li>Create a child "GroundCheck" at the feet</li>
+                  <li>Add this script and configure in Inspector</li>
+                </ol>
+
+                <details class="code-block">
+                  <summary>BufferedJump2D.cs</summary>
+                <pre><code>using UnityEngine;
 
 /// &lt;summary&gt;
-/// JUMP WITH INPUT BUFFER - Remember inputs pressed slightly early
-/// VG101 Code Bank - For learning and prototyping
-///
-/// Press jump just before landing, and the jump happens when you land.
-/// Players think they timed it perfectly; the buffer did the work.
+/// BUFFERED JUMP 2D - Remember jump input and execute when possible
+/// VG101 Code Bank - Requires InputReader from Input Setup
 /// &lt;/summary&gt;
 [RequireComponent(typeof(Rigidbody2D))]
-public class JumpWithInputBuffer2D : MonoBehaviour
+public class BufferedJump2D : MonoBehaviour
 {
-    // ========================================
-    // INPUT SETUP
-    // ========================================
-    [Header("Input Setup")]
-
-    [Tooltip("Your Input Actions asset")]
-    [SerializeField] private InputActionAsset inputActions;
-
-    [Tooltip("Name of your jump action")]
-    [SerializeField] private string jumpActionName = "Jump";
-
-    // ========================================
-    // JUMP FEEL
-    // ========================================
     [Header("Jump Feel")]
-
-    [Tooltip("How hard we push off")]
     [Range(5f, 25f)]
     [SerializeField] private float jumpForce = 12f;
 
-    [Tooltip("Gravity while airborne")]
     [Range(20f, 80f)]
     [SerializeField] private float gravity = 40f;
 
-    [Tooltip("Extra gravity when falling")]
     [Range(1f, 4f)]
     [SerializeField] private float fallGravityMultiplier = 1.5f;
 
-    // ========================================
-    // INPUT BUFFER - The magic happens here
-    // ========================================
     [Header("Input Buffer")]
-
-    [Tooltip("How long to remember a jump press (seconds). 0.1 is a good default.")]
+    [Tooltip("How long to remember a jump press")]
     [Range(0.01f, 0.3f)]
     [SerializeField] private float bufferTime = 0.1f;
 
-    // ========================================
-    // GROUND DETECTION
-    // ========================================
     [Header("Ground Detection")]
-
-    [Tooltip("Empty GameObject at character's feet")]
     [SerializeField] private Transform groundCheckPoint;
-
-    [Tooltip("How far down to check for ground")]
-    [Range(0.01f, 0.5f)]
-    [SerializeField] private float groundCheckDistance = 0.1f;
-
-    [Tooltip("Which layers count as ground")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    // ========================================
-    // DEBUG
-    // ========================================
     [Header("Debug")]
-
-    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool showGroundCheck = true;
     [SerializeField] private bool debugBuffer = false;
 
-    [Tooltip("Show ground check in Scene view")]
-    [SerializeField] private bool showGroundCheck = true;
-
-    // ========================================
-    // PRIVATE VARIABLES
-    // ========================================
     private Rigidbody2D rb;
-    private InputAction jumpAction;
     private float verticalVelocity;
     private bool isGrounded;
-    private float bufferTimer;       // Time left on buffered input
-    private bool jumpBuffered;       // Is a jump waiting?
+    private float bufferTimer;
+    private bool jumpBuffered;
 
-    // ========================================
-    // SETUP
-    // ========================================
     private void Awake()
     {
         rb = GetComponent&lt;Rigidbody2D&gt;();
         rb.gravityScale = 0f;
-
-        if (inputActions != null)
-        {
-            jumpAction = inputActions.FindAction(jumpActionName);
-            jumpAction?.Enable();
-        }
     }
 
     private void OnEnable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed += OnJumpPressed;
+            InputReader.Instance.OnJumpPressed += HandleJumpInput;
         }
     }
 
     private void OnDisable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.performed -= OnJumpPressed;
+            InputReader.Instance.OnJumpPressed -= HandleJumpInput;
         }
     }
 
-    // ========================================
-    // MAIN LOOP
-    // ========================================
     private void FixedUpdate()
     {
         CheckGrounded();
@@ -307,14 +269,11 @@ public class JumpWithInputBuffer2D : MonoBehaviour
         ApplyVelocity();
     }
 
-    // ========================================
-    // GROUND CHECK
-    // ========================================
     private void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(
             groundCheckPoint.position,
-            groundCheckDistance,
+            groundCheckRadius,
             groundLayer
         );
 
@@ -324,12 +283,9 @@ public class JumpWithInputBuffer2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // BUFFER LOGIC
-    // ========================================
     private void HandleBuffer()
     {
-        // Count down the buffer timer
+        // Count down buffer timer
         if (bufferTimer &gt; 0)
         {
             bufferTimer -= Time.fixedDeltaTime;
@@ -339,49 +295,37 @@ public class JumpWithInputBuffer2D : MonoBehaviour
             jumpBuffered = false;
         }
 
-        // If we have a buffered jump and can now jump, do it!
+        // Execute buffered jump when grounded
         if (jumpBuffered && isGrounded)
         {
             ExecuteJump();
             jumpBuffered = false;
             bufferTimer = 0;
-
             if (debugBuffer) Debug.Log("BUFFERED JUMP executed!");
         }
     }
 
-    // ========================================
-    // JUMP INPUT
-    // ========================================
-    private void OnJumpPressed(InputAction.CallbackContext context)
+    private void HandleJumpInput()
     {
-        // Can we jump right now?
         if (isGrounded)
         {
-            // Yes - jump immediately
+            // Jump immediately
             ExecuteJump();
         }
         else
         {
-            // No - buffer the input for later
+            // Buffer the input
             jumpBuffered = true;
             bufferTimer = bufferTime;
-
-            if (debugBuffer) Debug.Log("Jump BUFFERED, waiting for ground...");
+            if (debugBuffer) Debug.Log("Jump BUFFERED...");
         }
     }
 
-    // ========================================
-    // THE ACTUAL JUMP
-    // ========================================
     private void ExecuteJump()
     {
         verticalVelocity = jumpForce;
     }
 
-    // ========================================
-    // GRAVITY
-    // ========================================
     private void ApplyGravity()
     {
         if (!isGrounded)
@@ -395,9 +339,6 @@ public class JumpWithInputBuffer2D : MonoBehaviour
         }
     }
 
-    // ========================================
-    // APPLY MOVEMENT
-    // ========================================
     private void ApplyVelocity()
     {
         Vector2 velocity = rb.linearVelocity;
@@ -405,54 +346,257 @@ public class JumpWithInputBuffer2D : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    // ========================================
-    // DEBUG
-    // ========================================
     private void OnDrawGizmos()
     {
         if (showGroundCheck && groundCheckPoint != null)
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckDistance);
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
         }
     }
 }</code></pre>
+                </details>
+              </div>
+
+              <!-- 3D (ALL PERSPECTIVES) -->
+              <div class="tab-content content-3d">
+                <h4>BufferedJump3D.cs</h4>
+                <p>3D jump with input buffering. Works for third-person, first-person, and isometric perspectives.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Integrate with your movement script or use built-in movement</li>
+                </ol>
+
+                <details class="code-block">
+                  <summary>BufferedJump3D.cs</summary>
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// BUFFERED JUMP 3D - Input buffer for all 3D perspectives
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class BufferedJump3D : MonoBehaviour
+{
+    [Header("Jump Feel")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 10f;
+
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 30f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Input Buffer")]
+    [Tooltip("How long to remember a jump press")]
+    [Range(0.01f, 0.3f)]
+    [SerializeField] private float bufferTime = 0.1f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement (Optional)")]
+    [SerializeField] private float moveSpeed = 8f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+    [SerializeField] private bool useBuiltInMovement = true;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+    [SerializeField] private bool debugBuffer = false;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private float bufferTimer;
+    private bool jumpBuffered;
+    private Transform cameraTransform;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        cameraTransform = Camera.main?.transform;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJumpInput;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJumpInput;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleBuffer();
+
+        if (useBuiltInMovement)
+        {
+            HandleMovement();
+        }
+
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+        }
+    }
+
+    private void HandleBuffer()
+    {
+        if (bufferTimer &gt; 0)
+        {
+            bufferTimer -= Time.deltaTime;
+        }
+        else
+        {
+            jumpBuffered = false;
+        }
+
+        if (jumpBuffered && isGrounded)
+        {
+            ExecuteJump();
+            jumpBuffered = false;
+            bufferTimer = 0;
+            if (debugBuffer) Debug.Log("BUFFERED JUMP executed!");
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        Vector3 forward = cameraTransform != null ? cameraTransform.forward : transform.forward;
+        Vector3 right = cameraTransform != null ? cameraTransform.right : transform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * input.y + right * input.x);
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        if (moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
+    }
+
+    private void HandleJumpInput()
+    {
+        if (isGrounded)
+        {
+            ExecuteJump();
+        }
+        else
+        {
+            jumpBuffered = true;
+            bufferTimer = bufferTime;
+            if (debugBuffer) Debug.Log("Jump BUFFERED...");
+        }
+    }
+
+    private void ExecuteJump()
+    {
+        velocity.y = jumpForce;
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void SetHorizontalVelocity(Vector3 horizontalVelocity)
+    {
+        velocity.x = horizontalVelocity.x;
+        velocity.z = horizontalVelocity.z;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+                </details>
+              </div>
+            </div>
 
             <h3>Key Implementation Details</h3>
             <ul>
-              <li><strong>Immediate when possible:</strong> If grounded, jump happens instantly - no delay</li>
-              <li><strong>Buffer when not possible:</strong> If airborne, store the input and a timer</li>
+              <li><strong>Immediate when possible:</strong> If grounded, jump happens instantly</li>
+              <li><strong>Buffer when not possible:</strong> If airborne, store the input with a timer</li>
               <li><strong>Check every frame:</strong> Once grounded + buffered, execute the jump</li>
-              <li><strong>Clear after use:</strong> jumpBuffered = false prevents double jumps</li>
+              <li><strong>Clear after use:</strong> Prevents accidental double activation</li>
             </ul>
 
-            <h3>Testing Input Buffer</h3>
-            <ol>
-              <li>Enable "Debug Buffer" in the Inspector</li>
-              <li>Jump, and press jump again while still in the air</li>
-              <li>Console should show "Jump BUFFERED" then "BUFFERED JUMP executed!" on landing</li>
-              <li>Set bufferTime to 0.5 to make it obvious, then tune down</li>
-            </ol>
-
-            <h3>The Complete Package</h3>
-            <p>For the full forgiveness experience, combine Coyote Time + Input Buffer in one script. See the <a href="complete-jump.html">Complete Jump</a> scaffold for a script with both.</p>
-
-            <h3>Common Issues</h3>
-            <p><strong>"Buffered input executes multiple times"</strong><br>
-            You're not clearing the buffer when the action executes. Always set jumpBuffered = false after executing.</p>
-
-            <p><strong>"Buffer doesn't seem to work"</strong><br>
-            Check that you're recording the input even when the action can't execute. The buffer should capture the press, not the action.</p>
-
-            <p><strong>"Inputs feel delayed"</strong><br>
-            You might be waiting for the buffer instead of executing immediately when possible. Buffer should only delay inputs that CAN'T execute immediately.</p>
-
-            <h3>Combine With</h3>
-            <ul>
-              <li><a href="coyote-time.html">Coyote Time</a> - together they cover both directions of timing error</li>
-              <li><a href="hitstop.html">Hitstop</a> - buffer inputs during freeze frames</li>
-              <li><a href="dash.html">Dash</a> - buffer dash during other actions</li>
-            </ul>
+            <h3>The Complete Forgiveness Package</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Technique</th>
+                  <th>What it forgives</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="coyote-time.html">Coyote Time</a></td>
+                  <td>Pressing jump slightly AFTER leaving edge</td>
+                </tr>
+                <tr>
+                  <td>Input Buffer</td>
+                  <td>Pressing jump slightly BEFORE landing</td>
+                </tr>
+                <tr>
+                  <td>Both together</td>
+                  <td>Nearly all "unfair" missed jumps</td>
+                </tr>
+              </tbody>
+            </table>
 
             <h3>Beyond Jump: What Else to Buffer</h3>
             <table>
@@ -481,6 +625,20 @@ public class JumpWithInputBuffer2D : MonoBehaviour
                 </tr>
               </tbody>
             </table>
+
+            <h3>Common Issues</h3>
+            <p><strong>"Buffered input executes multiple times"</strong><br>
+            You're not clearing the buffer after execution. Set jumpBuffered = false after ExecuteJump().</p>
+
+            <p><strong>"Buffer doesn't seem to work"</strong><br>
+            Make sure you're recording input even when grounded. Test with debugBuffer enabled.</p>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="coyote-time.html">Coyote Time</a> - together they cover both timing error directions</li>
+              <li><a href="hitstop.html">Hitstop</a> - buffer inputs during freeze frames</li>
+              <li><a href="dash.html">Dash</a> - buffer dash during other actions</li>
+            </ul>
           </div>
         </div>
 
@@ -491,29 +649,28 @@ public class JumpWithInputBuffer2D : MonoBehaviour
           </div>
           <div class="register-content">
             <h3>Why Teach This</h3>
-            <p>Input buffering teaches students that <strong>player intent matters more than precise timing</strong>. It's a design philosophy as much as a technique: the videogame should try to understand what the player wanted to do.</p>
+            <p>Input buffering teaches that <strong>player intent matters more than precise timing</strong>. The videogame should try to understand what the player wanted to do.</p>
 
             <h3>Teaching Sequence</h3>
             <ol>
-              <li>Have students play a platformer and note when jumps "don't work"</li>
-              <li>Add jump buffering - note how those failures disappear</li>
+              <li>Have students play and note when jumps "don't work"</li>
+              <li>Add input buffering - watch failures disappear</li>
               <li>Extend to other actions (attacks, dashes)</li>
               <li>Discuss: where would buffering be unwanted?</li>
             </ol>
 
             <h3>The Complementary Pair</h3>
-            <p>Teach input buffer alongside coyote time. Together they illustrate a complete approach to timing forgiveness:</p>
+            <p>Teach with coyote time. Together they illustrate complete timing forgiveness:</p>
             <ul>
-              <li><strong>Coyote Time:</strong> Forgives pressing jump AFTER leaving a platform</li>
-              <li><strong>Input Buffer:</strong> Forgives pressing jump BEFORE being able to</li>
+              <li><strong>Coyote Time:</strong> Forgives pressing AFTER leaving platform</li>
+              <li><strong>Input Buffer:</strong> Forgives pressing BEFORE being able to</li>
             </ul>
-            <p>Most "unfair" missed jumps are one of these two cases.</p>
 
             <h3>Assessment Questions</h3>
             <ul>
               <li>When would you NOT want to buffer an input?</li>
-              <li>How does buffer time interact with action rhythm in combat?</li>
-              <li>Why is it important that immediate execution still works?</li>
+              <li>How does buffer time affect combat rhythm?</li>
+              <li>Why must immediate execution still work?</li>
             </ul>
           </div>
         </div>
@@ -525,28 +682,18 @@ public class JumpWithInputBuffer2D : MonoBehaviour
           </div>
           <div class="register-content">
             <h3>Heritage Notes</h3>
-            <p>Input buffering became essential with fighting games in the 1990s. Street Fighter II's combo system required players to input moves during other moves' animations. Without buffering, combos would be nearly impossible.</p>
-            <p>Modern action games inherit this tradition. The buffer is invisible infrastructure that makes complex action sequences feel achievable.</p>
+            <p>Input buffering became essential with fighting games in the 1990s. Street Fighter II's combo system required inputting moves during other moves' animations. Without buffering, combos would be nearly impossible.</p>
 
             <h3>The Intent Problem</h3>
-            <p>Input buffering is an attempt to solve the <strong>intent problem</strong>: the player knows what they want to do, but the videogame only sees button presses. Timing errors don't mean the player changed their mind - they mean the player's timing was imperfect.</p>
+            <p>Input buffering attempts to solve the <strong>intent problem</strong>: the player knows what they want to do, but the videogame only sees button presses. Timing errors don't mean the player changed their mind.</p>
             <p>A generous buffer says: "I trust that you meant to do this, so I'll do it when I can."</p>
 
             <h3>When Buffering Is Wrong</h3>
-            <p>Not all actions should be buffered:</p>
             <ul>
-              <li><strong>Defensive actions:</strong> Blocking/dodging should often require precise timing. Buffering removes the skill expression.</li>
-              <li><strong>Commitment actions:</strong> If the videogame wants you to commit to a decision, buffering undermines that.</li>
-              <li><strong>Context-sensitive actions:</strong> If the same button does different things based on situation, buffering can cause wrong actions.</li>
+              <li><strong>Defensive actions:</strong> Blocking/dodging often requires precise timing for skill expression</li>
+              <li><strong>Commitment actions:</strong> If commitment matters, buffering undermines it</li>
+              <li><strong>Context-sensitive:</strong> Same button, different actions - buffering can cause wrong action</li>
             </ul>
-
-            <h3>Fighting Game Philosophy</h3>
-            <p>Fighting games have deep input buffer traditions. Different videogames use different buffer windows, and this is a design choice:</p>
-            <ul>
-              <li>Long buffer = easier combos, more forgiving, less precise feel</li>
-              <li>Short buffer = harder combos, more skill expression, tighter feel</li>
-            </ul>
-            <p>Street Fighter V has longer buffers than Street Fighter III. This is intentional accessibility vs. skill ceiling tradeoff.</p>
           </div>
         </div>
 
@@ -556,7 +703,7 @@ public class JumpWithInputBuffer2D : MonoBehaviour
         <ul>
           <li><a href="coyote-time.html">Coyote Time</a> - the complementary forgiveness technique</li>
           <li><a href="hitstop.html">Hitstop</a> - buffer inputs during freeze</li>
-          <li><a href="../foundations/player-psychology.html">Player Psychology</a> - why intent matters</li>
+          <li><a href="input-setup.html">Input Setup</a> - required InputReader system</li>
         </ul>
 
         <h2>Glossary Terms</h2>

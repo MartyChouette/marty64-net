@@ -264,6 +264,77 @@ pre code {
   font-size: var(--text-sm);
 }
 
+/* Collapsible code blocks */
+details.code-block {
+  margin: var(--space-md) 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+details.code-block summary {
+  background: #2d2d2d;
+  color: #d4d4d4;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+  border-radius: 6px;
+}
+
+details.code-block[open] summary {
+  border-radius: 6px 6px 0 0;
+}
+
+details.code-block summary:hover {
+  background: #3d3d3d;
+}
+
+details.code-block summary::before {
+  content: '▶';
+  font-size: 0.7em;
+  transition: transform 0.2s ease;
+}
+
+details.code-block[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details.code-block summary::-webkit-details-marker {
+  display: none;
+}
+
+details.code-block pre {
+  margin: 0;
+  border-radius: 0 0 6px 6px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for code blocks */
+details.code-block pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+details.code-block pre::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 0 0 6px 0;
+}
+
+details.code-block pre::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+details.code-block pre::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
 blockquote {
   border-left: 3px solid var(--border);
   padding-left: var(--space-md);

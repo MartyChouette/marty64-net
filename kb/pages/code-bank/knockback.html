@@ -32,12 +32,16 @@
   </style>
 </head>
 <body>
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+
   <div class="site-container">
     <nav class="sidebar">
-      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <a href="../../../index.html" class="site-title">marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
 
-      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+      <a href="../../index.html" class="nav-home">VG101 Home</a>
 
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
@@ -63,13 +67,17 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
+          <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
+          <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
           <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
-          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
-          <li class="nav-item"><a href="knockback.html" class="nav-link active">Knockback</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link active">Knockback</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
         </ul>
       </div>
 
@@ -171,6 +179,8 @@
             </ul>
 
             <h3>Pseudocode</h3>
+            <details class="code-block">
+              <summary>Pseudocode</summary>
             <pre><code>On Hit:
   - Calculate direction from attacker to target
   - Apply velocity: (direction * knockbackForce) + (up * knockbackUp)
@@ -183,6 +193,7 @@ Every Frame during hitstun:
 
 On hitstun end:
   - Restore target control</code></pre>
+            </details>
 
             <h3>Unity Setup (2D)</h3>
             <ol>
@@ -215,6 +226,8 @@ On hitstun end:
             </ol>
 
             <h3>The Script (2D)</h3>
+            <details class="code-block">
+              <summary>KnockbackReceiver2D.cs</summary>
             <pre><code>// ============================================================
 // KnockbackReceiver2D.cs
 // Attach to any entity that can be knocked back when hit.
@@ -535,6 +548,7 @@ public class KnockbackReceiver2D : MonoBehaviour
 //
 // 6. For 3D: Change Rigidbody2D to Rigidbody, Vector2 to Vector3
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"Knockback goes the wrong direction"</strong><br>

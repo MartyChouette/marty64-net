@@ -29,9 +29,34 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    /* Perspective Tabs */
+    .perspective-tabs{margin:1.5rem 0}
+    .perspective-tabs input[type="radio"]{display:none}
+    .tab-labels{display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:0}
+    .tab-labels label{padding:0.75rem 1.25rem;cursor:pointer;font-weight:500;font-size:0.875rem;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+    .tab-labels label:hover{color:#334155;background:#f8fafc}
+    .tab-content{display:none;padding:1.5rem;background:#f8fafc;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px}
+    #tab-2d:checked ~ .tab-labels label[for="tab-2d"],
+    #tab-3d:checked ~ .tab-labels label[for="tab-3d"]{color:#14b8a6;border-bottom-color:#14b8a6;background:#f0fdfa}
+    #tab-2d:checked ~ .content-2d,
+    #tab-3d:checked ~ .content-3d{display:block}
+    .prereq-note{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:1rem;margin-bottom:1.5rem;font-size:0.9rem}
+    .prereq-note a{color:#d97706;font-weight:500}
+    pre{background:#1e293b;color:#e2e8f0;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.8rem;line-height:1.5}
+    code{font-family:'JetBrains Mono',monospace}
+    pre code{color:#e2e8f0}
+    :not(pre)>code{background:#e2e8f0;padding:0.125rem 0.375rem;border-radius:3px;font-size:0.85em;color:#334155}
   </style>
 </head>
 <body>
+  <!-- Mobile Navigation -->
+  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
   <div class="site-container">
     <nav class="sidebar">
       <a href="../../../index.html" class="site-title">← marty64.net</a>
@@ -63,12 +88,16 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
           <li class="nav-item"><a href="double-jump.html" class="nav-link active">Double Jump</a></li>
           <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
           <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link">Squash & Stretch</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
         </ul>
       </div>
@@ -129,12 +158,6 @@
                   <td>Force of air jump (often less than ground)</td>
                 </tr>
                 <tr>
-                  <td><code>jumpsRemaining</code></td>
-                  <td>int</td>
-                  <td>-</td>
-                  <td>Current available air jumps</td>
-                </tr>
-                <tr>
                   <td><code>resetVelocity</code></td>
                   <td>bool</td>
                   <td>true</td>
@@ -149,454 +172,468 @@
             <ul>
               <li><code>airJumpForce</code> = same as <code>jumpForce</code></li>
               <li><code>resetVelocity</code> = true</li>
-              <li>Each jump feels equal</li>
             </ul>
 
             <p><strong>For diminishing jumps:</strong></p>
             <ul>
               <li><code>airJumpForce</code> = 70-80% of <code>jumpForce</code></li>
-              <li>Second jump is weaker, encourages using first jump wisely</li>
+              <li>Encourages using first jump wisely</li>
             </ul>
-            <p><em>Reference: Hollow Knight, many Metroidvanias</em></p>
+            <p><em>Reference: Hollow Knight, Metroidvanias</em></p>
 
             <p><strong>For boosted air jump:</strong></p>
             <ul>
               <li><code>airJumpForce</code> > <code>jumpForce</code></li>
-              <li><code>resetVelocity</code> = true</li>
-              <li>Air jump is the powerful one; first jump is setup</li>
+              <li>First jump is setup, air jump is powerful</li>
             </ul>
 
-            <h3>Pseudocode</h3>
-            <pre><code>On Landing:
-  - Set jumpsRemaining = extraJumps
+            <h3>Perspective Scripts</h3>
 
-On Jump Press:
-  - If grounded: do normal jump
-  - Else if jumpsRemaining > 0:
-    - If resetVelocity: set vertical velocity to 0
-    - Apply airJumpForce upward
-    - Decrement jumpsRemaining
-    - Play air jump effect</code></pre>
+            <div class="prereq-note">
+              <strong>Prerequisite:</strong> All scripts below require the <a href="input-setup.html">InputReader</a> to be set up in your scene.
+            </div>
 
-            <h3>Unity Setup (2D)</h3>
-            <ol>
-              <li><strong>Create Input Actions:</strong>
-                <ul>
-                  <li>Window → Input Actions (or open existing asset)</li>
-                  <li>Create "Jump" action (Button type) - bind to Space and A Button</li>
-                  <li>Save and enable "Generate C# Class"</li>
-                </ul>
-              </li>
-              <li><strong>Setup the Player:</strong>
-                <ul>
-                  <li>Add <code>Rigidbody2D</code> (Gravity Scale: 3, Freeze Rotation Z: checked)</li>
-                  <li>Add <code>Collider2D</code> (BoxCollider2D or CapsuleCollider2D)</li>
-                  <li>Add <code>PlayerInput</code> component, assign your Input Actions asset</li>
-                  <li>Add the <code>DoubleJump2D.cs</code> script below</li>
-                </ul>
-              </li>
-              <li><strong>Create Ground Check:</strong>
-                <ul>
-                  <li>Create empty child object named "GroundCheck"</li>
-                  <li>Position it at the player's feet</li>
-                  <li>Assign to the script's <code>groundCheck</code> field</li>
-                </ul>
-              </li>
-              <li><strong>Configure Layers:</strong>
-                <ul>
-                  <li>Edit → Project Settings → Tags and Layers</li>
-                  <li>Create "Ground" layer, assign to ground objects</li>
-                  <li>Set <code>groundLayer</code> in the script's Inspector</li>
-                </ul>
-              </li>
-              <li><strong>Optional - Air Jump Effects:</strong>
-                <ul>
-                  <li>Create a particle prefab for air jump (wings, sparkles)</li>
-                  <li>Assign to <code>airJumpEffect</code> field</li>
-                  <li>Assign different AudioClip for <code>airJumpSound</code></li>
-                </ul>
-              </li>
-            </ol>
+            <div class="perspective-tabs">
+              <input type="radio" name="perspective" id="tab-2d" checked>
+              <input type="radio" name="perspective" id="tab-3d">
 
-            <h3>The Script (2D)</h3>
-            <pre><code>// ============================================================
-// DoubleJump2D.cs
-// A 2D double jump with configurable air jumps, force options,
-// and distinct feedback for ground vs air jumps.
-// Unity 6.x + New Input System
-// ============================================================
+              <div class="tab-labels">
+                <label for="tab-2d">2D Platformer</label>
+                <label for="tab-3d">3D (All Perspectives)</label>
+              </div>
 
-using UnityEngine;
-using UnityEngine.InputSystem;
+              <!-- 2D PLATFORMER -->
+              <div class="tab-content content-2d">
+                <h4>DoubleJump2D.cs</h4>
+                <p>2D double jump with configurable air jumps and distinct feedback for ground vs air jumps.</p>
 
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>Rigidbody2D</code> to your player</li>
+                  <li>Create a child "GroundCheck" at the feet</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Optional: assign airJumpEffect particle prefab</li>
+                </ol>
+
+                <details class="code-block">
+                  <summary>DoubleJump2D.cs</summary>
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// DOUBLE JUMP 2D - Air jump with resource management
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DoubleJump2D : MonoBehaviour
 {
-    // ========================================================
-    // JUMP PARAMETERS - Tune these in the Inspector
-    // ========================================================
-
     [Header("Ground Jump")]
-    [Tooltip("Force applied for ground jump")]
-    [SerializeField] [Range(5f, 25f)] private float jumpForce = 12f;
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 12f;
 
     [Header("Air Jump")]
-    [Tooltip("Number of air jumps allowed (1 = double jump, 2 = triple, etc.)")]
-    [SerializeField] [Range(1, 5)] private int extraJumps = 1;
+    [Tooltip("Number of air jumps (1 = double jump, 2 = triple)")]
+    [Range(1, 5)]
+    [SerializeField] private int extraJumps = 1;
 
-    [Tooltip("Force applied for air jump (often less than ground)")]
-    [SerializeField] [Range(5f, 25f)] private float airJumpForce = 10f;
+    [Range(5f, 25f)]
+    [SerializeField] private float airJumpForce = 10f;
 
-    [Tooltip("Cancel downward velocity before air jump? (Recommended: true)")]
+    [Tooltip("Cancel downward velocity before air jump")]
     [SerializeField] private bool resetVelocity = true;
 
+    [Header("Gravity")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 40f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 1.5f;
+
     [Header("Ground Detection")]
-    [Tooltip("Empty transform at player's feet")]
-    [SerializeField] private Transform groundCheck;
-
-    [Tooltip("Radius of ground check circle")]
-    [SerializeField] [Range(0.05f, 0.5f)] private float groundCheckRadius = 0.1f;
-
-    [Tooltip("Which layers count as ground")]
+    [SerializeField] private Transform groundCheckPoint;
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Feedback - Air Jump")]
-    [Tooltip("Particle effect spawned on air jump (optional)")]
+    [Header("Air Jump Effect (Optional)")]
     [SerializeField] private GameObject airJumpEffect;
 
-    [Tooltip("Sound for air jump (should differ from ground jump)")]
-    [SerializeField] private AudioClip airJumpSound;
-
-    [Tooltip("Sound for ground jump")]
-    [SerializeField] private AudioClip groundJumpSound;
-
-    [Header("Input Actions")]
-    [Tooltip("Reference to your Input Actions asset")]
-    [SerializeField] private InputActionAsset inputActions;
-
     [Header("Debug")]
-    [Tooltip("Show debug info in console")]
+    [SerializeField] private bool showGroundCheck = true;
     [SerializeField] private bool debugMode = false;
 
-    // ========================================================
-    // INTERNAL STATE - Don't modify directly
-    // ========================================================
-
     private Rigidbody2D rb;
-    private AudioSource audioSource;
-    private InputAction jumpAction;
+    private float verticalVelocity;
+    private bool isGrounded;
+    private bool wasGrounded;
+    private int jumpsRemaining;
 
-    // Jump state
-    private bool isGrounded = false;
-    private bool wasGrounded = false;
-    private int jumpsRemaining = 0;
-
-    // ========================================================
-    // PUBLIC PROPERTIES - For other scripts to read
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// True if player is on the ground
-    /// &lt;/summary&gt;
-    public bool IsGrounded =&gt; isGrounded;
-
-    /// &lt;summary&gt;
-    /// Current remaining air jumps
-    /// &lt;/summary&gt;
     public int JumpsRemaining =&gt; jumpsRemaining;
-
-    /// &lt;summary&gt;
-    /// Maximum air jumps (same as extraJumps)
-    /// &lt;/summary&gt;
-    public int MaxAirJumps =&gt; extraJumps;
-
-    /// &lt;summary&gt;
-    /// True if player can currently jump (grounded or has air jumps)
-    /// &lt;/summary&gt;
     public bool CanJump =&gt; isGrounded || jumpsRemaining &gt; 0;
 
-    // ========================================================
-    // UNITY LIFECYCLE
-    // ========================================================
-
-    void Awake()
+    private void Awake()
     {
-        // Get required components
         rb = GetComponent&lt;Rigidbody2D&gt;();
-        audioSource = GetComponent&lt;AudioSource&gt;();
-
-        // Initialize jumps
+        rb.gravityScale = 0f;
         jumpsRemaining = extraJumps;
+    }
 
-        // Setup input actions
-        if (inputActions != null)
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
         {
-            var gameplay = inputActions.FindActionMap("Gameplay");
-            if (gameplay != null)
-            {
-                jumpAction = gameplay.FindAction("Jump");
-            }
+            InputReader.Instance.OnJumpPressed += HandleJump;
         }
     }
 
-    void OnEnable()
+    private void OnDisable()
     {
-        if (jumpAction != null)
+        if (InputReader.Instance != null)
         {
-            jumpAction.Enable();
-            jumpAction.performed += OnJumpPressed;
+            InputReader.Instance.OnJumpPressed -= HandleJump;
         }
     }
 
-    void OnDisable()
+    private void FixedUpdate()
     {
-        if (jumpAction != null)
+        CheckGrounded();
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        wasGrounded = isGrounded;
+
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheckPoint.position,
+            groundCheckRadius,
+            groundLayer
+        );
+
+        if (isGrounded && verticalVelocity &lt; 0)
         {
-            jumpAction.performed -= OnJumpPressed;
-            jumpAction.Disable();
+            verticalVelocity = 0f;
+        }
+
+        // Refresh jumps on landing
+        if (isGrounded && !wasGrounded)
+        {
+            jumpsRemaining = extraJumps;
+            if (debugMode) Debug.Log($"Landed! Air jumps: {jumpsRemaining}");
         }
     }
 
-    void Update()
-    {
-        // Check ground state
-        CheckGroundState();
-    }
-
-    // ========================================================
-    // INPUT HANDLING
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Called when jump input is pressed
-    /// &lt;/summary&gt;
-    private void OnJumpPressed(InputAction.CallbackContext context)
-    {
-        TryJump();
-    }
-
-    /// &lt;summary&gt;
-    /// Attempt to perform a jump (ground or air)
-    /// &lt;/summary&gt;
-    public void TryJump()
+    private void HandleJump()
     {
         if (isGrounded)
         {
             // Ground jump
-            PerformGroundJump();
+            verticalVelocity = jumpForce;
+            if (debugMode) Debug.Log("Ground jump!");
         }
         else if (jumpsRemaining &gt; 0)
         {
-            // Air jump (double jump)
-            PerformAirJump();
-        }
-        else
-        {
-            if (debugMode) Debug.Log("Jump blocked: not grounded, no air jumps");
-        }
-    }
-
-    // ========================================================
-    // JUMP EXECUTION
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Execute a ground jump
-    /// &lt;/summary&gt;
-    private void PerformGroundJump()
-    {
-        // Apply jump force
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-        // Play ground jump sound
-        PlaySound(groundJumpSound);
-
-        if (debugMode) Debug.Log("Ground jump!");
-    }
-
-    /// &lt;summary&gt;
-    /// Execute an air jump (double jump)
-    /// &lt;/summary&gt;
-    private void PerformAirJump()
-    {
-        // Optionally reset vertical velocity first
-        // This ensures consistent air jump height regardless of fall speed
-        if (resetVelocity)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        }
-
-        // Apply air jump force
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, airJumpForce);
-
-        // Consume one air jump
-        jumpsRemaining--;
-
-        // Spawn air jump effect
-        SpawnAirJumpEffect();
-
-        // Play air jump sound (different from ground jump!)
-        PlaySound(airJumpSound);
-
-        if (debugMode)
-        {
-            Debug.Log($"Air jump! Jumps remaining: {jumpsRemaining}");
-        }
-    }
-
-    // ========================================================
-    // GROUND DETECTION + JUMP REFRESH
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Check ground state and refresh air jumps when landing
-    /// &lt;/summary&gt;
-    private void CheckGroundState()
-    {
-        wasGrounded = isGrounded;
-
-        // Check for ground
-        if (groundCheck != null)
-        {
-            isGrounded = Physics2D.OverlapCircle(
-                groundCheck.position,
-                groundCheckRadius,
-                groundLayer
-            );
-        }
-
-        // Just landed - refresh air jumps!
-        if (isGrounded &amp;&amp; !wasGrounded)
-        {
-            jumpsRemaining = extraJumps;
-
-            if (debugMode)
+            // Air jump
+            if (resetVelocity)
             {
-                Debug.Log($"Landed! Air jumps refreshed to {extraJumps}");
+                verticalVelocity = 0f;
             }
+            verticalVelocity = airJumpForce;
+            jumpsRemaining--;
+
+            SpawnAirJumpEffect();
+            if (debugMode) Debug.Log($"Air jump! Remaining: {jumpsRemaining}");
         }
     }
 
-    // ========================================================
-    // FEEDBACK
-    // ========================================================
-
-    /// &lt;summary&gt;
-    /// Spawn visual effect for air jump
-    /// &lt;/summary&gt;
     private void SpawnAirJumpEffect()
     {
         if (airJumpEffect != null)
         {
-            // Spawn at player position
-            GameObject effect = Instantiate(
-                airJumpEffect,
-                transform.position,
-                Quaternion.identity
-            );
-
-            // Auto-destroy after 2 seconds
+            GameObject effect = Instantiate(airJumpEffect, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
         }
     }
 
-    /// &lt;summary&gt;
-    /// Play a sound clip
-    /// &lt;/summary&gt;
-    private void PlaySound(AudioClip clip)
+    private void ApplyGravity()
     {
-        if (clip != null &amp;&amp; audioSource != null)
+        if (!isGrounded)
         {
-            audioSource.PlayOneShot(clip);
+            float gravityThisFrame = gravity;
+            if (verticalVelocity &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            verticalVelocity -= gravityThisFrame * Time.fixedDeltaTime;
         }
     }
 
-    // ========================================================
-    // PUBLIC METHODS - Call from other scripts
-    // ========================================================
+    private void ApplyVelocity()
+    {
+        Vector2 velocity = rb.linearVelocity;
+        velocity.y = verticalVelocity;
+        rb.linearVelocity = velocity;
+    }
 
-    /// &lt;summary&gt;
-    /// Manually refresh air jumps (e.g., touching wall, taking damage)
-    /// &lt;/summary&gt;
+    // Call from external scripts (e.g., wall touch)
     public void RefreshAirJumps()
     {
         jumpsRemaining = extraJumps;
     }
 
-    /// &lt;summary&gt;
-    /// Grant bonus air jumps (e.g., power-up)
-    /// &lt;/summary&gt;
-    public void AddAirJump(int amount = 1)
+    private void OnDrawGizmos()
     {
-        jumpsRemaining = Mathf.Min(jumpsRemaining + amount, extraJumps);
-    }
-
-    // ========================================================
-    // DEBUG VISUALIZATION
-    // ========================================================
-
-    void OnDrawGizmosSelected()
-    {
-        // Show ground check radius
-        if (groundCheck != null)
+        if (showGroundCheck && groundCheckPoint != null)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
         }
     }
-}
+}</code></pre>
+                </details>
+              </div>
 
-// ============================================================
-// USAGE NOTES:
-//
-// 1. The key difference from BasicJump: we track jumpsRemaining
-//    which decrements on air jump and resets on landing.
-//
-// 2. Air jump MUST have different feedback than ground jump!
-//    Players need to know they used their resource. Use:
-//    - Different sound (airJumpSound vs groundJumpSound)
-//    - Visual effect (airJumpEffect - wings, sparkles, etc.)
-//    - Different animation (not shown, but recommended)
-//
-// 3. resetVelocity = true is recommended. Without it, air jump
-//    while falling fast gives much less height than air jump
-//    at apex of first jump. With it, height is consistent.
-//
-// 4. To integrate with coyote time: coyote jump should NOT
-//    consume an air jump. Check "just left ground" separately
-//    from "in air with jumpsRemaining".
-//
-// 5. For wall touch reset, call RefreshAirJumps() on wall contact:
-//    void OnCollisionEnter2D(Collision2D col)
-//    {
-//        if (col.gameObject.layer == LayerMask.NameToLayer("Wall"))
-//            GetComponent&lt;DoubleJump2D&gt;().RefreshAirJumps();
-//    }
-//
-// 6. For 3D: Change Rigidbody2D to Rigidbody, Physics2D to
-//    Physics.CheckSphere, and use rb.linearVelocity with Vector3
-// ============================================================</code></pre>
+              <!-- 3D (ALL PERSPECTIVES) -->
+              <div class="tab-content content-3d">
+                <h4>DoubleJump3D.cs</h4>
+                <p>3D double jump for third-person, first-person, and isometric. Works with CharacterController.</p>
+
+                <p><strong>Setup:</strong></p>
+                <ol>
+                  <li>Add <code>CharacterController</code> to your player</li>
+                  <li>Add this script and configure in Inspector</li>
+                  <li>Optional: assign airJumpEffect particle prefab</li>
+                </ol>
+
+                <details class="code-block">
+                  <summary>DoubleJump3D.cs</summary>
+                <pre><code>using UnityEngine;
+
+/// &lt;summary&gt;
+/// DOUBLE JUMP 3D - Air jump for all 3D perspectives
+/// VG101 Code Bank - Requires InputReader from Input Setup
+/// &lt;/summary&gt;
+[RequireComponent(typeof(CharacterController))]
+public class DoubleJump3D : MonoBehaviour
+{
+    [Header("Ground Jump")]
+    [Range(5f, 25f)]
+    [SerializeField] private float jumpForce = 10f;
+
+    [Header("Air Jump")]
+    [Range(1, 5)]
+    [SerializeField] private int extraJumps = 1;
+
+    [Range(5f, 25f)]
+    [SerializeField] private float airJumpForce = 8f;
+
+    [SerializeField] private bool resetVelocity = true;
+
+    [Header("Gravity")]
+    [Range(20f, 80f)]
+    [SerializeField] private float gravity = 30f;
+
+    [Range(1f, 4f)]
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [Header("Ground Detection")]
+    [SerializeField] private Vector3 groundCheckOffset = new Vector3(0, -0.9f, 0);
+    [SerializeField] private float groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Movement (Optional)")]
+    [SerializeField] private float moveSpeed = 8f;
+    [Range(0f, 1f)]
+    [SerializeField] private float airControl = 0.5f;
+    [SerializeField] private bool useBuiltInMovement = true;
+
+    [Header("Air Jump Effect (Optional)")]
+    [SerializeField] private GameObject airJumpEffect;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGroundCheck = true;
+    [SerializeField] private bool debugMode = false;
+
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool wasGrounded;
+    private int jumpsRemaining;
+    private Transform cameraTransform;
+
+    public int JumpsRemaining =&gt; jumpsRemaining;
+    public bool CanJump =&gt; isGrounded || jumpsRemaining &gt; 0;
+
+    private void Awake()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+        cameraTransform = Camera.main?.transform;
+        jumpsRemaining = extraJumps;
+    }
+
+    private void OnEnable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed += HandleJump;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (InputReader.Instance != null)
+        {
+            InputReader.Instance.OnJumpPressed -= HandleJump;
+        }
+    }
+
+    private void Update()
+    {
+        CheckGrounded();
+
+        if (useBuiltInMovement)
+        {
+            HandleMovement();
+        }
+
+        ApplyGravity();
+        ApplyVelocity();
+    }
+
+    private void CheckGrounded()
+    {
+        wasGrounded = isGrounded;
+
+        Vector3 checkPosition = transform.position + groundCheckOffset;
+        isGrounded = Physics.CheckSphere(checkPosition, groundCheckRadius, groundLayer);
+
+        if (isGrounded && velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+        }
+
+        // Refresh jumps on landing
+        if (isGrounded && !wasGrounded)
+        {
+            jumpsRemaining = extraJumps;
+            if (debugMode) Debug.Log($"Landed! Air jumps: {jumpsRemaining}");
+        }
+    }
+
+    private void HandleMovement()
+    {
+        Vector2 input = InputReader.Instance != null ? InputReader.Instance.MoveInput : Vector2.zero;
+
+        Vector3 forward = cameraTransform != null ? cameraTransform.forward : transform.forward;
+        Vector3 right = cameraTransform != null ? cameraTransform.right : transform.right;
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDirection = (forward * input.y + right * input.x);
+
+        float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airControl;
+        velocity.x = moveDirection.x * currentSpeed;
+        velocity.z = moveDirection.z * currentSpeed;
+
+        if (moveDirection.magnitude &gt; 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (isGrounded)
+        {
+            velocity.y = jumpForce;
+            if (debugMode) Debug.Log("Ground jump!");
+        }
+        else if (jumpsRemaining &gt; 0)
+        {
+            if (resetVelocity)
+            {
+                velocity.y = 0f;
+            }
+            velocity.y = airJumpForce;
+            jumpsRemaining--;
+
+            SpawnAirJumpEffect();
+            if (debugMode) Debug.Log($"Air jump! Remaining: {jumpsRemaining}");
+        }
+    }
+
+    private void SpawnAirJumpEffect()
+    {
+        if (airJumpEffect != null)
+        {
+            GameObject effect = Instantiate(airJumpEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 2f);
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!isGrounded)
+        {
+            float gravityThisFrame = gravity;
+            if (velocity.y &lt; 0)
+            {
+                gravityThisFrame *= fallGravityMultiplier;
+            }
+            velocity.y -= gravityThisFrame * Time.deltaTime;
+        }
+    }
+
+    private void ApplyVelocity()
+    {
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void SetHorizontalVelocity(Vector3 horizontalVelocity)
+    {
+        velocity.x = horizontalVelocity.x;
+        velocity.z = horizontalVelocity.z;
+    }
+
+    public void RefreshAirJumps()
+    {
+        jumpsRemaining = extraJumps;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGroundCheck)
+        {
+            Vector3 checkPosition = transform.position + groundCheckOffset;
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(checkPosition, groundCheckRadius);
+        }
+    }
+}</code></pre>
+                </details>
+              </div>
+            </div>
+
+            <h3>Key Implementation Details</h3>
+            <ul>
+              <li><strong>Counter management:</strong> Track <code>jumpsRemaining</code>, decrement on air jump, reset on landing</li>
+              <li><strong>Velocity reset:</strong> Optional - makes air jump height consistent regardless of fall speed</li>
+              <li><strong>Distinct feedback:</strong> Air jump MUST look/sound different from ground jump</li>
+              <li><strong>RefreshAirJumps():</strong> Call from wall touch or other refresh triggers</li>
+            </ul>
 
             <h3>Common Issues</h3>
-            <p><strong>"Double jump doesn't feel different from first jump"</strong><br>
-            Add distinct feedback: different sound, particle effect, animation. Players should know they used their air jump.</p>
+            <p><strong>"Double jump doesn't feel different"</strong><br>
+            Add distinct feedback: particle effect, different sound, animation change. Players need to know they used their resource.</p>
 
-            <p><strong>"It feels like I have infinite jumps"</strong><br>
-            Make sure you're only resetting jumpsRemaining on landing, not on jump. Also check that the counter actually decrements.</p>
+            <p><strong>"Infinite jumps"</strong><br>
+            Make sure you only reset jumpsRemaining on landing (wasGrounded check), not every frame.</p>
 
-            <p><strong>"Air jump barely helps when falling fast"</strong><br>
-            If <code>resetVelocity</code> is false, the jump force fights existing downward velocity. Set it to true to always get full air jump height.</p>
-
-            <p><strong>"Players are reaching places they shouldn't"</strong><br>
-            Double jump significantly increases vertical reach. Redesign level geometry or reduce airJumpForce.</p>
-
-            <h3>Combine With</h3>
-            <ul>
-              <li><a href="variable-jump.html">Variable Jump</a> - both jumps can be variable height</li>
-              <li><a href="coyote-time.html">Coyote Time</a> - coyote jump shouldn't consume air jump</li>
-              <li><a href="dash.html">Dash</a> - dash + double jump for maximum air mobility</li>
-              <li><a href="squash-stretch.html">Squash & Stretch</a> - unique deformation for air jump</li>
-            </ul>
+            <p><strong>"Air jump barely helps when falling"</strong><br>
+            Set <code>resetVelocity</code> to true for consistent air jump height.</p>
 
             <h3>Design Decisions</h3>
             <table>
@@ -608,23 +645,26 @@ public class DoubleJump2D : MonoBehaviour
               </thead>
               <tbody>
                 <tr>
-                  <td>When to unlock double jump?</td>
-                  <td>Start with it, ability pickup, permanent upgrade</td>
+                  <td>Coyote jump uses air jump?</td>
+                  <td>Most videogames: no. Coyote is grace, not air jump.</td>
                 </tr>
                 <tr>
-                  <td>Should coyote time use an air jump?</td>
-                  <td>Most videogames: no. Coyote is a grace period, not a true air jump.</td>
+                  <td>Reset on wall touch?</td>
+                  <td>Yes for wall-jump videogames (enables infinite climbing)</td>
                 </tr>
                 <tr>
-                  <td>Reset air jump on wall touch?</td>
-                  <td>Yes for wall-jump videogames, creates infinite climbing</td>
-                </tr>
-                <tr>
-                  <td>Reset air jump on taking damage?</td>
-                  <td>Generous design choice, prevents unfair deaths</td>
+                  <td>Reset on taking damage?</td>
+                  <td>Generous design - prevents unfair deaths</td>
                 </tr>
               </tbody>
             </table>
+
+            <h3>Combine With</h3>
+            <ul>
+              <li><a href="variable-jump.html">Variable Jump</a> - both jumps can be variable height</li>
+              <li><a href="coyote-time.html">Coyote Time</a> - coyote shouldn't consume air jump</li>
+              <li><a href="dash.html">Dash</a> - dash + double jump for maximum air mobility</li>
+            </ul>
           </div>
         </div>
 
@@ -635,32 +675,30 @@ public class DoubleJump2D : MonoBehaviour
           </div>
           <div class="register-content">
             <h3>Why Teach This</h3>
-            <p>Double jump teaches <strong>ability management</strong>. Students learn to track state (jumps remaining), reset conditions (landing), and provide feedback (air jump effects). It's more complex than basic jump but still approachable.</p>
+            <p>Double jump teaches <strong>ability management</strong>: tracking state (jumps remaining), reset conditions (landing), and feedback (air jump effects). More complex than basic jump but still approachable.</p>
 
             <h3>Teaching Sequence</h3>
             <ol>
               <li>Start with basic jump working</li>
               <li>Add counter for remaining jumps</li>
               <li>Allow jump when jumpsRemaining > 0 and in air</li>
-              <li>Add distinct visual/audio feedback for air jump</li>
+              <li>Add distinct visual/audio feedback</li>
               <li>Tune the feel (force, velocity reset)</li>
             </ol>
 
             <h3>The Feedback Lesson</h3>
-            <p>Double jump is a great place to teach <strong>feedback differentiation</strong>. The air jump needs to feel different from the ground jump so players know they've used their resource. This could be:</p>
+            <p>Air jump needs different feedback than ground jump so players know they've used their resource:</p>
             <ul>
               <li>Different sound effect</li>
               <li>Different particle effect (wings, sparkles)</li>
               <li>Different animation</li>
-              <li>Brief screen flash or shake</li>
             </ul>
-            <p>Without distinct feedback, players lose track of their jumps.</p>
 
             <h3>Assessment Questions</h3>
             <ul>
-              <li>Why might you want the air jump to be weaker than the ground jump?</li>
-              <li>What feedback tells the player they've used their double jump?</li>
-              <li>How does double jump change level design requirements?</li>
+              <li>Why might air jump be weaker than ground jump?</li>
+              <li>What feedback tells the player they've used double jump?</li>
+              <li>How does double jump change level design?</li>
             </ul>
           </div>
         </div>
@@ -672,24 +710,23 @@ public class DoubleJump2D : MonoBehaviour
           </div>
           <div class="register-content">
             <h3>Heritage Notes</h3>
-            <p>The double jump has murky origins but became codified in the 1980s-90s. Dragon Buster (1984) is often cited as an early example. The technique spread through action-platformers and Metroidvanias.</p>
-            <p>It's now so common that players expect it. Many videogames start without double jump and grant it as an upgrade - following the Metroidvania tradition of ability-gated progression.</p>
+            <p>Double jump has murky origins but became codified in the 1980s-90s. Dragon Buster (1984) is an early example. It spread through action-platformers and Metroidvanias.</p>
+            <p>Now so common that players expect it. Many videogames start without it and grant it as an upgrade - the Metroidvania tradition of ability-gated progression.</p>
 
             <h3>The Abstraction Question</h3>
-            <p>Double jump is <strong>physically impossible</strong>. You can't push off nothing. This is fine - videogames aren't physics simulations. But it raises the question: how much do videogame physics need to make sense?</p>
-            <p>The answer is usually: they need to be internally consistent, not realistic. If double jump exists, it should work the same way every time. Players learn videogame physics, not real physics.</p>
+            <p>Double jump is <strong>physically impossible</strong>. You can't push off nothing. But videogames aren't physics simulations. They need to be internally consistent, not realistic.</p>
 
             <h3>Permission and Progression</h3>
-            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, double jump expands what's <strong>allowed</strong>. Before the upgrade, certain heights are forbidden. After, they're reachable. This is the Metroidvania formula: new abilities = new permissions = new areas.</p>
+            <p>From a <a href="../framework/permissions.html" class="term">Permissions</a> perspective, double jump expands what's <strong>allowed</strong>. Before: certain heights forbidden. After: reachable. New abilities = new permissions = new areas.</p>
 
             <h3>Triple Jump and Beyond</h3>
-            <p>Why stop at two? Some videogames allow triple jumps or more. But there's diminishing returns:</p>
+            <p>Why stop at two? Diminishing returns:</p>
             <ul>
               <li>More jumps = more to track mentally</li>
-              <li>More jumps = harder to design levels for</li>
+              <li>More jumps = harder level design</li>
               <li>More jumps = less meaningful each jump becomes</li>
             </ul>
-            <p>Double jump is the sweet spot for most videogames. It adds expression without overwhelming.</p>
+            <p>Double is the sweet spot for most videogames.</p>
           </div>
         </div>
 
@@ -697,8 +734,9 @@ public class DoubleJump2D : MonoBehaviour
 
         <h2>Related</h2>
         <ul>
-          <li><a href="basic-jump.html">Basic Jump</a> - the foundation this builds on</li>
-          <li><a href="variable-jump.html">Variable Jump</a> - can be combined with double jump</li>
+          <li><a href="basic-jump.html">Basic Jump</a> - the foundation</li>
+          <li><a href="variable-jump.html">Variable Jump</a> - can combine with double jump</li>
+          <li><a href="input-setup.html">Input Setup</a> - required InputReader system</li>
           <li><a href="dash.html">Dash</a> - another air mobility option</li>
         </ul>
 

@@ -32,12 +32,16 @@
   </style>
 </head>
 <body>
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+
   <div class="site-container">
     <nav class="sidebar">
-      <a href="../../../index.html" class="site-title">← marty64.net</a>
+      <a href="../../../index.html" class="site-title">marty64.net</a>
       <p class="site-subtitle">VG101 Knowledge Base</p>
 
-      <a href="../../index.html" class="nav-home">← VG101 Home</a>
+      <a href="../../index.html" class="nav-home">VG101 Home</a>
 
       <div class="nav-section">
         <div class="nav-section-title">Core Framework</div>
@@ -63,14 +67,17 @@
         <div class="nav-section-title">Code Bank</div>
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Overview</a></li>
+          <li class="nav-item"><a href="input-setup.html" class="nav-link">Input Setup</a></li>
           <li class="nav-item"><a href="basic-jump.html" class="nav-link">Basic Jump</a></li>
           <li class="nav-item"><a href="variable-jump.html" class="nav-link">Variable Jump</a></li>
           <li class="nav-item"><a href="coyote-time.html" class="nav-link">Coyote Time</a></li>
           <li class="nav-item"><a href="input-buffer.html" class="nav-link">Input Buffer</a></li>
-          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
-          <li class="nav-item"><a href="squash-stretch.html" class="nav-link active">Squash & Stretch</a></li>
+          <li class="nav-item"><a href="double-jump.html" class="nav-link">Double Jump</a></li>
           <li class="nav-item"><a href="dash.html" class="nav-link">Dash</a></li>
+          <li class="nav-item"><a href="knockback.html" class="nav-link">Knockback</a></li>
+          <li class="nav-item"><a href="hitstop.html" class="nav-link">Hitstop</a></li>
           <li class="nav-item"><a href="screen-shake.html" class="nav-link">Screen Shake</a></li>
+          <li class="nav-item"><a href="squash-stretch.html" class="nav-link active">Squash & Stretch</a></li>
         </ul>
       </div>
 
@@ -171,6 +178,8 @@
             <p><em>Reference: Cuphead, classic Disney</em></p>
 
             <h3>Pseudocode</h3>
+            <details class="code-block">
+              <summary>Pseudocode</summary>
             <pre><code>Every Frame:
   - Get vertical velocity
   - If falling fast: stretch vertically, compress horizontally
@@ -182,6 +191,7 @@ On Land:
   - Lerp back to normal over time
 
 Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
+            </details>
 
             <h3>Unity Setup (2D)</h3>
             <ol>
@@ -217,6 +227,8 @@ Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
             </ol>
 
             <h3>The Script (2D)</h3>
+            <details class="code-block">
+              <summary>SquashStretch2D.cs</summary>
             <pre><code>// ============================================================
 // SquashStretch2D.cs
 // Deforms a visual sprite based on velocity and landing.
@@ -553,6 +565,7 @@ public class SquashStretch2D : MonoBehaviour
 // 6. For 3D: Same principles apply, but scale on local Y axis
 //    and compensate on X and Z to preserve volume
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"It looks wrong/distorted"</strong><br>
