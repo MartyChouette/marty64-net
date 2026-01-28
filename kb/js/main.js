@@ -9,7 +9,7 @@
 const searchIndex = [
   // Framework
   { title: "Gesture", section: "Framework", url: "pages/framework/gesture.html", 
-    keywords: "action aesthetic arc atmosphere feel unit experience" },
+    keywords: "action art arc atmosphere feel unit experience" },
   { title: "Aesthetic Heritage", section: "Framework", url: "pages/framework/aesthetic-heritage.html",
     keywords: "lineage history inheritance quotation transformation cinema music" },
   { title: "Permissions", section: "Framework", url: "pages/framework/permissions.html",
