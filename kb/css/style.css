@@ -275,6 +275,7 @@ details.code-block summary {
   background: #2d2d2d;
   color: #d4d4d4;
   padding: 0.75rem 1rem;
+  padding-right: 5rem;
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: var(--text-sm);
@@ -284,6 +285,41 @@ details.code-block summary {
   gap: 0.5rem;
   user-select: none;
   border-radius: 6px;
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #3d3d3d;
+  border: none;
+  color: #a0a0a0;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.code-copy-btn:hover {
+  background: #4d4d4d;
+  color: #d4d4d4;
+}
+
+.code-copy-btn.copied {
+  background: #14b8a6;
+  color: white;
+}
+
+.code-copy-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
 details.code-block[open] summary {
