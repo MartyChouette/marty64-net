@@ -311,6 +311,28 @@ details.code-block summary::-webkit-details-marker {
 details.code-block pre {
   margin: 0;
   border-radius: 0 0 6px 6px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for code blocks */
+details.code-block pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+details.code-block pre::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 0 0 6px 0;
+}
+
+details.code-block pre::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+details.code-block pre::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
 }
 
 blockquote {
