@@ -202,6 +202,8 @@
             </ul>
 
             <h3>Pseudocode</h3>
+            <details class="code-block" open>
+              <summary>Pseudocode</summary>
             <pre><code>On Shake Trigger:
   - Set shake timer to duration
   - Store base intensity
@@ -215,6 +217,7 @@ Every Frame (while shaking):
 
 On Shake End:
   - Smoothly return camera to base position</code></pre>
+            </details>
 
             <h3>Unity Setup</h3>
             <ol>
@@ -248,6 +251,8 @@ On Shake End:
             </ol>
 
             <h3>The Script</h3>
+            <details class="code-block" open>
+              <summary>ScreenShake.cs</summary>
             <pre><code>// ============================================================
 // ScreenShake.cs
 // Camera shake with multiple patterns, decay types, and
@@ -655,6 +660,7 @@ public class ScreenShake : MonoBehaviour
 // 6. For 3D: Same script works, just uses XY offset by default.
 //    For full 3D shake, add Z offset in CalculateOffset.
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"The shake is nauseating"</strong><br>

@@ -169,6 +169,8 @@
             <p><em>Reference: God of War finishers, Smash Bros. killing blows</em></p>
 
             <h3>Pseudocode</h3>
+            <details class="code-block" open>
+              <summary>Pseudocode</summary>
             <pre><code>On Hit:
   - Store original Time.timeScale
   - Set Time.timeScale to 0 (or near-zero)
@@ -179,6 +181,7 @@ Every Frame (using unscaledDeltaTime):
     - Decrease hitstopTimer
     - If hitstopTimer <= 0:
       - Restore original Time.timeScale</code></pre>
+            </details>
 
             <p><strong>Critical:</strong> Use <code>Time.unscaledDeltaTime</code> for the hitstop timer, so it counts down even when time is frozen.</p>
 
@@ -213,6 +216,8 @@ Every Frame (using unscaledDeltaTime):
             </ol>
 
             <h3>The Script</h3>
+            <details class="code-block" open>
+              <summary>HitstopManager.cs</summary>
             <pre><code>// ============================================================
 // HitstopManager.cs
 // A global hitstop system using Time.timeScale.
@@ -459,6 +464,7 @@ public class HitstopManager : MonoBehaviour
 //    use Time.unscaledDeltaTime for their movement:
 //    transform.position += direction * speed * Time.unscaledDeltaTime;
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"Nothing happens during hitstop"</strong><br>

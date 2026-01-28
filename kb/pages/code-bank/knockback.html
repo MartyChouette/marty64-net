@@ -179,6 +179,8 @@
             </ul>
 
             <h3>Pseudocode</h3>
+            <details class="code-block" open>
+              <summary>Pseudocode</summary>
             <pre><code>On Hit:
   - Calculate direction from attacker to target
   - Apply velocity: (direction * knockbackForce) + (up * knockbackUp)
@@ -191,6 +193,7 @@ Every Frame during hitstun:
 
 On hitstun end:
   - Restore target control</code></pre>
+            </details>
 
             <h3>Unity Setup (2D)</h3>
             <ol>
@@ -223,6 +226,8 @@ On hitstun end:
             </ol>
 
             <h3>The Script (2D)</h3>
+            <details class="code-block" open>
+              <summary>KnockbackReceiver2D.cs</summary>
             <pre><code>// ============================================================
 // KnockbackReceiver2D.cs
 // Attach to any entity that can be knocked back when hit.
@@ -543,6 +548,7 @@ public class KnockbackReceiver2D : MonoBehaviour
 //
 // 6. For 3D: Change Rigidbody2D to Rigidbody, Vector2 to Vector3
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"Knockback goes the wrong direction"</strong><br>

@@ -178,6 +178,8 @@
             <p><em>Reference: Cuphead, classic Disney</em></p>
 
             <h3>Pseudocode</h3>
+            <details class="code-block" open>
+              <summary>Pseudocode</summary>
             <pre><code>Every Frame:
   - Get vertical velocity
   - If falling fast: stretch vertically, compress horizontally
@@ -189,6 +191,7 @@ On Land:
   - Lerp back to normal over time
 
 Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
+            </details>
 
             <h3>Unity Setup (2D)</h3>
             <ol>
@@ -224,6 +227,8 @@ Key: Preserve volume - if you stretch Y, compress X proportionally</code></pre>
             </ol>
 
             <h3>The Script (2D)</h3>
+            <details class="code-block" open>
+              <summary>SquashStretch2D.cs</summary>
             <pre><code>// ============================================================
 // SquashStretch2D.cs
 // Deforms a visual sprite based on velocity and landing.
@@ -560,6 +565,7 @@ public class SquashStretch2D : MonoBehaviour
 // 6. For 3D: Same principles apply, but scale on local Y axis
 //    and compensate on X and Z to preserve volume
 // ============================================================</code></pre>
+            </details>
 
             <h3>Common Issues</h3>
             <p><strong>"It looks wrong/distorted"</strong><br>
