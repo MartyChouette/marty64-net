@@ -29,6 +29,9 @@
     .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
     .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
     .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
   </style>
 </head>
 <body>
@@ -62,6 +65,7 @@
       <div class="nav-section">
         <div class="nav-section-title">Systems</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Overview</a></li>
           <li class="nav-item"><a href="economy-resources.html" class="nav-link">Economy & Resources</a></li>
           <li class="nav-item"><a href="progression-systems.html" class="nav-link">Progression Systems</a></li>
           <li class="nav-item"><a href="balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
@@ -92,45 +96,189 @@
           Economies, progression, balance, and emergence - the interconnected rules that create depth and replayability.
         </p>
 
-        <h2>Entries</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Entry</th>
-              <th>What it covers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="economy-resources.html">Economy & Resources</a></td>
-              <td>How value flows through videogames</td>
-            </tr>
-            <tr>
-              <td><a href="progression-systems.html">Progression Systems</a></td>
-              <td>Tracking and displaying player advancement</td>
-            </tr>
-            <tr>
-              <td><a href="balance-philosophy.html">Balance Philosophy</a></td>
-              <td>What "balance" means and how to achieve it</td>
-            </tr>
-            <tr>
-              <td><a href="emergent-behavior.html">Emergent Behavior</a></td>
-              <td>Complex patterns from simple rules</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what to explore</span>
+          </div>
+          <div class="register-content">
+            <h3>Entries</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Entry</th>
+                  <th>What it covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="economy-resources.html">Economy & Resources</a></td>
+                  <td>How value flows through videogames - sources, sinks, and flow</td>
+                </tr>
+                <tr>
+                  <td><a href="progression-systems.html">Progression Systems</a></td>
+                  <td>Tracking and displaying player advancement</td>
+                </tr>
+                <tr>
+                  <td><a href="balance-philosophy.html">Balance Philosophy</a></td>
+                  <td>What "balance" means and how to achieve it</td>
+                </tr>
+                <tr>
+                  <td><a href="emergent-behavior.html">Emergent Behavior</a></td>
+                  <td>Complex patterns from simple rules</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <hr>
+            <h3>Core Insight</h3>
+            <p>
+              Systems design is about <strong>relationships between parts</strong>, not individual mechanics.
+            </p>
+            <p>
+              A resource matters because of what creates it, what consumes it, and what it enables.
+              A progression system matters because of what it rewards and what it gates.
+              Balance matters relative to the experience you're creating.
+            </p>
 
-        <h2>Core Insight</h2>
-        <p>
-          Systems design is about <strong>relationships between parts</strong>, not individual mechanics.
-        </p>
-        <p>
-          A resource matters because of what creates it, what consumes it, and what it enables.
-          A progression system matters because of what it rewards and what it gates.
-          Balance matters relative to the experience you're creating.
-        </p>
+            <h3>By Framework Concept</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>Systems Application</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="../framework/gesture.html" class="term">Gesture</a></td>
+                  <td>Systems shape the feel of playing - scarcity vs abundance, power vs vulnerability</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/the-four-as.html" class="term">The 4 A's</a></td>
+                  <td>Arc is central - systems unfold over time and create rhythms</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></td>
+                  <td>Where your systems vocabulary comes from (board games, economics, simulations, other videogames)</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/permissions.html" class="term">Permissions</a></td>
+                  <td>Systems are <a href="../framework/permissions.html" class="term">Permissions</a> made mathematical - rules about what's allowed, required, and forbidden</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Sequence</h3>
+            <p>Recommended order for introducing systems concepts:</p>
+            <ol>
+              <li><strong>Economy & Resources</strong> - Concrete and visual. Students can diagram it.</li>
+              <li><strong>Progression Systems</strong> - Familiar from every RPG. Easy to analyze.</li>
+              <li><strong>Balance Philosophy</strong> - Requires understanding of context and player experience.</li>
+              <li><strong>Emergent Behavior</strong> - Most abstract. Requires understanding of systemic interaction.</li>
+            </ol>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"More systems = more depth"</strong></p>
+            <p>
+              Students often add systems without purpose. Complexity isn't depth.
+              Every system should serve the core experience.
+            </p>
+
+            <p><strong>"Balance = equality"</strong></p>
+            <p>
+              Balance doesn't mean everything is equal. It means the experience works as intended.
+              Asymmetric balance is often more interesting than symmetric.
+            </p>
+
+            <p><strong>"Emergence just happens"</strong></p>
+            <p>
+              Emergence is designed, not accidental. You create the conditions for emergence
+              through careful system interaction. Random systems produce noise, not emergence.
+            </p>
+
+            <h3>Analysis Exercise</h3>
+            <p>Map a videogame's economy:</p>
+            <ul>
+              <li>Identify all resources (currency, items, time, attention)</li>
+              <li>Draw sources (where resources come from)</li>
+              <li>Draw sinks (where resources go)</li>
+              <li>Identify feedback loops (positive and negative)</li>
+              <li>Find the pressure points - where does the system create tension?</li>
+            </ul>
+
+            <h3>Creation Exercise</h3>
+            <p>Design a two-resource economy:</p>
+            <ul>
+              <li>Resources must be interdependent (you need A to get B, B to get A)</li>
+              <li>Include at least one meaningful choice</li>
+              <li>Playtest: does it create interesting decisions or degenerate into one strategy?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Systems Thinking Origins</h3>
+            <p>
+              Systems design draws from cybernetics, economics, and ecological modeling.
+              Videogames are simulations, and simulation inherits these disciplines.
+            </p>
+            <p>
+              The key insight: behavior emerges from structure. Change the relationships,
+              change the behavior. Individual components matter less than their connections.
+            </p>
+
+            <h3>Feedback Loops and Player Psychology</h3>
+            <p>
+              Positive feedback loops (success breeds success) create momentum and drama.
+              Negative feedback loops (rubber banding) create tension and catch-up.
+            </p>
+            <p>
+              The balance between these loops shapes the emotional arc of play.
+              See <a href="../foundations/player-psychology.html">Player Psychology</a> for more.
+            </p>
+
+            <h3>Procedural Rhetoric Through Systems</h3>
+            <p>
+              Ian Bogost argues that systems make arguments. A videogame's economy says something
+              about how value works. A progression system says something about growth and reward.
+            </p>
+            <p>
+              The rules of your system are a worldview. What does your videogame's economy
+              say about scarcity, labor, and reward?
+            </p>
+
+            <h3>The Simulation Gap</h3>
+            <p>
+              All systems are simplifications. The gap between your simulation and reality
+              (or player expectation) creates the design space.
+            </p>
+            <p>
+              This gap isn't a flaw - it's where videogames live. The question is whether
+              your simplifications serve your design intent.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>Adams, Ernest & Dormans, Joris. <em>Game Mechanics: Advanced Game Design</em> (2012)</li>
+              <li>Koster, Raph. <em>A Theory of Fun for Game Design</em> (2004) - patterns in systems</li>
+              <li>Salen, Katie & Zimmerman, Eric. <em>Rules of Play</em> (2004) - foundational systems theory</li>
+              <li>Meadows, Donella. <em>Thinking in Systems</em> (2008) - general systems theory</li>
+            </ul>
+          </div>
+        </div>
 
         <hr>
 
@@ -138,6 +286,7 @@
         <ul>
           <li><a href="../foundations/player-psychology.html">Player Psychology</a> - feedback loops are the engine of systems behavior</li>
           <li><a href="../framework/permissions.html">Permissions</a> - systems shape what's possible</li>
+          <li><a href="../case-studies/index.html">Case Studies</a> - systems in action</li>
         </ul>
 
       </div>

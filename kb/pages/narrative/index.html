@@ -8,6 +8,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
 </head>
 <body>
   <div class="site-container">
@@ -40,6 +65,7 @@
       <div class="nav-section">
         <div class="nav-section-title">Narrative</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Overview</a></li>
           <li class="nav-item"><a href="environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
           <li class="nav-item"><a href="branching-consequence.html" class="nav-link">Branching & Consequence</a></li>
           <li class="nav-item"><a href="dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
@@ -66,45 +92,168 @@
 
         <h1>Narrative Design</h1>
 
-        <p class="lead">Storytelling through and alongside videogame systems.</p>
+        <p class="lead">Storytelling through and alongside videogame systems - not just cutscenes and dialogue, but meaning that emerges from play.</p>
 
-        <h2>Entries</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Entry</th>
-              <th>What it covers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="environmental-storytelling.html">Environmental Storytelling</a></td>
-              <td>Narrative embedded in space and objects</td>
-            </tr>
-            <tr>
-              <td><a href="branching-consequence.html">Branching & Consequence</a></td>
-              <td>Player choice and its long-term effects</td>
-            </tr>
-            <tr>
-              <td><a href="dialogue-systems.html">Dialogue Systems</a></td>
-              <td>Conversation as interface and gameplay</td>
-            </tr>
-            <tr>
-              <td><a href="ludonarrative-harmony.html">Ludonarrative Harmony</a></td>
-              <td>When mechanics and story align (or don't)</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what to explore</span>
+          </div>
+          <div class="register-content">
+            <h3>Entries</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Entry</th>
+                  <th>What it covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="environmental-storytelling.html">Environmental Storytelling</a></td>
+                  <td>Narrative embedded in space and objects - story discovered, not told</td>
+                </tr>
+                <tr>
+                  <td><a href="branching-consequence.html">Branching & Consequence</a></td>
+                  <td>Player choice and its long-term effects on narrative</td>
+                </tr>
+                <tr>
+                  <td><a href="dialogue-systems.html">Dialogue Systems</a></td>
+                  <td>Conversation as interface, gameplay, and character</td>
+                </tr>
+                <tr>
+                  <td><a href="ludonarrative-harmony.html">Ludonarrative Harmony</a></td>
+                  <td>When mechanics and story align - or deliberately clash</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <hr>
+            <h3>Core Insight</h3>
+            <p>
+              Narrative in videogames isn't just "the story." It's how story relates to play.
+            </p>
+            <p>
+              The best videogame narratives use the medium: meaning emerges from what you <em>do</em>, not just what you're told.
+              A cutscene can tell you the villain is powerful, but making you fail against them <em>shows</em> you.
+            </p>
 
-        <h2>Core Insight</h2>
-        <p>
-          Narrative in videogames isn't just "the story." It's how story relates to play.
-        </p>
-        <p>
-          The best videogame narratives use the medium: meaning emerges from what you <em>do</em>, not just what you're told.
-        </p>
+            <h3>By Framework Concept</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>Narrative Application</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="../framework/gesture.html" class="term">Gesture</a></td>
+                  <td>Narrative moments as complete experiences (Action + Art + Arc + Atmosphere)</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/the-four-as.html" class="term">The 4 A's</a></td>
+                  <td>Arc is particularly central - story is shaped by duration</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></td>
+                  <td>Where your narrative techniques come from (film, literature, theatre, other videogames)</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/permissions.html" class="term">Permissions</a></td>
+                  <td>What the player is allowed to do shapes what stories are possible</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Sequence</h3>
+            <p>Recommended order for introducing narrative concepts:</p>
+            <ol>
+              <li><strong>Environmental Storytelling</strong> - Most accessible. Students can analyze without playing.</li>
+              <li><strong>Ludonarrative Harmony</strong> - Introduces the core tension of videogame narrative.</li>
+              <li><strong>Branching & Consequence</strong> - Requires understanding of systems and scope.</li>
+              <li><strong>Dialogue Systems</strong> - Most technical. Benefits from prior concepts.</li>
+            </ol>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Narrative = Writing"</strong></p>
+            <p>
+              Students often conflate narrative design with scriptwriting. Clarify: narrative design is about
+              <em>structure</em> and <em>integration with systems</em>. Writing is one tool among many.
+            </p>
+
+            <p><strong>"More story = better"</strong></p>
+            <p>
+              Some videogames are harmed by too much explicit narrative. Help students see that
+              restraint and implication are also narrative choices.
+            </p>
+
+            <p><strong>"Ludonarrative dissonance is always bad"</strong></p>
+            <p>
+              Dissonance can be intentional. <em>Spec Ops: The Line</em> weaponizes dissonance.
+              The question is whether it's designed or accidental.
+            </p>
+
+            <h3>Assessment Approaches</h3>
+            <ul>
+              <li>Have students map a videogame's narrative structure without describing the plot</li>
+              <li>Ask students to identify the <a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a> of a videogame's narrative techniques</li>
+              <li>Design a narrative moment using only environmental storytelling (no text, no dialogue)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Narrative vs. Story</h3>
+            <p>
+              In narratology, "story" (fabula) is the chronological sequence of events.
+              "Narrative" (syuzhet) is how those events are presented.
+            </p>
+            <p>
+              Videogames add a third layer: the player's construction of meaning through interaction.
+              This makes videogame narrative fundamentally different from film or literature.
+            </p>
+
+            <h3>The Embedded vs. Emergent Distinction</h3>
+            <p>
+              Embedded narrative is authored content: cutscenes, dialogue, scripted events.
+              Emergent narrative arises from systems: the stories players tell about what happened in their playthrough.
+            </p>
+            <p>
+              Most videogames mix both. The question is the ratio and how they interact.
+            </p>
+
+            <h3>Procedural Rhetoric and Narrative</h3>
+            <p>
+              Ian Bogost's concept of procedural rhetoric suggests that systems themselves make arguments.
+              This extends to narrative: the rules of your videogame tell a story about how the world works.
+            </p>
+            <p>
+              A videogame where violence solves all problems tells a different story than one where
+              violence has lasting consequences - regardless of explicit narrative content.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>Jenkins, Henry. "Game Design as Narrative Architecture" (2004)</li>
+              <li>Bogost, Ian. <em>Persuasive Games</em> (2007)</li>
+              <li>Koster, Raph. <em>A Theory of Fun for Game Design</em> (2004) - patterns and narrative</li>
+              <li>Murray, Janet. <em>Hamlet on the Holodeck</em> (1997) - foundational interactive narrative theory</li>
+            </ul>
+          </div>
+        </div>
 
         <hr>
 
@@ -113,6 +262,7 @@
           <li><a href="../framework/permissions.html">Permissions</a> - what you're allowed to do shapes what stories are possible</li>
           <li><a href="../framework/gesture.html">Gesture</a> - the whole experience, including narrative</li>
           <li><a href="../level-design/index.html">Level Design</a> - narrative often lives in space</li>
+          <li><a href="../case-studies/undertale-genocide.html">Undertale: Genocide Route</a> - narrative through permissions</li>
         </ul>
 
       </div>

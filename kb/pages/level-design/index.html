@@ -8,6 +8,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
+    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
+    .register.collapsed .register-header::after{transform:rotate(-90deg)}
+    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
+    .register.collapsed .register-content{display:none}
+    .register--practice{background:#f0fdfa;border:2px solid #14b8a6}
+    .register--practice .register-header{background:#14b8a6;color:#fff}
+    .register--practice .register-content{border-color:#99f6e4}
+    .register--craft{background:#eff6ff;border:2px solid #3b82f6}
+    .register--craft .register-header{background:#3b82f6;color:#fff}
+    .register--craft .register-content{border-color:#bfdbfe}
+    .register--theory{background:#faf5ff;border:2px solid #a855f7}
+    .register--theory .register-header{background:#a855f7;color:#fff}
+    .register--theory .register-content{border-color:#e9d5ff}
+    .register-content h3{margin-top:0}
+    .register-content h3:not(:first-child){margin-top:1.5rem}
+    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
+    .term{color:#f59e0b;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+    .term:hover{color:#d97706}
+    table{width:100%;border-collapse:collapse;margin:1rem 0}
+    th,td{padding:0.75rem;text-align:left;border:1px solid #e5e7eb}
+    th{background:#f3f4f6;font-weight:600}
+  </style>
 </head>
 <body>
   <div class="site-container">
@@ -40,6 +65,7 @@
       <div class="nav-section">
         <div class="nav-section-title">Level Design</div>
         <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Overview</a></li>
           <li class="nav-item"><a href="spatial-communication.html" class="nav-link">Spatial Communication</a></li>
           <li class="nav-item"><a href="pacing-flow.html" class="nav-link">Pacing & Flow</a></li>
           <li class="nav-item"><a href="guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
@@ -63,43 +89,190 @@
         <nav class="breadcrumb"><a href="../../index.html">VG101</a> / Level Design</nav>
 
         <h1>Level Design</h1>
-        <p>Spatial communication, pacing, and world-building through environment.</p>
 
-        <hr>
+        <p class="lead">Spatial communication, pacing, and world-building through environment. Every room, corridor, and vista is saying something.</p>
 
-        <h2>Entries</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Entry</th>
-              <th>What it covers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="spatial-communication.html">Spatial Communication</a></td>
-              <td>How space talks to the player</td>
-            </tr>
-            <tr>
-              <td><a href="pacing-flow.html">Pacing & Flow</a></td>
-              <td>Rhythm of intensity over time</td>
-            </tr>
-            <tr>
-              <td><a href="guidance-without-handholding.html">Guidance Without Hand-Holding</a></td>
-              <td>Teaching through design, not text</td>
-            </tr>
-            <tr>
-              <td><a href="verticality-sightlines.html">Verticality & Sight Lines</a></td>
-              <td>Height and visibility as design tools</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- PRACTICE REGISTER -->
+        <div class="register register--practice">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Practice <span class="register-label">- what to explore</span>
+          </div>
+          <div class="register-content">
+            <h3>Entries</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Entry</th>
+                  <th>What it covers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="spatial-communication.html">Spatial Communication</a></td>
+                  <td>How space talks to the player - landmarks, framing, contrast</td>
+                </tr>
+                <tr>
+                  <td><a href="pacing-flow.html">Pacing & Flow</a></td>
+                  <td>Rhythm of intensity over time and space</td>
+                </tr>
+                <tr>
+                  <td><a href="guidance-without-handholding.html">Guidance Without Hand-Holding</a></td>
+                  <td>Teaching through design, not tutorials or text</td>
+                </tr>
+                <tr>
+                  <td><a href="verticality-sightlines.html">Verticality & Sight Lines</a></td>
+                  <td>Height, visibility, and "weenies" as design tools</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <hr>
+            <h3>Core Insight</h3>
+            <p>
+              Level design is <strong>communication design</strong>. Every room, corridor, and vista is saying something.
+              The question is whether it says what you intend.
+            </p>
+            <p>
+              Good level design teaches without tutorializing, guides without hand-holding, and creates
+              pacing through spatial arrangement.
+            </p>
 
-        <h2>Core Insight</h2>
-        <p>Level design is <strong>communication design</strong>. Every room, corridor, and vista is saying something. The question is whether it says what you intend.</p>
-        <p>Good level design teaches without tutorializing, guides without hand-holding, and creates pacing through spatial arrangement.</p>
+            <h3>By Framework Concept</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>Level Design Application</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="../framework/gesture.html" class="term">Gesture</a></td>
+                  <td>Each space creates a <a href="../framework/gesture.html" class="term">Gesture</a> - the experience of being there and moving through</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/the-four-as.html" class="term">The 4 A's</a></td>
+                  <td>Art (visuals, lighting), Arc (duration of traversal), Atmosphere (mood of spaces)</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/aesthetic-heritage.html" class="term">Aesthetic Heritage</a></td>
+                  <td>Where your spatial design vocabulary comes from (architecture, cinema, theme parks, other videogames)</td>
+                </tr>
+                <tr>
+                  <td><a href="../framework/permissions.html" class="term">Permissions</a></td>
+                  <td>Space defines what's allowed - walls are <a href="../framework/permissions.html" class="term">Permissions</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CRAFT REGISTER -->
+        <div class="register register--craft collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Craft <span class="register-label">- for educators</span>
+          </div>
+          <div class="register-content">
+            <h3>Teaching Sequence</h3>
+            <p>Recommended order for introducing level design concepts:</p>
+            <ol>
+              <li><strong>Spatial Communication</strong> - Foundation. How does space convey meaning?</li>
+              <li><strong>Guidance Without Hand-Holding</strong> - Practical application of communication.</li>
+              <li><strong>Verticality & Sight Lines</strong> - Specific techniques for guiding attention.</li>
+              <li><strong>Pacing & Flow</strong> - Requires understanding of the above to discuss rhythm.</li>
+            </ol>
+
+            <h3>Common Misconceptions</h3>
+            <p><strong>"Level design = environment art"</strong></p>
+            <p>
+              Students conflate visual design with spatial design. Clarify: level design is about
+              <em>player movement and experience</em>. Environment art supports this but isn't the same discipline.
+            </p>
+
+            <p><strong>"More detail = better"</strong></p>
+            <p>
+              Visual noise can harm navigation. Teach students to use contrast and restraint.
+              The most important thing in a room should be the most visually distinct.
+            </p>
+
+            <p><strong>"Players will explore everywhere"</strong></p>
+            <p>
+              Players often miss content that isn't on the critical path. If something matters,
+              design ensures players encounter it - or accept that it's optional.
+            </p>
+
+            <h3>Analysis Exercise</h3>
+            <p>Have students map the first 10 minutes of a videogame:</p>
+            <ul>
+              <li>Draw a top-down sketch of the spaces (doesn't need to be accurate)</li>
+              <li>Mark where the videogame guided their attention</li>
+              <li>Mark where they got confused or lost</li>
+              <li>Identify the techniques used (lighting, landmarks, geometry)</li>
+            </ul>
+
+            <h3>Creation Exercise</h3>
+            <p>Design a level that teaches a mechanic without any text:</p>
+            <ul>
+              <li>The mechanic must be used to progress</li>
+              <li>No tutorials, prompts, or written instructions</li>
+              <li>Space itself must teach the mechanic</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- THEORY REGISTER -->
+        <div class="register register--theory collapsed">
+          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            Theory <span class="register-label">- deeper grounding</span>
+          </div>
+          <div class="register-content">
+            <h3>Architecture and Level Design</h3>
+            <p>
+              Level design borrows heavily from architectural theory - circulation, wayfinding, spatial sequence.
+              But architecture serves inhabitants; level design serves players. The goals differ.
+            </p>
+            <p>
+              Architects design for repeated use over years. Level designers often design for single traversal.
+              This changes everything about how we think about space.
+            </p>
+
+            <h3>The Theme Park Heritage</h3>
+            <p>
+              Disney Imagineering contributed key concepts to level design: the "weenie" (a distant landmark
+              that draws you forward), forced perspective, and environmental storytelling.
+            </p>
+            <p>
+              Theme parks and videogames share a concern: how do you guide visitors through a space
+              while maintaining the illusion of freedom? Level design inherits this problem.
+            </p>
+
+            <h3>Film and Spatial Composition</h3>
+            <p>
+              Cinematography provides vocabulary for spatial composition: framing, leading lines, depth staging.
+              Level designers are often implicitly cinematographers, composing what the player sees.
+            </p>
+            <p>
+              The difference: players control the camera (in most videogames). Level design must work
+              from many angles, not just the one the director chose.
+            </p>
+
+            <h3>The Procedural Question</h3>
+            <p>
+              Procedural generation challenges traditional level design. If space is generated, can it still communicate?
+            </p>
+            <p>
+              The answer is yes, but differently. Procedural levels communicate through systemic patterns,
+              not authored moments. This is its own discipline.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>Totten, Christopher. <em>An Architectural Approach to Level Design</em> (2014)</li>
+              <li>Rogers, Scott. <em>Level Up! The Guide to Great Video Game Design</em> (2010)</li>
+              <li>Kremers, Rudolf. <em>Level Design: Concept, Theory, and Practice</em> (2009)</li>
+              <li>Lynch, Kevin. <em>The Image of the City</em> (1960) - foundational wayfinding theory</li>
+            </ul>
+          </div>
+        </div>
 
         <hr>
 
@@ -107,6 +280,7 @@
         <ul>
           <li><a href="../framework/gesture.html">Gesture</a> - how levels shape the player's experience</li>
           <li><a href="../narrative/environmental-storytelling.html">Environmental Storytelling</a> - narrative in space</li>
+          <li><a href="../case-studies/portal-level-one.html">Portal: Level One</a> - implicit teaching through spatial constraint</li>
           <li><a href="../case-studies/index.html">Case Studies</a> - spatial design masterclasses</li>
         </ul>
 
