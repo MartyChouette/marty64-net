@@ -226,12 +226,11 @@ marty64.net/
 - Portfolio with 5 videogames (Iris, RhodesTrip, Blackout, Solus, Cold Flame)
 - Writings section (Blackout whitepaper linked)
 - VG101 Home link added to all page sidebars
-- Expanded sidebar nav (Narrative, Level Design, Systems, Pedagogy sections) added to: Framework, Foundations, Code Bank index, Case Studies index, glossary.html, references.html
+- Expanded sidebar nav (Narrative, Level Design, Systems, Pedagogy sections) added to all KB pages
 - Gesture page Practice section updated with improved conversational content
 - Three-register format applied to Narrative, Level Design, Systems index pages
 
 **Still needs:**
-- Add expanded sidebar nav to 16 remaining sub-pages (case-studies/*.html except index, level-design/*.html except index, pedagogy/*.html except index, systems/*.html except index)
 - Update all pages to use "Art" instead of "Aesthetic" for the A
 - Add more writings (YouTube, papers)
 - Create splash image from screenshots
