@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs -I {} sh -c \"grep -L ''Narrative'' ''{}'' 2>/dev/null\")",
+      "Bash(dir:*)"
+    ]
+  }
+}
