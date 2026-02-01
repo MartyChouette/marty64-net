@@ -294,8 +294,21 @@ th { font-weight: 600; background: var(--bg-alt); }
   border-radius: 1px;
 }
 
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.sidebar-overlay.active { display: block; }
+
 @media (max-width: 900px) {
+  html, body { overflow-x: hidden; }
+
   .mobile-nav-toggle { display: flex; }
+
   .sidebar {
     position: fixed;
     left: -100%;
@@ -304,12 +317,55 @@ th { font-weight: 600; background: var(--bg-alt); }
     transition: left 0.3s ease;
   }
   .sidebar.mobile-open { left: 0; }
+
   .main-content {
     margin-left: 0;
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-lg) var(--space-md);
     padding-top: 4rem;
+    max-width: 100%;
   }
+
+  .content-wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   .features-grid { grid-template-columns: 1fr; }
+
+  /* Tables scroll horizontally instead of breaking layout */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Phase headers wrap on small screens */
+  .phase-header {
+    flex-wrap: wrap;
+  }
+
+  /* Prevent code blocks from pushing layout */
+  pre {
+    max-width: calc(100vw - 2 * var(--space-md));
+  }
+
+  details.code-block {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Scale down heading sizes */
+  h1 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-xl); }
+
+  /* Tech badges wrap nicely */
+  .tech-badges {
+    gap: var(--space-xs);
+  }
+  .tech-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+  }
 }
 
 /* Collapsible code blocks */
