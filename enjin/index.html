@@ -14,6 +14,7 @@
     <span></span><span></span><span></span>
   </button>
 
+  <div class="sidebar-overlay"></div>
   <div class="site-container">
     <nav class="sidebar">
       <a href="../index.html" class="site-title">marty64.net</a>
@@ -695,11 +696,29 @@ cmake --build . --config Release</code></pre>
   <script>
     const toggle = document.querySelector('.mobile-nav-toggle');
     const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    function openSidebar() {
+      sidebar.classList.add('mobile-open');
+      overlay.classList.add('active');
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('mobile-open');
+      overlay.classList.remove('active');
+    }
+
     if (toggle && sidebar) {
       toggle.addEventListener('click', () => {
-        sidebar.classList.toggle('mobile-open');
+        sidebar.classList.contains('mobile-open') ? closeSidebar() : openSidebar();
       });
     }
+    if (overlay) {
+      overlay.addEventListener('click', closeSidebar);
+    }
+    // Close sidebar when a nav link is tapped on mobile
+    document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
   </script>
 </body>
 </html>
