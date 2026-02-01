@@ -9,7 +9,7 @@
 const searchIndex = [
   // Framework
   { title: "Gesture", section: "Framework", url: "pages/framework/gesture.html", 
-    keywords: "action aesthetic arc atmosphere feel unit experience" },
+    keywords: "action art arc atmosphere feel unit experience" },
   { title: "Aesthetic Heritage", section: "Framework", url: "pages/framework/aesthetic-heritage.html",
     keywords: "lineage history inheritance quotation transformation cinema music" },
   { title: "Permissions", section: "Framework", url: "pages/framework/permissions.html",
@@ -255,6 +255,65 @@ function initMobileNav() {
 }
 
 // ========================================
+// Code Block Copy Buttons
+// ========================================
+
+function initCodeCopyButtons() {
+  document.querySelectorAll('details.code-block').forEach(block => {
+    const summary = block.querySelector('summary');
+    const pre = block.querySelector('pre');
+    const code = block.querySelector('code');
+
+    if (!summary || !code) return;
+
+    // Create copy button
+    const btn = document.createElement('button');
+    btn.className = 'code-copy-btn';
+    btn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+      Copy
+    `;
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Get the code text
+      const text = code.textContent;
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(text).then(() => {
+        // Show success state
+        btn.classList.add('copied');
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Copied!
+        `;
+
+        // Reset after 2 seconds
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Copy
+          `;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+      });
+    });
+
+    summary.appendChild(btn);
+  });
+}
+
+// ========================================
 // Initialize on DOM Ready
 // ========================================
 
@@ -263,6 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initToggles();
   initActiveNav();
   initMobileNav();
+  initCodeCopyButtons();
 });
 
 // ========================================
