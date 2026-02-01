@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enjin Engine</title>
+  <title>TEGE - The Enjin Game Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   <div class="site-container">
     <nav class="sidebar">
       <a href="../index.html" class="site-title">marty64.net</a>
-      <p class="site-subtitle">Enjin Engine</p>
+      <p class="site-subtitle">TEGE</p>
 
       <a href="../index.html" class="nav-home">Back to Portfolio</a>
 
@@ -33,13 +33,18 @@
       </div>
 
       <div class="nav-section">
-        <div class="nav-section-title">Tech</div>
+        <div class="nav-section-title">Systems</div>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#renderer" class="nav-link">Vulkan Renderer</a></li>
+          <li class="nav-item"><a href="#renderer" class="nav-link">Renderer</a></li>
           <li class="nav-item"><a href="#ecs" class="nav-link">ECS</a></li>
-          <li class="nav-item"><a href="#animation" class="nav-link">Animation</a></li>
-          <li class="nav-item"><a href="#ai" class="nav-link">AI & Procgen</a></li>
           <li class="nav-item"><a href="#postfx" class="nav-link">Post-Processing</a></li>
+          <li class="nav-item"><a href="#animation" class="nav-link">Animation</a></li>
+          <li class="nav-item"><a href="#audio" class="nav-link">Audio</a></li>
+          <li class="nav-item"><a href="#ai" class="nav-link">AI & Procgen</a></li>
+          <li class="nav-item"><a href="#gameplay" class="nav-link">Gameplay</a></li>
+          <li class="nav-item"><a href="#accessibility" class="nav-link">Accessibility</a></li>
+          <li class="nav-item"><a href="#skybox" class="nav-link">Skybox</a></li>
+          <li class="nav-item"><a href="#player" class="nav-link">Standalone Player</a></li>
         </ul>
       </div>
 
@@ -53,9 +58,10 @@
 
     <main class="main-content">
       <div class="content-wrapper">
-        <h1>Enjin Engine</h1>
+        <h1>TEGE</h1>
+        <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: -0.5rem; margin-bottom: var(--space-md);">The Enjin Game Engine</p>
         <p class="lead">
-          A proprietary, licensable game engine built from scratch using C++20 and Vulkan API.
+          A proprietary, licensable game engine built from scratch using C++20 and the Vulkan graphics API. Features a complete editor, 40+ component types, and a standalone game player.
         </p>
 
         <div class="tech-badges">
@@ -64,6 +70,9 @@
           <span class="tech-badge">GLFW3</span>
           <span class="tech-badge">Dear ImGui</span>
           <span class="tech-badge">ImGuizmo</span>
+          <span class="tech-badge">miniaudio</span>
+          <span class="tech-badge">Assimp</span>
+          <span class="tech-badge">nlohmann/json</span>
           <span class="tech-badge">CMake</span>
         </div>
 
@@ -74,51 +83,51 @@
         <div class="features-grid">
           <div class="feature-card">
             <h3>Vulkan Renderer</h3>
-            <p>Modern graphics pipeline with Blinn-Phong lighting and PBR materials. Depth buffer, SPIR-V shaders, swapchain management.</p>
+            <p>PBR materials, shadow mapping with PCF, normal mapping, parallax occlusion, deferred rendering framework, GPU frustum culling.</p>
           </div>
           <div class="feature-card">
-            <h3>Entity-Component System</h3>
-            <p>Flexible ECS architecture for game objects. Clean separation of data and behavior.</p>
+            <h3>40+ Components</h3>
+            <p>Full ECS with inspector UI for every component. 5 character controller types, gravity zones, temperature zones, camera triggers.</p>
           </div>
           <div class="feature-card">
-            <h3>glTF Model Import</h3>
-            <p>Load .gltf and .glb 3D models directly into the editor. Scene importer converts to ECS entities.</p>
+            <h3>Full Editor</h3>
+            <p>Hierarchy, inspector, viewport, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs.</p>
           </div>
           <div class="feature-card">
-            <h3>Editor UI</h3>
-            <p>Full ImGui-based editor with hierarchy, inspector, viewport, and settings panels.</p>
+            <h3>Post-Processing</h3>
+            <p>Bloom, FXAA, film grain, tone mapping, vignette, color grading, LUT grading, chromatic aberration, palette lock.</p>
           </div>
           <div class="feature-card">
-            <h3>Transform Gizmos</h3>
-            <p>Visual translate, rotate, and scale manipulation via ImGuizmo. Local and world space.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Entity Selection</h3>
-            <p>Click-to-select with ray casting in the viewport.</p>
-          </div>
-          <div class="feature-card">
-            <h3>PBR Materials</h3>
-            <p>Base color, metallic, roughness, emissive. Alpha cutoff and transparency support.</p>
+            <h3>Retro Effects</h3>
+            <p>PSX flat shading, affine texturing, vertex snapping, stipple transparency, CRT scanlines with phosphor glow, dithering, VHS filter.</p>
           </div>
           <div class="feature-card">
             <h3>Animation</h3>
-            <p>2D sprite flipbook animation. 3D skeletal animation with bone hierarchy, skinning, blending, and state machines.</p>
+            <p>2D sprite flipbook. 3D skeletal with GPU skinning, state machines, blending. Inverse kinematics (LookAt, FABRIK).</p>
+          </div>
+          <div class="feature-card">
+            <h3>Audio</h3>
+            <p>Cross-platform via miniaudio. 3D spatialization, multi-channel mixing, category volumes (master, SFX, music, ambient, voice).</p>
           </div>
           <div class="feature-card">
             <h3>AI & Pathfinding</h3>
-            <p>Enemy behaviors, FSM state machines, navmesh generation, A* pathfinding.</p>
+            <p>FSM state machines, patrol/chase/flee/attack behaviors, navmesh generation, A* pathfinding, spline system.</p>
           </div>
           <div class="feature-card">
             <h3>Procedural Generation</h3>
             <p>2D prefab-based levels with marked openings. 3D room/corridor systems.</p>
           </div>
           <div class="feature-card">
-            <h3>Post-Processing</h3>
-            <p>Bloom, tone mapping, vignette, color grading. Retro effects: PSX, CRT, dithering, vertex jitter.</p>
+            <h3>Environment</h3>
+            <p>Weather (rain, snow, fog, storms with lightning). Water with Gerstner waves, shore foam, freeze, ocean mode. Procedural skybox.</p>
           </div>
           <div class="feature-card">
-            <h3>Audio</h3>
-            <p>Basic audio system with FMOD and Wwise integration hooks.</p>
+            <h3>Accessibility</h3>
+            <p>4 editor themes, 8 GPU colorblind modes, remappable input, reduced motion, subtitles, content warnings, quick presets.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Standalone Player</h3>
+            <p>Editor-free runtime loads scenes from .enjpak asset packs. Full build pipeline for distribution.</p>
           </div>
         </div>
 
@@ -128,22 +137,26 @@
 
         <details class="code-block" open>
           <summary>Project Structure</summary>
-<pre><code>EnjinEngine/
+<pre><code>enjin/
 +-- Core/           # Foundation layer (Memory, Math, Logging, Platform)
-+-- Engine/         # Engine layer (Renderer, ECS, Assets, GUI)
-+-- Editor/         # Editor application
++-- Engine/         # Engine layer (Renderer, ECS, Audio, Effects, Editor, Assets)
++-- Editor/         # Editor application entry point
++-- Player/         # Standalone game player entry point
 +-- third_party/    # External dependencies (GLFW, ImGui, ImGuizmo)
-+-- Tests/          # Unit tests</code></pre>
++-- build/          # Build output (bin/, lib/)</code></pre>
         </details>
 
         <h3>Core Layer</h3>
-        <p>Foundation systems that everything else builds on: memory management (stack, pool, and linear allocators), math library (vectors, matrices, quaternions, matrix inversion), thread-safe logging, and platform abstraction.</p>
+        <p>Foundation systems: memory management (stack, pool, linear allocators), math library (vectors, matrices, quaternions, splines), thread-safe logging, and platform abstraction.</p>
 
         <h3>Engine Layer</h3>
-        <p>The Vulkan renderer, ECS, asset loading (glTF), input system, camera system, animation, AI, and audio all live here.</p>
+        <p>Vulkan renderer, ECS with 40+ component types, audio (miniaudio), asset loading (Assimp for glTF), input system, camera system, animation (skeletal + sprite), AI, effects, and scene management.</p>
 
         <h3>Editor Layer</h3>
-        <p>The editor application built on top of the engine. ImGui for all UI, ImGuizmo for transform gizmos, and a fly camera for viewport navigation.</p>
+        <p>Full editor application: ImGui panels, ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, skybox panel.</p>
+
+        <h3>Player Layer</h3>
+        <p>Standalone runtime that loads .enjpak asset packs. No editor dependency - ships as a minimal executable for distribution.</p>
 
         <hr>
 
@@ -151,14 +164,21 @@
 
         <ul>
           <li>Vulkan context initialization and swapchain management</li>
-          <li>Command buffer system</li>
-          <li>SPIR-V shader pipeline</li>
-          <li>Depth buffer / Z-testing</li>
-          <li>Blinn-Phong lighting</li>
-          <li>Uniform buffer objects (MVP, lighting, material)</li>
+          <li>SPIR-V shader pipeline, depth buffer / Z-testing</li>
+          <li>Blinn-Phong lighting with deferred rendering framework</li>
           <li>PBR material system (baseColor, metallic, roughness, emissive)</li>
-          <li>Alpha cutoff / transparency</li>
-          <li>Multiple light sources (point, spot, directional)</li>
+          <li>Shadow mapping with PCF filtering</li>
+          <li>Texture support (albedo, normal, height, metallic-roughness, emissive)</li>
+          <li>Normal mapping (tangent-space) and parallax occlusion mapping</li>
+          <li>Multiple light sources (directional, point, spot)</li>
+          <li>Alpha cutoff / transparency, stipple transparency</li>
+          <li>GPU skinning via bone matrix SSBO</li>
+          <li>GPU-driven frustum culling</li>
+          <li>Render-to-texture (Game View offscreen rendering with separate UBOs)</li>
+          <li>Wireframe rendering with wide line support</li>
+          <li>World curvature (vertex-shader horizon bending)</li>
+          <li>Instanced vegetation rendering (grass, shrubs, trees with wind sway)</li>
+          <li>Editable terrain with brush tools (2D and 3D)</li>
         </ul>
 
         <hr>
@@ -168,28 +188,58 @@
         <h3>Standard Effects</h3>
         <ul>
           <li>Bloom</li>
-          <li>Tone mapping</li>
+          <li>Tone mapping (exposure, gamma)</li>
           <li>Vignette</li>
-          <li>Color grading</li>
+          <li>Color grading and LUT color grading</li>
+          <li>FXAA anti-aliasing</li>
+          <li>Film grain</li>
+          <li>Chromatic aberration</li>
+          <li>Palette lock</li>
         </ul>
 
         <h3>Retro Effects</h3>
         <ul>
-          <li>PSX-style vertex jitter</li>
-          <li>CRT scanlines and curvature</li>
-          <li>Dithering</li>
+          <li>PSX-style flat shading, affine texturing, vertex snapping</li>
+          <li>Stipple transparency</li>
+          <li>CRT filter (scanlines, curved screen, phosphor glow, phosphor mask types)</li>
+          <li>VHS filter</li>
+          <li>Dithering and color quantization</li>
+          <li>Global retro shading</li>
         </ul>
 
         <h3>Environmental</h3>
         <ul>
-          <li>Weather system (rain, snow, fog)</li>
-          <li>Water rendering (waves, reflections, caustics)</li>
+          <li>Weather system (rain, snow, fog, storms with toggleable lightning)</li>
+          <li>Water rendering (Gerstner waves, shore foam, freeze system, ocean mode)</li>
+          <li>Distance fog</li>
+          <li>World time / day-night cycle with seasonal weather</li>
         </ul>
 
         <hr>
 
         <h2 id="ecs">Entity-Component System</h2>
-        <p>Flexible ECS architecture. Entities are IDs, components are pure data, systems operate on component groups. The glTF scene importer converts loaded models into ECS entities with the appropriate components (transform, mesh, material).</p>
+        <p>40+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
+
+        <h3>Character Controllers</h3>
+        <ul>
+          <li>2D Platformer</li>
+          <li>2D Top-Down</li>
+          <li>3D Top-Down</li>
+          <li>3D Third Person</li>
+          <li>3D First Person</li>
+        </ul>
+
+        <h3>Gameplay Components</h3>
+        <ul>
+          <li>Camera component with projection settings and frustum visualization</li>
+          <li>Physics (sphere-sphere, AABB-AABB, sphere-AABB collision, ground detection)</li>
+          <li>Gravity zones (directional, point, zero-G)</li>
+          <li>Temperature zones (heat/cold environmental effects)</li>
+          <li>Camera trigger zones (camera override volumes)</li>
+          <li>Text rendering (TextComponent with stb_truetype rasterization)</li>
+          <li>Vegetation components (grass, shrub, tree volume definitions)</li>
+          <li>AudioSource and AudioListener components</li>
+        </ul>
 
         <hr>
 
@@ -200,10 +250,28 @@
 
         <h3>3D</h3>
         <ul>
-          <li>Skeletal animation with bone hierarchy</li>
-          <li>Vertex skinning</li>
-          <li>Animation blending</li>
-          <li>State machines with transitions</li>
+          <li>Skeletal animation - glTF skin/joint/animation import</li>
+          <li>GPU skinning via bone matrix SSBO</li>
+          <li>Animation blending and state machines (FSM with transitions)</li>
+          <li>Auto-play support</li>
+        </ul>
+
+        <h3>Inverse Kinematics</h3>
+        <ul>
+          <li>LookAt IK</li>
+          <li>FABRIK chain solving</li>
+          <li>Interaction IK</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="audio">Audio</h2>
+        <ul>
+          <li>Cross-platform backend via miniaudio (WAV, MP3, FLAC)</li>
+          <li>3D spatialization with distance attenuation models</li>
+          <li>Multi-channel mixing (multiple simultaneous sounds)</li>
+          <li>Category volumes (master, SFX, music, ambient, voice)</li>
+          <li>AudioSource and AudioListener components serialized with scenes</li>
         </ul>
 
         <hr>
@@ -215,7 +283,7 @@
           <li>Spline system (linear, Bezier, Catmull-Rom, B-spline)</li>
           <li>Enemy behaviors (patrol, chase, flee, attack patterns)</li>
           <li>AI state machines (FSM with transitions)</li>
-          <li>Navmesh generation and A* pathfinding</li>
+          <li>Navmesh generation and A* pathfinding with path following</li>
         </ul>
 
         <h3>Procedural Generation</h3>
@@ -226,24 +294,134 @@
 
         <hr>
 
-        <h2 id="editor">Editor Controls</h2>
+        <h2 id="gameplay">Gameplay Systems</h2>
+        <ul>
+          <li>5 character controller types</li>
+          <li>Gravity zones (directional, point, zero-G per-entity override)</li>
+          <li>Temperature zones</li>
+          <li>Camera trigger zones</li>
+          <li>Wind system with vegetation sway</li>
+          <li>Terrain editing with brushes (raise, lower, smooth, paint)</li>
+          <li>World time & seasonal weather</li>
+          <li>In-game text rendering</li>
+        </ul>
 
+        <hr>
+
+        <h2 id="accessibility">Accessibility</h2>
+        <ul>
+          <li><strong>Editor themes:</strong> Dark, Light, High Contrast Dark, High Contrast Light</li>
+          <li><strong>Colorblind correction:</strong> 8 GPU modes (protanopia, deuteranopia, tritanopia, anomalous variants, achromatopsia)</li>
+          <li><strong>Remappable input:</strong> Semantic game actions with hold/toggle modes and one-handed presets</li>
+          <li><strong>Reduced motion:</strong> Weather particle reduction, head-bob disable</li>
+          <li><strong>Subtitles:</strong> Configurable font size, background, speaker names, direction indicators</li>
+          <li><strong>Content warnings:</strong> Per-scene warning flags with dismissable overlay</li>
+          <li><strong>Quick presets:</strong> Low Vision, Motor Impaired, Photosensitive, Reset All</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="skybox">Skybox</h2>
+        <p>Dedicated Skybox panel (View > Skybox) for configuring the scene background.</p>
+
+        <h3>Supported Types</h3>
+        <ul>
+          <li><strong>None</strong> - No skybox</li>
+          <li><strong>Procedural</strong> - Gradient sky with configurable top, horizon, bottom colors and sun direction</li>
+          <li><strong>Solid Color</strong> - Single flat color fill</li>
+          <li><strong>Cubemap</strong> - Six-face cubemap with individual texture paths</li>
+        </ul>
+
+        <h3>Procedural Presets</h3>
+        <p>One-click presets that configure colors and sun direction:</p>
+        <ul>
+          <li><strong>Midday</strong> - Bright blue sky with overhead sun</li>
+          <li><strong>Sunset</strong> - Warm orange horizon with low sun</li>
+          <li><strong>Dawn</strong> - Soft pinks and purples with rising sun</li>
+          <li><strong>Night</strong> - Deep dark sky with sun below horizon</li>
+          <li><strong>Overcast</strong> - Flat grey tones with diffused light</li>
+        </ul>
+        <p>All non-None types support Y-axis rotation (0-360). Configuration persists with scene save/load.</p>
+
+        <hr>
+
+        <h2 id="player">Standalone Player</h2>
+        <ul>
+          <li>Editor-free runtime that loads scenes from <code>.enjpak</code> asset packs</li>
+          <li>Build pipeline packages scenes and assets for standalone distribution</li>
+          <li>Minimal executable with no editor dependency</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="editor">Editor</h2>
+
+        <h3>Panels</h3>
+        <ul>
+          <li>Scene hierarchy with entity tree</li>
+          <li>Entity inspector (40+ component types with full UI)</li>
+          <li>Viewport with fly camera</li>
+          <li>Game View (renders from in-scene camera, independent from editor camera)</li>
+          <li>Settings panel (camera, grid, gizmo options)</li>
+          <li>Effects panel (post-processing, retro effects)</li>
+          <li>Skybox panel with procedural presets</li>
+          <li>Stats overlay (FPS, frame time, draw calls, triangle count)</li>
+        </ul>
+
+        <h3>Tools</h3>
+        <ul>
+          <li>Transform gizmos (translate, rotate, scale via ImGuizmo)</li>
+          <li>Entity selection via ray casting, double-click to focus</li>
+          <li>Play/Pause/Stop with input isolation</li>
+          <li>Undo/redo (command pattern)</li>
+          <li>Entity clipboard (cut/copy/paste via JSON)</li>
+          <li>Terrain brushes (raise, lower, smooth, paint)</li>
+          <li>Native file dialogs (Win32, macOS osascript, Linux zenity/kdialog)</li>
+          <li>Asset hot-reload (file watcher polls texture files)</li>
+        </ul>
+
+        <h3>Templates</h3>
+        <p>15 startup templates:</p>
+        <ul>
+          <li>Blank, 2D Platformer, 2D Top-Down, 3D Isometric</li>
+          <li>3D Third Person, 3D First Person, Visual Novel</li>
+          <li>RPG Village, Survival, Game Manager</li>
+          <li>3D Narrative, 4P Racing, Arena Fighter</li>
+          <li>PS1 RPG, City Builder</li>
+        </ul>
+        <p>Custom templates can be saved/loaded from the <code>templates/</code> directory.</p>
+
+        <h3>Controls</h3>
         <table>
           <thead>
             <tr><th>Action</th><th>Control</th></tr>
           </thead>
           <tbody>
             <tr><td>Move Camera</td><td><code>W/A/S/D</code></td></tr>
-            <tr><td>Look Around</td><td>Right-click + drag</td></tr>
-            <tr><td>Camera Up/Down</td><td><code>E</code> / <code>Q</code> (while moving)</td></tr>
+            <tr><td>Look Around</td><td>Hold Right-click + Mouse</td></tr>
+            <tr><td>Camera Up</td><td><code>Space</code> / <code>E</code></td></tr>
+            <tr><td>Camera Down</td><td><code>Q</code> / <code>Ctrl</code></td></tr>
+            <tr><td>Sprint</td><td><code>Shift</code></td></tr>
             <tr><td>Select Entity</td><td>Left-click in viewport</td></tr>
-            <tr><td>Translate Gizmo</td><td><code>W</code></td></tr>
-            <tr><td>Rotate Gizmo</td><td><code>E</code></td></tr>
-            <tr><td>Scale Gizmo</td><td><code>R</code></td></tr>
-            <tr><td>Toggle Local/World</td><td><code>Q</code></td></tr>
-            <tr><td>Import Model</td><td>File > Import Model</td></tr>
+            <tr><td>Focus Entity</td><td>Double-click entity</td></tr>
+            <tr><td>Adjust Move Speed</td><td>Scroll wheel</td></tr>
+            <tr><td>Translate Gizmo</td><td><code>1</code></td></tr>
+            <tr><td>Rotate Gizmo</td><td><code>2</code></td></tr>
+            <tr><td>Scale Gizmo</td><td><code>3</code></td></tr>
+            <tr><td>Toggle Local/World</td><td><code>4</code></td></tr>
           </tbody>
         </table>
+
+        <hr>
+
+        <h2>Scene Management</h2>
+        <ul>
+          <li><code>.enjinproject</code> JSON manifest format</li>
+          <li>Scene manager with project manifests, scene lists, build indices</li>
+          <li>Scene transitions (Instant, Fade Black, Fade White, Cross Fade with configurable duration)</li>
+          <li>Prefab system (save/load entity templates)</li>
+          <li>Full JSON scene serialization with all component data</li>
+        </ul>
 
         <hr>
 
@@ -256,7 +434,7 @@
           </div>
           <ul>
             <li class="done">Memory management (stack, pool, linear allocators)</li>
-            <li class="done">Math library (vectors, matrices, quaternions, matrix inversion)</li>
+            <li class="done">Math library (vectors, matrices, quaternions, splines)</li>
             <li class="done">Logging system (thread-safe, categorized)</li>
             <li class="done">Platform abstraction layer</li>
             <li class="done">Entry point abstraction</li>
@@ -301,44 +479,56 @@
           <ul>
             <li class="done">Editor GUI (Dear ImGui integration)</li>
             <li class="done">Scene hierarchy panel</li>
-            <li class="done">Entity inspector panel</li>
-            <li class="done">Transform gizmos (ImGuizmo - translate/rotate/scale)</li>
+            <li class="done">Entity inspector panel (40+ component types)</li>
+            <li class="done">Transform gizmos (ImGuizmo)</li>
             <li class="done">Entity selection via ray casting</li>
             <li class="done">Viewport panel with camera controls</li>
-            <li class="done">Settings panel (gizmo options, render settings)</li>
-            <li class="done">Stats overlay (FPS, frame time)</li>
+            <li class="done">Settings panel</li>
+            <li class="done">Stats overlay (FPS, frame time, draw calls, triangles)</li>
+            <li class="done">Play mode (play/pause/stop)</li>
+            <li class="done">Undo/redo system</li>
+            <li class="done">Entity clipboard (cut/copy/paste)</li>
+            <li class="done">Startup template selector (15 templates)</li>
           </ul>
         </div>
 
         <div class="phase">
           <div class="phase-header">
             <h3>Phase 5: Advanced Rendering</h3>
-            <span class="phase-status phase-status--wip">In Progress</span>
+            <span class="phase-status phase-status--done">Complete</span>
           </div>
           <ul>
-            <li class="done">PBR material system (baseColor, metallic, roughness, emissive)</li>
-            <li class="done">Alpha cutoff / transparency support</li>
-            <li class="done">Multiple light sources (point, spot, directional)</li>
-            <li class="done">Post-processing (bloom, tone mapping, vignette, color grading)</li>
+            <li class="done">PBR material system</li>
+            <li class="done">Alpha cutoff / transparency</li>
+            <li class="done">Multiple light sources (directional, point, spot)</li>
+            <li class="done">Shadow mapping with PCF filtering</li>
+            <li class="done">Texture support (albedo, normal, height, metallic-roughness, emissive)</li>
+            <li class="done">Normal mapping and parallax occlusion mapping</li>
+            <li class="done">Post-processing (bloom, tone mapping, vignette, color grading, FXAA, film grain)</li>
             <li class="done">Retro effects (PSX, CRT, dithering, vertex jitter)</li>
-            <li class="done">Weather system (rain, snow, fog)</li>
-            <li class="done">Water rendering (waves, reflections, caustics)</li>
-            <li class="todo">Shadow mapping (infrastructure created)</li>
-            <li class="todo">Texture support (albedo, normal, roughness maps)</li>
-            <li class="todo">Environment mapping / skybox</li>
+            <li class="done">Weather system (rain, snow, fog, storms)</li>
+            <li class="done">Water rendering (Gerstner waves, shore foam, freeze, ocean)</li>
+            <li class="done">Environment mapping / skybox</li>
+            <li class="done">Render-to-texture (Game View)</li>
+            <li class="done">Wireframe rendering</li>
+            <li class="done">GPU-driven frustum culling</li>
+            <li class="done">Deferred rendering framework</li>
           </ul>
         </div>
 
         <div class="phase">
           <div class="phase-header">
             <h3>Phase 6: Production Features</h3>
-            <span class="phase-status phase-status--wip">In Progress</span>
+            <span class="phase-status phase-status--done">Complete</span>
           </div>
           <ul>
             <li class="done">Scene serialization (JSON save/load)</li>
             <li class="done">Undo/redo system (command pattern)</li>
-            <li class="done">Prefab system (save/load entity templates)</li>
-            <li class="todo">Asset hot-reloading</li>
+            <li class="done">Prefab system</li>
+            <li class="done">Asset hot-reloading (file watcher)</li>
+            <li class="done">Scene management (project manifests, scene lists)</li>
+            <li class="done">Scene transitions (fade, cross-fade)</li>
+            <li class="done">Native file dialogs (cross-platform)</li>
           </ul>
         </div>
 
@@ -349,11 +539,11 @@
           </div>
           <ul>
             <li class="done">2D sprite animation (frame-based, flipbook)</li>
-            <li class="done">3D skeletal animation (bone hierarchy, skinning)</li>
+            <li class="done">3D skeletal animation (bone hierarchy, GPU skinning)</li>
             <li class="done">Animation blending & state machines</li>
-            <li class="done">Audio system (basic)</li>
-            <li class="done">FMOD integration hooks</li>
-            <li class="done">Wwise integration hooks</li>
+            <li class="done">Inverse kinematics (LookAt, FABRIK)</li>
+            <li class="done">Audio system (miniaudio - cross-platform, multi-channel)</li>
+            <li class="done">3D spatialized audio</li>
           </ul>
         </div>
 
@@ -364,23 +554,58 @@
           </div>
           <ul>
             <li class="done">Spline system (linear, Bezier, Catmull-Rom, B-spline)</li>
-            <li class="done">Enemy AI behaviors (patrol, chase, flee, attack patterns)</li>
+            <li class="done">Enemy AI behaviors (patrol, chase, flee, attack)</li>
             <li class="done">AI state machines (FSM with transitions)</li>
-            <li class="done">2D procedural level generation (prefab-based with marked openings)</li>
-            <li class="done">3D procedural level generation (room/corridor system)</li>
-            <li class="done">Navmesh generation & pathfinding (A* pathfinding, path following)</li>
+            <li class="done">2D procedural level generation</li>
+            <li class="done">3D procedural level generation</li>
+            <li class="done">Navmesh generation & A* pathfinding</li>
           </ul>
         </div>
 
         <div class="phase">
           <div class="phase-header">
-            <h3>Phase 9: Licensable Features</h3>
+            <h3>Phase 9: Gameplay Systems</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Character controllers (5 types)</li>
+            <li class="done">Gravity zones</li>
+            <li class="done">Temperature zones</li>
+            <li class="done">Camera trigger zones</li>
+            <li class="done">Wind system with vegetation sway</li>
+            <li class="done">Terrain editing with brushes</li>
+            <li class="done">World time & seasonal weather</li>
+            <li class="done">In-game text rendering</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 10: Accessibility</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Editor themes (4 themes)</li>
+            <li class="done">GPU colorblind correction (8 modes)</li>
+            <li class="done">Remappable input system</li>
+            <li class="done">Reduced motion support</li>
+            <li class="done">Subtitle/caption system</li>
+            <li class="done">Content warning system</li>
+            <li class="done">Accessibility quick presets</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 11: Distribution</h3>
             <span class="phase-status phase-status--wip">In Progress</span>
           </div>
           <ul>
-            <li class="done">Physics integration (simple built-in)</li>
+            <li class="done">Standalone game player</li>
+            <li class="done">Asset pack build pipeline (.enjpak)</li>
             <li class="todo">Scripting language (Lua or C# binding)</li>
             <li class="todo">Networking (client-server, peer-to-peer)</li>
+            <li class="todo">Splitscreen rendering</li>
           </ul>
         </div>
 
@@ -396,7 +621,7 @@
           <li>GLFW3</li>
         </ul>
 
-        <h3>Linux</h3>
+        <h3>Linux / macOS</h3>
         <details class="code-block">
           <summary>Build commands</summary>
 <pre><code>mkdir build && cd build
@@ -412,6 +637,18 @@ cmake .. -G "Visual Studio 16 2019" -A x64
 cmake --build . --config Release</code></pre>
         </details>
 
+        <h3>Running</h3>
+        <details class="code-block">
+          <summary>Run commands</summary>
+<pre><code># Editor
+./build/bin/Release/EnjinEditor.exe   # Windows
+./build/bin/EnjinEditor               # Linux/macOS
+
+# Standalone Player (requires game.enjpak in same directory)
+./build/bin/Release/EnjinPlayer.exe   # Windows
+./build/bin/EnjinPlayer               # Linux/macOS</code></pre>
+        </details>
+
         <h3>Build Options</h3>
         <table>
           <thead>
@@ -419,6 +656,7 @@ cmake --build . --config Release</code></pre>
           </thead>
           <tbody>
             <tr><td><code>ENJIN_BUILD_EDITOR</code></td><td>ON</td><td>Build the editor</td></tr>
+            <tr><td><code>ENJIN_BUILD_PLAYER</code></td><td>ON</td><td>Build the standalone game player</td></tr>
             <tr><td><code>ENJIN_BUILD_TESTS</code></td><td>OFF</td><td>Build unit tests</td></tr>
             <tr><td><code>ENJIN_BUILD_EXAMPLES</code></td><td>OFF</td><td>Build example projects</td></tr>
           </tbody>
@@ -426,16 +664,35 @@ cmake --build . --config Release</code></pre>
 
         <hr>
 
+        <h2>Technology Stack</h2>
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Technology</th><th>License</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Language</td><td>C++20</td><td>-</td></tr>
+            <tr><td>Graphics</td><td>Vulkan 1.3</td><td>Apache 2.0</td></tr>
+            <tr><td>Audio</td><td>miniaudio</td><td>Public domain</td></tr>
+            <tr><td>Windowing</td><td>GLFW3</td><td>zlib/libpng</td></tr>
+            <tr><td>3D Import</td><td>Assimp</td><td>BSD</td></tr>
+            <tr><td>UI</td><td>Dear ImGui + ImGuizmo</td><td>MIT</td></tr>
+            <tr><td>JSON</td><td>nlohmann/json</td><td>MIT</td></tr>
+            <tr><td>Text</td><td>stb_truetype</td><td>Public domain</td></tr>
+            <tr><td>Build</td><td>CMake</td><td>BSD</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--text-muted);">All dependencies use permissive licenses compatible with proprietary licensing.</p>
+
+        <hr>
+
         <h2>License</h2>
         <p>Proprietary - All rights reserved.</p>
-        <p>All dependencies use permissive licenses compatible with proprietary licensing (zlib/libpng, Apache 2.0, MIT).</p>
 
       </div>
     </main>
   </div>
 
   <script>
-    // Mobile nav toggle
     const toggle = document.querySelector('.mobile-nav-toggle');
     const sidebar = document.querySelector('.sidebar');
     if (toggle && sidebar) {
