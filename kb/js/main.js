@@ -314,15 +314,93 @@ function initCodeCopyButtons() {
 }
 
 // ========================================
+// Lightbox for Example Figures
+// ========================================
+
+function initLightbox() {
+  // Create lightbox element if not present
+  let lightbox = document.querySelector('.vg-lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'vg-lightbox';
+    lightbox.innerHTML = `
+      <button class="vg-lightbox__close" aria-label="Close">&times;</button>
+      <img src="" alt="">
+      <div class="vg-lightbox__caption"></div>
+    `;
+    document.body.appendChild(lightbox);
+  }
+
+  const lbImg = lightbox.querySelector('img');
+  const lbCaption = lightbox.querySelector('.vg-lightbox__caption');
+  const lbClose = lightbox.querySelector('.vg-lightbox__close');
+
+  function openLightbox(src, alt, caption) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCaption.textContent = caption || alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // Click on any .vg-figure img to open lightbox
+  document.querySelectorAll('.vg-figure img').forEach(function(img) {
+    img.addEventListener('click', function() {
+      var figure = img.closest('.vg-figure');
+      var caption = figure ? figure.querySelector('figcaption') : null;
+      openLightbox(img.src, img.alt, caption ? caption.textContent.trim() : img.alt);
+    });
+  });
+
+  // Close lightbox
+  lbClose.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeLightbox();
+  });
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+}
+
+// ========================================
+// Register Toggle (unified)
+// ========================================
+
+function initRegisterToggles() {
+  document.querySelectorAll('.register-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+}
+
+// ========================================
 // Initialize on DOM Ready
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
   initSearch();
   initToggles();
+  initRegisterToggles();
   initActiveNav();
   initMobileNav();
   initCodeCopyButtons();
+  initLightbox();
 });
 
 // ========================================

@@ -369,6 +369,137 @@ th { font-weight: 600; background: var(--bg-alt); }
   }
 }
 
+/* ========================================
+   Section Screenshots (right-side gallery)
+   ======================================== */
+
+.section-gallery {
+  float: right;
+  width: 260px;
+  margin: 0 0 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-gallery figure {
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+}
+
+.section-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.section-gallery img:hover {
+  opacity: 0.88;
+}
+
+.section-gallery figcaption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  line-height: 1.3;
+}
+
+.section-gallery figcaption .gallery-credit {
+  font-style: italic;
+}
+
+/* Enjin lightbox */
+.enjin-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.88);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.enjin-lightbox.active {
+  display: flex;
+}
+
+.enjin-lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  object-fit: contain;
+}
+
+.enjin-lightbox__caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d4d8dc;
+  font-size: 0.8rem;
+  text-align: center;
+  max-width: 80vw;
+  background: rgba(57, 58, 75, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.enjin-lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+
+.enjin-lightbox__close:hover {
+  opacity: 1;
+}
+
+/* Clear float after sections */
+h2::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 900px) {
+  .section-gallery {
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .section-gallery figure {
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+
+  .enjin-lightbox {
+    padding: 1rem;
+  }
+}
+
 /* Collapsible code blocks */
 details.code-block {
   margin: var(--space-md) 0;
