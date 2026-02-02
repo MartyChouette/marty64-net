@@ -18,8 +18,8 @@
   --accent-light: #fcd34d;
   
   /* Secondary - cool blue for contrast */
-  --secondary: #3b82f6;
-  --secondary-dark: #2563eb;
+  --secondary: #7bc43c;
+  --secondary-dark: #5a9a2e;
   
   /* Spacing */
   --space-xs: 0.25rem;
@@ -362,8 +362,8 @@ p {
 
 .btn--tege:hover {
   background: #2d2b3a;
-  color: #7bc43c;
-  border-color: #7bc43c;
+  color: #3b82f6;
+  border-color: #3b82f6;
 }
 
 /* ========================================
@@ -888,13 +888,13 @@ p {
 }
 
 .project-card--tege:hover {
-  border-color: #7bc43c;
-  box-shadow: 0 12px 40px rgba(123, 196, 60, 0.15);
+  border-color: #3b82f6;
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
 }
 
 .project-card--tege .project-card__tag {
   background: #3d3a4f;
-  color: #7bc43c;
+  color: #3b82f6;
 }
 
 .project-card--tege .project-card__title {
@@ -906,11 +906,11 @@ p {
 }
 
 .project-card--tege .project-card__link {
-  color: #7bc43c;
+  color: #3b82f6;
 }
 
 .project-card--tege .project-card__link:hover {
-  color: #96d45c;
+  color: #60a5fa;
 }
 
 /* VG101 card */
