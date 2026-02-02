@@ -1013,11 +1013,19 @@ th {
   font-style: italic;
 }
 
-/* Right-float figure for wider layouts */
+/* Right-side figure - centered block on medium screens */
 .vg-figure--right {
-  float: right;
   width: 280px;
-  margin: 0 0 1rem 1.5rem;
+  margin: 1.5rem auto;
+}
+
+/* Wide screens: figure sits in the right margin, outside the text column */
+@media (min-width: 1400px) {
+  .vg-figure--right {
+    float: right;
+    clear: right;
+    margin: 0 calc(-280px - 2rem) 1rem 1.5rem;
+  }
 }
 
 /* Inline figure - centered in content flow */
