@@ -17,9 +17,9 @@
   --accent-dark: #d97706;
   --accent-light: #fcd34d;
   
-  /* Secondary - cool blue for contrast */
-  --secondary: #7bc43c;
-  --secondary-dark: #5a9a2e;
+  /* Secondary - matches brand orange */
+  --secondary: #f59e0b;
+  --secondary-dark: #d97706;
   
   /* Spacing */
   --space-xs: 0.25rem;
@@ -353,17 +353,17 @@ p {
   border-color: #152d4a;
 }
 
-/* Themed button - TEGE (engine green) */
+/* Themed button - TEGE (engine slate/periwinkle) */
 .btn--tege {
-  background: #3d3a4f;
-  color: #d4d4d4;
-  border: 1px solid #3d3a4f;
+  background: #393a4b;
+  color: #d4d8dc;
+  border: 1px solid #393a4b;
 }
 
 .btn--tege:hover {
-  background: #2d2b3a;
-  color: #3b82f6;
-  border-color: #3b82f6;
+  background: #2f3040;
+  color: #b4cef3;
+  border-color: #b4cef3;
 }
 
 /* ========================================
@@ -882,35 +882,35 @@ p {
 
 /* TEGE card */
 .project-card--tege {
-  border-color: #3d3a4f;
-  background: #2d2b3a;
-  color: #d4d4d4;
+  border-color: #393a4b;
+  background: #2f3040;
+  color: #d4d8dc;
 }
 
 .project-card--tege:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+  border-color: #b4cef3;
+  box-shadow: 0 12px 40px rgba(180, 206, 243, 0.15);
 }
 
 .project-card--tege .project-card__tag {
-  background: #3d3a4f;
-  color: #3b82f6;
+  background: #4a4b5c;
+  color: #b4cef3;
 }
 
 .project-card--tege .project-card__title {
-  color: #e5e5e5;
+  color: #e5e7eb;
 }
 
 .project-card--tege .project-card__desc {
-  color: #a8a8b0;
+  color: #a8aab4;
 }
 
 .project-card--tege .project-card__link {
-  color: #3b82f6;
+  color: #b4cef3;
 }
 
 .project-card--tege .project-card__link:hover {
-  color: #60a5fa;
+  color: #cddff7;
 }
 
 /* VG101 card */
