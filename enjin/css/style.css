@@ -217,7 +217,7 @@ th { font-weight: 600; background: var(--bg-alt); }
   font-size: var(--text-base);
   margin-top: 0;
   margin-bottom: var(--space-sm);
-  color: var(--accent);
+  color: #4a5ea8;
 }
 
 .feature-card p {
