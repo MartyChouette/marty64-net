@@ -45,7 +45,7 @@
           <li class="nav-item"><a href="#gameplay" class="nav-link">Gameplay</a></li>
           <li class="nav-item"><a href="#accessibility" class="nav-link">Accessibility</a></li>
           <li class="nav-item"><a href="#skybox" class="nav-link">Skybox</a></li>
-          <li class="nav-item"><a href="#player" class="nav-link">Standalone Player</a></li>
+          <li class="nav-item"><a href="#player" class="nav-link">Build & Distribution</a></li>
         </ul>
       </div>
 
@@ -62,7 +62,7 @@
         <h1>TEGE</h1>
         <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: -0.5rem; margin-bottom: var(--space-md);">The Enjin Game Engine</p>
         <p class="lead">
-          A proprietary, licensable game engine built from scratch using C++20 and the Vulkan graphics API. Features a complete editor, 40+ component types, and a standalone game player.
+          A proprietary, licensable game engine built from scratch using C++20 and the Vulkan graphics API. Features a complete editor with ImGui, an Entity-Component-System architecture with 50+ component types, and a standalone game player with asset packing.
         </p>
 
         <div class="tech-badges">
@@ -87,12 +87,12 @@
             <p>PBR materials, shadow mapping with PCF, normal mapping, parallax occlusion, deferred rendering framework, GPU frustum culling.</p>
           </div>
           <div class="feature-card">
-            <h3>40+ Components</h3>
-            <p>Full ECS with inspector UI for every component. 5 character controller types, gravity zones, temperature zones, camera triggers.</p>
+            <h3>50+ Components</h3>
+            <p>Full ECS with inspector UI for every component. 5 character controller types, gravity zones, temperature zones, camera triggers, text rendering.</p>
           </div>
           <div class="feature-card">
             <h3>Full Editor</h3>
-            <p>Hierarchy, inspector, viewport, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs.</p>
+            <p>Hierarchy, inspector, viewport, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, build dialog.</p>
           </div>
           <div class="feature-card">
             <h3>Post-Processing</h3>
@@ -127,8 +127,8 @@
             <p>4 editor themes, 8 GPU colorblind modes, remappable input, reduced motion, subtitles, content warnings, quick presets.</p>
           </div>
           <div class="feature-card">
-            <h3>Standalone Player</h3>
-            <p>Editor-free runtime loads scenes from .enjpak asset packs. Full build pipeline for distribution.</p>
+            <h3>Build & Distribution</h3>
+            <p>Asset packer (.enjpak) with compression, XOR obfuscation, CRC32 verification. Build dialog, standalone player, splitscreen rendering.</p>
           </div>
         </div>
 
@@ -140,7 +140,7 @@
           <summary>Project Structure</summary>
 <pre><code>enjin/
 +-- Core/           # Foundation layer (Memory, Math, Logging, Platform)
-+-- Engine/         # Engine layer (Renderer, ECS, Audio, Effects, Editor, Assets)
++-- Engine/         # Engine layer (Renderer, ECS, Audio, Effects, Editor, Build, Assets)
 +-- Editor/         # Editor application entry point
 +-- Player/         # Standalone game player entry point
 +-- third_party/    # External dependencies (GLFW, ImGui, ImGuizmo)
@@ -151,13 +151,13 @@
         <p>Foundation systems: memory management (stack, pool, linear allocators), math library (vectors, matrices, quaternions, splines), thread-safe logging, and platform abstraction.</p>
 
         <h3>Engine Layer</h3>
-        <p>Vulkan renderer, ECS with 40+ component types, audio (miniaudio), asset loading (Assimp for glTF), input system, camera system, animation (skeletal + sprite), AI, effects, and scene management.</p>
+        <p>Vulkan renderer, ECS with 50+ component types, audio (miniaudio), asset loading (Assimp for glTF), input system, camera system, animation (skeletal + sprite), AI, effects, and scene management.</p>
 
         <h3>Editor Layer</h3>
-        <p>Full editor application: ImGui panels, ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, skybox panel.</p>
+        <p>Full editor application: ImGui panels, ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, skybox panel, build dialog.</p>
 
         <h3>Player Layer</h3>
-        <p>Standalone runtime that loads .enjpak asset packs. No editor dependency - ships as a minimal executable for distribution.</p>
+        <p>Standalone runtime that loads <code>.enjpak</code> asset packs with build manifest. No editor dependency - ships as a minimal executable for distribution. Includes AngelScript integration for game scripting.</p>
 
         <hr>
 
@@ -219,7 +219,7 @@
         <hr>
 
         <h2 id="ecs">Entity-Component System</h2>
-        <p>40+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
+        <p>50+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
 
         <h3>Character Controllers</h3>
         <ul>
@@ -296,15 +296,31 @@
         <hr>
 
         <h2 id="gameplay">Gameplay Systems</h2>
+
+        <h3>Core</h3>
         <ul>
-          <li>5 character controller types</li>
+          <li>5 character controller types (2D Platformer, 2D Top-Down, 3D Top-Down, 3D Third Person, 3D First Person)</li>
           <li>Gravity zones (directional, point, zero-G per-entity override)</li>
-          <li>Temperature zones</li>
-          <li>Camera trigger zones</li>
+          <li>Temperature zones (heat/cold environmental effects)</li>
+          <li>Camera trigger zones (camera override volumes)</li>
           <li>Wind system with vegetation sway</li>
-          <li>Terrain editing with brushes (raise, lower, smooth, paint)</li>
+          <li>Terrain editing with brushes (raise, lower, flatten, smooth, paint)</li>
           <li>World time & seasonal weather</li>
           <li>In-game text rendering</li>
+        </ul>
+
+        <h3>Advanced Systems</h3>
+        <ul>
+          <li>Save/Load system - 10-slot persistence with quick save/load support</li>
+          <li>HUD overlay - health bars, resource bars, labels, and crosshair rendering</li>
+          <li>Quest/objective tracking - start, complete, and fail quests with objective tracking</li>
+          <li>Damage resistance/weakness - per-type damage multipliers</li>
+          <li>Stamina/resource system - generic resource with regeneration and controller integration</li>
+          <li>Footstep audio - surface-based footstep sounds with walk/run interval support</li>
+          <li>Object pooling - entity recycling with configurable pool sizes and auto-release</li>
+          <li>Cinematic camera - waypoint sequences with easing curves for cutscenes</li>
+          <li>Entity event bus - decoupled C++ entity communication system</li>
+          <li>Raw mouse input - bypass OS mouse acceleration with smoothing options</li>
         </ul>
 
         <hr>
@@ -346,11 +362,21 @@
 
         <hr>
 
-        <h2 id="player">Standalone Player</h2>
+        <h2 id="player">Build & Distribution</h2>
+
+        <h3>Build Pipeline</h3>
         <ul>
-          <li>Editor-free runtime that loads scenes from <code>.enjpak</code> asset packs</li>
-          <li>Build pipeline packages scenes and assets for standalone distribution</li>
-          <li>Minimal executable with no editor dependency</li>
+          <li>Scan project, validate assets, compress/obfuscate, pack into <code>.enjpak</code> with CRC32 integrity verification</li>
+          <li>Asset packer - <code>.enjpak</code> archive format with compression, XOR obfuscation, and per-file CRC32 checksums</li>
+          <li>Build dialog - editor UI for configuring and running builds with progress tracking</li>
+          <li>Build manifest - window title, resolution, fullscreen, and start scene baked into the pack</li>
+        </ul>
+
+        <h3>Standalone Player</h3>
+        <ul>
+          <li>Editor-free runtime that loads <code>game.enjpak</code>, reads the build manifest, and runs the game loop</li>
+          <li>Splitscreen rendering support</li>
+          <li>Scripting language (AngelScript with hot-reload, coroutines, event bus)</li>
         </ul>
 
         <hr>
@@ -360,7 +386,7 @@
         <h3>Panels</h3>
         <ul>
           <li>Scene hierarchy with entity tree</li>
-          <li>Entity inspector (40+ component types with full UI)</li>
+          <li>Entity inspector (50+ component types with full UI)</li>
           <li>Viewport with fly camera</li>
           <li>Game View (renders from in-scene camera, independent from editor camera)</li>
           <li>Settings panel (camera, grid, gizmo options)</li>
@@ -376,9 +402,10 @@
           <li>Play/Pause/Stop with input isolation</li>
           <li>Undo/redo (command pattern)</li>
           <li>Entity clipboard (cut/copy/paste via JSON)</li>
-          <li>Terrain brushes (raise, lower, smooth, paint)</li>
+          <li>Terrain brushes (5 modes: raise, lower, flatten, smooth, paint) with adjustable radius/strength/falloff</li>
           <li>Native file dialogs (Win32, macOS osascript, Linux zenity/kdialog)</li>
           <li>Asset hot-reload (file watcher polls texture files)</li>
+          <li>Build dialog - configure and export standalone game builds from the editor</li>
         </ul>
 
         <h3>Templates</h3>
@@ -410,6 +437,11 @@
             <tr><td>Rotate Gizmo</td><td><code>2</code></td></tr>
             <tr><td>Scale Gizmo</td><td><code>3</code></td></tr>
             <tr><td>Toggle Local/World</td><td><code>4</code></td></tr>
+            <tr><td>Multi-Select</td><td><code>Ctrl+click</code></td></tr>
+            <tr><td>Range Select (Hierarchy)</td><td><code>Shift+click</code></td></tr>
+            <tr><td>Marquee Select</td><td>Viewport drag</td></tr>
+            <tr><td>Undo</td><td><code>Ctrl+Z</code></td></tr>
+            <tr><td>Redo</td><td><code>Ctrl+Y</code></td></tr>
           </tbody>
         </table>
 
@@ -480,7 +512,7 @@
           <ul>
             <li class="done">Editor GUI (Dear ImGui integration)</li>
             <li class="done">Scene hierarchy panel</li>
-            <li class="done">Entity inspector panel (40+ component types)</li>
+            <li class="done">Entity inspector panel (50+ component types)</li>
             <li class="done">Transform gizmos (ImGuizmo)</li>
             <li class="done">Entity selection via ray casting</li>
             <li class="done">Viewport panel with camera controls</li>
@@ -604,9 +636,29 @@
           <ul>
             <li class="done">Standalone game player</li>
             <li class="done">Asset pack build pipeline (.enjpak)</li>
-            <li class="todo">Scripting language (Lua or C# binding)</li>
+            <li class="done">Splitscreen rendering</li>
+            <li class="done">Scripting language (AngelScript with hot-reload, coroutines, event bus)</li>
             <li class="todo">Networking (client-server, peer-to-peer)</li>
-            <li class="todo">Splitscreen rendering</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 12: Advanced Gameplay</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Save/load system (10-slot persistence)</li>
+            <li class="done">HUD overlay system</li>
+            <li class="done">Quest/objective system</li>
+            <li class="done">Damage resistance system</li>
+            <li class="done">Stamina/resource system</li>
+            <li class="done">Footstep audio system</li>
+            <li class="done">Object pooling</li>
+            <li class="done">Cinematic camera system</li>
+            <li class="done">Entity event bus</li>
+            <li class="done">Raw mouse input + smoothing</li>
+            <li class="done">Window icon support</li>
           </ul>
         </div>
 

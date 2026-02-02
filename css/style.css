@@ -340,6 +340,32 @@ p {
   color: var(--accent);
 }
 
+/* Themed button - VG101 (academic navy/gold) */
+.btn--vg101 {
+  background: #1e3a5f;
+  color: #faf8f0;
+  border: 1px solid #1e3a5f;
+}
+
+.btn--vg101:hover {
+  background: #152d4a;
+  color: #faf8f0;
+  border-color: #152d4a;
+}
+
+/* Themed button - TEGE (engine green) */
+.btn--tege {
+  background: #3d3a4f;
+  color: #d4d4d4;
+  border: 1px solid #3d3a4f;
+}
+
+.btn--tege:hover {
+  background: #2d2b3a;
+  color: #7bc43c;
+  border-color: #7bc43c;
+}
+
 /* ========================================
    Section Headers
    ======================================== */
@@ -848,6 +874,75 @@ p {
 .kb-nav-link--active {
   background: white;
   color: var(--text);
+}
+
+/* ========================================
+   Themed Resource Cards
+   ======================================== */
+
+/* TEGE card */
+.project-card--tege {
+  border-color: #3d3a4f;
+  background: #2d2b3a;
+  color: #d4d4d4;
+}
+
+.project-card--tege:hover {
+  border-color: #7bc43c;
+  box-shadow: 0 12px 40px rgba(123, 196, 60, 0.15);
+}
+
+.project-card--tege .project-card__tag {
+  background: #3d3a4f;
+  color: #7bc43c;
+}
+
+.project-card--tege .project-card__title {
+  color: #e5e5e5;
+}
+
+.project-card--tege .project-card__desc {
+  color: #a8a8b0;
+}
+
+.project-card--tege .project-card__link {
+  color: #7bc43c;
+}
+
+.project-card--tege .project-card__link:hover {
+  color: #96d45c;
+}
+
+/* VG101 card */
+.project-card--vg101 {
+  border-color: #1e3a5f;
+  background: #faf8f0;
+}
+
+.project-card--vg101:hover {
+  border-color: #c49a2e;
+  box-shadow: 0 12px 40px rgba(30, 58, 95, 0.12);
+}
+
+.project-card--vg101 .project-card__tag {
+  background: #eee8d5;
+  color: #1e3a5f;
+}
+
+.project-card--vg101 .project-card__title {
+  color: #1e3a5f;
+}
+
+.project-card--vg101 .project-card__desc {
+  color: #5a5a5a;
+}
+
+.project-card--vg101 .project-card__link {
+  color: #7c3043;
+}
+
+.project-card--vg101 .project-card__link:hover {
+  color: #a03d56;
 }
 
 /* ========================================
