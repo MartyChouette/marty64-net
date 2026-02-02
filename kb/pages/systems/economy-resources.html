@@ -8,28 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
-  <style>
-    .register{margin:2rem 0;border-radius:8px;overflow:hidden}
-    .register-header{padding:1rem 1.5rem;font-weight:600;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-    .register-header::after{content:'▼';font-size:.75rem;transition:transform .2s}
-    .register.collapsed .register-header::after{transform:rotate(-90deg)}
-    .register-content{padding:1.5rem;border-top:1px solid rgba(0,0,0,0.1)}
-    .register.collapsed .register-content{display:none}
-    .register--practice{background:#eef3e8;border:2px solid #2d6a4f}
-    .register--practice .register-header{background:#2d6a4f;color:#fff}
-    .register--practice .register-content{border-color:#a8d5b8}
-    .register--craft{background:#eef2f7;border:2px solid #1e3a5f}
-    .register--craft .register-header{background:#1e3a5f;color:#fff}
-    .register--craft .register-content{border-color:#a8c4e0}
-    .register--theory{background:#f5eef0;border:2px solid #7c3043}
-    .register--theory .register-header{background:#7c3043;color:#fff}
-    .register--theory .register-content{border-color:#d4a0b0}
-    .register-content h3{margin-top:0}
-    .register-content h3:not(:first-child){margin-top:1.5rem}
-    .register-label{font-size:.75rem;opacity:.8;font-weight:400;text-transform:none;letter-spacing:normal}
-    .term{color:#c49a2e;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
-    .term:hover{color:#d97706}
-  </style>
 </head>
 <body>
   <!-- Mobile Navigation -->
@@ -165,9 +143,17 @@
           An <strong>economy</strong> is any system where resources flow - created, spent, exchanged, lost. Most videogames have economies, even if they don't look like money. Understanding economy design is understanding how <strong>value</strong> moves through your videogame.
         </p>
 
+        <figure class="vg-figure vg-figure--right">
+          <div class="vg-figure__placeholder">
+            <span class="vg-figure__placeholder-title">Diablo II</span>
+            The Horadric Cube and trading window - resource conversion as gameplay
+          </div>
+          <figcaption>Economy as expression - every trade is a design decision. <span class="vg-credit">Courtesy of Blizzard Entertainment</span></figcaption>
+        </figure>
+
         <!-- PRACTICE REGISTER -->
         <div class="register register--practice">
-          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <div class="register-header">
             Practice <span class="register-label">- what you do</span>
           </div>
           <div class="register-content">
@@ -331,7 +317,7 @@
 
         <!-- CRAFT REGISTER -->
         <div class="register register--craft collapsed">
-          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <div class="register-header">
             Craft <span class="register-label">- for educators</span>
           </div>
           <div class="register-content">
@@ -367,7 +353,7 @@
 
         <!-- THEORY REGISTER -->
         <div class="register register--theory collapsed">
-          <div class="register-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <div class="register-header">
             Theory <span class="register-label">- deeper grounding</span>
           </div>
           <div class="register-content">

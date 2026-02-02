@@ -81,6 +81,17 @@
 
         <h2 id="features">Features</h2>
 
+        <div class="section-gallery">
+          <figure>
+            <img src="../images/enjin_1.jpg" alt="TEGE Editor - viewport with scene hierarchy and inspector panels">
+            <figcaption>The TEGE editor interface - hierarchy, inspector, and viewport. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin2.jpg" alt="TEGE Engine - 3D scene with PBR materials and lighting">
+            <figcaption>PBR rendering with Vulkan - materials, lighting, and shadows. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
+
         <div class="features-grid">
           <div class="feature-card">
             <h3>Vulkan Renderer</h3>
@@ -186,6 +197,23 @@
 
         <h2 id="postfx">Post-Processing</h2>
 
+        <div class="section-gallery">
+          <figure>
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
+              <strong style="color:#2d2e38;">Post-Processing</strong>
+              CRT scanlines, bloom, and color grading applied to a 3D scene
+            </div>
+            <figcaption>Retro post-processing stack - CRT filter with phosphor glow. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
+              <strong style="color:#2d2e38;">PSX Effects</strong>
+              Flat shading, vertex snapping, and affine texturing on a 3D model
+            </div>
+            <figcaption>PSX-style rendering - flat shading with vertex jitter. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
+
         <h3>Standard Effects</h3>
         <ul>
           <li>Bloom</li>
@@ -219,6 +247,17 @@
         <hr>
 
         <h2 id="ecs">Entity-Component System</h2>
+
+        <div class="section-gallery">
+          <figure>
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
+              <strong style="color:#2d2e38;">Inspector</strong>
+              Entity inspector showing component properties - transform, mesh, material, physics
+            </div>
+            <figcaption>Full inspector UI for 50+ component types. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
+
         <p>50+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
 
         <h3>Character Controllers</h3>
@@ -382,6 +421,23 @@
         <hr>
 
         <h2 id="editor">Editor</h2>
+
+        <div class="section-gallery">
+          <figure>
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
+              <strong style="color:#2d2e38;">Editor Panels</strong>
+              Full editor layout - hierarchy, inspector, viewport, effects, and skybox panels
+            </div>
+            <figcaption>The complete editor workspace with ImGui panels. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
+              <strong style="color:#2d2e38;">Template Selector</strong>
+              The 15 startup templates - from Blank to City Builder
+            </div>
+            <figcaption>15 startup templates for rapid prototyping. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
 
         <h3>Panels</h3>
         <ul>
@@ -745,6 +801,13 @@ cmake --build . --config Release</code></pre>
     </main>
   </div>
 
+  <!-- Lightbox -->
+  <div class="enjin-lightbox">
+    <button class="enjin-lightbox__close" aria-label="Close">&times;</button>
+    <img src="" alt="">
+    <div class="enjin-lightbox__caption"></div>
+  </div>
+
   <script>
     const toggle = document.querySelector('.mobile-nav-toggle');
     const sidebar = document.querySelector('.sidebar');
@@ -771,6 +834,50 @@ cmake --build . --config Release</code></pre>
     document.querySelectorAll('.sidebar .nav-link').forEach(link => {
       link.addEventListener('click', closeSidebar);
     });
+
+    // Lightbox for gallery images
+    (function() {
+      var lb = document.querySelector('.enjin-lightbox');
+      if (!lb) return;
+      var lbImg = lb.querySelector('img');
+      var lbCaption = lb.querySelector('.enjin-lightbox__caption');
+      var lbClose = lb.querySelector('.enjin-lightbox__close');
+
+      document.querySelectorAll('.section-gallery img').forEach(function(img) {
+        img.addEventListener('click', function() {
+          var fig = img.closest('figure');
+          var cap = fig ? fig.querySelector('figcaption') : null;
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lbCaption.textContent = cap ? cap.textContent.trim() : img.alt;
+          lb.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      lbClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+      });
+
+      lb.addEventListener('click', function(e) {
+        if (e.target === lb) {
+          lb.classList.remove('active');
+          document.body.style.overflow = '';
+          lbImg.src = '';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lb.classList.contains('active')) {
+          lb.classList.remove('active');
+          document.body.style.overflow = '';
+          lbImg.src = '';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
