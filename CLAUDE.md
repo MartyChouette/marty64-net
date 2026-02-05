@@ -229,9 +229,12 @@ marty64.net/
 - Expanded sidebar nav (Narrative, Level Design, Systems, Pedagogy sections) added to all KB pages
 - Gesture page Practice section updated with improved conversational content
 - Three-register format applied to Narrative, Level Design, Systems index pages
+- All pages use "Art" instead of "Aesthetic" for the 4th A
+- Image/figure system with lightbox, attribution, and right-margin layout
+- 10 KB figure placeholders filled with press kit screenshots (Celeste, Hades, Stanley Parable, Disco Elysium, Hollow Knight, Dwarf Fortress, Nuclear Throne)
 
 **Still needs:**
-- Update all pages to use "Art" instead of "Aesthetic" for the A
+- Fill remaining 23 figure placeholders (require own screenshots - no free press kits available)
 - Add more writings (YouTube, papers)
 - Create splash image from screenshots
 - Possibly add Code as Material page to Pedagogy
