@@ -378,6 +378,26 @@ function initLightbox() {
 }
 
 // ========================================
+// Collapsible Sidebar Nav Sections
+// ========================================
+
+function initNavCollapse() {
+  var sections = document.querySelectorAll('.nav-section');
+  sections.forEach(function(section) {
+    var hasActive = section.querySelector('.nav-link.active');
+    if (!hasActive) {
+      section.classList.add('collapsed');
+    }
+    var title = section.querySelector('.nav-section-title');
+    if (title) {
+      title.addEventListener('click', function() {
+        section.classList.toggle('collapsed');
+      });
+    }
+  });
+}
+
+// ========================================
 // Register Toggle (unified)
 // ========================================
 
@@ -398,6 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initToggles();
   initRegisterToggles();
   initActiveNav();
+  initNavCollapse();
   initMobileNav();
   initCodeCopyButtons();
   initLightbox();

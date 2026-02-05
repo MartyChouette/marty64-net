@@ -167,6 +167,35 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.nav-section-title:hover {
+  color: var(--text);
+}
+
+.nav-section-title::after {
+  content: '\25BC';
+  font-size: 0.6em;
+  transition: transform 0.2s;
+}
+
+.nav-section.collapsed .nav-section-title::after {
+  transform: rotate(-90deg);
+}
+
+.nav-section .nav-list {
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height 0.25s ease;
+}
+
+.nav-section.collapsed .nav-list {
+  max-height: 0;
 }
 
 .nav-list {
@@ -1011,6 +1040,12 @@ th {
 
 .vg-figure figcaption .vg-credit {
   font-style: italic;
+}
+
+.vg-figure figcaption em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* Right-side figure - full-width on mobile */
