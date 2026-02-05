@@ -239,8 +239,6 @@ marty64.net/
 **Still needs:**
 - VG101 Classroom placeholder (needs user's own photo)
 - Add more writings (YouTube, papers)
-- Create splash image from screenshots
-- Possibly add Code as Material page to Pedagogy
 
 ---
 
