@@ -105,6 +105,22 @@ body {
 }
 
 /* ========================================
+   VG101 Splash Banner
+   ======================================== */
+
+.vg101-splash {
+  margin: var(--space-xl) 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vg101-splash img {
+  width: 100%;
+  display: block;
+}
+
+/* ========================================
    Sidebar Navigation
    ======================================== */
 
