@@ -1013,19 +1013,10 @@ th {
   font-style: italic;
 }
 
-/* Right-side figure - centered block on medium screens */
+/* Right-side figure - full-width on mobile */
 .vg-figure--right {
-  width: 280px;
-  margin: 1.5rem auto;
-}
-
-/* Wide screens: figure sits in the right margin, outside the text column */
-@media (min-width: 1400px) {
-  .vg-figure--right {
-    float: right;
-    clear: right;
-    margin: 0 calc(-280px - 2rem) 1rem 1.5rem;
-  }
+  width: 100%;
+  margin: 1rem 0;
 }
 
 /* Inline figure - centered in content flow */
@@ -1045,24 +1036,37 @@ th {
   clear: both;
 }
 
-/* Large screens: double figure size */
-@media (min-width: 1800px) {
+/* Medium screens: big centered figures */
+@media (min-width: 900px) {
   .vg-figure--right {
-    width: 560px;
-    margin: 0 calc(-560px - 2rem) 1rem 1.5rem;
+    width: 480px;
+    margin: 1.5rem auto;
   }
 
   .vg-figure--inline {
-    max-width: 720px;
+    max-width: 640px;
   }
 }
 
-/* Mobile: figures go full-width, no float */
-@media (max-width: 900px) {
+/* Wide screens: big figures float into the right margin */
+@media (min-width: 1400px) {
   .vg-figure--right {
-    float: none;
-    width: 100%;
-    margin: 1rem 0;
+    width: 500px;
+    float: right;
+    clear: right;
+    margin: 0 calc(-500px - 2rem) 1rem 1.5rem;
+  }
+}
+
+/* Large screens: even bigger */
+@media (min-width: 1800px) {
+  .vg-figure--right {
+    width: 640px;
+    margin: 0 calc(-640px - 2rem) 1rem 1.5rem;
+  }
+
+  .vg-figure--inline {
+    max-width: 800px;
   }
 }
 
