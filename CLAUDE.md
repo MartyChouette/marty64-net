@@ -231,10 +231,13 @@ marty64.net/
 - Three-register format applied to Narrative, Level Design, Systems index pages
 - All pages use "Art" instead of "Aesthetic" for the 4th A
 - Image/figure system with lightbox, attribution, and right-margin layout
-- 10 KB figure placeholders filled with press kit screenshots (Celeste, Hades, Stanley Parable, Disco Elysium, Hollow Knight, Dwarf Fortress, Nuclear Throne)
+- All 30 KB figure placeholders filled with game screenshots (Steam/RAWG press kits)
+- Figcaptions include game names in bold with styled em tags
+- Collapsible sidebar nav sections (auto-collapse non-active, clickable titles with chevrons)
+- Responsive figure sizing (480px at 900px+, 500px floated right at 1400px+, 640px at 1800px+)
 
 **Still needs:**
-- Fill remaining 23 figure placeholders (require own screenshots - no free press kits available)
+- VG101 Classroom placeholder (needs user's own photo)
 - Add more writings (YouTube, papers)
 - Create splash image from screenshots
 - Possibly add Code as Material page to Pedagogy
