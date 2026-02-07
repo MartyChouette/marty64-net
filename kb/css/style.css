@@ -1099,13 +1099,15 @@ th {
   }
 }
 
-/* Wide screens: big figures float into the right margin */
+/* Wide screens: big figures float into the right margin and stick on scroll */
 @media (min-width: 1400px) {
   .vg-figure--right {
     width: 500px;
     float: right;
     clear: right;
     margin: 0 calc(-500px - 2rem) 1rem 1.5rem;
+    position: sticky;
+    top: 1rem;
   }
 }
 
@@ -1114,6 +1116,8 @@ th {
   .vg-figure--right {
     width: 640px;
     margin: 0 calc(-640px - 2rem) 1rem 1.5rem;
+    position: sticky;
+    top: 1rem;
   }
 
   .vg-figure--inline {
