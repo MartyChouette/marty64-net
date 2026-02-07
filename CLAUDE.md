@@ -1,6 +1,6 @@
 # VG101 Project Instructions
 
-This repository contains **marty64.net**, a portfolio site featuring videogame projects and the **VG101 Knowledge Base**, a comprehensive videogame design pedagogy.
+This repository contains **marty64.net**, a portfolio site featuring videogame projects and the **VG101 Knowledge Base**, a comprehensive videogame design text.
 
 ---
 
