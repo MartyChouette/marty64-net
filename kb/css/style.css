@@ -1211,3 +1211,22 @@ th {
     display: none !important;
   }
 }
+
+/* Under Construction Badge */
+.wip-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--accent-gold);
+  background: var(--bg);
+  border: 1px solid var(--accent-gold);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0.85;
+  pointer-events: none;
+}

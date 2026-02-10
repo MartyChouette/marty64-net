@@ -530,3 +530,22 @@ details.code-block summary::before {
 details.code-block[open] summary::before { transform: rotate(90deg); }
 details.code-block summary::-webkit-details-marker { display: none; }
 details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
+
+/* Under Construction Badge */
+.wip-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--link);
+  background: var(--bg);
+  border: 1px solid var(--link);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0.85;
+  pointer-events: none;
+}

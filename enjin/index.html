@@ -41,8 +41,16 @@
           <li class="nav-item"><a href="#postfx" class="nav-link">Post-Processing</a></li>
           <li class="nav-item"><a href="#animation" class="nav-link">Animation</a></li>
           <li class="nav-item"><a href="#audio" class="nav-link">Audio</a></li>
+          <li class="nav-item"><a href="#physics" class="nav-link">Physics</a></li>
           <li class="nav-item"><a href="#ai" class="nav-link">AI & Procgen</a></li>
           <li class="nav-item"><a href="#gameplay" class="nav-link">Gameplay</a></li>
+          <li class="nav-item"><a href="#scripting" class="nav-link">Scripting</a></li>
+          <li class="nav-item"><a href="#visual-scripting" class="nav-link">Visual Scripting</a></li>
+          <li class="nav-item"><a href="#node-graphs" class="nav-link">Node Graphs</a></li>
+          <li class="nav-item"><a href="#art-pipeline" class="nav-link">2D Art Pipeline</a></li>
+          <li class="nav-item"><a href="#profiler" class="nav-link">Debug & Profiler</a></li>
+          <li class="nav-item"><a href="#plugin" class="nav-link">Plugin System</a></li>
+          <li class="nav-item"><a href="#streaming" class="nav-link">Level Streaming</a></li>
           <li class="nav-item"><a href="#accessibility" class="nav-link">Accessibility</a></li>
           <li class="nav-item"><a href="#skybox" class="nav-link">Skybox</a></li>
           <li class="nav-item"><a href="#player" class="nav-link">Build & Distribution</a></li>
@@ -62,7 +70,7 @@
         <h1>TEGE</h1>
         <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: -0.5rem; margin-bottom: var(--space-md);">The Enjin Game Engine</p>
         <p class="lead">
-          A proprietary, licensable game engine built from scratch using C++20 and the Vulkan graphics API. Features a complete editor with ImGui, an Entity-Component-System architecture with 50+ component types, and a standalone game player with asset packing.
+          A proprietary, licensable game engine built from scratch using C++20 and the Vulkan graphics API. Features a complete editor with 15+ ImGui panels, an Entity-Component-System architecture with 60+ component types, AngelScript scripting with visual scripting, impulse-based physics with joints and ragdoll, node graph editors for dialogue, behavior trees, and quests, a built-in pixel editor and sprite pipeline, and a standalone game player with asset packing.
         </p>
 
         <div class="tech-badges">
@@ -71,9 +79,12 @@
           <span class="tech-badge">GLFW3</span>
           <span class="tech-badge">Dear ImGui</span>
           <span class="tech-badge">ImGuizmo</span>
+          <span class="tech-badge">AngelScript</span>
           <span class="tech-badge">miniaudio</span>
           <span class="tech-badge">Assimp</span>
           <span class="tech-badge">nlohmann/json</span>
+          <span class="tech-badge">nanosvg</span>
+          <span class="tech-badge">stb_truetype</span>
           <span class="tech-badge">CMake</span>
         </div>
 
@@ -95,15 +106,15 @@
         <div class="features-grid">
           <div class="feature-card">
             <h3>Vulkan Renderer</h3>
-            <p>PBR materials, shadow mapping with PCF, normal mapping, parallax occlusion, deferred rendering framework, GPU frustum culling.</p>
+            <p>PBR materials, cascaded shadow maps, soft shadows (Poisson PCF), multi-threaded command buffers, indirect rendering, Hi-Z occlusion culling, bindless resources.</p>
           </div>
           <div class="feature-card">
-            <h3>50+ Components</h3>
-            <p>Full ECS with inspector UI for every component. 5 character controller types, gravity zones, temperature zones, camera triggers, text rendering.</p>
+            <h3>60+ Components</h3>
+            <p>Full ECS with inspector UI for every component. 7 character controller types, physics joints, ragdoll, combat, inventory, streaming volumes.</p>
           </div>
           <div class="feature-card">
             <h3>Full Editor</h3>
-            <p>Hierarchy, inspector, viewport, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, build dialog.</p>
+            <p>15+ panels including hierarchy, inspector, asset browser, profiler, visual script editor, behavior tree editor, pixel editor. 15 startup templates, terrain brushes.</p>
           </div>
           <div class="feature-card">
             <h3>Post-Processing</h3>
@@ -115,23 +126,51 @@
           </div>
           <div class="feature-card">
             <h3>Animation</h3>
-            <p>2D sprite flipbook. 3D skeletal with GPU skinning, state machines, blending. Inverse kinematics (LookAt, FABRIK).</p>
+            <p>2D sprite flipbook. 3D skeletal with GPU skinning, state machines, blending. Inverse kinematics (LookAt, FABRIK). Timeline/sequencer with property, event, and animation tracks.</p>
           </div>
           <div class="feature-card">
             <h3>Audio</h3>
             <p>Cross-platform via miniaudio. 3D spatialization, multi-channel mixing, category volumes (master, SFX, music, ambient, voice).</p>
           </div>
           <div class="feature-card">
-            <h3>AI & Pathfinding</h3>
-            <p>FSM state machines, patrol/chase/flee/attack behaviors, navmesh generation, A* pathfinding, spline system.</p>
+            <h3>Physics & Joints</h3>
+            <p>Impulse-based rigid body dynamics. 6 joint types (distance, hinge, ball socket, spring, fixed, slider) with breakable mode. Ragdoll system.</p>
           </div>
           <div class="feature-card">
-            <h3>Procedural Generation</h3>
-            <p>2D prefab-based levels with marked openings. 3D room/corridor systems.</p>
+            <h3>Scripting</h3>
+            <p>AngelScript with ~170 API bindings, TegeBehavior lifecycle, coroutines, event system, tweening (25 easing functions), noise generation, hot-reload.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Visual Scripting</h3>
+            <p>Blueprint-style node graph with 40+ node types across flow, math, transform, physics, and component categories. Debugger with breakpoints, step-through, and call stack.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Node Graph Editors</h3>
+            <p>Dialogue tree editor (7 node types, typewriter effect). Behavior tree editor (20 node types, blackboard). Quest flow editor (objectives, conditions, rewards).</p>
+          </div>
+          <div class="feature-card">
+            <h3>2D Art Pipeline</h3>
+            <p>Built-in pixel editor with 8 tools, layers, 9 retro presets, onion skinning. Sprite sheet importer with auto-detect slicing. SVG import via nanosvg.</p>
+          </div>
+          <div class="feature-card">
+            <h3>AI & Pathfinding</h3>
+            <p>FSM state machines, behavior trees (20 node types), patrol/chase/flee/attack behaviors, navmesh generation, A* pathfinding, spline system.</p>
           </div>
           <div class="feature-card">
             <h3>Environment</h3>
             <p>Weather (rain, snow, fog, storms with lightning). Water with Gerstner waves, shore foam, freeze, ocean mode. Procedural skybox.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Debug & Profiler</h3>
+            <p>Frame profiling with scope timers. Per-system breakdown (render, physics, scripting, ECS, audio). Draw call, entity, and memory tracking. ImGui overlay.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Plugin System</h3>
+            <p>IPlugin interface with dynamic library loading and hot-reload. Plugin manifest (JSON), state save/restore, editor management panel.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Level Streaming</h3>
+            <p>Distance-based chunk loading/unloading. Streaming volumes and portals. Priority-sorted load queue with async loading. Debug overlay.</p>
           </div>
           <div class="feature-card">
             <h3>Accessibility</h3>
@@ -151,7 +190,20 @@
           <summary>Project Structure</summary>
 <pre><code>enjin/
 +-- Core/           # Foundation layer (Memory, Math, Logging, Platform)
-+-- Engine/         # Engine layer (Renderer, ECS, Audio, Effects, Editor, Build, Assets)
++-- Engine/         # Engine layer
+|   +-- AI/         # AIBehaviors, Navmesh, Pathfinding
+|   +-- Animation/  # Sprite + skeletal animation, Timeline/Sequencer
+|   +-- Assets/     # GLTFLoader, SceneImporter, Prefab
+|   +-- Audio/      # AudioSystem (miniaudio backend)
+|   +-- Debug/      # Profiler, ScopeTimer, FrameData
+|   +-- ECS/        # 60+ components, controllers, systems
+|   +-- Editor/     # EditorLayer, PlayMode, panels
+|   +-- Gameplay/   # Save, HUD, Quest, Combat, Footstep, Pool
+|   +-- Physics/    # SimplePhysics, PhysicsWorld, ConstraintSolver
+|   +-- Plugin/     # PluginSystem, HotReload
+|   +-- Renderer/   # Vulkan renderer, RenderBackend
+|   +-- Scene/      # SceneSerializer, SceneManager, LevelStreaming
+|   +-- Scripting/  # AngelScript engine, bindings, coroutines
 +-- Editor/         # Editor application entry point
 +-- Player/         # Standalone game player entry point
 +-- third_party/    # External dependencies (GLFW, ImGui, ImGuizmo)
@@ -162,35 +214,57 @@
         <p>Foundation systems: memory management (stack, pool, linear allocators), math library (vectors, matrices, quaternions, splines), thread-safe logging, and platform abstraction.</p>
 
         <h3>Engine Layer</h3>
-        <p>Vulkan renderer, ECS with 50+ component types, audio (miniaudio), asset loading (Assimp for glTF), input system, camera system, animation (skeletal + sprite), AI, effects, and scene management.</p>
+        <p>Vulkan renderer with multi-threaded command recording and async compute. ECS with 60+ component types. Physics engine with constraint solver and ragdoll. AngelScript scripting with ~170 bindings. Audio (miniaudio), asset loading (Assimp for glTF), animation (skeletal + sprite + timeline), AI and behavior trees, profiler, plugin system, level streaming, and scene management.</p>
 
         <h3>Editor Layer</h3>
-        <p>Full editor application: ImGui panels, ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, skybox panel, build dialog.</p>
+        <p>Full editor application: 15+ ImGui panels including asset browser, profiler, visual script editor, behavior tree editor, quest flow editor, pixel editor, and sprite sheet importer. ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 15 startup templates, terrain brushes, native file dialogs, build dialog.</p>
 
         <h3>Player Layer</h3>
-        <p>Standalone runtime that loads <code>.enjpak</code> asset packs with build manifest. No editor dependency - ships as a minimal executable for distribution. Includes AngelScript integration for game scripting.</p>
+        <p>Standalone runtime that loads <code>.enjpak</code> asset packs with build manifest. No editor dependency - ships as a minimal executable for distribution. Includes AngelScript integration for game scripting with hot-reload and coroutines.</p>
 
         <hr>
 
         <h2 id="renderer">Vulkan Renderer</h2>
 
+        <h3>Core Pipeline</h3>
         <ul>
           <li>Vulkan context initialization and swapchain management</li>
           <li>SPIR-V shader pipeline, depth buffer / Z-testing</li>
           <li>Blinn-Phong lighting with deferred rendering framework</li>
           <li>PBR material system (baseColor, metallic, roughness, emissive)</li>
-          <li>Shadow mapping with PCF filtering</li>
           <li>Texture support (albedo, normal, height, metallic-roughness, emissive)</li>
           <li>Normal mapping (tangent-space) and parallax occlusion mapping</li>
           <li>Multiple light sources (directional, point, spot)</li>
           <li>Alpha cutoff / transparency, stipple transparency</li>
           <li>GPU skinning via bone matrix SSBO</li>
-          <li>GPU-driven frustum culling</li>
           <li>Render-to-texture (Game View offscreen rendering with separate UBOs)</li>
           <li>Wireframe rendering with wide line support</li>
           <li>World curvature (vertex-shader horizon bending)</li>
           <li>Instanced vegetation rendering (grass, shrubs, trees with wind sway)</li>
+          <li>Sprite texture atlas batching (shelf-packing into 4096x4096 GPU texture)</li>
           <li>Editable terrain with brush tools (2D and 3D)</li>
+        </ul>
+
+        <h3>Shadow System</h3>
+        <ul>
+          <li>Cascaded shadow maps (CSM) for directional lights</li>
+          <li>Point light shadow maps (cubemap array, up to 4 shadow-casting lights)</li>
+          <li>Spot light shadow maps (2D array, up to 4 shadow-casting lights)</li>
+          <li>Soft shadows via 16-sample Poisson disk PCF with configurable radius</li>
+          <li>Per-entity shadow dither modes (by darkness, distance, angle)</li>
+          <li>Per-entity cast/receive shadow flags</li>
+        </ul>
+
+        <h3>Pipeline Optimization</h3>
+        <ul>
+          <li>Multi-threaded command buffer recording</li>
+          <li>Indirect rendering (VkCmdDrawIndexedIndirect) with GPU payload batching</li>
+          <li>Async compute queue for culling, particles, and post-processing</li>
+          <li>Hi-Z occlusion culling</li>
+          <li>GPU-driven frustum culling</li>
+          <li>Frame graph resource scheduling</li>
+          <li>Merged geometry buffer</li>
+          <li>Bindless resource management</li>
         </ul>
 
         <hr>
@@ -254,31 +328,55 @@
               <strong style="color:#2d2e38;">Inspector</strong>
               Entity inspector showing component properties - transform, mesh, material, physics
             </div>
-            <figcaption>Full inspector UI for 50+ component types. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <figcaption>Full inspector UI for 60+ component types. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
         </div>
 
-        <p>50+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
+        <p>60+ component types with full inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
 
-        <h3>Character Controllers</h3>
+        <h3>Character Controllers (7 types)</h3>
         <ul>
-          <li>2D Platformer</li>
-          <li>2D Top-Down</li>
-          <li>3D Top-Down</li>
-          <li>3D Third Person</li>
-          <li>3D First Person</li>
+          <li>2D Platformer (coyote time, input buffer, wall jump/slide)</li>
+          <li>2D Top-Down (8-directional, optional dash)</li>
+          <li>3D Top-Down (isometric, click-to-move)</li>
+          <li>3D Third Person (orbit camera, lock-on targeting)</li>
+          <li>3D First Person (head bob, crouch, dungeon crawler mode)</li>
+          <li>Vehicle (steering, acceleration, drift, body roll/pitch)</li>
+          <li>Possessable (runtime entity possession with camera blend)</li>
+        </ul>
+
+        <h3>Physics Components</h3>
+        <ul>
+          <li>Rigidbody (dynamic, kinematic, static body types)</li>
+          <li>Box, Sphere, and Capsule colliders with layers and masks</li>
+          <li>Trigger zones (box/sphere shape, enter/exit/stay events)</li>
+        </ul>
+
+        <h3>Joint Components</h3>
+        <ul>
+          <li>Distance, Hinge, Ball Socket, Spring, Fixed, Slider (6 types)</li>
+          <li>All joints support breakable mode with force threshold</li>
+          <li>Ragdoll component (per-bone joints, animation blend weight, auto-settle)</li>
+        </ul>
+
+        <h3>Combat Components</h3>
+        <ul>
+          <li>Health, Damage, DamageResistance (per-type multipliers)</li>
+          <li>Resource/stamina system with regeneration</li>
         </ul>
 
         <h3>Gameplay Components</h3>
         <ul>
-          <li>Camera component with projection settings and frustum visualization</li>
-          <li>Physics (sphere-sphere, AABB-AABB, sphere-AABB collision, ground detection)</li>
+          <li>Camera with projection settings and frustum visualization</li>
           <li>Gravity zones (directional, point, zero-G)</li>
           <li>Temperature zones (heat/cold environmental effects)</li>
           <li>Camera trigger zones (camera override volumes)</li>
-          <li>Text rendering (TextComponent with stb_truetype rasterization)</li>
-          <li>Vegetation components (grass, shrub, tree volume definitions)</li>
-          <li>AudioSource and AudioListener components</li>
+          <li>Text rendering (stb_truetype rasterization)</li>
+          <li>Vegetation (grass, shrub, tree volume definitions)</li>
+          <li>AudioSource and AudioListener</li>
+          <li>Interactable, Pickup, Inventory</li>
+          <li>Script, Timeline, Visual Script, Behavior Tree</li>
+          <li>Streaming Volume and Streaming Portal</li>
         </ul>
 
         <hr>
@@ -303,6 +401,15 @@
           <li>Interaction IK</li>
         </ul>
 
+        <h3>Timeline / Sequencer</h3>
+        <ul>
+          <li>Property tracks - keyframe any component field over time (position, rotation, scale, material)</li>
+          <li>Event tracks - fire callbacks at specific timestamps</li>
+          <li>Animation tracks - play/blend skeletal animations</li>
+          <li>Easing functions (Linear, EaseIn, EaseOut, EaseInOut, Step)</li>
+          <li>Loop and ping-pong playback modes</li>
+        </ul>
+
         <hr>
 
         <h2 id="audio">Audio</h2>
@@ -316,6 +423,53 @@
 
         <hr>
 
+        <h2 id="physics">Physics</h2>
+
+        <h3>SimplePhysics</h3>
+        <ul>
+          <li>Collision detection (sphere-sphere, AABB-AABB, sphere-AABB)</li>
+          <li>Raycasting (single hit and multi-hit)</li>
+          <li>Move-and-slide for character controllers</li>
+          <li>Ground detection (raycast downward)</li>
+          <li>Configurable gravity with per-entity zones</li>
+        </ul>
+
+        <h3>PhysicsWorld</h3>
+        <ul>
+          <li>Impulse-based rigid body dynamics</li>
+          <li>RigidBody objects with mass, velocity, restitution, friction</li>
+          <li>Sphere and Box collision shapes</li>
+          <li>Impulse-based collision response with friction</li>
+          <li>Positional correction with Baumgarte stabilization</li>
+          <li>ECS integration bridge (SyncFromECS / SyncToECS)</li>
+        </ul>
+
+        <h3>Constraint Solver</h3>
+        <ul>
+          <li>Sequential impulse solver with configurable iterations (default 8)</li>
+          <li>Warm starting for improved convergence</li>
+          <li>6 joint types:
+            <ul>
+              <li><strong>Distance</strong> - fixed distance between entities with stiffness</li>
+              <li><strong>Hinge</strong> - rotation around one axis with angle limits and motor</li>
+              <li><strong>Ball Socket</strong> - free rotation with cone and twist limits</li>
+              <li><strong>Spring</strong> - Hooke's law spring with damping</li>
+              <li><strong>Fixed</strong> - rigid connection (breakable under force)</li>
+              <li><strong>Slider</strong> - translation along one axis with limits and motor</li>
+            </ul>
+          </li>
+          <li>All joints support breakable mode with force threshold and stress tracking</li>
+        </ul>
+
+        <h3>Ragdoll</h3>
+        <ul>
+          <li>Per-bone joint definitions mapped to skeleton</li>
+          <li>Blend weight for animation-to-ragdoll transition</li>
+          <li>Auto-settle detection</li>
+        </ul>
+
+        <hr>
+
         <h2 id="ai">AI & Procedural Generation</h2>
 
         <h3>AI Systems</h3>
@@ -323,7 +477,9 @@
           <li>Spline system (linear, Bezier, Catmull-Rom, B-spline)</li>
           <li>Enemy behaviors (patrol, chase, flee, attack patterns)</li>
           <li>AI state machines (FSM with transitions)</li>
+          <li>Behavior trees with 20 node types, blackboard system, and editor panel</li>
           <li>Navmesh generation and A* pathfinding with path following</li>
+          <li>AI components: AIController, FollowTarget, LookAtTarget, Waypoint</li>
         </ul>
 
         <h3>Procedural Generation</h3>
@@ -338,7 +494,7 @@
 
         <h3>Core</h3>
         <ul>
-          <li>5 character controller types (2D Platformer, 2D Top-Down, 3D Top-Down, 3D Third Person, 3D First Person)</li>
+          <li>7 character controller types (2D Platformer, 2D Top-Down, 3D Top-Down, 3D Third Person, 3D First Person, Vehicle, Possessable)</li>
           <li>Gravity zones (directional, point, zero-G per-entity override)</li>
           <li>Temperature zones (heat/cold environmental effects)</li>
           <li>Camera trigger zones (camera override volumes)</li>
@@ -360,6 +516,178 @@
           <li>Cinematic camera - waypoint sequences with easing curves for cutscenes</li>
           <li>Entity event bus - decoupled C++ entity communication system</li>
           <li>Raw mouse input - bypass OS mouse acceleration with smoothing options</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="scripting">Scripting (AngelScript)</h2>
+
+        <h3>Architecture</h3>
+        <ul>
+          <li>ScriptEngine manages the AngelScript VM, module compilation, and hot-reload</li>
+          <li>TegeBehavior base class for all gameplay scripts (lifecycle: OnCreate, OnUpdate, OnDestroy)</li>
+          <li>CoroutineScheduler for script coroutines (yield seconds, frames, end-of-frame)</li>
+          <li>ScriptEventBus for script-to-script event dispatch with typed EventData</li>
+        </ul>
+
+        <h3>Script Bindings (~170 functions)</h3>
+        <ul>
+          <li><strong>Scene:</strong> entity transform, visibility, tags, scene loading, entity creation/destruction</li>
+          <li><strong>Physics:</strong> raycast, sphere/box overlap, force/impulse/velocity, gravity scale, layer masks</li>
+          <li><strong>Audio:</strong> play/stop/volume/pitch per entity, positional audio, master volume</li>
+          <li><strong>Components:</strong> Health, Material, Light, Camera, AudioSource, Animator, Controller, State Machine, Camera2D (40+ functions)</li>
+          <li><strong>Core:</strong> coroutines, events, logging, input (keyboard, mouse, gamepad), time, math</li>
+        </ul>
+
+        <h3>Tween System</h3>
+        <ul>
+          <li>Position, rotation, scale, color, opacity tweening</li>
+          <li>25 easing functions</li>
+          <li>Completion callbacks and delay support</li>
+        </ul>
+
+        <h3>Noise System</h3>
+        <ul>
+          <li>Base noise: Value, Perlin, Simplex, Worley (2D and 3D)</li>
+          <li>Fractal noise: FBM, Ridged, Billow with octaves, lacunarity, persistence</li>
+          <li>Domain warping (2D and 3D)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="visual-scripting">Visual Scripting</h2>
+
+        <ul>
+          <li>Blueprint-style node graph editor with 40+ node types</li>
+          <li>Flow control nodes (Branch, ForLoop, While, Delay, Sequence, Gate)</li>
+          <li>Math/logic nodes (arithmetic, comparison, Clamp, Lerp, Normalize, DotProduct, CrossProduct, Distance, Random)</li>
+          <li>Transform nodes (Get/Set Position, Rotation, Scale, Translate, Rotate, LookAt)</li>
+          <li>Component access nodes (Health, Material, Audio, Animation)</li>
+          <li>Physics nodes (Raycast, SphereCheck, BoxCheck, AddForce, AddImpulse, SetVelocity)</li>
+          <li>Collision callbacks (OnCollisionEnter/Exit, OnTriggerEnter/Exit)</li>
+          <li>Subgraph/function nodes with 32-level call depth</li>
+          <li>AngelScript interop (call AS functions from visual scripts and vice versa)</li>
+        </ul>
+
+        <h3>Debugger</h3>
+        <ul>
+          <li>Breakpoints with conditional expressions and hit counts (F9 toggle, Shift+F9 edit)</li>
+          <li>Step-through execution (F5 continue, F10 step)</li>
+          <li>Call stack view with push/pop tracking</li>
+          <li>Watch window for variable inspection</li>
+          <li>Execution visualization (highlighted currently-executing node)</li>
+          <li>Execution timeline profiler with color-coded node bars</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="node-graphs">Node Graph Editors</h2>
+
+        <p>All node graph editors share a common framework: 12 typed pins, Bezier curve visualization, pan/zoom canvas with minimap, box select, keyboard navigation, and full JSON serialization.</p>
+
+        <h3>Dialogue Tree Editor</h3>
+        <ul>
+          <li>7 node types for branching dialogue</li>
+          <li>DialoguePlayer state machine with typewriter effect</li>
+          <li>Subtitle system with accessibility support</li>
+          <li>Choice navigation and variable conditions</li>
+          <li>10 AngelScript bindings for runtime control</li>
+        </ul>
+
+        <h3>Behavior Tree Editor</h3>
+        <ul>
+          <li>20 node types (composite, decorator, action, condition)</li>
+          <li>Blackboard data system for AI state</li>
+          <li>Auto-layout with color-coded node categories</li>
+          <li>Play-mode status visualization</li>
+          <li>Configurable tick interval</li>
+        </ul>
+
+        <h3>Quest Flow Editor</h3>
+        <ul>
+          <li>Visual quest graph with node types for start, objectives, conditions, rewards, branches, and end states</li>
+          <li>Sequential and parallel objective support</li>
+          <li>Integration with QuestSystem for runtime tracking</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="art-pipeline">2D Art Pipeline</h2>
+
+        <h3>Pixel Editor</h3>
+        <ul>
+          <li>8 drawing tools: pencil, eraser, fill (flood fill BFS), line (Bresenham), rectangle, ellipse (midpoint), eyedropper, selection</li>
+          <li>Layer stack with add/remove, visibility toggle, opacity</li>
+          <li>9 retro resolution presets (Game Boy, NES, SNES, GBA, Genesis, PC Engine, EarthBound, DS, Custom)</li>
+          <li>Onion skinning (before/after tint, configurable frames/opacity)</li>
+          <li>Frame timeline with thumbnails and FPS playback preview</li>
+          <li>16-color default palette with color picker and custom palette support</li>
+          <li>50-entry undo/redo stack</li>
+          <li>Export as PNG sheet or individual frames</li>
+        </ul>
+
+        <h3>Sprite Sheet Importer</h3>
+        <ul>
+          <li>Grid slicing with configurable cell width/height and padding</li>
+          <li>Auto-detect slicing via BFS flood fill for connected non-transparent regions</li>
+          <li>Slice thumbnails with apply-to-entity button</li>
+        </ul>
+
+        <h3>Auto Collider Generation</h3>
+        <ul>
+          <li>Alpha-based bounds detection with configurable threshold</li>
+          <li>Auto-fit box, capsule, and sphere colliders from sprite bounds</li>
+          <li>World-space conversion relative to sprite pivot and size</li>
+        </ul>
+
+        <h3>SVG Import</h3>
+        <ul>
+          <li>Parse SVG via nanosvg, rasterize to RGBA at configurable scale</li>
+          <li>Max 4096x4096 with auto-scale</li>
+          <li>Integrated into engine texture loading pipeline</li>
+        </ul>
+
+        <h3>Prefab Output</h3>
+        <p>Complete draw-to-game workflow: draw sprite (or import PNG/SVG), slice into frames, define animations, generate colliders, export as prefab with Transform, Sprite2D, AnimatedSprite2D, and BoxCollider components.</p>
+
+        <hr>
+
+        <h2 id="profiler">Debug & Profiler</h2>
+
+        <ul>
+          <li>Profiler singleton with <code>ENJIN_PROFILE_SCOPE("name")</code> macro</li>
+          <li>Per-frame breakdown: render, physics, scripting, ECS, audio</li>
+          <li>FPS counter with 240-frame rolling history</li>
+          <li>Draw call, entity, and triangle counters</li>
+          <li>Memory usage tracking</li>
+          <li>ImGui overlay panel with graphs, progress bars, and detailed scope table</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="plugin">Plugin System</h2>
+
+        <ul>
+          <li><code>IPlugin</code> interface: OnLoad, OnUnload, OnUpdate, GetName, GetVersion</li>
+          <li>Dynamic library loading (LoadLibrary / dlopen)</li>
+          <li>Hot-reload with state save/restore</li>
+          <li>Plugin manifest (JSON: name, version, dependencies)</li>
+          <li>Plugin registration with engine subsystems</li>
+          <li>Editor panel for plugin management (load, unload, status display)</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="streaming">Level Streaming</h2>
+
+        <ul>
+          <li>StreamingManager with distance-based chunk loading/unloading</li>
+          <li>StreamingChunk spatial regions with entity lists, load states, and LOD levels</li>
+          <li>StreamingVolumeComponent defines chunk boundaries</li>
+          <li>StreamingPortalComponent connects chunks (doorways, corridors)</li>
+          <li>Priority-sorted load queue with concurrent load limiting</li>
+          <li>Async chunk loading via SceneSerializer</li>
+          <li>ImGui debug overlay showing chunk states</li>
         </ul>
 
         <hr>
@@ -441,14 +769,23 @@
 
         <h3>Panels</h3>
         <ul>
-          <li>Scene hierarchy with entity tree</li>
-          <li>Entity inspector (50+ component types with full UI)</li>
+          <li>Scene hierarchy with entity tree and drag-and-drop reparenting</li>
+          <li>Entity inspector (60+ component types with full UI)</li>
+          <li>Console (log output for engine messages, warnings, errors)</li>
+          <li>Asset browser (grid/list view, thumbnails, search, type-colored labels)</li>
           <li>Viewport with fly camera</li>
           <li>Game View (renders from in-scene camera, independent from editor camera)</li>
-          <li>Settings panel (camera, grid, gizmo options)</li>
+          <li>Settings panel (camera, grid, gizmo, accent color options)</li>
           <li>Effects panel (post-processing, retro effects)</li>
           <li>Skybox panel with procedural presets</li>
           <li>Stats overlay (FPS, frame time, draw calls, triangle count)</li>
+          <li>Profiler (per-system breakdown, scope timers, memory tracking)</li>
+          <li>Visual Script editor (node graph, variables, debugger)</li>
+          <li>Behavior Tree editor (20 node types, blackboard, auto-layout)</li>
+          <li>Quest Flow editor (visual quest graph)</li>
+          <li>Pixel Editor (8 tools, layers, retro presets, onion skinning)</li>
+          <li>Sprite Sheet Importer (grid/auto-detect slicing)</li>
+          <li>Scene List (multi-scene project management)</li>
         </ul>
 
         <h3>Tools</h3>
@@ -496,6 +833,10 @@
             <tr><td>Multi-Select</td><td><code>Ctrl+click</code></td></tr>
             <tr><td>Range Select (Hierarchy)</td><td><code>Shift+click</code></td></tr>
             <tr><td>Marquee Select</td><td>Viewport drag</td></tr>
+            <tr><td>Duplicate</td><td><code>Ctrl+D</code></td></tr>
+            <tr><td>Delete</td><td><code>Delete</code></td></tr>
+            <tr><td>Focus Selection</td><td><code>F</code></td></tr>
+            <tr><td>Import Model</td><td><code>Ctrl+I</code></td></tr>
             <tr><td>Undo</td><td><code>Ctrl+Z</code></td></tr>
             <tr><td>Redo</td><td><code>Ctrl+Y</code></td></tr>
           </tbody>
@@ -568,7 +909,7 @@
           <ul>
             <li class="done">Editor GUI (Dear ImGui integration)</li>
             <li class="done">Scene hierarchy panel</li>
-            <li class="done">Entity inspector panel (50+ component types)</li>
+            <li class="done">Entity inspector panel (60+ component types)</li>
             <li class="done">Transform gizmos (ImGuizmo)</li>
             <li class="done">Entity selection via ray casting</li>
             <li class="done">Viewport panel with camera controls</li>
@@ -657,7 +998,7 @@
             <span class="phase-status phase-status--done">Complete</span>
           </div>
           <ul>
-            <li class="done">Character controllers (5 types)</li>
+            <li class="done">Character controllers (7 types)</li>
             <li class="done">Gravity zones</li>
             <li class="done">Temperature zones</li>
             <li class="done">Camera trigger zones</li>
@@ -715,6 +1056,94 @@
             <li class="done">Entity event bus</li>
             <li class="done">Raw mouse input + smoothing</li>
             <li class="done">Window icon support</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 13: Node Graph Editors</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Dialogue Tree Editor (7 node types, typewriter effect, subtitle system)</li>
+            <li class="done">Visual Scripting (40+ node types, 5 phases of development)</li>
+            <li class="done">Visual Script debugger (breakpoints, step-through, call stack, watch window)</li>
+            <li class="done">Subgraph/function nodes with AngelScript interop</li>
+            <li class="done">Behavior Tree Editor (20 node types, blackboard, auto-layout)</li>
+            <li class="done">Quest Flow Editor (objectives, conditions, rewards, branches)</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 14: 2D Art Pipeline</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Pixel Editor (8 tools, layers, 9 retro presets, onion skinning)</li>
+            <li class="done">Sprite Sheet Importer (grid slicing, auto-detect, atlas packing)</li>
+            <li class="done">Auto collider generation from sprite bounds</li>
+            <li class="done">SVG import via nanosvg</li>
+            <li class="done">Prefab output pipeline (draw to playable entity)</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 15: Debug & Profiler</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Frame profiler with scope timers</li>
+            <li class="done">Per-system breakdown (render, physics, scripting, ECS, audio)</li>
+            <li class="done">Draw call, entity, and triangle counters</li>
+            <li class="done">Memory usage tracking</li>
+            <li class="done">ImGui overlay with graphs and detailed scope table</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 16: Plugin System & Hot-Reload</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">IPlugin interface with dynamic library loading</li>
+            <li class="done">Hot-reload with state save/restore</li>
+            <li class="done">Plugin manifest (JSON) and editor management panel</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 17: Level Streaming</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Distance-based chunk loading/unloading</li>
+            <li class="done">Streaming volumes and portals</li>
+            <li class="done">Priority-sorted load queue with async loading</li>
+            <li class="done">Debug overlay showing chunk states</li>
+          </ul>
+        </div>
+
+        <div class="phase">
+          <div class="phase-header">
+            <h3>Phase 18: Rendering Pipeline Optimization</h3>
+            <span class="phase-status phase-status--done">Complete</span>
+          </div>
+          <ul>
+            <li class="done">Multi-threaded command buffer recording</li>
+            <li class="done">Indirect rendering (VkCmdDrawIndexedIndirect)</li>
+            <li class="done">Async compute queue</li>
+            <li class="done">Hi-Z occlusion culling</li>
+            <li class="done">Frame graph resource scheduling</li>
+            <li class="done">Merged geometry buffer</li>
+            <li class="done">Bindless resource management</li>
+            <li class="done">Soft shadows (16-sample Poisson disk PCF)</li>
+            <li class="done">Point and spot light shadow maps</li>
+            <li class="done">Cascaded shadow maps (CSM)</li>
+            <li class="done">Sprite texture atlas batching</li>
           </ul>
         </div>
 
@@ -781,12 +1210,14 @@ cmake --build . --config Release</code></pre>
           <tbody>
             <tr><td>Language</td><td>C++20</td><td>-</td></tr>
             <tr><td>Graphics</td><td>Vulkan 1.3</td><td>Apache 2.0</td></tr>
+            <tr><td>Scripting</td><td>AngelScript</td><td>zlib</td></tr>
             <tr><td>Audio</td><td>miniaudio</td><td>Public domain</td></tr>
             <tr><td>Windowing</td><td>GLFW3</td><td>zlib/libpng</td></tr>
             <tr><td>3D Import</td><td>Assimp</td><td>BSD</td></tr>
             <tr><td>UI</td><td>Dear ImGui + ImGuizmo</td><td>MIT</td></tr>
             <tr><td>JSON</td><td>nlohmann/json</td><td>MIT</td></tr>
             <tr><td>Text</td><td>stb_truetype</td><td>Public domain</td></tr>
+            <tr><td>SVG</td><td>nanosvg</td><td>zlib</td></tr>
             <tr><td>Build</td><td>CMake</td><td>BSD</td></tr>
           </tbody>
         </table>
@@ -879,5 +1310,6 @@ cmake --build . --config Release</code></pre>
       });
     })();
   </script>
+  <div class="wip-badge">Under Construction</div>
 </body>
 </html>
