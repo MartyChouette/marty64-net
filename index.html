@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marty Scott | Game Designer & Developer</title>
-  <meta name="description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, and Cold Flame. MFA NYU Game Center.">
+  <meta name="description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, Cold Flame, and Snoop. MFA NYU Game Center.">
+  <meta property="og:title" content="Marty Scott | Game Designer & Developer">
+  <meta property="og:description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, Cold Flame, and Snoop. MFA NYU Game Center.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/iris.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="images/vox_self_portrait_2024.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,11 +31,12 @@
         <li><a href="#work" class="nav-link">Work</a></li>
         <li><a href="#writings" class="nav-link">Writings</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="kb/index.html" class="nav-link">VG101</a></li>
-        <li><a href="enjin/index.html" class="nav-link">TEGE</a></li>
-        <li><a href="https://github.com/MartyChouette" class="nav-link" target="_blank">GitHub</a></li>
-        <li><a href="https://martychouette.itch.io/" class="nav-link" target="_blank">Itch.io</a></li>
+        <li><a href="#resume" class="nav-link">Resume</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="https://github.com/MartyChouette" class="nav-link" target="_blank">GitHub</a></li>
+        <li><a href="enjin/index.html" class="nav-link nav-link--tege">TEGE</a></li>
+        <li><a href="kb/index.html" class="nav-link nav-link--vg101">VG101</a></li>
+        <li><a href="https://martychouette.itch.io/" class="nav-link nav-link--itch" target="_blank">Itch.io</a></li>
       </ul>
     </div>
   </nav>
@@ -44,6 +51,10 @@
           The surreal, serene, and sincere. I'm exploring new design approaches and 
           more expansive accessibility tooling for the videogames of tomorrow. 
           Accessibility of concepts, of art, of design itself.
+        </p>
+        <p class="hero-positioning">
+          Gameplay / Technical Designer (Unity/C#). I build tactile mechanics, narrative pacing systems, 
+          and accessibility-first play.
         </p>
         <div class="hero-cta">
           <a href="#work" class="btn btn--primary">See My Work</a>
@@ -62,6 +73,11 @@
         <h2 class="section-title">Videogames & Prototypes</h2>
       </div>
 
+      <div class="subsection-header">
+        <h3 class="subsection-title">Flagship Projects</h3>
+        <p class="subsection-desc">The three clearest signals of how I design, build, and ship.</p>
+      </div>
+
       <div class="projects-grid">
         <!-- Featured: Iris -->
         <article class="project-card project-card--featured">
@@ -76,15 +92,18 @@
             </div>
             <h3 class="project-card__title">Iris</h3>
             <p class="project-card__desc">
-              A cozy psychological horror videogame. Nema has a secret. She goes on dates and trims her flowers. 
-              Features a custom flower trimming mechanic inspired by real ikebana mathematics. 
-              Perspective shifts between third and first person as you explore her house and her life.
+              Cozy psychological horror about Nema, her secret, and the ritual of tending flowers.
             </p>
+            <p class="project-card__role">
+              Role: Code / Design / Sound (2-person team)
+            </p>
+            <ul class="project-card__bullets">
+              <li>Built a custom flower-trimming mechanic inspired by ikebana mathematics.</li>
+              <li>Designed perspective shifts between third and first person exploration.</li>
+              <li>Prototyped in 4 months with a 2-person team (art/design/3D + code/design/sound).</li>
+            </ul>
             <p class="project-card__desc" style="font-style: italic; color: var(--text-muted);">
               Just remember: love is hard.
-            </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-md);">
-              2-person team (code/design/sound + art/design/3D) • 4 months in • Prototype
             </p>
           </div>
         </article>
@@ -102,13 +121,16 @@
             </div>
             <h3 class="project-card__title">RhodesTrip</h3>
             <p class="project-card__desc">
-              A third-person narrative videogame about driving, talking, and listening to music 
-              on a road trip back home. Meet quirky characters as you journey through beautiful 
-              biomes and reminisce about the things we miss.
+              Third-person narrative road trip about driving, talking, and listening to music on the way home.
             </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
-              4-person team (2 artists, 2 coder/designers) • Created custom state machine scripting language for narrative pacing • Music & SFX
+            <p class="project-card__role">
+              Role: Coder / Designer (4-person team)
             </p>
+            <ul class="project-card__bullets">
+              <li>Created a custom state machine scripting language for narrative pacing.</li>
+              <li>Designed character-driven encounters across distinct biomes.</li>
+              <li>Composed music and handled SFX for the demo.</li>
+            </ul>
             <a href="https://martychouette.itch.io/rhodestrip" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
               Play Demo on Itch.io →
             </a>
@@ -128,19 +150,29 @@
             </div>
             <h3 class="project-card__title">Blackout</h3>
             <p class="project-card__desc">
-              A sightless 2D platformer where you must use sounds and NPC directions to navigate. 
-              A study in blind videogames and alternate design theory to address the lack of thoughtful 
-              crafting in videogames outside of their visual component.
+              Sightless 2D platformer that navigates via sound and NPC directions.
             </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
-              Solo developed • Accompanied by research and <a href="https://sites.google.com/nyu.edu/blackout/" target="_blank">whitepaper</a>
+            <p class="project-card__role">
+              Role: Solo developer
             </p>
+            <ul class="project-card__bullets">
+              <li>Built audio-first navigation that replaces visual cues.</li>
+              <li>Designed NPC direction systems to guide traversal.</li>
+              <li>Published a supporting research <a href="https://sites.google.com/nyu.edu/blackout/" target="_blank">whitepaper</a> on blind play.</li>
+            </ul>
             <a href="https://martychouette.itch.io/blackout" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
               Play on Itch.io →
             </a>
           </div>
         </article>
+      </div>
 
+      <div class="subsection-header subsection-header--spaced">
+        <h3 class="subsection-title">More Projects</h3>
+        <p class="subsection-desc">Additional experiments, prototypes, and short-form work.</p>
+      </div>
+
+      <div class="projects-grid">
         <!-- Solus -->
         <article class="project-card">
           <div class="project-card__image">
@@ -219,6 +251,30 @@
           </div>
         </article>
 
+        <!-- Snoop -->
+        <article class="project-card project-card--playdate">
+          <div class="project-card__image">
+            <img src="images/snoop.svg" alt="Snoop - surveillance game for Playdate" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">C++</span>
+              <span class="project-card__tag">Playdate</span>
+              <span class="project-card__tag">Procedural</span>
+            </div>
+            <h3 class="project-card__title">Snoop</h3>
+            <p class="project-card__desc">
+              Surveillance game for Playdate. 50 buildings, 8 districts, "The Architect"
+              conspiracy. All procedural graphics, crank mechanics.
+            </p>
+            <p style="font-size: var(--text-sm); color: #b0b0b0; margin-top: var(--space-sm);">
+              Solo developed &bull; 400&times;240, 1-bit &bull; 50 levels, full story arc
+            </p>
+            <a href="snoop-reference.html" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
+              View Scene Reference &rarr;
+            </a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -228,7 +284,7 @@
     <div class="container">
       <div class="section-header">
         <span class="section-label">Resources</span>
-        <h2 class="section-title">Engine & Pedagogy</h2>
+        <h2 class="section-title">Engine, Tools & Text</h2>
       </div>
 
       <div class="projects-grid">
@@ -245,15 +301,18 @@
             </div>
             <h3 class="project-card__title">TEGE - The Enjin Game Engine</h3>
             <p class="project-card__desc">
-              A proprietary, licensable game engine built from scratch. Vulkan renderer with PBR materials,
-              ECS architecture with 50+ component types, full editor with ImGui, skeletal animation, AI systems,
-              procedural generation, retro post-processing effects, and a standalone game player with asset packing.
+              A proprietary, licensable game engine built from scratch. Vulkan renderer with PBR materials and ray tracing,
+              ECS architecture with 70+ component types, full editor with 20+ ImGui panels, Jolt Physics and Box2D backends,
+              ~721 AngelScript bindings, 146+ node visual scripting, shader graph, procedural generation, and HTML5 export.
             </p>
             <p class="project-card__desc" style="font-size: var(--text-sm); margin-top: var(--space-sm);">
               Solo developed • C++20 / Vulkan 1.3 • Proprietary
             </p>
             <a href="enjin/index.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
               Explore →
+            </a>
+            <a href="enjin/engine-analysis.html" class="project-card__link" style="margin-top: var(--space-sm); display: inline-block;">
+              Technical Analysis →
             </a>
           </div>
         </article>
@@ -265,7 +324,7 @@
           </div>
           <div class="project-card__content">
             <div class="project-card__tags">
-              <span class="project-card__tag">Pedagogy</span>
+              <span class="project-card__tag">Text</span>
               <span class="project-card__tag">Framework</span>
               <span class="project-card__tag">In Development</span>
             </div>
@@ -281,6 +340,31 @@
             </p>
             <a href="kb/index.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
               Explore →
+            </a>
+          </div>
+        </article>
+
+        <!-- Playdate Draw Tool -->
+        <article class="project-card project-card--playdate">
+          <div class="project-card__image">
+            <img src="images/playdate-draw.svg" alt="Playdate Draw Tool - browser-based pixel art editor" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="project-card__content">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Tool</span>
+              <span class="project-card__tag">Playdate</span>
+              <span class="project-card__tag">Browser-Based</span>
+            </div>
+            <h3 class="project-card__title">Playdate Draw Tool</h3>
+            <p class="project-card__desc">
+              Browser-based pixel art editor for Playdate's 400&times;240 1-bit display.
+              Layers, dithering, animation, undo/redo, C code export.
+            </p>
+            <p style="font-size: var(--text-sm); color: #b0b0b0; margin-top: var(--space-sm);">
+              Solo developed &bull; Single HTML file &bull; No dependencies
+            </p>
+            <a href="playdate-draw.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
+              Open Draw Tool &rarr;
             </a>
           </div>
         </article>
@@ -372,6 +456,65 @@
     </div>
   </section>
 
+  <!-- Resume -->
+  <section id="resume" class="section section--alt">
+    <div class="container container--narrow">
+      <div class="resume-header">
+        <span class="section-label">Resume</span>
+        <h2 class="resume-title">Tailored resumes by role</h2>
+        <p class="resume-subtitle">
+          Tailored per role to keep the signal tight. PDFs are available on request while I finalize the newest versions.
+        </p>
+      </div>
+
+      <div class="resume-list" role="list">
+        <div class="resume-row" role="listitem">
+          <div class="resume-row__meta">
+            <span class="resume-row__title">Teaching Resume</span>
+            <span class="resume-row__desc">Higher-ed, mentorship, curriculum, workshops.</span>
+          </div>
+          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Teaching">
+            Request PDF
+          </a>
+        </div>
+
+        <div class="resume-row" role="listitem">
+          <div class="resume-row__meta">
+            <span class="resume-row__title">Programming Resume</span>
+            <span class="resume-row__desc">Software engineering, engines, tools, systems.</span>
+          </div>
+          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Programming">
+            Request PDF
+          </a>
+        </div>
+
+        <div class="resume-row" role="listitem">
+          <div class="resume-row__meta">
+            <span class="resume-row__title">Game Development Resume</span>
+            <span class="resume-row__desc">Design, gameplay, narrative systems, prototypes.</span>
+          </div>
+          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Game%20Development">
+            Request PDF
+          </a>
+        </div>
+
+        <div class="resume-row" role="listitem">
+          <div class="resume-row__meta">
+            <span class="resume-row__title">Combined Resume</span>
+            <span class="resume-row__desc">All roles in one concise PDF.</span>
+          </div>
+          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Combined">
+            Request PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="resume-note">
+        Prefer one combined resume or a quick custom edit? Email me and I can tailor it fast.
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section id="contact" class="section">
     <div class="container container--narrow">
@@ -402,12 +545,14 @@
         <li><a href="index.html" class="footer-link">Home</a></li>
         <li><a href="#work" class="footer-link">Work</a></li>
         <li><a href="#writings" class="footer-link">Writings</a></li>
-        <li><a href="kb/index.html" class="footer-link">VG101</a></li>
+        <li><a href="kb/index.html" class="footer-link footer-link--vg101">VG101</a></li>
         <li><a href="https://www.beargatsby.com" class="footer-link" target="_blank">Music</a></li>
-        <li><a href="marty_resume.pdf" class="footer-link" target="_blank">Resume</a></li>
+        <li><a href="enjin/index.html" class="footer-link footer-link--tege">TEGE</a></li>
+        <li><a href="https://martychouette.itch.io/" class="footer-link footer-link--itch" target="_blank">Itch.io</a></li>
+        <li><a href="#resume" class="footer-link">Resume</a></li>
         <li><a href="#contact" class="footer-link">Contact</a></li>
       </ul>
-      <p class="footer-copy">© 2025 Marty Scott</p>
+      <p class="footer-copy">© 2026 Marty Scott</p>
     </div>
   </footer>
 
