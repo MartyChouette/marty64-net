@@ -1003,12 +1003,15 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.04),
     0 12px 40px rgba(0, 0, 0, 0.12);
+  max-height: 520px;
 }
 
 .landing-hero__image img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
+  object-position: top left;
 }
 
 /* ---- Landing Sections ---- */
@@ -1066,6 +1069,9 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
   display: block;
   cursor: pointer;
   transition: opacity 0.15s;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
 }
 
 .screenshot-gallery__img:hover {
@@ -1346,7 +1352,20 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
 }
 
 /* ---- Landing Page Responsive ---- */
+/* 4 breakpoints: large desktop (1200+), desktop (901-1199), tablet (601-900), phone (≤600) */
 
+/* Large desktop — wider content area */
+@media (min-width: 1200px) {
+  .landing-page .content-wrapper {
+    max-width: 1060px;
+  }
+
+  .landing-hero__image {
+    max-height: 560px;
+  }
+}
+
+/* Tablet — sidebar collapses, 2-column grids */
 @media (max-width: 900px) {
   .landing-page .content-wrapper {
     max-width: 100%;
@@ -1364,6 +1383,10 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
     font-size: var(--text-base);
   }
 
+  .landing-hero__image {
+    max-height: 400px;
+  }
+
   .landing-hero__cta {
     flex-direction: column;
   }
@@ -1374,11 +1397,15 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
   }
 
   .screenshot-gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .screenshot-gallery__placeholder {
+    display: none;
   }
 
   .landing-features-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .landing-stats {
@@ -1423,18 +1450,74 @@ details.code-block pre { margin: 0; border-radius: 0 0 6px 6px; }
   }
 }
 
-@media (max-width: 480px) {
+/* Phone landscape / small tablet — single column features */
+@media (max-width: 600px) {
   .landing-hero__title {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
+  }
+
+  .landing-hero__image {
+    max-height: 280px;
+    border-radius: 8px;
+  }
+
+  .screenshot-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshot-gallery__img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .landing-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-feature-card {
+    padding: 1.25rem;
   }
 
   .landing-stats__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .landing-stats__number {
+    font-size: 1.25rem;
+  }
 }
 
-@media (min-width: 1200px) {
-  .landing-page .content-wrapper {
-    max-width: 1060px;
+/* Phone portrait — smallest sizes */
+@media (max-width: 400px) {
+  .landing-hero__title {
+    font-size: 2rem;
+  }
+
+  .landing-hero__subtitle {
+    font-size: 0.75rem;
+  }
+
+  .landing-hero__image {
+    max-height: 220px;
+  }
+
+  .landing-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md) var(--space-sm);
+  }
+
+  .landing-stats__number {
+    font-size: 1.1rem;
+  }
+
+  .landing-stats__label {
+    font-size: 0.7rem;
+  }
+
+  .landing-getting-started__card {
+    padding: 1rem;
+  }
+
+  .landing-download__sub {
+    font-size: var(--text-base);
   }
 }
