@@ -376,12 +376,26 @@
       padding: 24px;
       margin: 1.5em 0;
       border: 1px solid var(--tege-border);
-      overflow-x: auto;
+      overflow: hidden;
+      touch-action: pan-y;
       text-align: center;
+      cursor: grab;
+      position: relative;
+    }
+
+    .mermaid-wrapper.is-grabbing {
+      cursor: grabbing;
+      user-select: none;
     }
 
     .mermaid {
       margin: 0 auto;
+      transform-origin: 0 0;
+    }
+
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
     }
 
     /* ===== Part Dividers ===== */
@@ -542,13 +556,41 @@
     #search-overlay.active {
       display: flex;
     }
+
+    /* Accessibility */
+    :focus-visible {
+      outline: 3px solid var(--tege-accent);
+      outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 <body>
+  <a href="#content" style="position:absolute;top:-100%;left:0;z-index:9999;padding:0.75rem 1.5rem;background:var(--tege-accent);color:#fff;font-weight:600;font-size:0.875rem;text-decoration:none;border-radius:0 0 8px 0;" onfocus="this.style.top='0'" onblur="this.style.top='-100%'">Skip to main content</a>
   <button class="menu-toggle" onclick="document.getElementById('toc').classList.toggle('open')" aria-label="Toggle navigation">&#9776;</button>
   <header id="site-header">
     <div style="display:flex;align-items:center;gap:16px;padding:0 24px;height:100%;max-width:1200px;margin:0 auto;width:100%">
-      <div class="header-logo">TEGE</div>
+      <div style="display:flex;align-items:center;gap:20px;">
+        <a href="index.html" class="header-logo" style="text-decoration:none;color:inherit;">TEGE</a>
+        <nav style="display:flex;gap:16px;font-size:0.85em;">
+          <a href="index.html" style="color:var(--tege-text-muted);text-decoration:none;">Home</a>
+          <a href="docs.html" style="color:var(--tege-text-muted);text-decoration:none;">Documentation</a>
+          <a href="manual.html" style="color:var(--tege-sage);text-decoration:none;">Manual</a>
+          <a href="engine-analysis.html" style="color:var(--tege-text-muted);text-decoration:none;">Analysis</a>
+          <a href="https://github.com/MartyChouette/TEGE" style="color:var(--tege-text-muted);text-decoration:none;" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </div>
       <span style="color:var(--tege-text-muted);font-size:1.1em">User Manual</span>
       <div style="flex:1"></div>
       <div class="search-wrapper">
@@ -15104,12 +15146,19 @@ mermaid.initialize({
 // Initialize highlight.js
 hljs.highlightAll();
 
-// Initialize AOS
-AOS.init({
-  duration: 600,
-  once: true,
-  offset: 50
-});
+// Initialize AOS (skip if user prefers reduced motion)
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  AOS.init({
+    duration: 600,
+    once: true,
+    offset: 50
+  });
+} else {
+  // Remove AOS attributes so content is visible immediately
+  document.querySelectorAll('[data-aos]').forEach(function(el) {
+    el.removeAttribute('data-aos');
+  });
+}
 
 // Initialize Tocbot
 tocbot.init({
@@ -15189,8 +15238,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Initialize medium-zoom on Mermaid SVGs
-  mediumZoom('.mermaid-wrapper svg', { background: 'var(--tege-bg)' });
+  // Pan-zoom for mermaid wrappers
+  document.querySelectorAll('.mermaid-wrapper').forEach(function(w){
+      var inner=w.querySelector('.mermaid');if(!inner)return;
+      var s=1,tx=0,ty=0,pd=0;
+      function apply(){inner.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')';}
+      var drag=false,mx,my,stx,sty;
+      w.addEventListener('mousedown',function(e){if(e.button!==0)return;drag=true;w.classList.add('is-grabbing');mx=e.clientX;my=e.clientY;stx=tx;sty=ty;});
+      addEventListener('mousemove',function(e){if(!drag)return;e.preventDefault();tx=stx+e.clientX-mx;ty=sty+e.clientY-my;apply();});
+      addEventListener('mouseup',function(){if(!drag)return;drag=false;w.classList.remove('is-grabbing');});
+      w.addEventListener('wheel',function(e){e.preventDefault();var r=w.getBoundingClientRect();var ox=e.clientX-r.left,oy=e.clientY-r.top;var ns=Math.max(0.5,Math.min(15,s*(e.deltaY<0?1.1:0.9)));tx=ox-(ox-tx)*ns/s;ty=oy-(oy-ty)*ns/s;s=ns;apply();},{passive:false});
+      w.addEventListener('touchstart',function(e){if(e.touches.length===2){pd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}else if(e.touches.length===1&&s>1.05){mx=e.touches[0].clientX;my=e.touches[0].clientY;stx=tx;sty=ty;}},{passive:true});
+      w.addEventListener('touchmove',function(e){if(e.touches.length===2){e.preventDefault();var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);var r=w.getBoundingClientRect();var cx=(e.touches[0].clientX+e.touches[1].clientX)/2-r.left;var cy=(e.touches[0].clientY+e.touches[1].clientY)/2-r.top;var ns=Math.max(0.5,Math.min(15,s*d/pd));tx=cx-(cx-tx)*ns/s;ty=cy-(cy-ty)*ns/s;s=ns;pd=d;apply();}else if(e.touches.length===1&&s>1.05){e.preventDefault();tx=stx+e.touches[0].clientX-mx;ty=sty+e.touches[0].clientY-my;apply();}},{passive:false});
+      var lt=0;w.addEventListener('touchend',function(){var n=Date.now();if(n-lt<300){s=1;tx=0;ty=0;apply();}lt=n;});
+  });
 });
 </script>
 </body>
