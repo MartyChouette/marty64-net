@@ -2,7 +2,26 @@
   "permissions": {
     "allow": [
       "Bash(xargs -I {} sh -c \"grep -L ''Narrative'' ''{}'' 2>/dev/null\")",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "WebSearch",
+      "WebFetch(domain:www.kitfoxgames.com)",
+      "WebFetch(domain:www.supergiantgames.com)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:steamcommunity.com)",
+      "WebFetch(domain:shared.akamai.steamstatic.com)",
+      "Bash(del \"D:\\\\GitHub\\\\marty64-net\\\\marty64-net\\\\temp_steam.json\")",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "WebFetch(domain:store.steampowered.com)",
+      "Bash(powershell:*)",
+      "WebFetch(domain:steamdb.info)",
+      "WebFetch(domain:blizzard.gamespress.com)",
+      "WebFetch(domain:media.rawg.io)",
+      "WebFetch(domain:www.igdb.com)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(python3:*)"
     ]
   }
 }

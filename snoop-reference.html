@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Snoop - Visual Reference</title>
+<style>
+body{background:#1a1a2e;color:#ccc;font-family:system-ui;padding:20px;margin:0}
+h1{color:#f9e2af;margin-bottom:4px}
+h2{color:#89b4fa;margin:16px 0 8px;font-size:16px}
+.grid{display:flex;flex-wrap:wrap;gap:16px}
+.scene{background:#222;border-radius:8px;padding:12px;border:1px solid #444}
+.scene canvas{display:block;border:1px solid #555;image-rendering:pixelated}
+.scene .label{font-size:12px;color:#888;margin-top:6px}
+</style></head><body>
+<h1>Snoop - Game Scene Reference</h1>
+<p style="color:#888;margin-bottom:20px">All scenes rendered from the game's draw code. 400x240, 1-bit black & white.</p>
+<div class="grid" id="grid"></div>
+<script>
+const SW=400,SH=240;
+const WL=100,WT=50,WR=300,WB=190;
+const WW=WR-WL,WH=WB-WT;
+
+function makeScene(name,drawFn){
+  const div=document.createElement('div');div.className='scene';
+  const c=document.createElement('canvas');c.width=SW;c.height=SH;
+  c.style.width='400px';c.style.height='240px';
+  const ctx=c.getContext('2d');
+  // Provide gfx-like API
+  const gfx={
+    clear(col){ctx.fillStyle=col==='black'?'#000':'#fff';ctx.fillRect(0,0,SW,SH)},
+    drawLine(x1,y1,x2,y2,lw,col){ctx.strokeStyle=col==='black'?'#000':'#fff';ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke()},
+    drawRect(x,y,w,h,col){ctx.strokeStyle=col==='black'?'#000':'#fff';ctx.lineWidth=1;ctx.strokeRect(x+.5,y+.5,w-1,h-1)},
+    fillRect(x,y,w,h,col){ctx.fillStyle=col==='black'?'#000':'#fff';ctx.fillRect(x,y,w,h)},
+    drawEllipse(x,y,w,h,lw,sa,ea,col){ctx.strokeStyle=col==='black'?'#000':'#fff';ctx.lineWidth=lw;ctx.beginPath();ctx.ellipse(x+w/2,y+h/2,Math.max(1,w/2),Math.max(1,h/2),0,sa*Math.PI/180,ea*Math.PI/180);ctx.stroke()},
+    fillEllipse(x,y,w,h,sa,ea,col){ctx.fillStyle=col==='black'?'#000':'#fff';ctx.beginPath();ctx.ellipse(x+w/2,y+h/2,Math.max(1,w/2),Math.max(1,h/2),0,sa*Math.PI/180,ea*Math.PI/180);ctx.fill()},
+    drawText(t,len,enc,x,y){ctx.fillStyle='#000';ctx.font='12px monospace';ctx.fillText(t,x,y+10)},
+    drawTextWhite(t,x,y){ctx.fillStyle='#fff';ctx.font='12px monospace';ctx.fillText(t,x,y+10)},
+  };
+  function drawCentered(t,y){ctx.fillStyle='#000';ctx.font='12px monospace';ctx.textAlign='center';ctx.fillText(t,SW/2,y+10);ctx.textAlign='start'}
+  function drawCenteredWhite(t,y){ctx.fillStyle='#fff';ctx.font='12px monospace';ctx.textAlign='center';ctx.fillText(t,SW/2,y+10);ctx.textAlign='start'}
+  try{drawFn(gfx,drawCentered,drawCenteredWhite)}catch(e){console.error(name,e)}
+  div.appendChild(c);
+  const lbl=document.createElement('div');lbl.className='label';lbl.textContent=name;
+  div.appendChild(lbl);
+  document.getElementById('grid').appendChild(div);
+}
+
+// ---- Title Screen ----
+makeScene('Title Screen',(gfx,drawCentered,drawCenteredWhite)=>{
+  gfx.clear('black');
+  const starPosX=[15,38,62,95,128,167,203,248,275,312,345,378,52,140,190,330,8,390,110,260];
+  const starPosY=[8,22,5,15,28,10,18,6,24,12,20,3,35,32,40,38,42,30,45,42];
+  for(let s=0;s<20;s++)gfx.fillRect(starPosX[s],starPosY[s],1,1,'white');
+  gfx.fillEllipse(340,8,16,16,0,360,'white');
+  gfx.fillEllipse(344,6,14,14,0,360,'black');
+  const skyline=95;
+  const bldgX=[0,22,42,58,80,105,125,148,170,195,215,240,258,280,300,325,350,372,390];
+  const bldgW=[20,18,14,20,22,18,20,20,22,18,22,16,20,18,22,22,20,16,12];
+  const bldgH=[35,50,25,60,40,55,30,45,65,35,48,28,52,38,42,56,32,44,25];
+  for(let b=0;b<19;b++){
+    const bx=bldgX[b],bh=bldgH[b],bw=bldgW[b],by=skyline-bh;
+    gfx.fillRect(bx,by,bw,bh+2,'white');
+    for(let wy=by+3;wy<skyline-3;wy+=6)for(let wx=bx+3;wx<bx+bw-3;wx+=5){
+      if((wx*7+wy*13+b)%5<3)gfx.fillRect(wx,wy,3,3,'black');
+    }
+  }
+  gfx.drawLine(0,skyline+1,SW,skyline+1,1,'white');
+  // Spy figure
+  const spyX=180,spyY=skyline-2;
+  gfx.fillRect(spyX,spyY-10,6,8,'black');
+  gfx.fillRect(spyX-2,spyY-8,10,4,'black');
+  gfx.fillEllipse(spyX+6,spyY-13,5,5,0,360,'black');
+  gfx.drawLine(spyX+1,spyY-2,spyX-2,spyY+2,2,'black');
+  gfx.drawLine(spyX+4,spyY-2,spyX+7,spyY+2,2,'black');
+  gfx.drawLine(spyX+8,spyY-10,spyX+20,spyY-14,1,'white');
+  gfx.drawLine(spyX+8,spyY-10,spyX+20,spyY-6,1,'white');
+  drawCenteredWhite('S N O O P',110);
+  gfx.drawLine(SW/2-50,128,SW/2+50,128,1,'white');
+  gfx.drawLine(SW/2-48,130,SW/2+48,130,1,'white');
+  drawCenteredWhite('Search the buildings.',145);
+  drawCenteredWhite('[A] New Game',185);
+  drawCenteredWhite('Crank: interact  D-Pad: navigate',210);
+});
+
+// ---- Room Frame ----
+makeScene('Room Frame (perspective box)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  gfx.drawLine(0,0,WL,WT,1,'black');
+  gfx.drawLine(SW,0,WR,WT,1,'black');
+  gfx.drawLine(0,SH,WL,WB,1,'black');
+  gfx.drawLine(SW,SH,WR,WB,1,'black');
+  gfx.drawRect(WL,WT,WW,WH,'black');
+  for(let i=1;i<=2;i++){
+    const y=WB+i*(SH-WB)/3;
+    const s=(y-WB)*WL/(SH-WB);
+    gfx.drawLine(WL-s,y,WR+s,y,1,'black');
+  }
+});
+
+// ---- Window Wall ----
+makeScene('Window Wall (blinds open)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  // Room frame
+  gfx.drawLine(0,0,WL,WT,1,'black');gfx.drawLine(SW,0,WR,WT,1,'black');
+  gfx.drawLine(0,SH,WL,WB,1,'black');gfx.drawLine(SW,SH,WR,WB,1,'black');
+  gfx.drawRect(WL,WT,WW,WH,'black');
+  for(let i=1;i<=2;i++){const y=WB+i*(SH-WB)/3;const s=(y-WB)*WL/(SH-WB);gfx.drawLine(WL-s,y,WR+s,y,1,'black')}
+  // Window
+  const wx=WL+35,wy=WT+12,ww=WW-70,wh=WH-30;
+  gfx.drawRect(wx-3,wy-3,ww+6,wh+6,'black');
+  gfx.drawRect(wx,wy,ww,wh,'black');
+  gfx.fillRect(wx-5,wy+wh+3,ww+10,4,'black');
+  gfx.drawLine(wx-12,wy-5,wx+ww+12,wy-5,2,'black');
+  for(let i=0;i<3;i++){gfx.drawLine(wx-8-i*2,wy-3,wx-8-i*2,wy+wh,1,'black');gfx.drawLine(wx+ww+8+i*2,wy-3,wx+ww+8+i*2,wy+wh,1,'black')}
+  gfx.fillRect(wx+1,wy+1,ww-2,wh-2,'white');
+  const groundY=wy+wh*2/3;
+  gfx.drawLine(wx+2,groundY,wx+ww-2,groundY,1,'black');
+  gfx.drawLine(wx+2,groundY+10,wx+ww-2,groundY+10,1,'black');
+  gfx.drawRect(wx+10,groundY-18,20,18,'black');
+  gfx.drawLine(wx+10,groundY-18,wx+20,groundY-28,1,'black');
+  gfx.drawLine(wx+20,groundY-28,wx+30,groundY-18,1,'black');
+  gfx.drawRect(wx+ww-35,groundY-15,22,15,'black');
+  gfx.fillEllipse(wx+50,groundY-25,14,14,0,360,'black');
+  gfx.drawLine(wx+57,groundY-12,wx+57,groundY,2,'black');
+  const carX=wx+8,carY=groundY+2;
+  gfx.drawRect(carX,carY,24,7,'black');
+  gfx.drawRect(carX+5,carY-4,14,5,'black');
+  gfx.fillEllipse(carX+3,carY+5,5,5,0,360,'black');
+  gfx.fillEllipse(carX+17,carY+5,5,5,0,360,'black');
+  const slX=wx+ww-20;
+  gfx.drawLine(slX,groundY,slX,groundY-35,2,'black');
+  gfx.drawLine(slX-5,groundY-35,slX+5,groundY-35,1,'black');
+  gfx.fillEllipse(slX-3,groundY-38,6,4,0,360,'black');
+  gfx.fillEllipse(wx+ww-40,groundY-22,12,12,0,360,'black');
+  gfx.drawLine(wx+ww-34,groundY-10,wx+ww-34,groundY,2,'black');
+  drawCentered('Blinds: OPEN',SH-24);
+});
+
+// ---- Desk Wall ----
+makeScene('Desk Wall',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  gfx.drawLine(0,0,WL,WT,1,'black');gfx.drawLine(SW,0,WR,WT,1,'black');
+  gfx.drawLine(0,SH,WL,WB,1,'black');gfx.drawLine(SW,SH,WR,WB,1,'black');
+  gfx.drawRect(WL,WT,WW,WH,'black');
+  for(let i=1;i<=2;i++){const y=WB+i*(SH-WB)/3;const s=(y-WB)*WL/(SH-WB);gfx.drawLine(WL-s,y,WR+s,y,1,'black')}
+  const dx=WL+15,dw=WW-30;
+  const surfY=WT+WH/2-5;
+  gfx.fillRect(dx,surfY,dw,3,'black');
+  gfx.drawRect(dx,surfY,dw,WB-surfY-2,'black');
+  gfx.drawLine(dx+3,WB-2,dx+3,WB+8,2,'black');
+  gfx.drawLine(dx+dw-3,WB-2,dx+dw-3,WB+8,2,'black');
+  const colW=dw/3;
+  for(let c=0;c<3;c++){
+    const ix=dx+c*colW+5,iy=surfY-28;
+    if(c===0){gfx.drawLine(ix+10,iy+24,ix+10,iy+10,2,'black');gfx.drawLine(ix+3,iy+10,ix+17,iy+10,1,'black');gfx.drawLine(ix+5,iy+10,ix+8,iy+2,1,'black');gfx.drawLine(ix+15,iy+10,ix+12,iy+2,1,'black')}
+    else if(c===1){gfx.drawRect(ix+2,iy+8,20,14,'black');gfx.drawLine(ix,iy+22,ix+24,iy+22,1,'black')}
+    else{gfx.drawRect(ix+5,iy+4,16,20,'black');gfx.drawRect(ix+7,iy+6,12,16,'black')}
+  }
+  const drawerH=22,drawerW=(dw-16)/3,drawerY=surfY+10;
+  for(let c=0;c<3;c++){
+    const ddx=dx+4+c*(drawerW+4);
+    const sel=c===1;
+    if(sel)gfx.fillRect(ddx,drawerY,drawerW,drawerH,'black');
+    else gfx.drawRect(ddx,drawerY,drawerW,drawerH,'black');
+    const handleY=drawerY+drawerH/2-2;
+    gfx.fillEllipse(ddx+drawerW/2-3,handleY,6,4,0,360,sel?'white':'black');
+  }
+  drawCentered('[A] Investigate desk',SH-24);
+});
+
+// ---- Door Wall ----
+makeScene('Door Wall (locked)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  gfx.drawLine(0,0,WL,WT,1,'black');gfx.drawLine(SW,0,WR,WT,1,'black');
+  gfx.drawLine(0,SH,WL,WB,1,'black');gfx.drawLine(SW,SH,WR,WB,1,'black');
+  gfx.drawRect(WL,WT,WW,WH,'black');
+  for(let i=1;i<=2;i++){const y=WB+i*(SH-WB)/3;const s=(y-WB)*WL/(SH-WB);gfx.drawLine(WL-s,y,WR+s,y,1,'black')}
+  const ddx=WL+WW/2-30,dy=WT+8,dw=60,dh=WH-12;
+  gfx.drawRect(ddx-4,dy-4,dw+8,dh+8,'black');
+  gfx.drawRect(ddx-3,dy-3,dw+6,dh+6,'black');
+  gfx.drawRect(ddx,dy,dw,dh,'black');
+  gfx.drawRect(ddx+6,dy+6,dw-12,dh/2-12,'black');
+  gfx.drawRect(ddx+6,dy+dh/2+4,dw-12,dh/2-12,'black');
+  gfx.fillEllipse(ddx+dw/2-3,dy+18,6,6,0,360,'black');
+  const hx=ddx+dw-15,hy=dy+dh/2;
+  gfx.fillEllipse(hx,hy-3,8,8,0,360,'black');
+  gfx.drawRect(hx-1,hy-18,10,8,'black');
+  gfx.fillRect(hx+9,hy-16,14,4,'black');
+  gfx.drawRect(WL+WW/2-22,WB-2,44,5,'black');
+  drawCentered('LOCKED',SH-36);
+  drawCentered('Crank to turn lock',SH-14);
+});
+
+// ---- Closet Wall (partially open) ----
+makeScene('Closet Wall (partially open)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  gfx.drawLine(0,0,WL,WT,1,'black');gfx.drawLine(SW,0,WR,WT,1,'black');
+  gfx.drawLine(0,SH,WL,WB,1,'black');gfx.drawLine(SW,SH,WR,WB,1,'black');
+  gfx.drawRect(WL,WT,WW,WH,'black');
+  for(let i=1;i<=2;i++){const y=WB+i*(SH-WB)/3;const s=(y-WB)*WL/(SH-WB);gfx.drawLine(WL-s,y,WR+s,y,1,'black')}
+  const cx=WL+15,cy=WT+5,cw=WW-30,ch=WH-10;
+  const half=cw/2;
+  const closetDoor=0.6;
+  const gap=Math.floor(closetDoor*half*0.45);
+  gfx.drawRect(cx,cy,cw,ch,'black');
+  if(gap>2){
+    gfx.fillRect(cx+half-gap,cy+1,gap*2,ch-2,'black');
+    if(gap>8){for(let i=0;i<3;i++){const hx2=cx+half-gap+5+i*Math.floor((gap*2-10)/3);gfx.drawLine(hx2,cy+10,hx2,cy+ch*2/3,2,'white');gfx.drawLine(hx2-4,cy+ch*2/3,hx2+4,cy+ch*2/3,1,'white')}}
+  }
+  if(half-gap>3){gfx.drawRect(cx,cy,half-gap,ch,'black');gfx.drawRect(cx+half+gap,cy,half-gap,ch,'black')}
+  if(half-gap>6){gfx.fillEllipse(cx+half-gap-7,cy+ch/2-3,5,5,0,360,'black');gfx.fillEllipse(cx+half+gap+2,cy+ch/2-3,5,5,0,360,'black')}
+  drawCentered('Crank to open closet',SH-24);
+});
+
+// ---- Inside Closet ----
+makeScene('Inside Closet (peeking out)',(gfx,drawCentered,drawCenteredWhite)=>{
+  gfx.clear('black');
+  const slitH=4+Math.floor(0.5*50);
+  const slitY=SH/2-slitH/2;
+  const slitX=30,slitW=SW-60;
+  gfx.fillRect(slitX,slitY,slitW,slitH,'white');
+  gfx.drawLine(slitX,slitY,slitX+slitW,slitY,2,'black');
+  gfx.drawLine(slitX,slitY+slitH,slitX+slitW,slitY+slitH,2,'black');
+  const roomL=slitX+10,floorY=slitY+slitH-4;
+  gfx.fillRect(roomL,floorY-8,30,8,'black');
+  gfx.fillRect(roomL+40,floorY-12,20,12,'black');
+  drawCenteredWhite('Hiding... stay quiet',SH-30);
+  drawCenteredWhite('Crank to close door',SH-14);
+});
+
+// ---- Drawer Search ----
+makeScene('Drawer Search (rolodex UI)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  drawCentered('-- Drawer 1 --',8);
+  const cx=60,cy=35,cw=SW-120,ch=120;
+  gfx.drawRect(cx,cy,cw,ch,'black');
+  gfx.drawRect(cx+1,cy+1,cw-2,ch-2,'black');
+  drawCentered('Suspicious Ledger',cy+20);
+  drawCentered('!! EVIDENCE !!',cy+50);
+  drawCentered('[A] Take this!',cy+75);
+  const dotY=cy+ch+12,count=5,idx=2;
+  const totalW2=count*12;
+  const dotStartX=SW/2-totalW2/2;
+  for(let i=0;i<count;i++){
+    const dx2=dotStartX+i*12;
+    if(i===idx)gfx.fillEllipse(dx2,dotY,8,8,0,360,'black');
+    else gfx.drawEllipse(dx2,dotY,8,8,1,0,360,'black');
+  }
+  drawCentered('3 / 5',dotY+15);
+  drawCentered('Crank: scroll    [B] Close drawer',SH-20);
+});
+
+// ---- Busted ----
+makeScene('Busted Screen',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  drawCentered('!! BUSTED !!',40);
+  drawCentered('The owner walked in and found you!',75);
+  drawCentered('Evidence: 2/4',110);
+  drawCentered('[A] Try again',170);
+});
+
+// ---- HUD ----
+makeScene('HUD Overlay (gameplay)',(gfx,drawCentered)=>{
+  gfx.clear('white');
+  // Simplified HUD
+  gfx.fillRect(0,0,SW,16,'black');
+  gfx.drawTextWhite=function(t,x,y){
+    const c=document.createElement('canvas').getContext('2d');
+  };
+  // Left: evidence
+  const ctx2=gfx;
+  // Just show the bar
+  gfx.fillRect(4,3,60,10,'white');gfx.fillRect(4,3,30,10,'white');
+  // Arrow indicators
+  gfx.drawLine(WL-10,SH/2,WL-2,SH/2,2,'black');
+  gfx.drawLine(WL-8,SH/2-4,WL-2,SH/2,1,'black');
+  gfx.drawLine(WL-8,SH/2+4,WL-2,SH/2,1,'black');
+  gfx.drawLine(WR+2,SH/2,WR+10,SH/2,2,'black');
+  gfx.drawLine(WR+2,SH/2,WR+8,SH/2-4,1,'black');
+  gfx.drawLine(WR+2,SH/2,WR+8,SH/2+4,1,'black');
+  drawCentered('North Wall - Desk',20);
+  drawCentered('Evidence: 2/4    Room: Office 3B',SH-10);
+});
+</script>
+</body></html>

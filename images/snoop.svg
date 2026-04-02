@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+  <rect width="400" height="240" fill="#000"/>
+  <!-- Moon -->
+  <circle cx="340" cy="45" r="25" fill="#fff"/>
+  <circle cx="350" cy="38" r="22" fill="#000"/>
+  <!-- Stars -->
+  <circle cx="50" cy="20" r="1.5" fill="#fff"/>
+  <circle cx="120" cy="35" r="1" fill="#fff"/>
+  <circle cx="200" cy="15" r="1.5" fill="#fff"/>
+  <circle cx="270" cy="28" r="1" fill="#fff"/>
+  <circle cx="80" cy="50" r="1" fill="#fff"/>
+  <circle cx="160" cy="45" r="1.5" fill="#fff"/>
+  <circle cx="300" cy="18" r="1" fill="#fff"/>
+  <!-- Cityscape - back row -->
+  <rect x="20" y="90" width="35" height="150" fill="#fff"/>
+  <rect x="60" y="110" width="25" height="130" fill="#fff"/>
+  <rect x="90" y="75" width="30" height="165" fill="#fff"/>
+  <rect x="125" y="100" width="20" height="140" fill="#fff"/>
+  <rect x="150" y="85" width="40" height="155" fill="#fff"/>
+  <rect x="195" y="105" width="25" height="135" fill="#fff"/>
+  <rect x="225" y="70" width="35" height="170" fill="#fff"/>
+  <rect x="265" y="95" width="20" height="145" fill="#fff"/>
+  <rect x="290" y="80" width="30" height="160" fill="#fff"/>
+  <rect x="325" y="110" width="25" height="130" fill="#fff"/>
+  <rect x="355" y="90" width="30" height="150" fill="#fff"/>
+  <!-- Windows (small dots on buildings) -->
+  <rect x="27" y="100" width="4" height="5" fill="#000"/>
+  <rect x="38" y="100" width="4" height="5" fill="#000"/>
+  <rect x="27" y="115" width="4" height="5" fill="#000"/>
+  <rect x="38" y="115" width="4" height="5" fill="#000"/>
+  <rect x="27" y="130" width="4" height="5" fill="#000"/>
+  <rect x="38" y="130" width="4" height="5" fill="#000"/>
+  <rect x="97" y="85" width="4" height="5" fill="#000"/>
+  <rect x="108" y="85" width="4" height="5" fill="#000"/>
+  <rect x="97" y="100" width="4" height="5" fill="#000"/>
+  <rect x="108" y="100" width="4" height="5" fill="#000"/>
+  <rect x="97" y="115" width="4" height="5" fill="#000"/>
+  <rect x="108" y="115" width="4" height="5" fill="#000"/>
+  <rect x="157" y="95" width="4" height="5" fill="#000"/>
+  <rect x="168" y="95" width="4" height="5" fill="#000"/>
+  <rect x="179" y="95" width="4" height="5" fill="#000"/>
+  <rect x="157" y="110" width="4" height="5" fill="#000"/>
+  <rect x="168" y="110" width="4" height="5" fill="#000"/>
+  <rect x="179" y="110" width="4" height="5" fill="#000"/>
+  <rect x="232" y="80" width="4" height="5" fill="#000"/>
+  <rect x="243" y="80" width="4" height="5" fill="#000"/>
+  <rect x="232" y="95" width="4" height="5" fill="#000"/>
+  <rect x="243" y="95" width="4" height="5" fill="#000"/>
+  <rect x="232" y="110" width="4" height="5" fill="#000"/>
+  <rect x="243" y="110" width="4" height="5" fill="#000"/>
+  <rect x="297" y="90" width="4" height="5" fill="#000"/>
+  <rect x="308" y="90" width="4" height="5" fill="#000"/>
+  <rect x="297" y="105" width="4" height="5" fill="#000"/>
+  <rect x="308" y="105" width="4" height="5" fill="#000"/>
+  <rect x="362" y="100" width="4" height="5" fill="#000"/>
+  <rect x="373" y="100" width="4" height="5" fill="#000"/>
+  <rect x="362" y="115" width="4" height="5" fill="#000"/>
+  <rect x="373" y="115" width="4" height="5" fill="#000"/>
+  <!-- Spy silhouette (foreground, right) -->
+  <!-- Hat -->
+  <ellipse cx="330" cy="135" rx="18" ry="4" fill="#fff"/>
+  <ellipse cx="330" cy="132" rx="12" ry="10" fill="#fff"/>
+  <!-- Head -->
+  <ellipse cx="330" cy="148" rx="10" ry="12" fill="#fff"/>
+  <!-- Body / coat -->
+  <path d="M320 158 L315 240 L345 240 L340 158 Z" fill="#fff"/>
+  <!-- Collar -->
+  <path d="M322 158 L330 170 L338 158" fill="#000" stroke="#000" stroke-width="1"/>
+  <!-- Binoculars -->
+  <rect x="310" y="142" width="8" height="6" rx="2" fill="#000"/>
+  <rect x="303" y="140" width="8" height="10" rx="3" fill="#000"/>
+  <!-- Title: S N O O P -->
+  <text x="200" y="225" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#fff" letter-spacing="12">SNOOP</text>
+</svg>
