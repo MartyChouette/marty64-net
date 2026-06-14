@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ink Ribbon - Marty Scott</title>
+<meta name="description" content="Ink Ribbon: a typing narrative about two rival families' typists who fall in love through hidden messages buried in official correspondence, and the secret language that becomes the key to preventing a war.">
+<meta property="og:title" content="Ink Ribbon">
+<meta property="og:description" content="Two typists. Opposite sides of a coming war. A love story written in the spaces between official correspondence.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://marty64.net/ink-ribbon/showcase.html">
+<meta property="og:image" content="https://marty64.net/ink-ribbon/shots/prototype2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ink Ribbon">
+<meta name="twitter:description" content="Two typists. Opposite sides of a coming war. A love story written in the spaces between official correspondence.">
+<meta name="twitter:image" content="https://marty64.net/ink-ribbon/shots/prototype2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --bg: #1a0f09;
+    --bg2: #140b06;
+    --paper: #f4eed6;
+    --ink: #2c1810;
+    --text: #f4eed6;
+    --text2: #a89880;
+    --text3: #8a7a68;
+    --gold: #c9a84c;
+    --rust: #b85a30;
+    --candle: #c87828;
+    --slate: #8a9aaa;
+    --plum: #6b5b7b;
+    --line: rgba(196,181,154,0.12);
+    --red: #8b2500;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* paper grain */
+  body::before {
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.04;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:140px 140px;
+  }
+
+  /* === TOP BAR === */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px;
+    background: rgba(20,11,6,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .mark {
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .topbar a {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text3); text-decoration: none; transition: color 0.15s;
+  }
+  .topbar a:hover { color: var(--gold); }
+  .topbar .right { display: flex; align-items: center; gap: 16px; }
+  .topbar .itch-top {
+    font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--gold); color: #1a0f09 !important; padding: 7px 14px; border-radius: 3px; transition: all 0.15s;
+  }
+  .topbar .itch-top:hover { background: #e2c062; color: #1a0f09 !important; }
+
+  /* === LAYOUT === */
+  .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 82px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .eyebrow {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--rust); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 64px; line-height: 1.05;
+    letter-spacing: 1px; margin-bottom: 18px;
+  }
+  h2 {
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700; font-size: 26px; line-height: 1.2;
+    color: var(--paper); margin-bottom: 20px;
+  }
+  h3 {
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700; font-size: 15px; letter-spacing: 1px;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  p { margin-bottom: 16px; color: #e8dfc6; }
+  p:last-child { margin-bottom: 0; }
+  section p:not(.lead):not(.thesis):not(.muted):not(.tagline):not(.mechanic-desc) { text-indent: 1.6em; }
+  .beats { margin: 34px 0; }
+  .lead { font-size: 20px; line-height: 1.6; color: var(--text); }
+  .thesis { font-family: 'Crimson Text', serif; font-style: italic; font-size: 21px; line-height: 1.5; color: var(--paper); border-left: 2px solid var(--gold); padding-left: 20px; margin-top: 26px; }
+  .muted { color: var(--text2); }
+  em.book { font-style: italic; color: var(--text2); }
+  strong { color: var(--paper); font-weight: 600; }
+
+  /* === HERO === */
+  .hero {
+    position: relative; min-height: 82vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    text-align: left; padding: 90px 0; border-bottom: 1px solid var(--line);
+  }
+  .hero::before {
+    content:''; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw;
+    transform: translateX(-50%); z-index: 0;
+    background:
+      linear-gradient(180deg, rgba(20,11,6,0.70) 0%, rgba(20,11,6,0.84) 50%, rgba(26,15,9,0.98) 100%),
+      radial-gradient(ellipse at 72% 32%, rgba(201,168,76,0.14), transparent 60%),
+      url('shots/prototype2.png') center center / cover no-repeat;
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.35); border-radius: 999px;
+    padding: 6px 14px; margin-bottom: 26px;
+  }
+  .status-badge .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero h1 { font-size: 78px; text-shadow: 0 2px 30px rgba(0,0,0,0.55); margin-bottom: 18px; }
+  .hero .tagline {
+    font-family: 'Crimson Text', serif; font-style: italic;
+    font-size: 24px; line-height: 1.5; color: var(--paper);
+    max-width: 640px; text-shadow: 0 1px 16px rgba(0,0,0,0.5);
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 13px 24px; border-radius: 4px; text-decoration: none; cursor: pointer;
+    transition: all 0.18s; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--gold); color: #1a0f09; }
+  .btn-primary:hover { background: #e2c062; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.25); }
+  .btn-ghost { background: rgba(20,11,6,0.4); color: var(--text); border-color: rgba(244,238,214,0.25); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .build-pass { margin-top: 16px; font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 0.5px; color: var(--text2); }
+  .build-pass strong { font-family: 'Courier Prime', monospace; color: var(--gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.35); border-radius: 3px; padding: 1px 8px; letter-spacing: 2px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+  .chip {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text2); border: 1px solid rgba(244,238,214,0.18);
+    padding: 6px 12px; border-radius: 2px; background: rgba(20,11,6,0.3);
+  }
+
+  /* === PILLARS === */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .pillar {
+    border: 1px solid var(--line); border-radius: 4px; padding: 18px;
+    background: rgba(244,238,214,0.02);
+  }
+  .pillar .k {
+    font-family: 'Special Elite', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 8px;
+  }
+  .pillar .v { font-family: 'Courier Prime', monospace; font-size: 16px; color: var(--paper); line-height: 1.4; }
+
+  /* === DISPUTE CARDS === */
+  .disputes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .dispute {
+    border: 1px solid var(--line); border-top: 2px solid var(--rust);
+    border-radius: 4px; padding: 18px; background: rgba(244,238,214,0.02);
+  }
+  .dispute .act {
+    font-family: 'Special Elite', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text3); margin-bottom: 6px;
+  }
+  .dispute .name { font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 17px; color: var(--paper); margin-bottom: 10px; }
+  .dispute .desc { font-size: 15px; line-height: 1.5; color: var(--text2); }
+
+  /* === LAYER LIST === */
+  .layers { margin-top: 24px; display: grid; gap: 12px; }
+  .layer {
+    display: grid; grid-template-columns: 130px 1fr; gap: 16px;
+    border-left: 2px solid var(--gold); padding: 6px 0 6px 18px;
+  }
+  .layer .lname { font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 15px; color: var(--gold); }
+  .layer .ldesc { font-size: 15px; color: var(--text2); line-height: 1.5; }
+
+  /* === MECHANICS EXPLORER === */
+  .explorer { margin-top: 32px; }
+  /* channel legend */
+  .cipher-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 14px; }
+  .cipher-legend span { font-family: 'Special Elite', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); display: inline-flex; align-items: center; gap: 7px; }
+  .cipher-legend span::before { content: ''; width: 9px; height: 9px; border-radius: 2px; background: var(--line); }
+  .cipher-legend .day::before { background: var(--gold); }
+  .cipher-legend .candle::before { background: var(--candle); }
+  .cipher-legend .phys::before { background: var(--slate); }
+
+  /* index-card tabs */
+  .cipher-tabs { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-end; position: relative; z-index: 2; }
+  .mtab {
+    font-family: 'Crimson Text', serif; font-size: 14px; color: var(--text2);
+    background: rgba(244,238,214,0.03);
+    border: 1px solid var(--line); border-bottom: none;
+    border-top: 3px solid var(--line); border-radius: 7px 7px 0 0;
+    padding: 9px 17px; cursor: pointer; transition: all 0.15s; position: relative; top: 1px;
+  }
+  .mtab.ch-day { border-top-color: var(--gold); }
+  .mtab.ch-candle { border-top-color: var(--candle); }
+  .mtab.ch-phys { border-top-color: var(--slate); }
+  .mtab:hover { color: var(--paper); background: rgba(244,238,214,0.07); }
+  .mtab.active { color: var(--paper); background: var(--bg2); }
+
+  .panel-host { border: 1px solid var(--line); border-radius: 0 7px 7px 7px; background: var(--bg2); padding: 26px; }
+  .panel { display: none; }
+  .panel.active { display: flex; flex-direction: column; }
+  .panel.active > .mechanic-header { order: 0; }
+  .panel.active > .stripe-label { order: 1; }
+  .panel.active > .controls-row { order: 1; }
+  .panel.active > .letter-frame { order: 2; }
+  .panel.active > .decode-box { order: 3; }
+
+  .mechanic-header { margin-bottom: 18px; }
+  .mechanic-header h4 {
+    font-family: 'Courier Prime', monospace; font-size: 21px; font-weight: 700;
+    color: var(--paper); margin-bottom: 8px;
+  }
+  .badge {
+    display: inline-block; font-family: 'Special Elite', monospace;
+    font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 2px; margin-right: 6px; margin-bottom: 8px;
+  }
+  .badge-daylight { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .badge-candle { background: rgba(200,120,40,0.15); color: var(--candle); }
+  .badge-physical { background: rgba(120,140,160,0.15); color: var(--slate); }
+  .badge-act { background: rgba(107,91,123,0.16); color: #a692b6; }
+  .badge-method { background: rgba(100,140,160,0.14); color: #7a9aaa; }
+  .mechanic-desc { font-size: 15px; color: var(--text2); margin-bottom: 16px; line-height: 1.55; }
+  .mechanic-real { font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5; border-left: 2px solid rgba(201,168,76,0.35); padding-left: 12px; }
+  .mechanic-real strong { color: var(--gold); font-weight: 600; }
+
+  /* === LETTER FRAME (ported from cipher reference) === */
+  .letter-frame {
+    background: var(--paper); border: 1px solid #c4b59a; border-radius: 3px;
+    padding: 32px 36px; position: relative; box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(139,116,65,0.04) 27px, rgba(139,116,65,0.04) 28px);
+    margin-bottom: 14px;
+  }
+  .letterhead { text-align: center; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #c4b59a; }
+  .letterhead .crest { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--plum); letter-spacing: 3px; }
+  .letterhead .office { font-family: 'Special Elite', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #8b7441; margin-top: 2px; }
+  .typed-line { font-family: 'Courier Prime', monospace; font-size: 13.5px; line-height: 2.0; color: var(--ink); position: relative; white-space: pre-wrap; }
+  .typed-line.blank { height: 27px; }
+
+  .acr { transition: all 0.3s; }
+  .revealed .acr { color: var(--red); font-weight: bold; text-decoration: underline; text-underline-offset: 3px; }
+
+  .flutter { display: inline-block; width: 1.6em; position: relative; vertical-align: baseline; }
+  .flutter::before, .flutter::after { content: ''; position: absolute; top: 50%; border-radius: 50%; background: rgba(44,24,16,0.35); }
+  .flutter::before { left: 30%; width: 3px; height: 2px; transform: translateY(-1px) rotate(15deg); box-shadow: 4px -1px 0 0 rgba(44,24,16,0.18), -2px 1px 0 0 rgba(44,24,16,0.12), 6px 1px 0 0 rgba(44,24,16,0.08); }
+  .flutter::after { left: 55%; width: 2px; height: 1px; transform: translateY(1px); box-shadow: 3px 0 0 0 rgba(44,24,16,0.14), -3px -1px 0 0 rgba(44,24,16,0.10); }
+  .revealed .flutter { background: rgba(201,168,76,0.08); }
+  .flutter-payload { transition: all 0.3s; }
+  .revealed .flutter-payload { background: rgba(201,168,76,0.12); border-bottom: 1px dashed rgba(139,90,43,0.4); }
+
+  .stripe { position: relative; transition: all 0.3s; }
+  .stripe::after { content: ''; position: absolute; left: -36px; right: -36px; top: 50%; height: 2px; transform: translateY(-1px); background: linear-gradient(90deg, rgba(44,24,16,0.03) 0%, rgba(44,24,16,0.08) 8%, rgba(44,24,16,0.06) 50%, rgba(44,24,16,0.09) 92%, rgba(44,24,16,0.04) 100%); pointer-events: none; }
+  .revealed .stripe { background: rgba(201,168,76,0.06); }
+  .revealed .stripe::after { background: linear-gradient(90deg, rgba(139,37,0,0.06) 0%, rgba(139,37,0,0.14) 8%, rgba(139,37,0,0.10) 50%, rgba(139,37,0,0.16) 92%, rgba(139,37,0,0.06) 100%); }
+  .filler { transition: all 0.3s; }
+  .revealed .filler { opacity: 0.3; }
+
+  .kw { transition: all 0.3s; }
+  .kw-dictation { display: none; }
+  .revealed .kw { color: var(--red); background: rgba(139,37,0,0.08); padding: 0 2px; }
+  .revealed .kw-dictation { display: block; }
+
+  .tc { transition: all 0.3s; }
+  .revealed .tc { color: var(--red); font-weight: bold; font-size: 15px; }
+
+  .tw { transition: all 0.3s; }
+  .revealed .tw { color: var(--red); font-weight: bold; }
+  .tw-filler { transition: all 0.3s; }
+  .revealed .tw-filler { opacity: 0.35; }
+
+  .heat-line { font-family: 'Crimson Text', serif; font-size: 11.5px; font-style: italic; color: rgba(139,90,43,0); height: 0; overflow: hidden; transition: all 0.5s; margin: 0; line-height: 1.4; padding-left: 12px; }
+  .revealed .heat-line { color: rgba(139,90,43,0.7); height: 18px; margin: 2px 0; }
+
+  .pin { position: absolute; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; display: none; }
+  .revealed .pin { display: block; background: radial-gradient(circle, rgba(201,168,76,0.85) 0%, rgba(201,168,76,0) 70%); box-shadow: 0 0 5px rgba(201,168,76,0.6); }
+
+  .crease-mark { position: absolute; top: 0; bottom: 0; width: 1px; pointer-events: none; }
+  .fold-std { background: linear-gradient(180deg, transparent 3%, rgba(44,24,16,0.06) 12%, rgba(44,24,16,0.10) 50%, rgba(44,24,16,0.06) 88%, transparent 97%); }
+  .fold-code { background: linear-gradient(180deg, transparent 3%, rgba(44,24,16,0.08) 12%, rgba(44,24,16,0.14) 50%, rgba(44,24,16,0.08) 88%, transparent 97%); }
+  .revealed .fold-code { background: linear-gradient(180deg, transparent 3%, rgba(139,37,0,0.10) 12%, rgba(139,37,0,0.18) 50%, rgba(139,37,0,0.10) 88%, transparent 97%); }
+  .crease-char { transition: all 0.3s; }
+  .revealed .crease-char { color: var(--red); font-weight: bold; background: rgba(139,37,0,0.06); }
+  .crease-readout { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: none; flex-direction: column; align-items: center; gap: 6px; font-family: 'Courier Prime', monospace; font-size: 16px; font-weight: bold; color: var(--red); }
+  .crease-readout::before { content: '\25BC'; font-size: 8px; color: rgba(139,37,0,0.4); }
+  .crease-readout span { display: block; width: 22px; height: 22px; line-height: 22px; text-align: center; border: 1px solid rgba(139,37,0,0.2); border-radius: 2px; background: rgba(139,37,0,0.04); }
+  .revealed .crease-readout { display: flex; }
+
+  .water-seep { position: absolute; top: 0; right: -1px; bottom: 0; width: 0%; background: linear-gradient(90deg, transparent 0%, rgba(90,100,110,0.03) 20%, rgba(80,90,100,0.07) 50%, rgba(70,80,90,0.10) 80%, rgba(65,75,85,0.13) 100%); transition: width 1.2s ease-out; pointer-events: none; border-radius: 0 3px 3px 0; }
+  .revealed .water-seep { width: 45%; }
+  .water-drops { position: absolute; top: 0; right: 0; bottom: 0; width: 8px; opacity: 0; transition: opacity 0.6s; background: radial-gradient(ellipse at 50% 15%, rgba(100,115,130,0.12) 0%, transparent 60%), radial-gradient(ellipse at 30% 40%, rgba(100,115,130,0.10) 0%, transparent 50%), radial-gradient(ellipse at 70% 65%, rgba(100,115,130,0.14) 0%, transparent 55%), radial-gradient(ellipse at 40% 85%, rgba(100,115,130,0.09) 0%, transparent 50%); }
+  .revealed .water-drops { opacity: 1; }
+  .water-text { position: absolute; right: 44px; font-family: 'Crimson Text', serif; font-size: 12px; font-style: italic; color: rgba(70,50,25,0); white-space: nowrap; transition: color 1s 0.4s; }
+  .revealed .water-text { color: rgba(70,50,25,0.55); }
+
+  /* controls + decode */
+  .controls-row { display: flex; gap: 10px; margin-bottom: 16px; }
+  .reveal-btn { font-family: 'Special Elite', monospace; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid var(--gold); border-radius: 4px; padding: 13px 30px; cursor: pointer; transition: all 0.2s; }
+  .reveal-btn:hover { background: rgba(201,168,76,0.12); }
+  .reveal-btn.active { background: var(--gold); color: #1a0f09; }
+  .decode-box { padding: 14px 16px; background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.12); border-radius: 3px; opacity: 0; max-height: 0; overflow: hidden; transition: opacity 0.3s; }
+  .decode-box.visible { opacity: 1; max-height: none; }
+  .decode-label { font-family: 'Special Elite', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #6b5744; margin-bottom: 6px; }
+  .decode-text { font-size: 14px; color: var(--gold); font-style: italic; line-height: 1.6; }
+  .decode-text b { color: var(--paper); font-style: normal; }
+  .decode-text u { text-decoration-color: rgba(201,168,76,0.5); }
+
+  .stripe-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b5744; margin: 16px 0 8px; }
+
+  /* === THREE ZONES === */
+  .zones { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+  .zone { border:1px solid var(--line); border-radius:4px; padding:18px; background:rgba(244,238,214,0.02); border-top:2px solid; }
+  .zone .z-dir { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; color:var(--text3); }
+  .zone .z-name { font-family:'Courier Prime',monospace; font-weight:700; font-size:16px; color:var(--paper); margin-bottom:8px; }
+  .zone .z-desc { font-size:14px; color:var(--text2); line-height:1.5; }
+  .diagram { margin: 26px 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #0d0a07; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .diagram-cap { font-family:'Special Elite',monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); padding: 10px 14px; border-top: 1px solid var(--line); }
+
+  /* === PROTOTYPE GALLERY === */
+  .shots { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:24px; }
+  .shot { border:1px solid var(--line); border-radius:4px; overflow:hidden; background:rgba(244,238,214,0.02); margin:0; position:relative; }
+  .shot img { width:100%; display:block; }
+  .shot figcaption { font-family:'Special Elite',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text3); padding:10px 12px; border-top:1px solid var(--line); position:relative; z-index:1; background:var(--bg); }
+  .shot.empty { min-height:210px; }
+  .shot.empty::before { content:'Prototype shot'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Special Elite',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#4a3a2a; background:repeating-linear-gradient(45deg, rgba(244,238,214,0.02) 0 10px, transparent 10px 20px); }
+
+  /* === ACT SELECTOR + INDICATORS === */
+  .act-select { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 18px; }
+  .act-btn { font-family:'Special Elite',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--text2); background:transparent; border:1px solid var(--line); border-radius:3px; padding:8px 16px; cursor:pointer; transition:all .15s; }
+  .act-btn:hover { color:var(--paper); border-color:rgba(201,168,76,.4); }
+  .act-btn.active { color:var(--gold); border-color:var(--gold); background:rgba(201,168,76,.08); }
+  .threat-meter { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .threat-label { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); white-space:nowrap; }
+  .threat-track { flex:1; height:4px; background:rgba(244,238,214,0.06); border-radius:2px; overflow:hidden; }
+  .threat-fill { height:100%; width:20%; border-radius:2px; transition:all .4s ease; }
+  .indicators { display:grid; gap:0; border:1px solid var(--line); border-radius:4px; overflow:hidden; }
+  .ind-row { display:grid; grid-template-columns:140px 1fr; gap:14px; padding:12px 16px; border-bottom:1px solid var(--line); align-items:baseline; }
+  .ind-row:last-child { border-bottom:none; }
+  .ind-name { font-family:'Courier Prime',monospace; font-size:13px; color:var(--gold); }
+  .ind-state { font-size:15px; color:var(--text2); line-height:1.45; }
+
+  /* === STREET WINDOW MOCKUP === */
+  .window-mock { max-width: 640px; margin-top: 8px; }
+  .window-svg { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 2px 18px rgba(0,0,0,0.45); background: #0a0604; }
+  .tension-control { margin-top: 22px; max-width: 640px; }
+  .tension-ends { display: flex; justify-content: space-between; font-family:'Special Elite',monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .tension-ends .peace-end { color: #6aaa6a; }
+  .tension-ends .war-end { color: #c85040; }
+  input[type=range].tension { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #6aaa6a, #d4a850 55%, #c85040); outline: none; cursor: pointer; }
+  input[type=range].tension::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); border: 2px solid var(--gold); cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+  input[type=range].tension::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--paper); border: 2px solid var(--gold); cursor: pointer; }
+  .tension-state { margin-top: 16px; }
+  .tension-state .ts-name { font-family:'Courier Prime',monospace; font-weight: 700; font-size: 18px; color: var(--gold); }
+  .tension-state .ts-desc { font-size: 15px; color: var(--text2); margin-top: 2px; }
+
+  /* === LETTERHEAD ARC === */
+  .heads { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px; }
+  .head-card { background:var(--paper); border:1px solid #c4b59a; border-radius:3px; padding:18px 16px 14px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .head-card .hc-crest { font-family:'Playfair Display',serif; font-weight:700; letter-spacing:3px; color:var(--plum); font-size:15px; }
+  .head-card .hc-sub { font-family:'Special Elite',monospace; font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:#8b7441; margin-top:4px; min-height:11px; }
+  .head-card .hc-rule { height:1px; background:#c4b59a; margin:12px 0; }
+  .head-card .hc-body { font-family:'Courier Prime',monospace; font-size:10px; color:#2c1810; opacity:.45; line-height:1.9; }
+  .head-card .hc-act { font-family:'Special Elite',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8b7441; margin-top:14px; }
+  .head-card.imperial .hc-crest { color:#8b2500; }
+  .head-card.imperial .hc-sub { color:#8b2500; }
+  .head-card.republic .hc-crest { color:#6f7280; }
+  .head-card.republic .hc-sub { color:#6f7280; }
+
+  /* === MAP COMPASS === */
+  .compass { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; max-width:560px; margin:24px auto 0; }
+  .nation { border:1px solid var(--line); border-radius:4px; padding:14px 10px; text-align:center; }
+  .nation .n-dir { font-family:'Special Elite',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:6px; }
+  .nation .n-name { font-family:'Courier Prime',monospace; font-weight:700; font-size:14px; color:var(--paper); }
+  .nation .n-tag { font-size:13px; color:var(--text2); margin-top:4px; line-height:1.4; }
+  .nation.center { border-color:rgba(122,104,168,0.5); background:rgba(122,104,168,0.07); }
+  .nation.center .n-name { color:#a692b6; }
+  .nation.north { border-top:2px solid var(--rust); }
+  .nation.south { border-top:2px solid #c4b59a; }
+  .nation.west { border-top:2px solid var(--slate); }
+  .pos-n { grid-column:2; grid-row:1; }
+  .pos-w { grid-column:1; grid-row:2; }
+  .pos-c { grid-column:2; grid-row:2; }
+  .pos-e { grid-column:3; grid-row:2; display:flex; flex-direction:column; justify-content:center; }
+  .pos-s { grid-column:2; grid-row:3; }
+
+  /* === FOOTER === */
+  footer { text-align: center; padding: 40px 24px 56px; position: relative; z-index: 1; }
+  footer .line { font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 44px; }
+    .pillars, .disputes { grid-template-columns: 1fr; }
+    .layer { grid-template-columns: 1fr; gap: 4px; }
+    .hero .tagline { font-size: 20px; }
+    .letter-frame { padding: 24px 20px; }
+    .typed-line { font-size: 12.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="mark">Ink Ribbon</span>
+  <div class="right">
+    <a href="../index.html" aria-label="Back to marty64.net">&larr;</a>
+    <a class="itch-top itch-link" href="https://martychouette.itch.io/ink-ribbon" target="_blank" rel="noopener">Play prototype &#8599;</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <span class="status-badge"><span class="pulse"></span> In development &middot; A quiet border town in 1914</span>
+    <h1>Ink Ribbon</h1>
+    <p class="tagline">Two rival families' typists fall in love through hidden messages buried in official correspondence, and their secret language becomes the key to preventing a war.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary itch-link" href="https://martychouette.itch.io/ink-ribbon" target="_blank" rel="noopener">&#9654;&nbsp;&nbsp;Play the prototype on itch.io</a>
+      <a class="btn btn-ghost" href="#secret-language">See how the ciphers work</a>
+    </div>
+    <p class="build-pass">The itch build is password-protected: enter <strong>ink</strong> to unlock it.</p>
+  </section>
+
+  <!-- ============ OPENING ============ -->
+  <section>
+    <p class="lead">Ink Ribbon is a narrative typing puzzle game. You play a family-employed typist in 1914, in a small Rovellan town on the edge of war. You type the daily correspondence from inside and outside the estate, and you begin to pick up suspicious patterns inside the letters. From small gossip to the tides of war, it is a game about paying attention and corresponding in codes.</p>
+  </section>
+
+  <!-- ============ SETTING ============ -->
+  <section>
+    <div class="eyebrow">The setting</div>
+    <p><strong>Rovella</strong> is a small border town built on ink and paper mills, in the contested region of <strong>Trentara</strong> where three nations meet. The Aurine Empire, the Serenna Republic, and the Helvetar Cantons. Two families wield immense power over the Rovellan locals. The <strong>Epaule</strong> hold the mayorship and support the sovereign Serennan South. The rival <strong>Aguien</strong> hold the ambassadorship and answer to the growing Aurine Empire, contesting from the North. One family owns the town. The other outranks it.</p>
+  </section>
+
+  <!-- ============ CORE DESIGN ============ -->
+  <section>
+    <div class="eyebrow">The core design</div>
+    <h2>You type what you are told. But what is encoded is the game.</h2>
+    <p class="lead">You are a typist for the Epaule family, working from a desk in the estate study. Across the street, another typist works for the rival Aguien household. You never meet. Your letters cross only through the documents the two houses exchange each day.</p>
+    <div class="beats">
+      <p>At first you notice anomalies in the documents from across the street. An extra space. An odd word choice. These are not mistakes. Someone on the other side is trying to say something.</p>
+      <p>Over the unfolding days, a romance grows in those secrets and symbols. You uncover more messages and work to put out the tensions and family dramas the coming war brings.</p>
+    </div>
+    <p class="thesis">Ink Ribbon is a game about how encoding information isn't about hiding it. It's about channeling it.</p>
+  </section>
+
+
+  <!-- ============ STATIONERY, TYPE & SIGNAGE ============ -->
+  <section>
+    <div class="eyebrow">Stationery, type &amp; signage</div>
+    <h2>Read the temperature on the page</h2>
+    <p>The letterhead tells its own story. In Act 1 both families write on stationery carrying their crests in the local blend, lavender and all. Both say: we are from Rovella. As the dispute escalates, national symbols creep in beside the crests. By Act 3 the crests are gone. You are typing on stationery that belongs to nations, not families.</p>
+
+    <div class="stripe-label">The Epaule house, act by act</div>
+    <div class="heads">
+      <div class="head-card">
+        <div class="hc-crest">&#9672; EPAULE &#9672;</div>
+        <div class="hc-sub">Rovella, Trentara</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">family crest<br>lavender and white<br>local mill paper</div>
+        <div class="hc-act">Act 1 &middot; the blend</div>
+      </div>
+      <div class="head-card">
+        <div class="hc-crest">&#9672; EPAULE &#9672;</div>
+        <div class="hc-sub">Office of the Mayor</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">crest + Serennan motif<br>lavender receding<br>Serennan white arriving</div>
+        <div class="hc-act">Act 2 &middot; markers appear</div>
+      </div>
+      <div class="head-card republic">
+        <div class="hc-crest">SERENNA REPUBLIC</div>
+        <div class="hc-sub">Office of the Mayor</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">republican header<br>family name a line item<br>pure Serennan white</div>
+        <div class="hc-act">Act 3 &middot; faction stationery</div>
+      </div>
+    </div>
+
+    <div class="stripe-label" style="margin-top:28px">The Aguien house, act by act</div>
+    <div class="heads">
+      <div class="head-card">
+        <div class="hc-crest">&#9672; AGUIEN &#9672;</div>
+        <div class="hc-sub">Rovella, Trentara</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">family crest<br>lavender and red<br>local mill paper</div>
+        <div class="hc-act">Act 1 &middot; the blend</div>
+      </div>
+      <div class="head-card">
+        <div class="hc-crest">&#9672; AGUIEN &#9672;</div>
+        <div class="hc-sub">Imperial Administration</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">crest + imperial seal<br>lavender fading<br>Aurinian bond arriving</div>
+        <div class="hc-act">Act 2 &middot; markers appear</div>
+      </div>
+      <div class="head-card imperial">
+        <div class="hc-crest">AURINE EMPIRE</div>
+        <div class="hc-sub">Office of the Ambassador</div>
+        <div class="hc-rule"></div>
+        <div class="hc-body">imperial header<br>family name a line item<br>Aurinian red bond</div>
+        <div class="hc-act">Act 3 &middot; faction stationery</div>
+      </div>
+    </div>
+
+    <p style="margin-top:24px">The same separation happens out on the street. Shopfronts and notices start in the mixed Trentaran script, red awnings beside white facades with blue doors. Then the signs get repainted, one at a time, into a single national language. By Act 3 the blue is gone with the Helvetans, the street is color-separated, and the notice board carries conscription orders. If you are winning, the signs stay mixed and the blue doors stay blue.</p>
+  </section>
+
+  <!-- ============ MECHANICS EXPLORER ============ -->
+  <section id="secret-language">
+    <div class="eyebrow">The secret language</div>
+    <h2>Ciphers in three channels</h2>
+    <p>The language is never handed to you. It is always present, you just cannot see it yet. Routine-looking early documents were carrying messages you could not read at the time. The game trains a new way of reading until you cannot look at a typed page without searching it.</p>
+    <p><strong>Typewriter</strong> ciphers hide in the typed text itself, readable right at the desk. <strong>Candlelight</strong> ciphers need a flame. <strong>Physical</strong> ciphers need you to do something to the paper. Pick one and reveal it.</p>
+
+    <div class="explorer">
+      <div class="cipher-legend">
+        <span class="day">Typewriter</span>
+        <span class="candle">Candlelight</span>
+        <span class="phys">Physical</span>
+      </div>
+      <div class="cipher-tabs" role="tablist">
+        <button class="mtab ch-day active" data-tab="acrostic">Acrostic</button>
+        <button class="mtab ch-day" data-tab="flutter">Ink Flutter</button>
+        <button class="mtab ch-day" data-tab="stripes">Carriage Stripes</button>
+        <button class="mtab ch-day" data-tab="typecode">Typewriter Code</button>
+        <button class="mtab ch-day" data-tab="twisted">Twisted Path</button>
+        <button class="mtab ch-day" data-tab="keywords">Red Keywords</button>
+        <button class="mtab ch-candle" data-tab="heat">Sympathetic Ink</button>
+        <button class="mtab ch-candle" data-tab="pins">Pin Pricks</button>
+        <button class="mtab ch-phys" data-tab="crease">Crease Codes</button>
+        <button class="mtab ch-phys" data-tab="water">Water Reveal</button>
+      </div>
+
+      <div class="panel-host">
+
+        <!-- ACROSTIC -->
+        <div class="panel active" id="panel-acrostic">
+          <div class="mechanic-header">
+            <h4>Acrostic</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Ink</span><span class="badge badge-act">Basic</span>
+            <p class="mechanic-desc">The first letter of each line spells a hidden message. Read down the left margin.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> the acrostic null cipher. First-letter messages hide in Renaissance dedications, and the form was used to smuggle text past censors who read every word but never read the margin.</p>
+          </div>
+          <div class="letter-frame" id="letter-acrostic">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line"><span class="acr">H</span>ave the remaining census forms been collected from the ward offices?</div>
+            <div class="typed-line"><span class="acr">E</span>ach district must file independently before the quarterly deadline.</div>
+            <div class="typed-line"><span class="acr">L</span>ate submissions will not be accepted under the current protocol.</div>
+            <div class="typed-line"><span class="acr">P</span>lease direct any questions regarding procedure to the chief clerk.</div>
+            <div class="typed-line blank"></div>
+            <div class="typed-line"><span class="acr">U</span>pdated records should reflect the November amendments without exception.</div>
+            <div class="typed-line"><span class="acr">S</span>tandard filing procedures apply to all remaining departments.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('acrostic')">Reveal</button></div>
+          <div class="decode-box" id="decode-acrostic"><div class="decode-label">Hidden Message</div><div class="decode-text">HELP US</div></div>
+        </div>
+
+        <!-- INK FLUTTER -->
+        <div class="panel" id="panel-flutter">
+          <div class="mechanic-header">
+            <h4>Ink Flutter</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Ink</span><span class="badge badge-act">Basic</span>
+            <p class="mechanic-desc">An extra space makes the carriage advance without striking. The ribbon drags and leaves a faint smear. Two flutter marks bracket the hidden segment. The words between them are the message.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> whitespace steganography. The meaning rides in the spacing rather than the letters. Modern tools hide data in the gaps between words the same way.</p>
+          </div>
+          <div class="letter-frame" id="letter-flutter">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line">Delivery schedules for the western district remain unchanged.</div>
+            <div class="typed-line">We confirm the<span class="flutter"></span><span class="flutter-payload">they are opening the western mail</span><span class="flutter"></span>standard</div>
+            <div class="typed-line">routes will continue for all official correspondence.</div>
+            <div class="typed-line">No further action is required at this time.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('flutter')">Reveal</button></div>
+          <div class="decode-box" id="decode-flutter"><div class="decode-label">Hidden Message</div><div class="decode-text">"they are opening the western mail"<br><br>The surface still parses: "We confirm the standard routes will continue..." The flutter marks cause a slight pause and ink disturbance. The words between them are the payload.</div></div>
+        </div>
+
+        <!-- CARRIAGE STRIPES -->
+        <div class="panel" id="panel-stripes">
+          <div class="mechanic-header">
+            <h4>Carriage Return Stripes</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Ink</span><span class="badge badge-act">Intermediate</span>
+            <p class="mechanic-desc">Returning the carriage with the ribbon engaged drags a faint line across the full width of the page. Some lines have it, some do not. The stripe is always visible. The cipher is the pattern.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> the grille cipher (Cardano, 1550). A grille or marker designates which lines carry the message while the rest of the page stays as camouflage.</p>
+          </div>
+          <div class="stripe-label">Example A: Supply Requisition &rarr; Safe Combination</div>
+          <div class="letter-frame" id="letter-stripes">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line filler">Please deliver 4 crates of standard filing paper.</div>
+            <div class="typed-line stripe">The office requires 17 new ink ribbons this quarter.</div>
+            <div class="typed-line filler">We need 8 replacement ledgers for the accounting desk.</div>
+            <div class="typed-line filler">Additional 12 candles should be included if available.</div>
+            <div class="typed-line stripe">Send 32 boxes of correspondence envelopes, cream stock.</div>
+            <div class="typed-line filler">Standard sealing wax, 6 sticks in the usual red.</div>
+            <div class="typed-line filler">We also need 2 bottles of ink, Rovella blend.</div>
+            <div class="typed-line stripe">Include 5 reams of carbon paper for duplicates.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('stripes')">Reveal</button></div>
+          <div class="decode-box" id="decode-stripes"><div class="decode-label">Hidden: Safe Combination</div><div class="decode-text">17 - 32 - 5<br><br>Eight lines, eight quantities. The stripes pick out three: 17, 32, 5. A combination lock. The other five numbers are real supply requests. Without the stripes you are staring at a grocery list.</div></div>
+        </div>
+
+        <!-- TYPEWRITER CODE -->
+        <div class="panel" id="panel-typecode">
+          <div class="mechanic-header">
+            <h4>Typewriter Code</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Ink</span><span class="badge badge-act">Intermediate</span>
+            <p class="mechanic-desc">A letter typed in uppercase when it should be lowercase. The unexpected capitals spell a hidden word.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> a null cipher keyed to typography. The reader ignores the words and collects only the letters that break the rule, here the misplaced capitals.</p>
+          </div>
+          <div class="letter-frame" id="letter-typecode">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line">the <span class="tc">O</span>ffice has <span class="tc">P</span>repared a r<span class="tc">E</span>spo<span class="tc">N</span>se to the recent</div>
+            <div class="typed-line">inquiry regarding the northern warehouse inspection</div>
+            <div class="typed-line">schedule. All documents have been filed as required.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('typecode')">Reveal</button></div>
+          <div class="decode-box" id="decode-typecode"><div class="decode-label">Hidden Message</div><div class="decode-text">O - P - E - N<br><br>The unexpected capitals spell "OPEN." The Aguien typist confirms receipt and signals you to open the next incoming document carefully.</div></div>
+        </div>
+
+        <!-- TWISTED PATH -->
+        <div class="panel" id="panel-twisted">
+          <div class="mechanic-header">
+            <h4>Twisted Path</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Ink</span><span class="badge badge-act">Advanced</span>
+            <p class="mechanic-desc">The hidden message rides inside text that reads normally on its own. Every Nth word carries it. A margin symbol tells the reader the interval.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> the every-Nth-word null cipher, a spy-craft staple. The carrier text reads as ordinary correspondence while the message sits on a fixed interval.</p>
+          </div>
+          <div class="letter-frame" id="letter-twisted">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div style="position:absolute; top:36px; right:15px; font-family:'Courier Prime',monospace; font-size:10px; color:rgba(44,24,16,0.3);">&#xb7;&#xb7;&#xb7;</div>
+            <div class="typed-line"><span class="tw-filler">The</span> <span class="tw-filler">current</span> <span class="tw">orders</span> <span class="tw-filler">are</span> <span class="tw-filler">all</span> <span class="tw">arriving</span> <span class="tw-filler">by</span> <span class="tw-filler">mail</span> <span class="tw">tomorrow</span></div>
+            <div class="typed-line"><span class="tw-filler">before</span> <span class="tw-filler">the</span> <span class="tw">morning</span> <span class="tw-filler">session</span> <span class="tw-filler">begins.</span> <span class="tw">Sincerely,</span></div>
+            <div class="typed-line"><span class="tw-filler">the</span> <span class="tw-filler">office</span> <span class="tw-filler">of</span> <span class="tw-filler">the</span> <span class="tw-filler">ambassador.</span></div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('twisted')">Reveal</button></div>
+          <div class="decode-box" id="decode-twisted"><div class="decode-label">Hidden Message (every 3rd word)</div><div class="decode-text">Orders arriving tomorrow morning.<br><br>The surface reads as normal correspondence. Three dots in the margin tell the reader: every 3rd word. The message hides in plain sight because it is part of the sentence.</div></div>
+        </div>
+
+        <!-- RED KEYWORDS (the dictation mechanic) -->
+        <div class="panel" id="panel-keywords">
+          <div class="mechanic-header">
+            <h4>Red Keywords</h4>
+            <span class="badge badge-daylight">Typewriter</span><span class="badge badge-method">Dictation</span><span class="badge badge-act">Editorial</span>
+            <p class="mechanic-desc">During dictation the speaker emphasizes hostile words. If you type them, they appear red on the page. A page full of red faithfully transmitted the speaker's hostility. A page with no red is one where you softened every edge. This is editorial control made visible.</p>
+            <p class="mechanic-real"><strong>Real parallel:</strong> the latitude of the diplomatic translator. Faithful transmission versus softened phrasing is a real and consequential choice in treaty and dispatch work.</p>
+          </div>
+          <div class="letter-frame" id="letter-keywords">
+            <div class="letterhead"><div class="crest">&#9672; EPAULE &#9672;</div><div class="office">Office of the Mayor &middot; Rovella, Trentara</div></div>
+            <div class="kw-dictation" style="font-family:'Crimson Text',serif; font-size:12px; color:#8b7441; font-style:italic; margin-bottom:12px; padding:8px; border:1px dashed #c4b59a; border-radius:2px;">
+              Dictation (spoken by the Matriarch):<br>
+              "We <b style="color:#8b2500;">CATEGORICALLY REFUSE</b> to entertain any further <b style="color:#8b2500;">DEMANDS</b> regarding the mill. This position is <b style="color:#8b2500;">FINAL</b> and <b style="color:#8b2500;">NON-NEGOTIABLE</b>."
+            </div>
+            <div class="typed-line" style="margin-bottom:4px;">Typed faithfully:</div>
+            <div class="typed-line">We <span class="kw">categorically refuse</span> to entertain any further</div>
+            <div class="typed-line"><span class="kw">demands</span> regarding the mill. This position is <span class="kw">final</span></div>
+            <div class="typed-line">and <span class="kw">non-negotiable</span>.</div>
+            <div class="typed-line blank"></div>
+            <div class="typed-line" style="margin-bottom:4px;">Typed with editorial control:</div>
+            <div class="typed-line">We decline to discuss the mill matter further at this time.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('keywords')">Reveal</button></div>
+          <div class="decode-box" id="decode-keywords"><div class="decode-label">The Point</div><div class="decode-text">The red words are the hostile ones from the dictation, transmitting the Matriarch's anger at full force. The edited version below has no red because you softened every word. Same content, different temperature. You decide which letter the ambassador reads.</div></div>
+        </div>
+
+        <!-- SYMPATHETIC INK -->
+        <div class="panel" id="panel-heat">
+          <div class="mechanic-header">
+            <h4>Sympathetic Ink</h4>
+            <span class="badge badge-candle">Candlelight</span><span class="badge badge-method">Heat</span><span class="badge badge-act">Intermediate</span>
+            <p class="mechanic-desc">Written between the typed lines in lemon juice or milk. Invisible when dry. Warm the paper near the candle and the organic compounds oxidize brown. The reveal is permanent. Once browned, it stays.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> sympathetic ink. Organic fluids like lemon juice or milk vanish when dry and brown under heat. Washington's Culper spy ring relied on it during the American Revolution.</p>
+          </div>
+          <div class="letter-frame" id="letter-heat">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line">The imperial administration has completed its review.</div>
+            <div class="heat-line">the ambassador is afraid</div>
+            <div class="typed-line">All departments have reported satisfactory results.</div>
+            <div class="heat-line">he wants to refuse the order</div>
+            <div class="typed-line">Standard procedures will continue as outlined.</div>
+            <div class="heat-line">give him a reason on paper</div>
+            <div class="typed-line">No further action is required at this time.</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('heat')">Bring candle close</button></div>
+          <div class="decode-box" id="decode-heat"><div class="decode-label">Hidden Message (between the lines)</div><div class="decode-text">The ambassador is afraid. He wants to refuse the order. Give him a reason on paper.<br><br>Three lines of hidden text layered into a routine document. The typed text is the envelope. The sympathetic ink is the letter.</div></div>
+        </div>
+
+        <!-- PIN PRICKS -->
+        <div class="panel" id="panel-pins">
+          <div class="mechanic-header">
+            <h4>Pin Pricks</h4>
+            <span class="badge badge-candle">Candlelight</span><span class="badge badge-method">Backlit</span><span class="badge badge-act">Basic</span>
+            <p class="mechanic-desc">One tiny hole punched through the paper per line, each at a specific horizontal position. Invisible in daylight. Place the candle behind the page and each hole becomes a point of warm light. The positions encode letters.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> the pin-prick cipher. Tiny holes pricked above letters spell a message when the page is held to light. Used by lovers, prisoners, and Victorians dodging postage.</p>
+          </div>
+          <div class="letter-frame" id="letter-pins">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line">The quarterly reports have been compiled and submitted.<span class="pin" style="left:38%;"></span></div>
+            <div class="typed-line">Every district office has confirmed its annual filings.<span class="pin" style="left:18%;"></span></div>
+            <div class="typed-line">No discrepancies were found in the current period.<span class="pin" style="left:52%;"></span></div>
+            <div class="typed-line">All records are available for inspection upon request.<span class="pin" style="left:62%;"></span></div>
+            <div class="typed-line">Municipal archives will remain open during regular hours.<span class="pin" style="left:28%;"></span></div>
+            <div class="typed-line">Please direct further inquiries to the chief clerk.<span class="pin" style="left:45%;"></span></div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('pins')">Hold to candle</button></div>
+          <div class="decode-box" id="decode-pins"><div class="decode-label">Hidden Message</div><div class="decode-text">Six points of light, one per line. Each position maps to a letter, and the cipher key determines what they spell. Warm golden dots floating on the page where randomness should be.</div></div>
+        </div>
+
+        <!-- CREASE CODES -->
+        <div class="panel" id="panel-crease">
+          <div class="mechanic-header">
+            <h4>Crease Codes</h4>
+            <span class="badge badge-physical">Physical</span><span class="badge badge-method">Fold</span><span class="badge badge-act">Advanced</span>
+            <p class="mechanic-desc">The letter arrives folded in half, but there is a second crease at an unusual position. Refold along the odd crease and read down: the characters at that column spell the hidden message.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> a fold-based grille. Refolding the sheet aligns a hidden column, the same selection principle behind the Cardan grille applied through paper geometry.</p>
+          </div>
+          <div class="letter-frame" id="letter-crease">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="crease-mark fold-std" style="left: 50%;"></div>
+            <div class="crease-mark fold-code" id="crease-code-line"></div>
+            <div class="typed-line">The for<span class="crease-char">m</span>al review confirms all records are in order.</div>
+            <div class="typed-line">Deliver<span class="crease-char">i</span>es must be confirmed before the deadline.</div>
+            <div class="typed-line">The hal<span class="crease-char">l</span> archives remain available for inspection.</div>
+            <div class="typed-line">Control<span class="crease-char">l</span>ed access to the east wing begins Monday.</div>
+            <div class="crease-readout"><span>M</span><span>I</span><span>L</span><span>L</span></div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('crease')">Fold along the crease</button></div>
+          <div class="decode-box" id="decode-crease"><div class="decode-label">Hidden Message (read down the odd fold)</div><div class="decode-text">M - I - L - L<br><br>The letter arrives folded in half. Normal. But there is a second crease at an unusual position. Refold along it and read the characters at that column: "MILL." The paper mill. The thing the families are fighting over.</div></div>
+        </div>
+
+        <!-- WATER REVEAL -->
+        <div class="panel" id="panel-water">
+          <div class="mechanic-header">
+            <h4>Water Reveal</h4>
+            <span class="badge badge-physical">Physical</span><span class="badge badge-method">Water</span><span class="badge badge-act">Basic</span>
+            <p class="mechanic-desc">Written with a solution invisible when dry. A water glass sits at the edge of the desk. Its condensation drips onto the corner of the document, the moisture seeps in, and hidden text blooms where it spreads. The glass has been there since Day 1.</p>
+            <p class="mechanic-real"><strong>Real technique:</strong> invisible ink developed by a reagent. Some sympathetic inks stay hidden until moisture or a chemical wash brings them up, exactly as the condensation does here.</p>
+          </div>
+          <div class="letter-frame" id="letter-water">
+            <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
+            <div class="typed-line">The office confirms receipt of all current filings.</div>
+            <div class="typed-line">Standard procedures will continue through the quarter.</div>
+            <div class="typed-line">All departments should maintain existing arrangements.</div>
+            <div class="typed-line">No further action is required at this time.</div>
+            <div class="typed-line">We appreciate your continued diligence in this matter.</div>
+            <div class="water-seep"><div class="water-drops"></div></div>
+            <div class="water-text" style="top: 38%;">they moved the cousin</div>
+            <div class="water-text" style="top: 52%;">into the room behind you</div>
+            <div class="water-text" style="top: 66%;">he reads everything now</div>
+          </div>
+          <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('water')">Condensation drips onto the page</button></div>
+          <div class="decode-box" id="decode-water"><div class="decode-label">Hidden Message</div><div class="decode-text">they moved the cousin / into the room behind you / he reads everything now<br><br>Three lines of invisible ink seeping into view as the paper darkens. The glass on the desk was never in the way. It was the tool. You did not spill water on a document. The document was waiting to be spilled on.</div></div>
+        </div>
+
+      </div><!-- panel-host -->
+    </div><!-- explorer -->
+  </section>
+
+  <!-- ============ THE DESK / THE LEVEL ============ -->
+  <section>
+    <div class="eyebrow">The desk &middot; the level</div>
+    <h2>The whole game happens at one desk</h2>
+    <p>The typewriter fills the foreground. A window sits directly ahead, looking onto the street and across to the Aguien residence. The typewriter tells you what is happening in words. The window shows you what is happening in the world. When they contradict, when the letter says peace but the street says war, that is the tension.</p>
+    <p>The job is dictation. A family member or official reads correspondence aloud and you type what you hear. The audio is crackling and mechanical, 1914-period, and the imperfection gives you cover for the words you miss on purpose.</p>
+
+    <p class="muted">One chair, three directions. The camera pans left, forward, and right, and never changes position. Most of the game is spent looking forward at the page.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="600" height="520" fill="#0d0a07"/>
+        <rect x="80" y="60" width="440" height="400" rx="2" fill="#110e0a" stroke="#4a3728" stroke-width="2.5"/>
+        <ellipse cx="300" cy="300" rx="130" ry="90" fill="#1e1810" stroke="#2a2218" stroke-width="1" opacity="0.5"/>
+        <text x="300" y="50" text-anchor="middle" font-family="'Special Elite',monospace" font-size="9" letter-spacing="2" fill="#6b5744">NORTH WALL</text>
+        <text x="300" y="478" text-anchor="middle" font-family="'Special Elite',monospace" font-size="9" letter-spacing="2" fill="#6b5744">SOUTH WALL</text>
+        <rect x="78" y="140" width="12" height="180" fill="#2a2218"/>
+        <rect x="78" y="150" width="12" height="160" fill="#3a5a70" opacity="0.3"/>
+        <rect x="78" y="150" width="12" height="160" fill="none" stroke="#8b7441" stroke-width="1.5"/>
+        <text x="62" y="234" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#2c4a6e" transform="rotate(-90 62 234)">WINDOW</text>
+        <line x1="75" y1="230" x2="30" y2="230" stroke="#2c4a6e" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+        <polygon points="26,230 34,226 34,234" fill="#2c4a6e" opacity="0.5"/>
+        <text x="24" y="222" text-anchor="end" font-family="'Crimson Text',serif" font-size="9" font-style="italic" fill="#2c4a6e" opacity="0.6">to street</text>
+        <rect x="498" y="130" width="22" height="210" fill="#2a2018" stroke="#4a3a28" stroke-width="1.5" rx="1"/>
+        <line x1="500" y1="172" x2="518" y2="172" stroke="#4a3a28" stroke-width="1"/>
+        <line x1="500" y1="214" x2="518" y2="214" stroke="#4a3a28" stroke-width="1"/>
+        <line x1="500" y1="256" x2="518" y2="256" stroke="#4a3a28" stroke-width="1"/>
+        <rect x="503" y="136" width="5" height="34" fill="#8b2500" opacity="0.3" rx="0.5"/>
+        <rect x="510" y="138" width="4" height="32" fill="#6b5b7b" opacity="0.3" rx="0.5"/>
+        <rect x="503" y="178" width="6" height="34" fill="#c9a84c" opacity="0.2" rx="0.5"/>
+        <rect x="511" y="180" width="4" height="32" fill="#2c4a6e" opacity="0.3" rx="0.5"/>
+        <text x="538" y="238" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#6b5b7b" transform="rotate(90 538 238)">BOOKSHELF</text>
+        <rect x="180" y="65" width="240" height="100" rx="3" fill="#2a2418" stroke="#4a3a28" stroke-width="2"/>
+        <rect x="255" y="80" width="90" height="55" rx="3" fill="#1a1610" stroke="#2c2418" stroke-width="1"/>
+        <rect x="275" y="70" width="50" height="22" fill="#f4eed6" opacity="0.6" rx="1"/>
+        <circle cx="210" cy="100" r="8" fill="#3a3028" stroke="#5a4a38" stroke-width="0.8"/>
+        <text x="210" y="122" text-anchor="middle" font-family="'Crimson Text',serif" font-size="8" font-style="italic" fill="#6b5744" opacity="0.5">cup</text>
+        <rect x="370" y="90" width="30" height="5" fill="#f0e8d0" opacity="0.25" rx="1"/>
+        <rect x="368" y="85" width="30" height="5" fill="#f4eed6" opacity="0.2" rx="1"/>
+        <text x="385" y="115" text-anchor="middle" font-family="'Crimson Text',serif" font-size="8" font-style="italic" fill="#6b5744" opacity="0.5">incoming</text>
+        <ellipse cx="300" cy="210" rx="30" ry="22" fill="#1e1810" stroke="#3a3028" stroke-width="1.5"/>
+        <path d="M 300,210 L 92,155 L 92,305 Z" fill="#2c4a6e" opacity="0.07"/>
+        <path d="M 300,210 L 185,65 L 415,65 Z" fill="#c9a84c" opacity="0.07"/>
+        <path d="M 300,210 L 498,135 L 498,335 Z" fill="#6b5b7b" opacity="0.07"/>
+        <g font-family="'Special Elite',monospace" letter-spacing="2">
+          <text x="165" y="228" text-anchor="middle" font-size="12" fill="#2c4a6e" opacity="0.8">WINDOW</text>
+          <text x="165" y="244" text-anchor="middle" font-size="8" letter-spacing="1" fill="#2c4a6e" opacity="0.4">look left</text>
+          <text x="300" y="152" text-anchor="middle" font-size="12" fill="#c9a84c" opacity="0.8">DESK</text>
+          <text x="300" y="164" text-anchor="middle" font-size="8" letter-spacing="1" fill="#c9a84c" opacity="0.4">look forward</text>
+          <text x="430" y="228" text-anchor="middle" font-size="12" fill="#6b5b7b" opacity="0.8">SHELF</text>
+          <text x="430" y="244" text-anchor="middle" font-size="8" letter-spacing="1" fill="#6b5b7b" opacity="0.4">look right</text>
+        </g>
+        <rect x="270" y="455" width="60" height="8" fill="#2a2218" stroke="#4a3728" stroke-width="1" rx="1"/>
+        <text x="370" y="462" text-anchor="start" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#6b5744">DOOR</text>
+        <text x="340" y="380" text-anchor="start" font-family="'Crimson Text',serif" font-size="9" font-style="italic" fill="#6b5744" opacity="0.4">Zia brings documents</text>
+      </svg>
+      <div class="diagram-cap">Floor plan &middot; the player never leaves the chair</div>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="900" height="340" fill="#0d0a07"/>
+        <rect x="10" y="30" width="280" height="280" rx="3" fill="#0a0806" stroke="#2c4a6e" stroke-width="1.5"/>
+        <text x="150" y="22" text-anchor="middle" font-family="'Special Elite',monospace" font-size="10" letter-spacing="2" fill="#2c4a6e">LOOK LEFT: THE WINDOW</text>
+        <rect x="30" y="50" width="240" height="160" rx="2" fill="#6a8aa0" opacity="0.3"/>
+        <rect x="30" y="50" width="240" height="50" fill="#7a98b0" opacity="0.3"/>
+        <polygon points="210,80 230,60 250,80" fill="#5a6a58" opacity="0.3"/>
+        <rect x="90" y="85" width="120" height="80" fill="#b8a880" opacity="0.5" stroke="#6b5a48" stroke-width="0.5"/>
+        <polygon points="85,85 150,68 215,85" fill="#a09070" opacity="0.5"/>
+        <rect x="110" y="95" width="12" height="15" fill="#2a3540" opacity="0.5" rx="1"/>
+        <rect x="130" y="95" width="12" height="15" fill="#c9a84c" opacity="0.3" rx="1"/>
+        <rect x="150" y="95" width="12" height="15" fill="#2a3540" opacity="0.5" rx="1"/>
+        <rect x="30" y="165" width="240" height="20" fill="#7a6a58" opacity="0.4"/>
+        <ellipse cx="80" cy="172" rx="3" ry="3" fill="#6b5b7b" opacity="0.5"/>
+        <ellipse cx="170" cy="174" rx="3" ry="3" fill="#6b5744" opacity="0.4"/>
+        <rect x="28" y="48" width="244" height="165" fill="none" stroke="#4a3a28" stroke-width="4" rx="2"/>
+        <rect x="25" y="210" width="250" height="6" fill="#4a3a28" rx="1"/>
+        <text x="150" y="250" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#2c4a6e" opacity="0.6">THE STREET &middot; THE SCOREBOARD</text>
+        <text x="150" y="272" text-anchor="middle" font-family="'Crimson Text',serif" font-size="11" font-style="italic" fill="#6b5744">observation</text>
+        <rect x="310" y="30" width="280" height="280" rx="3" fill="#0a0806" stroke="#8b7441" stroke-width="1.5"/>
+        <text x="450" y="22" text-anchor="middle" font-family="'Special Elite',monospace" font-size="10" letter-spacing="2" fill="#8b7441">LOOK FORWARD: THE DESK</text>
+        <rect x="320" y="170" width="260" height="130" fill="#3a3020" rx="2"/>
+        <rect x="380" y="195" width="140" height="80" rx="4" fill="#1a1610" stroke="#2c2418" stroke-width="1"/>
+        <rect x="390" y="190" width="120" height="10" rx="3" fill="#2a2620" stroke="#1a1610" stroke-width="0.8"/>
+        <rect x="410" y="160" width="90" height="40" fill="#f4eed6" rx="1"/>
+        <line x1="420" y1="172" x2="488" y2="172" stroke="#2c1810" stroke-width="0.6" opacity="0.4"/>
+        <line x1="420" y1="178" x2="480" y2="178" stroke="#2c1810" stroke-width="0.6" opacity="0.4"/>
+        <line x1="420" y1="184" x2="485" y2="184" stroke="#2c1810" stroke-width="0.6" opacity="0.4"/>
+        <g opacity="0.3">
+          <circle cx="400" cy="250" r="4" fill="none" stroke="#6b6258" stroke-width="0.6"/>
+          <circle cx="428" cy="250" r="4" fill="none" stroke="#6b6258" stroke-width="0.6"/>
+          <circle cx="456" cy="250" r="4" fill="none" stroke="#6b6258" stroke-width="0.6"/>
+          <circle cx="484" cy="250" r="4" fill="none" stroke="#6b6258" stroke-width="0.6"/>
+        </g>
+        <rect x="540" y="185" width="30" height="4" fill="#e8dfc4" opacity="0.4" rx="1"/>
+        <rect x="538" y="181" width="30" height="4" fill="#f4eed6" opacity="0.4" rx="1"/>
+        <text x="450" y="284" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#8b7441" opacity="0.6">THE TYPEWRITER &middot; THE GAMEPLAY</text>
+        <rect x="610" y="30" width="280" height="280" rx="3" fill="#0a0806" stroke="#6b5b7b" stroke-width="1.5"/>
+        <text x="750" y="22" text-anchor="middle" font-family="'Special Elite',monospace" font-size="10" letter-spacing="2" fill="#6b5b7b">LOOK RIGHT: THE SHELF</text>
+        <rect x="640" y="50" width="220" height="240" fill="#2a2218" stroke="#4a3a28" stroke-width="1.5" rx="2"/>
+        <line x1="640" y1="98" x2="860" y2="98" stroke="#4a3a28" stroke-width="1.5"/>
+        <rect x="650" y="58" width="12" height="38" fill="#8b2500" opacity="0.4" rx="1"/>
+        <rect x="666" y="62" width="10" height="34" fill="#6b5b7b" opacity="0.4" rx="1"/>
+        <rect x="680" y="56" width="14" height="40" fill="#2c4a6e" opacity="0.4" rx="1"/>
+        <rect x="698" y="60" width="11" height="36" fill="#5a4a32" opacity="0.5" rx="1"/>
+        <line x1="640" y1="148" x2="860" y2="148" stroke="#4a3a28" stroke-width="1.5"/>
+        <rect x="650" y="106" width="16" height="40" fill="#c9a84c" opacity="0.4" rx="1"/>
+        <text x="790" y="130" text-anchor="middle" font-family="'Crimson Text',serif" font-size="9" font-style="italic" fill="#6b5744" opacity="0.5">the codebook grows</text>
+        <line x1="640" y1="198" x2="860" y2="198" stroke="#4a3a28" stroke-width="1.5"/>
+        <rect x="650" y="156" width="40" height="30" fill="#f4eed6" opacity="0.15" rx="1"/>
+        <text x="790" y="178" text-anchor="middle" font-family="'Crimson Text',serif" font-size="9" font-style="italic" fill="#6b5744" opacity="0.5">decoded messages</text>
+        <line x1="640" y1="248" x2="860" y2="248" stroke="#4a3a28" stroke-width="1.5"/>
+        <text x="750" y="305" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" letter-spacing="1.5" fill="#6b5b7b" opacity="0.6">THE REFERENCE &middot; STUDY</text>
+      </svg>
+      <div class="diagram-cap">What you see &middot; look left, forward, right</div>
+    </div>
+
+    <div class="zones">
+      <div class="zone" style="border-top-color:var(--slate)">
+        <div class="z-dir">Look left</div>
+        <div class="z-name">The Window</div>
+        <div class="z-desc">Observation. The street and the Aguien residence across it. No interaction, pure reading. This is the scoreboard.</div>
+      </div>
+      <div class="zone" style="border-top-color:var(--gold)">
+        <div class="z-dir">Look forward</div>
+        <div class="z-name">The Desk</div>
+        <div class="z-desc">Gameplay. The typewriter, the incoming stack, the page. All typing, encoding, and editorial control happens here.</div>
+      </div>
+      <div class="zone" style="border-top-color:var(--plum)">
+        <div class="z-dir">Look right</div>
+        <div class="z-name">The Shelf</div>
+        <div class="z-desc">Study. The codebook that grows as you decode, the saved correspondence, the trade-cipher references. Your knowledge made physical.</div>
+      </div>
+    </div>
+
+    <p class="muted">Every page you type has three layers working at once.</p>
+    <div class="layers">
+      <div class="layer">
+        <div class="lname">Accuracy</div>
+        <div class="ldesc">Can you type it correctly? Errors draw scrutiny. Too many and you are dismissed, which is game over. You lose your seat at the typewriter and your only connection to the other side.</div>
+      </div>
+      <div class="layer">
+        <div class="lname">Editorial control</div>
+        <div class="ldesc">You are transcribing speech, so you control the written record. Drop a line of troop numbers and it never reaches the recipient. Change "demand" to "request" and the ambassador reads a calmer letter than the one that was spoken. "I didn't hear that part clearly, sir." Mistakes are expected. Too many convenient ones and the family gets suspicious.</div>
+      </div>
+      <div class="layer">
+        <div class="lname">Secret language</div>
+        <div class="ldesc">The other typist's coded words arrive embedded in the documents being read aloud. You have to hear the code while typing the surface text. Dual attention. Performing your job and holding a private conversation in the same keystrokes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROTOTYPE ============ -->
+  <section>
+    <div class="eyebrow">Prototype</div>
+    <h2>From the early build</h2>
+    <p>A first pass at the desk: paper rolled into the platen, a supply requisition between the Epaule estate and the Rovella paper mill, the light shifting from day to dusk so the candlelight ciphers have something to warm against.</p>
+    <div class="shots">
+      <figure class="shot">
+        <img src="shots/prototype1.png" alt="The desk in daylight, a supply requisition in the typewriter" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('empty')">
+      </figure>
+      <figure class="shot">
+        <img src="shots/prototype2.png" alt="The same desk at dusk, warm light, a marked character on the page" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('empty')">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ THE STREET WINDOW ============ -->
+  <section>
+    <div class="eyebrow">The street window</div>
+    <h2>You are never told your score. You look up and see it.</h2>
+    <p>Your whole sense of the outside world comes through two channels: the documents on the desk and the street through the window. Every element in the window is an indicator, none of them decorative. Each tracks the town from peace to war and responds to your choices with a delay. A change today shows up days later.</p>
+    <p>Sometimes the two channels agree. Sometimes they contradict. You read an incoming letter that says all matters are proceeding normally, you look up, and there is a flag on the Aguien residence that was not there yesterday.</p>
+
+    <div class="window-mock">
+      <svg class="window-svg" id="windowScene" viewBox="0 0 640 400" role="img" aria-label="The view through the study window, from peace to war">
+        <!-- sky -->
+        <rect id="sky" x="40" y="28" width="560" height="212" fill="rgb(169,194,212)"/>
+        <circle id="sun" cx="520" cy="78" r="34" fill="#f0dca0" opacity="0.7"/>
+        <polygon id="mtn" points="40,150 150,98 250,150 360,106 470,150 600,112 600,172 40,172" fill="#7d8a86" opacity="0.4"/>
+
+        <!-- street -->
+        <rect id="street" x="40" y="238" width="560" height="120" fill="#7a6a58"/>
+
+        <!-- trade post (left edge) -->
+        <g id="trade">
+          <rect x="40" y="150" width="58" height="90" fill="#5a4a3a"/>
+          <rect id="tradeShutters" x="50" y="168" width="38" height="54" fill="rgb(72,120,168)"/>
+          <rect id="tradeClosed" x="46" y="166" width="46" height="60" fill="#241c14" opacity="0"/>
+        </g>
+
+        <!-- Aguien residence across the street -->
+        <polygon id="roof" points="142,94 320,56 500,94" fill="#8a3a2a"/>
+        <rect id="facade" x="150" y="92" width="340" height="146" fill="rgb(196,176,138)"/>
+        <g fill="#2a3038">
+          <rect x="178" y="116" width="26" height="32"/><rect x="226" y="116" width="26" height="32"/>
+          <rect x="392" y="116" width="26" height="32"/><rect x="440" y="116" width="26" height="32"/>
+          <rect x="178" y="176" width="26" height="32"/><rect x="226" y="176" width="26" height="32"/>
+          <rect x="392" y="176" width="26" height="32"/><rect x="440" y="176" width="26" height="32"/>
+        </g>
+        <!-- rival typist's lamp, the warm window -->
+        <circle id="lampGlow" cx="320" cy="134" r="34" fill="#e8b94a" opacity="0.9"/>
+        <rect x="303" y="114" width="34" height="40" fill="#3a2c18"/>
+        <rect x="307" y="118" width="26" height="32" fill="#f0c860"/>
+        <!-- door + crest -->
+        <rect x="302" y="200" width="36" height="38" fill="#241c14"/>
+        <circle id="crest" cx="320" cy="188" r="8" fill="#7a68a8"/>
+        <!-- imperial flag draped (appears toward war) -->
+        <g id="impFlag" opacity="0">
+          <rect x="455" y="96" width="40" height="116" fill="#b83030"/>
+          <circle cx="475" cy="150" r="12" fill="#8a1818"/>
+        </g>
+        <!-- lavender pennant (fades toward war) -->
+        <g id="lavBanner">
+          <line x1="320" y1="56" x2="320" y2="34" stroke="#5a4a38" stroke-width="2"/>
+          <polygon points="320,36 350,42 320,50" fill="#8a78b8"/>
+        </g>
+        <!-- guard posts at the door (appear toward war) -->
+        <g id="posts" opacity="0" fill="#b83030">
+          <rect x="284" y="208" width="9" height="30"/><rect x="347" y="208" width="9" height="30"/>
+        </g>
+
+        <!-- foreground awnings, the mixed colors -->
+        <rect id="awnR" x="96" y="298" width="64" height="13" fill="#b85040"/>
+        <rect id="awnW" x="250" y="298" width="64" height="13" fill="rgb(221,210,188)"/>
+        <rect id="awnB" x="404" y="298" width="64" height="13" fill="#5a8aaa"/>
+
+        <!-- food cart (vanishes toward war) -->
+        <g id="cart">
+          <rect x="486" y="300" width="44" height="26" fill="#6a4a32"/>
+          <rect x="484" y="292" width="48" height="8" fill="#c87848"/>
+          <circle cx="496" cy="330" r="6" fill="#3a2a1a"/><circle cx="520" cy="330" r="6" fill="#3a2a1a"/>
+        </g>
+
+        <!-- street life (empties toward war) -->
+        <g id="people" fill="#4a3a2a">
+          <circle cx="130" cy="332" r="5"/><rect x="126" y="334" width="8" height="16"/>
+          <circle cx="370" cy="334" r="5"/><rect x="366" y="336" width="8" height="16"/>
+          <circle cx="448" cy="340" r="5"/><rect x="444" y="342" width="8" height="16"/>
+        </g>
+        <!-- militia (lavender, recolors toward war) -->
+        <g id="militia" fill="rgb(122,104,168)">
+          <circle cx="214" cy="330" r="5"/><rect x="210" y="332" width="8" height="18"/>
+          <circle cx="234" cy="332" r="5"/><rect x="230" y="334" width="8" height="18"/>
+        </g>
+
+        <!-- darkening toward war -->
+        <rect id="warOverlay" x="40" y="28" width="560" height="330" fill="#0a0604" opacity="0"/>
+
+        <!-- window frame, on top of the glass -->
+        <g id="frame">
+          <rect x="206" y="28" width="7" height="330" fill="#4a3a28"/>
+          <rect x="427" y="28" width="7" height="330" fill="#4a3a28"/>
+          <rect x="40" y="150" width="560" height="7" fill="#4a3a28"/>
+          <rect x="40" y="28" width="560" height="330" fill="none" stroke="#4a3a28" stroke-width="16"/>
+          <rect x="26" y="356" width="588" height="24" fill="#5a4632"/>
+          <rect x="26" y="356" width="588" height="4" fill="#6e5840"/>
+        </g>
+      </svg>
+
+      <div class="tension-control">
+        <div class="tension-ends"><span class="peace-end">&#9664; Peace</span><span class="war-end">War &#9654;</span></div>
+        <input type="range" class="tension" id="tensionSlider" min="0" max="100" value="0" aria-label="Drag from peace to war">
+        <div class="tension-state">
+          <div class="ts-name" id="tsName">Peace</div>
+          <div class="ts-desc" id="tsDesc">The street is busy and shared. Peace holds.</div>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:18px;font-size:14px">Win, and the street resists the slide: the lavender holds, the crest stays up, the cart keeps its place, and the rival's lamp stays warm.</p>
+  </section>
+
+
+</div><!-- wrap -->
+
+<footer>
+  <div class="line">Ink Ribbon &middot; a game by Marty Scott</div>
+  <div class="line"><a href="../index.html">marty64.net</a> &middot; <a href="mailto:greatmartyscott@gmail.com">greatmartyscott@gmail.com</a></div>
+  <div class="line">&copy; 2026 Marty Scott</div>
+</footer>
+
+<script>
+  // tab navigation
+  document.querySelectorAll('.mtab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('panel-' + tab.dataset.tab);
+      if (panel) panel.classList.add('active');
+      // reset reveal state
+      document.querySelectorAll('.letter-frame').forEach(l => l.classList.remove('revealed'));
+      document.querySelectorAll('.reveal-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.decode-box').forEach(d => d.classList.remove('visible'));
+      if (tab.dataset.tab === 'crease') requestAnimationFrame(alignCrease);
+    });
+  });
+
+  // align the encoding crease line with the actual character positions
+  function alignCrease() {
+    const chars = document.querySelectorAll('#letter-crease .crease-char');
+    const line = document.getElementById('crease-code-line');
+    if (chars.length > 0 && line) {
+      const charRect = chars[0].getBoundingClientRect();
+      const frameRect = chars[0].closest('.letter-frame').getBoundingClientRect();
+      if (charRect.width > 0) {
+        line.style.left = (charRect.left - frameRect.left + charRect.width / 2) + 'px';
+      }
+    }
+  }
+  window.addEventListener('resize', alignCrease);
+
+  // reveal toggle
+  function toggleReveal(id) {
+    const letter = document.getElementById('letter-' + id);
+    const decode = document.getElementById('decode-' + id);
+    const btn = letter.parentElement.querySelector('.reveal-btn');
+    letter.classList.toggle('revealed');
+    btn.classList.toggle('active');
+    decode.classList.toggle('visible');
+  }
+
+  // === street window: peace -> war, driven by the slider ===
+  const W = id => document.getElementById(id);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ramp = (t, a, b) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+  const mix = (c1, c2, t) => 'rgb(' + Math.round(lerp(c1[0], c2[0], t)) + ',' + Math.round(lerp(c1[1], c2[1], t)) + ',' + Math.round(lerp(c1[2], c2[2], t)) + ')';
+  const SKY = [[169,194,212],[92,88,82]], FACADE = [[196,176,138],[132,120,102]], MIL = [[122,104,168],[184,48,48]], TRADE = [[72,120,168],[96,90,82]], AWNW = [[221,210,188],[184,80,64]];
+  const setEl = (id, attr, val) => { const e = W(id); if (e) e.setAttribute(attr, val); };
+  const setOp = (id, v) => { const e = W(id); if (e) e.style.opacity = v; };
+
+  function applyTension(t) {
+    setEl('sky', 'fill', mix(SKY[0], SKY[1], t));
+    setOp('sun', 1 - ramp(t, 0.2, 0.65));
+    setEl('facade', 'fill', mix(FACADE[0], FACADE[1], t));
+    setOp('lavBanner', 1 - ramp(t, 0.05, 0.4));
+    setOp('impFlag', ramp(t, 0.2, 0.65));
+    setOp('crest', 1 - ramp(t, 0.45, 0.82));
+    setOp('posts', ramp(t, 0.55, 0.9));
+    setOp('cart', 1 - ramp(t, 0.3, 0.6));
+    setOp('people', 1 - ramp(t, 0.25, 0.8));
+    setEl('militia', 'fill', mix(MIL[0], MIL[1], ramp(t, 0.3, 0.85)));
+    setEl('tradeShutters', 'fill', mix(TRADE[0], TRADE[1], ramp(t, 0.4, 0.85)));
+    setOp('tradeClosed', ramp(t, 0.5, 0.9));
+    setOp('awnB', 1 - ramp(t, 0.4, 0.85));
+    setEl('awnW', 'fill', mix(AWNW[0], AWNW[1], ramp(t, 0.6, 1)));
+    setOp('warOverlay', ramp(t, 0.35, 1) * 0.34);
+    setOp('lampGlow', lerp(0.9, 0.5, ramp(t, 0.6, 1)));
+
+    let name, desc;
+    if (t < 0.12) { name = 'Peace'; desc = 'The street is busy and shared. Peace holds.'; }
+    else if (t < 0.35) { name = 'Eroding'; desc = 'Small flags appear. People linger a little less.'; }
+    else if (t < 0.6) { name = 'Tension'; desc = 'The cart shifts, the militia harden, the blue starts to drain.'; }
+    else if (t < 0.85) { name = 'Crisis'; desc = 'Imperial colors spread. Staff stop crossing the street.'; }
+    else { name = 'War'; desc = 'Flags up, posts manned, the cart gone, the street empty.'; }
+    W('tsName').textContent = name;
+    W('tsDesc').textContent = desc;
+  }
+
+  const tensionSlider = W('tensionSlider');
+  if (tensionSlider) {
+    tensionSlider.addEventListener('input', e => applyTension(+e.target.value / 100));
+    applyTension(0);
+  }
+
+  // === itch.io prototype link ===
+  const ITCH_URL = 'https://martychouette.itch.io/ink-ribbon';
+  document.querySelectorAll('.itch-link').forEach(a => { a.href = ITCH_URL; a.title = 'Build password: ink'; });
+</script>
+
+</body>
+</html>
