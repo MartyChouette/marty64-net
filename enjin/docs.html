@@ -29,7 +29,6 @@
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="docs.html" class="nav-link active">Full Documentation</a></li>
           <li class="nav-item"><a href="manual.html" class="nav-link">User Manual</a></li>
-          <li class="nav-item"><a href="engine-analysis.html" class="nav-link">Technical Analysis</a></li>
           <li class="nav-item"><a href="https://github.com/MartyChouette/TEGE" class="nav-link" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
@@ -68,7 +67,6 @@
           <li class="nav-item"><a href="#skybox" class="nav-link">Skybox</a></li>
           <li class="nav-item"><a href="#player" class="nav-link">Build & Distribution</a></li>
           <li class="nav-item"><a href="#platforms" class="nav-link">Platform Support</a></li>
-          <li class="nav-item"><a href="#analysis" class="nav-link">Technical Analysis</a></li>
         </ul>
       </div>
 
@@ -86,7 +84,7 @@
           <h1>TEGE</h1>
           <p class="hero-subtitle">The Enjin Game Engine</p>
           <p class="lead">
-            A game engine built using C++20 and the Vulkan graphics API. Features a complete editor, Entity-Component-System architecture, AngelScript and visual scripting, Jolt Physics (3D) and Box2D (2D) backends, ray tracing pipeline with denoising, node graph editors for shaders, dialogue, behavior trees, quests, audio events, and particles, a built-in pixel editor and sprite pipeline, runtime UI system, asset libraries, and a standalone game player with HTML5 export and asset packing.
+            A friendly, accessible game engine for making things simply and fast. TEGE gives you a complete editor, rendering, physics, animation, audio, scripting, and export in one place, with lighting that adapts to any machine and elemental and weather systems that bring a world to life. This documentation covers how each part works.
           </p>
 
           <div class="hero-cta">
@@ -102,20 +100,11 @@
           </div>
 
           <div class="tech-badges">
-            <span class="tech-badge">C++20</span>
-            <span class="tech-badge">Vulkan 1.3</span>
-            <span class="tech-badge">GLFW3</span>
-            <span class="tech-badge">Dear ImGui</span>
-            <span class="tech-badge">ImGuizmo</span>
-            <span class="tech-badge">AngelScript</span>
-            <span class="tech-badge">Jolt Physics</span>
-            <span class="tech-badge">Box2D</span>
-            <span class="tech-badge">miniaudio</span>
-            <span class="tech-badge">Assimp</span>
-            <span class="tech-badge">nlohmann/json</span>
-            <span class="tech-badge">nanosvg</span>
-            <span class="tech-badge">stb_truetype</span>
-            <span class="tech-badge">CMake</span>
+            <span class="tech-badge">Windows</span>
+            <span class="tech-badge">Web</span>
+            <span class="tech-badge">2D + 3D</span>
+            <span class="tech-badge">Open source</span>
+            <span class="tech-badge">Accessible by default</span>
           </div>
         </div>
 
@@ -136,12 +125,20 @@
 
         <div class="features-grid">
           <div class="feature-card">
+            <h3>Adaptive Quality</h3>
+            <p>Holds your target framerate by adjusting shadows, effects, resolution, and detail to fit the hardware. The most important lights stay sharp while the rest fall back gracefully, so a scene stays smooth and beautiful on a desktop or a handheld.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Elemental &amp; Weather</h3>
+            <p>Fire, water, earth, and air share one simulation and interact with each other and with wind, weather, and the seasons. Fire lights the scene around it. You set the conditions and the world responds.</p>
+          </div>
+          <div class="feature-card">
             <h3>Vulkan Renderer</h3>
             <p>PBR materials, cascaded shadow maps, soft shadows (Poisson PCF), multi-threaded command buffers, indirect rendering, Hi-Z occlusion culling, bindless resources, deferred rendering, particle system.</p>
           </div>
           <div class="feature-card">
-            <h3>Ray Tracing</h3>
-            <p>RT shadows, reflections, AO, GI, translucency (refraction/SSS), caustics (photon-traced), path tracing with 3 denoiser options (SVGF, OIDN, OptiX NVIDIA CUDA). SH light probes with L2 irradiance baking.</p>
+            <h3>Path-Traced Lighting</h3>
+            <p>A built-in path tracer for high-quality shadows, reflections, ambient occlusion, and global illumination, with three denoiser options (SVGF, OIDN, OptiX). SH light probes with irradiance baking.</p>
           </div>
           <div class="feature-card">
             <h3>ECS Components</h3>
@@ -149,7 +146,11 @@
           </div>
           <div class="feature-card">
             <h3>Full Editor</h3>
-            <p>Hierarchy, inspector, asset browser, profiler, shader graph, visual script editor, animation graph, particle editor, UI editor, and more. 48 startup templates, terrain brushes, command palette.</p>
+            <p>Hierarchy, inspector, asset browser, profiler, shader graph, visual script editor, animation graph, particle editor, UI editor, and more. Startup templates, terrain brushes, command palette.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Scene Layers</h3>
+            <p>Non-destructive editing like a DAW. Edits are captured into layers over a pristine base scene. Mute a layer and its changes vanish instantly. Merge it down when it's final. One file per layer, so parallel edit sessions never conflict in version control.</p>
           </div>
           <div class="feature-card">
             <h3>Post-Processing</h3>
@@ -263,7 +264,7 @@
         <p>Vulkan renderer with multi-threaded command recording, async compute, and ray tracing pipeline. ECS architecture. Jolt Physics (3D) and Box2D (2D) backends. AngelScript scripting. Audio (miniaudio), asset loading (Assimp for glTF), animation (skeletal + sprite + timeline), AI and behavior trees, profiler, plugin system, level streaming, runtime UI, and scene management.</p>
 
         <h3>Editor Layer</h3>
-        <p>Full editor application: asset browser, profiler, shader graph, visual script editor, animation graph, behavior tree editor, quest flow editor, audio event graph, particle editor, UI editor, pixel editor, vector drawing editor, sprite sheet importer, and more. ImGuizmo gizmos, play mode, undo/redo, entity clipboard, 48 startup templates, template marketplace, terrain brushes, command palette, native file dialogs, build dialog.</p>
+        <p>Full editor application: asset browser, profiler, shader graph, visual script editor, animation graph, behavior tree editor, quest flow editor, audio event graph, particle editor, UI editor, pixel editor, vector drawing editor, sprite sheet importer, and more. ImGuizmo gizmos, play mode, undo/redo, entity clipboard, startup templates, template marketplace, terrain brushes, command palette, native file dialogs, build dialog.</p>
 
         <h3>Player Layer</h3>
         <p>Standalone runtime that loads <code>.enjpak</code> asset packs with build manifest. No editor dependency - ships as a minimal executable for distribution. Includes AngelScript integration for game scripting with hot-reload and coroutines.</p>
@@ -308,7 +309,7 @@
 
         <h3>Ray Tracing</h3>
         <ul>
-          <li>RT shadows, reflections, ambient occlusion, global illumination, translucency (refraction/SSS), caustics (photon-traced)</li>
+          <li>Ray-traced shadows, reflections, ambient occlusion, global illumination, and translucency (refraction/SSS) on RT-capable hardware</li>
           <li>Path tracing with 3 denoiser options (SVGF compute, OIDN Intel neural, OptiX NVIDIA CUDA)</li>
           <li>RT composition pass</li>
           <li>Real depth buffer and RT composition pass</li>
@@ -575,7 +576,7 @@
 
         <h3>Core</h3>
         <ul>
-          <li>6 character controller types (2D Platformer, 2D Top-Down, 3D Top-Down, 3D Third Person, 3D First Person, Vehicle)</li>
+          <li>7 character controller types (2D Platformer, 2D Top-Down, 3D Top-Down, 3D Third Person, 3D First Person, Vehicle, Surface-Aligned)</li>
           <li>Gravity zones (directional, point, zero-G per-entity override)</li>
           <li>Temperature zones (heat/cold environmental effects)</li>
           <li>Camera trigger zones (camera override volumes)</li>
@@ -933,9 +934,9 @@
           <figure>
             <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
               <strong style="color:#2d2e38;">Template Selector</strong>
-              48 startup templates across 7 categories
+              Startup templates across 7 categories
             </div>
-            <figcaption>48 startup templates for rapid prototyping. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <figcaption>Startup templates for rapid prototyping. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
         </div>
 
@@ -994,7 +995,7 @@
         </ul>
 
         <h3>Templates</h3>
-        <p>48 startup templates across 7 categories:</p>
+        <p>Startup templates across 7 categories:</p>
         <ul>
           <li><strong>Foundations:</strong> Blank, 2D Platformer, 2D Top-Down, 3D Isometric, 3D Third Person, 3D First Person</li>
           <li><strong>Genre Showcases:</strong> Visual Novel, RPG Village, Survival, PS1 RPG, City Builder</li>
@@ -1057,24 +1058,6 @@
           <li><strong>Nintendo Switch 1:</strong> NVN render backend stub, Joy-Con/touch/docked mode stubs (requires licensed devkit)</li>
           <li><strong>Hub Application:</strong> Standalone project launcher with project manager, engine version manager, template browser</li>
         </ul>
-
-        <hr>
-
-        <h2 id="analysis">Technical Analysis</h2>
-        <p>A comprehensive technical analysis of the engine architecture, systems, and design decisions.</p>
-        <div class="analysis-viewer">
-          <button class="analysis-toggle" onclick="toggleAnalysis()">View Full Technical Analysis</button>
-          <div class="analysis-container" id="analysisContainer">
-            <div class="analysis-toolbar">
-              <span class="analysis-title">Enjin Engine - Comprehensive Technical Analysis</span>
-              <div class="analysis-actions">
-                <a href="engine-analysis.html" target="_blank" class="analysis-open-btn">Open in New Tab</a>
-                <button class="analysis-close-btn" onclick="toggleAnalysis()">Close</button>
-              </div>
-            </div>
-            <iframe src="" data-src="engine-analysis.html" class="analysis-iframe" title="Engine Technical Analysis"></iframe>
-          </div>
-        </div>
 
         <hr>
 
@@ -1141,7 +1124,7 @@
             <li class="done">Play mode (play/pause/stop)</li>
             <li class="done">Undo/redo system</li>
             <li class="done">Entity clipboard (cut/copy/paste)</li>
-            <li class="done">Startup template selector (48 templates)</li>
+            <li class="done">Startup template selector</li>
           </ul>
         </div>
 

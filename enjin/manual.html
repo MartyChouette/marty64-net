@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TEGE Game Engine — User Manual</title>
+  <title>TEGE Game Engine - User Manual</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -587,7 +587,6 @@
           <a href="index.html" style="color:var(--tege-text-muted);text-decoration:none;">Home</a>
           <a href="docs.html" style="color:var(--tege-text-muted);text-decoration:none;">Documentation</a>
           <a href="manual.html" style="color:var(--tege-sage);text-decoration:none;">Manual</a>
-          <a href="engine-analysis.html" style="color:var(--tege-text-muted);text-decoration:none;">Analysis</a>
           <a href="https://github.com/MartyChouette/TEGE" style="color:var(--tege-text-muted);text-decoration:none;" target="_blank" rel="noopener">GitHub</a>
           <a href="../index.html#resume" style="color:var(--tege-text-muted);text-decoration:none;">Resume</a>
         </nav>
@@ -622,41 +621,41 @@
   <h2>Welcome to TEGE</h2>
 
   <p>
-    TEGE (The Enjin Game Engine) is an open-source (BSL 1.1) game engine built
-    entirely from scratch using <strong>C++20</strong> and the
-    <strong>Vulkan</strong> graphics API. It ships with a complete editor
-    powered by Dear ImGui, an Entity-Component-System architecture with over 70
-    component types, physically-based rendering, skeletal animation, and
-    AngelScript scripting &mdash; everything you need to create 2D, 2.5D, and
-    3D games from a single, unified toolset.
+    TEGE (The Enjin Game Engine) is a friendly, accessible game engine for
+    making things simply and fast. It is free and open under the BSL 1.1
+    license, and ships with a complete editor, rendering, physics, animation,
+    audio, scripting, and export. Everything you need to make 2D, 2.5D, and 3D
+    games lives in one toolset. Its lighting adapts to whatever machine your
+    game runs on, and its elemental and weather systems give you a world that
+    feels alive.
   </p>
 
   <h3 id="welcome-features">Feature Highlights</h3>
 
   <ul>
-    <li><strong>70+ ECS components</strong> &mdash; Transform, Mesh, Material, Light, Camera, Rigidbody, Sprite, Tilemap, Audio, UI Canvas, Dialogue, and many more.</li>
-    <li><strong>Vulkan PBR rendering</strong> &mdash; Physically-based materials with metallic/roughness workflow, normal maps, height maps, emissive, transmission, subsurface scattering, and cel shading.</li>
-    <li><strong>Ray tracing</strong> &mdash; Full RT pipeline for shadows, reflections, ambient occlusion, global illumination, translucency, and caustics with SVGF, OIDN, and OptiX denoisers.</li>
-    <li><strong>6 character controllers</strong> &mdash; First-person, third-person, top-down, platformer, vehicle, and planet-gravity controllers.</li>
-    <li><strong>Jolt 3D + Box2D 2D physics</strong> &mdash; Dual physics backends via a unified interface, with collision filtering, sensors, joints, gravity zones, and conveyors.</li>
-    <li><strong>AngelScript + visual scripting</strong> &mdash; Sandboxed text scripting with a complete API, plus a 76-node blueprint-style visual script editor with debugger.</li>
-    <li><strong>Tiered save system</strong> &mdash; Three persistence tiers (RunState, SceneState, MetaProgression) covering collectibles, checkpoints, and cross-session progression.</li>
-    <li><strong>LAN multiplayer</strong> &mdash; Built-in networking layer for local-area multiplayer and splitscreen support.</li>
-    <li><strong>23+ templates</strong> &mdash; Ready-made starting points across 5 categories: Foundations, Genre Showcases, Systems Deep-Dives, Retro &amp; Flash, and Advanced.</li>
-    <li><strong>Procedural generation</strong> &mdash; Terrain, dungeon, and world generation utilities built on Perlin/simplex noise.</li>
-    <li><strong>Accessibility</strong> &mdash; 11 editor themes, colorblind simulation modes, reduced-motion settings, subtitle sizing, and focus-navigable UI.</li>
-    <li><strong>Build pipeline</strong> &mdash; One-click export to a standalone player with asset packing (<code>.enjpak</code>), CRC integrity checks, and configurable window settings.</li>
+    <li><strong>Adaptive quality</strong> - Holds your target framerate by adjusting shadows, effects, resolution, and detail to fit the hardware, so your game stays smooth on a desktop or a handheld.</li>
+    <li><strong>Elemental and weather systems</strong> - Fire, water, earth, and air interact with each other and with wind, weather, and the seasons in one connected simulation. Fire even lights the scene around it.</li>
+    <li><strong>80+ ECS components</strong> - Transform, Mesh, Material, Light, Camera, Rigidbody, Sprite, Tilemap, Audio, UI Canvas, Dialogue, and many more.</li>
+    <li><strong>Vulkan PBR rendering</strong> - Physically-based materials with metallic/roughness workflow, normal maps, height maps, emissive, transmission, subsurface scattering, and cel shading.</li>
+    <li><strong>Path-traced lighting</strong> - A built-in path tracer for high-quality shadows, reflections, ambient occlusion, and global illumination, with SVGF, OIDN, and OptiX denoisers.</li>
+    <li><strong>7 character controllers</strong> - Platformer 2D, Top-Down 2D, Top-Down 3D, third-person, first-person, vehicle, and surface-aligned controllers.</li>
+    <li><strong>Jolt 3D + Box2D 2D physics</strong> - Dual physics backends via a unified interface, with collision filtering, sensors, joints, gravity zones, and conveyors.</li>
+    <li><strong>AngelScript + visual scripting</strong> - A complete text scripting API with hot reload, plus a 146+ node blueprint-style visual script editor with a debugger.</li>
+    <li><strong>Save system</strong> - Persistence tiers (RunState, SceneState, MetaProgression) covering collectibles, checkpoints, and cross-session progression.</li>
+    <li><strong>LAN multiplayer</strong> - Built-in networking layer for local-area multiplayer and splitscreen support.</li>
+    <li><strong>Starter templates</strong> - Ready-made starting points so you can begin with something playable instead of a blank scene.</li>
+    <li><strong>Procedural generation</strong> - Terrain, dungeon, and world generation utilities built on Perlin/simplex noise.</li>
+    <li><strong>Accessibility</strong> - Colorblind correction (8 modes), screen reader, switch access, dyslexia mode, high-contrast themes, reduced motion, and configurable subtitles.</li>
+    <li><strong>Build pipeline</strong> - One-click export to a standalone player with asset packing (<code>.enjpak</code>), CRC integrity checks, and configurable window settings.</li>
   </ul>
 
   <h3 id="welcome-philosophy">Philosophy</h3>
 
   <p>
-    TEGE is built from the ground up with zero middleware dependencies. Every
-    subsystem &mdash; rendering, physics abstraction, audio, scripting,
-    animation, networking, UI, AI, and the editor itself &mdash; is implemented
-    in-house. This gives you a single, cohesive codebase where every layer is
-    designed to work together, with no hidden third-party licenses, no black-box
-    libraries, and full source access under the BSL&nbsp;1.1 license.
+    TEGE is built to stay small and understandable. Its systems are designed to
+    work together as one cohesive whole, and the third-party libraries it relies
+    on are all permissive open source, so there are no hidden licenses or
+    black boxes. You get full source access under the BSL&nbsp;1.1 license.
   </p>
 </section>
 
@@ -748,7 +747,7 @@ brew install molten-vk   # MoltenVK required for Vulkan on macOS</code></pre>
 
   <ol>
     <li>Install <strong>Visual Studio 2019 or 2022</strong> with the "Desktop development with C++" workload.</li>
-    <li>Install <strong>CMake 3.20+</strong> &mdash; download from <a href="https://cmake.org/download/">cmake.org</a> or run <code>winget install Kitware.CMake</code>.</li>
+    <li>Install <strong>CMake 3.20+</strong> - download from <a href="https://cmake.org/download/">cmake.org</a> or run <code>winget install Kitware.CMake</code>.</li>
     <li>Install the <strong>Vulkan SDK</strong> from <a href="https://vulkan.lunarg.com/sdk/home">LunarG</a>. The installer sets <code>VULKAN_SDK</code> and PATH automatically.</li>
     <li>
       Install <strong>GLFW3</strong> via vcpkg (recommended):
@@ -883,9 +882,9 @@ pkg-config --modversion glfw3</code></pre>
   <p>When you run the editor for the first time, the following sequence occurs:</p>
 
   <ol>
-    <li><strong>Splash screen</strong> &mdash; A brief engine splash screen appears while subsystems initialize (Vulkan context, audio device, asset caches).</li>
-    <li><strong>Template Selector</strong> &mdash; A dialog opens presenting 23+ built-in templates organized into 5 categories. Pick one to create a pre-populated starting scene, or choose <em>Blank</em> for an empty canvas.</li>
-    <li><strong>Editor opens</strong> &mdash; The editor workspace loads with the selected template's scene, entities, and components already in place. A default 5-panel layout is applied: Hierarchy, Inspector, Viewport, Console, and Asset Browser.</li>
+    <li><strong>Splash screen</strong> - A brief engine splash screen appears while subsystems initialize (Vulkan context, audio device, asset caches).</li>
+    <li><strong>Template Selector</strong> - A dialog opens presenting 23+ built-in templates organized into 5 categories. Pick one to create a pre-populated starting scene, or choose <em>Blank</em> for an empty canvas.</li>
+    <li><strong>Editor opens</strong> - The editor workspace loads with the selected template's scene, entities, and components already in place. A default 5-panel layout is applied: Hierarchy, Inspector, Viewport, Console, and Asset Browser.</li>
   </ol>
 
   <h3 id="first-launch-templates">Template Selector</h3>
@@ -953,7 +952,7 @@ pkg-config --modversion glfw3</code></pre>
 
   <div class="callout tip">
     <div class="callout-title">Tip</div>
-    <p>The default 5-panel layout (Hierarchy, Inspector, Viewport, Console, Asset Browser) is designed for a clean first impression. All panels are dockable and can be rearranged freely &mdash; drag any panel tab to reposition it, or use the <strong>View</strong> menu to toggle panels on and off.</p>
+    <p>The default 5-panel layout (Hierarchy, Inspector, Viewport, Console, Asset Browser) is designed for a clean first impression. All panels are dockable and can be rearranged freely - drag any panel tab to reposition it, or use the <strong>View</strong> menu to toggle panels on and off.</p>
   </div>
 </section>
 
@@ -967,7 +966,7 @@ pkg-config --modversion glfw3</code></pre>
   <p>
     The TEGE editor is a panel-based workspace. All panels can be toggled from
     the <strong>View</strong> menu in the top menu bar, and every panel is
-    dockable &mdash; drag tabs to rearrange, split, or stack them however you
+    dockable - drag tabs to rearrange, split, or stack them however you
     prefer.
   </p>
 
@@ -1081,11 +1080,11 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Hierarchy</strong> &mdash; "No World Loaded" or "No Entities" (with a <em>Create Entity</em> button).</li>
-    <li><strong>Inspector</strong> &mdash; "No Entity Selected".</li>
-    <li><strong>Asset Browser</strong> &mdash; "Directory Not Found".</li>
-    <li><strong>Dialogue</strong> &mdash; "No DialogueComponent".</li>
-    <li><strong>Plugin Browser</strong> &mdash; "No Plugins Found".</li>
+    <li><strong>Hierarchy</strong> - "No World Loaded" or "No Entities" (with a <em>Create Entity</em> button).</li>
+    <li><strong>Inspector</strong> - "No Entity Selected".</li>
+    <li><strong>Asset Browser</strong> - "Directory Not Found".</li>
+    <li><strong>Dialogue</strong> - "No DialogueComponent".</li>
+    <li><strong>Plugin Browser</strong> - "No Plugins Found".</li>
   </ul>
 
   <h3 id="editor-tour-shortcuts">Keyboard Shortcuts</h3>
@@ -1137,10 +1136,10 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Ctrl + click</strong> &mdash; Toggles an individual entity in or out of the current selection, in both the hierarchy and the viewport.</li>
-    <li><strong>Shift + click</strong> &mdash; Performs a range select in the hierarchy from the current primary selected entity to the clicked entity, selecting everything in between.</li>
-    <li><strong>Drag in viewport</strong> &mdash; Draws a marquee (rubber-band) rectangle; all entities enclosed by the rectangle are added to the selection on mouse release.</li>
-    <li><strong>Primary entity</strong> &mdash; The last entity clicked becomes the primary selection. The Inspector and gizmo use the primary entity as their reference point.</li>
+    <li><strong>Ctrl + click</strong> - Toggles an individual entity in or out of the current selection, in both the hierarchy and the viewport.</li>
+    <li><strong>Shift + click</strong> - Performs a range select in the hierarchy from the current primary selected entity to the clicked entity, selecting everything in between.</li>
+    <li><strong>Drag in viewport</strong> - Draws a marquee (rubber-band) rectangle; all entities enclosed by the rectangle are added to the selection on mouse release.</li>
+    <li><strong>Primary entity</strong> - The last entity clicked becomes the primary selection. The Inspector and gizmo use the primary entity as their reference point.</li>
   </ul>
 
   <p>When multiple entities are selected, the following batch operations become available:</p>
@@ -1149,9 +1148,9 @@ pkg-config --modversion glfw3</code></pre>
     <li>
       The <strong>Inspector</strong> displays a list of all selected entities and provides batch transform editing:
       <ul>
-        <li><strong>Position offset</strong> &mdash; Apply a positional offset to all selected entities.</li>
-        <li><strong>Rotation offset</strong> &mdash; Apply a rotational offset to all selected entities.</li>
-        <li><strong>Scale multiplier</strong> &mdash; Multiply the scale of all selected entities.</li>
+        <li><strong>Position offset</strong> - Apply a positional offset to all selected entities.</li>
+        <li><strong>Rotation offset</strong> - Apply a rotational offset to all selected entities.</li>
+        <li><strong>Scale multiplier</strong> - Multiply the scale of all selected entities.</li>
       </ul>
       Each transform operation has an <strong>Apply</strong> button to commit the change.
     </li>
@@ -1163,7 +1162,7 @@ pkg-config --modversion glfw3</code></pre>
   </ul>
 </section>
 <!-- ============================================================
-     Part II — Core Concepts
+     Part II - Core Concepts
      Projects, ECS architecture, transforms, and play mode.
      ============================================================ -->
 
@@ -1174,7 +1173,7 @@ pkg-config --modversion glfw3</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 5 — Projects and Scenes
+     Section 5 - Projects and Scenes
      ============================================================ -->
 <section id="projects-scenes" data-aos="fade-up">
   <h2>Projects and Scenes</h2>
@@ -1283,10 +1282,10 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Add</strong> &mdash; create a new scene or add an existing <code>.enjin</code> file to the project.</li>
-    <li><strong>Reorder</strong> &mdash; drag scenes up or down to change their build index order.</li>
-    <li><strong>Load</strong> &mdash; click any scene entry to load it into the editor viewport.</li>
-    <li><strong>Set Start Scene</strong> &mdash; right-click a scene and choose "Set as Start" to designate the scene that loads first in exported builds.</li>
+    <li><strong>Add</strong> - create a new scene or add an existing <code>.enjin</code> file to the project.</li>
+    <li><strong>Reorder</strong> - drag scenes up or down to change their build index order.</li>
+    <li><strong>Load</strong> - click any scene entry to load it into the editor viewport.</li>
+    <li><strong>Set Start Scene</strong> - right-click a scene and choose "Set as Start" to designate the scene that loads first in exported builds.</li>
   </ul>
 
   <div class="callout tip">
@@ -1345,7 +1344,7 @@ pkg-config --modversion glfw3</code></pre>
   <p>
     Scenes can be loaded <strong>additively</strong>, meaning the new scene's entities are merged
     on top of the currently loaded scene rather than replacing it. This is useful for layering
-    concerns&mdash;for example, loading a UI overlay scene on top of a gameplay scene, or
+    concerns - for example, loading a UI overlay scene on top of a gameplay scene, or
     streaming in a new section of a level without unloading the current one.
   </p>
 
@@ -1377,13 +1376,13 @@ pkg-config --modversion glfw3</code></pre>
 
   <p>
     All paths inside the <code>.enjinproject</code> manifest and scene files are relative to the
-    project root directory. This makes projects fully portable&mdash;move or rename the root
+    project root directory. This makes projects fully portable - move or rename the root
     folder and everything continues to work.
   </p>
 </section>
 
 <!-- ============================================================
-     Section 6 — Entity-Component-System
+     Section 6 - Entity-Component-System
      ============================================================ -->
 <section id="ecs" data-aos="fade-up">
   <h2>Entity-Component-System</h2>
@@ -1406,7 +1405,7 @@ pkg-config --modversion glfw3</code></pre>
       <tbody>
         <tr>
           <td><strong>Entity</strong></td>
-          <td>A lightweight identifier&mdash;just a <code>u64</code> ID. Entities have no data or behavior by themselves.</td>
+          <td>A lightweight identifier - just a <code>u64</code> ID. Entities have no data or behavior by themselves.</td>
           <td><code>Entity 42</code></td>
         </tr>
         <tr>
@@ -1444,7 +1443,7 @@ pkg-config --modversion glfw3</code></pre>
 
   <ol>
     <li>
-      <strong>Entity menu</strong> &mdash; use the top menu bar's <strong>Entity</strong> menu to
+      <strong>Entity menu</strong> - use the top menu bar's <strong>Entity</strong> menu to
       create common objects:
       <div class="table-wrapper">
         <table>
@@ -1484,7 +1483,7 @@ pkg-config --modversion glfw3</code></pre>
       </div>
     </li>
     <li>
-      <strong>Hierarchy panel</strong> &mdash; right-click in the Hierarchy panel to access the
+      <strong>Hierarchy panel</strong> - right-click in the Hierarchy panel to access the
       same creation options via a context menu. You can also right-click an existing entity to
       create a child entity parented to it.
     </li>
@@ -1495,7 +1494,7 @@ pkg-config --modversion glfw3</code></pre>
   <p>
     Select an entity in the Hierarchy or viewport, then click the <strong>Add Component</strong>
     button at the bottom of the Inspector panel. A searchable dropdown lists all available
-    component types. Type a few characters to filter&mdash;for example, typing "light" will show
+    component types. Type a few characters to filter - for example, typing "light" will show
     <code>LightComponent</code>, <code>SpotLightComponent</code>, and similar matches.
   </p>
 
@@ -1522,13 +1521,13 @@ pkg-config --modversion glfw3</code></pre>
 
   <p>
     This design makes it easy to add new behavior to existing entities. Need an entity to play
-    footstep sounds? Attach a <code>FootstepComponent</code>&mdash;the <code>FootstepSystem</code>
+    footstep sounds? Attach a <code>FootstepComponent</code> - the <code>FootstepSystem</code>
     will pick it up automatically on the next frame. No base class changes required.
   </p>
 
   <div class="callout tip">
     <div class="callout-title">Tip</div>
-    <p><code>DestroyEntity()</code> is deferred&mdash;entities marked for destruction are not
+    <p><code>DestroyEntity()</code> is deferred - entities marked for destruction are not
     actually removed until the start of the next <code>Update()</code> call. If you need to
     check whether an entity is still alive (and not pending destruction), use
     <code>IsValid()</code>.</p>
@@ -1536,7 +1535,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 7 — Coordinate System and Transform
+     Section 7 - Coordinate System and Transform
      ============================================================ -->
 <section id="coordinate-system" data-aos="fade-up">
   <h2>Coordinate System and Transform</h2>
@@ -1616,7 +1615,7 @@ pkg-config --modversion glfw3</code></pre>
   </ul>
 
   <p>
-    This is essential for building compound objects&mdash;for example, a car entity with child
+    This is essential for building compound objects - for example, a car entity with child
     entities for each wheel, or a character entity with an attached weapon.
   </p>
 
@@ -1669,7 +1668,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 8 — Play Mode
+     Section 8 - Play Mode
      ============================================================ -->
 <section id="play-mode" data-aos="fade-up">
   <h2>Play Mode</h2>
@@ -1747,7 +1746,7 @@ pkg-config --modversion glfw3</code></pre>
       <tbody>
         <tr>
           <td><strong>ControllerSystem</strong></td>
-          <td>Processes all character controllers&mdash;movement, jumping, camera orbit, vehicle input.</td>
+          <td>Processes all character controllers - movement, jumping, camera orbit, vehicle input.</td>
         </tr>
         <tr>
           <td><strong>Physics</strong></td>
@@ -1771,7 +1770,7 @@ pkg-config --modversion glfw3</code></pre>
         </tr>
         <tr>
           <td><strong>HUDSystem</strong></td>
-          <td>Runtime HUD widget rendering&mdash;health bars, resource bars, labels, crosshair.</td>
+          <td>Runtime HUD widget rendering - health bars, resource bars, labels, crosshair.</td>
         </tr>
         <tr>
           <td><strong>CinematicSystem</strong></td>
@@ -1822,34 +1821,34 @@ pkg-config --modversion glfw3</code></pre>
 
   <p>
     The PlayModeDiff dialog lets you selectively keep changes that occurred during play. This is
-    invaluable for level design&mdash;for example, you might play-test to find the perfect
+    invaluable for level design - for example, you might play-test to find the perfect
     position for an object, then apply just that transform change back to the editor scene.
   </p>
 
   <ul>
     <li>
-      <strong>Tree view</strong> &mdash; all changed entities are listed in an expandable tree.
+      <strong>Tree view</strong> - all changed entities are listed in an expandable tree.
       Expand an entity to see its changed components, and expand a component to see individual
       property changes.
     </li>
     <li>
       <strong>Color-coded actions</strong>:
       <ul>
-        <li><span style="color: var(--tege-success);"><strong>Green</strong></span> &mdash; entity or component was <strong>created</strong> during play.</li>
-        <li><span style="color: var(--tege-error);"><strong>Red</strong></span> &mdash; entity or component was <strong>deleted</strong> during play.</li>
-        <li><span style="color: var(--tege-warning);"><strong>Yellow</strong></span> &mdash; entity or component was <strong>modified</strong> during play.</li>
+        <li><span style="color: var(--tege-success);"><strong>Green</strong></span> - entity or component was <strong>created</strong> during play.</li>
+        <li><span style="color: var(--tege-error);"><strong>Red</strong></span> - entity or component was <strong>deleted</strong> during play.</li>
+        <li><span style="color: var(--tege-warning);"><strong>Yellow</strong></span> - entity or component was <strong>modified</strong> during play.</li>
       </ul>
     </li>
     <li>
-      <strong>Checkboxes</strong> &mdash; every node in the tree (entity, component, and
+      <strong>Checkboxes</strong> - every node in the tree (entity, component, and
       individual property) has a checkbox. Check only the changes you want to keep.
     </li>
     <li>
-      <strong>Apply Selected</strong> &mdash; re-applies the checked changes to the restored
+      <strong>Apply Selected</strong> - re-applies the checked changes to the restored
       editor scene.
     </li>
     <li>
-      <strong>Discard All</strong> &mdash; closes the dialog without applying any changes. The
+      <strong>Discard All</strong> - closes the dialog without applying any changes. The
       scene returns to its exact pre-play state.
     </li>
   </ul>
@@ -1885,7 +1884,7 @@ pkg-config --modversion glfw3</code></pre>
   </div>
 </section>
 <!-- ================================================================
-     Part III — Component Reference (first half)
+     Part III - Component Reference (first half)
      Sections 9-12: Core, Rendering, Physics 3D, Physics 2D
      ================================================================ -->
 
@@ -1896,7 +1895,7 @@ pkg-config --modversion glfw3</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 9 — Core Components
+     Section 9 - Core Components
      ============================================================ -->
 
 <section id="core-components" data-aos="fade-up">
@@ -2135,7 +2134,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 10 — Rendering Components
+     Section 10 - Rendering Components
      ============================================================ -->
 
 <section id="rendering-components" data-aos="fade-up">
@@ -2682,7 +2681,7 @@ pkg-config --modversion glfw3</code></pre>
         <tr>
           <td><code>settings</code></td>
           <td>PostProcessSettings</td>
-          <td>&mdash;</td>
+          <td> - </td>
           <td>The post-process settings this volume applies (bloom, tone mapping, vignette, etc.).</td>
         </tr>
       </tbody>
@@ -2701,7 +2700,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 11 — Physics 3D Components
+     Section 11 - Physics 3D Components
      ============================================================ -->
 
 <section id="physics-3d" data-aos="fade-up">
@@ -3113,7 +3112,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 12 — Physics 2D Components
+     Section 12 - Physics 2D Components
      ============================================================ -->
 
 <section id="physics-2d" data-aos="fade-up">
@@ -3695,7 +3694,7 @@ pkg-config --modversion glfw3</code></pre>
   </div>
 </section>
 <!-- ============================================================
-     Part III-B — Gameplay Components
+     Part III-B - Gameplay Components
      Character controllers, 2D components, audio, AI and
      navigation, and gameplay systems.
      ============================================================ -->
@@ -3707,7 +3706,7 @@ pkg-config --modversion glfw3</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 13 — Character Controllers
+     Section 13 - Character Controllers
      ============================================================ -->
 <section id="character-controllers" data-aos="fade-up">
   <h2>Character Controllers</h2>
@@ -3779,7 +3778,7 @@ pkg-config --modversion glfw3</code></pre>
           <td><code>gamepadIndex</code></td>
           <td>i32</td>
           <td>0</td>
-          <td>Gamepad index (0&ndash;3) for splitscreen.</td>
+          <td>Gamepad index (0-3) for splitscreen.</td>
         </tr>
         <tr>
           <td><code>gamepadLookSensitivity</code></td>
@@ -4509,7 +4508,7 @@ pkg-config --modversion glfw3</code></pre>
           <td><code>playerIndex</code></td>
           <td>i32</td>
           <td>0</td>
-          <td>Which player (0&ndash;3) can possess this entity.</td>
+          <td>Which player (0-3) can possess this entity.</td>
         </tr>
         <tr>
           <td><code>possessRange</code></td>
@@ -4541,14 +4540,14 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 14 — 2D Components
+     Section 14 - 2D Components
      ============================================================ -->
 <section id="2d-components" data-aos="fade-up">
   <h2>2D Components</h2>
 
   <p>
     TEGE provides dedicated 2D rendering components for sprite-based games.
-    These work alongside the engine's scene classification system &mdash; scenes
+    These work alongside the engine's scene classification system - scenes
     containing only 2D components are automatically classified as
     <code>Scene2D</code>, which skips the shadow pipeline for better performance.
   </p>
@@ -4614,7 +4613,7 @@ pkg-config --modversion glfw3</code></pre>
           <td><code>pivot</code></td>
           <td>Vector2</td>
           <td>(0.5, 0.5)</td>
-          <td>Pivot point (0&ndash;1, center by default).</td>
+          <td>Pivot point (0-1, center by default).</td>
         </tr>
         <tr>
           <td><code>tint</code></td>
@@ -4668,7 +4667,7 @@ pkg-config --modversion glfw3</code></pre>
   <p>
     Sprite sheet animation with per-frame timing. Each frame specifies a source
     rectangle and duration, allowing variable frame rates within a single
-    animation. Attach alongside a <code>Sprite2DComponent</code> &mdash; the
+    animation. Attach alongside a <code>Sprite2DComponent</code> - the
     animated sprite system updates the parent sprite's source rectangle each frame.
   </p>
 
@@ -4900,7 +4899,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 15 — Audio Components
+     Section 15 - Audio Components
      ============================================================ -->
 <section id="audio-components" data-aos="fade-up">
   <h2>Audio Components</h2>
@@ -4943,7 +4942,7 @@ pkg-config --modversion glfw3</code></pre>
           <td><code>volume</code></td>
           <td>f32</td>
           <td>1.0</td>
-          <td>Playback volume (0&ndash;1).</td>
+          <td>Playback volume (0-1).</td>
         </tr>
         <tr>
           <td><code>pitch</code></td>
@@ -5008,7 +5007,7 @@ pkg-config --modversion glfw3</code></pre>
 
   <p>
     Defines the "ears" of the scene. Typically attached to the player or camera
-    entity. Only one active listener should exist at a time &mdash; if multiple
+    entity. Only one active listener should exist at a time - if multiple
     listeners have <code>isActive</code> set to <code>true</code>, the first one
     found in the entity list takes precedence.
   </p>
@@ -5049,11 +5048,11 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>HRTF binaural rendering</strong> &mdash; head-related transfer
+    <li><strong>HRTF binaural rendering</strong> - head-related transfer
     function filtering for realistic headphone spatialization.</li>
-    <li><strong>Occlusion and transmission</strong> &mdash; sounds are
+    <li><strong>Occlusion and transmission</strong> - sounds are
     attenuated when blocked by geometry, with material-dependent transmission.</li>
-    <li><strong>Environmental reverb</strong> &mdash; automatic reverb based on
+    <li><strong>Environmental reverb</strong> - automatic reverb based on
     room geometry and surface materials.</li>
   </ul>
 
@@ -5061,12 +5060,12 @@ pkg-config --modversion glfw3</code></pre>
     <div class="callout-title">Tip</div>
     <p>Steam Audio processing is handled by <code>SteamAudioProcessor</code>,
     which runs as a post-process on the audio mix. No additional components are
-    needed &mdash; it automatically enhances all 3D audio sources when enabled.</p>
+    needed - it automatically enhances all 3D audio sources when enabled.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     Section 16 — AI and Navigation
+     Section 16 - AI and Navigation
      ============================================================ -->
 <section id="ai-navigation" data-aos="fade-up">
   <h2>AI and Navigation</h2>
@@ -5227,7 +5226,7 @@ pkg-config --modversion glfw3</code></pre>
         <tr>
           <td><strong>Dead</strong></td>
           <td>Inactive. The entity stops all movement and processing.</td>
-          <td>&mdash;</td>
+          <td> - </td>
         </tr>
       </tbody>
     </table>
@@ -5470,13 +5469,13 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Navmesh generation</strong> &mdash; automatically builds a
+    <li><strong>Navmesh generation</strong> - automatically builds a
     navigation mesh from scene geometry. Static meshes and colliders in the scene
     are voxelized and converted into a walkable surface representation.</li>
-    <li><strong>Path queries</strong> &mdash; find a path from point A to point B
+    <li><strong>Path queries</strong> - find a path from point A to point B
     on the navmesh. AI entities use pathfinding results to navigate around
     obstacles instead of moving in straight lines.</li>
-    <li><strong>Debug visualization</strong> &mdash; toggle navmesh and path
+    <li><strong>Debug visualization</strong> - toggle navmesh and path
     rendering in the editor to inspect walkable areas, obstacles, and computed
     paths in real time.</li>
   </ul>
@@ -5491,7 +5490,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 17 — Gameplay Components
+     Section 17 - Gameplay Components
      ============================================================ -->
 <section id="gameplay-components" data-aos="fade-up">
   <h2>Gameplay Components</h2>
@@ -5606,8 +5605,8 @@ pkg-config --modversion glfw3</code></pre>
   </div>
 
   <p>
-    Helper methods: <code>GetHealthPercent()</code> (0&ndash;1),
-    <code>GetShieldPercent()</code> (0&ndash;1), <code>IsFullHealth()</code>.
+    Helper methods: <code>GetHealthPercent()</code> (0-1),
+    <code>GetShieldPercent()</code> (0-1), <code>IsFullHealth()</code>.
   </p>
 
   <!-- ---- DamageComponent ---- -->
@@ -5832,7 +5831,7 @@ pkg-config --modversion glfw3</code></pre>
   </div>
 
   <p>
-    Helper methods: <code>GetPercent()</code> (0&ndash;1),
+    Helper methods: <code>GetPercent()</code> (0-1),
     <code>TryConsume(amount)</code> (returns false if insufficient),
     <code>Regenerate(deltaTime)</code>. Auto-regeneration happens automatically
     each frame. Controllers check <code>TryConsume()</code> before allowing
@@ -6209,13 +6208,13 @@ pkg-config --modversion glfw3</code></pre>
   </div>
 
   <p>
-    Helper queries: <code>GetProgress()</code> returns a 0&ndash;1 normalized
+    Helper queries: <code>GetProgress()</code> returns a 0-1 normalized
     value, <code>GetRemaining()</code> returns seconds left, and
     <code>IsComplete()</code> returns true once the timer has finished.
   </p>
 </section>
 <!-- ============================================================
-     Part III-C — Gameplay Systems (Puzzle, State, Save, HUD,
+     Part III-C - Gameplay Systems (Puzzle, State, Save, HUD,
      Cinematic, Networking, Environment, Terrain, Advanced)
      ============================================================ -->
 
@@ -6226,7 +6225,7 @@ pkg-config --modversion glfw3</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 18 — Puzzle and Level Design
+     Section 18 - Puzzle and Level Design
      ============================================================ -->
 <section id="puzzle-level-design" data-aos="fade-up">
   <h2>Puzzle and Level Design</h2>
@@ -6477,7 +6476,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 19 — State and Dialogue
+     Section 19 - State and Dialogue
      ============================================================ -->
 <section id="state-dialogue" data-aos="fade-up">
   <h2>State and Dialogue</h2>
@@ -6647,7 +6646,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 20 — Save System
+     Section 20 - Save System
      ============================================================ -->
 <section id="save-system" data-aos="fade-up">
   <h2>Save System</h2>
@@ -6893,7 +6892,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 21 — HUD and UI
+     Section 21 - HUD and UI
      ============================================================ -->
 <section id="hud-ui" data-aos="fade-up">
   <h2>HUD and UI</h2>
@@ -7000,10 +6999,10 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Layout</strong> &mdash; resolves anchors, pivots, margins, and the element tree hierarchy into screen-space rectangles.</li>
-    <li><strong>Render</strong> &mdash; draws all visible elements as ImGui draw commands in the Game View overlay.</li>
-    <li><strong>Input</strong> &mdash; processes mouse clicks, hover states, and drag events, dispatching them to the correct element.</li>
-    <li><strong>Focus navigation</strong> &mdash; manages keyboard/gamepad focus traversal for accessible UI control.</li>
+    <li><strong>Layout</strong> - resolves anchors, pivots, margins, and the element tree hierarchy into screen-space rectangles.</li>
+    <li><strong>Render</strong> - draws all visible elements as ImGui draw commands in the Game View overlay.</li>
+    <li><strong>Input</strong> - processes mouse clicks, hover states, and drag events, dispatching them to the correct element.</li>
+    <li><strong>Focus navigation</strong> - manages keyboard/gamepad focus traversal for accessible UI control.</li>
   </ul>
 
   <!-- Focus Navigation -->
@@ -7037,7 +7036,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 22 — Cinematic and Animation
+     Section 22 - Cinematic and Animation
      ============================================================ -->
 <section id="cinematic-animation" data-aos="fade-up">
   <h2>Cinematic and Animation</h2>
@@ -7138,10 +7137,10 @@ pkg-config --modversion glfw3</code></pre>
   <h4 id="timeline-playback">Playback Controls</h4>
 
   <ul>
-    <li><strong>Play / Pause / Stop</strong> &mdash; standard playback controls.</li>
-    <li><strong>Loop</strong> &mdash; restart when reaching the end.</li>
-    <li><strong>Ping-Pong</strong> &mdash; play forward then backward.</li>
-    <li><strong>Speed</strong> &mdash; playback rate multiplier.</li>
+    <li><strong>Play / Pause / Stop</strong> - standard playback controls.</li>
+    <li><strong>Loop</strong> - restart when reaching the end.</li>
+    <li><strong>Ping-Pong</strong> - play forward then backward.</li>
+    <li><strong>Speed</strong> - playback rate multiplier.</li>
   </ul>
 
   <h4 id="timeline-easing">Easing Functions</h4>
@@ -7154,7 +7153,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 23 — Networking
+     Section 23 - Networking
      ============================================================ -->
 <section id="networking" data-aos="fade-up">
   <h2>Networking</h2>
@@ -7227,11 +7226,11 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Host/Join</strong> &mdash; The host creates a session on a configurable port (default 7777). Clients connect by entering the host's IP address.</li>
-    <li><strong>Entity Ownership</strong> &mdash; Each replicated entity has an <code>ownerId</code>. Only the owning client sends authoritative state updates. Other clients receive and interpolate.</li>
-    <li><strong>RPCs (Remote Procedure Calls)</strong> &mdash; Scripts can invoke functions on remote clients via named RPCs. Both AngelScript and visual script bindings are provided (<code>Host Game</code>, <code>Join Game</code>, <code>Disconnect</code>, <code>Call RPC</code> nodes).</li>
-    <li><strong>Delta Sync</strong> &mdash; The <code>NetworkSystem</code> sends state updates at 20 Hz by default, with HMAC-SHA256 authentication for packet integrity.</li>
-    <li><strong>Client-Side Prediction</strong> &mdash; Locally owned entities are simulated immediately; prediction errors are smoothly corrected when authoritative state arrives.</li>
+    <li><strong>Host/Join</strong> - The host creates a session on a configurable port (default 7777). Clients connect by entering the host's IP address.</li>
+    <li><strong>Entity Ownership</strong> - Each replicated entity has an <code>ownerId</code>. Only the owning client sends authoritative state updates. Other clients receive and interpolate.</li>
+    <li><strong>RPCs (Remote Procedure Calls)</strong> - Scripts can invoke functions on remote clients via named RPCs. Both AngelScript and visual script bindings are provided (<code>Host Game</code>, <code>Join Game</code>, <code>Disconnect</code>, <code>Call RPC</code> nodes).</li>
+    <li><strong>Delta Sync</strong> - The <code>NetworkSystem</code> sends state updates at 20 Hz by default, with HMAC-SHA256 authentication for packet integrity.</li>
+    <li><strong>Client-Side Prediction</strong> - Locally owned entities are simulated immediately; prediction errors are smoothly corrected when authoritative state arrives.</li>
   </ul>
 
   <!-- Network Config -->
@@ -7272,7 +7271,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 24 — Environment and Effects
+     Section 24 - Environment and Effects
      ============================================================ -->
 <section id="environment-effects" data-aos="fade-up">
   <h2>Environment and Effects</h2>
@@ -7465,7 +7464,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 25 — Vegetation and Terrain
+     Section 25 - Vegetation and Terrain
      ============================================================ -->
 <section id="vegetation-terrain" data-aos="fade-up">
   <h2>Vegetation and Terrain</h2>
@@ -7574,7 +7573,7 @@ pkg-config --modversion glfw3</code></pre>
 </section>
 
 <!-- ============================================================
-     Section 26 — Advanced Components
+     Section 26 - Advanced Components
      ============================================================ -->
 <section id="advanced-components" data-aos="fade-up">
   <h2>Advanced Components</h2>
@@ -8187,8 +8186,8 @@ pkg-config --modversion glfw3</code></pre>
   <p>The panel is divided into two areas:</p>
 
   <ul>
-    <li><strong>Toolbar</strong> &mdash; search bar, grid/list toggle button, and a thumbnail size slider.</li>
-    <li><strong>Content Area</strong> &mdash; file cards displayed in either grid or list view.</li>
+    <li><strong>Toolbar</strong> - search bar, grid/list toggle button, and a thumbnail size slider.</li>
+    <li><strong>Content Area</strong> - file cards displayed in either grid or list view.</li>
   </ul>
 
   <h3 id="asset-browser-features">Features</h3>
@@ -8378,9 +8377,9 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>NES</strong> &mdash; 54-color palette with 256&times;240 resolution.</li>
-    <li><strong>Game Boy</strong> &mdash; 4-shade green palette with 160&times;144 resolution.</li>
-    <li><strong>SNES</strong> &mdash; Extended palette with 256&times;224 resolution.</li>
+    <li><strong>NES</strong> - 54-color palette with 256&times;240 resolution.</li>
+    <li><strong>Game Boy</strong> - 4-shade green palette with 160&times;144 resolution.</li>
+    <li><strong>SNES</strong> - Extended palette with 256&times;224 resolution.</li>
   </ul>
 
   <h3 id="pixel-editor-onion">Onion Skinning</h3>
@@ -8558,12 +8557,12 @@ pkg-config --modversion glfw3</code></pre>
   <h3 id="vector-drawing-features">Editor Features</h3>
 
   <ul>
-    <li><strong>Layer system</strong> &mdash; add, remove, and reorder layers for organizing complex drawings.</li>
-    <li><strong>Undo / Redo</strong> &mdash; 50 levels of history for non-destructive editing.</li>
-    <li><strong>Snap to grid</strong> &mdash; configurable grid size for precise alignment.</li>
-    <li><strong>Zoom and pan</strong> &mdash; mouse wheel for zoom, middle mouse drag for pan.</li>
-    <li><strong>Property panel</strong> &mdash; edit fill color, stroke color, and stroke width for the selected shape.</li>
-    <li><strong>SVG export</strong> &mdash; export your drawing as SVG for use in web applications or re-import into TEGE.</li>
+    <li><strong>Layer system</strong> - add, remove, and reorder layers for organizing complex drawings.</li>
+    <li><strong>Undo / Redo</strong> - 50 levels of history for non-destructive editing.</li>
+    <li><strong>Snap to grid</strong> - configurable grid size for precise alignment.</li>
+    <li><strong>Zoom and pan</strong> - mouse wheel for zoom, middle mouse drag for pan.</li>
+    <li><strong>Property panel</strong> - edit fill color, stroke color, and stroke width for the selected shape.</li>
+    <li><strong>SVG export</strong> - export your drawing as SVG for use in web applications or re-import into TEGE.</li>
   </ul>
 </section>
 
@@ -8620,7 +8619,7 @@ pkg-config --modversion glfw3</code></pre>
         </tr>
         <tr>
           <td><strong>Paint</strong></td>
-          <td>Paints splatmap weights for the selected texture layer (0&ndash;3). Weights are automatically normalized to sum to 1.0.</td>
+          <td>Paints splatmap weights for the selected texture layer (0-3). Weights are automatically normalized to sum to 1.0.</td>
         </tr>
       </tbody>
     </table>
@@ -8640,27 +8639,27 @@ pkg-config --modversion glfw3</code></pre>
       <tbody>
         <tr>
           <td><strong>Radius</strong></td>
-          <td>0.5 &ndash; 50.0</td>
+          <td>0.5 - 50.0</td>
           <td>Brush size in world units.</td>
         </tr>
         <tr>
           <td><strong>Strength</strong></td>
-          <td>0.01 &ndash; 10.0</td>
+          <td>0.01 - 10.0</td>
           <td>Intensity of the brush effect per frame.</td>
         </tr>
         <tr>
           <td><strong>Falloff</strong></td>
-          <td>0.0 &ndash; 1.0</td>
+          <td>0.0 - 1.0</td>
           <td>How quickly the effect fades from center to edge. 0 = uniform circle, 1 = full smoothstep falloff.</td>
         </tr>
         <tr>
           <td><strong>Flatten Height</strong></td>
-          <td>0.0 &ndash; maxHeight</td>
+          <td>0.0 - maxHeight</td>
           <td>Target height for Flatten mode.</td>
         </tr>
         <tr>
           <td><strong>Paint Layer</strong></td>
-          <td>0 &ndash; 3</td>
+          <td>0 - 3</td>
           <td>Which splatmap layer to paint (corresponds to one of the 4 texture layers).</td>
         </tr>
       </tbody>
@@ -8675,8 +8674,8 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Load Texture</strong> &mdash; select a PNG, JPG, BMP, or TGA file for the layer.</li>
-    <li><strong>Tile Scale</strong> &mdash; how many times the texture repeats across the terrain surface.</li>
+    <li><strong>Load Texture</strong> - select a PNG, JPG, BMP, or TGA file for the layer.</li>
+    <li><strong>Tile Scale</strong> - how many times the texture repeats across the terrain surface.</li>
   </ul>
 
   <p>
@@ -8708,7 +8707,7 @@ pkg-config --modversion glfw3</code></pre>
     <div class="callout-title">Tip</div>
     <p>
       While terrain Edit Mode is active, <strong>viewport picking is
-      disabled</strong> &mdash; left-clicking sculpts terrain instead of selecting
+      disabled</strong> - left-clicking sculpts terrain instead of selecting
       entities. This prevents accidentally deselecting the terrain entity while
       painting. The transform gizmo still works normally. Uncheck the Edit Mode
       checkbox to return to normal entity selection.
@@ -8932,9 +8931,9 @@ pkg-config --modversion glfw3</code></pre>
   <p>The editor window is divided into three areas:</p>
 
   <ul>
-    <li><strong>Toolbar</strong> (top) &mdash; Auto Layout and Fit All buttons.</li>
-    <li><strong>Graph Canvas</strong> (left) &mdash; the node graph where you create and connect nodes. Right-click to open a context menu with Flow, Objectives, and Logic categories.</li>
-    <li><strong>Inspector Panel</strong> (right, 280px) &mdash; quest info fields (ID, title, description) and properties for the currently selected node.</li>
+    <li><strong>Toolbar</strong> (top) - Auto Layout and Fit All buttons.</li>
+    <li><strong>Graph Canvas</strong> (left) - the node graph where you create and connect nodes. Right-click to open a context menu with Flow, Objectives, and Logic categories.</li>
+    <li><strong>Inspector Panel</strong> (right, 280px) - quest info fields (ID, title, description) and properties for the currently selected node.</li>
   </ul>
 
   <h3 id="quest-flow-connecting">Connecting Nodes</h3>
@@ -8960,13 +8959,13 @@ pkg-config --modversion glfw3</code></pre>
   </p>
 
   <ul>
-    <li><strong>Start</strong> &mdash; immediately completes and activates its output.</li>
-    <li><strong>Objective</strong> &mdash; waits until its counter reaches <code>targetCount</code>.</li>
-    <li><strong>Condition / Branch</strong> &mdash; evaluates and routes to True or False output.</li>
-    <li><strong>Reward</strong> &mdash; logs the grant and continues.</li>
-    <li><strong>Delay</strong> &mdash; accumulates time and continues when elapsed.</li>
-    <li><strong>Event</strong> &mdash; fires the named event and continues.</li>
-    <li><strong>End</strong> &mdash; sets the quest status and stops processing.</li>
+    <li><strong>Start</strong> - immediately completes and activates its output.</li>
+    <li><strong>Objective</strong> - waits until its counter reaches <code>targetCount</code>.</li>
+    <li><strong>Condition / Branch</strong> - evaluates and routes to True or False output.</li>
+    <li><strong>Reward</strong> - logs the grant and continues.</li>
+    <li><strong>Delay</strong> - accumulates time and continues when elapsed.</li>
+    <li><strong>Event</strong> - fires the named event and continues.</li>
+    <li><strong>End</strong> - sets the quest status and stops processing.</li>
   </ul>
 
   <p>
@@ -9648,10 +9647,10 @@ VisualScript_GetVariable(entity, name);</code></pre>
   </p>
 
   <ul>
-    <li><strong>Size</strong> &mdash; room dimensions in grid units.</li>
-    <li><strong>Connection points</strong> &mdash; doorways and openings where rooms can snap together, with directional constraints.</li>
-    <li><strong>Tags</strong> &mdash; categorization labels such as <code>"start"</code>, <code>"boss"</code>, <code>"corridor"</code>, or <code>"treasure"</code>.</li>
-    <li><strong>Weight</strong> &mdash; probability weight for random selection (higher weight = more likely to be chosen).</li>
+    <li><strong>Size</strong> - room dimensions in grid units.</li>
+    <li><strong>Connection points</strong> - doorways and openings where rooms can snap together, with directional constraints.</li>
+    <li><strong>Tags</strong> - categorization labels such as <code>"start"</code>, <code>"boss"</code>, <code>"corridor"</code>, or <code>"treasure"</code>.</li>
+    <li><strong>Weight</strong> - probability weight for random selection (higher weight = more likely to be chosen).</li>
   </ul>
 
   <h3 id="procgen-parameters">Generation Parameters</h3>
@@ -9743,7 +9742,7 @@ VisualScript_GetVariable(entity, name);</code></pre>
   <p>
     The procedural generation pipeline editor provides <strong>38 node
     types</strong> for composing complex generation workflows visually. Nodes can
-    be chained together to combine algorithms &mdash; for example, generating a
+    be chained together to combine algorithms - for example, generating a
     BSP dungeon layout, applying cellular automata for cave rooms, using Voronoi
     for biome assignment, and finishing with L-system vegetation placement.
   </p>
@@ -9756,10 +9755,10 @@ VisualScript_GetVariable(entity, name);</code></pre>
   </p>
 
   <ul>
-    <li><strong>Reaction-Diffusion</strong> &mdash; Gray-Scott model with 9 presets (Mitosis Spots, Coral Growth, Fingerprints, Leopard, Labyrinth, Worm Holes, Bubble Packing, Spirals, Custom). Outputs RGBA8 textures and heightmaps.</li>
-    <li><strong>Cellular Automata Geometry</strong> &mdash; 7 CA rules (Game of Life, HighLife, Day and Night, Seeds, Brian&rsquo;s Brain, Rule 110, Diamoeba) with 3 mesh output modes: Voxels (greedy face culling), Marching Cubes, and Point Cloud.</li>
-    <li><strong>Physarum Slime Mold</strong> &mdash; 50K+ agent simulation with trail map diffusion/decay, 5 presets (Classic Slime, Branching Network, Dense Web, Tendrils, Pulsating), and bake-to-texture export.</li>
-    <li><strong>Fluid-Terrain Coupling</strong> &mdash; fluid simulation density/velocity grids drive terrain heightmap modification via erosion and accumulation modes.</li>
+    <li><strong>Reaction-Diffusion</strong> - Gray-Scott model with 9 presets (Mitosis Spots, Coral Growth, Fingerprints, Leopard, Labyrinth, Worm Holes, Bubble Packing, Spirals, Custom). Outputs RGBA8 textures and heightmaps.</li>
+    <li><strong>Cellular Automata Geometry</strong> - 7 CA rules (Game of Life, HighLife, Day and Night, Seeds, Brian&rsquo;s Brain, Rule 110, Diamoeba) with 3 mesh output modes: Voxels (greedy face culling), Marching Cubes, and Point Cloud.</li>
+    <li><strong>Physarum Slime Mold</strong> - 50K+ agent simulation with trail map diffusion/decay, 5 presets (Classic Slime, Branching Network, Dense Web, Tendrils, Pulsating), and bake-to-texture export.</li>
+    <li><strong>Fluid-Terrain Coupling</strong> - fluid simulation density/velocity grids drive terrain heightmap modification via erosion and accumulation modes.</li>
   </ul>
 
   <h3 id="procgen-forest">Forest Generation</h3>
@@ -9770,10 +9769,10 @@ VisualScript_GetVariable(entity, name);</code></pre>
   </p>
 
   <ul>
-    <li><strong>Mixed</strong> &mdash; balanced variety of tree types.</li>
-    <li><strong>Dense Conifer</strong> &mdash; tightly packed evergreen forests.</li>
-    <li><strong>Deciduous Park</strong> &mdash; spaced broadleaf trees with open areas.</li>
-    <li><strong>Sparse Savanna</strong> &mdash; widely distributed trees with grass.</li>
+    <li><strong>Mixed</strong> - balanced variety of tree types.</li>
+    <li><strong>Dense Conifer</strong> - tightly packed evergreen forests.</li>
+    <li><strong>Deciduous Park</strong> - spaced broadleaf trees with open areas.</li>
+    <li><strong>Sparse Savanna</strong> - widely distributed trees with grass.</li>
   </ul>
 
   <p>
@@ -9783,8 +9782,101 @@ VisualScript_GetVariable(entity, name);</code></pre>
     sliders are configurable.
   </p>
 </section>
+
+<!-- ============================================================ -->
+<!-- Section 40: Scene Layers                                       -->
+<!-- ============================================================ -->
+
+<section id="scene-layers" data-aos="fade-up">
+  <h2>Scene Layers</h2>
+
+  <p>
+    Scene layers let you edit non-destructively, the way a DAW layers tracks over
+    a recording. The scene on disk stays a pristine <strong>base</strong>; your
+    edits are captured into <strong>layers</strong> stacked on top of it. Toggle
+    a layer off and its edits vanish from the scene instantly. Toggle it back on
+    and they return. The base is never touched until you decide to merge.
+  </p>
+
+  <p>
+    Open the panel via <strong>View &gt; Panels &gt; Layers</strong>.
+  </p>
+
+  <h3 id="scene-layers-workflow">Working with Layers</h3>
+
+  <ol>
+    <li><strong>+ Add Layer</strong> creates a new layer and makes it active. The first layer also snapshots the current scene as the base.</li>
+    <li>The <strong>radio button</strong> picks the active layer. While a layer is active, every edit you make &mdash; inspector fields, gizmo moves, multi-select batch edits, added or removed components, created or deleted entities &mdash; is captured into it automatically as a sparse delta.</li>
+    <li>Each row shows a live count of the entities and component edits the layer holds, and layer names are editable in place.</li>
+  </ol>
+
+  <p>
+    Without an active layer the editor behaves exactly as before &mdash; layers
+    are fully opt-in.
+  </p>
+
+  <h3 id="scene-layers-controls">Controls</h3>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Control</th>
+          <th>Effect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Enable checkbox</strong></td>
+          <td>Mutes/unmutes the layer. Applied to the live scene instantly &mdash; no reload, and unsaved work elsewhere is untouched.</td>
+        </tr>
+        <tr>
+          <td><strong>L (lock)</strong></td>
+          <td>Blocks capture into the layer. Edits made while the active layer is locked are not recorded.</td>
+        </tr>
+        <tr>
+          <td><strong>Mrg</strong></td>
+          <td>Merges the layer down into the layer below it (or into the base scene if it is the bottom layer). The visible scene does not change &mdash; only the stack gets flatter. Locked or disabled layers refuse to merge.</td>
+        </tr>
+        <tr>
+          <td><strong>X</strong></td>
+          <td>Deletes the layer and all of its edits.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="scene-layers-persistence">Saving and Loading</h3>
+
+  <p>
+    <strong>Save Layers</strong> writes one <code>.layer</code> file per layer
+    into a <code>&lt;scene&gt;.layers</code> directory beside the scene file.
+    Distinct layers in distinct files means two people editing the same scene on
+    different layers never conflict in version control.
+    <strong>Load Layers</strong> restores the stack from that directory.
+  </p>
+
+  <p>
+    Saving the scene also saves its layers automatically, and opening a scene
+    with a <code>.layers</code> directory beside it resumes the session &mdash;
+    layers loaded, edits applied. <strong>Rebuild From Layers</strong> clears the
+    world and rebuilds it from the base plus all enabled layers, if you ever want
+    a full clean resolve.
+  </p>
+
+  <div class="callout tip">
+    <div class="callout-title">Note</div>
+    <p>
+      The saved <code>.enjin</code> file contains the scene as you see it (base
+      plus enabled layers). After saving and reopening, disabling a layer
+      restores the values from that save, not from before the layer existed.
+      Merge a layer down when you are happy with it. Layer edits are addressed
+      by stable entity IDs, so they survive scene reloads and entity reordering.
+    </p>
+  </div>
+</section>
 <!-- ============================================================
-     Part V — Scripting
+     Part V - Scripting
      AngelScript programming, API reference, and visual scripting.
      ============================================================ -->
 
@@ -9795,7 +9887,7 @@ VisualScript_GetVariable(entity, name);</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 40 — AngelScript Basics
+     Section 40 - AngelScript Basics
      ============================================================ -->
 <section id="angelscript-basics" data-aos="fade-up">
   <h2>AngelScript Basics</h2>
@@ -9944,13 +10036,13 @@ VisualScript_GetVariable(entity, name);</code></pre>
   </p>
 
   <ol>
-    <li><strong>Hot Reload Check</strong> &mdash; Every 30 frames, the engine polls the script directory for modified <code>.as</code> files. Changed scripts are recompiled and running instances are updated without stopping play mode.</li>
-    <li><strong>New Scripts</strong> &mdash; Any scripts added since the last frame run <code>CreateInstance</code> &rarr; <code>OnCreate</code> &rarr; <code>OnEnable</code>.</li>
-    <li><strong>Unstarted Scripts</strong> &mdash; Scripts that have been created but have not yet received their first frame call <code>OnStart</code>.</li>
-    <li><strong>Fixed Timestep Loop</strong> &mdash; Zero or more calls to <code>OnFixedUpdate(fixedDt)</code> depending on accumulated time.</li>
-    <li><strong>OnUpdate</strong> &mdash; Every active script receives <code>OnUpdate(deltaTime)</code>.</li>
-    <li><strong>Coroutine Scheduler</strong> &mdash; Pending coroutines are resumed based on their yield condition.</li>
-    <li><strong>OnLateUpdate</strong> &mdash; Every active script receives <code>OnLateUpdate(deltaTime)</code>.</li>
+    <li><strong>Hot Reload Check</strong> - Every 30 frames, the engine polls the script directory for modified <code>.as</code> files. Changed scripts are recompiled and running instances are updated without stopping play mode.</li>
+    <li><strong>New Scripts</strong> - Any scripts added since the last frame run <code>CreateInstance</code> &rarr; <code>OnCreate</code> &rarr; <code>OnEnable</code>.</li>
+    <li><strong>Unstarted Scripts</strong> - Scripts that have been created but have not yet received their first frame call <code>OnStart</code>.</li>
+    <li><strong>Fixed Timestep Loop</strong> - Zero or more calls to <code>OnFixedUpdate(fixedDt)</code> depending on accumulated time.</li>
+    <li><strong>OnUpdate</strong> - Every active script receives <code>OnUpdate(deltaTime)</code>.</li>
+    <li><strong>Coroutine Scheduler</strong> - Pending coroutines are resumed based on their yield condition.</li>
+    <li><strong>OnLateUpdate</strong> - Every active script receives <code>OnLateUpdate(deltaTime)</code>.</li>
   </ol>
 
   <div class="mermaid">
@@ -9993,22 +10085,22 @@ graph TD
         <tr>
           <td><code>Bool</code></td>
           <td>Checkbox</td>
-          <td>&mdash;</td>
+          <td> - </td>
         </tr>
         <tr>
           <td><code>String</code></td>
           <td>Text field</td>
-          <td>&mdash;</td>
+          <td> - </td>
         </tr>
         <tr>
           <td><code>Vector2</code></td>
           <td>XY float fields</td>
-          <td>&mdash;</td>
+          <td> - </td>
         </tr>
         <tr>
           <td><code>Vector3</code></td>
           <td>XYZ float fields</td>
-          <td>&mdash;</td>
+          <td> - </td>
         </tr>
         <tr>
           <td><code>Vector4</code></td>
@@ -10080,7 +10172,7 @@ graph TD
 </section>
 
 <!-- ============================================================
-     Section 41 — Complete API Reference
+     Section 41 - Complete API Reference
      ============================================================ -->
 <section id="api-reference" data-aos="fade-up">
   <h2>Complete API Reference</h2>
@@ -10192,7 +10284,7 @@ graph TD
         <tr><td><code>Entity_SetVisible(uint64, bool)</code>, <code>bool Entity_IsVisible(uint64)</code></td><td>Toggle entity visibility.</td></tr>
         <tr>
           <td colspan="2">
-            <strong>EntityHandle</strong> class &mdash; object wrapper around an entity ID:<br>
+            <strong>EntityHandle</strong> class - object wrapper around an entity ID:<br>
             <code>IsValid()</code>, <code>GetID()</code>, <code>GetPosition()</code> / <code>SetPosition()</code>,
             <code>GetRotation()</code> / <code>SetRotation()</code>, <code>GetScale()</code> / <code>SetScale()</code>,
             <code>GetName()</code>, <code>HasTag(string)</code>.
@@ -10200,7 +10292,7 @@ graph TD
         </tr>
         <tr>
           <td colspan="2">
-            <strong>TransformProxy</strong> &mdash; convenience accessors:<br>
+            <strong>TransformProxy</strong> - convenience accessors:<br>
             <code>position</code>, <code>rotation</code>, <code>scale</code> (read/write),
             <code>forward</code>, <code>right</code>, <code>up</code> (read-only directional vectors).
           </td>
@@ -10297,8 +10389,8 @@ graph TD
   </div>
 
   <p>
-    Key constants: <code>Key_A</code> through <code>Key_Z</code>, <code>Key_Num0</code>&ndash;<code>Key_Num9</code>,
-    <code>Key_F1</code>&ndash;<code>Key_F12</code>, <code>Key_Space</code>, <code>Key_Escape</code>,
+    Key constants: <code>Key_A</code> through <code>Key_Z</code>, <code>Key_Num0</code>-<code>Key_Num9</code>,
+    <code>Key_F1</code>-<code>Key_F12</code>, <code>Key_Space</code>, <code>Key_Escape</code>,
     <code>Key_Enter</code>, <code>Key_Tab</code>, <code>Key_Backspace</code>, arrow keys
     (<code>Key_Up</code>, <code>Key_Down</code>, <code>Key_Left</code>, <code>Key_Right</code>),
     <code>Key_Shift</code>, <code>Key_Control</code>, <code>Key_Alt</code>.
@@ -10360,7 +10452,7 @@ graph TD
         <tr><td><code>bool Physics_RaycastHit(Vector3 origin, Vector3 dir, float maxDist, RaycastHit &amp;out hit)</code></td><td>Cast a ray and populate a <code>RaycastHit</code> struct (<code>point</code>, <code>normal</code>, <code>distance</code>, <code>entity</code>).</td></tr>
         <tr><td><code>bool Physics_CheckSphere(Vector3 center, float radius)</code></td><td>Check if any collider overlaps a sphere.</td></tr>
         <tr><td><code>bool Physics_CheckBox(Vector3 center, Vector3 halfExtents)</code></td><td>Check if any collider overlaps a box.</td></tr>
-        <tr><td colspan="2"><em>Masked overloads</em> &mdash; all four queries accept an additional <code>uint layerMask</code> parameter for collision group filtering.</td></tr>
+        <tr><td colspan="2"><em>Masked overloads</em> - all four queries accept an additional <code>uint layerMask</code> parameter for collision group filtering.</td></tr>
         <tr><td><code>Physics_AddForce(uint64, Vector3)</code></td><td>Apply a continuous force to a rigidbody.</td></tr>
         <tr><td><code>Physics_AddImpulse(uint64, Vector3)</code></td><td>Apply an instant impulse.</td></tr>
         <tr><td><code>Physics_SetVelocity(uint64, Vector3)</code>, <code>Vector3 Physics_GetVelocity(uint64)</code></td><td>Directly set or read the linear velocity.</td></tr>
@@ -10456,7 +10548,7 @@ graph TD
       </thead>
       <tbody>
         <tr><td><code>Material_SetBaseColor(uint64, Vector3)</code>, <code>Vector3 Material_GetBaseColor(uint64)</code></td><td>Albedo colour (linear RGB).</td></tr>
-        <tr><td><code>Material_SetMetallic(uint64, float)</code>, <code>Material_SetRoughness(uint64, float)</code></td><td>PBR metallic and roughness values (0&ndash;1).</td></tr>
+        <tr><td><code>Material_SetMetallic(uint64, float)</code>, <code>Material_SetRoughness(uint64, float)</code></td><td>PBR metallic and roughness values (0-1).</td></tr>
         <tr><td><code>Material_SetTransmission / GetTransmission(uint64, float)</code></td><td>Transmission factor for translucent materials.</td></tr>
         <tr><td><code>Material_SetIOR / GetIOR(uint64, float)</code></td><td>Index of refraction.</td></tr>
         <tr><td><code>Material_SetThickness / GetThickness(uint64, float)</code></td><td>Thickness for thin-surface transmission.</td></tr>
@@ -10608,7 +10700,7 @@ graph TD
       <tbody>
         <tr>
           <td colspan="2">
-            <strong>EventData</strong> class &mdash; key-value payload for events:<br>
+            <strong>EventData</strong> class - key-value payload for events:<br>
             <code>SetFloat / GetFloat(string key, float)</code>,
             <code>SetInt / GetInt(string key, int)</code>,
             <code>SetString / GetString(string key, string)</code>,
@@ -10926,7 +11018,7 @@ graph TD
         </tr>
       </thead>
       <tbody>
-        <tr><td><code>bool SaveGame_ToSlot(int slot)</code></td><td>Save current game state to slot 0&ndash;19. Returns success.</td></tr>
+        <tr><td><code>bool SaveGame_ToSlot(int slot)</code></td><td>Save current game state to slot 0-19. Returns success.</td></tr>
         <tr><td><code>bool SaveGame_FromSlot(int slot)</code></td><td>Load game state from a slot. Returns success.</td></tr>
         <tr><td><code>bool SaveGame_DeleteSlot(int slot)</code></td><td>Delete save data in a slot. Returns success.</td></tr>
         <tr><td><code>SaveGame_Checkpoint()</code></td><td>Create a checkpoint save (writes to next rotating auto-save slot).</td></tr>
@@ -10990,9 +11082,9 @@ graph TD
       <tbody>
         <tr><td><code>Weather_Set(int type, float transitionTime = 2.0)</code></td><td>Change weather. Types: 0=Clear, 1=Cloudy, 2=Rain, 3=HeavyRain, 4=Snow, 5=Fog, 6=Storm.</td></tr>
         <tr><td><code>int Weather_Get()</code></td><td>Current weather type as integer.</td></tr>
-        <tr><td><code>Weather_SetRainIntensity / GetRainIntensity(float)</code></td><td>Rain intensity (0&ndash;1).</td></tr>
-        <tr><td><code>Weather_SetSnowIntensity / GetSnowIntensity(float)</code></td><td>Snow intensity (0&ndash;1).</td></tr>
-        <tr><td><code>Weather_SetFogDensity / GetFogDensity(float)</code></td><td>Fog density (0&ndash;1).</td></tr>
+        <tr><td><code>Weather_SetRainIntensity / GetRainIntensity(float)</code></td><td>Rain intensity (0-1).</td></tr>
+        <tr><td><code>Weather_SetSnowIntensity / GetSnowIntensity(float)</code></td><td>Snow intensity (0-1).</td></tr>
+        <tr><td><code>Weather_SetFogDensity / GetFogDensity(float)</code></td><td>Fog density (0-1).</td></tr>
         <tr><td><code>Weather_SetFogColor(float r, g, b)</code></td><td>Fog colour RGB.</td></tr>
         <tr><td><code>Weather_SetFogRange(float start, float end)</code></td><td>Fog start/end distances.</td></tr>
         <tr><td><code>Weather_SetWind(float dirX, dirY, dirZ, float strength)</code></td><td>Wind direction and strength.</td></tr>
@@ -11049,7 +11141,7 @@ graph TD
         <tr><td><code>float HUD_GetValue(uint64)</code>, <code>float HUD_GetMaxValue(uint64)</code></td><td>Read bar values.</td></tr>
         <tr><td><code>HUD_SetFillColor(uint64, float r, g, b)</code></td><td>Bar fill colour.</td></tr>
         <tr><td><code>HUD_SetTextColor(uint64, float r, g, b)</code></td><td>Label text colour.</td></tr>
-        <tr><td><code>HUD_SetPosition(uint64, float anchorX, float anchorY)</code></td><td>Screen position (0&ndash;1 normalized).</td></tr>
+        <tr><td><code>HUD_SetPosition(uint64, float anchorX, float anchorY)</code></td><td>Screen position (0-1 normalized).</td></tr>
         <tr><td><code>HUD_SetSize(uint64, float width, float height)</code></td><td>Widget dimensions (normalized).</td></tr>
         <tr><td><code>HUD_SetFontSize(uint64, float)</code></td><td>Font size in pixels.</td></tr>
         <tr><td><code>HUD_SetBindField(uint64, string)</code></td><td>Data binding field ("health", "stamina", "custom").</td></tr>
@@ -11074,11 +11166,11 @@ graph TD
         <tr><td><code>UI_SetText(uint64, int elemId, string)</code>, <code>string UI_GetText(uint64, int)</code></td><td>Set or get text on a label or button.</td></tr>
         <tr><td><code>UI_SetElementVisible(uint64, int, bool)</code>, <code>bool UI_IsElementVisible(uint64, int)</code></td><td>Show or hide a specific element.</td></tr>
         <tr><td><code>UI_SetElementEnabled(uint64, int, bool)</code></td><td>Enable or disable an element.</td></tr>
-        <tr><td><code>UI_SetProgress(uint64, int, float)</code>, <code>float UI_GetProgress(uint64, int)</code></td><td>Progress bar value (0&ndash;1).</td></tr>
+        <tr><td><code>UI_SetProgress(uint64, int, float)</code>, <code>float UI_GetProgress(uint64, int)</code></td><td>Progress bar value (0-1).</td></tr>
         <tr><td><code>UI_SetSliderValue(uint64, int, float)</code>, <code>float UI_GetSliderValue(uint64, int)</code></td><td>Slider value.</td></tr>
         <tr><td><code>UI_SetChecked(uint64, int, bool)</code>, <code>bool UI_IsChecked(uint64, int)</code></td><td>Checkbox / toggle state.</td></tr>
         <tr><td><code>UI_SetImagePath(uint64, int, string)</code></td><td>Change an image element's texture.</td></tr>
-        <tr><td><code>UI_SetImageAlpha(uint64, int, float)</code></td><td>Image transparency (0&ndash;1).</td></tr>
+        <tr><td><code>UI_SetImageAlpha(uint64, int, float)</code></td><td>Image transparency (0-1).</td></tr>
         <tr><td><code>UI_SetBgColor(uint64, int, float r, g, b, float a)</code></td><td>Element background colour with alpha.</td></tr>
         <tr><td><code>UI_SetTextColor(uint64, int, float r, g, b)</code></td><td>Element text colour.</td></tr>
         <tr><td><code>bool UI_IsHovered(uint64, int)</code>, <code>bool UI_IsPressed(uint64, int)</code></td><td>Interaction state queries.</td></tr>
@@ -11278,7 +11370,7 @@ graph TD
         <tr><td><code>bool InputAction_IsDown(int action)</code></td><td>True while the action is held.</td></tr>
         <tr><td><code>bool InputAction_IsPressed(int action)</code></td><td>True on the frame the action is first pressed.</td></tr>
         <tr><td><code>bool InputAction_IsReleased(int action)</code></td><td>True on the frame the action is released.</td></tr>
-        <tr><td><code>float InputAction_GetValue(int action)</code></td><td>Analog value (0.0&ndash;1.0).</td></tr>
+        <tr><td><code>float InputAction_GetValue(int action)</code></td><td>Analog value (0.0-1.0).</td></tr>
         <tr><td><code>Vector2 InputAction_GetMovement()</code></td><td>Combined WASD/stick movement vector.</td></tr>
       </tbody>
     </table>
@@ -11398,7 +11490,7 @@ graph TD
         <tr><td><code>int Net_GetLocalPlayerId()</code></td><td>This peer's player ID.</td></tr>
         <tr><td><code>int Net_GetPlayerCount()</code></td><td>Total connected player count.</td></tr>
         <tr><td><code>float Net_GetPing()</code></td><td>Round-trip latency in milliseconds.</td></tr>
-        <tr><td><code>float Net_GetPacketLoss()</code></td><td>Packet loss percentage (0&ndash;1).</td></tr>
+        <tr><td><code>float Net_GetPacketLoss()</code></td><td>Packet loss percentage (0-1).</td></tr>
         <tr><td><code>Net_SetReady(bool)</code></td><td>Set lobby ready state.</td></tr>
         <tr><td><code>int Net_GetLobbyPlayerCount()</code></td><td>Number of players in the lobby.</td></tr>
         <tr><td><code>string Net_GetLobbyPlayerName(int index)</code></td><td>Lobby player name by index.</td></tr>
@@ -11429,7 +11521,7 @@ graph TD
         <tr><td><code>Text_SetFontSize(uint64, float)</code></td><td>Font size in pixels.</td></tr>
         <tr><td><code>Text_SetColor(uint64, float r, g, b)</code></td><td>Text colour RGB.</td></tr>
         <tr><td><code>Text_SetBgColor(uint64, float r, g, b)</code></td><td>Background colour RGB.</td></tr>
-        <tr><td><code>Text_SetBgOpacity(uint64, float)</code></td><td>Background opacity (0&ndash;1).</td></tr>
+        <tr><td><code>Text_SetBgOpacity(uint64, float)</code></td><td>Background opacity (0-1).</td></tr>
         <tr><td><code>Text_SetAlignment(uint64, int)</code></td><td>Horizontal alignment: 0=Left, 1=Center, 2=Right.</td></tr>
         <tr><td><code>Text_SetWrapWidth(uint64, float)</code></td><td>Word wrap width in pixels.</td></tr>
       </tbody>
@@ -11439,7 +11531,7 @@ graph TD
 </section>
 
 <!-- ============================================================
-     Section 42 — Coroutines and Events
+     Section 42 - Coroutines and Events
      ============================================================ -->
 <section id="coroutines-events" data-aos="fade-up">
   <h2>Coroutines and Events</h2>
@@ -11605,16 +11697,16 @@ class PlayerCombat : TegeBehavior {
 
   <ul>
     <li>Supports <strong>named events</strong> with key-value payloads (floats, ints, strings, entity references).</li>
-    <li><strong>Send</strong> &mdash; immediate dispatch to all listeners for the event name.</li>
-    <li><strong>SendDeferred</strong> &mdash; queues the event for dispatch at the end of the current frame, useful for avoiding issues with listeners modifying the entity graph during iteration.</li>
-    <li><strong>Broadcast</strong> &mdash; sends to all listeners regardless of event name.</li>
+    <li><strong>Send</strong> - immediate dispatch to all listeners for the event name.</li>
+    <li><strong>SendDeferred</strong> - queues the event for dispatch at the end of the current frame, useful for avoiding issues with listeners modifying the entity graph during iteration.</li>
+    <li><strong>Broadcast</strong> - sends to all listeners regardless of event name.</li>
     <li>Listeners are <strong>automatically cleaned up</strong> when their associated entities are destroyed, preventing dangling callbacks.</li>
   </ul>
 
 </section>
 
 <!-- ============================================================
-     Section 43 — Visual Scripting
+     Section 43 - Visual Scripting
      ============================================================ -->
 <section id="visual-scripting-guide" data-aos="fade-up">
   <h2>Visual Scripting</h2>
@@ -11858,7 +11950,7 @@ class PlayerCombat : TegeBehavior {
 
 </section>
 <!-- ============================================================
-     Part VI — Rendering and Effects
+     Part VI - Rendering and Effects
      Vulkan rendering pipeline, materials, ray tracing, and
      visual effects.
      ============================================================ -->
@@ -11870,7 +11962,7 @@ class PlayerCombat : TegeBehavior {
 </div>
 
 <!-- ============================================================
-     Section 44 — Rendering Pipeline
+     Section 44 - Rendering Pipeline
      ============================================================ -->
 <section id="rendering-pipeline" data-aos="fade-up">
   <h2>Rendering Pipeline</h2>
@@ -12133,7 +12225,7 @@ class PlayerCombat : TegeBehavior {
       </thead>
       <tbody>
         <tr>
-          <td>0&ndash;2</td>
+          <td>0-2</td>
           <td>Render flags</td>
           <td>Double-sided, cast shadows, receive shadows</td>
         </tr>
@@ -12143,7 +12235,7 @@ class PlayerCombat : TegeBehavior {
           <td>1 = GPU-skinned (reads bone SSBO)</td>
         </tr>
         <tr>
-          <td>8&ndash;9</td>
+          <td>8-9</td>
           <td>Alpha mode</td>
           <td>0 = Opaque, 1 = Mask, 2 = Blend</td>
         </tr>
@@ -12163,22 +12255,22 @@ class PlayerCombat : TegeBehavior {
           <td>Per-vertex lighting instead of per-fragment</td>
         </tr>
         <tr>
-          <td>16&ndash;19</td>
+          <td>16-19</td>
           <td>Texture flags</td>
           <td>Base color, normal, metallic-roughness, emissive presence</td>
         </tr>
         <tr>
-          <td>20&ndash;23</td>
+          <td>20-23</td>
           <td>Retro flags</td>
           <td>Flat shading, affine texturing, vertex snapping, stipple transparency</td>
         </tr>
         <tr>
-          <td>24&ndash;28</td>
+          <td>24-28</td>
           <td>Vertex snap resolution</td>
-          <td>Grid resolution divided by 8 (80&ndash;320 range)</td>
+          <td>Grid resolution divided by 8 (80-320 range)</td>
         </tr>
         <tr>
-          <td>29&ndash;31</td>
+          <td>29-31</td>
           <td>Shadow dither pattern</td>
           <td>Pattern index for dithered shadow transitions</td>
         </tr>
@@ -12200,7 +12292,7 @@ class PlayerCombat : TegeBehavior {
     In <strong>phase 1</strong>, objects that were visible last frame are tested against the previous
     frame's hierarchical depth buffer (HiZ pyramid) and drawn immediately. In <strong>phase 2</strong>,
     the depth buffer from phase 1 is used to build a new HiZ pyramid, and previously-culled objects
-    are re-tested &mdash; any newly visible objects are drawn in a second pass. This eliminates most
+    are re-tested - any newly visible objects are drawn in a second pass. This eliminates most
     CPU-side visibility queries while avoiding one-frame-late artifacts.
   </p>
 
@@ -12210,14 +12302,14 @@ class PlayerCombat : TegeBehavior {
     The view frustum is divided into a 16&times;9&times;24 3D grid of clusters with exponential depth
     distribution. Two compute shaders run before the main render pass: one to calculate cluster AABBs
     from the inverse projection matrix, and one to assign each light to the clusters it overlaps.
-    During shading, each fragment looks up its cluster (bindings 14&ndash;15) and iterates only the
+    During shading, each fragment looks up its cluster (bindings 14-15) and iterates only the
     lights assigned to that cluster instead of all active lights. This supports up to 1024 simultaneous
     lights efficiently.
   </p>
 
   <div class="callout note">
     <div class="callout-title">CMake Flag</div>
-    <p><code>ENJIN_CLUSTERED_LIGHTING</code> &mdash; ON by default.</p>
+    <p><code>ENJIN_CLUSTERED_LIGHTING</code> - ON by default.</p>
   </div>
 
   <h4 id="vrs">Variable Rate Shading (VRS)</h4>
@@ -12244,7 +12336,7 @@ class PlayerCombat : TegeBehavior {
 
   <div class="callout note">
     <div class="callout-title">CMake Flag</div>
-    <p><code>ENJIN_VRS</code> &mdash; OFF by default. Requires GPU support for
+    <p><code>ENJIN_VRS</code> - OFF by default. Requires GPU support for
     <code>VK_KHR_fragment_shading_rate</code>.</p>
   </div>
 
@@ -12260,7 +12352,7 @@ class PlayerCombat : TegeBehavior {
 
   <div class="callout note">
     <div class="callout-title">CMake Flag</div>
-    <p><code>ENJIN_VIRTUAL_TEXTURING</code> &mdash; OFF by default.</p>
+    <p><code>ENJIN_VIRTUAL_TEXTURING</code> - OFF by default.</p>
   </div>
 
   <h4 id="visibility-buffer">Visibility Buffer Rendering</h4>
@@ -12276,22 +12368,22 @@ class PlayerCombat : TegeBehavior {
 
   <div class="callout note">
     <div class="callout-title">CMake Flag</div>
-    <p><code>ENJIN_VISIBILITY_BUFFER</code> &mdash; OFF by default.</p>
+    <p><code>ENJIN_VISIBILITY_BUFFER</code> - OFF by default.</p>
   </div>
 
   <h4 id="additional-gpu-opts">Additional Optimizations</h4>
 
   <ul>
-    <li><strong>64-bit material sort keys</strong> &mdash; Entities are sorted by a combined pipeline/material key to minimize descriptor writes and state changes.</li>
-    <li><strong>Async compute overlap</strong> &mdash; Culling and cluster assignment run on async compute queues, overlapping with the previous frame's presentation.</li>
-    <li><strong>Per-frame linear allocator</strong> &mdash; A <code>FrameAllocator</code> provides bump-pointer allocation for transient per-frame data, reset at frame boundaries with zero overhead.</li>
-    <li><strong>LOD hysteresis</strong> &mdash; Dead-zone around LOD transition boundaries prevents rapid flickering. Screen-space sizing mode uses projected size for scale-aware selection.</li>
+    <li><strong>64-bit material sort keys</strong> - Entities are sorted by a combined pipeline/material key to minimize descriptor writes and state changes.</li>
+    <li><strong>Async compute overlap</strong> - Culling and cluster assignment run on async compute queues, overlapping with the previous frame's presentation.</li>
+    <li><strong>Per-frame linear allocator</strong> - A <code>FrameAllocator</code> provides bump-pointer allocation for transient per-frame data, reset at frame boundaries with zero overhead.</li>
+    <li><strong>LOD hysteresis</strong> - Dead-zone around LOD transition boundaries prevents rapid flickering. Screen-space sizing mode uses projected size for scale-aware selection.</li>
   </ul>
 
 </section>
 
 <!-- ============================================================
-     Section 45 — Materials and Shaders
+     Section 45 - Materials and Shaders
      ============================================================ -->
 <section id="materials-shaders" data-aos="fade-up">
   <h2>Materials and Shaders</h2>
@@ -12321,12 +12413,12 @@ class PlayerCombat : TegeBehavior {
         </tr>
         <tr>
           <td><strong>Metallic</strong></td>
-          <td>Float (0&ndash;1)</td>
+          <td>Float (0-1)</td>
           <td>0 = dielectric (plastic, wood), 1 = metal (gold, chrome). Controls Fresnel response.</td>
         </tr>
         <tr>
           <td><strong>Roughness</strong></td>
-          <td>Float (0&ndash;1)</td>
+          <td>Float (0-1)</td>
           <td>0 = mirror-smooth, 1 = fully diffuse. Controls specular highlight spread.</td>
         </tr>
         <tr>
@@ -12346,7 +12438,7 @@ class PlayerCombat : TegeBehavior {
         </tr>
         <tr>
           <td><strong>Opacity</strong></td>
-          <td>Float (0&ndash;1)</td>
+          <td>Float (0-1)</td>
           <td>Surface transparency. Combined with alpha mode (Opaque / Mask / Blend) from the flags field.</td>
         </tr>
         <tr>
@@ -12407,7 +12499,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 46 — Ray Tracing
+     Section 46 - Ray Tracing
      ============================================================ -->
 <section id="ray-tracing" data-aos="fade-up">
   <h2>Ray Tracing</h2>
@@ -12553,12 +12645,12 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ol>
-    <li><strong>Temporal Accumulation</strong> &mdash; blends the current frame with the history
+    <li><strong>Temporal Accumulation</strong> - blends the current frame with the history
     buffer using motion vectors. A configurable alpha controls the blend weight (lower alpha
     = more temporal reuse, less noise, but more ghosting).</li>
-    <li><strong>Variance Estimation</strong> &mdash; computes per-pixel variance from luminance
+    <li><strong>Variance Estimation</strong> - computes per-pixel variance from luminance
     moments to guide the spatial filter's aggressiveness.</li>
-    <li><strong>A-Trous Wavelet Filter</strong> &mdash; an edge-preserving spatial filter that
+    <li><strong>A-Trous Wavelet Filter</strong> - an edge-preserving spatial filter that
     runs multiple iterations (default 5) at increasing kernel sizes. Preserves geometric edges
     while aggressively smoothing noise in flat regions.</li>
   </ol>
@@ -12580,15 +12672,15 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </div>
 
   <ol>
-    <li><strong>BLAS</strong> (Bottom-Level Acceleration Structure) &mdash; one per unique mesh,
+    <li><strong>BLAS</strong> (Bottom-Level Acceleration Structure) - one per unique mesh,
     cached by mesh hash. Built lazily when new meshes appear in the scene.</li>
-    <li><strong>TLAS</strong> (Top-Level Acceleration Structure) &mdash; rebuilt each frame from
+    <li><strong>TLAS</strong> (Top-Level Acceleration Structure) - rebuilt each frame from
     entity transforms. Uses UPDATE mode when only transforms have changed (no new geometry)
     for faster rebuilds.</li>
-    <li><strong>RT Dispatch</strong> &mdash; after the shadow pass, before the main render pass.
+    <li><strong>RT Dispatch</strong> - after the shadow pass, before the main render pass.
     Each enabled effect dispatches its own ray generation shader.</li>
-    <li><strong>SVGF Denoise</strong> &mdash; 3-pass compute shader smooths the noisy RT output.</li>
-    <li><strong>RT Compositor</strong> &mdash; a fullscreen compute shader that multiplies shadows,
+    <li><strong>SVGF Denoise</strong> - 3-pass compute shader smooths the noisy RT output.</li>
+    <li><strong>RT Compositor</strong> - a fullscreen compute shader that multiplies shadows,
     adds reflections, multiplies AO, and adds GI into the scene HDR buffer.</li>
   </ol>
 
@@ -12703,7 +12795,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 47 — Post-Processing
+     Section 47 - Post-Processing
      ============================================================ -->
 <section id="post-processing" data-aos="fade-up">
   <h2>Post-Processing</h2>
@@ -12868,7 +12960,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
         </tr>
         <tr>
           <td><strong>Override Mask</strong></td>
-          <td>24-bit selective override mask. Each bit controls which effect group the volume overrides. Bits 19&ndash;23 correspond to the five screen-space effects.</td>
+          <td>24-bit selective override mask. Each bit controls which effect group the volume overrides. Bits 19-23 correspond to the five screen-space effects.</td>
         </tr>
         <tr>
           <td><strong>Global Volume</strong></td>
@@ -12888,7 +12980,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 48 — Retro Effects
+     Section 48 - Retro Effects
      ============================================================ -->
 <section id="retro-effects" data-aos="fade-up">
   <h2>Retro Effects</h2>
@@ -12904,7 +12996,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 
   <p>
     These are set on individual <code>MaterialComponent</code> instances via the inspector.
-    They are packed into bits 20&ndash;23 of the push constant flags field and evaluated in the
+    They are packed into bits 20-23 of the push constant flags field and evaluated in the
     vertex and fragment shaders:
   </p>
 
@@ -12927,7 +13019,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
         </tr>
         <tr>
           <td><strong>Vertex Snapping</strong></td>
-          <td>PS1-style vertex jittering. Snaps vertex positions to a configurable grid (80&ndash;320 resolution). Lower values produce more visible snapping. Resolution is stored in bits 24&ndash;28 of the flags field, divided by 8.</td>
+          <td>PS1-style vertex jittering. Snaps vertex positions to a configurable grid (80-320 resolution). Lower values produce more visible snapping. Resolution is stored in bits 24-28 of the flags field, divided by 8.</td>
         </tr>
         <tr>
           <td><strong>Stipple Transparency</strong></td>
@@ -13005,12 +13097,12 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
         </tr>
         <tr>
           <td><code>ditherGradientBands</code></td>
-          <td>int (2&ndash;8)</td>
+          <td>int (2-8)</td>
           <td>Number of discrete shading bands. Fewer bands produce a more stylized cel-shaded look.</td>
         </tr>
         <tr>
           <td><code>ditherGradientPattern</code></td>
-          <td>int (0&ndash;5)</td>
+          <td>int (0-5)</td>
           <td>Dither pattern index. Six built-in patterns provide different noise characteristics at band transitions.</td>
         </tr>
       </tbody>
@@ -13020,7 +13112,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 49 — Skybox and Environment
+     Section 49 - Skybox and Environment
      ============================================================ -->
 <section id="skybox-environment" data-aos="fade-up">
   <h2>Skybox and Environment</h2>
@@ -13127,7 +13219,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </div>
 
   <p>
-    All skybox types support a <strong>Y-axis rotation</strong> slider (0&ndash;360 degrees) to
+    All skybox types support a <strong>Y-axis rotation</strong> slider (0-360 degrees) to
     orient the sky relative to your scene.
   </p>
 
@@ -13180,10 +13272,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ul>
-    <li><strong>Gerstner Waves</strong> &mdash; physically-based wave simulation with configurable amplitude and frequency for realistic ocean movement.</li>
-    <li><strong>Shore Foam</strong> &mdash; foam effect at water edges where the water plane intersects scene geometry.</li>
-    <li><strong>Freeze System</strong> &mdash; water can freeze over time, transitioning from liquid to ice with a visual effect.</li>
-    <li><strong>Ocean Mode</strong> &mdash; extended water plane for open-water scenes that tiles to the horizon.</li>
+    <li><strong>Gerstner Waves</strong> - physically-based wave simulation with configurable amplitude and frequency for realistic ocean movement.</li>
+    <li><strong>Shore Foam</strong> - foam effect at water edges where the water plane intersects scene geometry.</li>
+    <li><strong>Freeze System</strong> - water can freeze over time, transitioning from liquid to ice with a visual effect.</li>
+    <li><strong>Ocean Mode</strong> - extended water plane for open-water scenes that tiles to the horizon.</li>
   </ul>
 
   <h3 id="world-time">World Time</h3>
@@ -13201,15 +13293,15 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ul>
-    <li><strong>Weather Particles</strong> &mdash; rain and snow direction and speed are influenced by wind strength and direction.</li>
-    <li><strong>Vegetation Sway</strong> &mdash; trees, shrubs, and flowers respond to wind with procedural sway animation.</li>
-    <li><strong>Instanced Grass</strong> &mdash; grass blades rendered via GPU instancing include wind-driven animation baked into the vertex shader.</li>
+    <li><strong>Weather Particles</strong> - rain and snow direction and speed are influenced by wind strength and direction.</li>
+    <li><strong>Vegetation Sway</strong> - trees, shrubs, and flowers respond to wind with procedural sway animation.</li>
+    <li><strong>Instanced Grass</strong> - grass blades rendered via GPU instancing include wind-driven animation baked into the vertex shader.</li>
   </ul>
 
 </section>
 
 <!-- ============================================================
-     Section 50 — Effects Gallery
+     Section 50 - Effects Gallery
      ============================================================ -->
 <section id="effects-gallery" data-aos="fade-up">
   <h2>Effects Gallery</h2>
@@ -13321,7 +13413,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 
   <p>
     Each preset configures emission rate, lifetime, speed, colors, gravity, drag, and shape to
-    produce the named effect. Presets serve as starting points&mdash;all properties remain fully
+    produce the named effect. Presets serve as starting points - all properties remain fully
     editable after applying a preset.
   </p>
 
@@ -13332,14 +13424,14 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ul>
-    <li><strong>Instanced Grass</strong> &mdash; grass blades are rendered via the <code>GrassRenderer</code>
+    <li><strong>Instanced Grass</strong> - grass blades are rendered via the <code>GrassRenderer</code>
     using GPU instancing with a dedicated grass vertex/fragment shader (<code>grass.vert</code> /
     <code>grass.frag</code>). Wind sway is computed in the vertex shader using the global wind
     direction and strength.</li>
-    <li><strong>Trees and Shrubs</strong> &mdash; rendered as standard mesh entities or billboards
+    <li><strong>Trees and Shrubs</strong> - rendered as standard mesh entities or billboards
     (<code>BillboardComponent</code> with Y-axis lock). Wind sway is applied via the material
     wind flag (bit 4 of the flags field).</li>
-    <li><strong>Flowers</strong> &mdash; the <code>FlowerSystem</code> handles flower and small
+    <li><strong>Flowers</strong> - the <code>FlowerSystem</code> handles flower and small
     vegetation animation with procedural sway.</li>
   </ul>
 
@@ -13388,7 +13480,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Part VII — Building and Distribution
+     Part VII - Building and Distribution
      Packaging and distributing your game.
      ============================================================ -->
 
@@ -13399,7 +13491,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </div>
 
 <!-- ============================================================
-     Section 51 — Build Pipeline
+     Section 51 - Build Pipeline
      ============================================================ -->
 <section id="build-pipeline" data-aos="fade-up">
   <h2>Build Pipeline</h2>
@@ -13470,18 +13562,18 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </div>
 
   <ol>
-    <li><strong>Scan Project</strong> &mdash; reads the <code>.enjinproject</code> manifest and lists
+    <li><strong>Scan Project</strong> - reads the <code>.enjinproject</code> manifest and lists
     all scenes referenced by the project.</li>
-    <li><strong>Validate Assets</strong> &mdash; parses each scene JSON, collects all referenced assets
+    <li><strong>Validate Assets</strong> - parses each scene JSON, collects all referenced assets
     (textures, models, scripts, audio), and verifies they exist on disk. Missing assets are reported
     as errors.</li>
-    <li><strong>Pack Assets</strong> &mdash; compresses and packs all validated assets into a
+    <li><strong>Pack Assets</strong> - compresses and packs all validated assets into a
     <code>.enjpak</code> archive file.</li>
-    <li><strong>Copy Player</strong> &mdash; copies the standalone <code>EnjinPlayer</code> executable
+    <li><strong>Copy Player</strong> - copies the standalone <code>EnjinPlayer</code> executable
     to the output directory.</li>
-    <li><strong>Write Build Manifest</strong> &mdash; writes <code>_build/manifest.json</code> into the
+    <li><strong>Write Build Manifest</strong> - writes <code>_build/manifest.json</code> into the
     pack with the window title, resolution, fullscreen flag, and start scene information.</li>
-    <li><strong>Verify Build</strong> &mdash; reads back the <code>.enjpak</code> archive and verifies
+    <li><strong>Verify Build</strong> - reads back the <code>.enjpak</code> archive and verifies
     all CRC32 checksums for data integrity.</li>
   </ol>
 
@@ -13502,7 +13594,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
       <tbody>
         <tr>
           <td><strong>Magic Header</strong></td>
-          <td><code>ENJPAK10</code> &mdash; 8-byte identifier at the start of the file.</td>
+          <td><code>ENJPAK10</code> - 8-byte identifier at the start of the file.</td>
         </tr>
         <tr>
           <td><strong>Compression</strong></td>
@@ -13583,7 +13675,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 52 — Standalone Player
+     Section 52 - Standalone Player
      ============================================================ -->
 <section id="standalone-player" data-aos="fade-up">
   <h2>Standalone Player</h2>
@@ -13621,13 +13713,13 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ol>
-    <li><strong>Load Pack</strong> &mdash; opens <code>game.enjpak</code> from its own directory and
+    <li><strong>Load Pack</strong> - opens <code>game.enjpak</code> from its own directory and
     verifies CRC32 checksums.</li>
-    <li><strong>Read Manifest</strong> &mdash; reads the build manifest for window configuration
+    <li><strong>Read Manifest</strong> - reads the build manifest for window configuration
     (title, resolution, fullscreen flag, start scene).</li>
-    <li><strong>Initialize Vulkan</strong> &mdash; creates the Vulkan instance, device, and swapchain
+    <li><strong>Initialize Vulkan</strong> - creates the Vulkan instance, device, and swapchain
     with the configured window settings.</li>
-    <li><strong>Run Game Loop</strong> &mdash; loads the start scene and enters the main loop.
+    <li><strong>Run Game Loop</strong> - loads the start scene and enters the main loop.
     No editor UI is loaded; only game systems run.</li>
   </ol>
 
@@ -13638,15 +13730,15 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ul>
-    <li><strong>Title Screen</strong> &mdash; auto-generated from the build manifest's window title.</li>
-    <li><strong>Pause Menu</strong> &mdash; accessible during gameplay for resume, settings, and quit.</li>
+    <li><strong>Title Screen</strong> - auto-generated from the build manifest's window title.</li>
+    <li><strong>Pause Menu</strong> - accessible during gameplay for resume, settings, and quit.</li>
   </ul>
 
   <h3 id="player-distribution">Distribution</h3>
 
   <p>
     To distribute your game, ship both files together. The player expects <code>game.enjpak</code>
-    in the same directory as the executable. No installer is strictly required&mdash;both files can
+    in the same directory as the executable. No installer is strictly required - both files can
     be placed in a single folder and zipped for distribution. For a more polished experience, use
     the Inno Setup installer (see <a href="#distribution-formats">Distribution Formats</a>).
   </p>
@@ -13654,7 +13746,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 53 — HTML5 Export
+     Section 53 - HTML5 Export
      ============================================================ -->
 <section id="html5-export" data-aos="fade-up">
   <h2>HTML5 Export</h2>
@@ -13699,10 +13791,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
   </p>
 
   <ul>
-    <li><strong>Output Directory</strong> &mdash; where the generated web files are written.</li>
-    <li><strong>Window Title</strong> &mdash; sets the HTML page title and the canvas label.</li>
-    <li><strong>Resolution</strong> &mdash; canvas width and height in pixels.</li>
-    <li><strong>Embed Code Generation</strong> &mdash; generates ready-to-use <code>&lt;iframe&gt;</code>
+    <li><strong>Output Directory</strong> - where the generated web files are written.</li>
+    <li><strong>Window Title</strong> - sets the HTML page title and the canvas label.</li>
+    <li><strong>Resolution</strong> - canvas width and height in pixels.</li>
+    <li><strong>Embed Code Generation</strong> - generates ready-to-use <code>&lt;iframe&gt;</code>
     embed code, compatible with Newgrounds and other game portal embed systems.</li>
   </ul>
 
@@ -13714,7 +13806,7 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 54 — Newgrounds Integration
+     Section 54 - Newgrounds Integration
      ============================================================ -->
 <section id="newgrounds-integration" data-aos="fade-up">
   <h2>Newgrounds Integration</h2>
@@ -13823,7 +13915,7 @@ string LoadProgress() {
 
 </section>
 <!-- ================================================================
-     Part VIII — Advanced Topics
+     Part VIII - Advanced Topics
      Sections 55-62: Architecture, Physics, Accessibility,
      Splitscreen, Streaming, Plugins, Profiler, Security
      ================================================================ -->
@@ -13835,7 +13927,7 @@ string LoadProgress() {
 </div>
 
 <!-- ============================================================
-     Section 55 — Architecture Overview
+     Section 55 - Architecture Overview
      ============================================================ -->
 
 <section id="architecture-overview" data-aos="fade-up">
@@ -13844,7 +13936,7 @@ string LoadProgress() {
   <p>
     TEGE is structured as a layered architecture with strict dependency
     direction: upper layers depend on lower layers, never the reverse. The four
-    layers&nbsp;&mdash; from bottom to top&nbsp;&mdash; are the
+    layers&nbsp; - from bottom to top&nbsp; - are the
     <strong>Vulkan API Layer</strong>, the <strong>Core Layer</strong>, the
     <strong>Engine Layer</strong>, and the <strong>Application Layer</strong>.
   </p>
@@ -13953,24 +14045,24 @@ string LoadProgress() {
 
   <ul>
     <li>
-      <strong>Component-based architecture</strong> &mdash; Entities are
+      <strong>Component-based architecture</strong> - Entities are
       <code>u64</code> IDs. Components are plain data structs. Systems contain
       all logic and operate on components. This separation keeps data cache-friendly
       and logic composable.
     </li>
     <li>
-      <strong>Data-oriented design</strong> &mdash; Components are stored
+      <strong>Data-oriented design</strong> - Components are stored
       contiguously per type for efficient iteration. Systems iterate over
       component arrays rather than per-entity virtual dispatch.
     </li>
     <li>
-      <strong>Data-driven design</strong> &mdash; Scenes, project manifests,
+      <strong>Data-driven design</strong> - Scenes, project manifests,
       room prefabs, dialogue trees, save data, and build configurations are all
       JSON. This keeps content editable outside the engine and simplifies
       serialization.
     </li>
     <li>
-      <strong>Pluggable backends</strong> &mdash; Physics, audio, save storage,
+      <strong>Pluggable backends</strong> - Physics, audio, save storage,
       and rendering use abstract interfaces so implementations can be swapped
       without changing consuming code.
     </li>
@@ -13978,7 +14070,7 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 56 — Physics Backend Selection
+     Section 56 - Physics Backend Selection
      ============================================================ -->
 
 <section id="physics-backends" data-aos="fade-up">
@@ -14079,7 +14171,7 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 57 — Accessibility
+     Section 57 - Accessibility
      ============================================================ -->
 
 <section id="accessibility" data-aos="fade-up">
@@ -14112,13 +14204,13 @@ string LoadProgress() {
         <tr><td><strong>Light</strong></td><td>Light background theme.</td></tr>
         <tr><td><strong>High Contrast Dark</strong></td><td>High-contrast dark for low vision.</td></tr>
         <tr><td><strong>High Contrast Light</strong></td><td>High-contrast light for low vision.</td></tr>
-        <tr><td><strong>SNES</strong></td><td>Super Nintendo inspired &mdash; deep purple and indigo tones with lavender accents.</td></tr>
-        <tr><td><strong>PS2</strong></td><td>PlayStation 2 inspired &mdash; dark blue with PS2-signature blue accents.</td></tr>
-        <tr><td><strong>Xbox</strong></td><td>Xbox inspired &mdash; dark charcoal with Xbox green accents.</td></tr>
-        <tr><td><strong>Dreamcast</strong></td><td>Dreamcast inspired &mdash; warm grey-blues with Dreamcast orange-red accents.</td></tr>
-        <tr><td><strong>Sega Saturn</strong></td><td>Sega Saturn inspired &mdash; dark blue-greys with Saturn blue accents.</td></tr>
-        <tr><td><strong>GBA</strong></td><td>Game Boy Advance inspired &mdash; dark teal-grey with GBA purple accents.</td></tr>
-        <tr><td><strong>DS</strong></td><td>Nintendo DS inspired &mdash; slate grey with DS red accents.</td></tr>
+        <tr><td><strong>SNES</strong></td><td>Super Nintendo inspired - deep purple and indigo tones with lavender accents.</td></tr>
+        <tr><td><strong>PS2</strong></td><td>PlayStation 2 inspired - dark blue with PS2-signature blue accents.</td></tr>
+        <tr><td><strong>Xbox</strong></td><td>Xbox inspired - dark charcoal with Xbox green accents.</td></tr>
+        <tr><td><strong>Dreamcast</strong></td><td>Dreamcast inspired - warm grey-blues with Dreamcast orange-red accents.</td></tr>
+        <tr><td><strong>Sega Saturn</strong></td><td>Sega Saturn inspired - dark blue-greys with Saturn blue accents.</td></tr>
+        <tr><td><strong>GBA</strong></td><td>Game Boy Advance inspired - dark teal-grey with GBA purple accents.</td></tr>
+        <tr><td><strong>DS</strong></td><td>Nintendo DS inspired - slate grey with DS red accents.</td></tr>
       </tbody>
     </table>
   </div>
@@ -14153,7 +14245,7 @@ string LoadProgress() {
   <p>
     GPU-accelerated colorblind correction via Daltonization in the
     post-process shader. Eight modes are supported, with a strength slider
-    (0&ndash;1) controlling correction intensity:
+    (0-1) controlling correction intensity:
   </p>
 
   <div class="table-wrapper">
@@ -14214,7 +14306,7 @@ string LoadProgress() {
 
   <p>
     22 AngelScript bindings are available for scripting input actions at
-    runtime &mdash; see the Scripting API reference for the full
+    runtime - see the Scripting API reference for the full
     <code>InputAction_*</code> function list (query, sensitivity, toggle,
     rebinding, display, presets).
   </p>
@@ -14222,10 +14314,10 @@ string LoadProgress() {
   <h3 id="accessibility-motion">Reduced Motion</h3>
 
   <ul>
-    <li><strong>Weather particle reduction</strong> &mdash; fewer particles for rain, snow, and effects.</li>
-    <li><strong>Disable head bob</strong> &mdash; removes the camera bob from FirstPersonController.</li>
-    <li><strong>Disable screen shake</strong> &mdash; suppresses all screen shake effects.</li>
-    <li><strong>Disable FOV effects</strong> &mdash; prevents FOV changes (sprint zoom, etc.).</li>
+    <li><strong>Weather particle reduction</strong> - fewer particles for rain, snow, and effects.</li>
+    <li><strong>Disable head bob</strong> - removes the camera bob from FirstPersonController.</li>
+    <li><strong>Disable screen shake</strong> - suppresses all screen shake effects.</li>
+    <li><strong>Disable FOV effects</strong> - prevents FOV changes (sprint zoom, etc.).</li>
   </ul>
 
   <h3 id="accessibility-subtitles">Subtitles and Captions</h3>
@@ -14236,7 +14328,7 @@ string LoadProgress() {
   </p>
 
   <ul>
-    <li>Configurable <strong>font size</strong> (16&ndash;48 px).</li>
+    <li>Configurable <strong>font size</strong> (16-48 px).</li>
     <li>Adjustable <strong>background opacity</strong> for readability.</li>
     <li><strong>Speaker names</strong> toggle.</li>
     <li><strong>Direction indicators</strong> showing where sound is coming from.</li>
@@ -14334,7 +14426,7 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 58 — Splitscreen
+     Section 58 - Splitscreen
      ============================================================ -->
 
 <section id="splitscreen" data-aos="fade-up">
@@ -14382,7 +14474,7 @@ string LoadProgress() {
       with its own view/projection matrices.
     </li>
     <li>
-      Character controllers use the <code>gamepadIndex</code> field (0&ndash;3)
+      Character controllers use the <code>gamepadIndex</code> field (0-3)
       to assign each player to a different gamepad.
     </li>
   </ul>
@@ -14417,7 +14509,7 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 59 — Level Streaming
+     Section 59 - Level Streaming
      ============================================================ -->
 
 <section id="level-streaming" data-aos="fade-up">
@@ -14456,11 +14548,11 @@ string LoadProgress() {
 
   <ul>
     <li>
-      <strong>StreamingVolumeComponent</strong> &mdash; placed on entities to
+      <strong>StreamingVolumeComponent</strong> - placed on entities to
       define chunk boundaries in the scene.
     </li>
     <li>
-      <strong>StreamingPortalComponent</strong> &mdash; connects two chunks
+      <strong>StreamingPortalComponent</strong> - connects two chunks
       (doorways, corridors) for seamless transitions between loaded regions.
     </li>
   </ul>
@@ -14504,7 +14596,7 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 60 — Plugin System
+     Section 60 - Plugin System
      ============================================================ -->
 
 <section id="plugin-system" data-aos="fade-up">
@@ -14569,7 +14661,7 @@ public:
 </section>
 
 <!-- ============================================================
-     Section 61 — Profiler and Debug
+     Section 61 - Profiler and Debug
      ============================================================ -->
 
 <section id="profiler-debug" data-aos="fade-up">
@@ -14586,10 +14678,10 @@ public:
 
   <ul>
     <li><strong>FPS</strong> and average frame time.</li>
-    <li><strong>Frame time graph</strong> &mdash; a 240-frame rolling window showing per-frame timing.</li>
-    <li><strong>System breakdown</strong> &mdash; Render, Physics, Scripting, ECS, Audio shown as progress bars indicating percentage of total frame time.</li>
-    <li><strong>Counters</strong> &mdash; draw calls, entity count, triangle count, memory usage.</li>
-    <li><strong>Detailed scopes</strong> &mdash; an expandable table showing per-scope last/avg/max times and call counts.</li>
+    <li><strong>Frame time graph</strong> - a 240-frame rolling window showing per-frame timing.</li>
+    <li><strong>System breakdown</strong> - Render, Physics, Scripting, ECS, Audio shown as progress bars indicating percentage of total frame time.</li>
+    <li><strong>Counters</strong> - draw calls, entity count, triangle count, memory usage.</li>
+    <li><strong>Detailed scopes</strong> - an expandable table showing per-scope last/avg/max times and call counts.</li>
   </ul>
 
   <h3 id="profiler-macros">Adding Profile Scopes</h3>
@@ -14624,7 +14716,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Section 62 — Security
+     Section 62 - Security
      ============================================================ -->
 
 <section id="security" data-aos="fade-up">
@@ -14681,7 +14773,7 @@ void MySystem::Render() {
         <tr>
           <td><strong>foundation</strong></td>
           <td>LOW</td>
-          <td>Core math, memory, logging, platform. Widest blast radius &mdash; changes here affect everything.</td>
+          <td>Core math, memory, logging, platform. Widest blast radius - changes here affect everything.</td>
         </tr>
       </tbody>
     </table>
@@ -14744,7 +14836,7 @@ void MySystem::Render() {
 </div>
 
 <!-- ============================================================
-     Appendix A — Templates Reference
+     Appendix A - Templates Reference
      ============================================================ -->
 
 <section id="appendix-templates" data-aos="fade-up">
@@ -14857,7 +14949,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Appendix B — Type Conventions
+     Appendix B - Type Conventions
      ============================================================ -->
 
 <section id="appendix-types" data-aos="fade-up">
@@ -14895,7 +14987,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Appendix C — Namespace Reference
+     Appendix C - Namespace Reference
      ============================================================ -->
 
 <section id="appendix-namespaces" data-aos="fade-up">
@@ -14939,7 +15031,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Appendix D — File Formats
+     Appendix D - File Formats
      ============================================================ -->
 
 <section id="appendix-formats" data-aos="fade-up">
@@ -15001,7 +15093,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Appendix E — Troubleshooting
+     Appendix E - Troubleshooting
      ============================================================ -->
 
 <section id="appendix-troubleshooting" data-aos="fade-up">
@@ -15066,7 +15158,7 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Appendix F — Keyboard Shortcut Cheatsheet
+     Appendix F - Keyboard Shortcut Cheatsheet
      ============================================================ -->
 
 <section id="appendix-shortcuts" data-aos="fade-up">
@@ -15122,7 +15214,7 @@ void MySystem::Render() {
 </div>
 
 <footer>
-  <p><strong>TEGE Game Engine</strong> &mdash; User Manual</p>
+  <p><strong>TEGE Game Engine</strong> - User Manual</p>
   <p>Built from scratch with C++20 and Vulkan. Version 0.8 Beta.</p>
   <p style="margin-top:8px;font-size:0.85em">&copy; 2025 TEGE Engine. All rights reserved.</p>
 </footer>
