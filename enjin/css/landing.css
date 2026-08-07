@@ -1420,3 +1420,21 @@ html.a11y-motion .tege-gallery-item:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Skip to content link: hidden off-screen, appears on keyboard focus */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent, #4a6bdf);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
