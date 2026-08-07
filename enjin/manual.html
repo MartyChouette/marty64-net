@@ -216,6 +216,10 @@
       margin: 0 auto;
     }
 
+    section, h1, h2, h3, h4, [id] {
+      scroll-margin-top: 80px;
+    }
+
     section {
       margin-bottom: 64px;
     }
@@ -617,8 +621,8 @@
 <!-- Section 1: Welcome                                            -->
 <!-- ============================================================ -->
 
-<section id="welcome" data-aos="fade-up">
-  <h2>Welcome to TEGE</h2>
+<section data-aos="fade-up">
+  <h2 id="welcome">Welcome to TEGE</h2>
 
   <p>
     TEGE (The Enjin Game Engine) is a friendly, accessible game engine for
@@ -640,7 +644,7 @@
     <li><strong>Path-traced lighting</strong> - A built-in path tracer for high-quality shadows, reflections, ambient occlusion, and global illumination, with SVGF, OIDN, and OptiX denoisers.</li>
     <li><strong>7 character controllers</strong> - Platformer 2D, Top-Down 2D, Top-Down 3D, third-person, first-person, vehicle, and surface-aligned controllers.</li>
     <li><strong>Jolt 3D + Box2D 2D physics</strong> - Dual physics backends via a unified interface, with collision filtering, sensors, joints, gravity zones, and conveyors.</li>
-    <li><strong>AngelScript + visual scripting</strong> - A complete text scripting API with hot reload, plus a 146+ node blueprint-style visual script editor with a debugger.</li>
+    <li><strong>AngelScript + visual scripting</strong> - A complete text scripting API with hot reload, plus a 256-node blueprint-style visual script editor with a debugger.</li>
     <li><strong>Save system</strong> - Persistence tiers (RunState, SceneState, MetaProgression) covering collectibles, checkpoints, and cross-session progression.</li>
     <li><strong>LAN multiplayer</strong> - Built-in networking layer for local-area multiplayer and splitscreen support.</li>
     <li><strong>Starter templates</strong> - Ready-made starting points so you can begin with something playable instead of a blank scene.</li>
@@ -663,8 +667,8 @@
 <!-- Section 2: Installation and Build                             -->
 <!-- ============================================================ -->
 
-<section id="installation" data-aos="fade-up">
-  <h2>Installation and Build</h2>
+<section data-aos="fade-up">
+  <h2 id="installation">Installation and Build</h2>
 
   <h3 id="installation-prerequisites">Prerequisites</h3>
 
@@ -874,8 +878,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 3: First Launch                                       -->
 <!-- ============================================================ -->
 
-<section id="first-launch" data-aos="fade-up">
-  <h2>First Launch</h2>
+<section data-aos="fade-up">
+  <h2 id="first-launch">First Launch</h2>
 
   <h3 id="first-launch-sequence">Launch Sequence</h3>
 
@@ -960,8 +964,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 4: Editor Tour                                        -->
 <!-- ============================================================ -->
 
-<section id="editor-tour" data-aos="fade-up">
-  <h2>Editor Tour</h2>
+<section data-aos="fade-up">
+  <h2 id="editor-tour">Editor Tour</h2>
 
   <p>
     The TEGE editor is a panel-based workspace. All panels can be toggled from
@@ -1175,8 +1179,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 5 - Projects and Scenes
      ============================================================ -->
-<section id="projects-scenes" data-aos="fade-up">
-  <h2>Projects and Scenes</h2>
+<section data-aos="fade-up">
+  <h2 id="projects-scenes">Projects and Scenes</h2>
 
   <p>
     Every game in TEGE is organized around two file types: the <strong>project manifest</strong>
@@ -1384,8 +1388,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 6 - Entity-Component-System
      ============================================================ -->
-<section id="ecs" data-aos="fade-up">
-  <h2>Entity-Component-System</h2>
+<section data-aos="fade-up">
+  <h2 id="ecs">Entity-Component-System</h2>
 
   <p>
     TEGE uses an <strong>Entity-Component-System (ECS)</strong> architecture as the foundation for
@@ -1537,8 +1541,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 7 - Coordinate System and Transform
      ============================================================ -->
-<section id="coordinate-system" data-aos="fade-up">
-  <h2>Coordinate System and Transform</h2>
+<section data-aos="fade-up">
+  <h2 id="coordinate-system">Coordinate System and Transform</h2>
 
   <p>
     TEGE uses a <strong>left-handed coordinate system</strong>:
@@ -1556,7 +1560,7 @@ pkg-config --modversion glfw3</code></pre>
     handles the coordinate conversion automatically.
   </p>
 
-  <h3 id="transform-component">TransformComponent</h3>
+  <h3 id="transform-component-basics">TransformComponent</h3>
 
   <p>
     Every entity has a <code>TransformComponent</code>. It defines the entity's position,
@@ -1670,8 +1674,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 8 - Play Mode
      ============================================================ -->
-<section id="play-mode" data-aos="fade-up">
-  <h2>Play Mode</h2>
+<section data-aos="fade-up">
+  <h2 id="play-mode">Play Mode</h2>
 
   <p>
     Play Mode lets you test your game directly inside the editor. The <strong>Game View</strong>
@@ -1898,8 +1902,8 @@ pkg-config --modversion glfw3</code></pre>
      Section 9 - Core Components
      ============================================================ -->
 
-<section id="core-components" data-aos="fade-up">
-  <h2>9. Core Components</h2>
+<section data-aos="fade-up">
+  <h2 id="core-components">Core Components</h2>
   <p>
     Core components provide the foundational data every entity may need: spatial
     placement, naming, tagging, and developer annotations. Most entities will
@@ -2137,8 +2141,8 @@ pkg-config --modversion glfw3</code></pre>
      Section 10 - Rendering Components
      ============================================================ -->
 
-<section id="rendering-components" data-aos="fade-up">
-  <h2>10. Rendering Components</h2>
+<section data-aos="fade-up">
+  <h2 id="rendering-components">Rendering Components</h2>
   <p>
     Rendering components control how entities appear in the viewport: surface
     materials, lighting, cameras, billboards, text, and post-processing
@@ -2703,8 +2707,8 @@ pkg-config --modversion glfw3</code></pre>
      Section 11 - Physics 3D Components
      ============================================================ -->
 
-<section id="physics-3d" data-aos="fade-up">
-  <h2>11. Physics 3D Components</h2>
+<section data-aos="fade-up">
+  <h2 id="physics-3d">Physics 3D Components</h2>
   <p>
     3D physics components enable physical simulation for entities: rigid body
     dynamics, collision shapes, trigger zones, and collision filtering. The
@@ -3115,8 +3119,8 @@ pkg-config --modversion glfw3</code></pre>
      Section 12 - Physics 2D Components
      ============================================================ -->
 
-<section id="physics-2d" data-aos="fade-up">
-  <h2>12. Physics 2D Components</h2>
+<section data-aos="fade-up">
+  <h2 id="physics-2d">Physics 2D Components</h2>
   <p>
     2D physics components provide collision detection and rigid body dynamics
     for side-scrollers, top-down games, and other 2D projects. The engine uses
@@ -3708,8 +3712,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 13 - Character Controllers
      ============================================================ -->
-<section id="character-controllers" data-aos="fade-up">
-  <h2>Character Controllers</h2>
+<section data-aos="fade-up">
+  <h2 id="character-controllers">Character Controllers</h2>
 
   <p>
     Character controllers provide pre-built movement behaviors that handle input
@@ -4542,8 +4546,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 14 - 2D Components
      ============================================================ -->
-<section id="2d-components" data-aos="fade-up">
-  <h2>2D Components</h2>
+<section data-aos="fade-up">
+  <h2 id="2d-components">2D Components</h2>
 
   <p>
     TEGE provides dedicated 2D rendering components for sprite-based games.
@@ -4901,8 +4905,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 15 - Audio Components
      ============================================================ -->
-<section id="audio-components" data-aos="fade-up">
-  <h2>Audio Components</h2>
+<section data-aos="fade-up">
+  <h2 id="audio-components">Audio Components</h2>
 
   <p>
     TEGE's audio system is built on <strong>miniaudio</strong> and provides 3D
@@ -5067,8 +5071,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 16 - AI and Navigation
      ============================================================ -->
-<section id="ai-navigation" data-aos="fade-up">
-  <h2>AI and Navigation</h2>
+<section data-aos="fade-up">
+  <h2 id="ai-navigation">AI and Navigation</h2>
 
   <p>
     TEGE includes a suite of AI components for enemy behavior, NPC following,
@@ -5492,8 +5496,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 17 - Gameplay Components
      ============================================================ -->
-<section id="gameplay-components" data-aos="fade-up">
-  <h2>Gameplay Components</h2>
+<section data-aos="fade-up">
+  <h2 id="gameplay-components">Gameplay Components</h2>
 
   <p>
     TEGE ships with a comprehensive set of gameplay-ready components covering
@@ -6227,8 +6231,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 18 - Puzzle and Level Design
      ============================================================ -->
-<section id="puzzle-level-design" data-aos="fade-up">
-  <h2>Puzzle and Level Design</h2>
+<section data-aos="fade-up">
+  <h2 id="puzzle-level-design">Puzzle and Level Design</h2>
 
   <p>
     TEGE provides a rich set of puzzle and level-design components for building interactive
@@ -6478,8 +6482,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 19 - State and Dialogue
      ============================================================ -->
-<section id="state-dialogue" data-aos="fade-up">
-  <h2>State and Dialogue</h2>
+<section data-aos="fade-up">
+  <h2 id="state-dialogue">State and Dialogue</h2>
 
   <p>
     The state and dialogue systems let you build interactive NPCs, branching conversations, and
@@ -6648,8 +6652,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 20 - Save System
      ============================================================ -->
-<section id="save-system" data-aos="fade-up">
-  <h2>Save System</h2>
+<section data-aos="fade-up">
+  <h2 id="save-system">Save System</h2>
 
   <p>
     TEGE provides a comprehensive tiered save system that supports everything from per-scene
@@ -6894,8 +6898,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 21 - HUD and UI
      ============================================================ -->
-<section id="hud-ui" data-aos="fade-up">
-  <h2>HUD and UI</h2>
+<section data-aos="fade-up">
+  <h2 id="hud-ui">HUD and UI</h2>
 
   <p>
     TEGE provides two complementary UI systems: <strong>HUD widgets</strong> for quick
@@ -7038,8 +7042,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 22 - Cinematic and Animation
      ============================================================ -->
-<section id="cinematic-animation" data-aos="fade-up">
-  <h2>Cinematic and Animation</h2>
+<section data-aos="fade-up">
+  <h2 id="cinematic-animation">Cinematic and Animation</h2>
 
   <p>
     TEGE provides a complete animation and cinematic toolset: scripted camera sequences with
@@ -7119,7 +7123,7 @@ pkg-config --modversion glfw3</code></pre>
     Add a <code>TimelineComponent</code> to any entity and configure tracks with keyframes.
   </p>
 
-  <h4 id="timeline-track-types">Track Types</h4>
+  <h4 id="cinematic-track-types">Track Types</h4>
 
   <div class="table-wrapper">
     <table>
@@ -7134,7 +7138,7 @@ pkg-config --modversion glfw3</code></pre>
     </table>
   </div>
 
-  <h4 id="timeline-playback">Playback Controls</h4>
+  <h4 id="cinematic-playback">Playback Controls</h4>
 
   <ul>
     <li><strong>Play / Pause / Stop</strong> - standard playback controls.</li>
@@ -7143,7 +7147,7 @@ pkg-config --modversion glfw3</code></pre>
     <li><strong>Speed</strong> - playback rate multiplier.</li>
   </ul>
 
-  <h4 id="timeline-easing">Easing Functions</h4>
+  <h4 id="cinematic-easing">Easing Functions</h4>
 
   <p>
     Keyframes support five interpolation curves: <code>Linear</code>, <code>EaseIn</code>,
@@ -7155,8 +7159,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 23 - Networking
      ============================================================ -->
-<section id="networking" data-aos="fade-up">
-  <h2>Networking</h2>
+<section data-aos="fade-up">
+  <h2 id="networking">Networking</h2>
 
   <p>
     TEGE includes a built-in LAN multiplayer system with entity replication, interpolation,
@@ -7273,8 +7277,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 24 - Environment and Effects
      ============================================================ -->
-<section id="environment-effects" data-aos="fade-up">
-  <h2>Environment and Effects</h2>
+<section data-aos="fade-up">
+  <h2 id="environment-effects">Environment and Effects</h2>
 
   <p>
     TEGE includes a suite of environment components for defining weather zones, temperature
@@ -7466,8 +7470,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 25 - Vegetation and Terrain
      ============================================================ -->
-<section id="vegetation-terrain" data-aos="fade-up">
-  <h2>Vegetation and Terrain</h2>
+<section data-aos="fade-up">
+  <h2 id="vegetation-terrain">Vegetation and Terrain</h2>
 
   <p>
     TEGE provides terrain components for both 3D heightmap landscapes and 2D side-scrolling
@@ -7575,8 +7579,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- ============================================================
      Section 26 - Advanced Components
      ============================================================ -->
-<section id="advanced-components" data-aos="fade-up">
-  <h2>Advanced Components</h2>
+<section data-aos="fade-up">
+  <h2 id="advanced-components">Advanced Components</h2>
 
   <p>
     TEGE includes several advanced components for scripting, object pooling, audio, level of
@@ -7775,8 +7779,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 27: Settings Window                                    -->
 <!-- ============================================================ -->
 
-<section id="settings-window" data-aos="fade-up">
-  <h2>Settings Window</h2>
+<section data-aos="fade-up">
+  <h2 id="settings-window">Settings Window</h2>
 
   <p>
     The Settings window is a unified configuration panel accessed via
@@ -7964,8 +7968,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 28: Keyboard Shortcuts                                 -->
 <!-- ============================================================ -->
 
-<section id="keyboard-shortcuts" data-aos="fade-up">
-  <h2>Keyboard Shortcuts</h2>
+<section data-aos="fade-up">
+  <h2 id="keyboard-shortcuts">Keyboard Shortcuts</h2>
 
   <p>
     TEGE provides a comprehensive set of keyboard shortcuts for fast editor
@@ -8172,8 +8176,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 29: Asset Browser                                      -->
 <!-- ============================================================ -->
 
-<section id="asset-browser" data-aos="fade-up">
-  <h2>Asset Browser</h2>
+<section data-aos="fade-up">
+  <h2 id="asset-browser">Asset Browser</h2>
 
   <p>
     The Asset Browser provides a visual interface for browsing, searching, and
@@ -8303,8 +8307,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 30: Pixel Editor                                       -->
 <!-- ============================================================ -->
 
-<section id="pixel-editor" data-aos="fade-up">
-  <h2>Pixel Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="pixel-editor">Pixel Editor</h2>
 
   <p>
     The Pixel Editor is a built-in sprite creation tool for making pixel art
@@ -8439,8 +8443,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 31: Sprite Sheet Importer                              -->
 <!-- ============================================================ -->
 
-<section id="sprite-sheet-importer" data-aos="fade-up">
-  <h2>Sprite Sheet Importer</h2>
+<section data-aos="fade-up">
+  <h2 id="sprite-sheet-importer">Sprite Sheet Importer</h2>
 
   <p>
     The Sprite Sheet Importer slices existing sprite sheet images into individual
@@ -8495,8 +8499,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 32: Vector Drawing Editor                              -->
 <!-- ============================================================ -->
 
-<section id="vector-drawing" data-aos="fade-up">
-  <h2>Vector Drawing Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="vector-drawing">Vector Drawing Editor</h2>
 
   <p>
     A built-in vector drawing editor for creating 2D art assets directly in the
@@ -8570,8 +8574,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 33: Terrain Editor                                     -->
 <!-- ============================================================ -->
 
-<section id="terrain-editor" data-aos="fade-up">
-  <h2>Terrain Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="terrain-editor">Terrain Editor</h2>
 
   <p>
     TEGE provides interactive terrain sculpting directly in the editor viewport
@@ -8719,8 +8723,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 34: Quest Flow Editor                                  -->
 <!-- ============================================================ -->
 
-<section id="quest-flow-editor" data-aos="fade-up">
-  <h2>Quest Flow Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="quest-flow-editor">Quest Flow Editor</h2>
 
   <p>
     The Quest Flow Editor is a visual node-graph tool for designing complex,
@@ -9001,8 +9005,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 35: Behavior Tree Editor                                -->
 <!-- ============================================================ -->
 
-<section id="behavior-tree-editor" data-aos="fade-up">
-  <h2>Behavior Tree Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="behavior-tree-editor">Behavior Tree Editor</h2>
 
   <p>
     The Behavior Tree (BT) editor provides a visual tool for designing AI logic
@@ -9223,8 +9227,8 @@ pkg-config --modversion glfw3</code></pre>
 <!-- Section 36: Visual Script Editor                                -->
 <!-- ============================================================ -->
 
-<section id="visual-script-editor" data-aos="fade-up">
-  <h2>Visual Script Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="visual-script-editor">Visual Script Editor</h2>
 
   <p>
     TEGE includes a full Blueprint-style visual scripting system for creating
@@ -9427,8 +9431,8 @@ VisualScript_GetVariable(entity, name);</code></pre>
 <!-- Section 37: Dialogue Editor                                    -->
 <!-- ============================================================ -->
 
-<section id="dialogue-editor" data-aos="fade-up">
-  <h2>Dialogue Editor</h2>
+<section data-aos="fade-up">
+  <h2 id="dialogue-editor">Dialogue Editor</h2>
 
   <p>
     TEGE includes a visual dialogue tree editor for authoring RPG-style
@@ -9514,8 +9518,8 @@ VisualScript_GetVariable(entity, name);</code></pre>
 <!-- Section 38: Animation Timeline                                 -->
 <!-- ============================================================ -->
 
-<section id="animation-timeline" data-aos="fade-up">
-  <h2>Animation Timeline</h2>
+<section data-aos="fade-up">
+  <h2 id="animation-timeline">Animation Timeline</h2>
 
   <p>
     The timeline system allows keyframing entity properties over time for
@@ -9628,8 +9632,8 @@ VisualScript_GetVariable(entity, name);</code></pre>
 <!-- Section 39: Procedural Generation                              -->
 <!-- ============================================================ -->
 
-<section id="procedural-generation" data-aos="fade-up">
-  <h2>Procedural Generation</h2>
+<section data-aos="fade-up">
+  <h2 id="procedural-generation">Procedural Generation</h2>
 
   <p>
     TEGE includes a comprehensive procedural generation system with 9+ algorithms,
@@ -9787,8 +9791,8 @@ VisualScript_GetVariable(entity, name);</code></pre>
 <!-- Section 40: Scene Layers                                       -->
 <!-- ============================================================ -->
 
-<section id="scene-layers" data-aos="fade-up">
-  <h2>Scene Layers</h2>
+<section data-aos="fade-up">
+  <h2 id="scene-layers">Scene Layers</h2>
 
   <p>
     Scene layers let you edit non-destructively, the way a DAW layers tracks over
@@ -9887,10 +9891,10 @@ VisualScript_GetVariable(entity, name);</code></pre>
 </div>
 
 <!-- ============================================================
-     Section 40 - AngelScript Basics
+     Section 41 - AngelScript Basics
      ============================================================ -->
-<section id="angelscript-basics" data-aos="fade-up">
-  <h2>AngelScript Basics</h2>
+<section data-aos="fade-up">
+  <h2 id="angelscript-basics">AngelScript Basics</h2>
 
   <p>
     TEGE uses <strong>AngelScript</strong> as its primary scripting language. Scripts are attached
@@ -9900,7 +9904,7 @@ VisualScript_GetVariable(entity, name);</code></pre>
     the player runtime.
   </p>
 
-  <h3 id="script-component">ScriptComponent</h3>
+  <h3 id="angelscript-script-component">ScriptComponent</h3>
 
   <p>
     Each entity can have <strong>multiple scripts</strong> attached. Every script attachment
@@ -10172,10 +10176,10 @@ graph TD
 </section>
 
 <!-- ============================================================
-     Section 41 - Complete API Reference
+     Section 42 - Complete API Reference
      ============================================================ -->
-<section id="api-reference" data-aos="fade-up">
-  <h2>Complete API Reference</h2>
+<section data-aos="fade-up">
+  <h2 id="api-reference">Complete API Reference</h2>
 
   <p>
     TEGE exposes approximately <strong>686 bindings</strong> to AngelScript, covering every major
@@ -11531,10 +11535,10 @@ graph TD
 </section>
 
 <!-- ============================================================
-     Section 42 - Coroutines and Events
+     Section 43 - Coroutines and Events
      ============================================================ -->
-<section id="coroutines-events" data-aos="fade-up">
-  <h2>Coroutines and Events</h2>
+<section data-aos="fade-up">
+  <h2 id="coroutines-events">Coroutines and Events</h2>
 
   <p>
     Coroutines and events are two mechanisms for writing time-based and decoupled game logic.
@@ -11706,10 +11710,10 @@ class PlayerCombat : TegeBehavior {
 </section>
 
 <!-- ============================================================
-     Section 43 - Visual Scripting
+     Section 44 - Visual Scripting
      ============================================================ -->
-<section id="visual-scripting-guide" data-aos="fade-up">
-  <h2>Visual Scripting</h2>
+<section data-aos="fade-up">
+  <h2 id="visual-scripting-guide">Visual Scripting</h2>
 
   <p>
     TEGE includes a full Blueprint-style visual scripting system for creating game logic without
@@ -11962,10 +11966,10 @@ class PlayerCombat : TegeBehavior {
 </div>
 
 <!-- ============================================================
-     Section 44 - Rendering Pipeline
+     Section 45 - Rendering Pipeline
      ============================================================ -->
-<section id="rendering-pipeline" data-aos="fade-up">
-  <h2>Rendering Pipeline</h2>
+<section data-aos="fade-up">
+  <h2 id="rendering-pipeline">Rendering Pipeline</h2>
 
   <p>
     TEGE uses a custom Vulkan-based renderer built from scratch. The renderer drives every pixel
@@ -12383,10 +12387,10 @@ class PlayerCombat : TegeBehavior {
 </section>
 
 <!-- ============================================================
-     Section 45 - Materials and Shaders
+     Section 46 - Materials and Shaders
      ============================================================ -->
-<section id="materials-shaders" data-aos="fade-up">
-  <h2>Materials and Shaders</h2>
+<section data-aos="fade-up">
+  <h2 id="materials-shaders">Materials and Shaders</h2>
 
   <p>
     TEGE uses a physically-based rendering (PBR) material model. Every <code>MaterialComponent</code>
@@ -12499,10 +12503,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 46 - Ray Tracing
+     Section 47 - Ray Tracing
      ============================================================ -->
-<section id="ray-tracing" data-aos="fade-up">
-  <h2>Ray Tracing</h2>
+<section data-aos="fade-up">
+  <h2 id="ray-tracing">Ray Tracing</h2>
 
   <p>
     TEGE includes a full Vulkan ray tracing pipeline for hybrid raster+RT rendering. The system
@@ -12795,10 +12799,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 47 - Post-Processing
+     Section 48 - Post-Processing
      ============================================================ -->
-<section id="post-processing" data-aos="fade-up">
-  <h2>Post-Processing</h2>
+<section data-aos="fade-up">
+  <h2 id="post-processing">Post-Processing</h2>
 
   <p>
     Post-processing effects are applied after the main render pass, operating on the full-screen
@@ -12980,10 +12984,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 48 - Retro Effects
+     Section 49 - Retro Effects
      ============================================================ -->
-<section id="retro-effects" data-aos="fade-up">
-  <h2>Retro Effects</h2>
+<section data-aos="fade-up">
+  <h2 id="retro-effects">Retro Effects</h2>
 
   <p>
     TEGE provides a suite of retro rendering effects that let you recreate the look of classic
@@ -13112,10 +13116,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 49 - Skybox and Environment
+     Section 50 - Skybox and Environment
      ============================================================ -->
-<section id="skybox-environment" data-aos="fade-up">
-  <h2>Skybox and Environment</h2>
+<section data-aos="fade-up">
+  <h2 id="skybox-environment">Skybox and Environment</h2>
 
   <p>
     TEGE provides a comprehensive environment system covering skyboxes, weather, water, world time,
@@ -13301,10 +13305,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 50 - Effects Gallery
+     Section 51 - Effects Gallery
      ============================================================ -->
-<section id="effects-gallery" data-aos="fade-up">
-  <h2>Effects Gallery</h2>
+<section data-aos="fade-up">
+  <h2 id="effects-gallery">Effects Gallery</h2>
 
   <p>
     Beyond the rendering pipeline and post-processing, TEGE provides several specialized visual
@@ -13491,10 +13495,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </div>
 
 <!-- ============================================================
-     Section 51 - Build Pipeline
+     Section 52 - Build Pipeline
      ============================================================ -->
-<section id="build-pipeline" data-aos="fade-up">
-  <h2>Build Pipeline</h2>
+<section data-aos="fade-up">
+  <h2 id="build-pipeline">Build Pipeline</h2>
 
   <p>
     TEGE includes a complete build pipeline for packaging your game into a standalone, distributable
@@ -13675,10 +13679,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 52 - Standalone Player
+     Section 53 - Standalone Player
      ============================================================ -->
-<section id="standalone-player" data-aos="fade-up">
-  <h2>Standalone Player</h2>
+<section data-aos="fade-up">
+  <h2 id="standalone-player">Standalone Player</h2>
 
   <p>
     The built game consists of exactly two files. No additional runtime, framework, or DLL is
@@ -13746,10 +13750,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 53 - HTML5 Export
+     Section 54 - HTML5 Export
      ============================================================ -->
-<section id="html5-export" data-aos="fade-up">
-  <h2>HTML5 Export</h2>
+<section data-aos="fade-up">
+  <h2 id="html5-export">HTML5 Export</h2>
 
   <p>
     TEGE can export your project as a web-ready HTML5 application, suitable for embedding on
@@ -13806,10 +13810,10 @@ glslangValidator -V Engine/shaders/triangle.frag -o Engine/shaders/triangle.frag
 </section>
 
 <!-- ============================================================
-     Section 54 - Newgrounds Integration
+     Section 55 - Newgrounds Integration
      ============================================================ -->
-<section id="newgrounds-integration" data-aos="fade-up">
-  <h2>Newgrounds Integration</h2>
+<section data-aos="fade-up">
+  <h2 id="newgrounds-integration">Newgrounds Integration</h2>
 
   <p>
     TEGE includes built-in support for the <strong>Newgrounds.io API</strong>, enabling session
@@ -13927,11 +13931,11 @@ string LoadProgress() {
 </div>
 
 <!-- ============================================================
-     Section 55 - Architecture Overview
+     Section 56 - Architecture Overview
      ============================================================ -->
 
-<section id="architecture-overview" data-aos="fade-up">
-  <h2>55. Architecture Overview</h2>
+<section data-aos="fade-up">
+  <h2 id="architecture-overview">Architecture Overview</h2>
 
   <p>
     TEGE is structured as a layered architecture with strict dependency
@@ -14070,11 +14074,11 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 56 - Physics Backend Selection
+     Section 57 - Physics Backend Selection
      ============================================================ -->
 
-<section id="physics-backends" data-aos="fade-up">
-  <h2>56. Physics Backend Selection</h2>
+<section data-aos="fade-up">
+  <h2 id="physics-backends">Physics Backend Selection</h2>
 
   <p>
     TEGE provides three physics backends behind a unified interface. The
@@ -14171,11 +14175,11 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 57 - Accessibility
+     Section 58 - Accessibility
      ============================================================ -->
 
-<section id="accessibility" data-aos="fade-up">
-  <h2>57. Accessibility</h2>
+<section data-aos="fade-up">
+  <h2 id="accessibility">Accessibility</h2>
 
   <p>
     TEGE includes comprehensive accessibility features configurable from the
@@ -14426,11 +14430,11 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 58 - Splitscreen
+     Section 59 - Splitscreen
      ============================================================ -->
 
-<section id="splitscreen" data-aos="fade-up">
-  <h2>58. Splitscreen</h2>
+<section data-aos="fade-up">
+  <h2 id="splitscreen">Splitscreen</h2>
 
   <p>
     TEGE supports splitscreen rendering for local multiplayer games with
@@ -14509,11 +14513,11 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 59 - Level Streaming
+     Section 60 - Level Streaming
      ============================================================ -->
 
-<section id="level-streaming" data-aos="fade-up">
-  <h2>59. Level Streaming</h2>
+<section data-aos="fade-up">
+  <h2 id="level-streaming">Level Streaming</h2>
 
   <p>
     For large worlds, the <code>StreamingManager</code> loads and unloads scene
@@ -14596,11 +14600,11 @@ string LoadProgress() {
 </section>
 
 <!-- ============================================================
-     Section 60 - Plugin System
+     Section 61 - Plugin System
      ============================================================ -->
 
-<section id="plugin-system" data-aos="fade-up">
-  <h2>60. Plugin System</h2>
+<section data-aos="fade-up">
+  <h2 id="plugin-system">Plugin System</h2>
 
   <p>
     TEGE supports dynamic plugins loaded at runtime via shared libraries.
@@ -14661,11 +14665,11 @@ public:
 </section>
 
 <!-- ============================================================
-     Section 61 - Profiler and Debug
+     Section 62 - Profiler and Debug
      ============================================================ -->
 
-<section id="profiler-debug" data-aos="fade-up">
-  <h2>61. Profiler and Debug Tools</h2>
+<section data-aos="fade-up">
+  <h2 id="profiler-debug">Profiler and Debug Tools</h2>
 
   <p>
     Open the profiler via <strong>View &gt; Profiler</strong> in the editor
@@ -14716,11 +14720,11 @@ void MySystem::Render() {
 </section>
 
 <!-- ============================================================
-     Section 62 - Security
+     Section 63 - Security
      ============================================================ -->
 
-<section id="security" data-aos="fade-up">
-  <h2>62. Security</h2>
+<section data-aos="fade-up">
+  <h2 id="security">Security</h2>
 
   <p>
     TEGE defines trust zones documented in <code>.enjin-boundaries.json</code>
@@ -14839,8 +14843,8 @@ void MySystem::Render() {
      Appendix A - Templates Reference
      ============================================================ -->
 
-<section id="appendix-templates" data-aos="fade-up">
-  <h2>Appendix A: Templates Reference</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-templates">Appendix A: Templates Reference</h2>
 
   <p>
     TEGE provides 23 built-in startup templates organized into 5 categories.
@@ -14952,8 +14956,8 @@ void MySystem::Render() {
      Appendix B - Type Conventions
      ============================================================ -->
 
-<section id="appendix-types" data-aos="fade-up">
-  <h2>Appendix B: Type Conventions</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-types">Appendix B: Type Conventions</h2>
 
   <p>
     TEGE uses fixed-width type aliases throughout the codebase and exposed APIs.
@@ -14990,8 +14994,8 @@ void MySystem::Render() {
      Appendix C - Namespace Reference
      ============================================================ -->
 
-<section id="appendix-namespaces" data-aos="fade-up">
-  <h2>Appendix C: Namespace Reference</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-namespaces">Appendix C: Namespace Reference</h2>
 
   <p>
     All engine types are organized under the <code>Enjin</code> root namespace.
@@ -15034,8 +15038,8 @@ void MySystem::Render() {
      Appendix D - File Formats
      ============================================================ -->
 
-<section id="appendix-formats" data-aos="fade-up">
-  <h2>Appendix D: File Formats</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-formats">Appendix D: File Formats</h2>
 
   <p>
     TEGE uses several custom file formats alongside standard image, model, and
@@ -15096,8 +15100,8 @@ void MySystem::Render() {
      Appendix E - Troubleshooting
      ============================================================ -->
 
-<section id="appendix-troubleshooting" data-aos="fade-up">
-  <h2>Appendix E: Troubleshooting</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-troubleshooting">Appendix E: Troubleshooting</h2>
 
   <p>
     Common build and runtime issues with their solutions:
@@ -15161,8 +15165,8 @@ void MySystem::Render() {
      Appendix F - Keyboard Shortcut Cheatsheet
      ============================================================ -->
 
-<section id="appendix-shortcuts" data-aos="fade-up">
-  <h2>Appendix F: Keyboard Shortcut Cheatsheet</h2>
+<section data-aos="fade-up">
+  <h2 id="appendix-shortcuts">Appendix F: Keyboard Shortcut Cheatsheet</h2>
 
   <div class="table-wrapper">
     <table>

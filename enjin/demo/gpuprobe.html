@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>WebGPU probe</title></head>
+<body style="background:#111;color:#eee;font-family:monospace;padding:20px;">
+<h2>WebGPU probe</h2>
+<pre id="out">running...</pre>
+<script>
+var out = document.getElementById('out');
+function log(s) { out.textContent += '\n' + s; }
+out.textContent = 'navigator.gpu: ' + (navigator.gpu ? 'present' : 'MISSING');
+if (navigator.gpu) {
+  log('preferred canvas format: ' + navigator.gpu.getPreferredCanvasFormat());
+  navigator.gpu.requestAdapter({ powerPreference: 'high-performance' }).then(function(a) {
+    if (!a) { log('requestAdapter(high-performance): NULL adapter'); return null; }
+    log('adapter (high-performance): OK');
+    log('  features: ' + Array.from(a.features).join(', '));
+    log('  maxTextureDimension2D: ' + a.limits.maxTextureDimension2D);
+    return a.requestDevice().then(function(d) {
+      log('requestDevice: OK');
+      d.destroy();
+    });
+  }).catch(function(e) {
+    log('high-performance FAILED: ' + e);
+  }).then(function() {
+    return navigator.gpu.requestAdapter().then(function(a) {
+      log('requestAdapter(default): ' + (a ? 'OK' : 'NULL adapter'));
+    }).catch(function(e) {
+      log('default FAILED: ' + e);
+    });
+  });
+}
+</script>
+</body></html>

@@ -1,0 +1,1422 @@
+/* ==========================================================================
+   TEGE Game Engine - Classic Sage Green & Cream Design System
+   Super Clean, Minimal Header & Layout
+   ========================================================================== */
+
+:root {
+  /* Classic TEGE Palette */
+  --bg: #e6efe3;
+  --bg-alt: #d7e5d2;
+  --card: #ffffff;
+  --card-soft: #f1f7ef;
+
+  --green: #5f9b5c;
+  --green-deep: #3f7a3c;
+  --green-soft: #d8ead4;
+  --warm: #f7f3e8;
+
+  --text: #262735;
+  --text-muted: #5b5d73;
+  --text-light: #7a7b8a;
+  --border: #aebca8;
+  --border-soft: #c8d6c3;
+
+  --link: #3b55b3;
+  --link-hover: #294096;
+  --accent-blue: #4f6bd6;
+  --accent-light: #dbe6ff;
+
+  --nav-bg: #262735;
+  --nav-text: #e5e7eb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(38, 47, 35, 0.06), 0 2px 12px rgba(38, 47, 35, 0.05);
+  --shadow-md: 0 6px 24px rgba(38, 47, 35, 0.10);
+  --shadow-lg: 0 14px 44px rgba(38, 47, 35, 0.14);
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 50rem;
+}
+
+/* Base Body Setup */
+body.landing-page {
+  background:
+    radial-gradient(1100px 520px at 78% -8%, #eef6ec 0%, rgba(238, 246, 236, 0) 60%),
+    radial-gradient(900px 480px at 0% 8%, #f4f2e6 0%, rgba(244, 242, 230, 0) 55%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.landing-page .site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body.landing-page .main-content {
+  margin-left: 0 !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  flex: 1;
+}
+
+body.landing-page .content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  width: 100%;
+}
+
+/* Accessibility Focus */
+.landing-page a:focus-visible,
+.landing-page button:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Header & Clean Tab Navigation System
+   ========================================================================== */
+
+.tege-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(38, 39, 53, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.tege-header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Clean Brand Cluster */
+.tege-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.tege-header__back {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  color: #98a0af;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.tege-header__back:hover {
+  color: #fff;
+}
+
+.tege-header__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tege-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.tege-logo-img {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+}
+
+/* Minimal Nav Tabs Bar */
+.tege-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tege-tab-btn {
+  background: transparent;
+  border: none;
+  color: #aeb4c0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tege-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tege-tab-btn.active {
+  color: #fff;
+  background: var(--green-deep);
+  font-weight: 600;
+}
+
+/* Header Actions */
+.tege-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tege-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Buttons & CTAs
+   ========================================================================== */
+
+.tege-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.tege-btn--sm {
+  font-size: 0.825rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+}
+
+.tege-btn--lg {
+  font-size: 1rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 10px;
+}
+
+.tege-btn--primary {
+  background: var(--green);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.tege-btn--primary:hover {
+  background: var(--green-deep);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.tege-btn--blue {
+  background: var(--link);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.tege-btn--blue:hover {
+  background: var(--link-hover);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.tege-btn--secondary {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.tege-btn--secondary:hover {
+  background: #fff;
+  border-color: var(--green-deep);
+  color: var(--green-deep);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   Tab Panel Visibility & Animations
+   ========================================================================== */
+
+.tege-tab-panel {
+  display: none;
+  animation: fadeInTab 0.25s ease;
+}
+
+.tege-tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+
+.tege-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 3rem;
+  padding: clamp(2rem, 4vw, 3.25rem);
+  margin-top: 1rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(150deg, #ffffff 0%, #f0f7ee 55%, #eaf3e6 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.tege-hero__launch {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: rgba(61, 136, 34, 0.1);
+  border: 1px solid rgba(61, 136, 34, 0.35);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-bottom: 1.25rem;
+}
+
+.tege-hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6.5vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.tege-hero__subtitle {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--green-deep);
+  letter-spacing: 0.01em;
+  margin-bottom: 1.25rem;
+}
+
+.tege-hero__tagline {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+  max-width: 520px;
+}
+
+.tege-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.tege-hero__tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tege-tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: rgba(95, 155, 92, 0.12);
+  border: 1px solid rgba(95, 155, 92, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+
+/* Hero Editor Media Showcase Card */
+.tege-hero__media {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+.tege-hero__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tege-hero__overlay-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tege-hero__overlay-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.tege-hero__overlay-desc {
+  font-size: 0.785rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Engine Stats Counter Bar
+   ========================================================================== */
+
+.tege-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0 3.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.tege-stat-item {
+  text-align: center;
+}
+
+.tege-stat-value {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--green-deep);
+  line-height: 1.2;
+}
+
+.tege-stat-label {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Cards & Section Grids
+   ========================================================================== */
+
+.tege-section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+.tege-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.tege-section-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 3.5vw, 2.65rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.02em;
+}
+
+.tege-section-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Grids */
+.tege-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tege-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tege-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+/* Cards */
+.tege-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tege-card:hover {
+  border-color: var(--green-deep);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.tege-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--green-soft);
+  color: var(--green-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.tege-card__icon--blue {
+  background: var(--accent-light);
+  color: var(--link);
+}
+
+.tege-card__icon--warm {
+  background: var(--warm);
+  color: #925f19;
+}
+
+.tege-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.65rem;
+}
+
+.tege-card__desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.tege-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.tege-card__list li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 0.35rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.tege-card__list li svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green-deep);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   Trust / Philosophy Section ("TEGE Is / Is Not")
+   ========================================================================== */
+
+.tege-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.tege-trust-card {
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.tege-trust-card--is {
+  background: linear-gradient(150deg, #ffffff 0%, #f1f8ee 100%);
+  border-color: #b7d6b3;
+}
+
+.tege-trust-card--not {
+  background: linear-gradient(150deg, #ffffff 0%, #faf5ea 100%);
+  border-color: #e5d4b8;
+}
+
+.tege-trust-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tege-trust-title--is { color: var(--green-deep); }
+.tege-trust-title--not { color: #a16207; }
+
+.tege-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tege-trust-list li {
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.tege-trust-list li:last-child {
+  border-bottom: none;
+}
+
+.tege-trust-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* License Callout Banner */
+.tege-license-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tege-license-text {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+.tege-license-text strong {
+  color: var(--text);
+}
+.tege-license-text a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Art Presets Showcase Grid
+   ========================================================================== */
+
+.tege-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.tege-preset-pill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.tege-preset-pill:hover {
+  border-color: var(--green-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tege-preset-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.tege-preset-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Playable WebGPU Demo Hero Card
+   ========================================================================== */
+
+.tege-demo-hero-card {
+  background: linear-gradient(150deg, #ffffff 0%, #f4f8f3 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 3rem;
+}
+
+.tege-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: var(--green-soft);
+  border: 1px solid rgba(61, 136, 34, 0.35);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1.25rem;
+}
+
+.tege-demo-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.tege-demo-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Screenshot Gallery & Lightbox
+   ========================================================================== */
+
+.tege-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tege-gallery-item {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.tege-gallery-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-deep);
+  box-shadow: var(--shadow-md);
+}
+
+.tege-gallery-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.tege-gallery-caption {
+  padding: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
+
+/* Lightbox Modal */
+.enjin-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(38, 39, 53, 0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.enjin-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.enjin-lightbox__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 1.75rem;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.enjin-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.enjin-lightbox__image {
+  max-width: 92vw;
+  max-height: 80vh;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+}
+
+.enjin-lightbox__caption {
+  margin-top: 1.25rem;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Quickstart Stepper Workflow
+   ========================================================================== */
+
+.tege-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.tege-step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tege-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  background: var(--green-soft);
+  border: 1px solid rgba(61, 136, 34, 0.3);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.tege-step-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.tege-step-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Download Center Hero
+   ========================================================================== */
+
+.tege-download-hero {
+  background: linear-gradient(150deg, #ffffff 0%, #f0f7ee 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 3rem;
+}
+
+.tege-download-hero h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.tege-download-hero p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 550px;
+  margin: 0 auto 2rem;
+}
+
+.tege-download-hero .tege-hero__ctas {
+  justify-content: center;
+}
+
+/* System Requirements Box */
+.tege-reqs-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tege-reqs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.tege-reqs-col h4 {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tege-reqs-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tege-reqs-col li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.tege-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--nav-bg);
+  color: #fff;
+  padding: 3rem 1.5rem;
+}
+
+.tege-footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.tege-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tege-footer__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.tege-footer__links a {
+  color: #98a0af;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.tege-footer__links a:hover {
+  color: #fff;
+}
+
+.tege-footer__copy {
+  font-size: 0.825rem;
+  color: #7a7b8a;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .tege-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .tege-hero__tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tege-hero__ctas,
+  .tege-hero__tech-pills {
+    justify-content: center;
+  }
+
+  .tege-grid-4,
+  .tege-presets-grid,
+  .tege-stepper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tege-grid-3,
+  .tege-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Belief Statement Band
+   ========================================================================== */
+
+.tege-manifesto {
+  margin-top: 2.5rem;
+  padding: 2rem 2.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--green);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.tege-manifesto__text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+  max-width: 900px;
+}
+
+/* ==========================================================================
+   Page Style & Accessibility Controls Strip
+   ========================================================================== */
+
+.tege-page-controls {
+  background: var(--card-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.tege-page-controls__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.5rem;
+}
+
+.tege-page-controls__label {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+
+.tege-page-controls__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tege-style-btn,
+.tege-a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tege-style-btn:hover,
+.tege-a11y-btn:hover {
+  border-color: var(--green-deep);
+  color: var(--text);
+}
+
+.tege-style-btn[aria-pressed="true"],
+.tege-a11y-btn[aria-pressed="true"] {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: #fff;
+}
+
+.tege-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--sw, var(--green));
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+/* Card title color variants (replaces inline styles for themeability) */
+.tege-card__title--green { color: var(--green-deep); }
+.tege-card__title--blue { color: var(--link); }
+.tege-card__title--warm { color: var(--warm-title, #925f19); }
+
+/* ==========================================================================
+   Page Art Styles (the engine promise, applied to the page itself)
+   ========================================================================== */
+
+/* Dusk: dark, moody */
+html.theme-dusk {
+  --bg: #23242f;
+  --bg-alt: #1c1d26;
+  --card: #2d2f3d;
+  --card-soft: #262835;
+  --green: #5f9b5c;
+  --green-deep: #8fc98b;
+  --green-soft: rgba(95, 155, 92, 0.18);
+  --warm: #3a3428;
+  --warm-title: #d9a94e;
+  --text: #e8e9f0;
+  --text-muted: #b6b8c8;
+  --text-light: #8f91a3;
+  --border: #454759;
+  --border-soft: #3a3c4c;
+  --link: #8fa8ff;
+  --link-hover: #aabcff;
+  --accent-blue: #6f87e8;
+  --accent-light: #2e3752;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 14px 44px rgba(0, 0, 0, 0.5);
+}
+
+html.theme-dusk body.landing-page {
+  background:
+    radial-gradient(1100px 520px at 78% -8%, #282c3a 0%, rgba(40, 44, 58, 0) 60%),
+    radial-gradient(900px 480px at 0% 8%, #2a2836 0%, rgba(42, 40, 54, 0) 55%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+html.theme-dusk .tege-hero {
+  background: linear-gradient(150deg, #2e303e 0%, #282a37 55%, #24262f 100%);
+}
+
+html.theme-dusk .tege-demo-hero-card,
+html.theme-dusk .tege-download-hero {
+  background: linear-gradient(150deg, #2e303e 0%, #262835 100%);
+}
+
+html.theme-dusk .tege-trust-card--is {
+  background: linear-gradient(150deg, #2a3229 0%, #242a24 100%);
+  border-color: #3f5a3c;
+}
+
+html.theme-dusk .tege-trust-card--not {
+  background: linear-gradient(150deg, #33301f 0%, #2a2820 100%);
+  border-color: #6b5a33;
+}
+
+html.theme-dusk .tege-trust-title--not { color: #d9a94e; }
+html.theme-dusk .tege-trust-list li { border-bottom-color: rgba(255, 255, 255, 0.07); }
+html.theme-dusk .tege-reqs-col li { border-bottom-color: rgba(255, 255, 255, 0.07); }
+
+html.theme-dusk .tege-hero__overlay-badge {
+  background: rgba(38, 39, 53, 0.92);
+}
+
+html.theme-dusk .tege-btn--secondary {
+  background: rgba(45, 47, 61, 0.9);
+  color: var(--text);
+}
+html.theme-dusk .tege-btn--secondary:hover {
+  background: #383a4a;
+  color: var(--green-deep);
+}
+
+html.theme-dusk .tege-tab-btn.active { background: #3f7a3c; }
+html.theme-dusk .tege-btn--primary { background: #4c8a49; }
+html.theme-dusk .tege-btn--primary:hover { background: #3f7a3c; }
+
+/* Paper: warm cream & terracotta ink */
+html.theme-paper {
+  --bg: #f3ead8;
+  --bg-alt: #ecdfc8;
+  --card: #fffcf4;
+  --card-soft: #f8f1e2;
+  --green: #b86a3a;
+  --green-deep: #8f4e24;
+  --green-soft: #f1dfcd;
+  --warm: #f7ede0;
+  --text: #33291d;
+  --text-muted: #66573f;
+  --text-light: #84745c;
+  --border: #cbb794;
+  --border-soft: #decfae;
+  --link: #9c5220;
+  --link-hover: #7a3f16;
+  --accent-blue: #a2612d;
+  --accent-light: #f0e4d2;
+}
+
+html.theme-paper body.landing-page {
+  background:
+    radial-gradient(1100px 520px at 78% -8%, #f8f1e0 0%, rgba(248, 241, 224, 0) 60%),
+    radial-gradient(900px 480px at 0% 8%, #f2e6cd 0%, rgba(242, 230, 205, 0) 55%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+html.theme-paper .tege-hero {
+  background: linear-gradient(150deg, #fffdf6 0%, #f8f0dd 55%, #f3e9d3 100%);
+}
+
+html.theme-paper .tege-demo-hero-card,
+html.theme-paper .tege-download-hero {
+  background: linear-gradient(150deg, #fffdf6 0%, #f6eeda 100%);
+}
+
+html.theme-paper .tege-trust-card--is {
+  background: linear-gradient(150deg, #fffdf6 0%, #f5eedb 100%);
+  border-color: #d0b98d;
+}
+
+html.theme-paper .tege-trust-card--not {
+  background: linear-gradient(150deg, #fffdf6 0%, #f6ead6 100%);
+  border-color: #d8bd8e;
+}
+
+/* ==========================================================================
+   Accessibility Toggles
+   ========================================================================== */
+
+/* Readable font (Atkinson Hyperlegible) */
+html.a11y-font {
+  --font-sans: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Atkinson Hyperlegible', Georgia, serif;
+  --font-mono: 'Atkinson Hyperlegible', monospace;
+}
+
+/* Larger text: rem-based sizes scale from the root */
+html.a11y-text {
+  font-size: 115%;
+}
+
+/* High contrast (declared after themes so its variables win) */
+html.a11y-contrast {
+  --text: #000000;
+  --text-muted: #26272e;
+  --text-light: #3c3d46;
+  --border: #55604f;
+  --link: #1a2f8f;
+}
+
+html.theme-dusk.a11y-contrast {
+  --text: #ffffff;
+  --text-muted: #dcdee8;
+  --text-light: #c3c5d1;
+  --border: #8b8fa3;
+  --link: #b9c8ff;
+  --green-deep: #a8e0a4;
+}
+
+html.theme-paper.a11y-contrast {
+  --text: #000000;
+  --text-muted: #33291d;
+  --text-light: #4a3d2a;
+  --border: #8f7c54;
+  --link: #6e3a12;
+}
+
+/* Reduced motion: user toggle */
+html.a11y-motion *,
+html.a11y-motion *::before,
+html.a11y-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-motion .tege-card:hover,
+html.a11y-motion .tege-btn:hover,
+html.a11y-motion .tege-preset-pill:hover,
+html.a11y-motion .tege-gallery-item:hover {
+  transform: none !important;
+}
+
+/* Reduced motion: OS-level preference, honored automatically */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .tege-card:hover,
+  .tege-btn:hover,
+  .tege-preset-pill:hover,
+  .tege-gallery-item:hover {
+    transform: none !important;
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .tege-page-controls__container {
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tege-header__container {
+    padding: 0.75rem 1rem;
+  }
+
+  .tege-tabs-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(38, 39, 53, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .tege-tabs-nav.mobile-open {
+    display: flex;
+  }
+
+  .tege-tab-btn {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: var(--radius-sm);
+  }
+
+  .tege-mobile-toggle {
+    display: block;
+  }
+
+  .tege-header__actions {
+    display: none;
+  }
+
+  .tege-grid-2,
+  .tege-grid-3,
+  .tege-grid-4,
+  .tege-trust-grid,
+  .tege-presets-grid,
+  .tege-gallery-grid,
+  .tege-stepper,
+  .tege-reqs-grid {
+    grid-template-columns: 1fr;
+  }
+}

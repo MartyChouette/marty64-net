@@ -3,391 +3,826 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TEGE - The Enjin Game Engine</title>
-  <meta name="description" content="TEGE - Respects creators. Your time, your talent, your tools. No waiting, no sign-ins, no walled garden. A unifying game engine with unrealistic expectations.">
+  <title>TEGE - The Opinionated Game Engine | Aesthetics & Accessibility First</title>
+  <meta name="description" content="TEGE is an opinionated game engine. Aesthetics and accessibility are first and foremost. Made to demystify making videogames for artists and dreamers of all types and abilities.">
+  <link rel="icon" type="image/png" href="../images/tege-icon-32.png">
+
+  <!-- Inter, Lora, JetBrains Mono & Atkinson Hyperlegible Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Core Styles -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
+
+  <!-- Apply saved page style & accessibility preferences before first paint -->
+  <script>
+    (function () {
+      try {
+        var prefs = JSON.parse(localStorage.getItem('tege-page-prefs') || '{}');
+        var root = document.documentElement;
+        if (prefs.theme === 'dusk' || prefs.theme === 'paper') {
+          root.classList.add('theme-' + prefs.theme);
+        }
+        ['font', 'text', 'contrast', 'motion'].forEach(function (key) {
+          if (prefs[key]) root.classList.add('a11y-' + key);
+        });
+      } catch (e) { /* first visit or blocked storage: defaults apply */ }
+    })();
+  </script>
 </head>
 <body class="landing-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-  </button>
+  <!-- ==================== STICKY TOP HEADER & TABS ==================== -->
+  <header class="tege-header">
+    <div class="tege-header__container">
+      <!-- Brand Cluster -->
+      <div class="tege-header__brand">
+        <a href="../index.html" class="tege-header__back" aria-label="Return to Marty Scott portfolio">&larr; marty64.net</a>
+        <div class="tege-header__divider" aria-hidden="true"></div>
+        <a href="index.html" class="tege-header__logo">
+          <img src="../images/tege-icon-32.png" alt="TEGE Engine Logo" class="tege-logo-img" width="26" height="26">
+        </a>
+      </div>
 
-  <div class="sidebar-overlay"></div>
+      <!-- Navigation Tabs (Clean 4 Core Tabs) -->
+      <nav class="tege-tabs-nav" role="tablist" aria-label="Engine Navigation Tabs">
+        <button class="tege-tab-btn active" role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" data-tab="overview">
+          Overview
+        </button>
+        <button class="tege-tab-btn" role="tab" aria-selected="false" aria-controls="panel-features" id="tab-features" data-tab="features">
+          Features
+        </button>
+        <button class="tege-tab-btn" role="tab" aria-selected="false" aria-controls="panel-showcase" id="tab-showcase" data-tab="showcase">
+          Showcase & Demo
+        </button>
+        <button class="tege-tab-btn" role="tab" aria-selected="false" aria-controls="panel-docs" id="tab-docs" data-tab="docs">
+          Docs & Download
+        </button>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="tege-header__actions">
+        <a href="demo/index.html" class="tege-btn tege-btn--blue tege-btn--sm">Play Demo</a>
+        <a href="TEGE-0.9.7.zip" class="tege-btn tege-btn--primary tege-btn--sm">Download</a>
+      </div>
+
+      <!-- Mobile Nav Drawer Button -->
+      <button class="tege-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== PAGE STYLE & ACCESSIBILITY CONTROLS ==================== -->
+  <div class="tege-page-controls" role="region" aria-label="Page style and accessibility options">
+    <div class="tege-page-controls__container">
+      <span class="tege-page-controls__label">One click changes the whole look. Try it on this page:</span>
+      <div class="tege-page-controls__group" role="group" aria-label="Page art style">
+        <button class="tege-style-btn" data-theme="sage" aria-pressed="true">
+          <span class="tege-swatch" style="--sw: #5f9b5c;" aria-hidden="true"></span>Sage
+        </button>
+        <button class="tege-style-btn" data-theme="dusk" aria-pressed="false">
+          <span class="tege-swatch" style="--sw: #2d2f3d;" aria-hidden="true"></span>Dusk
+        </button>
+        <button class="tege-style-btn" data-theme="paper" aria-pressed="false">
+          <span class="tege-swatch" style="--sw: #c17a44;" aria-hidden="true"></span>Paper
+        </button>
+      </div>
+      <div class="tege-page-controls__group" role="group" aria-label="Accessibility options">
+        <button class="tege-a11y-btn" data-a11y="font" aria-pressed="false">Readable font</button>
+        <button class="tege-a11y-btn" data-a11y="text" aria-pressed="false">Larger text</button>
+        <button class="tege-a11y-btn" data-a11y="contrast" aria-pressed="false">High contrast</button>
+        <button class="tege-a11y-btn" data-a11y="motion" aria-pressed="false">Reduce motion</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN TABBED CONTENT ==================== -->
   <div class="site-container">
-    <nav class="sidebar" aria-label="Page navigation">
-      <a href="../index.html" class="site-title">marty64.net</a>
-      <p class="site-subtitle">TEGE</p>
-
-      <a href="../index.html" class="nav-home">Back to Portfolio</a>
-      <a href="../index.html#resume" class="nav-home" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">Resume</a>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Page</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
-          <li class="nav-item"><a href="#screenshots" class="nav-link">Screenshots</a></li>
-          <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
-          <li class="nav-item"><a href="#getting-started" class="nav-link">Getting Started</a></li>
-          <li class="nav-item"><a href="#download" class="nav-link">Download</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Documentation</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="docs.html" class="nav-link">Full Documentation</a></li>
-          <li class="nav-item"><a href="manual.html" class="nav-link">User Manual</a></li>
-          <li class="nav-item"><a href="engine-analysis.html" class="nav-link">Technical Analysis</a></li>
-          <li class="nav-item"><a href="https://github.com/MartyChouette/TEGE" class="nav-link" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Links</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="../kb/index.html" class="nav-link">VG101 Knowledge Base</a></li>
-        </ul>
-      </div>
-    </nav>
-
     <main id="main-content" class="main-content">
       <div class="content-wrapper">
 
-        <!-- ============ HERO ============ -->
-        <section class="landing-hero" id="hero">
-          <div class="landing-hero__text">
-            <h1 class="landing-hero__title">TEGE</h1>
-            <p class="landing-hero__subtitle">The Enjin Game Engine</p>
-            <p class="landing-hero__tagline">
-              Respects creators. Your time, your talent, your tools. No waiting, no sign-ins, no walled garden. A unifying game engine with unrealistic expectations.
+        <!-- ===================================================================
+             TAB 1: OVERVIEW
+             =================================================================== -->
+        <section id="panel-overview" class="tege-tab-panel active" role="tabpanel" aria-labelledby="tab-overview">
+          
+          <!-- Hero Section -->
+          <div class="tege-hero">
+            <div class="tege-hero__text">
+              <h1 class="tege-hero__title">TEGE</h1>
+              <p class="tege-hero__subtitle">The Opinionated Game Engine</p>
+              <p class="tege-hero__tagline">
+                Aesthetics and accessibility are first and foremost. Pick any visual look, from PS1 retro to modern PBR lighting, in a single dropdown, and every videogame you make is accessible to every player by default.
+              </p>
+              <span class="tege-hero__launch">v0.9.7 Preview Available • Free & Open Source • 1.0 Launch Spring 2027</span>
+              
+              <div class="tege-hero__ctas">
+                <a href="demo/index.html" class="tege-btn tege-btn--primary tege-btn--lg">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Play a Demo Scene
+                </a>
+                <a href="TEGE-0.9.7.zip" class="tege-btn tege-btn--secondary tege-btn--lg">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download Preview
+                </a>
+                <a href="https://github.com/MartyChouette/TEGE" class="tege-btn tege-btn--secondary tege-btn--lg" target="_blank" rel="noopener noreferrer">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                  GitHub Source
+                </a>
+              </div>
+
+              <div class="tege-hero__tech-pills">
+                <span class="tege-tech-pill">🎨 8 One-Click Art Styles</span>
+                <span class="tege-tech-pill">♿ Accessibility Built In</span>
+                <span class="tege-tech-pill">⚡ Visual Scripting</span>
+                <span class="tege-tech-pill">🐣 Easy Drag & Drop Editor</span>
+              </div>
+            </div>
+
+            <!-- Hero Editor Media Showcase -->
+            <div class="tege-hero__media">
+              <img src="../images/enjin_1.jpg" alt="TEGE Game Engine Editor Workspace" class="tege-hero__img">
+              <div class="tege-hero__overlay-badge">
+                <div>
+                  <div class="tege-hero__overlay-title">Friendly Editor Workspace</div>
+                  <div class="tege-hero__overlay-desc">Simple interface designed to put art & creativity first</div>
+                </div>
+                <button class="tege-btn tege-btn--secondary tege-btn--sm screenshot-gallery__img-trigger" data-img="../images/enjin_1.jpg" data-alt="TEGE Editor Workspace">
+                  Zoom
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Belief Statement -->
+          <div class="tege-manifesto">
+            <p class="tege-manifesto__text">
+              We believe in demystifying making videogames. TEGE is built to encourage artists and dreamers of all types and abilities to make them.
             </p>
-            <div class="landing-hero__cta">
-              <a href="https://martychouette.itch.io/tege" class="cta-button cta-primary" target="_blank" rel="noopener noreferrer">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download for Windows
-                <span class="cta-version">Preview</span>
-              </a>
-              <a href="#getting-started" class="cta-button cta-secondary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Get Started (10 min)
-              </a>
-              <a href="https://github.com/MartyChouette/TEGE" class="cta-button cta-secondary" target="_blank" rel="noopener noreferrer">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                View on GitHub
-              </a>
+          </div>
+
+          <!-- Lead Pillars: Aesthetics, Accessibility, Demystified -->
+          <div class="tege-section-header" style="margin-top: 3.5rem;">
+            <span class="tege-section-label">Our Opinions</span>
+            <h2 class="tege-section-title">Aesthetics & Accessibility, First and Foremost</h2>
+            <p class="tege-section-desc">
+              Most engines treat how your videogame looks and who can play it as things you figure out at the end. TEGE puts them first, and everything else in the engine is built around that.
+            </p>
+          </div>
+
+          <div class="tege-grid-3">
+            <!-- Opinion 1: Aesthetics First -->
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              </div>
+              <h3 class="tege-card__title">Aesthetics Come First</h3>
+              <p class="tege-card__desc">
+                How your videogame looks and feels is not a polish pass at the end, it is where TEGE starts. Switch between 8 handcrafted render modes (PBR, PS1 retro, hand-painted, cel-shaded, pixel art, sketch, analog CRT) from a single dropdown, no shader math required.
+              </p>
             </div>
-            <div class="tech-badges">
-              <span class="tech-badge">C++20</span>
-              <span class="tech-badge">Vulkan 1.3</span>
-              <span class="tech-badge">AngelScript</span>
-              <span class="tech-badge">Jolt Physics</span>
-              <span class="tech-badge">Box2D</span>
-              <span class="tech-badge">Dear ImGui</span>
-              <span class="tech-badge">CMake</span>
+
+            <!-- Opinion 2: Accessibility First -->
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <h3 class="tege-card__title">Accessibility Is Built In, Not Bolted On</h3>
+              <p class="tege-card__desc">
+                Every videogame made in TEGE ships with colorblind modes, full input remapping, switch access, OpenDyslexic font toggles, and screen reader support out of the box. You do not have to build any of it yourself, and every player gets to play what you make.
+              </p>
+            </div>
+
+            <!-- Opinion 3: Demystified -->
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--warm">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <h3 class="tege-card__title">Making Videogames, Demystified</h3>
+              <p class="tege-card__desc">
+                You do not need a computer science degree to make a videogame. Start from ready-to-run templates covering common genres, wire up logic with visual node scripting, and open the code with AngelScript whenever you are curious what is underneath.
+              </p>
             </div>
           </div>
-          <div class="landing-hero__image">
-            <img src="../images/enjin_1.jpg" alt="TEGE Editor showing the viewport with scene hierarchy, inspector panels, and a 3D scene">
-          </div>
-        </section>
 
-        <!-- ============ WHAT TEGE IS ============ -->
-        <section class="landing-trust" id="about-tege">
-          <h2 class="landing-section__heading">What TEGE Is</h2>
-          <div class="landing-trust__grid">
-            <div class="landing-trust__col landing-trust__col--is">
-              <h3>TEGE is</h3>
-              <ul>
-                <li>A complete game engine with editor, scripting, physics, and export</li>
-                <li>Capable of shipping real games to Windows and HTML5 today</li>
-                <li>Designed with accessibility built in - colorblind modes, screen reader, switch access</li>
-                <li>Free to download and use during the preview period</li>
-              </ul>
-            </div>
-            <div class="landing-trust__col landing-trust__col--not">
-              <h3>TEGE is not</h3>
-              <ul>
-                <li>A Unity or Unreal replacement - TEGE targets specific creative niches</li>
-                <li>Production-stable yet - this is an alpha preview with known rough edges</li>
-                <li>A team project - TEGE is built by a single developer (bus factor: 1)</li>
-                <li>Mobile or console ready - focus is PC and web for now</li>
-                <li>A finished product - expect breaking changes between releases</li>
-              </ul>
-            </div>
-          </div>
-          <p class="landing-trust__note">
-            <strong>License:</strong> TEGE is released under the <a href="https://github.com/MartyChouette/TEGE/blob/main/LICENSE" target="_blank" rel="noopener">Business Source License 1.1</a>, which converts to Apache 2.0 after 4 years. Free to use for making and selling games.
-          </p>
-        </section>
-
-        <!-- ============ SCREENSHOTS ============ -->
-        <section class="landing-section" id="screenshots">
-          <h2 class="landing-section__heading">Screenshots</h2>
-          <div class="screenshot-gallery">
-            <figure class="screenshot-gallery__item">
-              <img src="../images/enjin_1.jpg"
-                   alt="TEGE Editor - viewport with scene hierarchy and inspector panels"
-                   class="screenshot-gallery__img"
-                   tabindex="0"
-                   role="button"
-                   aria-label="View full-size screenshot of the TEGE editor interface">
-              <figcaption></figcaption>
-            </figure>
-            <figure class="screenshot-gallery__item">
-              <img src="../images/enjin2.jpg"
-                   alt="TEGE Engine - 3D scene with PBR materials and lighting"
-                   class="screenshot-gallery__img"
-                   tabindex="0"
-                   role="button"
-                   aria-label="View full-size screenshot of PBR rendering">
-              <figcaption></figcaption>
-            </figure>
-            <figure class="screenshot-gallery__item">
-              <img src="../images/enjin3.png"
-                   alt="TEGE Engine - 3D scene with primitive shapes and real-time shadows"
-                   class="screenshot-gallery__img"
-                   tabindex="0"
-                   role="button"
-                   aria-label="View full-size screenshot of 3D primitives scene">
-              <figcaption></figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <!-- ============ FEATURES ============ -->
-        <section class="landing-section" id="features">
-          <h2 class="landing-section__heading">Features</h2>
-
-          <div class="landing-features-grid">
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <!-- Trust & Philosophy -->
+          <div class="tege-trust-grid">
+            <div class="tege-trust-card tege-trust-card--is">
+              <div class="tege-trust-title tege-trust-title--is">
+                <svg class="tege-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Opinions We Build By
               </div>
-              <h3>Drag &amp; Drop Pipeline</h3>
-              <p>Import assets by dropping them into the editor. Meshes, textures, splines, bones, animations - drag in, wire up, done. No manual conversion steps or import dialogs.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/><path d="M6 12h12"/></svg>
-              </div>
-              <h3>Plug &amp; Play Input</h3>
-              <p>Design your control scheme, bind it, ship it. Keyboard, mouse, gamepad - input just works. Remappable by default so players can change bindings without you writing extra code.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              </div>
-              <h3>PC &amp; Web First</h3>
-              <p>Windows and HTML5 are first-class build targets today. Ship desktop games or publish straight to the browser. Mac, Linux, Android, and iOS are on the roadmap.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-              </div>
-              <h3>Rendering for Creatives</h3>
-              <p>PBR, ray tracing, retro PSX effects, CRT filters, cel shading - pick an aesthetic direction and the renderer meets you there. Built for visual intent, not technical gatekeeping.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              </div>
-              <h3>Weather, Time &amp; Seasons</h3>
-              <p>Unified system for time of day, weather, seasons, and calendar. One clock drives lighting, fog, rain, snow, wind, and vegetation changes. Set up a living world, not a static skybox.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7"/></svg>
-              </div>
-              <h3>Use What You Need</h3>
-              <p>Modular architecture. Use the full editor or pull individual subsystems into your own project - just the 2D renderer, just the physics, just the scripting host. No forced dependencies.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <h3>Performance First</h3>
-              <p>Measured in ms/frame, not feelings. Stable frame times, fast iteration, GPU-driven rendering with occlusion culling and async compute. No surprises when you scale up.</p>
-            </div>
-
-            <div class="landing-feature-card">
-              <div class="landing-feature-card__icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <h3>Tiny Footprint</h3>
-              <p>Small engine, small builds. The editor fits in a ZIP. Exported games ship lean. You're distributing your game, not a bloated runtime.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============ GETTING STARTED ============ -->
-        <section class="landing-section" id="getting-started">
-          <h2 class="landing-section__heading">Getting Started</h2>
-
-          <div class="landing-getting-started">
-            <div class="landing-getting-started__card">
-              <h3>System Requirements</h3>
-              <ul>
-                <li>Windows 10/11 (64-bit)</li>
-                <li>GPU with Vulkan 1.3 support</li>
-                <li>4 GB RAM minimum</li>
-                <li>~200 MB disk space</li>
+              <ul class="tege-trust-list">
+                <li>Aesthetics come first: One-click visual style presets & customizable post-processing.</li>
+                <li>Accessibility comes first: Vision, motor, cognitive, & audio features in every videogame.</li>
+                <li>Making videogames should be demystified: Starter templates, drag-and-drop editing, & visual node scripting.</li>
+                <li>Shipping should be simple: One-click export for Windows desktop and WebGPU web browser.</li>
               </ul>
             </div>
 
-            <div class="landing-getting-started__card">
-              <h3>Quick Start (10 minutes)</h3>
-              <ol>
-                <li>Download the TEGE Preview from <a href="https://martychouette.itch.io/tege" target="_blank" rel="noopener">itch.io</a> or <a href="https://github.com/MartyChouette/TEGE/releases" target="_blank" rel="noopener">GitHub Releases</a></li>
-                <li>Extract the ZIP to any folder</li>
-                <li>Run <code>EnjinEditor.exe</code></li>
-                <li>Pick a template from 48 starters</li>
-                <li>Place an entity, add a component, press Play</li>
-              </ol>
-            </div>
-
-            <div class="landing-getting-started__card">
-              <h3>Build from Source</h3>
-<pre><code>git clone https://github.com/MartyChouette/TEGE.git
-cd enjin
-mkdir build &amp;&amp; cd build
-cmake ..
-cmake --build . --config Release</code></pre>
-              <p class="landing-getting-started__note">Requires a C++20 compiler, Vulkan SDK, and CMake 3.20+.</p>
+            <div class="tege-trust-card tege-trust-card--not">
+              <div class="tege-trust-title tege-trust-title--not">
+                <svg class="tege-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Things We Refuse to Do
+              </div>
+              <ul class="tege-trust-list">
+                <li>Overwhelming enterprise menus and intimidating setup screens.</li>
+                <li>Requiring shader math just to make a stylized retro videogame.</li>
+                <li>Surprise royalty fees or restrictive commercial terms.</li>
+                <li>Locking accessibility features behind external plugins or expensive middleware.</li>
+              </ul>
             </div>
           </div>
 
-          <p class="landing-section__link">
-            For detailed documentation, component references, and scripting API, see the <a href="manual.html">User Manual</a>.
-          </p>
-        </section>
-
-        <!-- ============ DOWNLOAD ============ -->
-        <section class="landing-download" id="download">
-          <h2 class="landing-download__heading">Ready to try it?</h2>
-          <p class="landing-download__sub">Free to use under the Business Source License 1.1.<br>Make and sell games with TEGE - no strings attached.</p>
-          <div class="landing-download__buttons">
-            <a href="https://martychouette.itch.io/tege" class="cta-button cta-primary cta-button--lg" target="_blank" rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download Preview
-            </a>
-            <a href="https://github.com/MartyChouette/TEGE" class="cta-button cta-secondary cta-button--lg" target="_blank" rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              View on GitHub
+          <!-- License Banner -->
+          <div class="tege-license-banner">
+            <div class="tege-license-text">
+              <strong>License:</strong> TEGE is released under the <a href="https://github.com/MartyChouette/TEGE/blob/main/LICENSE" target="_blank" rel="noopener">Business Source License 1.1 (BSL 1.1)</a>. Free to use for making and selling videogames, converting to pure Apache 2.0 open source after 4 years.
+            </div>
+            <a href="https://github.com/MartyChouette/TEGE/blob/main/LICENSE" class="tege-btn tege-btn--secondary tege-btn--sm" target="_blank" rel="noopener">
+              View License
             </a>
           </div>
-          <p class="landing-download__version">Preview &middot; Windows x64 &middot; ~150 MB</p>
         </section>
 
-        <!-- ============ FOOTER ============ -->
-        <footer class="landing-footer">
-          <div class="landing-footer__inner">
-            <div class="landing-footer__brand">
-              <span class="landing-footer__logo">TEGE</span>
-              <span class="landing-footer__tagline">The Enjin Game Engine</span>
+
+        <!-- ===================================================================
+             TAB 2: FEATURES
+             =================================================================== -->
+        <section id="panel-features" class="tege-tab-panel" role="tabpanel" aria-labelledby="tab-features">
+          
+          <div class="tege-section-header">
+            <span class="tege-section-label">Feature Breakdown</span>
+            <h2 class="tege-section-title">Engine Features & Creator Tools</h2>
+            <p class="tege-section-desc">
+              From one-click art presets and visual scripting to universal accessibility and one-click web export.
+            </p>
+          </div>
+
+          <!-- Section 1: Graphics & Art Styles -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🎨 1. Aesthetics & Preset Rendering Engine</h3>
+          <div class="tege-grid-3">
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+              </div>
+              <h4 class="tege-card__title">8 One-Click Art Presets</h4>
+              <p class="tege-card__desc">
+                Realistic PBR, Blinn-Phong, Hand-Painted, Cel/Toon, PS1 Low-Poly, Pixel Art, NPR Sketch, and Analog CRT effects. Switch render modes instantly in the editor.
+              </p>
             </div>
-            <div class="landing-footer__links">
-              <a href="https://github.com/MartyChouette/TEGE" target="_blank" rel="noopener">GitHub</a>
-              <a href="docs.html">Documentation</a>
-              <a href="manual.html">User Manual</a>
-              <a href="engine-analysis.html">Technical Analysis</a>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+              </div>
+              <h4 class="tege-card__title">Ray Tracing & Path Tracer <span style="font-size: 0.7em; opacity: 0.7;">(Experimental)</span></h4>
+              <p class="tege-card__desc">
+                Experimental, in progress: Vulkan Ray Tracing backend with hardware acceleration, SVGF spatio-temporal filtering, and Intel OIDN AI denoising.
+              </p>
             </div>
-            <div class="landing-footer__meta">
-              <p>Licensed under <a href="https://github.com/MartyChouette/TEGE/blob/main/LICENSE" target="_blank" rel="noopener">BSL 1.1</a> - converts to Apache 2.0 after 4 years.</p>
-              <p>Built by Marty Scott.</p>
+
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/></svg>
+              </div>
+              <h4 class="tege-card__title">30+ Post-Processing FX</h4>
+              <p class="tege-card__desc">
+                Bloom, depth of field, motion blur, film grain, PS1 jitter, pixelation, halftone, anime outlines, and chromatic aberration tuned for art direction.
+              </p>
             </div>
           </div>
-        </footer>
+
+          <!-- Presets Grid Showcase -->
+          <div class="tege-presets-grid">
+            <div class="tege-preset-pill">
+              <div class="tege-preset-name">Realistic PBR</div>
+              <div class="tege-preset-tag">Cascaded Shadows & Probes</div>
+            </div>
+            <div class="tege-preset-pill">
+              <div class="tege-preset-name">Low-Poly PS1</div>
+              <div class="tege-preset-tag">Vertex Jitter & Affine Texture</div>
+            </div>
+            <div class="tege-preset-pill">
+              <div class="tege-preset-name">Toon / Cel Shaded</div>
+              <div class="tege-preset-tag">Ramp Shading & Ink Outlines</div>
+            </div>
+            <div class="tege-preset-pill">
+              <div class="tege-preset-name">Hand-Painted</div>
+              <div class="tege-preset-tag">Soft Light & Brush Texturing</div>
+            </div>
+          </div>
+
+          <!-- Section 2: Beginner Friendly & Pro Logic -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">⚡ 2. Visual Scripting, AngelScript & ECS</h3>
+          <div class="tege-grid-3">
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--warm">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <h4 class="tege-card__title">Visual Node Scripting</h4>
+              <p class="tege-card__desc">
+                Connect logic visually without writing code. Perfect for beginners and artists designing interactions, quest triggers, and state machines.
+              </p>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h4 class="tege-card__title">720+ AngelScript API Bindings</h4>
+              <p class="tege-card__desc">
+                C++ performance with rapid script hot-reloading. Programmers get complete control over gameplay, custom components, and math.
+              </p>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <h4 class="tege-card__title">Flash API & Transpiler</h4>
+              <p class="tege-card__desc">
+                Built-in Flash API compatibility layer, AS2/AS3 transpiler, and native Newgrounds.io integration for instant web revival videogames.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 3: Physics & Gameplay -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🎮 3. Physics & Character Controllers</h3>
+          <div class="tege-grid-3">
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              </div>
+              <h4 class="tege-card__title">Jolt 3D & Box2D Physics</h4>
+              <p class="tege-card__desc">
+                Industry standard Jolt Physics (3D) and Box2D (2D) backends with support for ragdolls, destructibles, vehicles, and 6 joint types.
+              </p>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--warm">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <h4 class="tege-card__title">6 Character Controller Types</h4>
+              <p class="tege-card__desc">
+                Pre-built controllers out-of-the-box: 2D Platformer, 2D Top-Down, 3D FPS, 3D Third Person, 3D Top-Down, and Vehicle.
+              </p>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+              </div>
+              <h4 class="tege-card__title">Node Graph Editors</h4>
+              <p class="tege-card__desc">
+                Visual node graphs for Shader Editing (54 node types), Behavior Trees, Dialogue Trees, Quest Progression, and Audio Events.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 4: Accessibility -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">♿ 4. Universal Accessibility Suite</h3>
+          <div class="tege-grid-4">
+            <div class="tege-card">
+              <h4 class="tege-card__title tege-card__title--green">Vision</h4>
+              <ul class="tege-card__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 8 Colorblind correction modes</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> High-contrast themes</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dynamic font scaling</li>
+              </ul>
+            </div>
+
+            <div class="tege-card">
+              <h4 class="tege-card__title tege-card__title--green">Motor</h4>
+              <ul class="tege-card__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full input remapping</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One-handed control presets</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dwell click & switch access</li>
+              </ul>
+            </div>
+
+            <div class="tege-card">
+              <h4 class="tege-card__title tege-card__title--blue">Cognitive</h4>
+              <ul class="tege-card__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> OpenDyslexic font mode</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Reduced motion toggles</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Configurable content warnings</li>
+              </ul>
+            </div>
+
+            <div class="tege-card">
+              <h4 class="tege-card__title tege-card__title--warm">Audio & Comm</h4>
+              <ul class="tege-card__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Built-in Screen Reader</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Subtitles with speaker tags</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audio-visual indicators</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ===================================================================
+             TAB 3: SHOWCASE & DEMO
+             =================================================================== -->
+        <section id="panel-showcase" class="tege-tab-panel" role="tabpanel" aria-labelledby="tab-showcase">
+          
+          <div class="tege-section-header">
+            <span class="tege-section-label">Interactive Experience</span>
+            <h2 class="tege-section-title">Playable Demo Scene & Gallery</h2>
+            <p class="tege-section-desc">
+              Play a demo scene made in TEGE right in your browser, or explore screenshots of the editor interface.
+            </p>
+          </div>
+
+          <!-- WebGPU Demo Banner Card -->
+          <div class="tege-demo-hero-card">
+            <span class="tege-demo-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              Live WebGPU Engine Runtime
+            </span>
+            <h3 class="tege-demo-title">Play a Demo Scene in Your Browser</h3>
+            <p class="tege-demo-sub">
+              A demo scene built in TEGE, running on the engine's WebGPU player compiled to WebAssembly. This is what your videogame looks like after one-click web export.
+            </p>
+            <div>
+              <a href="demo/index.html" class="tege-btn tege-btn--primary tege-btn--lg" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Launch Demo Scene Fullscreen
+              </a>
+            </div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); margin-top: 1rem;">
+              Requires a WebGPU-enabled browser (Chrome or Edge 113+ recommended).
+            </p>
+          </div>
+
+          <!-- Screenshot Gallery -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📸 Editor & Engine Screenshots</h3>
+          <div class="tege-gallery-grid">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin_1.jpg" data-alt="TEGE Editor Workspace with Scene Viewport and Hierarchy">
+              <img src="../images/enjin_1.jpg" alt="TEGE Editor Workspace" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>TEGE Editor Workspace</strong> - Viewport, 20+ panel layout, hierarchy & inspector.
+              </div>
+            </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin2.jpg" data-alt="Lit 3D Scene rendered in TEGE with materials and environment probes">
+              <img src="../images/enjin2.jpg" alt="3D Environment Viewport" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Lit 3D Environment</strong> - Real-time PBR material shading & light probes.
+              </div>
+            </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin3.png" data-alt="3D Scene showing real-time cascaded shadow maps and primitives">
+              <img src="../images/enjin3.png" alt="Real-time Shadow Rendering" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Real-time Shadows</strong> - Cascaded directional shadow maps & dynamic lights.
+              </div>
+            </div>
+          </div>
+
+          <!-- Starter Templates Grid -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📦 Starter Project Templates</h3>
+          <div class="tege-grid-4">
+            <div class="tege-card">
+              <h4 class="tege-card__title">2D Platformer</h4>
+              <p class="tege-card__desc">Complete with Box2D character controller, tilemap importer, and coyote time mechanics.</p>
+            </div>
+            <div class="tege-card">
+              <h4 class="tege-card__title">3D First Person</h4>
+              <p class="tege-card__desc">FPS controller, weapon sway, raycast shooting, dynamic lights, and sound events.</p>
+            </div>
+            <div class="tege-card">
+              <h4 class="tege-card__title">PS1 Retro Horror</h4>
+              <p class="tege-card__desc">Pre-configured vertex jitter, affine texture mapping, fixed cameras, and tank controls.</p>
+            </div>
+            <div class="tege-card">
+              <h4 class="tege-card__title">Top-Down Action RPG</h4>
+              <p class="tege-card__desc">3D top-down camera, quest system graph, dialogue trees, and Jolt physics collisions.</p>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ===================================================================
+             TAB 4: DOCS & DOWNLOAD
+             =================================================================== -->
+        <section id="panel-docs" class="tege-tab-panel" role="tabpanel" aria-labelledby="tab-docs">
+          
+          <div class="tege-section-header">
+            <span class="tege-section-label">Get Started Today</span>
+            <h2 class="tege-section-title">Download TEGE & Documentation</h2>
+            <p class="tege-section-desc">
+              Download the Windows preview build, read the 10-minute quickstart guide, or browse full API documentation.
+            </p>
+          </div>
+
+          <!-- Download Hero Card -->
+          <div class="tege-download-hero">
+            <h2>TEGE 0.9.7 Preview Release</h2>
+            <p>
+              Free to download and use under the Business Source License 1.1.<br>Make and sell commercial videogames with zero upfront costs.
+            </p>
+            <div class="tege-hero__ctas">
+              <a href="TEGE-0.9.7.zip" class="tege-btn tege-btn--primary tege-btn--lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download for Windows (12 MB)
+              </a>
+              <a href="demo/index.html" class="tege-btn tege-btn--blue tege-btn--lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Play the Demo Scene
+              </a>
+              <a href="https://github.com/MartyChouette/TEGE" class="tege-btn tege-btn--secondary tege-btn--lg" target="_blank" rel="noopener noreferrer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub Repository
+              </a>
+            </div>
+          </div>
+
+          <!-- 10-Minute Onboarding Workflow -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🚀 Quickstart (10 minutes)</h3>
+          <div class="tege-stepper">
+            <div class="tege-step-card">
+              <span class="tege-step-num">STEP 1</span>
+              <h4 class="tege-step-title">Download & Extract</h4>
+              <p class="tege-step-desc">Download TEGE-0.9.7.zip (12 MB). Extract and launch the standalone editor binary.</p>
+            </div>
+            <div class="tege-step-card">
+              <span class="tege-step-num">STEP 2</span>
+              <h4 class="tege-step-title">Pick a Template</h4>
+              <p class="tege-step-desc">Choose a starter project (2D Platformer, FPS, Retro PS1, Top-Down, etc.).</p>
+            </div>
+            <div class="tege-step-card">
+              <span class="tege-step-num">STEP 3</span>
+              <h4 class="tege-step-title">Script & Design</h4>
+              <p class="tege-step-desc">Use AngelScript or visual node scripting. Pick an Art Style preset from the dropdown.</p>
+            </div>
+            <div class="tege-step-card">
+              <span class="tege-step-num">STEP 4</span>
+              <h4 class="tege-step-title">Export & Ship</h4>
+              <p class="tege-step-desc">Build a standalone Windows executable or export to WebGPU HTML5 web package with 1 click.</p>
+            </div>
+          </div>
+
+          <!-- System Requirements -->
+          <div class="tege-reqs-card">
+            <h3 style="font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem;">💻 Hardware & System Requirements</h3>
+            <div class="tege-reqs-grid">
+              <div class="tege-reqs-col">
+                <h4>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  Windows Desktop Requirements
+                </h4>
+                <ul>
+                  <li><strong>OS:</strong> Windows 10 or Windows 11 (64-bit)</li>
+                  <li><strong>Graphics:</strong> Dedicated GPU with Vulkan 1.3 support</li>
+                  <li><strong>RAM:</strong> 4 GB RAM minimum</li>
+                  <li><strong>Storage:</strong> ~250 MB disk space</li>
+                </ul>
+              </div>
+              <div class="tege-reqs-col">
+                <h4>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  WebGPU Browser Requirements
+                </h4>
+                <ul>
+                  <li><strong>Supported Browsers:</strong> Chrome 113+, Edge 113+</li>
+                  <li><strong>Experimental:</strong> Firefox & Safari WebGPU flags</li>
+                  <li><strong>WASM:</strong> WebAssembly execution enabled</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Documentation Links Hub -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📚 Documentation & Resources</h3>
+          <div class="tege-grid-3">
+            <div class="tege-card">
+              <div class="tege-card__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <h4 class="tege-card__title">Full API Documentation</h4>
+              <p class="tege-card__desc">Complete C++ and AngelScript API reference covering every component, rendering pass, and event.</p>
+              <div style="margin-top: 1rem;">
+                <a href="docs.html" class="tege-btn tege-btn--secondary tege-btn--sm">View API Docs &rarr;</a>
+              </div>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <h4 class="tege-card__title">User Manual & Guides</h4>
+              <p class="tege-card__desc">Step-by-step editor walkthroughs, accessibility configuration guides, and asset pipeline instructions.</p>
+              <div style="margin-top: 1rem;">
+                <a href="manual.html" class="tege-btn tege-btn--secondary tege-btn--sm">Read Manual &rarr;</a>
+              </div>
+            </div>
+
+            <div class="tege-card">
+              <div class="tege-card__icon tege-card__icon--warm">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h4 class="tege-card__title">Source Build Guide</h4>
+              <p class="tege-card__desc">Instructions for building TEGE from source code with CMake, MSVC, Clang, or GCC on Windows and Linux.</p>
+              <div style="margin-top: 1rem;">
+                <a href="https://github.com/MartyChouette/TEGE/blob/main/docs/BUILD.md" class="tege-btn tege-btn--secondary tege-btn--sm" target="_blank" rel="noopener">Build Guide &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </section>
 
       </div><!-- .content-wrapper -->
     </main>
   </div><!-- .site-container -->
 
-  <!-- Lightbox -->
-  <div class="enjin-lightbox" id="lightbox" role="dialog" aria-label="Image viewer" aria-modal="true">
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="tege-footer">
+    <div class="tege-footer__container">
+      <div class="tege-footer__brand">
+        <img src="../images/tege-icon-32.png" alt="TEGE Engine Logo" width="24" height="24" style="border-radius: 4px;">
+        <span style="font-weight: 700; color: #fff;">TEGE</span>
+        <span style="color: #98a0af; font-size: 0.85rem;">The Opinionated Game Engine</span>
+      </div>
+      <div class="tege-footer__links">
+        <a href="docs.html">API Docs</a>
+        <a href="manual.html">User Manual</a>
+        <a href="demo/index.html">Demo Scene</a>
+        <a href="https://github.com/MartyChouette/TEGE" target="_blank" rel="noopener">GitHub</a>
+        <a href="../kb/index.html">VG101 KB</a>
+      </div>
+      <div class="tege-footer__copy">
+        Licensed under <a href="https://github.com/MartyChouette/TEGE/blob/main/LICENSE" target="_blank" rel="noopener" style="color: #8fb1ff;">BSL 1.1</a> (converts to Apache 2.0). Built by Marty Scott.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div class="enjin-lightbox" id="lightbox" role="dialog" aria-label="Screenshot Viewer" aria-modal="true">
     <button class="enjin-lightbox__close" aria-label="Close image viewer">&times;</button>
     <img src="" alt="" class="enjin-lightbox__image">
     <div class="enjin-lightbox__caption"></div>
   </div>
 
+  <!-- ==================== JAVASCRIPT TAB SWITCHER & LIGHTBOX ==================== -->
   <script>
-    // Mobile nav toggle
-    const toggle = document.querySelector('.mobile-nav-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabButtons = document.querySelectorAll('.tege-tab-btn');
+      const tabPanels = document.querySelectorAll('.tege-tab-panel');
+      const mobileToggle = document.querySelector('.tege-mobile-toggle');
+      const navTabs = document.querySelector('.tege-tabs-nav');
 
-    function closeSidebar() {
-      sidebar.classList.remove('mobile-open');
-      overlay.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
+      // Function to activate tab by ID
+      function activateTab(tabId, updateHash = true) {
+        if (!tabId) return;
+        const targetBtn = document.querySelector(`.tege-tab-btn[data-tab="${tabId}"]`);
+        const targetPanel = document.getElementById(`panel-${tabId}`);
 
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        const open = sidebar.classList.toggle('mobile-open');
-        overlay.classList.toggle('active', open);
-        toggle.setAttribute('aria-expanded', String(open));
+        if (targetBtn && targetPanel) {
+          // Deactivate all
+          tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          });
+          tabPanels.forEach(panel => panel.classList.remove('active'));
+
+          // Activate target
+          targetBtn.classList.add('active');
+          targetBtn.setAttribute('aria-selected', 'true');
+          targetPanel.classList.add('active');
+
+          // Close mobile menu if open
+          if (navTabs) navTabs.classList.remove('mobile-open');
+
+          if (updateHash) {
+            history.replaceState(null, null, `#${tabId}`);
+          }
+        }
+      }
+
+      // Event listener for tab button clicks
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const tabId = btn.getAttribute('data-tab');
+          activateTab(tabId);
+        });
       });
-    }
-    if (overlay) overlay.addEventListener('click', closeSidebar);
 
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+      // Mobile Nav Toggle
+      if (mobileToggle && navTabs) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navTabs.classList.toggle('mobile-open');
+          mobileToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
 
-    function updateActiveNav() {
-      const scrollY = window.scrollY + 120;
-      let current = '';
-      sections.forEach(section => {
-        if (section.offsetTop <= scrollY) {
-          current = section.getAttribute('id');
+      // Initial Hash Routing
+      function handleHashChange() {
+        const hash = window.location.hash.replace('#', '');
+        if (['overview', 'features', 'showcase', 'docs'].includes(hash)) {
+          activateTab(hash, false);
+        }
+      }
+      handleHashChange();
+      window.addEventListener('hashchange', handleHashChange);
+
+      // Lightbox Logic
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = lightbox.querySelector('.enjin-lightbox__image');
+      const lbCaption = lightbox.querySelector('.enjin-lightbox__caption');
+      const lbClose = lightbox.querySelector('.enjin-lightbox__close');
+
+      document.querySelectorAll('.screenshot-gallery__img-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const imgSrc = trigger.getAttribute('data-img');
+          const imgAlt = trigger.getAttribute('data-alt');
+          lbImg.src = imgSrc;
+          lbImg.alt = imgAlt || '';
+          lbCaption.textContent = imgAlt || '';
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          lbClose.focus();
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (lbClose) lbClose.addEventListener('click', closeLightbox);
+      if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
         }
       });
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-      });
-    }
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
-    updateActiveNav();
 
-    // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = lightbox.querySelector('.enjin-lightbox__image');
-    const lbCaption = lightbox.querySelector('.enjin-lightbox__caption');
-    const lbClose = lightbox.querySelector('.enjin-lightbox__close');
+      // Page Style & Accessibility Controls
+      const root = document.documentElement;
+      const PREFS_KEY = 'tege-page-prefs';
 
-    document.querySelectorAll('.screenshot-gallery__img').forEach(img => {
-      function openLightbox() {
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        const caption = img.closest('figure')?.querySelector('figcaption');
-        lbCaption.textContent = caption ? caption.textContent : '';
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        lbClose.focus();
+      function loadPrefs() {
+        try {
+          return JSON.parse(localStorage.getItem(PREFS_KEY) || '{}');
+        } catch (e) {
+          return {};
+        }
       }
-      img.addEventListener('click', openLightbox);
-      img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); } });
+
+      function savePrefs(prefs) {
+        try {
+          localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        } catch (e) { /* storage blocked: prefs still apply this visit */ }
+      }
+
+      const prefs = loadPrefs();
+      const styleButtons = document.querySelectorAll('.tege-style-btn');
+      const a11yButtons = document.querySelectorAll('.tege-a11y-btn');
+
+      function applyTheme(theme) {
+        root.classList.remove('theme-dusk', 'theme-paper');
+        if (theme === 'dusk' || theme === 'paper') {
+          root.classList.add('theme-' + theme);
+        }
+        styleButtons.forEach(btn => {
+          btn.setAttribute('aria-pressed', String(btn.dataset.theme === (theme || 'sage')));
+        });
+      }
+
+      styleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          prefs.theme = btn.dataset.theme;
+          applyTheme(prefs.theme);
+          savePrefs(prefs);
+        });
+      });
+
+      a11yButtons.forEach(btn => {
+        const key = btn.dataset.a11y;
+        // Sync button state with prefs applied by the head script
+        btn.setAttribute('aria-pressed', String(!!prefs[key]));
+
+        btn.addEventListener('click', () => {
+          prefs[key] = !prefs[key];
+          root.classList.toggle('a11y-' + key, prefs[key]);
+          btn.setAttribute('aria-pressed', String(prefs[key]));
+          savePrefs(prefs);
+        });
+      });
+
+      // Sync style buttons with the theme applied by the head script
+      applyTheme(prefs.theme);
     });
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    lbClose.addEventListener('click', closeLightbox);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
   </script>
 </body>
 </html>
