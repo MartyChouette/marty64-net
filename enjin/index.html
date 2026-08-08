@@ -22,8 +22,9 @@
       try {
         var prefs = JSON.parse(localStorage.getItem('tege-page-prefs') || '{}');
         var root = document.documentElement;
-        if (prefs.theme === 'dusk' || prefs.theme === 'paper') {
-          root.classList.add('theme-' + prefs.theme);
+        var theme = prefs.theme || 'dusk';
+        if (theme === 'dusk' || theme === 'paper') {
+          root.classList.add('theme-' + theme);
         }
         ['font', 'text', 'contrast', 'motion'].forEach(function (key) {
           if (prefs[key]) root.classList.add('a11y-' + key);
@@ -81,10 +82,10 @@
     <div class="tege-page-controls__container">
       <span class="tege-page-controls__label">One click changes the whole look. Try it on this page:</span>
       <div class="tege-page-controls__group" role="group" aria-label="Page art style">
-        <button class="tege-style-btn" data-theme="sage" aria-pressed="true">
+        <button class="tege-style-btn" data-theme="sage" aria-pressed="false">
           <span class="tege-swatch" style="--sw: #5f9b5c;" aria-hidden="true"></span>Sage
         </button>
-        <button class="tege-style-btn" data-theme="dusk" aria-pressed="false">
+        <button class="tege-style-btn" data-theme="dusk" aria-pressed="true">
           <span class="tege-swatch" style="--sw: #2d2f3d;" aria-hidden="true"></span>Dusk
         </button>
         <button class="tege-style-btn" data-theme="paper" aria-pressed="false">
@@ -136,25 +137,16 @@
               </div>
 
               <div class="tege-hero__tech-pills">
-                <span class="tege-tech-pill">🎨 8 One-Click Art Styles</span>
-                <span class="tege-tech-pill">♿ Accessibility Built In</span>
-                <span class="tege-tech-pill">⚡ Visual Scripting</span>
-                <span class="tege-tech-pill">🐣 Easy Drag & Drop Editor</span>
+                <span class="tege-tech-pill">8 One-Click Art Styles</span>
+                <span class="tege-tech-pill">Accessibility Built In</span>
+                <span class="tege-tech-pill">Visual Scripting</span>
+                <span class="tege-tech-pill">Easy Drag &amp; Drop Editor</span>
               </div>
             </div>
 
             <!-- Hero Editor Media Showcase -->
             <div class="tege-hero__media">
-              <img src="../images/enjin_1.jpg" alt="TEGE Game Engine Editor Workspace" class="tege-hero__img">
-              <div class="tege-hero__overlay-badge">
-                <div>
-                  <div class="tege-hero__overlay-title">Friendly Editor Workspace</div>
-                  <div class="tege-hero__overlay-desc">Simple interface designed to put art & creativity first</div>
-                </div>
-                <button class="tege-btn tege-btn--secondary tege-btn--sm screenshot-gallery__img-trigger" data-img="../images/enjin_1.jpg" data-alt="TEGE Editor Workspace">
-                  Zoom
-                </button>
-              </div>
+              <img src="../images/enjin-editor-workspace.png" alt="TEGE Game Engine Editor Workspace" class="tege-hero__img">
             </div>
           </div>
 
@@ -174,69 +166,43 @@
             </p>
           </div>
 
-          <div class="tege-grid-3">
-            <!-- Opinion 1: Aesthetics First -->
-            <div class="tege-card">
-              <div class="tege-card__icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-              </div>
-              <h3 class="tege-card__title">Aesthetics Come First</h3>
-              <p class="tege-card__desc">
-                How your videogame looks and feels is not a polish pass at the end, it is where TEGE starts. Switch between 8 handcrafted render modes (PBR, PS1 retro, hand-painted, cel-shaded, pixel art, sketch, analog CRT) from a single dropdown, no shader math required.
-              </p>
-            </div>
+          <ul class="tege-lead-list">
+            <li><strong>Every rendering style, one dropdown.</strong> Switch between PBR, PS1 retro, hand-painted, cel-shaded, pixel art, sketch, and analog CRT instantly, no shader math.</li>
+            <li><strong>Accessible options, instantly.</strong> Colorblind modes, input remapping, switch access, OpenDyslexic fonts, and a screen reader ship in every videogame by default.</li>
+            <li><strong>Beginner friendly.</strong> Start from ready-to-run genre templates, wire logic with visual nodes, and drop into AngelScript whenever you are curious what is underneath.</li>
+            <li><strong>One-click web build.</strong> Export to the browser on WebGPU and WebAssembly, or to Windows desktop, and share a playable link the moment it is ready.</li>
+          </ul>
 
-            <!-- Opinion 2: Accessibility First -->
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              </div>
-              <h3 class="tege-card__title">Accessibility Is Built In, Not Bolted On</h3>
-              <p class="tege-card__desc">
-                Every videogame made in TEGE ships with colorblind modes, full input remapping, switch access, OpenDyslexic font toggles, and screen reader support out of the box. You do not have to build any of it yourself, and every player gets to play what you make.
-              </p>
+          <!-- One Scene, Every Style -->
+          <div class="tege-section-header" style="margin-top: 3.5rem;">
+            <span class="tege-section-label">Aesthetics First</span>
+            <h2 class="tege-section-title">One Scene, Every Style</h2>
+            <p class="tege-section-desc">
+              The same scene, re-rendered by switching a single preset. Go from clean PBR to PS1 retro to cel-shaded without touching a shader.
+            </p>
+          </div>
+          <div class="tege-gallery-grid">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-scene-shiba.png" data-alt="Scene rendered with realistic PBR shading">
+              <img src="../images/enjin-scene-shiba.png" alt="PBR Preset" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Realistic PBR</strong> - Physically based shading with soft shadows.</div>
             </div>
-
-            <!-- Opinion 3: Demystified -->
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--warm">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-              <h3 class="tege-card__title">Making Videogames, Demystified</h3>
-              <p class="tege-card__desc">
-                You do not need a computer science degree to make a videogame. Start from ready-to-run templates covering common genres, wire up logic with visual node scripting, and open the code with AngelScript whenever you are curious what is underneath.
-              </p>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-psx.png" data-alt="Scene rendered in PS1 retro style">
+              <img src="../images/enjin-psx.png" alt="PS1 Retro Preset" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>PS1 Retro</strong> - Vertex jitter, affine texturing, and CRT filter.</div>
+            </div>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-toon-outline.png" data-alt="Scene rendered with cel shading and ink outlines">
+              <img src="../images/enjin-toon-outline.png" alt="Cel Shaded Preset" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Cel / Toon</strong> - Ramp shading with ink outlines.</div>
             </div>
           </div>
 
-          <!-- Trust & Philosophy -->
-          <div class="tege-trust-grid">
-            <div class="tege-trust-card tege-trust-card--is">
-              <div class="tege-trust-title tege-trust-title--is">
-                <svg class="tege-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Opinions We Build By
-              </div>
-              <ul class="tege-trust-list">
-                <li>Aesthetics come first: One-click visual style presets & customizable post-processing.</li>
-                <li>Accessibility comes first: Vision, motor, cognitive, & audio features in every videogame.</li>
-                <li>Making videogames should be demystified: Starter templates, drag-and-drop editing, & visual node scripting.</li>
-                <li>Shipping should be simple: One-click export for Windows desktop and WebGPU web browser.</li>
-              </ul>
-            </div>
-
-            <div class="tege-trust-card tege-trust-card--not">
-              <div class="tege-trust-title tege-trust-title--not">
-                <svg class="tege-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                Things We Refuse to Do
-              </div>
-              <ul class="tege-trust-list">
-                <li>Overwhelming enterprise menus and intimidating setup screens.</li>
-                <li>Requiring shader math just to make a stylized retro videogame.</li>
-                <li>Surprise royalty fees or restrictive commercial terms.</li>
-                <li>Locking accessibility features behind external plugins or expensive middleware.</li>
-              </ul>
-            </div>
-          </div>
+          <!-- Opinions -->
+          <ul class="tege-lead-list">
+            <li>Aesthetics come first, not as a polish pass at the end.</li>
+            <li>Every player should be able to play what you make.</li>
+            <li>You should not need a computer science degree to start.</li>
+            <li>Shipping should be one click, with no surprise royalties.</li>
+          </ul>
 
           <!-- License Banner -->
           <div class="tege-license-banner">
@@ -264,166 +230,80 @@
           </div>
 
           <!-- Section 1: Graphics & Art Styles -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🎨 1. Aesthetics & Preset Rendering Engine</h3>
-          <div class="tege-grid-3">
-            <div class="tege-card">
-              <div class="tege-card__icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
-              </div>
-              <h4 class="tege-card__title">8 One-Click Art Presets</h4>
-              <p class="tege-card__desc">
-                Realistic PBR, Blinn-Phong, Hand-Painted, Cel/Toon, PS1 Low-Poly, Pixel Art, NPR Sketch, and Analog CRT effects. Switch render modes instantly in the editor.
-              </p>
-            </div>
+          <h3 class="tege-subhead">Aesthetics &amp; Preset Rendering</h3>
+          <p class="tege-prose">
+            Aesthetics come first. Switch the entire look of your videogame from a single dropdown: Realistic PBR, Blinn-Phong, Hand-Painted, Cel/Toon, PS1 Low-Poly, Pixel Art, NPR Sketch, or Analog CRT. On top sit more than 30 post-processing effects (bloom, depth of field, film grain, PS1 jitter, halftone, anime outlines, chromatic aberration) and an experimental Vulkan ray tracing and path tracing backend with SVGF filtering and Intel OIDN denoising. No shader math required.
+          </p>
 
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-              </div>
-              <h4 class="tege-card__title">Ray Tracing & Path Tracer <span style="font-size: 0.7em; opacity: 0.7;">(Experimental)</span></h4>
-              <p class="tege-card__desc">
-                Experimental, in progress: Vulkan Ray Tracing backend with hardware acceleration, SVGF spatio-temporal filtering, and Intel OIDN AI denoising.
-              </p>
+          <!-- Section 1 Gallery -->
+          <div class="tege-gallery-grid">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-psx.png" data-alt="PSX-style rendering with vertex jitter, affine texturing, and CRT screen">
+              <img src="../images/enjin-psx.png" alt="PS1 Retro Preset" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>PS1 Retro Preset</strong> - Vertex jitter, affine texturing, and CRT filter.</div>
             </div>
-
-            <div class="tege-card">
-              <div class="tege-card__icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/></svg>
-              </div>
-              <h4 class="tege-card__title">30+ Post-Processing FX</h4>
-              <p class="tege-card__desc">
-                Bloom, depth of field, motion blur, film grain, PS1 jitter, pixelation, halftone, anime outlines, and chromatic aberration tuned for art direction.
-              </p>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-toon-outline.png" data-alt="Cel-shaded scene with ink outlines">
+              <img src="../images/enjin-toon-outline.png" alt="Cel / Toon Preset" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Cel / Toon Preset</strong> - Ramp shading with ink outlines.</div>
             </div>
-          </div>
-
-          <!-- Presets Grid Showcase -->
-          <div class="tege-presets-grid">
-            <div class="tege-preset-pill">
-              <div class="tege-preset-name">Realistic PBR</div>
-              <div class="tege-preset-tag">Cascaded Shadows & Probes</div>
-            </div>
-            <div class="tege-preset-pill">
-              <div class="tege-preset-name">Low-Poly PS1</div>
-              <div class="tege-preset-tag">Vertex Jitter & Affine Texture</div>
-            </div>
-            <div class="tege-preset-pill">
-              <div class="tege-preset-name">Toon / Cel Shaded</div>
-              <div class="tege-preset-tag">Ramp Shading & Ink Outlines</div>
-            </div>
-            <div class="tege-preset-pill">
-              <div class="tege-preset-name">Hand-Painted</div>
-              <div class="tege-preset-tag">Soft Light & Brush Texturing</div>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-ui-retro.png" data-alt="Retro effects panel with console presets from PS1 to Dreamcast">
+              <img src="../images/enjin-ui-retro.png" alt="Retro Effects Panel" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>One-Click Presets</strong> - Console looks from PS1 to Dreamcast.</div>
             </div>
           </div>
 
           <!-- Section 2: Beginner Friendly & Pro Logic -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">⚡ 2. Visual Scripting, AngelScript & ECS</h3>
-          <div class="tege-grid-3">
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--warm">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-              <h4 class="tege-card__title">Visual Node Scripting</h4>
-              <p class="tege-card__desc">
-                Connect logic visually without writing code. Perfect for beginners and artists designing interactions, quest triggers, and state machines.
-              </p>
-            </div>
+          <h3 class="tege-subhead">Visual Scripting, AngelScript &amp; ECS</h3>
+          <p class="tege-prose">
+            Build logic the way that fits you. Wire interactions, quest triggers, and state machines with visual node graphs, or write AngelScript against 686 API bindings with hot-reload for C++-level control over gameplay, custom components, and math.
+          </p>
 
-            <div class="tege-card">
-              <div class="tege-card__icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              </div>
-              <h4 class="tege-card__title">720+ AngelScript API Bindings</h4>
-              <p class="tege-card__desc">
-                C++ performance with rapid script hot-reloading. Programmers get complete control over gameplay, custom components, and math.
-              </p>
+          <!-- Section 2 Gallery -->
+          <div class="tege-gallery-grid">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-editor-workspace.png" data-alt="TEGE editor workspace with hierarchy, viewport, inspector, and asset browser">
+              <img src="../images/enjin-editor-workspace.png" alt="Editor Workspace" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Editor Workspace</strong> - Hierarchy, viewport, inspector, and asset browser.</div>
             </div>
-
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-              <h4 class="tege-card__title">Flash API & Transpiler</h4>
-              <p class="tege-card__desc">
-                Built-in Flash API compatibility layer, AS2/AS3 transpiler, and native Newgrounds.io integration for instant web revival videogames.
-              </p>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-ui-rendering.png" data-alt="Rendering settings panel">
+              <img src="../images/enjin-ui-rendering.png" alt="Rendering Panel" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Rendering Panel</strong> - Lighting, ray tracing, and stylized modes.</div>
+            </div>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-ui-postprocessing.png" data-alt="Post-processing settings panel">
+              <img src="../images/enjin-ui-postprocessing.png" alt="Post-Processing Panel" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Post-Processing Panel</strong> - Tone mapping, bloom, and color grading.</div>
             </div>
           </div>
 
           <!-- Section 3: Physics & Gameplay -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🎮 3. Physics & Character Controllers</h3>
-          <div class="tege-grid-3">
-            <div class="tege-card">
-              <div class="tege-card__icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-              </div>
-              <h4 class="tege-card__title">Jolt 3D & Box2D Physics</h4>
-              <p class="tege-card__desc">
-                Industry standard Jolt Physics (3D) and Box2D (2D) backends with support for ragdolls, destructibles, vehicles, and 6 joint types.
-              </p>
-            </div>
+          <h3 class="tege-subhead">Physics &amp; Character Controllers</h3>
+          <p class="tege-prose">
+            Jolt (3D) and Box2D (2D) power ragdolls, destructibles, vehicles, and six joint types. Seven character controllers ship ready to use: 2D platformer, 2D top-down, 3D FPS, 3D third person, 3D top-down, vehicle, and surface-aligned. Node graph editors cover shaders (54 node types), behavior trees, dialogue, quests, and audio events.
+          </p>
 
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--warm">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <h4 class="tege-card__title">6 Character Controller Types</h4>
-              <p class="tege-card__desc">
-                Pre-built controllers out-of-the-box: 2D Platformer, 2D Top-Down, 3D FPS, 3D Third Person, 3D Top-Down, and Vehicle.
-              </p>
+          <!-- Section 3 Gallery -->
+          <div class="tege-gallery-grid">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-scene-shiba.png" data-alt="Lit 3D scene with animated characters">
+              <img src="../images/enjin-scene-shiba.png" alt="Character Scene" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Rigged Characters</strong> - GPU skinning with real-time shadows.</div>
             </div>
-
-            <div class="tege-card">
-              <div class="tege-card__icon tege-card__icon--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-              </div>
-              <h4 class="tege-card__title">Node Graph Editors</h4>
-              <p class="tege-card__desc">
-                Visual node graphs for Shader Editing (54 node types), Behavior Trees, Dialogue Trees, Quest Progression, and Audio Events.
-              </p>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-forest-coast.png" data-alt="Forest world with terrain, foliage, and coastal water">
+              <img src="../images/enjin-forest-coast.png" alt="Open World" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>First-Person Controller</strong> - Terrain, foliage, and water to explore.</div>
+            </div>
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-snow-forest.png" data-alt="Snowy forest environment">
+              <img src="../images/enjin-snow-forest.png" alt="Environment Traversal" class="tege-gallery-img">
+              <div class="tege-gallery-caption"><strong>Seasonal Worlds</strong> - Instanced vegetation with wind and weather.</div>
             </div>
           </div>
 
           <!-- Section 4: Accessibility -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">♿ 4. Universal Accessibility Suite</h3>
-          <div class="tege-grid-4">
-            <div class="tege-card">
-              <h4 class="tege-card__title tege-card__title--green">Vision</h4>
-              <ul class="tege-card__list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 8 Colorblind correction modes</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> High-contrast themes</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dynamic font scaling</li>
-              </ul>
-            </div>
-
-            <div class="tege-card">
-              <h4 class="tege-card__title tege-card__title--green">Motor</h4>
-              <ul class="tege-card__list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full input remapping</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> One-handed control presets</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dwell click & switch access</li>
-              </ul>
-            </div>
-
-            <div class="tege-card">
-              <h4 class="tege-card__title tege-card__title--blue">Cognitive</h4>
-              <ul class="tege-card__list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> OpenDyslexic font mode</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Reduced motion toggles</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Configurable content warnings</li>
-              </ul>
-            </div>
-
-            <div class="tege-card">
-              <h4 class="tege-card__title tege-card__title--warm">Audio & Comm</h4>
-              <ul class="tege-card__list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Built-in Screen Reader</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Subtitles with speaker tags</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audio-visual indicators</li>
-              </ul>
-            </div>
-          </div>
+          <h3 class="tege-subhead">Universal Accessibility</h3>
+          <p class="tege-prose">Every videogame made in TEGE ships accessible by default, across four areas:</p>
+          <ul class="tege-lead-list">
+            <li><strong>Vision.</strong> 8 colorblind correction modes, high-contrast themes, and dynamic font scaling.</li>
+            <li><strong>Motor.</strong> Full input remapping, one-handed control presets, dwell click, and switch access.</li>
+            <li><strong>Cognitive.</strong> OpenDyslexic font mode, reduced-motion toggles, and configurable content warnings.</li>
+            <li><strong>Audio &amp; communication.</strong> Built-in screen reader, subtitles with speaker tags, and audio-visual indicators.</li>
+          </ul>
         </section>
 
 
@@ -462,19 +342,12 @@
           </div>
 
           <!-- Screenshot Gallery -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📸 Editor & Engine Screenshots</h3>
+          <h3 class="tege-subhead">Editor &amp; Engine Screenshots</h3>
           <div class="tege-gallery-grid">
-            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin_1.jpg" data-alt="TEGE Editor Workspace with Scene Viewport and Hierarchy">
-              <img src="../images/enjin_1.jpg" alt="TEGE Editor Workspace" class="tege-gallery-img">
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin2.jpg" data-alt="TEGE editor with the CRT retro filter panel and game view">
+              <img src="../images/enjin2.jpg" alt="CRT Retro Filter in the Editor" class="tege-gallery-img">
               <div class="tege-gallery-caption">
-                <strong>TEGE Editor Workspace</strong> - Viewport, 20+ panel layout, hierarchy & inspector.
-              </div>
-            </div>
-
-            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin2.jpg" data-alt="Lit 3D Scene rendered in TEGE with materials and environment probes">
-              <img src="../images/enjin2.jpg" alt="3D Environment Viewport" class="tege-gallery-img">
-              <div class="tege-gallery-caption">
-                <strong>Lit 3D Environment</strong> - Real-time PBR material shading & light probes.
+                <strong>CRT &amp; Retro Filters</strong> - Scanlines, curvature &amp; phosphor glow, tuned live in the editor.
               </div>
             </div>
 
@@ -484,28 +357,76 @@
                 <strong>Real-time Shadows</strong> - Cascaded directional shadow maps & dynamic lights.
               </div>
             </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-dither.png" data-alt="Dithering and stipple shading applied to a lit scene">
+              <img src="../images/enjin-dither.png" alt="Dithering & Stipple" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Dithering &amp; Stipple</strong> - Retro color quantization on a lit scene.
+              </div>
+            </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-bloom.png" data-alt="Scene with bloom and tone mapping">
+              <img src="../images/enjin-bloom.png" alt="Bloom & Tone Mapping" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Bloom &amp; Tone Mapping</strong> - HDR glow with exposure control.
+              </div>
+            </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-toon-outline.png" data-alt="Cel-shaded forest with ink outlines">
+              <img src="../images/enjin-toon-outline.png" alt="Cel Shading & Ink Outlines" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Cel Shading &amp; Ink Outlines</strong> - Non-photoreal stylized rendering.
+              </div>
+            </div>
+
+            <div class="tege-gallery-item screenshot-gallery__img-trigger" data-img="../images/enjin-ui-environment.png" data-alt="Environment settings panel with world time, weather, and water">
+              <img src="../images/enjin-ui-environment.png" alt="Environment Panel" class="tege-gallery-img">
+              <div class="tege-gallery-caption">
+                <strong>Environment Panel</strong> - World time, weather zones & water volumes.
+              </div>
+            </div>
           </div>
 
-          <!-- Starter Templates Grid -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📦 Starter Project Templates</h3>
-          <div class="tege-grid-4">
-            <div class="tege-card">
-              <h4 class="tege-card__title">2D Platformer</h4>
-              <p class="tege-card__desc">Complete with Box2D character controller, tilemap importer, and coyote time mechanics.</p>
-            </div>
-            <div class="tege-card">
-              <h4 class="tege-card__title">3D First Person</h4>
-              <p class="tege-card__desc">FPS controller, weapon sway, raycast shooting, dynamic lights, and sound events.</p>
-            </div>
-            <div class="tege-card">
-              <h4 class="tege-card__title">PS1 Retro Horror</h4>
-              <p class="tege-card__desc">Pre-configured vertex jitter, affine texture mapping, fixed cameras, and tank controls.</p>
-            </div>
-            <div class="tege-card">
-              <h4 class="tege-card__title">Top-Down Action RPG</h4>
-              <p class="tege-card__desc">3D top-down camera, quest system graph, dialogue trees, and Jolt physics collisions.</p>
-            </div>
+          <!-- Attention to Detail -->
+          <div class="tege-section-header" style="margin-top: 3rem;">
+            <span class="tege-section-label">Dither Patterns</span>
+            <h2 class="tege-section-title">Attention to Detail</h2>
+            <p class="tege-section-desc">
+              The same shot under a few different black-and-white dither patterns. Look up close and the difference is all in the texture.
+            </p>
           </div>
+          <div class="tege-detail-grid">
+            <figure class="tege-detail-item screenshot-gallery__img-trigger" data-img="../images/enjin-fog-forest-1.png" data-alt="Vertical line dither pattern">
+              <img src="../images/enjin-fog-forest-1.png" alt="Vertical line dither">
+              <figcaption>Vertical lines</figcaption>
+            </figure>
+            <figure class="tege-detail-item screenshot-gallery__img-trigger" data-img="../images/enjin-fog-forest-2.png" data-alt="Fine noise dither pattern">
+              <img src="../images/enjin-fog-forest-2.png" alt="Fine noise dither">
+              <figcaption>Fine noise</figcaption>
+            </figure>
+            <figure class="tege-detail-item screenshot-gallery__img-trigger" data-img="../images/enjin-fog-forest-3.png" data-alt="Hatching dither pattern">
+              <img src="../images/enjin-fog-forest-3.png" alt="Hatching dither">
+              <figcaption>Hatching</figcaption>
+            </figure>
+            <figure class="tege-detail-item screenshot-gallery__img-trigger" data-img="../images/enjin-fog-forest-4.png" data-alt="Soft dispersed dither pattern">
+              <img src="../images/enjin-fog-forest-4.png" alt="Soft dispersed dither">
+              <figcaption>Soft dispersed</figcaption>
+            </figure>
+            <figure class="tege-detail-item screenshot-gallery__img-trigger" data-img="../images/enjin-fog-forest-5.png" data-alt="Coarse scatter dither pattern">
+              <img src="../images/enjin-fog-forest-5.png" alt="Coarse scatter dither">
+              <figcaption>Coarse scatter</figcaption>
+            </figure>
+          </div>
+
+          <!-- Starter Templates -->
+          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">Starter Project Templates</h3>
+          <p class="tege-prose">Every new project can start from a genre template, wired and ready to run:</p>
+          <ul class="tege-lead-list">
+            <li><strong>2D Platformer.</strong> Box2D character controller, tilemap importer, and coyote-time mechanics.</li>
+            <li><strong>3D First Person.</strong> FPS controller, weapon sway, raycast shooting, dynamic lights, and sound events.</li>
+            <li><strong>PS1 Retro Horror.</strong> Vertex jitter, affine texture mapping, fixed cameras, and tank controls.</li>
+            <li><strong>Top-Down Action RPG.</strong> Top-down camera, quest graph, dialogue trees, and Jolt physics collisions.</li>
+          </ul>
         </section>
 
 
@@ -545,7 +466,7 @@
           </div>
 
           <!-- 10-Minute Onboarding Workflow -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">🚀 Quickstart (10 minutes)</h3>
+          <h3 class="tege-subhead">Quickstart (10 minutes)</h3>
           <div class="tege-stepper">
             <div class="tege-step-card">
               <span class="tege-step-num">STEP 1</span>
@@ -571,7 +492,7 @@
 
           <!-- System Requirements -->
           <div class="tege-reqs-card">
-            <h3 style="font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem;">💻 Hardware & System Requirements</h3>
+            <h3 style="font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem;">Hardware &amp; System Requirements</h3>
             <div class="tege-reqs-grid">
               <div class="tege-reqs-col">
                 <h4>
@@ -600,7 +521,7 @@
           </div>
 
           <!-- Documentation Links Hub -->
-          <h3 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.25rem;">📚 Documentation & Resources</h3>
+          <h3 class="tege-subhead">Documentation &amp; Resources</h3>
           <div class="tege-grid-3">
             <div class="tege-card">
               <div class="tege-card__icon">
@@ -790,12 +711,13 @@
       const a11yButtons = document.querySelectorAll('.tege-a11y-btn');
 
       function applyTheme(theme) {
+        const active = theme || 'dusk';
         root.classList.remove('theme-dusk', 'theme-paper');
-        if (theme === 'dusk' || theme === 'paper') {
-          root.classList.add('theme-' + theme);
+        if (active === 'dusk' || active === 'paper') {
+          root.classList.add('theme-' + active);
         }
         styleButtons.forEach(btn => {
-          btn.setAttribute('aria-pressed', String(btn.dataset.theme === (theme || 'sage')));
+          btn.setAttribute('aria-pressed', String(btn.dataset.theme === active));
         });
       }
 

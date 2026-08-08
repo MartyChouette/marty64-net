@@ -118,8 +118,8 @@
             <figcaption>The TEGE editor interface - hierarchy, inspector, and viewport. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
           <figure>
-            <img src="../images/enjin2.jpg" alt="TEGE Engine - 3D scene with PBR materials and lighting">
-            <figcaption>PBR rendering with Vulkan - materials, lighting, and shadows. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <img src="../images/enjin2.jpg" alt="TEGE editor with the CRT retro filter panel and game view">
+            <figcaption>CRT and retro filters tuned live in the editor: scanlines, curvature, and phosphor glow. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
         </div>
 
@@ -174,7 +174,7 @@
           </div>
           <div class="feature-card">
             <h3>Scripting</h3>
-            <p>AngelScript with TegeBehavior lifecycle, 960+ bindings, coroutines, event system, tweening, noise generation, and hot-reload.</p>
+            <p>AngelScript with TegeBehavior lifecycle, 686 bindings, coroutines, event system, tweening, noise generation, and hot-reload.</p>
           </div>
           <div class="feature-card">
             <h3>Visual Scripting</h3>
@@ -273,6 +273,21 @@
 
         <h2 id="renderer">Vulkan Renderer</h2>
 
+        <div class="section-gallery">
+          <figure>
+            <img src="../images/enjin-scene-shiba.png" alt="TEGE - lit 3D scene with real-time shadows and PBR shading">
+            <figcaption>Real-time PBR shading with dynamic lights and shadows. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-lighting-night.png" alt="TEGE - nighttime scene with spot-lit characters and retro dithering">
+            <figcaption>Nighttime atmosphere: spot-lit characters with dithering and grain. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-ui-rendering.png" alt="TEGE rendering panel - lighting, ray tracing, post-processing, and display options">
+            <figcaption>Rendering panel: lighting, ray tracing, cinematic, and stylized modes. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
+
         <h3>Core Pipeline</h3>
         <ul>
           <li>Vulkan context initialization and swapchain management</li>
@@ -352,18 +367,20 @@
 
         <div class="section-gallery">
           <figure>
-            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
-              <strong style="color:#2d2e38;">Post-Processing</strong>
-              CRT scanlines, bloom, and color grading applied to a 3D scene
-            </div>
-            <figcaption>Retro post-processing stack - CRT filter with phosphor glow. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <img src="../images/enjin-dither.png" alt="TEGE - dithering, stipple shading, and color quantization on a lit scene">
+            <figcaption>Retro post-processing: dithering, stipple shading, and color quantization. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
           <figure>
-            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
-              <strong style="color:#2d2e38;">PSX Effects</strong>
-              Flat shading, vertex snapping, and affine texturing on a 3D model
-            </div>
-            <figcaption>PSX-style rendering - flat shading with vertex jitter. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <img src="../images/enjin-psx.png" alt="TEGE - PSX-style flat shading with vertex jitter, affine texturing, and a curved CRT screen">
+            <figcaption>PSX-style rendering: vertex jitter, affine texturing, and a curved CRT screen. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-ui-postprocessing.png" alt="TEGE post-processing panel - tone mapping, bloom, color grading, and depth-based effects">
+            <figcaption>Post-processing panel: tone mapping, bloom, color grading, and depth-based effects. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-ui-retro.png" alt="TEGE retro effects panel with console presets from PS1 to Dreamcast">
+            <figcaption>Retro effects panel: console presets, vertex jitter, CRT, VHS, and dithering. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
         </div>
 
@@ -399,6 +416,25 @@
           <li>World time / day-night cycle with seasonal weather</li>
         </ul>
 
+        <div class="section-gallery">
+          <figure>
+            <img src="../images/enjin-weather-snow.png" alt="TEGE - first-person forest with real-time snowfall and fog">
+            <figcaption>Weather system: real-time snowfall over a forest with distance fog. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-daynight-sunset.png" alt="TEGE - forest at golden hour under the day-night cycle">
+            <figcaption>Day-night cycle: golden-hour sky over terrain and vegetation. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-forest-coast.png" alt="TEGE - forest world with terrain, foliage, and coastal water in the distance">
+            <figcaption>Open environments: terrain, foliage, and coastal water. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../images/enjin-ui-environment.png" alt="TEGE environment panel - world time, curvature, weather zones, and water volumes">
+            <figcaption>Environment panel: world time, curvature, weather zones, and water volumes. <span class="gallery-credit">By Marty Scott</span></figcaption>
+          </figure>
+        </div>
+
         <hr>
 
         <h2 id="ecs">Entity-Component System</h2>
@@ -415,13 +451,15 @@
 
         <p>Full component library with inspector UI. Entities are IDs, components are pure data, systems operate on component groups.</p>
 
-        <h3>Character Controllers (5 types)</h3>
+        <h3>Character Controllers (7 types)</h3>
         <ul>
           <li>2D Platformer (coyote time, input buffer, wall jump/slide)</li>
           <li>2D Top-Down (8-directional, optional dash)</li>
           <li>3D Top-Down (isometric, click-to-move)</li>
           <li>3D Third Person (orbit camera, lock-on targeting)</li>
           <li>3D First Person (head bob, crouch, dungeon crawler mode)</li>
+          <li>Vehicle (throttle, steering, suspension)</li>
+          <li>Surface-Aligned (planet gravity, walking on spherical surfaces)</li>
         </ul>
 
         <h3>Physics Components</h3>
@@ -588,7 +626,7 @@
 
         <h3>Advanced Systems</h3>
         <ul>
-          <li>Save/Load system - 10-slot persistence with quick save/load support</li>
+          <li>Save/Load system - 20-slot persistence (17 manual + 3 auto-save) with quick save/load support</li>
           <li>HUD overlay - health bars, resource bars, labels, and crosshair rendering</li>
           <li>Quest/objective tracking - start, complete, and fail quests with objective tracking</li>
           <li>Damage resistance/weakness - per-type damage multipliers</li>
@@ -925,11 +963,8 @@
 
         <div class="section-gallery">
           <figure>
-            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
-              <strong style="color:#2d2e38;">Editor Panels</strong>
-              Full editor layout - hierarchy, inspector, viewport, effects, and skybox panels
-            </div>
-            <figcaption>The complete editor workspace with ImGui panels. <span class="gallery-credit">By Marty Scott</span></figcaption>
+            <img src="../images/enjin-editor-workspace.png" alt="TEGE editor workspace - hierarchy, viewport, inspector, and asset browser panels">
+            <figcaption>The complete editor workspace: hierarchy, viewport, inspector, and asset browser. <span class="gallery-credit">By Marty Scott</span></figcaption>
           </figure>
           <figure>
             <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#e4e9e2,#d4d9d2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;color:#6d6e80;font-size:0.8rem;padding:1rem;text-align:center;">
@@ -1115,7 +1150,7 @@
           <ul>
             <li class="done">Editor GUI (Dear ImGui integration)</li>
             <li class="done">Scene hierarchy panel</li>
-            <li class="done">Entity inspector panel (50+ component types)</li>
+            <li class="done">Entity inspector panel (70+ component types)</li>
             <li class="done">Transform gizmos (ImGuizmo)</li>
             <li class="done">Entity selection via ray casting</li>
             <li class="done">Viewport panel with camera controls</li>
@@ -1205,7 +1240,7 @@
             <span class="phase-status phase-status--done">Complete</span>
           </div>
           <ul>
-            <li class="done">Character controllers (6 types)</li>
+            <li class="done">Character controllers (7 types)</li>
             <li class="done">Gravity zones</li>
             <li class="done">Temperature zones</li>
             <li class="done">Camera trigger zones</li>
@@ -1270,7 +1305,7 @@
             <span class="phase-status phase-status--done">Complete</span>
           </div>
           <ul>
-            <li class="done">Save/load system (10-slot persistence)</li>
+            <li class="done">Save/load system (20-slot persistence)</li>
             <li class="done">HUD overlay system</li>
             <li class="done">Quest/objective system</li>
             <li class="done">Damage resistance system</li>
