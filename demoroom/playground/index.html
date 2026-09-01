@@ -54,22 +54,28 @@
     };
 
     var _runtimeReady = false;
-    var _ro = new ResizeObserver(function(entries) {
-      var r = entries[0].contentRect;
+    function _syncCanvasSize() {
+      var el = document.getElementById('game-container');
       var dpr = window.devicePixelRatio || 1;
-      var w = Math.floor(r.width);
-      var h = Math.floor(r.height);
+      var w = Math.floor(el.clientWidth);
+      var h = Math.floor(el.clientHeight);
       if (w <= 0 || h <= 0) return;
       var c = document.getElementById('game-canvas');
       c.width = Math.floor(w * dpr);
       c.height = Math.floor(h * dpr);
-      if (_runtimeReady) Module._onCanvasResize(w, h, dpr);
-    });
+      if (_runtimeReady && Module._onCanvasResize) Module._onCanvasResize(w, h, dpr);
+    }
+    var _ro = new ResizeObserver(function() { _syncCanvasSize(); });
     _ro.observe(document.getElementById('game-container'));
+
+    // Belt-and-suspenders: some browsers (notably Safari) don't reliably fire
+    // ResizeObserver on fullscreen enter/exit — force a resize on the event too.
+    document.addEventListener('fullscreenchange', function() { setTimeout(_syncCanvasSize, 60); });
+    document.addEventListener('webkitfullscreenchange', function() { setTimeout(_syncCanvasSize, 60); });
 
     document.getElementById('fullscreen-btn').addEventListener('click', function() {
       var el = document.getElementById('game-container');
-      if (el.requestFullscreen) el.requestFullscreen();
+      if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
     });
