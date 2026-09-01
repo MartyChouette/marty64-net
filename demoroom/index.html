@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Keep this room out of search engines -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Demo Room</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0d10;
+      --panel: #16161c;
+      --line: #26262f;
+      --ink: #e8e8ee;
+      --muted: #9a9aa8;
+      --accent: #7b1fa2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 64px 24px 96px; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    h1 { font-size: 2.4rem; margin: 0 0 12px; font-weight: 700; }
+    .lede { color: var(--muted); max-width: 60ch; margin: 0 0 48px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card h2 { font-size: 1.1rem; margin: 0 0 6px; }
+    .card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+    .card .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    a.home { color: var(--muted); text-decoration: none; }
+    a.home:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Private // Unlisted</p>
+    <h1>Demo Room</h1>
+    <p class="lede">Work-in-progress builds and things not ready for the front page. If you got this link, you're meant to be here.</p>
+
+    <!--
+      ============================================================
+      HOW TO ADD A GAME (see _HOW-TO-ADD-A-GAME.txt for full notes)
+      ============================================================
+      1. Put the Unity WebGL build in its own folder, e.g.  demoroom/mygame/
+         (that folder should contain index.html, Build/, TemplateData/)
+      2. Copy one card block below, change the href, title, tag, and blurb.
+      3. Upload the demoroom/ folder via FTP.
+    -->
+    <div class="grid">
+
+      <!-- EXAMPLE CARD - copy this for each game, delete this comment line -->
+      <!--
+      <a class="card" href="mygame/index.html">
+        <span class="tag">Unity · WebGL</span>
+        <h2>My Game</h2>
+        <p>One-line description of the build.</p>
+      </a>
+      -->
+
+      <a class="card" href="playground/index.html">
+        <span class="tag">Enjin &middot; WebGPU</span>
+        <h2>TEGE Playground</h2>
+        <p>Engine demo: weather, bullet time (B), cloth, water, touch controls. Needs a WebGPU browser (recent Chrome/Edge, iOS 18 Safari).</p>
+      </a>
+
+      <div class="empty">
+        No builds added yet. Drop a Unity WebGL build into a subfolder
+        and add a card above.
+      </div>
+
+    </div>
+
+    <footer>
+      <a class="home" href="../index.html">&larr; marty64.net</a>
+    </footer>
+  </div>
+</body>
+</html>
