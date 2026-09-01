@@ -73,12 +73,32 @@
     document.addEventListener('fullscreenchange', function() { setTimeout(_syncCanvasSize, 60); });
     document.addEventListener('webkitfullscreenchange', function() { setTimeout(_syncCanvasSize, 60); });
 
-    document.getElementById('fullscreen-btn').addEventListener('click', function() {
+    // Toggle fullscreen, falling back to CSS pseudo-fullscreen on iPhone Safari
+    // (the Fullscreen API is unavailable there for non-video elements).
+    // Exposed on window so the engine's touch/first-touch triggers reuse it.
+    function _pseudoFS(on) {
+      document.getElementById('game-container').classList.toggle('pseudo-fullscreen', on);
+      setTimeout(_syncCanvasSize, 60);
+    }
+    window.enjinToggleFullscreen = function() {
       var el = document.getElementById('game-container');
-      if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-    });
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen || function(){}).call(document);
+        return;
+      }
+      if (el.classList.contains('pseudo-fullscreen')) { _pseudoFS(false); return; }
+      if (el.requestFullscreen) { el.requestFullscreen().catch(function(){ _pseudoFS(true); }); }
+      else if (el.webkitRequestFullscreen) { try { el.webkitRequestFullscreen(); } catch (e) { _pseudoFS(true); } }
+      else { _pseudoFS(true); }   // iPhone Safari path
+    };
+    // Engine touch/first-touch gestures want to ENTER only (never toggle off).
+    window.enjinEnterFullscreen = function() {
+      var el = document.getElementById('game-container');
+      if (document.fullscreenElement || document.webkitFullscreenElement ||
+          el.classList.contains('pseudo-fullscreen')) return;
+      window.enjinToggleFullscreen();
+    };
+    document.getElementById('fullscreen-btn').addEventListener('click', window.enjinToggleFullscreen);
   </script>
   <script src="EnjinPlayer.js"></script>
 </body>
