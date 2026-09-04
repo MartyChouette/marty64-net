@@ -1,0 +1,8 @@
+# Recursively nested packager output. A tool writing its build folder
+# inside its own source folder re-copies the previous output each run,
+# nesting one level deeper every time.
+#
+# Only the repeated level is ignored. A legitimate one-level build
+# folder (a Unity WebGL Build/, for example) still commits normally.
+**/Build/Build/
+**/MyGame/MyGame/

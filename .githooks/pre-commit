@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Blocks commits containing recursively nested directories, e.g.
+# demoroom/shells/Build/Build/Build/scripts/. These appear when a
+# packaging tool writes its output folder inside its own source folder,
+# so each run copies the previous run's output one level deeper.
+#
+# Detects any path where a directory name repeats back to back (X/X).
+
+nested=$(git diff --cached --name-only --diff-filter=ACMR \
+         | awk -F/ '{for (i=1; i<NF; i++) if ($i == $(i+1)) { print; break }}')
+
+if [ -n "$nested" ]; then
+    echo "pre-commit: refusing to commit recursively nested build paths." >&2
+    echo >&2
+    echo "$nested" | sed 's/^/  /' >&2
+    echo >&2
+    echo "A directory name repeats inside itself. This is almost always a" >&2
+    echo "packaging tool writing its output into its own source folder." >&2
+    echo >&2
+    echo "Fix: delete the nested copy, then point the tool's output" >&2
+    echo "somewhere outside the folder it reads from." >&2
+    echo >&2
+    echo "If the path is genuinely intended, commit with --no-verify." >&2
+    exit 1
+fi
+
+exit 0
