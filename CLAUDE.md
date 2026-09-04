@@ -198,7 +198,7 @@ marty64.net/
 ├── css/style.css
 ├── images/
 ├── writings/ (essays, papers, videos)
-└── kb/ (VG101 Knowledge Base)
+└── vg101/ (VG101 Knowledge Base)
     ├── index.html
     ├── css/style.css
     ├── js/main.js

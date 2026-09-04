@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iris Trimming - Design Document</title>
+<style>
+:root {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --surface2: #222240;
+  --text: #c8e6c9;
+  --text-dim: #7a9a7e;
+  --accent: #7b1fa2;
+  --accent2: #4a8c2a;
+  --border: #2a2a4a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+body { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* Navigation */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(15, 15, 26, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10; padding: 12px 24px;
+  display: flex; justify-content: center; gap: 24px;
+  font-size: 13px;
+}
+nav a {
+  color: var(--text-dim); text-decoration: none;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--text); }
+nav a.back { position: absolute; left: 24px; }
+
+/* Header */
+header {
+  margin-top: 48px; margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+h1 {
+  font-size: 2rem; font-weight: 400;
+  margin-bottom: 8px; color: #e0e0e0;
+}
+h1 span { color: var(--accent); }
+.subtitle {
+  color: var(--text-dim); font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* Sections */
+h2 {
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--accent2); margin-top: 48px; margin-bottom: 16px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  letter-spacing: 0.03em;
+}
+h3 {
+  font-size: 1rem; font-weight: 600;
+  color: #a5d6a7; margin-top: 28px; margin-bottom: 10px;
+}
+p { margin-bottom: 16px; }
+p + p { margin-top: 0; }
+
+/* Code */
+code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background: var(--surface2); padding: 2px 6px;
+  border-radius: 3px; font-size: 0.88em;
+  color: #b39ddb;
+}
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 16px;
+  overflow-x: auto; margin: 16px 0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.82rem; line-height: 1.6;
+  color: #a5d6a7;
+}
+pre .comment { color: #5a6a5e; }
+pre .keyword { color: #c792ea; }
+pre .string { color: #c3e88d; }
+pre .number { color: #f78c6c; }
+
+/* Diagrams */
+.diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px;
+  margin: 20px 0; text-align: center;
+  font-family: 'Consolas', monospace;
+  font-size: 0.8rem; line-height: 1.4;
+  color: var(--text-dim);
+  white-space: pre;
+}
+
+/* Lists */
+ul, ol { margin: 12px 0 16px 24px; }
+li { margin-bottom: 6px; }
+
+/* Callout */
+.callout {
+  background: var(--surface2);
+  border-left: 3px solid var(--accent);
+  padding: 14px 18px; margin: 20px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.92rem;
+}
+.callout.green { border-left-color: var(--accent2); }
+
+/* Table */
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 16px 0; font-size: 0.9rem;
+}
+th, td {
+  padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th { color: var(--accent2); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; }
+td code { font-size: 0.82rem; }
+
+/* Badge */
+.badge {
+  display: inline-block; padding: 2px 8px;
+  border-radius: 4px; font-size: 0.75rem;
+  font-family: 'Consolas', monospace;
+  background: var(--surface2); color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+.badge.green { color: var(--accent2); border-color: #2a5a2a; }
+.badge.purple { color: var(--accent); border-color: #3a1a5a; }
+
+/* Footer */
+footer {
+  margin-top: 64px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim); font-size: 0.82rem;
+  text-align: center;
+}
+footer a { color: var(--accent2); text-decoration: none; }
+
+/* Scroll indicator */
+.toc { margin: 24px 0; }
+.toc a {
+  display: inline-block; color: var(--text-dim);
+  text-decoration: none; margin-right: 16px;
+  font-size: 0.85rem; transition: color 0.2s;
+}
+.toc a:hover { color: var(--text); }
+.toc a::before { content: '#'; color: var(--accent); margin-right: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="back">&larr; Play</a>
+  <a href="#overview">Overview</a>
+  <a href="#tech">Tech</a>
+  <a href="#mechanics">Mechanics</a>
+  <a href="#rendering">Rendering</a>
+  <a href="#optimization">Optimization</a>
+</nav>
+
+<header>
+  <h1>Iris <span>Trimming</span></h1>
+  <p class="subtitle">Design document &mdash; a browser-native flower grooming game</p>
+</header>
+
+<div class="toc">
+  <a href="#overview">Overview</a>
+  <a href="#tech">Tech Stack</a>
+  <a href="#mechanics">Mechanics</a>
+  <a href="#rendering">Rendering</a>
+  <a href="#physics">Physics</a>
+  <a href="#optimization">Optimization</a>
+</div>
+
+<!-- ─── OVERVIEW ─── -->
+<h2 id="overview">Overview</h2>
+
+<p>Iris Trimming is a portrait-oriented browser game where you groom an iris flower by plucking dying leaves, removing rotting petals, and slicing the stem at a proper 45&deg; angle. Every tear and cut squirts chlorophyll&mdash;green particle physics that spray, drip, and fall with gravity.</p>
+
+<p>The game runs as a single HTML file with zero external dependencies. No build step, no bundler, no framework. Open the file, play the game.</p>
+
+<div class="callout">
+  <strong>Design goal:</strong> Feel like you're handling a real plant. The stretch before a leaf tears, the spray of green sap, the weight of a falling petal&mdash;all of it sells the physicality.
+</div>
+
+<!-- ─── TECH ─── -->
+<h2 id="tech">Tech Stack</h2>
+
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Why</th></tr>
+  <tr>
+    <td>Rendering</td>
+    <td><code>Canvas 2D</code></td>
+    <td>Lightweight, universal support, no WebGL overhead for 2D shapes</td>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td><code>Vanilla JS</code></td>
+    <td>Zero dependencies = zero bundle size. Single file deployment.</td>
+  </tr>
+  <tr>
+    <td>Input</td>
+    <td><code>Pointer Events</code></td>
+    <td>Unified mouse + touch handling. One API for both.</td>
+  </tr>
+  <tr>
+    <td>Animation</td>
+    <td><code>requestAnimationFrame</code></td>
+    <td>Vsync-aligned, battery-friendly, auto-pauses when tab hidden</td>
+  </tr>
+  <tr>
+    <td>Layout</td>
+    <td><code>CSS (inline)</code></td>
+    <td>UI overlay only. All game rendering is canvas.</td>
+  </tr>
+</table>
+
+<div class="callout green">
+  <strong>Libraries used:</strong> None. The entire game is vanilla HTML + CSS + JavaScript. No Three.js, no Pixi, no Matter.js, no physics engine. All physics, particle systems, and rendering are hand-rolled.
+</div>
+
+<!-- ─── MECHANICS ─── -->
+<h2 id="mechanics">Game Mechanics</h2>
+
+<h3>Plucking (Leaves &amp; Petals)</h3>
+
+<p>Plucking uses a <strong>drag-to-tear</strong> mechanic. When you grab a leaf or petal, the game tracks pull distance from the attachment point. As you drag further, a <code>tearProgress</code> value ramps from 0 to 1:</p>
+
+<pre>
+<span class="comment">// Pull distance determines tear progress</span>
+<span class="keyword">const</span> dx = pointerX - part.x;
+<span class="keyword">const</span> dy = pointerY - part.y;
+<span class="keyword">const</span> dist = Math.sqrt(dx * dx + dy * dy);
+part.tearProgress = Math.min(<span class="number">1</span>, dist / (part.len * <span class="number">1.8</span>));
+</pre>
+
+<p>While pulling (tearProgress &gt; 0.3), chlorophyll particles ooze from the base. A visible stretch line connects the attachment point to your pointer, thinning as it nears breaking. At tearProgress = 1, the part detaches:</p>
+
+<ul>
+  <li>A directional chlorophyll <strong>stream</strong> sprays opposite to pull direction</li>
+  <li>A burst of <strong>scatter particles</strong> explodes from the base</li>
+  <li><strong>Drip particles</strong> fall with exaggerated gravity</li>
+  <li>The torn part becomes a <strong>falling body</strong> with rotation and fade</li>
+</ul>
+
+<div class="callout">
+  <strong>Health feedback:</strong> Removing sick parts (brown/dying) heals the plant (+3). Removing healthy parts hurts it (-5 leaves, -8 petals). This teaches players to identify what needs trimming.
+</div>
+
+<h3>Slicing (Stems &amp; Leaves)</h3>
+
+<p>Slicing uses <strong>line-segment intersection</strong>. The shears tool records a trail of pointer positions. Each frame, the last two trail points form a line segment that's tested against the stem segments:</p>
+
+<pre>
+<span class="comment">// Line-line intersection test</span>
+<span class="keyword">const</span> denom = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4);
+<span class="keyword">const</span> t = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)) / denom;
+<span class="keyword">const</span> u = -((x1-x2)*(y1-y3) - (y1-y2)*(x1-x3)) / denom;
+<span class="comment">// Hit if both t and u are in [0, 1]</span>
+</pre>
+
+<p>When the stem is cut, the game measures the <strong>cut angle</strong> relative to the stem. In real floristry, a 45&deg; angle maximizes water uptake surface area. The game scores this:</p>
+
+<table>
+  <tr><th>Angle Range</th><th>Rating</th><th>Health Effect</th></tr>
+  <tr><td>40&ndash;50&deg;</td><td>Perfect</td><td>+10</td></tr>
+  <tr><td>30&ndash;60&deg;</td><td>Good</td><td>+5</td></tr>
+  <tr><td>15&ndash;75&deg;</td><td>OK</td><td>0</td></tr>
+  <tr><td>0&ndash;15&deg; or 75&ndash;90&deg;</td><td>Bad</td><td>-5</td></tr>
+</table>
+
+<p>After cutting, the <strong>top of the stem</strong> (bloom + upper leaves) is kept&mdash;the bottom stump falls away. This is the part you harvest into your bouquet.</p>
+
+<h3>The Bouquet</h3>
+
+<p>Each flower can be saved to a persistent bouquet collection. The game <strong>deep-clones the entire flower object</strong> (not a screenshot)&mdash;all leaf positions, petal shapes, stem state, dying/rotting flags. When viewing the bouquet, each saved flower is re-rendered from scratch using the real drawing functions, then arranged in a fan from a wrapped vase.</p>
+
+<!-- ─── RENDERING ─── -->
+<h2 id="rendering">Rendering Pipeline</h2>
+
+<p>Each frame draws in this order (painter's algorithm, back to front):</p>
+
+<div class="diagram">
+Background (cached offscreen canvas)
+        &darr;
+   Stem (quadratic B&eacute;zier curves + gradient stroke)
+        &darr;
+   Leaves (cubic B&eacute;zier outlines, pre-baked colors)
+        &darr;
+   Petals: Falls (drooping, with beard detail)
+        &darr;
+   Petals: Standards (upright, with ruffle edges)
+        &darr;
+   Falling Parts (simplified ellipses with rotation)
+        &darr;
+   Particles (circles, no save/restore per particle)
+        &darr;
+   Slice Trail (gradient-alpha polyline)
+        &darr;
+   Tool Cursor (circle or X depending on mode)
+</div>
+
+<h3>Flower Structure</h3>
+
+<p>An iris is procedurally generated each time with randomized parameters:</p>
+
+<ul>
+  <li><strong>Stem:</strong> 8-segment polyline from base (88% screen height) to top (28%), rendered as thick quadratic curves with a horizontal gradient</li>
+  <li><strong>Leaves:</strong> 4&ndash;6 leaves alternating left/right along the stem. Each is a cubic B&eacute;zier lobe with a center vein. ~45% chance of being &ldquo;dying&rdquo; (brown, droopy, spotted)</li>
+  <li><strong>Petals &ndash; Standards:</strong> 3 upright petals with ruffled edges (sinusoidal displacement along the outline). Purple gradient fill. ~35% rotting chance</li>
+  <li><strong>Petals &ndash; Falls:</strong> 3 drooping petals with a yellow &ldquo;beard&rdquo; (fuzzy midline). Blue-indigo gradient. ~40% rotting chance</li>
+</ul>
+
+<h3>Petal Edge Ruffling</h3>
+
+<p>Iris petals have characteristically ruffled edges. This is achieved by displacing outline points along the perpendicular using a sine wave:</p>
+
+<pre>
+<span class="keyword">const</span> widthAtT = Math.sin(t * <span class="number">3.1416</span>) * w;
+<span class="keyword">const</span> ruffle = Math.sin(t * <span class="number">6</span> + rufflePhase) * w * <span class="number">0.15</span>;
+<span class="keyword">const</span> px = bx + perpX * (widthAtT + ruffle);
+</pre>
+
+<p>The base width follows a <code>sin(t * &pi;)</code> envelope (zero at base and tip, max at middle). The ruffle adds a higher-frequency wave on top, with a random phase per petal so they don't all match.</p>
+
+<!-- ─── PHYSICS ─── -->
+<h2 id="physics">Physics Systems</h2>
+
+<h3>Chlorophyll Particles</h3>
+
+<p>Three particle types create the "sap squirt" effect:</p>
+
+<table>
+  <tr><th>Type</th><th>Behavior</th><th>Visual</th></tr>
+  <tr>
+    <td><span class="badge green">scatter</span></td>
+    <td>Random direction, medium speed, slow decay</td>
+    <td>Green circles, 3 color shades</td>
+  </tr>
+  <tr>
+    <td><span class="badge green">stream</span></td>
+    <td>Directional spray (opposite to pull/cut), fast, spread</td>
+    <td>Larger green blobs, 4 color shades</td>
+  </tr>
+  <tr>
+    <td><span class="badge green">drip</span></td>
+    <td>Downward bias, high gravity, slow decay</td>
+    <td>Small circles with RGBA color</td>
+  </tr>
+</table>
+
+<p>All particles share the same physics: position integration, velocity damping (0.99x per frame on X), gravity accumulation on Y, and life decay. Dead particles are removed via swap-and-pop from a pre-allocated pool.</p>
+
+<h3>Wind &amp; Sway</h3>
+
+<p>A global <code>wind</code> value drifts toward random targets on a 2&ndash;6 second timer. Stem segments displace horizontally by <code>wind * t&sup2;</code> where t=1 at the top (most sway) and t=0 at the base (anchored). Leaves and petals add their own sinusoidal sway on top, each with a unique phase and fixed speed.</p>
+
+<!-- ─── OPTIMIZATION ─── -->
+<h2 id="optimization">Optimization</h2>
+
+<p>The game targets 60fps on mobile browsers. Key optimizations:</p>
+
+<h3>Cached Background</h3>
+<p>The sky/grass gradient and noise texture are rendered to an offscreen <code>&lt;canvas&gt;</code> once, then <code>drawImage</code>'d each frame. Rebuilds only on window resize.</p>
+
+<h3>Pre-baked Visual Data</h3>
+<p>Colors, vein colors, dying spot positions, and rotting spot positions are all computed at flower creation time and stored on each leaf/petal object. No <code>lerpColor</code> parsing, no <code>Math.random()</code> in draw calls. This also eliminates the spot-flickering that random-per-frame caused.</p>
+
+<h3>Object Pooling</h3>
+<p>Particles and falling parts use fixed-size arrays with a count index. Removal uses swap-and-pop (O(1)) instead of <code>Array.splice</code> (O(n)). Pool caps at 500 particles to prevent runaway allocation during heavy splatter.</p>
+
+<h3>Ring Buffer Trail</h3>
+<p>The slice trail uses a ring buffer instead of <code>Array.push</code> + <code>Array.shift</code>. Fixed 30-element array with head pointer&mdash;no array resizing or copying.</p>
+
+<h3>Batched Draw Calls</h3>
+<p>Petal side veins are batched into a single <code>beginPath/stroke</code> call. Particle drawing skips <code>save/restore</code> per particle&mdash;just sets <code>globalAlpha</code> directly. Falls and standards are pre-sorted into separate arrays at creation, eliminating per-frame <code>.filter()</code> allocations.</p>
+
+<h3>Reduced Math</h3>
+<p>Constants like <code>Math.PI * 2</code> are replaced with <code>6.2832</code> literals. <code>180/Math.PI</code> becomes <code>57.2958</code>. Division replaced with multiplication where possible. Square-root avoided in hot paths by comparing squared distances.</p>
+
+<footer>
+  <p>Iris Trimming &mdash; <a href="index.html">play it</a></p>
+  <p>Zero libraries. One file. All vibes.</p>
+</footer>
+
+</body>
+</html>

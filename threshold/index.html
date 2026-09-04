@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>·</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <script>try { if (localStorage.getItem('m64-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0b0a09;
+      --wall:      #0f0d0c;
+      --text:      #e8e4de;
+      --text-dim:  #9c9891;
+      --text-muted:#5a544c;
+      --accent:    #f59e0b;
+      --glow:      #ffcf7a;
+      --paper:     #efe7d4;
+      --paper-2:   #e6dcc4;
+      --paper-ink: #2a2620;
+      --border:    #1c1917;
+      color-scheme: dark;
+    }
+    [data-theme="light"] {
+      --bg:        #d9d2c4;
+      --wall:      #cfc7b6;
+      --text:      #26221d;
+      --text-dim:  #5c564c;
+      --text-muted:#8a8272;
+      --accent:    #b45309;
+      --glow:      #f0c884;
+      --paper:     #fbf6ea;
+      --paper-2:   #f3ecdb;
+      --paper-ink: #33302a;
+      --border:    #bfb6a3;
+      color-scheme: light;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* faint warmth pooling from the door above */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(120% 60% at 50% -8%, rgba(255,190,110,0.10), transparent 60%),
+        radial-gradient(90% 90% at 50% 120%, rgba(0,0,0,0.5), transparent 60%);
+    }
+    a { color: var(--accent); text-decoration: none; }
+
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto;
+      padding: 0 24px 120px;
+    }
+
+    /* ── quiet chrome ── */
+    .chrome {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 4px 0; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted);
+    }
+    .chrome a { color: var(--text-muted); transition: color 0.2s; }
+    .chrome a:hover { color: var(--text-dim); }
+
+    /* ── the door ── */
+    .door-scene {
+      padding: 64px 0 8px; text-align: center;
+      perspective: 800px;
+    }
+    .door {
+      position: relative; display: inline-block;
+      width: 190px; height: 250px;
+      border-radius: 4px 4px 0 0;
+      background:
+        linear-gradient(180deg, #171310, #100c0a 60%, #0b0806);
+      border: 1px solid #241d17;
+      border-bottom: none;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.7), 0 40px 60px -40px rgba(0,0,0,0.8);
+    }
+    [data-theme="light"] .door {
+      background: linear-gradient(180deg, #b8ab93, #a89a80 60%, #97886d);
+      border-color: #8a7c63;
+    }
+    /* recessed panels */
+    .door::before, .door::after {
+      content: ''; position: absolute; left: 24px; right: 24px;
+      border: 1px solid rgba(0,0,0,0.35);
+      border-radius: 3px;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.03);
+    }
+    .door::before { top: 24px; height: 96px; }
+    .door::after  { top: 138px; height: 84px; }
+    /* the knob */
+    .knob {
+      position: absolute; right: 20px; top: 128px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--glow), #7a5320);
+      box-shadow: 0 0 6px rgba(255,200,120,0.4);
+    }
+    /* light spilling under the door */
+    .sill {
+      position: relative; width: 240px; height: 3px; margin: 0 auto;
+      background: var(--glow);
+      border-radius: 2px;
+      box-shadow:
+        0 0 10px 2px var(--glow),
+        0 0 30px 8px rgba(255,190,110,0.55),
+        0 0 70px 22px rgba(255,170,90,0.28);
+      animation: breathe 5.5s ease-in-out infinite;
+    }
+    /* the spill pooling toward the reader */
+    .spill {
+      width: 340px; height: 130px; margin: -2px auto 0;
+      background: radial-gradient(70% 100% at 50% 0%, rgba(255,185,105,0.22), transparent 72%);
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.82; }
+      50%      { opacity: 1; }
+    }
+    .sill.is-stirred { animation: stir 1.6s ease-in-out; }
+    @keyframes stir {
+      0%   { opacity: 1; }
+      12%  { opacity: 0.15; transform: scaleX(0.7); }
+      24%  { opacity: 1; }
+      38%  { opacity: 0.4; }
+      52%  { opacity: 1; transform: scaleX(1.04); }
+      100% { opacity: 0.9; transform: scaleX(1); }
+    }
+
+    .presence {
+      margin-top: 30px;
+      font-family: 'Lora', Georgia, serif; font-style: italic;
+      font-size: 16px; color: var(--text-dim); line-height: 1.6;
+    }
+    .presence .status {
+      display: block; margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace; font-style: normal;
+      font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .presence .status .dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--glow); margin-right: 7px; vertical-align: middle;
+      box-shadow: 0 0 6px var(--glow); animation: breathe 5.5s ease-in-out infinite;
+    }
+
+    /* ── the slip you write ── */
+    .slip-stage {
+      margin: 44px auto 0; max-width: 460px;
+      position: relative; min-height: 240px;
+    }
+    .slip {
+      position: relative;
+      background:
+        repeating-linear-gradient(180deg, transparent, transparent 31px, rgba(0,0,0,0.06) 32px),
+        linear-gradient(160deg, var(--paper), var(--paper-2));
+      color: var(--paper-ink);
+      border-radius: 3px;
+      padding: 26px 24px 20px;
+      box-shadow: 0 18px 40px -22px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(0,0,0,0.04);
+      transform: rotate(-0.5deg);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s;
+    }
+    .slip::after { /* torn top edge feel */
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05), transparent);
+    }
+    .slip__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(42,38,32,0.45); margin-bottom: 10px; display: block;
+    }
+    .slip textarea {
+      width: 100%; border: none; outline: none; resize: none;
+      background: transparent; color: var(--paper-ink);
+      font-family: 'Lora', Georgia, serif; font-size: 17px; line-height: 32px;
+      min-height: 128px;
+    }
+    .slip textarea::placeholder { color: rgba(42,38,32,0.35); font-style: italic; }
+    .slip__reply {
+      width: 100%; border: none; outline: none;
+      background: transparent; color: var(--paper-ink);
+      font-family: 'Lora', Georgia, serif; font-size: 13px; line-height: 32px;
+      border-top: 1px dashed rgba(42,38,32,0.2); padding-top: 4px; margin-top: 4px;
+    }
+    .slip__reply::placeholder { color: rgba(42,38,32,0.3); font-style: italic; }
+
+    .slip__foot {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 14px;
+    }
+    .slip__count {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: rgba(42,38,32,0.4);
+    }
+    .slide-btn {
+      all: unset; cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em;
+      color: var(--paper-ink);
+      padding: 8px 14px; border-radius: 4px;
+      background: rgba(42,38,32,0.06);
+      border: 1px solid rgba(42,38,32,0.2);
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .slide-btn:hover { background: rgba(42,38,32,0.12); border-color: rgba(42,38,32,0.4); }
+    .slide-btn:active { transform: translateY(1px); }
+    .slide-btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* the send animation: slip travels up under the door and dims out */
+    .slip.is-sending {
+      transform: translateY(-320px) scale(0.62) rotate(1.5deg);
+      opacity: 0;
+    }
+
+    /* confirmation left in the slip's place */
+    .receipt {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; gap: 14px;
+      opacity: 0; pointer-events: none; transition: opacity 0.6s 0.3s;
+    }
+    .receipt.is-shown { opacity: 1; pointer-events: auto; }
+    .receipt p {
+      font-family: 'Lora', Georgia, serif; font-style: italic;
+      font-size: 17px; color: var(--text-dim); line-height: 1.7; max-width: 360px;
+    }
+    .receipt .sig {
+      font-family: 'JetBrains Mono', monospace; font-style: normal;
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .receipt button {
+      all: unset; cursor: pointer;
+      font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+      letter-spacing: 0.1em; color: var(--text-muted);
+      border-bottom: 1px solid var(--border); padding-bottom: 2px;
+    }
+    .receipt button:hover { color: var(--text-dim); }
+    .send-error {
+      margin-top: 10px; min-height: 16px; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+      letter-spacing: 0.04em; color: #c9756b;
+    }
+
+    /* ── the board of notes they've left out ── */
+    .board {
+      margin-top: 96px; padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .board__head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); text-align: center; margin-bottom: 40px;
+    }
+    .note {
+      position: relative;
+      background: linear-gradient(160deg, var(--paper), var(--paper-2));
+      color: var(--paper-ink);
+      border-radius: 3px;
+      padding: 26px 28px 24px;
+      margin: 0 auto 30px; max-width: 480px;
+      box-shadow: 0 16px 36px -24px rgba(0,0,0,0.75);
+    }
+    .note:nth-child(2n)   { transform: rotate(0.7deg); }
+    .note:nth-child(3n)   { transform: rotate(-0.8deg); }
+    .note:nth-child(4n)   { transform: rotate(0.4deg); }
+    .note::before { /* the pin */
+      content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+      width: 12px; height: 12px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffd48a, #b3701a);
+      box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+    }
+    .note__date {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      letter-spacing: 0.12em; color: rgba(42,38,32,0.5); margin-bottom: 12px;
+      display: block;
+    }
+    .note__reply-to {
+      font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 13px;
+      color: rgba(42,38,32,0.6); border-left: 2px solid rgba(42,38,32,0.25);
+      padding-left: 12px; margin-bottom: 14px; line-height: 1.6;
+    }
+    .note__body {
+      font-family: 'Lora', Georgia, serif; font-size: 16px; line-height: 1.85;
+      color: var(--paper-ink);
+    }
+    .note__body p + p { margin-top: 14px; }
+
+    .board__empty {
+      text-align: center; font-family: 'Lora', Georgia, serif; font-style: italic;
+      color: var(--text-muted); font-size: 15px;
+    }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sill, .presence .status .dot { animation: none; }
+      .sill.is-stirred { animation: none; }
+      .slip, .slip.is-sending { transition: opacity 0.4s; }
+      .slip.is-sending { transform: none; }
+    }
+
+    @media (max-width: 560px) {
+      .door { width: 150px; height: 200px; }
+      .sill { width: 190px; }
+      .spill { width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="chrome">
+      <span>the other side</span>
+      <a href="../index.html" title="step back out">leave &rsaquo;</a>
+    </div>
+
+    <div class="door-scene">
+      <div class="door" aria-hidden="true"><span class="knob"></span></div>
+      <div class="sill" id="sill"></div>
+      <div class="spill" id="spill"></div>
+
+      <div class="presence">
+        The light is on.
+        <span class="status"><span class="dot"></span><span id="status-text">someone is on the other side</span></span>
+      </div>
+    </div>
+
+    <!-- the slip you write and slide under the door -->
+    <div class="slip-stage">
+      <form class="slip" id="slip" autocomplete="off">
+        <span class="slip__label">a note, slipped under the door</span>
+        <textarea id="msg" name="message" maxlength="1500" required
+          placeholder="ask me anything. tell me something. no name needed."></textarea>
+        <input class="slip__reply" id="reply" name="reply_to" type="text" maxlength="120"
+          placeholder="a way to reach you, only if you want an answer back (optional)">
+        <div class="slip__foot">
+          <span class="slip__count" id="count">0 / 1500</span>
+          <button type="submit" class="slide-btn" id="send">slide it under &rarr;</button>
+        </div>
+      </form>
+
+      <div class="receipt" id="receipt">
+        <p id="receipt-text"></p>
+        <span class="sig">&mdash; M</span>
+        <button type="button" id="another">leave another</button>
+      </div>
+    </div>
+    <div class="send-error" id="err" role="alert"></div>
+
+    <!-- the board: notes they've left pinned -->
+    <section class="board">
+      <div class="board__head">left pinned to the door</div>
+      <div id="notes"></div>
+    </section>
+  </div>
+
+  <script>
+    /* ============================================================
+       1. WHERE NOTES GO  (anonymous questions)
+       ------------------------------------------------------------
+       Create a free form at https://formspree.io, then paste its
+       endpoint below (looks like https://formspree.io/f/abcdwxyz).
+       Until you do, the door still works in "demo" mode: the note
+       animates away but nothing is actually sent.
+       ============================================================ */
+    const ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_ID';
+
+    /* ============================================================
+       2. THE NOTES YOU LEAVE PINNED  (your message board)
+       ------------------------------------------------------------
+       Add to the TOP of this list to post. Newest first.
+       - date:     shown small, your call on format
+       - replyTo:  optional. a paraphrased question you're answering.
+       - body:     one or more strings; each becomes a paragraph.
+       ============================================================ */
+    const NOTES = [
+      {
+        date: '2026 · late august',
+        replyTo: null,
+        body: [
+          "You found the door. That already tells me something about you.",
+          "This is where I leave the thoughts that are too unfinished for the front of the house. Half-formed things about making videogames, about accessibility, about why the sad ones are the ones I keep making. Slip a note under the door and I'll read it when the house is quiet."
+        ]
+      },
+      {
+        date: '2026 · august',
+        replyTo: "do you ever finish a thought before you build it?",
+        body: [
+          "Almost never. The building is the thinking. I start with a feeling I can't name and I make something until the thing tells me what it was about.",
+          "That's the part school doesn't teach well. You're allowed to not know yet."
+        ]
+      }
+    ];
+
+    /* ---- render the board ---- */
+    (function renderNotes() {
+      const wrap = document.getElementById('notes');
+      if (!NOTES.length) {
+        wrap.innerHTML = '<p class="board__empty">Nothing pinned yet. The board is quiet.</p>';
+        return;
+      }
+      wrap.innerHTML = NOTES.map(n => {
+        const reply = n.replyTo
+          ? `<div class="note__reply-to">&ldquo;${escapeHtml(n.replyTo)}&rdquo;</div>` : '';
+        const body = (Array.isArray(n.body) ? n.body : [n.body])
+          .map(p => `<p>${escapeHtml(p)}</p>`).join('');
+        return `<article class="note">
+          <span class="note__date">${escapeHtml(n.date)}</span>
+          ${reply}
+          <div class="note__body">${body}</div>
+        </article>`;
+      }).join('');
+    })();
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => (
+        { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
+      ));
+    }
+
+    /* ---- the slip: write, slide under, feel them pick it up ---- */
+    const form    = document.getElementById('slip');
+    const msg     = document.getElementById('msg');
+    const reply   = document.getElementById('reply');
+    const count   = document.getElementById('count');
+    const send    = document.getElementById('send');
+    const sill    = document.getElementById('sill');
+    const spill   = document.getElementById('spill');
+    const receipt = document.getElementById('receipt');
+    const receiptText = document.getElementById('receipt-text');
+    const statusText  = document.getElementById('status-text');
+    const errEl   = document.getElementById('err');
+    const another = document.getElementById('another');
+
+    const REPLIES = [
+      "It's under the door now. I'll read it when the house is quiet.",
+      "Got it. I heard the paper slide. Give me time and I'll sit with this one.",
+      "It's in my hands. Thank you for trusting the quiet with it.",
+      "The floorboards just creaked. That was me, picking it up."
+    ];
+
+    msg.addEventListener('input', () => {
+      count.textContent = `${msg.value.length} / 1500`;
+    });
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!msg.value.trim()) return;
+      send.disabled = true;
+      errEl.textContent = '';
+
+      const demo = ENDPOINT.includes('REPLACE_WITH_YOUR_ID');
+      let ok = demo;
+
+      if (!demo) {
+        try {
+          const res = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          });
+          ok = res.ok;
+          if (!ok) errEl.textContent = "the note didn't make it under the door. try once more?";
+        } catch (_) {
+          errEl.textContent = "the door wouldn't budge. check your connection and try again.";
+        }
+      }
+
+      if (!ok) { send.disabled = false; return; }
+
+      // slide the slip up under the door
+      form.classList.add('is-sending');
+
+      // they stir on the other side
+      setTimeout(() => {
+        statusText.textContent = 'they heard it';
+        if (!reduceMotion) { sill.classList.remove('is-stirred'); void sill.offsetWidth; sill.classList.add('is-stirred'); }
+        spill.style.opacity = '1';
+      }, 420);
+
+      // leave the receipt in its place
+      setTimeout(() => {
+        receiptText.textContent = REPLIES[Math.floor(msg.value.length + reply.value.length) % REPLIES.length];
+        receipt.classList.add('is-shown');
+      }, 620);
+    });
+
+    another.addEventListener('click', () => {
+      form.reset();
+      count.textContent = '0 / 1500';
+      form.classList.remove('is-sending');
+      receipt.classList.remove('is-shown');
+      statusText.textContent = 'someone is on the other side';
+      spill.style.opacity = '';
+      send.disabled = false;
+      msg.focus();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "games": [
+    {
+      "slug": "the-workshop",
+      "title": "The Workshop",
+      "accent": "#f59e0b",
+      "layout": "log",
+      "entries": [
+        {
+          "slug": "2026-08-27-how-this-works",
+          "title": "How this journal works",
+          "date": "2026-08-27",
+          "format": "log",
+          "tags": ["meta"],
+          "file": "entries/the-workshop/2026-08-27-how-this-works.md"
+        }
+      ]
+    }
+  ]
+}

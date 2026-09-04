@@ -3,580 +3,1125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marty Scott | Game Designer & Developer</title>
-  <meta name="description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, Cold Flame, and Snoop. MFA NYU Game Center.">
-  <meta property="og:title" content="Marty Scott | Game Designer & Developer">
-  <meta property="og:description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, Cold Flame, and Snoop. MFA NYU Game Center.">
+  <title>Marty Scott</title>
+  <meta name="description" content="Game designer, developer, and musician. Creator of Iris, RhodesTrip, Blackout, Solus, Cold Flame, and more. MFA NYU Game Center.">
+  <meta property="og:title" content="Marty Scott">
+  <meta property="og:description" content="Game designer, developer, and musician. MFA NYU Game Center.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/iris.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="images/vox_self_portrait_2024.png">
-  
+  <script>try { if (localStorage.getItem('m64-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0f0f0f;
+      --bg-card:   #161616;
+      --bg-shelf:  #111111;
+      --text:      #e8e4de;
+      --text-dim:  #9c9891;
+      --text-muted:#4a4540;
+      --accent:    #f59e0b;
+      --accent-bg: rgba(245,158,11,0.1);
+      --border:    #1e1e1e;
+      --nav-bg:    rgba(15,15,15,0.94);
+      --hover:     rgba(255,255,255,0.03);
+      --hover-2:   rgba(255,255,255,0.06);
+      --media-bg:  #1a1a1a;
+      --shelf-w:   clamp(240px, 30vw, 460px);
+      --card-w:    440px;
+      --nav-h:     56px;
+      color-scheme: dark;
+    }
+    [data-theme="light"] {
+      --bg:        #f4f1ea;
+      --bg-card:   #faf8f3;
+      --bg-shelf:  #eeeae1;
+      --text:      #26221d;
+      --text-dim:  #5c564c;
+      --text-muted:#969083;
+      --accent:    #b45309;
+      --accent-bg: rgba(180,83,9,0.08);
+      --border:    #dcd6c9;
+      --nav-bg:    rgba(247,244,238,0.94);
+      --hover:     rgba(0,0,0,0.03);
+      --hover-2:   rgba(0,0,0,0.05);
+      --media-bg:  #e3ded3;
+      color-scheme: light;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Hidden bear ── */
+    .bear-egg {
+      position: fixed; bottom: 1px; left: calc(50% - 4px);
+      font-size: 5px; line-height: 1; text-decoration: none;
+      color: #111; pointer-events: auto; z-index: 1;
+      filter: grayscale(1) brightness(0.08);
+    }
+
+    /* ── Background canvas ── */
+    #bg-canvas {
+      position: fixed; inset: 0;
+      width: 100vw; height: 100vh;
+      z-index: -1; pointer-events: none;
+      image-rendering: auto;
+    }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0; z-index: 9999;
+      padding: 8px 16px; background: var(--accent); color: #000;
+      font-weight: 600; font-size: 13px; border-radius: 0 0 6px 0;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px 0 16px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 200;
+    }
+    .nav-left { display: flex; align-items: center; gap: 6px; }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 400;
+      color: var(--text); letter-spacing: 0.04em;
+    }
+    .nav-logo:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .nav-pill {
+      font-size: 10px; font-weight: 500;
+      padding: 4px 10px; border-radius: 4px;
+      border: 1px solid; letter-spacing: 0.04em;
+      transition: opacity 0.15s;
+    }
+    .nav-pill:hover { opacity: 0.75; }
+    .nav-pill--tege  { color: #8aa6c6; border-color: rgba(138,166,198,0.25); background: rgba(138,166,198,0.07); }
+    .nav-pill--vg101 { color: #8a8578; border-color: rgba(138,133,120,0.25); background: rgba(138,133,120,0.06); }
+    .nav-pill--vg101::after { content: ' · soon'; opacity: 0.6; }
+    .nav-pill--itch  { color: #fa5c5c; border-color: rgba(250,92,92,0.25);   background: rgba(250,92,92,0.07);   }
+    [data-theme="light"] .nav-pill--tege { color: #43658c; border-color: rgba(67,101,140,0.3); background: rgba(67,101,140,0.06); }
+    [data-theme="light"] .nav-pill--itch { color: #c23c3c; border-color: rgba(194,60,60,0.3);  background: rgba(194,60,60,0.05);  }
+    [data-theme="light"] .bear-egg { filter: grayscale(1) brightness(0.08) invert(0.92); }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      all: unset; cursor: pointer;
+      width: 30px; height: 30px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .theme-toggle:hover { color: var(--text); border-color: var(--text-muted); background: var(--hover); }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ── Iris easter egg ── */
+    .iris-egg {
+      display: flex; align-items: center;
+      opacity: 0.12; transition: opacity 0.4s, transform 0.3s; cursor: pointer;
+    }
+    .iris-egg:hover { opacity: 1; transform: scale(1.3) rotate(-8deg); }
+
+    /* ── Page ── */
+    .page {
+      display: flex;
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      padding-right: var(--shelf-w);
+    }
+
+    /* ── About ── */
+    .about {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 72px 40px 80px 40px;
+    }
+    .about__inner {
+      max-width: 540px; width: 100%;
+      margin-right: 60px;
+    }
+
+    .about__portrait {
+      width: 200px; height: 167px;
+      border-radius: 8px;
+      image-rendering: pixelated;
+      object-fit: cover;
+      margin-bottom: 28px;
+    }
+
+    .about__name {
+      font-size: 52px; font-weight: 600;
+      letter-spacing: -0.04em; line-height: 0.95;
+      margin-bottom: 14px;
+    }
+    .about__subtitle {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .about__roles {
+      font-size: 10px; color: var(--text-muted);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 44px;
+      display: block;
+    }
+    .about__bio {
+      font-size: 17px; line-height: 1.85;
+      font-family: 'Lora', Georgia, serif;
+      color: var(--text); margin-bottom: 48px;
+    }
+    .about__bio p + p { margin-top: 20px; }
+    .about__bio a { color: var(--text-dim); border-bottom: 1px solid var(--border); }
+    .about__bio a:hover { color: var(--text); border-color: var(--text-dim); }
+
+    .about__label {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+      display: block;
+    }
+    .about__edu {
+      list-style: none; margin-bottom: 48px;
+    }
+    .about__edu li {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .about__edu li:last-child { border-bottom: none; }
+    .edu-school { font-weight: 500; font-size: 14px; color: var(--text); }
+    .edu-detail { color: var(--text-muted); font-size: 10px; text-align: right; flex-shrink: 0; letter-spacing: 0.02em; }
+
+    .about__links { display: flex; gap: 7px; flex-wrap: wrap; }
+    .about-link {
+      font-size: 12px; font-weight: 500;
+      padding: 7px 13px; border-radius: 5px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .about-link:hover { border-color: var(--text-dim); color: var(--text); }
+    .about-link--email {
+      border-color: rgba(245,158,11,0.3);
+      color: var(--accent); background: var(--accent-bg);
+    }
+    .about-link--email:hover { border-color: var(--accent); }
+
+    /* ── Shelf ── */
+    .shelf {
+      position: fixed; top: var(--nav-h); right: 0; bottom: 0;
+      width: var(--shelf-w);
+      background: var(--bg-shelf);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      z-index: 100;
+    }
+
+    .shelf-header {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .shelf-header__text {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .shelf-header__count {
+      font-size: 9px; color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Shelf cards scroll container ── */
+    .shelf-cards {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px 10px 32px;
+      display: flex; flex-direction: column; gap: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .shelf-cards::-webkit-scrollbar { width: 3px; }
+    .shelf-cards::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    /* ── Category label ── */
+    .shelf-cat {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: #8a8578; padding: 6px 2px 3px;
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .shelf-cat::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+    .shelf-cards .shelf-cat:not(:first-child) { margin-top: 18px; }
+
+    /* ── Individual card ── */
+    .shelf-tab {
+      all: unset;
+      cursor: pointer;
+      display: flex; flex-direction: column;
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+      transition: background 0.18s;
+    }
+
+    .shelf-tab::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: transparent;
+      transition: background 0.18s, width 0.18s;
+      z-index: 1;
+    }
+
+    .shelf-tab:hover { background: var(--hover); }
+    .shelf-tab:hover::before { background: rgba(245,158,11,0.5); width: 3px; }
+    .shelf-tab.is-active { background: rgba(245,158,11,0.06); }
+    .shelf-tab.is-active::before { background: var(--accent); width: 3px; }
+
+    /* Image sits at top, full width, 16:9 */
+    .shelf-tab__thumb {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      display: block;
+      background: var(--media-bg);
+      transition: transform 0.4s ease;
+      flex-shrink: 0;
+    }
+    .shelf-tab:hover .shelf-tab__thumb { transform: scale(1.04); }
+
+    /* Under-construction project (grayed out) */
+    .shelf-tab.is-construction .shelf-tab__thumb { filter: grayscale(1); opacity: 0.5; }
+    .shelf-tab.is-construction .shelf-tab__name { color: var(--text-muted); }
+    .shelf-tab.is-construction .shelf-tab__name::after { content: ' · WIP'; opacity: 0.7; font-size: 0.8em; }
+    .card-media--construction img { filter: grayscale(1); opacity: 0.6; }
+    .card-badge-wip {
+      display: inline-block; margin-bottom: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #8a8578; border: 1px solid rgba(138,133,120,0.3);
+      background: rgba(138,133,120,0.08); padding: 3px 9px; border-radius: 999px;
+    }
+
+    .shelf-tab__thumb--placeholder {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Text below image */
+    .shelf-tab__info {
+      padding: 11px 14px 13px 16px;
+    }
+    .shelf-tab__name {
+      font-size: 20px; font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      display: block; letter-spacing: -0.01em;
+      transition: color 0.18s;
+    }
+    .shelf-tab__year {
+      font-size: 10px; color: var(--text-muted);
+      display: block; margin-top: 4px;
+      opacity: 0.5; font-family: 'JetBrains Mono', monospace;
+    }
+    .shelf-tab:hover .shelf-tab__name { color: var(--text-dim); }
+    .shelf-tab.is-active .shelf-tab__name { color: var(--text); }
+
+    /* ── Sliding card panel ── */
+    .card-panel {
+      position: fixed;
+      top: var(--nav-h); right: var(--shelf-w); bottom: 0;
+      width: var(--card-w);
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      transform: translateX(calc(100% + var(--shelf-w)));
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 90;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .card-panel.is-open { transform: translateX(0); }
+
+    .card-panel__header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .card-panel__category {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .card-panel__close {
+      all: unset; cursor: pointer;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px; color: var(--text-muted);
+      transition: color 0.15s, background 0.15s;
+    }
+    .card-panel__close:hover { color: var(--text); background: var(--hover-2); }
+
+    .card-panel__scroll {
+      flex: 1; overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .card-panel__scroll::-webkit-scrollbar { width: 3px; }
+    .card-panel__scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    /* Card content */
+    .card-media {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--media-bg); position: relative;
+      cursor: pointer; overflow: hidden;
+    }
+    .card-media img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .card-media--static { cursor: default; }
+    .yt-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none; opacity: 0.9; transition: opacity 0.15s;
+    }
+    .card-media:hover .yt-play { opacity: 1; }
+
+    .card-body { padding: 20px 20px 32px; }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+    .card-tag {
+      font-size: 10px; font-weight: 500;
+      padding: 3px 10px; border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted); letter-spacing: 0.05em;
+    }
+    .card-title {
+      font-size: 22px; font-weight: 600;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 4px;
+    }
+    .card-year {
+      font-size: 11px; color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px; display: block;
+    }
+    .card-desc {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-dim); margin-bottom: 14px;
+    }
+    .card-role {
+      font-size: 11px; font-weight: 500; color: var(--text-muted);
+      padding: 8px 12px;
+      background: var(--hover);
+      border-radius: 4px; border-left: 2px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .card-bullets { list-style: none; margin-bottom: 20px; }
+    .card-bullets li {
+      font-size: 12px; line-height: 1.6; color: var(--text-dim);
+      padding: 6px 0 6px 16px;
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .card-bullets li:last-child { border-bottom: none; }
+    .card-bullets li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--text-muted); opacity: 0.4;
+    }
+    .card-links { display: flex; flex-direction: column; gap: 7px; margin-top: 20px; }
+    .card-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 13px; border-radius: 5px;
+      border: 1px solid var(--border);
+      font-size: 13px; font-weight: 500; color: var(--text-dim);
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .card-link:hover { border-color: var(--text-muted); color: var(--text); background: var(--hover); }
+    .card-link--primary {
+      border-color: rgba(245,158,11,0.35);
+      color: var(--accent); background: var(--accent-bg);
+    }
+    .card-link--primary:hover { border-color: var(--accent); }
+    .card-link__arrow { opacity: 0.5; font-size: 11px; }
+
+    /* ── Overlay ── */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0); pointer-events: none;
+      transition: background 0.3s; z-index: 80;
+    }
+    .overlay.is-visible { background: rgba(0,0,0,0.5); pointer-events: all; }
+
+    /* ── Easter eggs ── */
+    .cleome-egg, .inkribbon-egg, .snoop-egg-footer {
+      position: fixed; opacity: 0.1;
+      transition: opacity 0.4s, transform 0.3s; display: block;
+    }
+    .cleome-egg { bottom: 16px; left: 16px; }
+    .inkribbon-egg { bottom: 36px; left: 16px; }
+    .snoop-egg-footer { bottom: 56px; left: 16px; }
+    .cleome-egg:hover, .inkribbon-egg:hover, .snoop-egg-footer:hover { opacity: 1; transform: scale(1.4); }
+
+    .moj-egg {
+      position: fixed; bottom: 18px; left: 52px;
+      z-index: 200; cursor: pointer; text-decoration: none;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+      animation: moj-idle 3s ease-in-out infinite;
+    }
+    .moj-egg:hover { animation: moj-excited 0.4s ease-in-out infinite; }
+    .moj-egg svg { width: 36px; height: 44px; border-radius: 6px; display: block; }
+    @keyframes moj-idle {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes moj-excited {
+      0%,100% { transform: rotate(0); }
+      25% { transform: translateY(-3px) rotate(-6deg); }
+      75% { transform: translateY(-3px) rotate(6deg); }
+    }
+
+    /* ── Mobile: bottom horizontal shelf ── */
+    @media (max-width: 768px) {
+      :root {
+        --shelf-w: 0px;
+        --card-w: 100vw;
+      }
+
+      .page {
+        padding-right: 0;
+        padding-bottom: 148px;
+      }
+
+      .about {
+        padding: 44px 24px 20px 24px;
+        justify-content: flex-start;
+      }
+      .about__inner { margin-right: 0; max-width: 100%; }
+      .about__name { font-size: 38px; }
+      .about__subtitle { font-size: 16px; }
+
+      /* Shelf becomes horizontal strip at bottom */
+      .shelf {
+        top: auto; left: 0; right: 0; bottom: 0;
+        width: auto; height: 148px;
+        border-left: none; border-top: 1px solid var(--border);
+        flex-direction: column;
+      }
+
+      .shelf-header {
+        padding: 8px 14px 6px;
+      }
+
+      .shelf-cards {
+        flex-direction: row;
+        overflow-x: auto; overflow-y: hidden;
+        padding: 8px 12px 12px;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .shelf-cat { display: none; }
+
+      .shelf-tab {
+        width: 160px;
+        flex-shrink: 0;
+        border-bottom: none; border-right: 1px solid var(--border);
+      }
+
+      .shelf-tab::before { display: none; }
+      .shelf-tab__name { font-size: 11px; }
+      .shelf-tab__year { font-size: 9px; }
+
+      /* Card panel: full screen on mobile */
+      .card-panel {
+        top: 0; right: 0; bottom: 0; left: 0;
+        width: 100%; border-left: none;
+        transform: translateY(100%);
+      }
+      .card-panel.is-open { transform: translateY(0); }
+    }
+
+    /* ── Focus ── */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .card-panel { transition: none; }
+      .shelf-tab { transition: none; }
+      .shelf-tab__bg { transition: none; }
+      .moj-egg, .moj-egg:hover { animation: none; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <a href="https://www.beargatsby.com" target="_blank" class="bear-egg" aria-hidden="true" tabindex="-1">&#x1F43B;</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <nav class="nav">
-    <div class="container nav-inner">
+    <div class="nav-left">
+      <a href="iris/index.html" class="iris-egg" aria-label="Iris Trimming">
+        <svg viewBox="0 0 24 30" width="13" height="17" fill="none" aria-hidden="true">
+          <path d="M12 2c-1.2 2-3 4.5-3 6.5a3 3 0 006 0c0-2-1.8-4.5-3-6.5z" fill="#7b1fa2" opacity="0.85"/>
+          <path d="M8.5 4c-1.8 1-4 3-3.5 5.2a2.5 2.5 0 004.5-1c0-1.5-.3-3-1-4.2z" fill="#9c27b0" opacity="0.7"/>
+          <path d="M15.5 4c1.8 1 4 3 3.5 5.2a2.5 2.5 0 01-4.5-1c0-1.5.3-3 1-4.2z" fill="#9c27b0" opacity="0.7"/>
+          <line x1="12" y1="10" x2="12" y2="28" stroke="#3d8822" stroke-width="1.5"/>
+          <path d="M12 18c-2.5-1.5-4-0.5-4 1" stroke="#3d8822" stroke-width="1" fill="none"/>
+          <path d="M12 22c2.5-1.5 4-0.5 4 1" stroke="#3d8822" stroke-width="1" fill="none"/>
+        </svg>
+      </a>
       <a href="index.html" class="nav-logo">marty64</a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 12h18M3 6h18M3 18h18"/>
+    </div>
+    <div class="nav-right">
+      <a href="tege/index.html" class="nav-pill nav-pill--tege">TEGE</a>
+      <a href="vg101/index.html" class="nav-pill nav-pill--vg101">VG101</a>
+      <a href="https://martychouette.itch.io/" class="nav-pill nav-pill--itch" target="_blank">itch.io</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">
+        <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4L19 19M19 5l-1.6 1.6M6.6 17.4L5 19"/>
+        </svg>
+        <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.4 14.2A8.5 8.5 0 019.8 3.6a8.5 8.5 0 1010.6 10.6z"/>
         </svg>
       </button>
-      <ul class="nav-links">
-        <li><a href="#work" class="nav-link">Work</a></li>
-        <li><a href="#writings" class="nav-link">Writings</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#resume" class="nav-link">Resume</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li><a href="https://github.com/MartyChouette" class="nav-link" target="_blank">GitHub</a></li>
-        <li><a href="enjin/index.html" class="nav-link nav-link--tege">TEGE</a></li>
-        <li><a href="kb/index.html" class="nav-link nav-link--vg101">VG101</a></li>
-        <li><a href="https://martychouette.itch.io/" class="nav-link nav-link--itch" target="_blank">Itch.io</a></li>
-      </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <span class="hero-label">Game Designer • Developer • Musician</span>
-        <h1>I make videogames about the human experience.</h1>
-        <p class="lead">
-          The surreal, serene, and sincere. I'm exploring new design approaches and 
-          more expansive accessibility tooling for the videogames of tomorrow. 
-          Accessibility of concepts, of art, of design itself.
-        </p>
-        <p class="hero-positioning">
-          Gameplay / Technical Designer (Unity/C#). I build tactile mechanics, narrative pacing systems, 
-          and accessibility-first play.
-        </p>
-        <div class="hero-cta">
-          <a href="#work" class="btn btn--primary">See My Work</a>
-          <a href="kb/index.html" class="btn btn--vg101">VG101 Knowledge Base</a>
-          <a href="enjin/index.html" class="btn btn--tege">TEGE Engine</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="page">
+    <main class="about" id="main-content">
+      <div class="about__inner">
+        <img class="about__portrait"
+             src="images/self_portrait_2026.png"
+             alt="Marty - pixel art self portrait"
+             width="200" height="167">
 
-  <!-- Work -->
-  <section id="work" class="section section--alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Selected Work</span>
-        <h2 class="section-title">Videogames & Prototypes</h2>
-      </div>
+        <h1 class="about__name">Marty Scott</h1>
+        <span class="about__subtitle">I make videogames about the human experience.</span>
+        <span class="about__roles">Game Designer &nbsp;·&nbsp; Developer &nbsp;·&nbsp; Musician</span>
 
-      <div class="subsection-header">
-        <h3 class="subsection-title">Flagship Projects</h3>
-        <p class="subsection-desc">The three clearest signals of how I design, build, and ship.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Featured: Iris -->
-        <article class="project-card project-card--featured">
-          <div class="project-card__image">
-            <img src="images/iris.jpg" alt="Iris - a cozy psychological horror videogame" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Cozy Horror</span>
-              <span class="project-card__tag">In Development</span>
-            </div>
-            <h3 class="project-card__title">Iris</h3>
-            <p class="project-card__desc">
-              Cozy psychological horror about Nema, her secret, and the ritual of tending flowers.
-            </p>
-            <p class="project-card__role">
-              Role: Code / Design / Sound (2-person team)
-            </p>
-            <ul class="project-card__bullets">
-              <li>Built a custom flower-trimming mechanic inspired by ikebana mathematics.</li>
-              <li>Designed perspective shifts between third and first person exploration.</li>
-              <li>Prototyped in 4 months with a 2-person team (art/design/3D + code/design/sound).</li>
-            </ul>
-            <p class="project-card__desc" style="font-style: italic; color: var(--text-muted);">
-              Just remember: love is hard.
-            </p>
-          </div>
-        </article>
-
-        <!-- RhodesTrip -->
-        <article class="project-card">
-          <div class="project-card__image">
-            <img src="images/rhodestrip.jpg" alt="RhodesTrip - a road trip narrative game" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Narrative</span>
-              <span class="project-card__tag">2025</span>
-            </div>
-            <h3 class="project-card__title">RhodesTrip</h3>
-            <p class="project-card__desc">
-              Third-person narrative road trip about driving, talking, and listening to music on the way home.
-            </p>
-            <p class="project-card__role">
-              Role: Coder / Designer (4-person team)
-            </p>
-            <ul class="project-card__bullets">
-              <li>Created a custom state machine scripting language for narrative pacing.</li>
-              <li>Designed character-driven encounters across distinct biomes.</li>
-              <li>Composed music and handled SFX for the demo.</li>
-            </ul>
-            <a href="https://martychouette.itch.io/rhodestrip" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              Play Demo on Itch.io →
-            </a>
-          </div>
-        </article>
-
-        <!-- Blackout -->
-        <article class="project-card">
-          <div class="project-card__image">
-            <img src="images/blackout.jpg" alt="Blackout - a sightless 2D platformer" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Accessibility</span>
-              <span class="project-card__tag">2025</span>
-            </div>
-            <h3 class="project-card__title">Blackout</h3>
-            <p class="project-card__desc">
-              Sightless 2D platformer that navigates via sound and NPC directions.
-            </p>
-            <p class="project-card__role">
-              Role: Solo developer
-            </p>
-            <ul class="project-card__bullets">
-              <li>Built audio-first navigation that replaces visual cues.</li>
-              <li>Designed NPC direction systems to guide traversal.</li>
-              <li>Published a supporting research <a href="https://sites.google.com/nyu.edu/blackout/" target="_blank">whitepaper</a> on blind play.</li>
-            </ul>
-            <a href="https://martychouette.itch.io/blackout" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              Play on Itch.io →
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <div class="subsection-header subsection-header--spaced">
-        <h3 class="subsection-title">More Projects</h3>
-        <p class="subsection-desc">Additional experiments, prototypes, and short-form work.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Solus -->
-        <article class="project-card">
-          <div class="project-card__image">
-            <img src="images/solus.jpg" alt="Solus - a walking sim about isolation" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Walking Sim</span>
-              <span class="project-card__tag">2024</span>
-            </div>
-            <h3 class="project-card__title">Solus</h3>
-            <p class="project-card__desc">
-              A walking sim about working for <em>Ego Vacations</em>, a vacation simulation company. 
-              The Batavia is a lonely ship, just you and a thousand souls plugged into simulations. 
-              You need to find out how to reboot the system, even if there is something else here.
-            </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
-              Solo developed • 5-10 min • Features a secret dream level with a monologue about technology, isolationism, and the ever-increasing gap between us
-            </p>
-            <a href="https://martychouette.itch.io/solus" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              Play on Itch.io →
-            </a>
-          </div>
-        </article>
-
-        <!-- Cold Flame -->
-        <article class="project-card">
-          <div class="project-card__image">
-            <img src="images/coldflame.jpg" alt="Cold Flame - a physics game about chopping wood" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Autobiographical</span>
-              <span class="project-card__tag">2024</span>
-            </div>
-            <h3 class="project-card__title">Cold Flame</h3>
-            <p class="project-card__desc">
-              A physics videogame about life, loss, and chopping wood. Three of the most heart-wrenching
-              moments of heartbreak from my life. The idea that happiness was never part of my family tree,
-              and that exercising self-worth is hard in a world that tells you you're too sharp, too loud, too much.
-            </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
-              Solo developed • 9 min with voiceover • Chop wood, stack wood, maybe chop down the ties of self-sabotage
-            </p>
-            <a href="https://martychouette.itch.io/coldflame" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              Play on Itch.io →
-            </a>
-          </div>
-        </article>
-
-        <!-- Prototype Gallery -->
-        <article class="project-card">
-          <div class="project-card__image">
-            <img src="images/prototype_icon.jpg" alt="Mosaic of 11 prototype games from NYU Prototype Studio" loading="lazy">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Unity</span>
-              <span class="project-card__tag">Prototypes</span>
-              <span class="project-card__tag">2025</span>
-            </div>
-            <h3 class="project-card__title">Prototype Studio Gallery</h3>
-            <p class="project-card__desc">
-              11 weekly prototypes from NYU Prototype Studio. A wide variety of explorations -
-              text adventures, physics toys, 3D environments, naval strategy, emotional vignettes,
-              abstract interactions. Each one built in a week, each one a different question.
-            </p>
-            <p style="font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-sm);">
-              Solo developed • One per week • Fall 2025
-            </p>
-            <a href="https://martychouette.itch.io/fall-2025-protoype-gallery" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              Play on Itch.io →
-            </a>
-          </div>
-        </article>
-
-        <!-- Snoop -->
-        <article class="project-card project-card--playdate">
-          <div class="project-card__image">
-            <img src="images/snoop.svg" alt="Snoop - surveillance game for Playdate" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">C++</span>
-              <span class="project-card__tag">Playdate</span>
-              <span class="project-card__tag">Procedural</span>
-            </div>
-            <h3 class="project-card__title">Snoop</h3>
-            <p class="project-card__desc">
-              Surveillance game for Playdate. 50 buildings, 8 districts, "The Architect"
-              conspiracy. All procedural graphics, crank mechanics.
-            </p>
-            <p style="font-size: var(--text-sm); color: #b0b0b0; margin-top: var(--space-sm);">
-              Solo developed &bull; 400&times;240, 1-bit &bull; 50 levels, full story arc
-            </p>
-            <a href="snoop-reference.html" class="project-card__link" target="_blank" style="margin-top: var(--space-md); display: inline-block;">
-              View Scene Reference &rarr;
-            </a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Resources -->
-  <section id="resources" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Resources</span>
-        <h2 class="section-title">Engine, Tools & Pedagogy</h2>
-      </div>
-
-      <div class="projects-grid">
-        <!-- TEGE - The Enjin Game Engine -->
-        <article class="project-card project-card--tege">
-          <div class="project-card__image">
-            <img src="images/enjin_1.jpg" alt="TEGE - The Enjin Game Engine editor interface" loading="lazy">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">C++20</span>
-              <span class="project-card__tag">Vulkan</span>
-              <span class="project-card__tag">Game Engine</span>
-            </div>
-            <h3 class="project-card__title">TEGE - The Enjin Game Engine</h3>
-            <p class="project-card__desc">
-              A proprietary, licensable game engine built from scratch. Vulkan renderer with PBR materials and ray tracing,
-              ECS architecture with 70+ component types, full editor with 20+ ImGui panels, Jolt Physics and Box2D backends,
-              ~480 AngelScript bindings, 136+ node visual scripting, shader graph, procedural generation, and HTML5 export.
-            </p>
-            <p class="project-card__desc" style="font-size: var(--text-sm); margin-top: var(--space-sm);">
-              Solo developed • C++20 / Vulkan 1.3 • Proprietary
-            </p>
-            <a href="enjin/index.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
-              Explore →
-            </a>
-            <a href="enjin/engine-analysis.html" class="project-card__link" style="margin-top: var(--space-sm); display: inline-block;">
-              Technical Analysis →
-            </a>
-          </div>
-        </article>
-
-        <!-- VG101 -->
-        <article class="project-card project-card--vg101">
-          <div class="project-card__image">
-            <img src="images/VG101.png" alt="VG101 Knowledge Base - a videogame design text" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Pedagogy</span>
-              <span class="project-card__tag">Framework</span>
-              <span class="project-card__tag">In Development</span>
-            </div>
-            <h3 class="project-card__title">VG101 Knowledge Base</h3>
-            <p class="project-card__desc">
-              A videogame design text built on a framework of Gesture + Aesthetic Heritage.
-              About the accessibility of videogames. Breaking the gamer taboo and accepting
-              the medium in its entirety. Not just product or entertainment, not just art.
-              Both and neither. The creations that take full advantage of the medium know this.
-            </p>
-            <p class="project-card__desc" style="font-size: var(--text-sm); margin-top: var(--space-sm);">
-              Online resource first, then book, then workshops
-            </p>
-            <a href="kb/index.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
-              Explore →
-            </a>
-          </div>
-        </article>
-
-        <!-- Playdate Draw Tool -->
-        <article class="project-card project-card--playdate">
-          <div class="project-card__image">
-            <img src="images/playdate-draw.svg" alt="Playdate Draw Tool - browser-based pixel art editor" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="project-card__content">
-            <div class="project-card__tags">
-              <span class="project-card__tag">Tool</span>
-              <span class="project-card__tag">Playdate</span>
-              <span class="project-card__tag">Browser-Based</span>
-            </div>
-            <h3 class="project-card__title">Playdate Draw Tool</h3>
-            <p class="project-card__desc">
-              Browser-based pixel art editor for Playdate's 400&times;240 1-bit display.
-              Layers, dithering, animation, undo/redo, C code export.
-            </p>
-            <p style="font-size: var(--text-sm); color: #b0b0b0; margin-top: var(--space-sm);">
-              Solo developed &bull; Single HTML file &bull; No dependencies
-            </p>
-            <a href="playdate-draw.html" class="project-card__link" style="margin-top: var(--space-md); display: inline-block;">
-              Open Draw Tool &rarr;
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Writings -->
-  <section id="writings" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Writings</span>
-        <h2 class="section-title">Essays, Research & Commentary</h2>
-        <p style="color: var(--text-muted); margin-top: var(--space-sm);">Academic writing, technical breakdowns, and videogame commentary.</p>
-      </div>
-
-      <div class="writings-grid">
-        <!-- Placeholder writing 1 -->
-        <article class="writing-card">
-          <div class="writing-card__meta">
-            <span class="writing-card__type">Research</span>
-            <span class="writing-card__date">2025</span>
-          </div>
-          <h3 class="writing-card__title">Blackout: Designing for Sightless Play</h3>
-          <p class="writing-card__excerpt">
-            A study in blind videogames and alternate design theory. How do we craft meaningful 
-            experiences outside of the visual component?
-          </p>
-          <a href="https://sites.google.com/nyu.edu/blackout/" class="writing-card__link" target="_blank">Read Whitepaper →</a>
-        </article>
-
-        <!-- Placeholder for future writings -->
-        <article class="writing-card writing-card--placeholder">
-          <div class="writing-card__meta">
-            <span class="writing-card__type">Coming Soon</span>
-          </div>
-          <h3 class="writing-card__title">More writings on the way</h3>
-          <p class="writing-card__excerpt">
-            Essays on videogame design, technical breakdowns, and commentary on the medium.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="section section--alt">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="images/vox_self_portrait_2024.jpg" alt="Marty - pixel art self portrait" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;background:#f5f5f4;">
-        </div>
-        <div class="about-content">
-          <h2>About Me</h2>
+        <div class="about__bio">
           <p>
-            Hi there! I'm <strong>Marty</strong>, a computer scientist, videogame developer, and musician
-            who loves old, new, and future technologies.
+            Music teacher and sound engineer turned computer scientist. Though a bit sad or silly at times,
+            I push to craft something serene and sincere.
           </p>
           <p>
-            I try to make videogames about the human experience: the surreal, serene, and sincere.
-            I'm infinitely interested in what is to come for the medium of videogames.
+            My work in accessibility isn't just about addressing the disabilities we have. It's also about our
+            accessibility to concepts, accessibility to art styles, and to game design itself.
+            I believe removing barriers to entry in all their forms is the path to a healthier, happier, more fulfilled
+            space for Video Games.
+
           </p>
-          <p>
-            My accessibility work isn't just about disability. It's about accessibility of concepts,
-            accessibility of art, accessibility of design itself. I love diving into design challenges
-            that require rigor.
-          </p>
-          <p>
-            This winter I served on the <strong>Peabody Awards Screening Committee</strong> for Interactive
-            and Immersive work. I've also spent six years teaching music at Music & Arts, and currently
-            TA at the NYU Game Center.
-          </p>
-          <p>
-            I also make music as <a href="https://www.beargatsby.com" target="_blank"><strong>Bear Gatsby</strong></a>:
-            DIY synth bedroom indie rock, a bit avant-garde, and some chiptune.
-          </p>
-          
-          <h3 style="margin-top: var(--space-xl); margin-bottom: var(--space-md);">Education</h3>
-          <ul style="list-style: none; color: var(--text-muted);">
-            <li style="margin-bottom: var(--space-sm);"><strong>NYU Game Center</strong>, MFA in Game Design (2024-2026)</li>
-            <li style="margin-bottom: var(--space-sm);"><strong>Cal Poly Pomona</strong>, BS in Computer Science (2021-2023)</li>
-            <li style="margin-bottom: var(--space-sm);"><strong>Mt. San Antonio College</strong>, AS in Programming & Database Management (2018-2021)</li>
-            <li><strong>Musicians Institute</strong>, Piano Technology & Audio Engineering (2009-2011)</li>
-          </ul>
-          
-          <div class="about-links" style="margin-top: var(--space-xl);">
-            <a href="https://martychouette.itch.io/" class="btn btn--primary" target="_blank">Itch.io</a>
-            <a href="https://github.com/MartyChouette" class="btn btn--secondary" target="_blank">GitHub</a>
-            <a href="https://www.beargatsby.com" class="btn btn--secondary" target="_blank">Music</a>
-          </div>
+        </div>
+
+        <span class="about__label">Education</span>
+        <ul class="about__edu">
+          <li>
+            <span class="edu-school">NYU Game Center</span>
+            <span class="edu-detail">MFA Game Design · 2024-2026</span>
+          </li>
+          <li>
+            <span class="edu-school">Cal Poly Pomona</span>
+            <span class="edu-detail">BS Computer Science · 2021-2023</span>
+          </li>
+          <li>
+            <span class="edu-school">Mt. San Antonio College</span>
+            <span class="edu-detail">AS Programming · 2018-2021</span>
+          </li>
+          <li>
+            <span class="edu-school">Musicians Institute</span>
+            <span class="edu-detail">Piano Tech &amp; Audio Eng · 2009-2011</span>
+          </li>
+        </ul>
+
+        <span class="about__label">Contact</span>
+        <div class="about__links">
+          <a href="mailto:greatmartyscott@gmail.com" class="about-link about-link--email">greatmartyscott@gmail.com</a>
+          <a href="https://github.com/MartyChouette" class="about-link" target="_blank">GitHub</a>
+          <a href="https://martychouette.itch.io/" class="about-link" target="_blank">itch.io</a>
+          <a href="https://www.linkedin.com/in/martyscott64/" class="about-link" target="_blank">LinkedIn</a>
         </div>
       </div>
+    </main>
+
+    <aside class="shelf" aria-label="Projects">
+      <div class="shelf-header">
+        <span class="shelf-header__text">Work</span>
+        <span class="shelf-header__count" id="shelf-count"></span>
+      </div>
+      <div class="shelf-cards" id="shelf-tabs"></div>
+    </aside>
+  </div>
+
+  <!-- Sliding card panel -->
+  <div class="card-panel" id="card-panel" role="dialog" aria-modal="true" aria-label="Project details" aria-hidden="true">
+    <div class="card-panel__header">
+      <span class="card-panel__category" id="panel-category"></span>
+      <button class="card-panel__close" id="panel-close" aria-label="Close project details">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
-  </section>
+    <div class="card-panel__scroll" id="panel-content"></div>
+  </div>
 
-  <!-- Resume -->
-  <section id="resume" class="section section--alt">
-    <div class="container container--narrow">
-      <div class="resume-header">
-        <span class="section-label">Resume</span>
-        <h2 class="resume-title">Tailored resumes by role</h2>
-        <p class="resume-subtitle">
-          Tailored per role to keep the signal tight. PDFs are available on request while I finalize the newest versions.
-        </p>
-      </div>
+  <div class="overlay" id="overlay"></div>
 
-      <div class="resume-list" role="list">
-        <div class="resume-row" role="listitem">
-          <div class="resume-row__meta">
-            <span class="resume-row__title">Teaching Resume</span>
-            <span class="resume-row__desc">Higher-ed, mentorship, curriculum, workshops.</span>
-          </div>
-          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Teaching">
-            Request PDF
-          </a>
-        </div>
+  <!-- Easter eggs -->
+  <a href="cleome/story_weaver.html" class="cleome-egg" aria-label="Story Weaver">
+    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" aria-hidden="true">
+      <path d="M12 2c-1.5 3-4 5-4 8a4 4 0 008 0c0-3-2.5-5-4-8z" fill="#44403c"/>
+      <line x1="12" y1="14" x2="12" y2="22" stroke="#44403c" stroke-width="1.2"/>
+      <path d="M12 17c-2-1-3-0.5-3.5 0.5" stroke="#44403c" stroke-width="0.8" fill="none"/>
+    </svg>
+  </a>
+  <a href="ink-ribbon/index.html" class="inkribbon-egg" aria-label="Ink Ribbon">
+    <svg viewBox="0 0 20 16" width="12" height="10" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="18" height="14" rx="2" stroke="#a8a29e" stroke-width="1.2"/>
+      <path d="M1 3l9 6 9-6" stroke="#a8a29e" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <a href="snoop/story_planner.html" class="snoop-egg-footer" aria-label="Snoop Story Planner">
+    <svg viewBox="0 0 20 20" width="11" height="11" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="5.5" stroke="#555" stroke-width="1.5"/>
+      <line x1="12" y1="12" x2="18" y2="18" stroke="#555" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </a>
 
-        <div class="resume-row" role="listitem">
-          <div class="resume-row__meta">
-            <span class="resume-row__title">Programming Resume</span>
-            <span class="resume-row__desc">Software engineering, engines, tools, systems.</span>
-          </div>
-          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Programming">
-            Request PDF
-          </a>
-        </div>
-
-        <div class="resume-row" role="listitem">
-          <div class="resume-row__meta">
-            <span class="resume-row__title">Game Development Resume</span>
-            <span class="resume-row__desc">Design, gameplay, narrative systems, prototypes.</span>
-          </div>
-          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Game%20Development">
-            Request PDF
-          </a>
-        </div>
-
-        <div class="resume-row" role="listitem">
-          <div class="resume-row__meta">
-            <span class="resume-row__title">Combined Resume</span>
-            <span class="resume-row__desc">All roles in one concise PDF.</span>
-          </div>
-          <a class="btn btn--secondary resume-row__cta" href="mailto:greatmartyscott@gmail.com?subject=Resume%20request%3A%20Combined">
-            Request PDF
-          </a>
-        </div>
-      </div>
-
-      <div class="resume-note">
-        Prefer one combined resume or a quick custom edit? Email me and I can tailor it fast.
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container container--narrow">
-      <div class="section-header text-center">
-        <span class="section-label">Contact</span>
-        <h2 class="section-title">Get in Touch</h2>
-      </div>
-
-      <div style="text-align: center; margin-top: var(--space-xl);">
-        <p style="font-size: var(--text-lg); margin-bottom: var(--space-xl);">
-          <a href="mailto:greatmartyscott@gmail.com" style="color: var(--secondary);">greatmartyscott@gmail.com</a>
-        </p>
-        
-        <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
-          <a href="https://github.com/MartyChouette" class="btn btn--secondary" target="_blank">GitHub</a>
-          <a href="https://martychouette.itch.io/" class="btn btn--secondary" target="_blank">Itch.io</a>
-          <a href="https://www.linkedin.com/in/martyscott64/" class="btn btn--secondary" target="_blank">LinkedIn</a>
-          <a href="https://www.beargatsby.com" class="btn btn--secondary" target="_blank">Music</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <ul class="footer-links">
-        <li><a href="index.html" class="footer-link">Home</a></li>
-        <li><a href="#work" class="footer-link">Work</a></li>
-        <li><a href="#writings" class="footer-link">Writings</a></li>
-        <li><a href="kb/index.html" class="footer-link footer-link--vg101">VG101</a></li>
-        <li><a href="https://www.beargatsby.com" class="footer-link" target="_blank">Music</a></li>
-        <li><a href="enjin/index.html" class="footer-link footer-link--tege">TEGE</a></li>
-        <li><a href="https://martychouette.itch.io/" class="footer-link footer-link--itch" target="_blank">Itch.io</a></li>
-        <li><a href="#resume" class="footer-link">Resume</a></li>
-        <li><a href="#contact" class="footer-link">Contact</a></li>
-      </ul>
-      <p class="footer-copy">© 2026 Marty Scott</p>
-    </div>
-  </footer>
+  <a href="mojabble/play.html" class="moj-egg" aria-label="Play MojAbble">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="2" width="18" height="20" rx="3" fill="#e8d4a8" stroke="#b8960b" stroke-width="1"/>
+      <text x="12" y="16" text-anchor="middle" fill="#2a1810" font-size="13" font-weight="900" font-family="Georgia, serif">M</text>
+      <text x="17" y="20" text-anchor="end" fill="rgba(42,24,16,0.4)" font-size="5" font-weight="700" font-family="sans-serif">3</text>
+    </svg>
+  </a>
 
   <script>
-    // Mobile nav toggle
-    document.querySelector('.nav-toggle').addEventListener('click', () => {
-      document.querySelector('.nav-links').classList.toggle('active');
+    const PROJECTS = [
+      {
+        id: 'mojabble', name: 'MojAbble', category: 'Games', year: '2025',
+        tags: ['Vanilla JS', 'Canvas 2D', 'Word Game'],
+        image: 'images/mojabble-card.svg', imageAlt: 'MojAbble tile board',
+        desc: 'A word videogame that fuses Mahjong Solitaire tile layouts with Scrabble letter scoring. Pull free tiles off the board, build words, chain combos, and climb the global leaderboard. In browser and a live closed alpha running on iOS and Android builds.',
+        role: 'Solo developed · Zero JS dependencies',
+        bullets: [],
+        links: [
+          { label: 'Play MojAbble', url: 'mojabble/play.html', primary: true },
+          { label: 'Visit Site', url: 'mojabble/index.html' },
+          { label: 'System Docs', url: 'mojabble/docs.html' }
+        ]
+      },
+      {
+        id: 'spent-bloom', name: 'Spent Bloom', category: 'Games', year: '2026',
+        tags: ['Unity', 'Dating Sim', 'Puzzle', 'In Development'],
+        image: 'images/spentbloom.png', imageAlt: "Nema's apartment in Paris",
+        video: '-GFV18mngOs',
+        desc: 'Part organizational dating-sim, part flower-trimming puzzle. We accompany Nema getting ready for her nightly dates. With an eye for the procrustean we help Nema tidy up the space to be judged by her guest. A light game about the hard things we go through and the dark art of tidying up.',
+        role: 'Code / Design / Sound · 2-person team',
+        bullets: ['Designed a cozy, communicative game feel across organizational and puzzle mechanics.'],
+        links: []
+      },
+      {
+        id: 'iris', name: 'Iris', category: 'Games', year: '2025',
+        tags: ['Unity', 'Cozy Horror'],
+        image: 'images/iris.jpg', imageAlt: 'Iris - cozy psychological horror',
+        video: 'Gc4040wCwXU',
+        desc: 'Cozy psychological horror physics game about Nema\'s secret and the ritual of tending flowers. Just remember: love is hard.',
+        role: 'Code / Design / Sound · 2-person team',
+        bullets: [
+          'Built a custom flower-trimming mechanic inspired by ikebana mathematics.',
+          'Designed perspective shifts between third and first person exploration.',
+          'Prototyped in 4 months with a 2-person team.'
+        ],
+        links: []
+      },
+      {
+        id: 'rhodestrip', name: 'RhodesTrip', category: 'Games', year: '2025',
+        tags: ['Unity', 'Narrative'],
+        image: 'images/rhodestrip.jpg', imageAlt: 'RhodesTrip - narrative road trip',
+        video: '4cmzTLnjUfY',
+        desc: 'Third-person narrative road trip about driving, talking, and listening to music on the way home.',
+        role: 'Coder / Designer / Sound · 4-person team',
+        bullets: [
+          'Created a custom state machine scripting language for narrative pacing.',
+          'Designed character-driven encounters across distinct biomes.',
+          'Composed music and handled SFX for the demo.'
+        ],
+        links: [{ label: 'Play Demo on Itch.io', url: 'https://martychouette.itch.io/rhodestrip', primary: true, external: true }]
+      },
+      {
+        id: 'solus', name: 'Solus', category: 'Games', year: '2024',
+        tags: ['Unity', 'Walking Sim'],
+        image: 'images/solus.jpg', imageAlt: 'Solus - a walking sim about isolation',
+        desc: 'A walking sim about working for Ego Vacations, a vacation simulation company. The Batavia is a lonely ship - just you and a thousand souls plugged into BIV simulated vacations.',
+        role: 'Solo developer · 5-10 min',
+        bullets: ['Features a secret dream level with a monologue about technology, isolationism, and the ever-increasing gap between us.'],
+        links: [{ label: 'Play on Itch.io', url: 'https://martychouette.itch.io/solus', primary: true, external: true }]
+      },
+      {
+        id: 'cold-flame', name: 'Cold Flame', category: 'Games', year: '2024',
+        tags: ['Unity', 'Autobiographical'],
+        image: 'images/coldflame.jpg', imageAlt: 'Cold Flame - a physics game about chopping wood',
+        desc: 'A physics videogame about life, loss, and chopping wood. A narration about the heart-wrenching moments of a heartbroken life.',
+        role: 'Solo developer · 9 min with voiceover',
+        bullets: [],
+        links: [{ label: 'Play on Itch.io', url: 'https://martychouette.itch.io/coldflame', primary: true, external: true }]
+      },
+      {
+        id: 'blackout', name: 'Blackout', category: 'Games', year: '2025',
+        tags: ['Unity', 'Accessibility'],
+        image: 'images/blackout.jpg', imageAlt: 'Blackout - a sightless 2D platformer',
+        desc: 'A "sightless" 2D platformer focused on auditory navigation. A study of software and disability as a design question and a creative opportunity.',
+        role: 'Solo developer',
+        bullets: [
+          'Audio-driven feedback and progression: navigation cues, mix logic, accessibility hooks, debug tools.',
+          'NPC directions guide traversal in place of sight.',
+          'Published a research whitepaper on designing for blind play.'
+        ],
+        links: [
+          { label: 'Play on Itch.io', url: 'https://martychouette.itch.io/blackout', primary: true, external: true },
+          { label: 'Read Whitepaper', url: 'https://sites.google.com/nyu.edu/blackout/', external: true }
+        ]
+      },
+      {
+        id: 'prototypes', name: 'Prototypes', category: 'Games', year: '2025',
+        tags: ['Unity', '11 Games', 'NYU'],
+        image: 'images/prototype_icon.jpg', imageAlt: 'Mosaic of 11 prototype games',
+        desc: 'One videogame a week from NYU Prototype Studio, 11 in all: text adventures, physics toys, 3D environments, naval strategy, emotional vignettes, abstract interactions.',
+        role: 'Solo developed · One per week · Fall 2025',
+        bullets: [],
+        links: [{ label: 'Play on Itch.io', url: 'https://martychouette.itch.io/fall-2025-protoype-gallery', primary: true, external: true }]
+      },
+      {
+        id: 'tege', name: 'TEGE', category: 'Tools', year: '2025',
+        tags: ['Game Engine', 'C++20', 'Vulkan 1.3', 'BSL 1.1'],
+        image: 'images/enjin-editor-workspace.png', imageAlt: 'TEGE - The Enjin Game Engine editor with shiba model',
+        desc: 'A game engine where aesthetics and accessibility are first and foremost. Pick any visual look, from PS1 retro to modern PBR lighting, in a single dropdown, and every videogame you make is accessible to every player by default.',
+        role: 'Solo developed · C++20 / Vulkan 1.3 · BSL 1.1',
+        bullets: [],
+        links: [
+          { label: 'Explore TEGE', url: 'tege/index.html', primary: true },
+          { label: 'Documentation', url: 'tege/manual.html' }
+        ]
+      },
+      {
+        id: 'cine', name: 'CINE', category: 'Tools', year: '2026',
+        tags: ['Unity 6', 'Cinemachine 3', 'C#', 'In Development'],
+        image: 'images/cine.webp', imageAlt: 'CINE - Virtual Cinematography Suite',
+        desc: 'A virtual cinematography suite for Unity structured like a DAW: non-destructively record, dub, and swap camera rigs, lenses, lighting, and blocking under locked takes. Rig inertia runs on a second-order spring-damper system, with director preset profiles and MIDI fader input for focus pulls and lighting.',
+        role: 'Solo developed · Unity 6 / URP 17 / Cinemachine 3',
+        bullets: [],
+        links: []
+      },
+      {
+        id: 'vg101', name: 'VG101', category: 'Academic', year: '2025', status: 'construction',
+        tags: ['Text', 'Framework', 'Under Construction'],
+        image: 'images/vg101-card.svg', imageAlt: 'VG101 Knowledge Base status screen',
+        desc: 'A videogame design text built on a framework of Gesture + Aesthetic Heritage. Together, they give us a way to understand videogames as their own medium.',
+        role: 'Author · In Development',
+        bullets: [],
+        links: [{ label: 'Under Construction', url: 'vg101/index.html' }]
+      },
+      {
+        id: 'this-game-is-running', name: 'This Game Is Running', category: 'Academic', year: '2025',
+        tags: ['Paper', 'Accessibility', 'Blind Play'],
+        image: 'images/blackout.jpg', imageAlt: 'This Game Is Running - Blackout research paper',
+        desc: 'The research whitepaper behind Blackout, on designing for blind play. It treats software and disability as a design question, not a compliance checkbox.',
+        role: 'Author · NYU Game Center',
+        bullets: [],
+        links: [{ label: 'Read the Paper', url: 'https://sites.google.com/nyu.edu/blackout/', primary: true, external: true }]
+      }
+    ];
+
+    // ── Build shelf cards ──
+    const shelfTabs = document.getElementById('shelf-tabs');
+    document.getElementById('shelf-count').textContent = PROJECTS.length;
+
+    let lastCat = null;
+    PROJECTS.forEach((p, i) => {
+      if (p.category !== lastCat) {
+        const cat = document.createElement('div');
+        cat.className = 'shelf-cat';
+        cat.textContent = p.category;
+        shelfTabs.appendChild(cat);
+        lastCat = p.category;
+      }
+
+      const btn = document.createElement('button');
+      btn.className = 'shelf-tab' + (p.status === 'construction' ? ' is-construction' : '');
+      btn.dataset.idx = i;
+      btn.setAttribute('aria-label', `View ${p.name}`);
+      btn.title = p.name;
+
+      const thumbHtml = p.image
+        ? `<img class="shelf-tab__thumb" src="${p.image}" alt="" loading="lazy">`
+        : `<div class="shelf-tab__thumb shelf-tab__thumb--placeholder">?</div>`;
+
+      btn.innerHTML = `${thumbHtml}<div class="shelf-tab__info">
+        <span class="shelf-tab__name">${p.name}</span>
+        <span class="shelf-tab__year">${p.year}</span>
+      </div>`;
+
+      shelfTabs.appendChild(btn);
     });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // ── Panel state ──
+    const panel = document.getElementById('card-panel');
+    const panelContent = document.getElementById('panel-content');
+    const panelCategory = document.getElementById('panel-category');
+    const panelClose = document.getElementById('panel-close');
+    const overlay = document.getElementById('overlay');
+    let activeIdx = null;
+
+    function openPanel(idx) {
+      const p = PROJECTS[idx];
+      const tabs = document.querySelectorAll('.shelf-tab');
+
+      if (activeIdx !== null) tabs[activeIdx].classList.remove('is-active');
+      activeIdx = idx;
+      tabs[idx].classList.add('is-active');
+
+      panelCategory.textContent = p.category;
+
+      let html = '';
+
+      if (p.video) {
+        html += `<div class="card-media" id="yt-${p.id}" data-video="${p.video}" role="button" tabindex="0" aria-label="Play ${p.name} trailer">
+          <img src="${p.image}" alt="${p.imageAlt}" loading="lazy">
+          <svg class="yt-play" viewBox="0 0 68 48" width="56" height="40" aria-hidden="true">
+            <path d="M66.5 7.7s-.7-4.7-2.8-6.8C60.7-2 57.2-2 55.6-2.2 46.4-3 34-3 34-3s-12.4 0-21.6 1C10.8-1.8 7.3-1.8 4.3 1.2 2.2 3.3 1.5 8 1.5 8S.8 13.5.8 19v5.2c0 5.5.7 11 .7 11s.7 4.7 2.8 6.8c3 3 7 2.9 8.7 3.2C19.4 45.8 34 46 34 46s12.4 0 21.6-1c1.6-.2 5.1-.2 8.1-3.2 2.1-2.1 2.8-6.8 2.8-6.8s.7-5.5.7-11V19c0-5.5-.7-11.3-.7-11.3z" fill="red"/>
+            <path d="M27 33V14l18 9.5z" fill="#fff"/>
+          </svg>
+        </div>`;
+      } else if (p.image) {
+        html += `<div class="card-media card-media--static${p.status === 'construction' ? ' card-media--construction' : ''}"><img src="${p.image}" alt="${p.imageAlt}" loading="lazy"></div>`;
+      }
+
+      html += `<div class="card-body">`;
+      if (p.status === 'construction') html += `<span class="card-badge-wip">Under Construction</span>`;
+      if (p.tags.length) html += `<div class="card-tags">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>`;
+      html += `<h2 class="card-title">${p.name}</h2><span class="card-year">${p.year}</span>`;
+      html += `<p class="card-desc">${p.desc}</p>`;
+      if (p.role) html += `<div class="card-role">${p.role}</div>`;
+      if (p.bullets.length) html += `<ul class="card-bullets">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
+      if (p.links.length) {
+        html += `<div class="card-links">${p.links.map(l =>
+          `<a href="${l.url}" class="card-link${l.primary ? ' card-link--primary' : ''}"${l.external ? ' target="_blank"' : ''}>
+            <span>${l.label}</span>
+            <span class="card-link__arrow">${l.external ? '↗' : '→'}</span>
+          </a>`
+        ).join('')}</div>`;
+      }
+      html += `</div>`;
+
+      panelContent.innerHTML = html;
+      panelContent.scrollTop = 0;
+
+      const ytEl = panelContent.querySelector(`#yt-${p.id}`);
+      if (ytEl) {
+        function activateYT() {
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube.com/embed/${ytEl.dataset.video}?autoplay=1`;
+          iframe.setAttribute('frameborder', '0');
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+          iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+          ytEl.style.position = 'relative';
+          ytEl.innerHTML = '';
+          ytEl.appendChild(iframe);
         }
-      });
+        ytEl.addEventListener('click', activateYT);
+        ytEl.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateYT(); }
+        });
+      }
+
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('is-visible');
+      panelClose.focus();
+    }
+
+    function closePanel() {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('is-visible');
+      if (activeIdx !== null) {
+        const tabs = document.querySelectorAll('.shelf-tab');
+        tabs[activeIdx].classList.remove('is-active');
+        tabs[activeIdx].focus();
+        activeIdx = null;
+      }
+    }
+
+    shelfTabs.addEventListener('click', e => {
+      const tab = e.target.closest('.shelf-tab');
+      if (!tab) return;
+      const idx = parseInt(tab.dataset.idx);
+      if (activeIdx === idx) { closePanel(); return; }
+      openPanel(idx);
     });
+
+    panelClose.addEventListener('click', closePanel);
+    overlay.addEventListener('click', closePanel);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+    });
+
+    // ── Hidden door (Konami code → the other side) ──
+    // Nothing on the page hints at this. Change SEQUENCE to any keys
+    // (or spell a word, e.g. ['m','a','r','t','y']) to set your own knock.
+    (function () {
+      const SEQUENCE = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+      const DEST = 'threshold/index.html';
+      let pos = 0;
+      window.addEventListener('keydown', (e) => {
+        // ignore while typing in a field
+        const t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        pos = (key === SEQUENCE[pos]) ? pos + 1 : (key === SEQUENCE[0] ? 1 : 0);
+        if (pos < SEQUENCE.length) return;
+        pos = 0;
+        // a thin line of warm light spills under a door, then we go through
+        const light = document.createElement('div');
+        light.setAttribute('aria-hidden', 'true');
+        light.style.cssText =
+          'position:fixed;left:0;right:0;bottom:0;height:3px;z-index:9999;' +
+          'background:#ffcf7a;box-shadow:0 0 30px 10px rgba(255,190,110,0.7),0 0 90px 30px rgba(255,170,90,0.35);' +
+          'opacity:0;transition:opacity .5s ease;pointer-events:none;';
+        document.body.appendChild(light);
+        requestAnimationFrame(() => { light.style.opacity = '1'; });
+        setTimeout(() => { window.location.href = DEST; }, 650);
+      });
+    })();
+
+    // ── Theme toggle ──
+    const themeBtn = document.getElementById('theme-toggle');
+    function syncThemeButton() {
+      const light = document.documentElement.hasAttribute('data-theme');
+      themeBtn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+    themeBtn.addEventListener('click', () => {
+      const toLight = !document.documentElement.hasAttribute('data-theme');
+      if (toLight) document.documentElement.setAttribute('data-theme', 'light');
+      else document.documentElement.removeAttribute('data-theme');
+      try { localStorage.setItem('m64-theme', toLight ? 'light' : 'dark'); } catch (e) {}
+      syncThemeButton();
+      window.dispatchEvent(new Event('m64-theme'));
+    });
+    syncThemeButton();
+  </script>
+
+  <script>
+    /* procedural background noise */
+    (function() {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      const NW = 256, NH = 192;
+      canvas.width = NW; canvas.height = NH;
+
+      /* value noise grid */
+      const GW = 16, GH = 12;
+      const grid = new Float32Array((GW + 2) * (GH + 2));
+      for (let i = 0; i < grid.length; i++) grid[i] = Math.random();
+
+      function smooth(t) { return t * t * (3 - 2 * t); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function vnoise(x, y) {
+        x = ((x % GW) + GW) % GW;
+        y = ((y % GH) + GH) % GH;
+        const xi = x | 0, yi = y | 0;
+        const xf = smooth(x - xi), yf = smooth(y - yi);
+        const x1 = (xi + 1) % GW, y1 = (yi + 1) % GH;
+        return lerp(
+          lerp(grid[yi * (GW + 2) + xi], grid[yi * (GW + 2) + x1], xf),
+          lerp(grid[y1 * (GW + 2) + xi], grid[y1 * (GW + 2) + x1], xf),
+          yf
+        );
+      }
+
+      const img = ctx.createImageData(NW, NH);
+      const px = img.data;
+      let t = 0;
+      let running = true;
+
+      function draw() {
+        const light = document.documentElement.hasAttribute('data-theme');
+        for (let y = 0; y < NH; y++) {
+          for (let x = 0; x < NW; x++) {
+            const fx = x / NW * GW, fy = y / NH * GH;
+            const v = vnoise(fx + t * 0.18, fy + t * 0.09) * 0.5
+                    + vnoise(fx * 2 - t * 0.12, fy * 2 + t * 0.06) * 0.3
+                    + vnoise(fx * 4 + t * 0.08, fy * 4 - t * 0.04) * 0.2;
+            /* dark: 11-22 very dark; light: 233-244 warm paper */
+            const lum = light ? 244 - v * 11 : 11 + v * 11;
+            const i = (y * NW + x) * 4;
+            px[i] = lum; px[i + 1] = lum;
+            px[i + 2] = Math.round(lum * (light ? 0.965 : 0.95)); /* faint warm-cool tint */
+            px[i + 3] = 255;
+          }
+        }
+        ctx.putImageData(img, 0, 0);
+        t += 0.003;
+        if (running) requestAnimationFrame(draw);
+      }
+
+      /* re-render the static frame when the theme flips */
+      window.addEventListener('m64-theme', () => { if (!running) draw(); });
+
+      /* pause when tab is hidden to save battery */
+      document.addEventListener('visibilitychange', () => {
+        running = !document.hidden;
+        if (running) requestAnimationFrame(draw);
+      });
+
+      /* respect reduced motion */
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        requestAnimationFrame(draw);
+      } else {
+        /* static single frame */
+        draw(); running = false;
+      }
+    })();
   </script>
 </body>
 </html>

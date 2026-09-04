@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ink Ribbon - Weaver</title>
+<style>
+:root {
+  --bg: #0e0c0a;
+  --bg2: #151210;
+  --bg3: #1c1814;
+  --surface: #141210;
+  --surface2: #1e1a16;
+  --border: #2e2822;
+  --text: #e8e0d4;
+  --text2: #8a7e6e;
+  --accent: #6a7e8c;
+  --accent2: #b89a6a;
+  --accent3: #d4a850;
+  --accent4: #c8b898;
+  --green: #6aaa6a;
+  --red: #c85040;
+  --blue: #5a8aaa;
+  --yellow: #d4a850;
+  --aurinian: #b83030;
+  --serennan: #d8d0c8;
+  --helvetan: #4878a8;
+  --trentaran: #7a68a8;
+  --supervision-close: #c85040;
+  --supervision-checked: #d4a850;
+  --supervision-glanced: #6aaa6a;
+  --supervision-unattended: #5a8aaa;
+  --doc-dictation: #c85040;
+  --doc-copywork: #8a7e6e;
+  --doc-incoming: #4878a8;
+  --doc-outgoing: #6aaa6a;
+  --doc-trade: #d4a850;
+  --doc-personal: #7a68a8;
+  --channel-daylight: #d4a850;
+  --channel-candlelight: #c8884a;
+  --channel-physical: #8a7e6e;
+  --tug-peace: #6aaa6a;
+  --tug-war: #c85040;
+  --tug-neutral: #d4a850;
+  --pacing-quiet: #5a8aaa;
+  --pacing-routine: #6aaa6a;
+  --pacing-tense: #d4a850;
+  --pacing-crisis: #c85040;
+  --pacing-climactic: #b83030;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.035; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size:128px 128px; }
+#app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+
+/* Top nav */
+#topbar { display: flex; align-items: center; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 16px; height: 48px; gap: 4px; }
+#topbar h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 16px; color: var(--text); margin-right: 16px; letter-spacing: 1px; font-weight: 400; text-shadow: 0 0 30px rgba(184,154,106,0.3); }
+#topbar h1 em { color: var(--accent2); font-style: italic; }
+#topbar h1 span { color: var(--text2); font-family: 'Consolas', 'Courier New', monospace; font-style: normal; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; vertical-align: super; }
+.tab-btn { background: none; border: none; color: var(--text2); padding: 12px 14px; cursor: pointer; font-size: 12px; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.tab-btn.active { color: var(--accent2); border-bottom-color: var(--accent2); text-shadow: 0 0 12px rgba(184,154,106,0.4); }
+#topbar .spacer { flex: 1; }
+.save-indicator { font-size: 11px; color: var(--green); opacity: 0; transition: opacity 0.3s; margin-right: 4px; }
+.save-indicator.show { opacity: 1; }
+.top-action { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 4px; }
+.top-action:hover { background: var(--accent2); color: #000; }
+
+/* Main content */
+#content { overflow: hidden; position: relative; }
+.tab-content { display: none; height: 100%; overflow: hidden; }
+.tab-content.active { display: flex; }
+
+/* Split view layout */
+.split-view { flex-direction: row; }
+.side-list { width: 240px; background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column; }
+.side-list h3 { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; }
+.side-list h3 button { background: none; border: 1px dashed var(--border); color: var(--accent3); padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 11px; }
+.side-list h3 button:hover { border-color: var(--accent3); background: rgba(212,168,80,0.1); }
+.list-items { flex: 1; overflow-y: auto; }
+.list-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(46,40,34,0.5); transition: background 0.15s; position: relative; }
+.list-item:hover { background: var(--surface2); }
+.list-item.active { background: var(--bg3); border-left: 3px solid var(--accent2); box-shadow: inset 0 0 20px rgba(184,154,106,0.06); }
+.list-item .li-name { font-size: 13px; font-weight: 600; }
+.list-item .li-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.list-item .li-tag { font-size: 9px; padding: 1px 6px; border-radius: 3px; display: inline-block; margin-top: 3px; }
+.editor-panel { flex: 1; overflow-y: auto; padding: 24px; max-width: 900px; }
+.editor-panel h2 { font-size: 20px; margin-bottom: 4px; text-shadow: 0 0 20px rgba(184,154,106,0.2); }
+.editor-panel .ep-sub { color: var(--text2); font-size: 12px; margin-bottom: 20px; }
+
+/* Form controls */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.form-group textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px; border-radius: 4px; font-family: inherit; font-size: 13px; line-height: 1.6; resize: vertical; min-height: 80px; }
+.form-group textarea:focus { outline: none; border-color: var(--accent2); }
+.form-group textarea.mono { font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; }
+.form-group input[type=text], .form-group input[type=number], .form-group input[type=color], .form-group select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 4px; font-size: 13px; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent2); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* Detail sections */
+.detail-section { margin-bottom: 16px; }
+.detail-section h4 { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+
+/* Cards */
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 10px; }
+.card .card-head { font-size: 12px; font-weight: 600; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.card .card-body { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.card textarea { width: 100%; min-height: 50px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 4px; font-family: inherit; font-size: 12px; line-height: 1.5; resize: vertical; }
+.card textarea:focus { outline: none; border-color: var(--accent2); }
+
+/* Tags */
+.tag-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); cursor: default; }
+.tag.removable { cursor: pointer; }
+.tag.removable:hover { border-color: var(--red); color: var(--red); }
+
+/* Reorder controls on list items */
+.reorder-btns { display: flex; flex-direction: column; gap: 0; margin-left: auto; flex-shrink: 0; opacity: 0.4; transition: opacity 0.15s; }
+.list-item:hover .reorder-btns, .list-item.active .reorder-btns { opacity: 1; }
+.reorder-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 10px; padding: 2px 6px; line-height: 1; border-radius: 3px; }
+.reorder-btn:hover { background: var(--bg3); color: var(--text); }
+
+/* Buttons */
+.btn { padding: 6px 14px; border-radius: 4px; border: 1px solid var(--border); cursor: pointer; font-size: 12px; background: var(--surface); color: var(--text); }
+.btn:hover { background: var(--bg3); }
+.btn-accent { background: var(--accent2); border-color: var(--accent2); color: #000; }
+.btn-accent:hover { opacity: 0.85; }
+.btn-danger { color: var(--red); border-color: transparent; background: none; }
+.btn-danger:hover { background: rgba(200,80,64,0.1); }
+.btn-row { display: flex; gap: 8px; margin-top: 12px; }
+
+/* Badges */
+.badge { font-size: 9px; padding: 2px 6px; border-radius: 3px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; }
+.badge-close { background: rgba(200,80,64,0.2); color: var(--supervision-close); border: 1px solid var(--supervision-close); }
+.badge-checked { background: rgba(212,168,80,0.2); color: var(--supervision-checked); border: 1px solid var(--supervision-checked); }
+.badge-glanced { background: rgba(106,170,106,0.2); color: var(--supervision-glanced); border: 1px solid var(--supervision-glanced); }
+.badge-unattended { background: rgba(90,138,170,0.2); color: var(--supervision-unattended); border: 1px solid var(--supervision-unattended); }
+
+.badge-dictation { background: rgba(200,80,64,0.15); color: var(--doc-dictation); border: 1px solid var(--doc-dictation); }
+.badge-copywork { background: rgba(138,126,110,0.15); color: var(--doc-copywork); border: 1px solid var(--doc-copywork); }
+.badge-incoming { background: rgba(72,120,168,0.15); color: var(--doc-incoming); border: 1px solid var(--doc-incoming); }
+.badge-outgoing { background: rgba(106,170,106,0.15); color: var(--doc-outgoing); border: 1px solid var(--doc-outgoing); }
+.badge-trade { background: rgba(212,168,80,0.15); color: var(--doc-trade); border: 1px solid var(--doc-trade); }
+.badge-personal { background: rgba(122,104,168,0.15); color: var(--doc-personal); border: 1px solid var(--doc-personal); }
+
+.badge-daylight { background: rgba(212,168,80,0.15); color: var(--channel-daylight); border: 1px solid var(--channel-daylight); }
+.badge-candlelight { background: rgba(200,136,74,0.15); color: var(--channel-candlelight); border: 1px solid var(--channel-candlelight); }
+.badge-physical { background: rgba(138,126,110,0.15); color: var(--channel-physical); border: 1px solid var(--channel-physical); }
+
+.badge-quiet { background: rgba(90,138,170,0.15); color: var(--pacing-quiet); border: 1px solid var(--pacing-quiet); }
+.badge-routine { background: rgba(106,170,106,0.15); color: var(--pacing-routine); border: 1px solid var(--pacing-routine); }
+.badge-tense { background: rgba(212,168,80,0.15); color: var(--pacing-tense); border: 1px solid var(--pacing-tense); }
+.badge-crisis { background: rgba(200,80,64,0.15); color: var(--pacing-crisis); border: 1px solid var(--pacing-crisis); }
+.badge-climactic { background: rgba(184,48,48,0.15); color: var(--pacing-climactic); border: 1px solid var(--pacing-climactic); }
+
+/* Color dot */
+.char-color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+
+/* Political alignment slider */
+.alignment-bar { width: 100%; height: 24px; border-radius: 12px; background: linear-gradient(to right, var(--serennan) 0%, var(--trentaran) 30%, var(--accent3) 50%, var(--helvetan) 70%, var(--aurinian) 100%); position: relative; cursor: pointer; border: 1px solid var(--border); }
+.alignment-bar .alignment-marker { position: absolute; top: -2px; width: 16px; height: 28px; background: var(--text); border-radius: 8px; border: 2px solid var(--bg); transform: translateX(-50%); pointer-events: none; }
+.alignment-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text2); margin-top: 2px; }
+
+/* Collapsible groups */
+.collapsible-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; cursor: pointer; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); user-select: none; }
+.collapsible-header:hover { background: var(--surface2); color: var(--text); }
+.collapsible-header .chevron { transition: transform 0.2s; font-size: 10px; }
+.collapsible-header.collapsed .chevron { transform: rotate(-90deg); }
+.collapsible-body { overflow: hidden; }
+.collapsible-body.collapsed { display: none; }
+
+/* Tug of war bar */
+.tug-bar { width: 100%; height: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; position: relative; overflow: hidden; }
+.tug-bar .tug-fill-peace { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(to right, var(--tug-peace), transparent); border-radius: 10px 0 0 10px; }
+.tug-bar .tug-fill-war { position: absolute; right: 0; top: 0; bottom: 0; background: linear-gradient(to left, var(--tug-war), transparent); border-radius: 0 10px 10px 0; }
+.tug-bar .tug-center { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--text2); transform: translateX(-50%); }
+.tug-bar .tug-needle { position: absolute; top: -2px; width: 12px; height: 24px; background: var(--accent3); border-radius: 6px; border: 2px solid var(--bg); transform: translateX(-50%); pointer-events: none; }
+.tug-mini-bar { width: 60px; height: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; display: inline-block; position: relative; overflow: hidden; vertical-align: middle; }
+.tug-mini-bar .tug-mini-fill { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+
+/* Day row layout for Day Planner */
+.day-row { display: flex; gap: 0; margin-bottom: 4px; min-height: 60px; }
+.day-label { width: 70px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--text2); background: var(--surface); border: 1px solid var(--border); border-radius: 4px 0 0 4px; gap: 2px; }
+.day-label .day-num { font-size: 20px; color: var(--text); }
+.day-content { flex: 1; background: var(--surface); border: 1px solid var(--border); border-left: none; border-radius: 0 4px 4px 0; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.day-row-group { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.day-row-label { font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; width: 55px; flex-shrink: 0; }
+.day-chip { font-size: 10px; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+.day-chip:hover { border-color: var(--accent2); transform: translateY(-1px); }
+.day-pacing-bar { height: 3px; border-radius: 2px; margin-top: 2px; }
+.day-pacing-bar.quiet { background: var(--pacing-quiet); }
+.day-pacing-bar.routine { background: var(--pacing-routine); }
+.day-pacing-bar.tense { background: var(--pacing-tense); }
+.day-pacing-bar.crisis { background: var(--pacing-crisis); }
+.day-pacing-bar.climactic { background: var(--pacing-climactic); }
+
+/* Act headers */
+.act-header { font-size: 14px; font-weight: 700; color: var(--accent2); margin: 16px 0 8px 0; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+
+/* Simulation chart */
+.sim-chart { width: 100%; height: 60px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; position: relative; overflow: hidden; margin-top: 12px; }
+.sim-chart .sim-zone { position: absolute; top: 0; bottom: 0; }
+.sim-chart .sim-zone.green { background: rgba(106,170,106,0.1); }
+.sim-chart .sim-zone.yellow { background: rgba(212,168,80,0.1); }
+.sim-chart .sim-zone.red { background: rgba(200,80,64,0.1); }
+.sim-chart .sim-bar { position: absolute; bottom: 0; width: 8px; border-radius: 4px 4px 0 0; transition: height 0.3s; }
+.sim-chart .sim-center { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--text2); opacity: 0.3; }
+
+/* Pipeline bar visualization */
+.pipeline-bar { width: 100%; height: 32px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; position: relative; overflow: hidden; margin-top: 12px; }
+.pipeline-band { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; color: var(--bg); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.pipeline-dot { position: absolute; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--red); border: 1px solid var(--bg); transform: translate(-50%, -50%); }
+
+/* Window indicator states table */
+.states-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.states-table th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--text2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.states-table td { padding: 6px 8px; border-bottom: 1px solid rgba(46,40,34,0.3); }
+.states-table td input, .states-table td textarea { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 4px 6px; border-radius: 3px; font-size: 12px; font-family: inherit; }
+.states-table td textarea { min-height: 40px; resize: vertical; }
+.states-table td input:focus, .states-table td textarea:focus { outline: none; border-color: var(--accent2); }
+
+/* Export */
+.export-section { margin-bottom: 20px; }
+.export-section h3 { font-size: 14px; margin-bottom: 8px; color: var(--accent3); }
+.export-code { background: #0d0c0a; border: 1px solid var(--border); border-radius: 6px; padding: 16px; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; line-height: 1.5; overflow: auto; max-height: 400px; white-space: pre; color: var(--text); }
+.export-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.export-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px; text-align: center; }
+.stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--accent2); text-shadow: 0 0 16px rgba(184,154,106,0.3); }
+.stat-card .stat-label { font-size: 11px; color: var(--text2); margin-top: 4px; }
+
+/* Validation */
+.validation-group { margin-bottom: 16px; }
+.validation-group h4 { font-size: 12px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.validation-group h4 .v-count { font-size: 10px; padding: 2px 6px; border-radius: 10px; }
+.v-pass { color: var(--green); border: 1px solid var(--green); }
+.v-warn { color: var(--accent3); border: 1px solid var(--accent3); }
+.v-fail { color: var(--red); border: 1px solid var(--red); }
+.v-item { font-size: 12px; padding: 6px 10px; border-left: 3px solid; margin-bottom: 4px; background: var(--bg); border-radius: 0 4px 4px 0; }
+
+/* Empty state */
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: var(--text2); font-size: 13px; }
+
+/* Overview full width */
+.full-width { flex-direction: column; overflow-y: auto; padding: 24px; gap: 0; }
+.overview-premise { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; line-height: 1.7; font-size: 14px; }
+.workflow-step { display: flex; align-items: flex-start; gap: 12px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; cursor: pointer; transition: all 0.15s; }
+.workflow-step:hover { border-color: var(--accent2); }
+.workflow-step .ws-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent2); color: #000; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.workflow-step .ws-text { font-size: 12px; line-height: 1.5; }
+.workflow-step .ws-text strong { color: var(--accent2); }
+
+/* Hidden layer indicator icon */
+.hidden-icon { font-size: 10px; color: var(--channel-candlelight); margin-left: 4px; }
+
+/* Complexity dots */
+.complexity-dots { display: flex; gap: 3px; align-items: center; }
+.complexity-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); }
+.complexity-dot.filled { background: var(--accent3); border-color: var(--accent3); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4a4038; }
+
+/* Vignette */
+#content::after { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at center, transparent 60%, rgba(14,12,10,0.4) 100%); z-index:0; }
+
+/* Mobile sidebar toggle */
+.mobile-toggle { display: none; width: 100%; padding: 10px 16px; background: var(--surface2); border: none; border-bottom: 1px solid var(--border); color: var(--accent2); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; flex-shrink: 0; }
+.mobile-toggle::after { content: ' \25BC'; font-size: 10px; opacity: 0.6; }
+.mobile-toggle.collapsed::after { content: ' \25B6'; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .side-list { width: 200px; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-row-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  html, body { height: 100dvh; }
+  #app { height: 100dvh; }
+  #topbar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; height: auto; min-height: 44px; padding: 0 8px; gap: 0; }
+  #topbar::-webkit-scrollbar { display: none; }
+  #topbar h1 { font-size: 12px; margin-right: 6px; flex-shrink: 0; letter-spacing: 2px; }
+  #topbar h1 span { display: none; }
+  .tab-btn { padding: 12px 10px; font-size: 11px; flex-shrink: 0; min-height: 44px; }
+  .spacer { flex: 0 0 4px; }
+  .top-action { padding: 8px 10px; font-size: 11px; flex-shrink: 0; min-height: 36px; }
+
+  .split-view { flex-direction: column !important; }
+  .mobile-toggle { display: block; }
+  .side-list {
+    width: 100% !important; max-height: 40vh; border-right: none !important; border-bottom: 1px solid var(--border);
+    overflow-y: auto; transition: max-height 0.25s ease;
+  }
+  .side-list.collapsed { max-height: 0 !important; overflow: hidden; border-bottom: none; }
+  .side-list h3 { position: sticky; top: 0; background: var(--surface); z-index: 2; }
+
+  .list-item { padding: 14px 16px; min-height: 48px; }
+  .list-item .li-name { font-size: 14px; }
+  .reorder-btns { opacity: 1; }
+  .reorder-btn { font-size: 16px; padding: 6px 10px; min-width: 36px; min-height: 28px; display: flex; align-items: center; justify-content: center; }
+
+  .editor-panel { padding: 16px; max-width: 100% !important; }
+  .form-group textarea { font-size: 16px; padding: 12px; min-height: 90px; line-height: 1.5; }
+  .form-group input[type=text], .form-group input[type=number], .form-group select { font-size: 16px; padding: 12px; min-height: 44px; }
+  .form-group label { font-size: 12px; margin-bottom: 6px; }
+
+  .btn { min-height: 40px; padding: 10px 16px; font-size: 13px; }
+  .btn-row { flex-wrap: wrap; }
+  .tag { font-size: 12px; padding: 4px 10px; min-height: 28px; display: inline-flex; align-items: center; }
+
+  .full-width { padding: 14px; }
+  .export-stats { grid-template-columns: repeat(3, 1fr); }
+  .stat-card .stat-num { font-size: 22px; }
+  .export-actions { flex-direction: column; }
+  .export-code { font-size: 10px; max-height: 300px; }
+
+  .day-row { flex-direction: column; min-height: auto; margin-bottom: 8px; }
+  .day-label { width: 100%; flex-direction: row; justify-content: flex-start; gap: 8px; padding: 8px 12px; border-radius: 4px 4px 0 0; }
+  .day-label .day-num { font-size: 16px; }
+  .day-content { border-radius: 0 0 4px 4px; border-left: 1px solid var(--border); padding: 10px; }
+  .day-chip { font-size: 12px; padding: 6px 10px; min-height: 32px; display: inline-flex; align-items: center; }
+}
+
+@media (max-width: 420px) {
+  #topbar h1 { display: none; }
+  .tab-btn { padding: 10px 8px; font-size: 10px; }
+  .export-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  #topbar { padding-top: env(safe-area-inset-top); padding-left: max(8px, env(safe-area-inset-left)); padding-right: max(8px, env(safe-area-inset-right)); }
+  .full-width { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+  .editor-panel { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+}
+
+@media (max-height: 500px) and (max-width: 900px) {
+  .side-list { max-height: 25vh; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="topbar">
+    <h1><em>Ink Ribbon</em> <span>Weaver</span></h1>
+    <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+    <button class="tab-btn" data-tab="characters" onclick="switchTab('characters')">Households</button>
+    <button class="tab-btn" data-tab="documents" onclick="switchTab('documents')">Documents</button>
+    <button class="tab-btn" data-tab="ciphers" onclick="switchTab('ciphers')">Ciphers</button>
+    <button class="tab-btn" data-tab="days" onclick="switchTab('days')">Day Planner</button>
+    <button class="tab-btn" data-tab="tugofwar" onclick="switchTab('tugofwar')">Tug of War</button>
+    <button class="tab-btn" data-tab="window" onclick="switchTab('window')">Street Window</button>
+    <button class="tab-btn" data-tab="language" onclick="switchTab('language')">Secret Language</button>
+    <button class="tab-btn" data-tab="export" onclick="switchTab('export')">Export</button>
+    <div class="spacer"></div>
+    <span class="save-indicator" id="saveInd">Saved</span>
+    <button class="top-action" onclick="undo()" title="Undo">&#8630;</button>
+    <button class="top-action" onclick="redo()" title="Redo">&#8631;</button>
+    <button class="top-action" onclick="exportJSON()">Export</button>
+    <button class="top-action" onclick="importJSON()">Import</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+  </div>
+  <div id="content">
+    <div id="tab-overview" class="tab-content full-width active"></div>
+    <div id="tab-characters" class="tab-content split-view"></div>
+    <div id="tab-documents" class="tab-content split-view"></div>
+    <div id="tab-ciphers" class="tab-content split-view"></div>
+    <div id="tab-days" class="tab-content full-width"></div>
+    <div id="tab-tugofwar" class="tab-content split-view"></div>
+    <div id="tab-window" class="tab-content split-view"></div>
+    <div id="tab-language" class="tab-content split-view"></div>
+    <div id="tab-export" class="tab-content full-width"></div>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// UTILITIES
+// =====================================================
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+// =====================================================
+// STATE
+// =====================================================
+const STORAGE_KEY = 'ink_ribbon_weaver';
+let data = null;
+let currentTab = 'overview';
+let selectedChar = 0;
+let selectedDoc = 0;
+let selectedCipher = 0;
+let selectedForce = 0;
+let selectedIndicator = 0;
+let selectedStage = 0;
+const undoStack = [];
+const redoStack = [];
+const MAX_UNDO = 50;
+
+// =====================================================
+// UNDO / REDO
+// =====================================================
+function pushUndo() {
+  undoStack.push(JSON.stringify(data));
+  if (undoStack.length > MAX_UNDO) undoStack.shift();
+  redoStack.length = 0;
+}
+function undo() {
+  if (!undoStack.length) return;
+  redoStack.push(JSON.stringify(data));
+  data = JSON.parse(undoStack.pop());
+  ensureDataStructure();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  renderCurrentTab();
+  flashSave('Undone');
+}
+function redo() {
+  if (!redoStack.length) return;
+  undoStack.push(JSON.stringify(data));
+  data = JSON.parse(redoStack.pop());
+  ensureDataStructure();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  renderCurrentTab();
+  flashSave('Redone');
+}
+
+// =====================================================
+// SAVE / LOAD
+// =====================================================
+function flashSave(msg) {
+  const ind = document.getElementById('saveInd');
+  ind.textContent = msg || 'Saved';
+  ind.classList.add('show');
+  setTimeout(() => { ind.classList.remove('show'); ind.textContent = 'Saved'; }, 1500);
+}
+
+function saveData() {
+  pushUndo();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  flashSave();
+}
+
+function loadData() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) { try { data = JSON.parse(stored); ensureDataStructure(); } catch(e) { data = defaultData(); } }
+  else { data = defaultData(); }
+}
+
+function ensureDataStructure() {
+  if (!data) data = defaultData();
+  if (!data.characters) data.characters = [];
+  if (!data.documents) data.documents = [];
+  if (!data.ciphers) data.ciphers = [];
+  if (!data.days) data.days = [];
+  if (!data.forces) data.forces = [];
+  if (!data.indicators) data.indicators = [];
+  if (!data.stages) data.stages = [];
+  data.characters.forEach(c => {
+    if (!c.relationships) c.relationships = [];
+    if (!c.arc) c.arc = {};
+  });
+  data.documents.forEach(d => {
+    if (!d.hiddenLayer) d.hiddenLayer = { ciphers: [], encoded: '', method: '', workedExample: '' };
+    if (!d.editorialChoices) d.editorialChoices = [];
+  });
+  data.ciphers.forEach(c => {
+    if (!c.dependencies) c.dependencies = [];
+  });
+  data.indicators.forEach(ind => {
+    if (!ind.states) ind.states = [];
+  });
+  data.stages.forEach(s => {
+    if (!s.anomalies) s.anomalies = [];
+  });
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ink_ribbon_data.json'; a.click();
+}
+function importJSON() { document.getElementById('importFile').click(); }
+function handleImport(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try { data = JSON.parse(ev.target.result); ensureDataStructure(); saveData(); renderCurrentTab(); alert('Imported!'); }
+    catch(err) { alert('Failed: ' + err.message); }
+  };
+  reader.readAsText(file); e.target.value = '';
+}
+
+// =====================================================
+// TAB SYSTEM
+// =====================================================
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.id === 'tab-'+tab));
+  renderCurrentTab();
+}
+
+function renderCurrentTab() {
+  switch(currentTab) {
+    case 'overview': renderOverview(); break;
+    case 'characters': renderCharacters(); break;
+    case 'documents': renderDocuments(); break;
+    case 'ciphers': renderCiphers(); break;
+    case 'days': renderDays(); break;
+    case 'tugofwar': renderTugOfWar(); break;
+    case 'window': renderWindow(); break;
+    case 'language': renderLanguage(); break;
+    case 'export': renderExport(); break;
+  }
+}
+
+function toggleSidebar(btn) {
+  const list = btn.nextElementSibling;
+  if (list && list.classList.contains('side-list')) {
+    list.classList.toggle('collapsed');
+    btn.classList.toggle('collapsed');
+  }
+}
+
+// =====================================================
+// HELPER FUNCTIONS
+// =====================================================
+function getCharName(id) {
+  const c = data.characters.find(ch => ch.id === id);
+  return c ? c.name : id || 'Unknown';
+}
+function getDocTypeBadge(type) {
+  const map = { official_dictation:'dictation', copywork:'copywork', incoming_aguien:'incoming', outgoing_aguien:'outgoing', helvetan_trade:'trade', personal_letter:'personal' };
+  const cls = map[type] || 'copywork';
+  const label = type ? type.replace(/_/g,' ') : 'unknown';
+  return `<span class="badge badge-${cls}">${esc(label)}</span>`;
+}
+function getSupervisionBadge(sup) {
+  const cls = sup || 'unattended';
+  return `<span class="badge badge-${cls}">${esc(cls)}</span>`;
+}
+function getPacingBadge(pacing) {
+  return `<span class="badge badge-${pacing||'routine'}">${esc(pacing||'routine')}</span>`;
+}
+function getChannelBadge(channel) {
+  return `<span class="badge badge-${channel||'daylight'}">${esc(channel||'daylight')}</span>`;
+}
+
+function computeTugAtDay(dayNum) {
+  let val = 0;
+  data.forces.forEach(f => {
+    const start = f.startDay || 1;
+    const end = f.endDay || 999;
+    if (dayNum < start || dayNum > end) return;
+    const dir = f.direction === 'war' ? 1 : -1;
+    if (f.source === 'constant') {
+      val += dir * (f.magnitude || 0) * (dayNum - start + 1);
+    } else {
+      val += dir * (f.magnitude || 0);
+    }
+  });
+  // Add editorial choices from documents on or before this day
+  data.documents.forEach(doc => {
+    if (doc.day <= dayNum) {
+      (doc.editorialChoices || []).forEach(ec => {
+        val += (ec.tugEffect || 0);
+      });
+    }
+  });
+  return val;
+}
+
+function reorder(arr, idx, dir) {
+  const ni = idx + dir;
+  if (ni < 0 || ni >= arr.length) return;
+  [arr[idx], arr[ni]] = [arr[ni], arr[idx]];
+  saveData();
+}
+
+function getValidationIssues() {
+  const issues = [];
+  // Characters without personality
+  data.characters.forEach(c => {
+    if (!c.personality || c.personality.trim().length < 10) issues.push({ level:'warn', msg:`Character "${c.name}" has minimal personality description` });
+  });
+  // Documents without surface text
+  data.documents.forEach(d => {
+    if (!d.surfaceText || d.surfaceText.trim().length < 5) issues.push({ level:'warn', msg:`Document "${d.title}" has no surface text` });
+  });
+  // Documents with hidden layer but no cipher selected
+  data.documents.forEach(d => {
+    if (d.hiddenLayer && d.hiddenLayer.encoded && d.hiddenLayer.encoded.trim() && (!d.hiddenLayer.ciphers || !d.hiddenLayer.ciphers.length)) {
+      issues.push({ level:'fail', msg:`Document "${d.title}" has hidden content but no cipher selected` });
+    }
+  });
+  // Days without documents
+  data.days.forEach(day => {
+    const docs = data.documents.filter(d => d.day === day.dayNumber);
+    if (!docs.length) issues.push({ level:'warn', msg:`Day ${day.dayNumber} has no documents assigned` });
+  });
+  // Ciphers with dependencies that don't exist
+  data.ciphers.forEach(c => {
+    (c.dependencies || []).forEach(dep => {
+      if (!data.ciphers.find(cc => cc.id === dep)) issues.push({ level:'fail', msg:`Cipher "${c.name}" depends on unknown cipher "${dep}"` });
+    });
+  });
+  // Cipher discovery day after it's first used in a document
+  data.ciphers.forEach(c => {
+    const firstUse = data.documents.filter(d => d.hiddenLayer && d.hiddenLayer.ciphers && d.hiddenLayer.ciphers.includes(c.id)).map(d => d.day).sort((a,b) => a-b)[0];
+    if (firstUse && firstUse < c.discoveryDay) issues.push({ level:'fail', msg:`Cipher "${c.name}" first used on day ${firstUse} but not discovered until day ${c.discoveryDay}` });
+  });
+  // Forces without magnitude
+  data.forces.forEach(f => {
+    if (!f.magnitude || f.magnitude === 0) issues.push({ level:'warn', msg:`Force "${f.name}" has no magnitude` });
+  });
+  // Language stages with overlapping day ranges
+  for (let i = 0; i < data.stages.length - 1; i++) {
+    const s = data.stages[i];
+    const next = data.stages[i+1];
+    if (s.endDay > next.startDay) issues.push({ level:'warn', msg:`Language stage "${s.name}" overlaps with "${next.name}"` });
+  }
+  return issues;
+}
+
+// =====================================================
+// DEFAULT DATA
+// =====================================================
+function defaultData() {
+  return {
+    characters: [
+      // EPAULE HOUSEHOLD
+      { id:'epaule_patriarch', name:'The Patriarch (Mayor)', color:'#d8d0c8', household:'epaule', role:'Mayor of the border town', alignment:-2, personality:'Pragmatist. Serves Serennan interests because his position requires it, but privately uncertain whether the empire he administers for is worth what it costs. Makes decisions slowly and expects them to be carried out quickly.', arc:{ act1:'Establishes authority. Dictates official correspondence with careful, measured language.', act2:'Increasingly pressured by both sides. His dictation grows more guarded.', act3:'Must choose between institutional loyalty and the safety of his household.' }, playerInfluence:'The player types his dictated letters. What the player chooses to include, omit, or subtly alter shapes the town\'s diplomatic posture.', relationships:[{targetId:'epaule_matriarch',description:'Married. She is more ideological than him. He respects her conviction but fears where it leads.'},{targetId:'player_typist',description:'Employer. Trusts the typist with sensitive correspondence. Does not know the typist has opinions.'}], notes:'His alignment of -2 means he leans Serennan but is not committed.' },
+      { id:'epaule_matriarch', name:'The Matriarch', color:'#d8d0c8', household:'epaule', role:'Serennan nationalist, social anchor', alignment:-4, personality:'True believer in Serennan sovereignty. Sees the Aurinian Empire as an occupying force wrapped in trade agreements. Hosts gatherings. Speaks carefully in public and freely in private. Her nationalism is principled, not performative.', arc:{ act1:'Social events. Her views are clear to anyone listening.', act2:'Her conviction hardens as tensions rise. Begins dictating her own correspondence.', act3:'Faces consequences of her own certainty.' }, playerInfluence:'When she dictates, her language is more charged. The player must decide how faithfully to transcribe her words.', relationships:[{targetId:'epaule_patriarch',description:'Married. Pushes him toward stronger Serennan positions. Frustrated by his caution.'}], notes:'Alignment -4. The household\'s ideological center of gravity.' },
+      { id:'epaule_eldest', name:'The Eldest', color:'#d8d0c8', household:'epaule', role:'Heir, swing vote', alignment:-1, personality:'Pragmatic like the father but more open-minded. Sees merit in multiple perspectives. The one most likely to change position based on new information. Not indecisive but genuinely uncommitted.', arc:{ act1:'Observes. Listens to both parents.', act2:'Begins forming independent opinions. May start writing letters of their own.', act3:'Their choice matters. Which way they lean affects the household\'s final position.' }, playerInfluence:'If the player builds a cipher relationship with the Eldest, they become an ally. If not, they follow their parents.', relationships:[{targetId:'epaule_younger',description:'Sibling. Protective but sometimes dismissive of the younger one\'s idealism.'}], notes:'Alignment -1. The pivot point in the Epaule household.' },
+      { id:'epaule_younger', name:'The Younger', color:'#7a68a8', household:'epaule', role:'Trentaran idealist', alignment:0, personality:'Romantic about Trentaran philosophy and culture. Reads banned books. Believes in a world beyond empires and borders. Naive in the way only someone who has never had to make a hard choice can be. Sincere.', arc:{ act1:'Quiet enthusiasm. Leaves Trentaran texts where the player might find them.', act2:'Becomes more outspoken as the stakes rise. Risks drawing attention.', act3:'Must reckon with the gap between ideals and the world that contains them.' }, playerInfluence:'The player can protect the Younger by hiding evidence of their reading habits, or expose them by leaving things in the open.', relationships:[{targetId:'epaule_eldest',description:'Sibling. Looks up to the Eldest. Wants their approval.'}], notes:'Alignment 0, but philosophically Trentaran. The household\'s conscience.' },
+      { id:'epaule_uncle', name:'The Uncle', color:'#4878a8', household:'epaule', role:'Helvetan opportunist', alignment:0, personality:'Trader. Connected to Helvetan merchant networks. Not ideological in the way the Matriarch is. Sees borders as obstacles to commerce. Friendly, practical, and impossible to pin down politically. Always has a deal in progress.', arc:{ act1:'Brings trade documents through. Casual presence.', act2:'His trade connections become strategically important.', act3:'Must decide whether his business relationships are worth more than family loyalty.' }, playerInfluence:'Trade documents pass through the player. The Uncle\'s correspondence reveals supply chain information that both sides want.', relationships:[{targetId:'epaule_patriarch',description:'Brother. Respects the Patriarch\'s position but thinks politics is a waste of perfectly good commerce.'}], notes:'Alignment 0. Helvetan by disposition, not nationality.' },
+      { id:'zia', name:'Zia (Housekeeper)', color:'#8a7e6e', household:'epaule', role:'Housekeeper, observer', alignment:0, personality:'Sees everything. Says little. Has worked in the household long enough to know where all the seams are. Not a servant in the feudal sense but a permanent fixture of the domestic architecture. Loyal to the household itself, not to any member of it.', arc:{ act1:'Background presence. Cleans around the player.', act2:'Begins leaving small observations. Not notes. Objects placed in meaningful positions.', act3:'Her knowledge of the household becomes either protective or dangerous.' }, playerInfluence:'The player can read Zia\'s spatial messages or ignore them. She communicates through arrangement, not language.', relationships:[{targetId:'player_typist',description:'Coworker in the domestic sense. Watches the player with neither suspicion nor warmth.'}], notes:'Alignment 0. Neutral but not uninvolved.' },
+      { id:'player_typist', name:'The Player (Typist)', color:'#c8b898', household:'epaule', role:'Typist, the player character', alignment:0, personality:'The player. Works in the Epaule household as a professional typist. Types what is dictated. What happens between the dictation and the page is the entire game.', arc:{ act1:'Learning the job. Building relationships with both households through correspondence.', act2:'Active choices. Editorial control. Cipher engagement.', act3:'The typist\'s accumulated choices determine the outcome.' }, playerInfluence:'This is the player. Everything is player influence.', relationships:[], notes:'Alignment 0. The player sets this through their actions.' },
+      // AGUIEN HOUSEHOLD
+      { id:'aguien_patriarch', name:'The Patriarch (Ambassador)', color:'#b83030', household:'aguien', role:'Aurinian ambassador, duty-bound', alignment:2, personality:'Career diplomat. Believes in the empire not because it is good but because the alternative is chaos. Duty is his operating principle. Personally decent. Professionally immovable. The kind of person who follows orders he privately questions because he believes the system that issues them is larger than any individual failure.', arc:{ act1:'Arrives. Establishes the Aurinian presence. Formal, correct.', act2:'The orders he receives grow harder to justify. His correspondence becomes more careful.', act3:'Duty versus conscience. The system he serves demands something he cannot stomach.' }, playerInfluence:'His outgoing correspondence passes through channels the player can observe. The player sees the gap between what he is told and what he writes.', relationships:[{targetId:'aguien_matriarch',description:'Married. She softens his institutional edges. He worries about her Trentaran connections.'},{targetId:'imperial_cousin',description:'Extended family. The Cousin represents the empire\'s harder edge. The Ambassador manages him.'}], notes:'Alignment 2. Aurinian by duty, not enthusiasm.' },
+      { id:'aguien_matriarch', name:'The Matriarch (Aguien)', color:'#7a68a8', household:'aguien', role:'Born Trentaran, bridge figure', alignment:0, personality:'Born Trentaran, married into the Aurinian diplomatic household. Navigates both worlds. Not a spy or a double agent. A person who contains contradictions and does not resolve them. Speaks multiple languages and understands what gets lost in translation.', arc:{ act1:'Gracious hostess. Social bridge between households.', act2:'Her Trentaran origins become politically relevant. Both sides want her loyalty.', act3:'She cannot remain a bridge when the bridge is burning.' }, playerInfluence:'Her correspondence is personal and multilingual. The player sees the version she writes versus the version she sends.', relationships:[{targetId:'aguien_patriarch',description:'Married. Loves him. Sees what duty is doing to him.'}], notes:'Alignment 0. The center that cannot hold.' },
+      { id:'aguien_heir', name:'The Heir', color:'#b83030', household:'aguien', role:'Imperial loyalist', alignment:4, personality:'Young, convinced, dangerous in the way true believers are dangerous. Sees the empire as civilization itself. Not cruel but certain. Certainty at that age, in that position, with that power, is its own kind of cruelty.', arc:{ act1:'Confident. Makes pronouncements. Dismisses local concerns.', act2:'Events challenge the narrative. Doubles down rather than reconsider.', act3:'The gap between belief and reality becomes untenable.' }, playerInfluence:'The player types documents that cross his desk. His certainty is a readable signal - and a vulnerability.', relationships:[{targetId:'aguien_second',description:'Sibling. Dismisses the Second Child\'s quietness as weakness.'}], notes:'Alignment 4. The household\'s ideological counterweight to the Epaule Matriarch.' },
+      { id:'aguien_second', name:'The Second Child', color:'#b83030', household:'aguien', role:'Quiet observer', alignment:0, personality:'Watches. Reads. Does not volunteer opinions. The household assumes this means they have none. They are wrong. The Second Child understands more than anyone gives them credit for. Their silence is not absence but storage.', arc:{ act1:'Background presence. Noticed by the attentive.', act2:'Begins leaving small marks. Not messages exactly. Breadcrumbs.', act3:'What they have been storing becomes relevant. Their choice to speak or stay silent matters.' }, playerInfluence:'The player may notice the Second Child\'s observations if they are paying attention. A cipher channel that opens only to the observant.', relationships:[{targetId:'aguien_heir',description:'Sibling. Loves the Heir. Sees what certainty costs.'}], notes:'Alignment 0. The mirror of the Epaule Younger, but through observation rather than ideology.' },
+      { id:'imperial_cousin', name:'The Imperial Cousin', color:'#b83030', household:'aguien', role:'Catalyst, the empire\'s hard edge', alignment:5, personality:'Arrives mid-game. Represents what the empire looks like when it stops being polite. Not a villain in the melodramatic sense. A functionary who believes efficiency is a virtue and mercy is a luxury. His arrival changes the temperature.', arc:{ act1:'Not present.', act2:'Arrives. Everything gets harder. Supervision tightens.', act3:'Becomes the force that demands a final choice from everyone.' }, playerInfluence:'His correspondence is monitored. The player\'s editorial freedom shrinks when he is in the room. His presence is a mechanical constraint.', relationships:[{targetId:'aguien_patriarch',description:'Family. The Ambassador is the velvet glove. The Cousin is the fist inside it.'}], notes:'Alignment 5. Maximum Aurinian. The catalyst that forces the endgame.' },
+      { id:'aguien_steward', name:'The Steward', color:'#b83030', household:'aguien', role:'Household manager', alignment:1, personality:'Manages the Aguien household with quiet competence. Loyal to the family, not the empire. Knows where the documents are kept. Knows which doors lock from which side. Practical in the way servants of powerful households learn to be practical.', arc:{ act1:'Background logistics. Ensures correspondence flows.', act2:'Becomes a potential ally or obstacle depending on the player\'s approach.', act3:'His knowledge of the household\'s internal workings becomes strategically critical.' }, playerInfluence:'The Steward controls document access. Building trust with him opens channels. Alienating him closes them.', relationships:[{targetId:'aguien_typist',description:'Works alongside the Aguien typist. Professional respect. Watches them carefully.'}], notes:'Alignment 1. Mildly Aurinian by habit.' },
+      { id:'aguien_typist', name:'The Aguien Typist (The Lover)', color:'#c85040', household:'aguien', role:'The other typist, romantic interest', alignment:0, personality:'The player\'s counterpart in the Aguien household. Also a typist. Also making choices about what to type and what to change. The relationship between the two typists is the game\'s emotional core - two people doing the same job for opposing sides, communicating through the only medium they share: typed documents.', arc:{ act1:'Professional contact through shared correspondence duties.', act2:'The cipher language develops. What begins as professional coordination becomes personal.', act3:'The relationship is the back channel. What it carries determines whether peace is possible.' }, playerInfluence:'Everything. The Lover is the player\'s primary relationship. The cipher language they build together is the game\'s central mechanic.', relationships:[{targetId:'player_typist',description:'The relationship. Professional, then personal, then the only thing that matters.'}], notes:'Alignment 0. Determined by the player\'s influence. The emotional center of the game.' },
+    ],
+    documents: [
+      { id:'trade_receipt_1', title:'Trade Receipt - Helvetan Wool', type:'helvetan_trade', day:1, act:1, supervision:'glanced', dictatedBy:'epaule_uncle', addressedTo:'', surfaceText:'Receipt of fourteen bales Helvetan wool, standard grade, received at the border warehouse. Weight confirmed. Duties paid per standing arrangement with the Merchant Guild.', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[], pacing:'routine', notes:'Tutorial document. The player learns the typing interface. No hidden content. Pure mechanical introduction.' },
+      { id:'personal_letter_1', title:'Personal Letter to Helvetan Merchant', type:'personal_letter', day:3, act:1, supervision:'unattended', dictatedBy:'epaule_patriarch', addressedTo:'', surfaceText:'My dear colleague, I write regarding the delayed shipment of paper stock. The mill has experienced difficulties I am told are temporary. I trust our arrangement continues to serve us both.', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[], pacing:'routine', notes:'The Patriarch dictates this but the player types it unattended. First opportunity for editorial freedom.' },
+      { id:'civic_notice_1', title:'Civic Notice About Paper Mill', type:'official_dictation', day:3, act:1, supervision:'checked', dictatedBy:'epaule_patriarch', addressedTo:'', surfaceText:'NOTICE: The Serennan Paper Mill will resume full operations within the fortnight. Citizens are advised that correspondence supplies will be restocked at the usual merchants. Patience is appreciated during this period of adjustment.', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[], pacing:'routine', notes:'Checked supervision means the Patriarch reads it before it goes out. Limited editorial freedom.' },
+      { id:'shipment_delay_1', title:'Shipment Delay Notice (HELP acrostic)', type:'incoming_aguien', day:3, act:1, supervision:'unattended', dictatedBy:'', addressedTo:'epaule_patriarch', surfaceText:'Having reviewed the latest cargo manifest, we find\nExpected quantities do not match the bill of lading.\nLikely this is a clerical error at the border post.\nPlease confirm receipt and advise on discrepancies.', hiddenLayer:{ ciphers:['acrostic'], encoded:'HELP', method:'First letter of each line spells HELP', workedExample:'H-aving, E-xpected, L-ikely, P-lease' }, editorialChoices:[], pacing:'tense', notes:'First hidden message the player encounters. The acrostic is simple enough to notice on a second reading. The question: who sent this, and why?' },
+      { id:'border_road_response', title:'Border Road Response', type:'official_dictation', day:47, act:2, supervision:'checked', dictatedBy:'epaule_matriarch', addressedTo:'', surfaceText:'The border road remains under Serennan jurisdiction per the Treaty of the Three Rivers. Any military presence on this road constitutes a violation of that treaty. We demand clarification of intent and immediate withdrawal of personnel to the agreed demarcation line.', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[{ description:'Soften "demand" to "request"', tugEffect:-1, consequence:'Reduces diplomatic tension but weakens Serennan position', requiresCipher:'' },{ description:'Add mention of trade disruption', tugEffect:-0.5, consequence:'Reframes the issue as economic rather than territorial', requiresCipher:'' }], pacing:'crisis', notes:'The Matriarch dictating. Supervision is checked but the Patriarch is distracted. Editorial choices available that shift the tug of war.' },
+      { id:'conscription_response', title:'Conscription Response', type:'official_dictation', day:78, act:3, supervision:'close', dictatedBy:'epaule_patriarch', addressedTo:'', surfaceText:'In response to the Imperial Conscription Order dated the 14th: the citizens of this town are not imperial subjects. They are Serennan nationals living under Serennan law in Serennan territory. This office does not recognize the authority of the Aurinian Empire to conscript our people. This letter constitutes formal refusal.', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[{ description:'Include the Patriarch\'s name as signatory', tugEffect:-2, consequence:'Personal commitment. He can\'t take it back. The town has a face.', requiresCipher:'' },{ description:'Reference the back-channel peace agreement', tugEffect:-3, consequence:'Reveals the cipher correspondence. Maximum peace effect but exposes everything.', requiresCipher:'word_substitution' }], pacing:'climactic', notes:'The climactic document. Close supervision. The Patriarch is watching every keystroke. The player\'s accumulated cipher knowledge and editorial skill are tested.' },
+    ],
+    ciphers: [
+      { id:'acrostic', name:'Acrostic', channel:'daylight', category:'structural', complexity:1, discoveryDay:3, discoveryMethod:'The player notices the first letters of each line in the Shipment Delay Notice spell HELP. The game does not point this out.', description:'First letters of each line or paragraph spell a hidden word or phrase. The simplest cipher. Readable by anyone who thinks to look.', workedExample:'Having reviewed the latest cargo manifest, we find\nExpected quantities do not match the bill of lading.\nLikely this is a clerical error at the border post.\nPlease confirm receipt and advise on discrepancies.\n\nFirst letters: H-E-L-P', dependencies:[], notes:'Daylight channel. Anyone could see this. The risk is low but so is the information density.' },
+      { id:'added_spaces', name:'Added Spaces / Ink Flutter', channel:'daylight', category:'typographic', complexity:1, discoveryDay:4, discoveryMethod:'A document arrives with irregular spacing. The player, now sensitized by the acrostic, looks more carefully. The extra spaces isolate specific words.', description:'Extra spaces or deliberate ink splatters isolate or emphasize specific words within the surface text. Looks like a typewriter malfunction.', workedExample:'The    shipment    arrived    safely.\nIsolated words: shipment, arrived, safely\nHidden message: shipment arrived safely', dependencies:[], notes:'Plausible deniability. A typewriter can flutter. Ink can spatter. But a pattern of flutters is a message.' },
+      { id:'deliberate_mistakes', name:'Deliberate Mistakes', channel:'daylight', category:'error-based', complexity:1, discoveryDay:8, discoveryMethod:'A document from the Aguien typist contains spelling errors that seem unlike a professional. The misspelled letters, extracted in order, form a word.', description:'Intentional misspellings where the incorrect letters, read in sequence, form a hidden message. Professional typists do not make random errors.', workedExample:'The receit was procesed and filed.\nErrors: receit (receipt - missing p), procesed (processed - missing s)\nExtracted letters: p, s\nWith more errors: P-E-A-C-E', dependencies:[], notes:'This cipher depends on the reader knowing the typist is competent. A bad typist makes real errors. A good typist makes deliberate ones.' },
+      { id:'word_substitution', name:'Word Substitution', channel:'daylight', category:'semantic', complexity:2, discoveryDay:30, discoveryMethod:'After weeks of correspondence, the player and the Lover have established a shared vocabulary. Certain words consistently mean something other than their surface meaning.', description:'Pre-agreed word substitutions where common words carry secret meanings. Requires an established shared vocabulary between correspondents.', workedExample:'The WEATHER has been DIFFICULT this SEASON.\nSubstitution key: weather=political situation, difficult=dangerous, season=month\nActual meaning: The political situation has been dangerous this month.', dependencies:['deliberate_mistakes'], notes:'Depends on deliberate_mistakes being established first - the shared vocabulary builds from the error-correction relationship. Complexity 2 because it requires prior coordination.' },
+      { id:'carriage_return', name:'Carriage Return Striping', channel:'daylight', category:'structural', complexity:2, discoveryDay:25, discoveryMethod:'The player notices that certain documents have unusual line break patterns. Reading every other line reveals a second text running parallel to the surface text.', description:'Alternating lines of surface text and hidden text. The typewriter\'s carriage return is used to interleave two documents. Readable only if you know to read every other line.', workedExample:'The trade agreement proceeds as planned.\nWE NEED TO MEET IN PERSON.\nAll parties have confirmed their signatures.\nBRING THE ORIGINAL DOCUMENTS.\nDelivery is expected by month\'s end.\nDESTROY THIS AFTER READING.', dependencies:[], notes:'Daylight channel but high risk. Anyone who reads carefully enough will see it. The protection is that bureaucrats skim.' },
+      { id:'pin_pricks', name:'Pin Pricks', channel:'candlelight', category:'physical', complexity:2, discoveryDay:10, discoveryMethod:'Holding a document up to candlelight reveals tiny pinholes that, when connected, form letters or mark specific words.', description:'Tiny holes pricked through the paper with a pin. Invisible under normal reading conditions. Visible when held against a light source. Marks specific words or letters.', workedExample:'Hold document to candle.\nPinholes appear above: border, troops, three, days\nMessage: border troops three days', dependencies:[], notes:'Candlelight channel. Requires physical access to the document and a light source. Cannot be detected by casual inspection. The transition from daylight to candlelight ciphers is a trust escalation.' },
+      { id:'heat_ink', name:'Heat-Activated Ink', channel:'candlelight', category:'chemical', complexity:2, discoveryDay:12, discoveryMethod:'A document held near a candle flame reveals additional text written in lemon juice or similar heat-reactive fluid between the typed lines.', description:'Messages written in heat-reactive ink (lemon juice, milk, diluted starch) between the lines of typed text. Invisible until heated. The typewriter provides the surface text; the hidden message is handwritten.', workedExample:'Surface (typed): The quarterly report is enclosed.\n[Heat reveals handwritten between lines]: They are reading our mail. Use the wax method next time.', dependencies:[], notes:'The first cipher that combines typewritten surface text with handwritten hidden text. A material shift. The player must physically interact with the document differently.' },
+      { id:'wax_resist', name:'Wax Resist', channel:'physical', category:'material', complexity:3, discoveryDay:35, discoveryMethod:'A document arrives that feels slightly different. Rubbing graphite or ink over the surface reveals words pressed into the paper with a wax stylus before the surface text was typed.', description:'A wax stylus pressed into the paper before typing. The wax is invisible but resists ink. When the surface is dusted with loose graphite or rubbed with a soft pencil, the wax text appears as blank shapes against the dark background.', workedExample:'Type surface text normally.\nPre-press with wax stylus: EVACUATION ROUTE CONFIRMED\nDust with graphite powder.\nWax letters appear as white shapes against dark graphite.', dependencies:['heat_ink'], notes:'Physical channel. Requires material interaction. Complexity 3 because it requires preparation before the surface text is typed, meaning the hidden message must be planned before the dictation begins. Depends on heat_ink because the player must already understand chemical-layer ciphers.' },
+    ],
+    days: [
+      { dayNumber:1, act:1, pacing:'quiet', events:'Tutorial. First trade document. Learn the typing interface.', notes:'The player is new. Everything is introduction.' },
+      { dayNumber:3, act:1, pacing:'routine', events:'Three documents. First hidden message (HELP acrostic). First editorial freedom (unattended personal letter).', notes:'The day the game begins in earnest.' },
+      { dayNumber:10, act:1, pacing:'tense', events:'Pin pricks discovered. Candlelight ciphers open. Supervision patterns established.', notes:'Trust escalation. The player is now actively looking for hidden content.' },
+      { dayNumber:30, act:2, pacing:'tense', events:'Word substitution unlocked. Shared vocabulary established with the Lover. Trade disruption event.', notes:'The relationship has become a communication channel.' },
+      { dayNumber:47, act:2, pacing:'crisis', events:'Border Road Response. The Matriarch dictating. Editorial choices with real consequences. Imperial Cousin has arrived.', notes:'The pressure cooker. Supervision is tighter. The stakes are visible.' },
+      { dayNumber:78, act:3, pacing:'climactic', events:'Conscription Response. The climactic document. Everything the player has learned is tested.', notes:'Endgame. The accumulated weight of every choice.' },
+    ],
+    forces: [
+      { id:'war_engine', name:'War Engine Drift', direction:'war', source:'constant', magnitude:0.5, startDay:1, endDay:999, description:'The background pressure toward conflict. Every day without active peacemaking, the situation drifts closer to war. Represents institutional momentum, imperial expansion, border tensions.', notes:'0.5 per day. By day 80, this alone contributes +40 toward war. The player must actively counteract this.' },
+      { id:'editorial_control', name:'Editorial Control', direction:'peace', source:'document', magnitude:2, startDay:1, endDay:999, description:'Each document where the player exercises editorial discretion to soften, redirect, or reframe contributes toward peace. The magnitude varies by document but averages 2.', notes:'The primary peace mechanism. The player\'s core verb.' },
+      { id:'cipher_engagement', name:'Cipher Engagement', direction:'peace', source:'cipher', magnitude:1.5, startDay:3, endDay:999, description:'Active use of the cipher channel with the Lover. Each successful cipher exchange builds the back channel that makes diplomatic alternatives possible.', notes:'Triggered by cipher use in documents. The relationship as peace infrastructure.' },
+      { id:'backchannel_protection', name:'Back-Channel Protection', direction:'peace', source:'backchannel', magnitude:2, startDay:10, endDay:999, description:'Once the cipher relationship is established, it provides ongoing diplomatic cover. Unofficial communication channels that let both sides save face.', notes:'Only active after pin pricks are discovered (day 10). Requires maintained cipher contact.' },
+      { id:'military_escalation', name:'Military Escalation', direction:'war', source:'event', magnitude:3, startDay:30, endDay:60, description:'Troop movements on the border. Political assassination attempt. Events that push hard toward war regardless of the player\'s actions.', notes:'Magnitude 3 events. The player cannot prevent these but can mitigate their impact through editorial and cipher work.' },
+      { id:'trade_disruption', name:'Trade Disruption', direction:'war', source:'event', magnitude:2, startDay:25, endDay:50, description:'Supply chain breakdowns. The Uncle\'s trade routes disrupted. Economic pressure that makes conflict feel inevitable.', notes:'The Uncle\'s storyline. Trade disruption raises the temperature.' },
+    ],
+    indicators: [
+      { id:'flags', name:'Flags', description:'Which flags are flying from buildings visible from the window. Serennan, Aurinian, both, neither.', timescale:'daily', states:[
+        { threshold:-5, label:'All Serennan', visual:'Every building flies the cream-and-silver Serennan flag. The street looks like a festival day.' },
+        { threshold:-2, label:'Mostly Serennan', visual:'Serennan flags predominant. One Aurinian flag visible at the ambassador\'s residence.' },
+        { threshold:0, label:'Mixed', visual:'Both flags visible in roughly equal numbers. The visual compromise of a border town.' },
+        { threshold:3, label:'Mostly Aurinian', visual:'Red imperial flags spreading. Some Serennan flags taken down overnight.' },
+        { threshold:5, label:'All Aurinian', visual:'Only imperial red. The Serennan flags are gone.' },
+      ], notes:'The most immediately visible indicator. Players will notice flag changes first.' },
+      { id:'guards', name:'Guards', description:'Military or police presence on the street. Quantity, uniform, posture.', timescale:'daily', states:[
+        { threshold:-3, label:'Local Watch', visual:'Two local watchmen making their rounds. Relaxed. They know everyone.' },
+        { threshold:0, label:'Increased Patrol', visual:'Additional guards. Some unfamiliar faces. They walk in pairs.' },
+        { threshold:3, label:'Military Patrol', visual:'Imperial soldiers. Armed. Walking in formation. Civilians move aside.' },
+        { threshold:5, label:'Occupation', visual:'Checkpoints. Papers checked. The street is controlled.' },
+      ], notes:'Guard presence escalates tension visibly.' },
+      { id:'foodCart', name:'Food Cart', description:'The food cart vendor who works the street. What they sell, how they behave.', timescale:'weekly', states:[
+        { threshold:-3, label:'Full Menu', visual:'Steam rising. Full menu board. Chatting with customers. Locals lingering.' },
+        { threshold:0, label:'Reduced Menu', visual:'Fewer items. Vendor is present but watchful. Less lingering.' },
+        { threshold:3, label:'Bare Minimum', visual:'Basic bread and broth. Vendor looks over their shoulder.' },
+        { threshold:5, label:'Gone', visual:'The cart is not there. The spot where it stood is empty.' },
+      ], notes:'The food cart is the canary. When it vanishes, things are bad.' },
+      { id:'signs', name:'Signs and Notices', description:'What is posted on the notice board visible from the window.', timescale:'daily', states:[
+        { threshold:-3, label:'Community Notices', visual:'Market schedules. Lost cat posters. A music recital announcement.' },
+        { threshold:0, label:'Official Notices Mixed', visual:'Government notices alongside community ones. Tone shift.' },
+        { threshold:3, label:'Imperial Edicts', visual:'Official proclamations in Aurinian. Community notices removed or papered over.' },
+        { threshold:5, label:'Propaganda', visual:'Conscription orders. Loyalty oaths. The notice board serves one purpose.' },
+      ], notes:'' },
+      { id:'aguienResidence', name:'Aguien Residence', description:'The ambassador\'s residence visible across the street. Activity, lights, visitors.', timescale:'daily', states:[
+        { threshold:-3, label:'Social Hub', visual:'Lights in every window. Carriages arriving. Music faintly audible.' },
+        { threshold:0, label:'Formal Activity', visual:'Official visitors. Guards at the door but not aggressive. Business.' },
+        { threshold:3, label:'Fortified', visual:'Shutters closed on lower floors. Extra guards. Visitors checked.' },
+        { threshold:5, label:'Locked Down', visual:'Dark. Shutters closed. Military presence at every entrance.' },
+      ], notes:'' },
+      { id:'rivalLamp', name:'The Rival Lamp', description:'A lamp in the Aguien typist\'s window. Their signal.', timescale:'immediate', states:[
+        { threshold:-3, label:'Steady Light', visual:'Warm, steady lamplight. They are working. They are safe. Normal.' },
+        { threshold:0, label:'Dimmed', visual:'Light lower than usual. Could mean anything. Could mean nothing.' },
+        { threshold:2, label:'Flickering', visual:'Irregular flicker. Not a candle gutter. Deliberate.' },
+        { threshold:5, label:'Dark', visual:'No light. The window is dark. They are not there, or they cannot signal.' },
+      ], notes:'The most personal indicator. The player watches this lamp.' },
+      { id:'tradePost', name:'Trade Post', description:'The trade post at the end of the street. Commerce indicator.', timescale:'weekly', states:[
+        { threshold:-3, label:'Busy', visual:'Carts loading and unloading. Merchants arguing prices. Normal commerce.' },
+        { threshold:0, label:'Slowing', visual:'Fewer carts. Some merchants not returning. Inventory visibly thinner.' },
+        { threshold:3, label:'Restricted', visual:'Imperial inspectors. Manifests checked. Some goods confiscated.' },
+        { threshold:5, label:'Closed', visual:'Doors shut. Official seal. Trade has stopped.' },
+      ], notes:'' },
+      { id:'streetActivity', name:'Street Activity', description:'Civilian traffic. People going about their lives.', timescale:'daily', states:[
+        { threshold:-3, label:'Lively', visual:'Children playing. Neighbors talking. Market day energy.' },
+        { threshold:0, label:'Normal', visual:'People moving with purpose. Less lingering. Fewer children.' },
+        { threshold:3, label:'Sparse', visual:'Quick walks. Heads down. Nobody stops to talk.' },
+        { threshold:5, label:'Empty', visual:'Curfew compliance. The street is a corridor, not a commons.' },
+      ], notes:'' },
+      { id:'curfew', name:'Curfew', description:'Whether a curfew is in effect and how it manifests.', timescale:'act', states:[
+        { threshold:-3, label:'No Curfew', visual:'Lamps lit late. Evening sounds. Normal nighttime.' },
+        { threshold:0, label:'Suggested', visual:'Notices recommending people stay indoors after dark. Advisory.' },
+        { threshold:3, label:'Enforced', visual:'Patrol lanterns after sunset. The sound of boots on cobblestones.' },
+        { threshold:5, label:'Martial', visual:'Darkness and silence after sundown. Violations have consequences.' },
+      ], notes:'' },
+      { id:'churchSteeple', name:'Church Steeple', description:'The church steeple visible above the roofline. Bells, flag, activity.', timescale:'weekly', states:[
+        { threshold:-3, label:'Normal Bells', visual:'Bells ring on the hour and for services. The sound of ordinary time.' },
+        { threshold:0, label:'Altered Schedule', visual:'Bell schedule changed. Some services cancelled or moved.' },
+        { threshold:3, label:'Imperial Flag', visual:'An Aurinian flag on the steeple. The bells ring at unfamiliar times.' },
+        { threshold:5, label:'Silent', visual:'No bells. The steeple stands against the sky without sound.' },
+      ], notes:'' },
+    ],
+    stages: [
+      { id:'calibration', name:'Calibration', description:'The player learns to type. The typewriter is a new instrument. Errors are frequent and genuine. The game establishes what normal typing looks like so that later deviations are meaningful.', startDay:1, endDay:5, recognitionTrigger:'The player reaches baseline typing proficiency. The typewriter stops fighting them.', anomalies:[], notes:'No ciphers active. Pure mechanical learning. The player has no reason to suspect the documents contain anything beyond their surface text.' },
+      { id:'seeds', name:'Seeds', description:'First cipher discoveries. The acrostic. The added spaces. The player begins to see that documents have layers. The Secret Language is not yet a language. It is a collection of noticed things.', startDay:6, endDay:15, recognitionTrigger:'The player successfully identifies a hidden message without being prompted.', anomalies:[
+        { documentId:'shipment_delay_1', description:'HELP acrostic is the first seed. Simple enough to catch on a second reading.', cipherId:'acrostic' },
+      ], notes:'The transition from "I am typing" to "I am reading."' },
+      { id:'accumulation', name:'Accumulation', description:'The cipher vocabulary grows. Pin pricks. Heat ink. The player and the Lover begin building a shared code. Individual ciphers are known; the combination of them is becoming a language.', startDay:16, endDay:30, recognitionTrigger:'The player uses multiple ciphers in combination. The shared vocabulary with the Lover has enough entries to carry meaning.', anomalies:[], notes:'The relationship drives the language forward. Each new cipher is also a trust escalation.' },
+      { id:'recognition', name:'Recognition', description:'The Secret Language is recognized as a language. The player and the Lover can communicate complex ideas through layered ciphers. The system is mature enough to carry diplomatic weight.', startDay:31, endDay:50, recognitionTrigger:'A document successfully carries both surface meaning and hidden diplomatic content that influences the tug of war.', anomalies:[], notes:'The language has grammar now. Combinations of ciphers create meaning that individual ciphers cannot.' },
+      { id:'dialogue', name:'Dialogue', description:'The language carries real conversation. Not just messages but replies, arguments, negotiations. The typists are conducting parallel diplomacy through the documents that pass between the households. The Secret Language is the back channel.', startDay:51, endDay:80, recognitionTrigger:'The back channel produces a concrete diplomatic outcome. The Secret Language changes the tug of war.', anomalies:[], notes:'Endgame. The language is the mechanism. Everything the player built is tested.' },
+    ],
+  };
+}
+
+// =====================================================
+// RENDER: OVERVIEW
+// =====================================================
+function renderOverview() {
+  const tab = document.getElementById('tab-overview');
+  let html = '';
+
+  html += `<h2 style="margin-bottom:4px">Ink Ribbon</h2>`;
+  html += `<div class="overview-premise">`;
+  html += `<p>A narrative design tool for <strong>Ink Ribbon</strong>, a game about two typists on opposite sides of a political crisis, communicating through hidden messages embedded in official correspondence. The player types dictated documents for one household in a border town. What they choose to include, omit, alter, or encode in those documents determines whether the town moves toward peace or war.</p>`;
+  html += `<p style="margin-top:10px;color:var(--text2);font-size:12px">The core mechanic is the typewriter. The core verb is editorial discretion. The core relationship is built through a Secret Language of ciphers that the player and their counterpart develop over 80 days.</p>`;
+  html += `</div>`;
+
+  // Stat cards
+  html += `<div class="export-stats">`;
+  html += `<div class="stat-card"><div class="stat-num">${data.characters.length}</div><div class="stat-label">Characters</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.documents.length}</div><div class="stat-label">Documents</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.ciphers.length}</div><div class="stat-label">Ciphers</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.days.length}</div><div class="stat-label">Days Planned</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.forces.length}</div><div class="stat-label">Forces</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.indicators.length}</div><div class="stat-label">Indicators</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.stages.length}</div><div class="stat-label">Language Stages</div></div>`;
+  html += `</div>`;
+
+  // Validation warnings
+  const issues = getValidationIssues();
+  if (issues.length) {
+    html += `<div class="validation-group"><h4>Validation Warnings <span class="v-count ${issues.some(i=>i.level==='fail')?'v-fail':'v-warn'}">${issues.length}</span></h4>`;
+    issues.forEach(i => {
+      const cls = i.level === 'fail' ? 'var(--red)' : 'var(--accent3)';
+      html += `<div class="v-item" style="border-left-color:${cls}"><span style="color:${cls}">${i.level === 'fail' ? 'ERROR' : 'WARN'}:</span> ${esc(i.msg)}</div>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `<div class="v-item" style="border-left-color:var(--green);margin-bottom:16px"><span style="color:var(--green)">All checks passed.</span></div>`;
+  }
+
+  // Workflow guide
+  html += `<div class="detail-section"><h4>Workflow</h4>`;
+  const steps = [
+    { tab:'characters', label:'Households', desc:'Define the 14 characters across two households. Set political alignments, relationships, personality.' },
+    { tab:'documents', label:'Documents', desc:'Author surface text and hidden layers for each key document. Assign supervision levels and editorial choices.' },
+    { tab:'ciphers', label:'Ciphers', desc:'Design the 8 cipher methods across daylight, candlelight, and physical channels. Set discovery conditions.' },
+    { tab:'days', label:'Day Planner', desc:'Plan the 80-day timeline. Assign documents and ciphers to specific days. Set pacing.' },
+    { tab:'tugofwar', label:'Tug of War', desc:'Balance the forces pushing toward peace and war. Simulate the cumulative effect of player choices.' },
+    { tab:'window', label:'Street Window', desc:'Define 10 visual indicators the player sees from their window. Map each to tug-of-war thresholds.' },
+    { tab:'language', label:'Secret Language', desc:'Design the 5-stage pipeline from calibration to dialogue. Place anomalies that teach each cipher.' },
+    { tab:'export', label:'Export', desc:'Full validation. Export data. Review the complete design.' },
+  ];
+  steps.forEach((s, i) => {
+    html += `<div class="workflow-step" onclick="switchTab('${s.tab}')"><div class="ws-num">${i+1}</div><div class="ws-text"><strong>${esc(s.label)}</strong><br>${esc(s.desc)}</div></div>`;
+  });
+  html += `</div>`;
+
+  tab.innerHTML = html;
+}
+
+// =====================================================
+// RENDER: CHARACTERS (HOUSEHOLDS)
+// =====================================================
+function renderCharacters() {
+  const tab = document.getElementById('tab-characters');
+  if (selectedChar >= data.characters.length) selectedChar = 0;
+  const ch = data.characters[selectedChar];
+
+  // Group by household
+  const epaule = data.characters.filter(c => c.household === 'epaule');
+  const aguien = data.characters.filter(c => c.household === 'aguien');
+  const neutral = data.characters.filter(c => c.household !== 'epaule' && c.household !== 'aguien');
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Households</button><div class="side-list">`;
+  L += `<h3>Households <button onclick="addCharacter()">+ New</button></h3>`;
+  L += `<div class="list-items">`;
+
+  function renderGroup(label, chars, color) {
+    L += `<div class="collapsible-header" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed')"><span style="color:${color}">${esc(label)} (${chars.length})</span><span class="chevron">&#9660;</span></div>`;
+    L += `<div class="collapsible-body">`;
+    chars.forEach(c => {
+      const gi = data.characters.indexOf(c);
+      L += `<div class="list-item${gi === selectedChar ? ' active' : ''}" onclick="selectedChar=${gi};renderCharacters()">`;
+      L += `<div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0"><span class="char-color-dot" style="background:${c.color}"></span><div><div class="li-name">${esc(c.name)}</div><div class="li-sub">${esc(c.role)}</div></div></div>`;
+      L += `<div class="reorder-btns" onclick="event.stopPropagation()"><button class="reorder-btn" onclick="reorder(data.characters,${gi},-1);selectedChar=Math.max(0,selectedChar-1);renderCharacters()">&uarr;</button><button class="reorder-btn" onclick="reorder(data.characters,${gi},1);if(selectedChar===${gi})selectedChar++;renderCharacters()">&darr;</button></div>`;
+      L += `</div>`;
+    });
+    L += `</div>`;
+  }
+
+  renderGroup('Epaule Household', epaule, 'var(--serennan)');
+  renderGroup('Aguien Household', aguien, 'var(--aurinian)');
+  if (neutral.length) renderGroup('Neutral', neutral, 'var(--text2)');
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (ch) {
+    E += `<div style="display:flex;align-items:center;gap:16px;margin-bottom:16px"><div style="width:48px;height:48px;border-radius:50%;border:2px solid ${ch.color};background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;color:${ch.color}">${esc(ch.name[0])}</div><div><h2>${esc(ch.name)}</h2><div class="ep-sub">${esc(ch.role)}</div></div></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Name</label><input type="text" value="${esc(ch.name)}" onchange="data.characters[${selectedChar}].name=this.value;saveData();renderCharacters()"></div><div class="form-group"><label>Color</label><input type="color" value="${esc(ch.color)}" onchange="data.characters[${selectedChar}].color=this.value;saveData();renderCharacters()"></div></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Household</label><select onchange="data.characters[${selectedChar}].household=this.value;saveData();renderCharacters()"><option value="epaule"${ch.household==='epaule'?' selected':''}>Epaule</option><option value="aguien"${ch.household==='aguien'?' selected':''}>Aguien</option><option value="neutral"${ch.household==='neutral'?' selected':''}>Neutral</option></select></div><div class="form-group"><label>Role</label><input type="text" value="${esc(ch.role)}" onchange="data.characters[${selectedChar}].role=this.value;saveData()"></div></div>`;
+
+    // Political alignment slider
+    E += `<div class="form-group"><label>Political Alignment (${ch.alignment > 0 ? '+' : ''}${ch.alignment})</label>`;
+    const pct = ((ch.alignment + 5) / 10) * 100;
+    E += `<div class="alignment-bar" onclick="const r=this.getBoundingClientRect();const x=(event.clientX-r.left)/r.width;const v=Math.round(x*10-5);data.characters[${selectedChar}].alignment=Math.max(-5,Math.min(5,v));saveData();renderCharacters()"><div class="alignment-marker" style="left:${pct}%"></div></div>`;
+    E += `<div class="alignment-labels"><span>-5 Serennan</span><span>0 Neutral</span><span>+5 Aurinian</span></div>`;
+    E += `</div>`;
+
+    E += `<div class="form-group"><label>Personality</label><textarea onchange="data.characters[${selectedChar}].personality=this.value;saveData()">${esc(ch.personality)}</textarea></div>`;
+
+    // Arc textareas
+    E += `<div class="detail-section"><h4>Character Arc</h4>`;
+    E += `<div class="form-group"><label>Act 1</label><textarea style="min-height:60px" onchange="data.characters[${selectedChar}].arc.act1=this.value;saveData()">${esc(ch.arc?.act1||'')}</textarea></div>`;
+    E += `<div class="form-group"><label>Act 2</label><textarea style="min-height:60px" onchange="data.characters[${selectedChar}].arc.act2=this.value;saveData()">${esc(ch.arc?.act2||'')}</textarea></div>`;
+    E += `<div class="form-group"><label>Act 3</label><textarea style="min-height:60px" onchange="data.characters[${selectedChar}].arc.act3=this.value;saveData()">${esc(ch.arc?.act3||'')}</textarea></div>`;
+    E += `</div>`;
+
+    E += `<div class="form-group"><label>Player Influence</label><textarea onchange="data.characters[${selectedChar}].playerInfluence=this.value;saveData()">${esc(ch.playerInfluence||'')}</textarea></div>`;
+
+    // Relationships
+    E += `<div class="detail-section"><h4>Relationships <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="data.characters[${selectedChar}].relationships.push({targetId:'',description:''});saveData();renderCharacters()">+ Add</button></h4>`;
+    (ch.relationships || []).forEach((rel, ri) => {
+      const target = data.characters.find(c => c.id === rel.targetId);
+      E += `<div class="card" style="border-left:3px solid ${target ? target.color : 'var(--border)'}">`;
+      E += `<div class="card-head"><select style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:4px;border-radius:3px;font-size:11px" onchange="data.characters[${selectedChar}].relationships[${ri}].targetId=this.value;saveData();renderCharacters()"><option value="">Select...</option>${data.characters.filter(c=>c.id!==ch.id).map(c=>`<option value="${c.id}"${rel.targetId===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select><button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="data.characters[${selectedChar}].relationships.splice(${ri},1);saveData();renderCharacters()">&times;</button></div>`;
+      E += `<textarea style="min-height:40px" onchange="data.characters[${selectedChar}].relationships[${ri}].description=this.value;saveData()">${esc(rel.description)}</textarea>`;
+      E += `</div>`;
+    });
+    E += `</div>`;
+
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.characters[${selectedChar}].notes=this.value;saveData()">${esc(ch.notes||'')}</textarea></div>`;
+
+    // Cross-references: documents where this character is dictator or addressee
+    const dictatedDocs = data.documents.filter(d => d.dictatedBy === ch.id);
+    const addressedDocs = data.documents.filter(d => d.addressedTo === ch.id);
+    if (dictatedDocs.length || addressedDocs.length) {
+      E += `<div class="detail-section" style="margin-top:16px"><h4>Referenced Documents</h4>`;
+      dictatedDocs.forEach(d => {
+        const di = data.documents.indexOf(d);
+        E += `<div class="card" style="cursor:pointer;border-left:3px solid var(--doc-dictation)" onclick="selectedDoc=${di};switchTab('documents')"><div class="card-head">${esc(d.title)} <span style="font-size:10px;color:var(--text2)">dictates</span></div><div class="card-body">Day ${d.day}</div></div>`;
+      });
+      addressedDocs.forEach(d => {
+        const di = data.documents.indexOf(d);
+        E += `<div class="card" style="cursor:pointer;border-left:3px solid var(--doc-incoming)" onclick="selectedDoc=${di};switchTab('documents')"><div class="card-head">${esc(d.title)} <span style="font-size:10px;color:var(--text2)">addressed to</span></div><div class="card-body">Day ${d.day}</div></div>`;
+      });
+      E += `</div>`;
+    }
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this character?')){data.characters.splice(${selectedChar},1);selectedChar=0;saveData();renderCharacters()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No character selected</div>`;
+  }
+  E += `</div>`;
+  tab.innerHTML = L + E;
+}
+
+function addCharacter() {
+  data.characters.push({ id:genId(), name:'New Character', color:'#8a7e6e', household:'neutral', role:'', alignment:0, personality:'', arc:{act1:'',act2:'',act3:''}, playerInfluence:'', relationships:[], notes:'' });
+  selectedChar = data.characters.length - 1;
+  saveData();
+  renderCharacters();
+}
+
+// =====================================================
+// RENDER: DOCUMENTS
+// =====================================================
+function renderDocuments() {
+  const tab = document.getElementById('tab-documents');
+  if (selectedDoc >= data.documents.length) selectedDoc = 0;
+  const doc = data.documents[selectedDoc];
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Documents</button><div class="side-list">`;
+  L += `<h3>Documents <button onclick="addDocument()">+ New</button></h3>`;
+  L += `<div class="list-items">`;
+
+  data.documents.forEach((d, i) => {
+    const typeColors = { official_dictation:'var(--doc-dictation)', copywork:'var(--doc-copywork)', incoming_aguien:'var(--doc-incoming)', outgoing_aguien:'var(--doc-outgoing)', helvetan_trade:'var(--doc-trade)', personal_letter:'var(--doc-personal)' };
+    const bc = typeColors[d.type] || 'var(--border)';
+    const hasHidden = d.hiddenLayer && d.hiddenLayer.encoded && d.hiddenLayer.encoded.trim();
+    L += `<div class="list-item${i === selectedDoc ? ' active' : ''}" style="border-left:3px solid ${bc}" onclick="selectedDoc=${i};renderDocuments()">`;
+    L += `<div style="flex:1;min-width:0"><div class="li-name">${esc(d.title)}${hasHidden ? '<span class="hidden-icon" title="Has hidden layer">&#9674;</span>' : ''}</div>`;
+    L += `<div class="li-sub">Day ${d.day} ${getSupervisionBadge(d.supervision)}</div>`;
+    L += `</div></div>`;
+  });
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (doc) {
+    E += `<h2>${esc(doc.title)}</h2>`;
+    E += `<div class="ep-sub">${getDocTypeBadge(doc.type)} ${getSupervisionBadge(doc.supervision)} ${getPacingBadge(doc.pacing)}</div>`;
+
+    E += `<div class="form-group"><label>Title</label><input type="text" value="${esc(doc.title)}" onchange="data.documents[${selectedDoc}].title=this.value;saveData();renderDocuments()"></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Type</label><select onchange="data.documents[${selectedDoc}].type=this.value;saveData();renderDocuments()"><option value="official_dictation"${doc.type==='official_dictation'?' selected':''}>Official Dictation</option><option value="copywork"${doc.type==='copywork'?' selected':''}>Copywork</option><option value="incoming_aguien"${doc.type==='incoming_aguien'?' selected':''}>Incoming (Aguien)</option><option value="outgoing_aguien"${doc.type==='outgoing_aguien'?' selected':''}>Outgoing (Aguien)</option><option value="helvetan_trade"${doc.type==='helvetan_trade'?' selected':''}>Helvetan Trade</option><option value="personal_letter"${doc.type==='personal_letter'?' selected':''}>Personal Letter</option></select></div>`;
+    E += `<div class="form-group"><label>Supervision</label><select onchange="data.documents[${selectedDoc}].supervision=this.value;saveData();renderDocuments()" style="color:var(--supervision-${doc.supervision||'unattended'})"><option value="close"${doc.supervision==='close'?' selected':''} style="color:var(--supervision-close)">Close</option><option value="checked"${doc.supervision==='checked'?' selected':''} style="color:var(--supervision-checked)">Checked</option><option value="glanced"${doc.supervision==='glanced'?' selected':''} style="color:var(--supervision-glanced)">Glanced</option><option value="unattended"${doc.supervision==='unattended'?' selected':''} style="color:var(--supervision-unattended)">Unattended</option></select></div></div>`;
+
+    E += `<div class="form-row-3"><div class="form-group"><label>Act</label><select onchange="data.documents[${selectedDoc}].act=parseInt(this.value);saveData()"><option value="1"${doc.act===1?' selected':''}>Act 1</option><option value="2"${doc.act===2?' selected':''}>Act 2</option><option value="3"${doc.act===3?' selected':''}>Act 3</option></select></div>`;
+    E += `<div class="form-group"><label>Day</label><input type="number" value="${doc.day||1}" min="1" max="80" onchange="data.documents[${selectedDoc}].day=parseInt(this.value)||1;saveData()"></div>`;
+    E += `<div class="form-group"><label>Pacing</label><select onchange="data.documents[${selectedDoc}].pacing=this.value;saveData();renderDocuments()"><option value="quiet"${doc.pacing==='quiet'?' selected':''}>Quiet</option><option value="routine"${doc.pacing==='routine'?' selected':''}>Routine</option><option value="tense"${doc.pacing==='tense'?' selected':''}>Tense</option><option value="crisis"${doc.pacing==='crisis'?' selected':''}>Crisis</option><option value="climactic"${doc.pacing==='climactic'?' selected':''}>Climactic</option></select></div></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Dictated By</label><select onchange="data.documents[${selectedDoc}].dictatedBy=this.value;saveData();renderDocuments()"><option value="">None</option>${data.characters.map(c=>`<option value="${c.id}"${doc.dictatedBy===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div>`;
+    E += `<div class="form-group"><label>Addressed To</label><select onchange="data.documents[${selectedDoc}].addressedTo=this.value;saveData()"><option value="">None / External</option>${data.characters.map(c=>`<option value="${c.id}"${doc.addressedTo===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div></div>`;
+
+    E += `<div class="form-group"><label>Surface Text</label><textarea class="mono" style="min-height:150px" onchange="data.documents[${selectedDoc}].surfaceText=this.value;saveData()">${esc(doc.surfaceText)}</textarea></div>`;
+
+    // Hidden Layer (collapsible)
+    const hl = doc.hiddenLayer || {};
+    const hasHL = hl.encoded || (hl.ciphers && hl.ciphers.length);
+    E += `<div style="background:var(--bg);border:1px solid var(--channel-candlelight);border-radius:8px;padding:14px;margin-bottom:16px">`;
+    E += `<div class="collapsible-header" style="padding:0;background:none;border:none;margin-bottom:${hasHL?'12':'0'}px" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed')"><span style="color:var(--channel-candlelight)">&#9674; Hidden Layer</span><span class="chevron">&#9660;</span></div>`;
+    E += `<div class="collapsible-body">`;
+
+    E += `<div class="form-group"><label>Ciphers Used</label><div class="tag-list">`;
+    (hl.ciphers || []).forEach((cid, ci) => {
+      const cipher = data.ciphers.find(c => c.id === cid);
+      E += `<span class="tag removable" style="color:var(--channel-${cipher?.channel||'daylight'});border-color:var(--channel-${cipher?.channel||'daylight'})" onclick="data.documents[${selectedDoc}].hiddenLayer.ciphers.splice(${ci},1);saveData();renderDocuments()">${cipher ? esc(cipher.name) : esc(cid)} &times;</span>`;
+    });
+    E += `</div><select style="margin-top:6px;width:auto;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:4px;border-radius:3px;font-size:11px" onchange="if(this.value){if(!data.documents[${selectedDoc}].hiddenLayer.ciphers)data.documents[${selectedDoc}].hiddenLayer.ciphers=[];data.documents[${selectedDoc}].hiddenLayer.ciphers.push(this.value);saveData();renderDocuments()}"><option value="">+ Add cipher...</option>${data.ciphers.filter(c=>!(hl.ciphers||[]).includes(c.id)).map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div>`;
+
+    E += `<div class="form-group"><label>Encoded Content</label><textarea class="mono" style="min-height:80px" onchange="data.documents[${selectedDoc}].hiddenLayer.encoded=this.value;saveData()">${esc(hl.encoded||'')}</textarea></div>`;
+    E += `<div class="form-group"><label>Method</label><textarea style="min-height:50px" onchange="data.documents[${selectedDoc}].hiddenLayer.method=this.value;saveData()">${esc(hl.method||'')}</textarea></div>`;
+    E += `<div class="form-group"><label>Worked Example</label><textarea class="mono" style="min-height:80px" onchange="data.documents[${selectedDoc}].hiddenLayer.workedExample=this.value;saveData()">${esc(hl.workedExample||'')}</textarea></div>`;
+
+    E += `</div></div>`;
+
+    // Editorial choices
+    E += `<div class="detail-section"><h4>Editorial Choices <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="data.documents[${selectedDoc}].editorialChoices.push({description:'',tugEffect:0,consequence:'',requiresCipher:''});saveData();renderDocuments()">+ Add</button></h4>`;
+    (doc.editorialChoices || []).forEach((ec, ei) => {
+      E += `<div class="card">`;
+      E += `<div class="card-head"><span>Choice ${ei+1}</span><button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="data.documents[${selectedDoc}].editorialChoices.splice(${ei},1);saveData();renderDocuments()">&times;</button></div>`;
+      E += `<div class="form-group" style="margin-bottom:6px"><label>Description</label><textarea style="min-height:40px" onchange="data.documents[${selectedDoc}].editorialChoices[${ei}].description=this.value;saveData()">${esc(ec.description)}</textarea></div>`;
+      E += `<div class="form-row"><div class="form-group" style="margin-bottom:6px"><label>Tug Effect</label><input type="number" value="${ec.tugEffect||0}" step="0.5" onchange="data.documents[${selectedDoc}].editorialChoices[${ei}].tugEffect=parseFloat(this.value)||0;saveData()"></div>`;
+      E += `<div class="form-group" style="margin-bottom:6px"><label>Requires Cipher</label><select onchange="data.documents[${selectedDoc}].editorialChoices[${ei}].requiresCipher=this.value;saveData()"><option value="">None</option>${data.ciphers.map(c=>`<option value="${c.id}"${ec.requiresCipher===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div></div>`;
+      E += `<div class="form-group" style="margin-bottom:0"><label>Consequence</label><textarea style="min-height:40px" onchange="data.documents[${selectedDoc}].editorialChoices[${ei}].consequence=this.value;saveData()">${esc(ec.consequence)}</textarea></div>`;
+      E += `</div>`;
+    });
+    E += `</div>`;
+
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.documents[${selectedDoc}].notes=this.value;saveData()">${esc(doc.notes||'')}</textarea></div>`;
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this document?')){data.documents.splice(${selectedDoc},1);selectedDoc=0;saveData();renderDocuments()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No document selected</div>`;
+  }
+  E += `</div>`;
+  tab.innerHTML = L + E;
+}
+
+function addDocument() {
+  data.documents.push({ id:genId(), title:'New Document', type:'official_dictation', day:1, act:1, supervision:'unattended', dictatedBy:'', addressedTo:'', surfaceText:'', hiddenLayer:{ ciphers:[], encoded:'', method:'', workedExample:'' }, editorialChoices:[], pacing:'routine', notes:'' });
+  selectedDoc = data.documents.length - 1;
+  saveData();
+  renderDocuments();
+}
+
+// =====================================================
+// RENDER: CIPHERS
+// =====================================================
+function renderCiphers() {
+  const tab = document.getElementById('tab-ciphers');
+  if (selectedCipher >= data.ciphers.length) selectedCipher = 0;
+  const cipher = data.ciphers[selectedCipher];
+
+  const daylight = data.ciphers.filter(c => c.channel === 'daylight');
+  const candlelight = data.ciphers.filter(c => c.channel === 'candlelight');
+  const physical = data.ciphers.filter(c => c.channel === 'physical');
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Ciphers</button><div class="side-list">`;
+  L += `<h3>Ciphers <button onclick="addCipher()">+ New</button></h3>`;
+  L += `<div class="list-items">`;
+
+  function renderCipherGroup(label, ciphers, color) {
+    L += `<div class="collapsible-header" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed')"><span style="color:${color}">${esc(label)} (${ciphers.length})</span><span class="chevron">&#9660;</span></div>`;
+    L += `<div class="collapsible-body">`;
+    ciphers.forEach(c => {
+      const gi = data.ciphers.indexOf(c);
+      L += `<div class="list-item${gi === selectedCipher ? ' active' : ''}" onclick="selectedCipher=${gi};renderCiphers()">`;
+      L += `<div style="flex:1;min-width:0"><div class="li-name">${esc(c.name)}</div>`;
+      L += `<div class="li-sub"><span class="complexity-dots">${[1,2,3].map(n=>`<span class="complexity-dot${n<=c.complexity?' filled':''}"></span>`).join('')}</span> Day ${c.discoveryDay}</div>`;
+      L += `</div></div>`;
+    });
+    L += `</div>`;
+  }
+
+  renderCipherGroup('Daylight', daylight, 'var(--channel-daylight)');
+  renderCipherGroup('Candlelight', candlelight, 'var(--channel-candlelight)');
+  renderCipherGroup('Physical', physical, 'var(--channel-physical)');
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (cipher) {
+    E += `<h2>${esc(cipher.name)}</h2>`;
+    E += `<div class="ep-sub">${getChannelBadge(cipher.channel)} Complexity ${cipher.complexity}</div>`;
+
+    E += `<div class="form-group"><label>Name</label><input type="text" value="${esc(cipher.name)}" onchange="data.ciphers[${selectedCipher}].name=this.value;saveData();renderCiphers()"></div>`;
+
+    E += `<div class="form-row-3"><div class="form-group"><label>Channel</label><select onchange="data.ciphers[${selectedCipher}].channel=this.value;saveData();renderCiphers()"><option value="daylight"${cipher.channel==='daylight'?' selected':''}>Daylight</option><option value="candlelight"${cipher.channel==='candlelight'?' selected':''}>Candlelight</option><option value="physical"${cipher.channel==='physical'?' selected':''}>Physical</option></select></div>`;
+    E += `<div class="form-group"><label>Category</label><input type="text" value="${esc(cipher.category||'')}" onchange="data.ciphers[${selectedCipher}].category=this.value;saveData()"></div>`;
+    E += `<div class="form-group"><label>Complexity</label><div style="display:flex;gap:6px;margin-top:4px">${[1,2,3].map(n=>`<div style="width:24px;height:24px;border-radius:50%;border:2px solid ${n<=cipher.complexity?'var(--accent3)':'var(--border)'};background:${n<=cipher.complexity?'var(--accent3)':'var(--bg)'};cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:${n<=cipher.complexity?'#000':'var(--text2)'}" onclick="data.ciphers[${selectedCipher}].complexity=${n};saveData();renderCiphers()">${n}</div>`).join('')}</div></div></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Discovery Day</label><input type="number" value="${cipher.discoveryDay||1}" min="1" max="80" onchange="data.ciphers[${selectedCipher}].discoveryDay=parseInt(this.value)||1;saveData()"></div><div class="form-group"><label>ID</label><input type="text" value="${esc(cipher.id)}" disabled style="opacity:0.5"></div></div>`;
+
+    E += `<div class="form-group"><label>Discovery Method</label><textarea onchange="data.ciphers[${selectedCipher}].discoveryMethod=this.value;saveData()">${esc(cipher.discoveryMethod||'')}</textarea></div>`;
+
+    E += `<div class="form-group"><label>Description</label><textarea onchange="data.ciphers[${selectedCipher}].description=this.value;saveData()">${esc(cipher.description||'')}</textarea></div>`;
+
+    E += `<div class="form-group"><label>Worked Example</label><textarea class="mono" style="min-height:120px" onchange="data.ciphers[${selectedCipher}].workedExample=this.value;saveData()">${esc(cipher.workedExample||'')}</textarea></div>`;
+
+    // Dependencies
+    E += `<div class="form-group"><label>Dependencies</label><div class="tag-list">`;
+    (cipher.dependencies || []).forEach((dep, di) => {
+      const dc = data.ciphers.find(c => c.id === dep);
+      E += `<span class="tag removable" onclick="data.ciphers[${selectedCipher}].dependencies.splice(${di},1);saveData();renderCiphers()">${dc ? esc(dc.name) : esc(dep)} &times;</span>`;
+    });
+    E += `</div><select style="margin-top:6px;width:auto;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:4px;border-radius:3px;font-size:11px" onchange="if(this.value){if(!data.ciphers[${selectedCipher}].dependencies)data.ciphers[${selectedCipher}].dependencies=[];data.ciphers[${selectedCipher}].dependencies.push(this.value);saveData();renderCiphers()}"><option value="">+ Add dependency...</option>${data.ciphers.filter(c=>c.id!==cipher.id&&!(cipher.dependencies||[]).includes(c.id)).map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></div>`;
+
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.ciphers[${selectedCipher}].notes=this.value;saveData()">${esc(cipher.notes||'')}</textarea></div>`;
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this cipher?')){data.ciphers.splice(${selectedCipher},1);selectedCipher=0;saveData();renderCiphers()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No cipher selected</div>`;
+  }
+  E += `</div>`;
+  tab.innerHTML = L + E;
+}
+
+function addCipher() {
+  data.ciphers.push({ id:genId(), name:'New Cipher', channel:'daylight', category:'', complexity:1, discoveryDay:1, discoveryMethod:'', description:'', workedExample:'', dependencies:[], notes:'' });
+  selectedCipher = data.ciphers.length - 1;
+  saveData();
+  renderCiphers();
+}
+
+// =====================================================
+// RENDER: DAY PLANNER
+// =====================================================
+function renderDays() {
+  const tab = document.getElementById('tab-days');
+  let html = '';
+
+  html += `<h2 style="margin-bottom:4px">Day Planner</h2>`;
+  html += `<p style="color:var(--text2);font-size:12px;margin-bottom:20px">80 days, three acts. Each row shows documents, newly available ciphers, and tug-of-war state for that day.</p>`;
+
+  let lastAct = 0;
+  const sortedDays = [...data.days].sort((a, b) => a.dayNumber - b.dayNumber);
+
+  sortedDays.forEach((day, di) => {
+    const realIdx = data.days.indexOf(day);
+
+    // Act headers
+    if (day.act !== lastAct) {
+      html += `<div class="act-header">Act ${day.act}</div>`;
+      lastAct = day.act;
+    }
+
+    const docs = data.documents.filter(d => d.day === day.dayNumber);
+    const newCiphers = data.ciphers.filter(c => c.discoveryDay === day.dayNumber);
+    const tugVal = computeTugAtDay(day.dayNumber);
+
+    html += `<div class="day-row">`;
+    html += `<div class="day-label"><div class="day-num">${day.dayNumber}</div><select style="font-size:9px;padding:1px 2px;background:transparent;border:1px solid var(--border);color:var(--${day.pacing ? 'pacing-'+day.pacing : 'text2'});border-radius:2px;width:54px" onchange="data.days[${realIdx}].pacing=this.value;saveData();renderDays()">${['quiet','routine','tense','crisis','climactic'].map(p=>`<option value="${p}"${day.pacing===p?' selected':''}>${p}</option>`).join('')}</select></div>`;
+    html += `<div class="day-content">`;
+
+    // Pacing bar
+    html += `<div class="day-pacing-bar ${day.pacing||'routine'}" style="width:100%"></div>`;
+
+    // Documents row
+    if (docs.length) {
+      html += `<div class="day-row-group"><span class="day-row-label">Docs</span>`;
+      docs.forEach(d => {
+        const typeColors = { official_dictation:'var(--doc-dictation)', copywork:'var(--doc-copywork)', incoming_aguien:'var(--doc-incoming)', outgoing_aguien:'var(--doc-outgoing)', helvetan_trade:'var(--doc-trade)', personal_letter:'var(--doc-personal)' };
+        const c = typeColors[d.type] || 'var(--border)';
+        const dIdx = data.documents.indexOf(d);
+        html += `<div class="day-chip" style="border-color:${c};color:${c}" onclick="selectedDoc=${dIdx};switchTab('documents')" title="${esc(d.title)}">${esc(d.title.length > 25 ? d.title.substring(0,25)+'...' : d.title)}</div>`;
+      });
+      html += `</div>`;
+    }
+
+    // New ciphers
+    if (newCiphers.length) {
+      html += `<div class="day-row-group"><span class="day-row-label">Ciphers</span>`;
+      newCiphers.forEach(c => {
+        const ci = data.ciphers.indexOf(c);
+        html += `<div class="day-chip" style="border-color:var(--channel-${c.channel});color:var(--channel-${c.channel})" onclick="selectedCipher=${ci};switchTab('ciphers')">${esc(c.name)}</div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Tug value mini bar
+    const tugPct = Math.max(0, Math.min(100, (tugVal + 50) / 100 * 100));
+    const tugColor = tugVal > 5 ? 'var(--tug-war)' : tugVal < -5 ? 'var(--tug-peace)' : 'var(--tug-neutral)';
+    html += `<div class="day-row-group"><span class="day-row-label">Tug</span>`;
+    html += `<div class="tug-mini-bar"><div class="tug-mini-fill" style="left:${Math.min(50,tugPct)}%;width:${Math.abs(tugPct-50)}%;background:${tugColor}"></div></div>`;
+    html += `<span style="font-size:10px;color:${tugColor}">${tugVal > 0 ? '+' : ''}${tugVal.toFixed(1)}</span>`;
+    html += `</div>`;
+
+    // Events/notes
+    if (day.events) {
+      html += `<div style="font-size:11px;color:var(--text2);margin-top:2px"><textarea style="width:100%;background:transparent;border:1px solid transparent;color:var(--text2);padding:2px 4px;font-size:11px;font-family:inherit;min-height:24px;resize:vertical;border-radius:3px" onfocus="this.style.borderColor='var(--border)'" onblur="this.style.borderColor='transparent'" onchange="data.days[${realIdx}].events=this.value;saveData()">${esc(day.events)}</textarea></div>`;
+    }
+
+    // Composition rule validation
+    const dayIssues = [];
+    if (docs.length === 0) dayIssues.push('No documents');
+    docs.forEach(d => {
+      if (d.hiddenLayer && d.hiddenLayer.ciphers && d.hiddenLayer.ciphers.length) {
+        d.hiddenLayer.ciphers.forEach(cid => {
+          const cipher = data.ciphers.find(c => c.id === cid);
+          if (cipher && cipher.discoveryDay > day.dayNumber) dayIssues.push(`Cipher "${cipher.name}" not yet discovered`);
+        });
+      }
+    });
+    if (dayIssues.length) {
+      html += `<div style="font-size:10px;margin-top:2px">${dayIssues.map(i=>`<span style="color:var(--red)">&#10007; ${esc(i)}</span>`).join(' ')}</div>`;
+    } else if (docs.length) {
+      html += `<div style="font-size:10px;margin-top:2px"><span style="color:var(--green)">&#10003; Valid</span></div>`;
+    }
+
+    html += `</div></div>`;
+  });
+
+  html += `<div class="btn-row" style="margin-top:16px"><button class="btn btn-accent" onclick="addDay()">+ Add Day</button></div>`;
+
+  tab.innerHTML = html;
+}
+
+function addDay() {
+  const maxDay = data.days.reduce((m, d) => Math.max(m, d.dayNumber), 0);
+  const newDay = maxDay + 1;
+  const act = newDay <= 30 ? 1 : newDay <= 60 ? 2 : 3;
+  data.days.push({ dayNumber: newDay, act: act, pacing: 'routine', events: '', notes: '' });
+  saveData();
+  renderDays();
+}
+
+// =====================================================
+// RENDER: TUG OF WAR
+// =====================================================
+function renderTugOfWar() {
+  const tab = document.getElementById('tab-tugofwar');
+  if (selectedForce >= data.forces.length) selectedForce = 0;
+  const force = data.forces[selectedForce];
+
+  const peaceForces = data.forces.filter(f => f.direction === 'peace');
+  const warForces = data.forces.filter(f => f.direction === 'war');
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Forces</button><div class="side-list">`;
+  L += `<h3>Forces <button onclick="addForce()">+ New</button></h3>`;
+  L += `<div class="list-items">`;
+
+  L += `<div class="collapsible-header" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed')"><span style="color:var(--tug-peace)">Toward Peace (${peaceForces.length})</span><span class="chevron">&#9660;</span></div>`;
+  L += `<div class="collapsible-body">`;
+  peaceForces.forEach(f => {
+    const gi = data.forces.indexOf(f);
+    L += `<div class="list-item${gi === selectedForce ? ' active' : ''}" onclick="selectedForce=${gi};renderTugOfWar()"><div style="flex:1;min-width:0"><div class="li-name">${esc(f.name)}</div><div class="li-sub"><span class="badge badge-routine">${esc(f.source)}</span> mag ${f.magnitude}</div></div></div>`;
+  });
+  L += `</div>`;
+
+  L += `<div class="collapsible-header" onclick="this.classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed')"><span style="color:var(--tug-war)">Toward War (${warForces.length})</span><span class="chevron">&#9660;</span></div>`;
+  L += `<div class="collapsible-body">`;
+  warForces.forEach(f => {
+    const gi = data.forces.indexOf(f);
+    L += `<div class="list-item${gi === selectedForce ? ' active' : ''}" onclick="selectedForce=${gi};renderTugOfWar()"><div style="flex:1;min-width:0"><div class="li-name">${esc(f.name)}</div><div class="li-sub"><span class="badge badge-crisis">${esc(f.source)}</span> mag ${f.magnitude}</div></div></div>`;
+  });
+  L += `</div>`;
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (force) {
+    E += `<h2>${esc(force.name)}</h2>`;
+    E += `<div class="ep-sub">${force.direction === 'peace' ? '<span style="color:var(--tug-peace)">Toward Peace</span>' : '<span style="color:var(--tug-war)">Toward War</span>'} - ${esc(force.source)}</div>`;
+
+    E += `<div class="form-group"><label>Name</label><input type="text" value="${esc(force.name)}" onchange="data.forces[${selectedForce}].name=this.value;saveData();renderTugOfWar()"></div>`;
+
+    E += `<div class="form-row-3"><div class="form-group"><label>Direction</label><select onchange="data.forces[${selectedForce}].direction=this.value;saveData();renderTugOfWar()"><option value="peace"${force.direction==='peace'?' selected':''}>Peace</option><option value="war"${force.direction==='war'?' selected':''}>War</option></select></div>`;
+    E += `<div class="form-group"><label>Source</label><select onchange="data.forces[${selectedForce}].source=this.value;saveData()"><option value="constant"${force.source==='constant'?' selected':''}>Constant</option><option value="document"${force.source==='document'?' selected':''}>Document</option><option value="cipher"${force.source==='cipher'?' selected':''}>Cipher</option><option value="backchannel"${force.source==='backchannel'?' selected':''}>Backchannel</option><option value="event"${force.source==='event'?' selected':''}>Event</option></select></div>`;
+    E += `<div class="form-group"><label>Magnitude</label><input type="number" value="${force.magnitude||0}" step="0.5" min="0" onchange="data.forces[${selectedForce}].magnitude=parseFloat(this.value)||0;saveData()"></div></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Start Day</label><input type="number" value="${force.startDay||1}" min="1" onchange="data.forces[${selectedForce}].startDay=parseInt(this.value)||1;saveData()"></div>`;
+    E += `<div class="form-group"><label>End Day</label><input type="number" value="${force.endDay||999}" min="1" onchange="data.forces[${selectedForce}].endDay=parseInt(this.value)||999;saveData()"></div></div>`;
+
+    E += `<div class="form-group"><label>Description</label><textarea onchange="data.forces[${selectedForce}].description=this.value;saveData()">${esc(force.description||'')}</textarea></div>`;
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.forces[${selectedForce}].notes=this.value;saveData()">${esc(force.notes||'')}</textarea></div>`;
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this force?')){data.forces.splice(${selectedForce},1);selectedForce=0;saveData();renderTugOfWar()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No force selected</div>`;
+  }
+
+  // Simulation chart
+  E += `<div class="detail-section" style="margin-top:24px"><h4>Tug-of-War Simulation</h4>`;
+  E += `<p style="font-size:11px;color:var(--text2);margin-bottom:8px">Cumulative tug value across all planned days. Green = peace zone, yellow = neutral, red = war zone.</p>`;
+
+  const sortedDays = [...data.days].sort((a, b) => a.dayNumber - b.dayNumber);
+  const tugValues = sortedDays.map(d => ({ day: d.dayNumber, val: computeTugAtDay(d.dayNumber) }));
+  const maxAbsTug = Math.max(10, ...tugValues.map(t => Math.abs(t.val)));
+
+  E += `<div class="sim-chart">`;
+  E += `<div class="sim-zone green" style="left:0;width:33%"></div>`;
+  E += `<div class="sim-zone yellow" style="left:33%;width:34%"></div>`;
+  E += `<div class="sim-zone red" style="left:67%;width:33%"></div>`;
+  E += `<div class="sim-center"></div>`;
+
+  if (tugValues.length) {
+    const barWidth = Math.max(4, Math.min(12, Math.floor(100 / tugValues.length * 0.8)));
+    tugValues.forEach((t, i) => {
+      const x = (i / Math.max(1, tugValues.length - 1)) * 90 + 5;
+      const normalizedVal = t.val / maxAbsTug;
+      const heightPct = Math.abs(normalizedVal) * 45;
+      const bottom = normalizedVal >= 0 ? 50 : 50 - heightPct;
+      const color = t.val > 5 ? 'var(--tug-war)' : t.val < -5 ? 'var(--tug-peace)' : 'var(--tug-neutral)';
+      E += `<div class="sim-bar" style="left:${x}%;bottom:${bottom}%;height:${heightPct}%;width:${barWidth}px;background:${color}" title="Day ${t.day}: ${t.val > 0 ? '+' : ''}${t.val.toFixed(1)}"></div>`;
+    });
+  }
+
+  E += `</div>`;
+  E += `<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text2);margin-top:4px"><span>Peace</span><span>Neutral</span><span>War</span></div>`;
+  E += `</div>`;
+
+  E += `</div>`;
+  tab.innerHTML = L + E;
+}
+
+function addForce() {
+  data.forces.push({ id:genId(), name:'New Force', direction:'peace', source:'event', magnitude:1, startDay:1, endDay:999, description:'', notes:'' });
+  selectedForce = data.forces.length - 1;
+  saveData();
+  renderTugOfWar();
+}
+
+// =====================================================
+// RENDER: STREET WINDOW
+// =====================================================
+function renderWindow() {
+  const tab = document.getElementById('tab-window');
+  if (selectedIndicator >= data.indicators.length) selectedIndicator = 0;
+  const ind = data.indicators[selectedIndicator];
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Indicators</button><div class="side-list">`;
+  L += `<h3>Indicators <button onclick="addIndicator()">+ New</button></h3>`;
+  L += `<div class="list-items">`;
+
+  data.indicators.forEach((indicator, i) => {
+    const tsColors = { immediate:'var(--red)', daily:'var(--accent3)', weekly:'var(--blue)', act:'var(--text2)' };
+    L += `<div class="list-item${i === selectedIndicator ? ' active' : ''}" onclick="selectedIndicator=${i};renderWindow()">`;
+    L += `<div style="flex:1;min-width:0"><div class="li-name">${esc(indicator.name)}</div>`;
+    L += `<div class="li-sub"><span class="badge" style="color:${tsColors[indicator.timescale]||'var(--text2)'};border:1px solid ${tsColors[indicator.timescale]||'var(--border)'}">${esc(indicator.timescale||'daily')}</span> ${indicator.states.length} states</div>`;
+    L += `</div></div>`;
+  });
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (ind) {
+    E += `<h2>${esc(ind.name)}</h2>`;
+    E += `<div class="ep-sub">${esc(ind.timescale||'daily')} timescale - ${ind.states.length} states</div>`;
+
+    E += `<div class="form-group"><label>Name</label><input type="text" value="${esc(ind.name)}" onchange="data.indicators[${selectedIndicator}].name=this.value;saveData();renderWindow()"></div>`;
+
+    E += `<div class="form-group"><label>Description</label><textarea onchange="data.indicators[${selectedIndicator}].description=this.value;saveData()">${esc(ind.description||'')}</textarea></div>`;
+
+    E += `<div class="form-group"><label>Timescale</label><select onchange="data.indicators[${selectedIndicator}].timescale=this.value;saveData();renderWindow()"><option value="immediate"${ind.timescale==='immediate'?' selected':''}>Immediate</option><option value="daily"${ind.timescale==='daily'?' selected':''}>Daily</option><option value="weekly"${ind.timescale==='weekly'?' selected':''}>Weekly</option><option value="act"${ind.timescale==='act'?' selected':''}>Act</option></select></div>`;
+
+    // States table
+    E += `<div class="detail-section"><h4>States <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="data.indicators[${selectedIndicator}].states.push({threshold:0,label:'',visual:''});saveData();renderWindow()">+ Add State</button></h4>`;
+    E += `<table class="states-table"><thead><tr><th style="width:80px">Threshold</th><th style="width:120px">Label</th><th>Visual Description</th><th style="width:40px"></th></tr></thead><tbody>`;
+    (ind.states || []).forEach((s, si) => {
+      const rowColor = s.threshold <= -3 ? 'var(--tug-peace)' : s.threshold >= 3 ? 'var(--tug-war)' : 'var(--tug-neutral)';
+      E += `<tr style="border-left:3px solid ${rowColor}">`;
+      E += `<td><input type="number" value="${s.threshold}" step="1" onchange="data.indicators[${selectedIndicator}].states[${si}].threshold=parseFloat(this.value)||0;saveData()"></td>`;
+      E += `<td><input type="text" value="${esc(s.label)}" onchange="data.indicators[${selectedIndicator}].states[${si}].label=this.value;saveData()"></td>`;
+      E += `<td><textarea onchange="data.indicators[${selectedIndicator}].states[${si}].visual=this.value;saveData()">${esc(s.visual)}</textarea></td>`;
+      E += `<td><button class="btn btn-danger" style="font-size:10px;padding:2px 6px" onclick="data.indicators[${selectedIndicator}].states.splice(${si},1);saveData();renderWindow()">&times;</button></td>`;
+      E += `</tr>`;
+    });
+    E += `</tbody></table></div>`;
+
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.indicators[${selectedIndicator}].notes=this.value;saveData()">${esc(ind.notes||'')}</textarea></div>`;
+
+    // Day snapshot
+    E += `<div class="detail-section" style="margin-top:16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px">`;
+    E += `<h4>Day Snapshot</h4>`;
+    E += `<div class="form-group"><label>Day Number</label><input type="number" id="snapshotDay" value="1" min="1" max="80" onchange="renderWindowSnapshot()"></div>`;
+    E += `<div id="windowSnapshot"></div>`;
+    E += `</div>`;
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this indicator?')){data.indicators.splice(${selectedIndicator},1);selectedIndicator=0;saveData();renderWindow()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No indicator selected</div>`;
+  }
+  E += `</div>`;
+  tab.innerHTML = L + E;
+
+  // Render initial snapshot
+  if (ind) renderWindowSnapshot();
+}
+
+function renderWindowSnapshot() {
+  const container = document.getElementById('windowSnapshot');
+  if (!container) return;
+  const dayInput = document.getElementById('snapshotDay');
+  const dayNum = parseInt(dayInput?.value) || 1;
+  const tugVal = computeTugAtDay(dayNum);
+
+  let html = `<p style="font-size:11px;color:var(--text2);margin-bottom:8px">Tug value at day ${dayNum}: <strong style="color:${tugVal > 5 ? 'var(--tug-war)' : tugVal < -5 ? 'var(--tug-peace)' : 'var(--tug-neutral)'}">${tugVal > 0 ? '+' : ''}${tugVal.toFixed(1)}</strong></p>`;
+
+  data.indicators.forEach(ind => {
+    const sorted = [...(ind.states || [])].sort((a, b) => a.threshold - b.threshold);
+    let currentState = sorted[0] || { label: 'Unknown', visual: 'No states defined' };
+    sorted.forEach(s => { if (tugVal >= s.threshold) currentState = s; });
+    const stateColor = currentState.threshold <= -3 ? 'var(--tug-peace)' : currentState.threshold >= 3 ? 'var(--tug-war)' : 'var(--tug-neutral)';
+    html += `<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong style="min-width:100px;color:${stateColor}">${esc(ind.name)}</strong><span style="color:var(--text2)">${esc(currentState.label)}</span></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function addIndicator() {
+  data.indicators.push({ id:genId(), name:'New Indicator', description:'', timescale:'daily', states:[{threshold:-3,label:'Peace',visual:''},{threshold:0,label:'Neutral',visual:''},{threshold:3,label:'Tension',visual:''},{threshold:5,label:'War',visual:''}], notes:'' });
+  selectedIndicator = data.indicators.length - 1;
+  saveData();
+  renderWindow();
+}
+
+// =====================================================
+// RENDER: SECRET LANGUAGE
+// =====================================================
+function renderLanguage() {
+  const tab = document.getElementById('tab-language');
+  if (selectedStage >= data.stages.length) selectedStage = 0;
+  const stage = data.stages[selectedStage];
+
+  const stageColors = ['var(--pacing-quiet)', 'var(--pacing-routine)', 'var(--pacing-tense)', 'var(--pacing-crisis)', 'var(--pacing-climactic)'];
+
+  let L = `<button class="mobile-toggle" onclick="toggleSidebar(this)">Stages</button><div class="side-list">`;
+  L += `<h3>Pipeline Stages</h3>`;
+  L += `<div class="list-items">`;
+
+  data.stages.forEach((s, i) => {
+    const color = stageColors[i % stageColors.length];
+    L += `<div class="list-item${i === selectedStage ? ' active' : ''}" onclick="selectedStage=${i};renderLanguage()">`;
+    L += `<div style="flex:1;min-width:0"><div class="li-name" style="color:${color}">${esc(s.name)}</div>`;
+    L += `<div class="li-sub">Days ${s.startDay}-${s.endDay}</div>`;
+    L += `</div></div>`;
+  });
+
+  L += `</div></div>`;
+
+  let E = `<div class="editor-panel">`;
+  if (stage) {
+    const color = stageColors[selectedStage % stageColors.length];
+    E += `<h2 style="color:${color}">${esc(stage.name)}</h2>`;
+    E += `<div class="ep-sub">Days ${stage.startDay} - ${stage.endDay}</div>`;
+
+    E += `<div class="form-group"><label>Name</label><input type="text" value="${esc(stage.name)}" onchange="data.stages[${selectedStage}].name=this.value;saveData();renderLanguage()"></div>`;
+
+    E += `<div class="form-group"><label>Description</label><textarea onchange="data.stages[${selectedStage}].description=this.value;saveData()">${esc(stage.description||'')}</textarea></div>`;
+
+    E += `<div class="form-row"><div class="form-group"><label>Start Day</label><input type="number" value="${stage.startDay||1}" min="1" max="80" onchange="data.stages[${selectedStage}].startDay=parseInt(this.value)||1;saveData();renderLanguage()"></div>`;
+    E += `<div class="form-group"><label>End Day</label><input type="number" value="${stage.endDay||80}" min="1" max="80" onchange="data.stages[${selectedStage}].endDay=parseInt(this.value)||80;saveData();renderLanguage()"></div></div>`;
+
+    E += `<div class="form-group"><label>Recognition Trigger</label><textarea onchange="data.stages[${selectedStage}].recognitionTrigger=this.value;saveData()">${esc(stage.recognitionTrigger||'')}</textarea></div>`;
+
+    // Anomalies
+    E += `<div class="detail-section"><h4>Anomalies <button class="btn" style="font-size:10px;padding:2px 8px;margin-left:8px" onclick="data.stages[${selectedStage}].anomalies.push({documentId:'',description:'',cipherId:''});saveData();renderLanguage()">+ Add</button></h4>`;
+    E += `<p style="font-size:10px;color:var(--text2);margin-bottom:8px">Documents within this stage's day range that teach or test a specific cipher.</p>`;
+    (stage.anomalies || []).forEach((a, ai) => {
+      const doc = data.documents.find(d => d.id === a.documentId);
+      const cipher = data.ciphers.find(c => c.id === a.cipherId);
+      // Filter documents by stage day range
+      const stageDocs = data.documents.filter(d => d.day >= stage.startDay && d.day <= stage.endDay);
+      E += `<div class="card">`;
+      E += `<div class="card-head"><span>Anomaly ${ai+1}</span><button class="btn btn-danger" style="font-size:10px;padding:1px 6px" onclick="data.stages[${selectedStage}].anomalies.splice(${ai},1);saveData();renderLanguage()">&times;</button></div>`;
+      E += `<div class="form-row"><div class="form-group" style="margin-bottom:6px"><label>Document</label><select onchange="data.stages[${selectedStage}].anomalies[${ai}].documentId=this.value;saveData()"><option value="">Select...</option>${stageDocs.map(d=>`<option value="${d.id}"${a.documentId===d.id?' selected':''}>${esc(d.title)} (Day ${d.day})</option>`).join('')}</select></div>`;
+      E += `<div class="form-group" style="margin-bottom:6px"><label>Cipher</label><select onchange="data.stages[${selectedStage}].anomalies[${ai}].cipherId=this.value;saveData()"><option value="">Select...</option>${data.ciphers.map(c=>`<option value="${c.id}"${a.cipherId===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div></div>`;
+      E += `<div class="form-group" style="margin-bottom:0"><label>Description</label><textarea style="min-height:40px" onchange="data.stages[${selectedStage}].anomalies[${ai}].description=this.value;saveData()">${esc(a.description)}</textarea></div>`;
+      E += `</div>`;
+    });
+    E += `</div>`;
+
+    E += `<div class="form-group"><label>Notes</label><textarea onchange="data.stages[${selectedStage}].notes=this.value;saveData()">${esc(stage.notes||'')}</textarea></div>`;
+
+    // Pipeline bar visualization
+    E += `<div class="detail-section" style="margin-top:16px"><h4>Pipeline Timeline</h4>`;
+    E += `<p style="font-size:10px;color:var(--text2);margin-bottom:4px">Days 1-80. Colored bands show each stage. Dots mark anomalies.</p>`;
+    const totalDays = 80;
+    E += `<div class="pipeline-bar">`;
+    data.stages.forEach((s, si) => {
+      const sc = stageColors[si % stageColors.length];
+      const left = ((s.startDay - 1) / totalDays) * 100;
+      const width = ((s.endDay - s.startDay + 1) / totalDays) * 100;
+      E += `<div class="pipeline-band" style="left:${left}%;width:${width}%;background:${sc};opacity:0.4">${esc(s.name.substring(0,3))}</div>`;
+      // Anomaly dots
+      (s.anomalies || []).forEach(a => {
+        const doc = data.documents.find(d => d.id === a.documentId);
+        if (doc) {
+          const dotLeft = ((doc.day - 1) / totalDays) * 100;
+          E += `<div class="pipeline-dot" style="left:${dotLeft}%" title="${esc(doc.title)}"></div>`;
+        }
+      });
+    });
+    E += `</div>`;
+    E += `<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text2);margin-top:2px"><span>Day 1</span><span>Day 40</span><span>Day 80</span></div>`;
+    E += `</div>`;
+
+    E += `<div class="btn-row"><button class="btn btn-danger" onclick="if(confirm('Delete this stage?')){data.stages.splice(${selectedStage},1);selectedStage=0;saveData();renderLanguage()}">Delete</button></div>`;
+  } else {
+    E += `<div class="empty-state">No stage selected</div>`;
+  }
+  E += `</div>`;
+  tab.innerHTML = L + E;
+}
+
+// =====================================================
+// RENDER: EXPORT
+// =====================================================
+function renderExport() {
+  const tab = document.getElementById('tab-export');
+  let html = '';
+
+  html += `<h2 style="margin-bottom:4px">Export</h2>`;
+  html += `<p style="color:var(--text2);font-size:12px;margin-bottom:20px">Full project statistics, validation, and export options.</p>`;
+
+  // Stats
+  html += `<div class="export-stats">`;
+  html += `<div class="stat-card"><div class="stat-num">${data.characters.length}</div><div class="stat-label">Characters</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.characters.filter(c=>c.household==='epaule').length}</div><div class="stat-label">Epaule</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.characters.filter(c=>c.household==='aguien').length}</div><div class="stat-label">Aguien</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.documents.length}</div><div class="stat-label">Documents</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.documents.filter(d=>d.hiddenLayer&&d.hiddenLayer.encoded).length}</div><div class="stat-label">With Hidden Layer</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.ciphers.length}</div><div class="stat-label">Ciphers</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.days.length}</div><div class="stat-label">Days Planned</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.forces.length}</div><div class="stat-label">Forces</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.indicators.length}</div><div class="stat-label">Indicators</div></div>`;
+  html += `<div class="stat-card"><div class="stat-num">${data.stages.length}</div><div class="stat-label">Language Stages</div></div>`;
+
+  const totalEditorial = data.documents.reduce((sum, d) => sum + (d.editorialChoices || []).length, 0);
+  html += `<div class="stat-card"><div class="stat-num">${totalEditorial}</div><div class="stat-label">Editorial Choices</div></div>`;
+
+  const totalRels = data.characters.reduce((sum, c) => sum + (c.relationships || []).length, 0);
+  html += `<div class="stat-card"><div class="stat-num">${totalRels}</div><div class="stat-label">Relationships</div></div>`;
+  html += `</div>`;
+
+  // Full validation
+  const issues = getValidationIssues();
+  html += `<div class="export-section"><h3>Validation Report</h3>`;
+  if (issues.length) {
+    const fails = issues.filter(i => i.level === 'fail');
+    const warns = issues.filter(i => i.level === 'warn');
+    if (fails.length) {
+      html += `<div class="validation-group"><h4>Errors <span class="v-count v-fail">${fails.length}</span></h4>`;
+      fails.forEach(i => html += `<div class="v-item" style="border-left-color:var(--red)">${esc(i.msg)}</div>`);
+      html += `</div>`;
+    }
+    if (warns.length) {
+      html += `<div class="validation-group"><h4>Warnings <span class="v-count v-warn">${warns.length}</span></h4>`;
+      warns.forEach(i => html += `<div class="v-item" style="border-left-color:var(--accent3)">${esc(i.msg)}</div>`);
+      html += `</div>`;
+    }
+  } else {
+    html += `<div class="v-item" style="border-left-color:var(--green)"><span style="color:var(--green)">All checks passed. No issues found.</span></div>`;
+  }
+  html += `</div>`;
+
+  // Export actions
+  html += `<div class="export-section"><h3>Actions</h3>`;
+  html += `<div class="export-actions">`;
+  html += `<button class="btn btn-accent" onclick="exportJSON()">Export JSON</button>`;
+  html += `<button class="btn" onclick="importJSON()">Import JSON</button>`;
+  html += `<button class="btn btn-danger" onclick="if(confirm('Reset all data to defaults? This cannot be undone.')){data=defaultData();saveData();renderCurrentTab()}">Reset to Defaults</button>`;
+  html += `</div></div>`;
+
+  // Copy document text
+  html += `<div class="export-section"><h3>Copy Document Text</h3>`;
+  html += `<div class="form-group"><label>Select Document</label><select id="exportDocSelect" onchange="renderExportDocText()"><option value="">Choose...</option>${data.documents.map((d,i)=>`<option value="${i}">${esc(d.title)} (Day ${d.day})</option>`).join('')}</select></div>`;
+  html += `<div id="exportDocText"></div>`;
+  html += `</div>`;
+
+  tab.innerHTML = html;
+}
+
+function renderExportDocText() {
+  const container = document.getElementById('exportDocText');
+  const sel = document.getElementById('exportDocSelect');
+  if (!container || !sel) return;
+  const idx = parseInt(sel.value);
+  if (isNaN(idx) || idx < 0 || idx >= data.documents.length) { container.innerHTML = ''; return; }
+  const doc = data.documents[idx];
+
+  let html = `<div class="export-code">${esc(doc.surfaceText || '(no surface text)')}</div>`;
+  html += `<button class="btn" style="margin-top:8px" onclick="navigator.clipboard.writeText(data.documents[${idx}].surfaceText||'').then(()=>alert('Copied!'))">Copy to Clipboard</button>`;
+
+  if (doc.hiddenLayer && doc.hiddenLayer.encoded) {
+    html += `<div style="margin-top:12px"><h4 style="font-size:11px;color:var(--channel-candlelight);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Hidden Layer</h4>`;
+    html += `<div class="export-code">${esc(doc.hiddenLayer.encoded)}</div></div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// =====================================================
+// KEYBOARD SHORTCUTS
+// =====================================================
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'z' && e.shiftKey) { e.preventDefault(); redo(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'y') { e.preventDefault(); redo(); }
+});
+
+// =====================================================
+// INIT
+// =====================================================
+loadData();
+switchTab('overview');
+</script>
+</body>
+</html>

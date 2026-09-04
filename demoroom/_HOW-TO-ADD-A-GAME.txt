@@ -1,0 +1,74 @@
+DEMO ROOM - HOW TO ADD A UNITY WEBGL GAME
+=========================================
+
+This folder (demoroom/) is unlisted: nothing on the site links to it,
+and robots.txt + a noindex tag keep it out of Google. Only people with
+the URL marty64.net/demoroom can find it.
+
+
+STEP 1 - BUILD UNITY THE RIGHT WAY (important)
+----------------------------------------------
+Unity WebGL builds ship compressed (.br / .gz) files. On a normal FTP
+web host those WILL FAIL TO LOAD unless the server sends special headers,
+which is fiddly. The easy fix is to build so no special headers are needed.
+
+In Unity, before building:
+  Edit > Project Settings > Player > WebGL (the world icon tab)
+    > Publishing Settings
+
+Pick ONE of these:
+
+  EASIEST (just works anywhere):
+    Compression Format = Disabled
+    -> Builds are bigger but load with zero server config.
+
+  SMALLER FILES (also works, slightly slower first load):
+    Compression Format = Gzip   (or Brotli)
+    Decompression Fallback = ON  (check this box)
+    -> The "fallback" lets the build decompress itself in the browser,
+       so it still works without server headers.
+
+Do NOT leave compression on with Decompression Fallback OFF. That is the
+only combo that breaks on a plain FTP host.
+
+
+STEP 2 - DROP THE BUILD IN A FOLDER
+-----------------------------------
+After Unity builds, you get a folder containing:
+    index.html
+    Build/
+    TemplateData/
+
+Rename that folder to your game's name (lowercase, no spaces), e.g. "mygame",
+and place it inside demoroom/ so you have:
+
+    demoroom/mygame/index.html
+    demoroom/mygame/Build/
+    demoroom/mygame/TemplateData/
+
+The game is now playable at:  marty64.net/demoroom/mygame/
+
+
+STEP 3 - ADD A CARD TO THE DEMO ROOM PAGE
+-----------------------------------------
+Open demoroom/index.html. Find the EXAMPLE CARD comment. Copy this block
+in, change the href/title/blurb, and delete the "No builds added yet" box:
+
+    <a class="card" href="mygame/index.html">
+      <span class="tag">Unity &middot; WebGL</span>
+      <h2>My Game</h2>
+      <p>One-line description of the build.</p>
+    </a>
+
+
+STEP 4 - UPLOAD
+---------------
+FTP the whole demoroom/ folder (and the updated robots.txt at the site root)
+to your web host. Done.
+
+
+NOTE ON FILE SIZE
+-----------------
+WebGL builds can be tens of MB. Git is fine with that but it bloats the repo
+over time. If a build is large and you only need it live (not in git), you can
+upload it via FTP without committing it. Tell Marty's setup which you prefer.

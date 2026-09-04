@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>&nbsp;</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="journal.css">
+</head>
+<body>
+  <!-- password gate -->
+  <div id="gate">
+    <form class="gate-card" id="gate-form">
+      <h1>Workshop</h1>
+      <input type="password" id="gate-input" autocomplete="current-password" placeholder="passphrase" autofocus>
+      <button type="submit">Enter</button>
+      <div class="gate-err" id="gate-err"></div>
+    </form>
+  </div>
+
+  <!-- app -->
+  <div id="app" class="hidden">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <span>dev log</span>
+          <a href="edit.html">+ write</a>
+        </div>
+        <nav id="nav"></nav>
+      </aside>
+      <main class="reader" id="reader">
+        <p class="empty">Pick an entry from the left.</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="md.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

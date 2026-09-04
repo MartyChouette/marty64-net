@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spent Bloom</title>
+<meta name="description" content="Tidy up. Set the mood. Trim the flowers. Someone special is on their way.">
+<meta name="theme-color" content="#0a0b10">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+@font-face {
+  font-family: 'Anger Management';
+  src: url('Anger Management.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --bg: #0a0b10;
+  --surface: #12131a;
+  --accent: #c83828;
+  --wine: #4a1a14;
+  --blush: #d4a090;
+  --gold: #b8926a;
+  --bone: #e8dcd4;
+  --text: #8a9aaa;
+  --dim: #4a6878;
+  --thorn: #1a0c0a;
+  --petal: #5090a8;
+  --moss: #4a5868;
+}
+
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-weight: 300;
+  cursor: default;
+}
+
+/* ── noise ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── selection ── */
+::selection { background: var(--petal); color: var(--bone); }
+
+/* ── page ── */
+.page {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══════════════════════
+   HERO
+═══════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: url('Nema_Image.JPG') center center / cover no-repeat;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,11,16,0.55) 0%,
+    rgba(10,11,16,0.7) 50%,
+    rgba(10,11,16,0.92) 100%
+  );
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 1.5rem;
+}
+
+.hero__signup {
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+.hero__signup .signup__heading {
+  margin-bottom: 1rem;
+}
+
+.hero__signup .signup__form {
+  justify-content: center;
+}
+
+.hero__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.hero__title {
+  font-family: 'Anger Management', 'Cormorant Garamond', serif;
+  font-weight: normal;
+  font-size: clamp(3.2rem, 12vw, 6.5rem);
+  line-height: 0.95;
+  color: var(--bone);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.4em;
+}
+
+.hero__title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__title-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero__rule {
+  width: 0;
+  height: 1px;
+  background: var(--petal);
+  margin: 1.5rem auto;
+  opacity: 0.6;
+}
+
+.hero__sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--dim);
+  max-width: 280px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+}
+
+.hero__scroll span {
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.hero__scroll-tick {
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--dim), transparent);
+  animation: scrollTick 2s ease-in-out infinite;
+}
+
+@keyframes scrollTick {
+  0%,100% { opacity: 0.2; transform: scaleY(1); }
+  50% { opacity: 0.7; transform: scaleY(1.4); transform-origin: top; }
+}
+
+/* ── hero trailer + cta ── */
+.hero__actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+.hero__trailer {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 104, 120, 0.2);
+  background: var(--surface);
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.4s;
+}
+
+.hero__trailer:hover,
+.hero__trailer:active {
+  border-color: var(--petal);
+}
+
+.hero__trailer iframe,
+.hero__trailer video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+
+/* placeholder state - overlays the video */
+.hero__trailer-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, rgba(10,11,16,0.95), rgba(74,26,20,0.6));
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.hero__trailer-play {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.hero__trailer:hover .hero__trailer-play {
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.hero__trailer-play::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent var(--dim);
+  margin-left: 2px;
+  transition: border-color 0.3s;
+}
+
+.hero__trailer:hover .hero__trailer-play::after {
+  border-left-color: var(--accent);
+}
+
+.hero__trailer-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.hero__cta {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 0.85rem 2.2rem;
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, color 0.4s;
+}
+
+.hero__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--wine), var(--petal));
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+
+.hero__cta:hover, .hero__cta:active {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.hero__cta:hover::before, .hero__cta:active::before {
+  opacity: 0.25;
+}
+
+@media (min-width: 768px) {
+  .hero__trailer { max-width: 640px; }
+}
+@media (min-width: 1200px) {
+  .hero__trailer { max-width: 780px; }
+}
+
+/* ═══════════════════════
+   ABOUT
+═══════════════════════ */
+.about {
+  padding: 6rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--petal);
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.about__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 4vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text);
+  opacity: 0;
+}
+
+.about__text strong {
+  color: var(--bone);
+  font-weight: 400;
+}
+
+.about__text .whisper {
+  color: var(--petal);
+  font-style: italic;
+}
+
+.about__text .dim {
+  color: var(--dim);
+  font-style: italic;
+}
+
+/* ═══════════════════════
+   FEATURES
+═══════════════════════ */
+.features {
+  padding: 3rem 1.5rem 5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(74, 104, 120, 0.12);
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.feature__num {
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  padding-top: 0.35rem;
+  width: 28px;
+}
+
+.feature__body { flex: 1; min-width: 0; }
+
+.feature__name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: var(--bone);
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+}
+
+.feature__desc {
+  font-size: 0.72rem;
+  color: var(--dim);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.feature--thorn .feature__num { color: var(--petal); }
+.feature--thorn .feature__name { color: var(--accent); }
+
+/* ═══════════════════════
+   FLOWER SCENE
+═══════════════════════ */
+.flowers {
+  padding: 5rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.flowers__canvas-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 340px;
+  margin: 0 auto 2.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 104, 120, 0.12);
+  background: var(--surface);
+  cursor: crosshair;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#flower-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flowers__hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.4;
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+  transition: opacity 0.6s;
+}
+
+.flowers__counter {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--petal);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.flowers__counter.visible { opacity: 0.6; }
+
+.flowers__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--dim);
+  line-height: 1.8;
+  opacity: 0;
+}
+
+.flowers__text strong {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* ═══════════════════════
+   QUOTE
+═══════════════════════ */
+.quote {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.quote__mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  color: var(--wine);
+  line-height: 1;
+  opacity: 0;
+}
+
+.quote__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.25rem, 4.5vw, 1.7rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bone);
+  line-height: 1.5;
+  margin: 0.5rem 0 1rem;
+  opacity: 0;
+}
+
+.quote__attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+}
+
+/* ═══════════════════════
+   CTA
+═══════════════════════ */
+.cta {
+  padding: 3rem 1.5rem 5rem;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cta__text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1.4;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+}
+
+.cta__btn {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 0.85rem 2.2rem;
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transition: border-color 0.4s, color 0.4s;
+}
+
+.cta__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--wine), var(--petal));
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+
+.cta__btn:hover, .cta__btn:active {
+  border-color: var(--accent);
+  color: #fff;
+}
+.cta__btn:hover::before, .cta__btn:active::before { opacity: 0.25; }
+
+/* ═══════════════════════
+   DIVIDERS
+═══════════════════════ */
+.divider {
+  width: 1px;
+  height: 50px;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, transparent, var(--dim), transparent);
+  opacity: 0.2;
+}
+
+.divider--wine {
+  background: linear-gradient(to bottom, transparent, var(--wine), transparent);
+  opacity: 0.3;
+}
+
+/* ═══════════════════════
+   FOOTER
+═══════════════════════ */
+.footer {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(74, 104, 120, 0.08);
+}
+
+.footer__text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.4;
+}
+
+/* ═══════════════════════
+   RESPONSIVE
+═══════════════════════ */
+@media (min-width: 768px) {
+  .about, .features, .cta, .flowers, .quote {
+    max-width: 560px;
+  }
+  .flowers__canvas-wrap { max-width: 440px; height: 380px; }
+}
+
+/* ═══════════════════════
+   REDUCED MOTION
+═══════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero__title-word { opacity: 1; transform: none; }
+  .hero__eyebrow, .hero__sub, .hero__scroll, .hero__actions, .hero__signup,
+  .hero__rule,
+  .section-label, .about__text, .feature,
+  .flowers__text, .quote__mark, .quote__text, .quote__attr,
+  .cta__text, .cta__btn { opacity: 1; transform: none; }
+  .hero__rule { width: 40px; }
+}
+
+/* ── focus-visible ── */
+.hero__cta:focus-visible,
+.cta__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.hero__trailer:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ── touch ── */
+@media (hover: none) {
+  .cta__btn:active { transform: scale(0.97); }
+}
+
+/* ═══════════════════════
+   SIGNUP
+═══════════════════════ */
+.signup {
+  padding: 4rem 1.5rem 5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signup__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bone);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+}
+
+.signup__sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.signup__form {
+  display: flex;
+  gap: 0;
+  max-width: 380px;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+.signup__input {
+  flex: 1;
+  min-width: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--bone);
+  background: transparent;
+  border: 1px solid var(--dim);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  padding: 0.85rem 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.signup__input::placeholder {
+  color: var(--dim);
+  opacity: 0.6;
+}
+
+.signup__input:focus {
+  border-color: var(--petal);
+}
+
+.signup__btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone);
+  background: transparent;
+  border: 1px solid var(--dim);
+  border-radius: 0 2px 2px 0;
+  padding: 0.85rem 1.4rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, color 0.4s;
+  white-space: nowrap;
+}
+
+.signup__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--wine), var(--petal));
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+
+.signup__btn:hover, .signup__btn:active {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.signup__btn:hover::before, .signup__btn:active::before {
+  opacity: 0.25;
+}
+
+.signup__btn:focus-visible,
+.signup__input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ── signup bloom ── */
+.signup__btn:hover, .signup__btn:active {
+  box-shadow:
+    0 0 20px rgba(80, 144, 168, 0.4),
+    0 0 50px rgba(74, 26, 20, 0.2),
+    inset 0 0 16px rgba(80, 144, 168, 0.1);
+}
+
+.signup__heading {
+  text-shadow:
+    0 0 30px rgba(232, 220, 212, 0.15),
+    0 0 60px rgba(80, 144, 168, 0.1);
+}
+
+.signup__msg {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  margin-top: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.signup__msg.visible { opacity: 1; }
+.signup__msg.success { color: var(--petal); }
+.signup__msg.error { color: var(--accent); }
+
+@media (min-width: 768px) {
+  .signup { max-width: 560px; }
+}
+
+/* ═══════════════════════
+   FOOTER (extended)
+═══════════════════════ */
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer__link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.3s;
+}
+
+.footer__link:hover {
+  color: var(--petal);
+}
+
+.footer__link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.footer__link--press {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(74, 104, 120, 0.25);
+  border-radius: 2px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.footer__link--press:hover {
+  border-color: var(--petal);
+  color: var(--bone);
+}
+
+.footer__divider {
+  width: 1px;
+  height: 12px;
+  background: var(--dim);
+  opacity: 0.3;
+}
+
+/* ── Steam icon in hero CTA ── */
+.hero__cta svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  vertical-align: -2px;
+  margin-right: 0.4rem;
+}
+
+/* ═══════════════════════
+   CRT / 90s BLOOM
+═══════════════════════ */
+
+/* ── scanlines ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.14) 2px,
+    rgba(0, 0, 0, 0.14) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ── CRT vignette burn ── */
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 11, 16, 0.5) 100%);
+}
+
+/* ── phosphor bloom + chromatic aberration ── */
+.hero__title {
+  text-shadow:
+    -1.5px 0 rgba(200, 56, 40, 0.18),
+     1.5px 0 rgba(80, 144, 168, 0.12),
+     0 0 40px rgba(80, 144, 168, 0.3),
+     0 0 80px rgba(74, 104, 120, 0.18),
+     0 0 120px rgba(74, 26, 20, 0.08);
+}
+
+.hero__title em {
+  text-shadow:
+    0 0 25px rgba(200, 56, 40, 0.5),
+    0 0 60px rgba(74, 104, 120, 0.3),
+    0 0 100px rgba(74, 26, 20, 0.15);
+}
+
+.quote__text {
+  text-shadow:
+    0 0 30px rgba(232, 220, 212, 0.2),
+    0 0 60px rgba(80, 144, 168, 0.12);
+}
+
+.cta__text {
+  text-shadow:
+    0 0 30px rgba(200, 56, 40, 0.35),
+    0 0 60px rgba(74, 104, 120, 0.18);
+}
+
+.section-label {
+  text-shadow: 0 0 16px rgba(80, 144, 168, 0.4);
+}
+
+.flowers__counter.visible {
+  text-shadow: 0 0 14px rgba(80, 144, 168, 0.5);
+}
+
+.feature--thorn .feature__name {
+  text-shadow: 0 0 20px rgba(200, 56, 40, 0.35);
+}
+
+/* ── button phosphor glow ── */
+.hero__cta:hover, .hero__cta:active {
+  box-shadow:
+    0 0 20px rgba(80, 144, 168, 0.4),
+    0 0 50px rgba(74, 26, 20, 0.2),
+    inset 0 0 16px rgba(80, 144, 168, 0.1);
+}
+
+.cta__btn:hover, .cta__btn:active {
+  box-shadow:
+    0 0 20px rgba(80, 144, 168, 0.4),
+    0 0 50px rgba(74, 26, 20, 0.2),
+    inset 0 0 16px rgba(80, 144, 168, 0.1);
+}
+
+/* ── subtle CRT flicker ── */
+@keyframes crtFlicker {
+  0%, 100% { opacity: 1; }
+  92%      { opacity: 1; }
+  93%      { opacity: 0.97; }
+  94%      { opacity: 1; }
+  97%      { opacity: 0.985; }
+  98%      { opacity: 1; }
+}
+
+body {
+  animation: crtFlicker 6s ease-in-out infinite;
+}
+
+/* ── bloom glow on the hero rule ── */
+.hero__rule {
+  box-shadow: 0 0 16px rgba(80, 144, 168, 0.45), 0 0 36px rgba(80, 144, 168, 0.18);
+}
+
+/* ── bloom on dividers ── */
+.divider--wine {
+  box-shadow: 0 0 12px rgba(74, 26, 20, 0.35);
+}
+
+/* ── flower canvas CRT border glow ── */
+.flowers__canvas-wrap {
+  box-shadow:
+    0 0 2px rgba(80, 144, 168, 0.25),
+    0 0 28px rgba(10, 11, 16, 0.6),
+    inset 0 0 40px rgba(10, 11, 16, 0.4);
+}
+
+/* ── quote mark phosphor ── */
+.quote__mark {
+  text-shadow:
+    0 0 28px rgba(74, 26, 20, 0.6),
+    0 0 55px rgba(74, 26, 20, 0.25);
+}
+
+/* ── hero trailer CRT glow ── */
+.hero__trailer {
+  box-shadow:
+    0 0 1px rgba(80, 144, 168, 0.1),
+    0 0 20px rgba(10, 11, 16, 0.4);
+}
+
+.hero__trailer:hover, .hero__trailer:active {
+  box-shadow:
+    0 0 1px rgba(80, 144, 168, 0.2),
+    0 0 24px rgba(80, 144, 168, 0.12),
+    0 0 40px rgba(10, 11, 16, 0.4);
+}
+
+/* ── keep CRT off for reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none !important; }
+  body::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Dating Demise</p>
+      <h1 class="hero__title">
+        <span class="hero__title-line"><span class="hero__title-word"><em>Spent Bloom</em></span></span>
+
+      </h1>
+      <div class="hero__rule"></div>
+      <p class="hero__sub">Tidy up. Set the mood.<br>Water the plants.<br>Someone special is on their way.</p>
+      <div class="hero__signup">
+        <p class="signup__heading">Get notified when it launches</p>
+        <form class="signup__form" id="signup-form">
+          <input class="signup__input" type="email" name="email_address" placeholder="your@email.com" required aria-label="Email address">
+          <button class="signup__btn" type="submit">Notify Me</button>
+        </form>
+        <p class="signup__msg" id="signup-msg"></p>
+      </div>
+    </div>
+
+    <div class="hero__actions">
+      <div class="hero__trailer" id="trailer" tabindex="0" role="button" aria-label="Watch trailer">
+        <video preload="metadata" playsinline>
+          <source src="spent_bloom_trailer_01.mp4" type="video/mp4">
+        </video>
+        <div class="hero__trailer-placeholder" id="trailer-overlay">
+          <div class="hero__trailer-play"></div>
+          <span class="hero__trailer-label">Watch Trailer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-tick"></div>
+    </div>
+  </section>
+
+  <!--
+  <section class="about">
+    <p class="section-label">About the Game</p>
+    <p class="about__text">
+      <strong>Nema Knows Best</strong> is a cozy narrative game about
+      <span class="whisper">preparing your home</span> for a visit from
+      a date to your place. Clean up the room, water the flowers,
+      put out some conversation pieces - <span class="dim">and try not to overthink it.</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="features">
+    <p class="section-label">What You'll Do</p>
+    <div class="feature">
+      <span class="feature__num">01</span>
+      <div class="feature__body">
+        <p class="feature__name">Pick a Date</p>
+        <p class="feature__desc">Who do you want to try and impress tonight?</p>
+      </div>
+    </div>
+    <div class="feature">
+      <span class="feature__num">02</span>
+      <div class="feature__body">
+        <p class="feature__name">Tidy the Room</p>
+        <p class="feature__desc">Clean, organize, and arrange each space until it feels just right.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <span class="feature__num">03</span>
+      <div class="feature__body">
+        <p class="feature__name">Set the Mood</p>
+        <p class="feature__desc">Choose music, lighting, and decor to create the perfect atmosphere.</p>
+      </div>
+    </div>
+    <div class="feature feature--thorn">
+      <span class="feature__num">04</span>
+      <div class="feature__body">
+        <p class="feature__name">Win a Flower trim a Flower</p>
+        <p class="feature__desc">Prune and style your dates' Flower with a satisfying pluck and trim mechanic.</p>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <div class="divider divider--wine"></div>
+
+  <!-- ═══ QUOTE ═══ -->
+  <section class="quote">
+    <p class="quote__mark">"</p>
+    <p class="quote__text">Just Remember, Love's Hard</p>
+    <p class="quote__attr">Nema</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="mailto:nemaknowsbest@Gmail.com" class="footer__link">nemaknowsbest@Gmail.com</a>
+      <span class="footer__divider"></span>
+      <a href="https://instagram.com/nemaknowsbest" target="_blank" rel="noopener" class="footer__link"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 011.47.958c.453.453.78.9.958 1.47.163.46.35 1.26.404 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.404 2.43a4.08 4.08 0 01-.958 1.47 4.08 4.08 0 01-1.47.958c-.46.163-1.26.35-2.43.404-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.404a4.08 4.08 0 01-1.47-.958 4.08 4.08 0 01-.958-1.47c-.163-.46-.35-1.26-.404-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.404-2.43a4.08 4.08 0 01.958-1.47 4.08 4.08 0 011.47-.958c.46-.163 1.26-.35 2.43-.404C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.014 7.053.072 5.775.13 4.902.333 4.14.63a5.88 5.88 0 00-2.126 1.384A5.88 5.88 0 00.63 4.14C.333 4.902.13 5.775.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.058 1.278.261 2.15.558 2.913a5.88 5.88 0 001.384 2.126 5.88 5.88 0 002.126 1.384c.763.297 1.635.5 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.278-.058 2.15-.261 2.913-.558a5.88 5.88 0 002.126-1.384 5.88 5.88 0 001.384-2.126c.297-.763.5-1.635.558-2.913C23.986 15.667 24 15.259 24 12s-.014-3.667-.072-4.947c-.058-1.278-.261-2.15-.558-2.913a5.88 5.88 0 00-1.384-2.126A5.88 5.88 0 0019.86.63C19.097.333 18.225.13 16.947.072 15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>@nemaknowsbest</a>
+      <!-- <span class="footer__divider"></span>
+      <a href="#" class="footer__link footer__link--press">Press Kit</a> -->
+    </div>
+    <p class="footer__text">&copy; 2026 SPENT BLOOM</p>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// ═══════════════════════════════
+// GSAP - hero entrance
+// ═══════════════════════════════
+(function(){
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tl = gsap.timeline({ delay: 0.3 });
+
+  tl.to('.hero__eyebrow', { opacity: 1, duration: 0.8, ease: 'power2.out' })
+    .to('.hero__title-word', {
+      opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out'
+    }, '-=0.3')
+    .to('.hero__rule', { width: 40, duration: 1, ease: 'power2.inOut' }, '-=0.3')
+    .to('.hero__sub', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.5')
+    .to('.hero__signup', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.3')
+    .call(() => { if(document.querySelector('.hero__actions')) gsap.to('.hero__actions', { opacity: 1, duration: 0.8, ease: 'power2.out' }); })
+    .to('.hero__scroll', { opacity: 0.6, duration: 0.8, ease: 'power2.out' }, '-=0.3');
+
+  // ── scroll-triggered sections ──
+  function scrollReveal(selector, vars) {
+    gsap.to(selector, Object.assign({
+      scrollTrigger: { trigger: selector, start: 'top 85%', once: true },
+      opacity: 1, duration: 0.8, ease: 'power2.out'
+    }, vars));
+  }
+
+  scrollReveal('.section-label', { stagger: 0.2 });
+  scrollReveal('.about__text', { delay: 0.15 });
+  scrollReveal('.feature', { y: 0, stagger: 0.12 });
+  scrollReveal('.quote__mark', {});
+  scrollReveal('.quote__text', { delay: 0.1 });
+  scrollReveal('.quote__attr', { delay: 0.2 });
+  scrollReveal('.signup__heading', {});
+  scrollReveal('.signup__sub', { delay: 0.1 });
+  scrollReveal('.signup__form', { delay: 0.2 });
+})();
+</script>
+
+<script>
+// ═══════════════════════════════
+// Email signup → Discord webhook
+// ═══════════════════════════════
+(function(){
+  const form = document.getElementById('signup-form');
+  const msg = document.getElementById('signup-msg');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = form.email_address.value.trim();
+    if (!email) return;
+
+    const btn = form.querySelector('.signup__btn');
+    btn.textContent = '...';
+    btn.disabled = true;
+
+    try {
+      await fetch('https://discord.com/api/webhooks/1483626439671812109/9yGYfQjQ2UdtKAW__R5q5xhv3k_JNFh4uyOwuWYMqgpqwt8lXmN9pNFzopFeAASFhxNi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            title: 'New Spent Bloom Signup',
+            description: email,
+            color: 0x5090a8,
+            timestamp: new Date().toISOString()
+          }]
+        })
+      });
+      msg.textContent = "You're on the list.";
+      msg.className = 'signup__msg visible success';
+      form.style.display = 'none';
+    } catch {
+      msg.textContent = 'Something went wrong. Try again.';
+      msg.className = 'signup__msg visible error';
+      btn.textContent = 'Notify Me';
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+<script>
+// ═══════════════════════════════
+// Trailer - click to play/pause
+// ═══════════════════════════════
+(function(){
+  const trailer = document.getElementById('trailer');
+  const overlay = document.getElementById('trailer-overlay');
+  const video = trailer.querySelector('video');
+
+  function play() {
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    video.controls = true;
+    video.play();
+  }
+
+  function pause() {
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = '';
+    video.controls = false;
+  }
+
+  trailer.addEventListener('click', function() {
+    if (video.paused) play(); else { video.pause(); pause(); }
+  });
+
+  video.addEventListener('ended', pause);
+})();
+</script>
+
+</body>
+</html>

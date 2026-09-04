@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 210" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <linearGradient id="gc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9f5e0"/>
+      <stop offset="100%" stop-color="#ece8c8"/>
+    </linearGradient>
+    <linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#989680"/>
+      <stop offset="100%" stop-color="#6e6c5a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Navy background -->
+  <rect width="480" height="210" fill="#13152e"/>
+
+  <!-- ROW A: 5 gray tiles, y=5 -->
+  <!-- I at x=100 -->
+  <rect x="103" y="9"  width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="100" y="5"  width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="126" y="29" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">I</text>
+  <text x="148" y="55" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- A at x=157 -->
+  <rect x="160" y="9"  width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="157" y="5"  width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="183" y="29" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">A</text>
+  <text x="205" y="55" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- T at x=214 -->
+  <rect x="217" y="9"  width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="214" y="5"  width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="240" y="29" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">T</text>
+  <text x="262" y="55" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- Q at x=271 (red, high-value) -->
+  <rect x="274" y="9"  width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="271" y="5"  width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="297" y="29" font-size="26" font-weight="700" fill="#8a1010" text-anchor="middle" dominant-baseline="middle">Q</text>
+  <text x="319" y="55" font-size="9" font-family="'Courier New',monospace" fill="#6a2020" text-anchor="end">10</text>
+
+  <!-- E at x=328 -->
+  <rect x="331" y="9"  width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="328" y="5"  width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="354" y="29" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">E</text>
+  <text x="376" y="55" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- ROW B: 7 mixed tiles, y=72 -->
+  <!-- B at x=43 (gray) -->
+  <rect x="46"  y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="43"  y="72" width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="69"  y="96" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">B</text>
+  <text x="91"  y="122" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">3</text>
+
+  <!-- L at x=100 (cream+gold, accessible) -->
+  <rect x="103" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="100" y="72" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="126" y="96" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">L</text>
+  <text x="148" y="122" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">1</text>
+
+  <!-- E at x=157 (gray) -->
+  <rect x="160" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="157" y="72" width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="183" y="96" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">E</text>
+  <text x="205" y="122" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- M at x=214 (cream+gold) -->
+  <rect x="217" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="214" y="72" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="240" y="96" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">M</text>
+  <text x="262" y="122" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">3</text>
+
+  <!-- O at x=271 (gray) -->
+  <rect x="274" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="271" y="72" width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="297" y="96" font-size="26" font-weight="700" fill="#3a3826" text-anchor="middle" dominant-baseline="middle">O</text>
+  <text x="319" y="122" font-size="9" font-family="'Courier New',monospace" fill="#48403a" text-anchor="end">1</text>
+
+  <!-- R at x=328 (cream+gold) -->
+  <rect x="331" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="328" y="72" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="354" y="96" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">R</text>
+  <text x="376" y="122" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">1</text>
+
+  <!-- J at x=385 (gray, red high-value) -->
+  <rect x="388" y="76" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="385" y="72" width="52" height="62" rx="6" fill="url(#gg)" stroke="#545040" stroke-width="1.5"/>
+  <text x="411" y="96" font-size="26" font-weight="700" fill="#8a1010" text-anchor="middle" dominant-baseline="middle">J</text>
+  <text x="433" y="122" font-size="9" font-family="'Courier New',monospace" fill="#6a2020" text-anchor="end">8</text>
+
+  <!-- ROW C: 5 cream+gold tiles, y=139 -->
+  <!-- O at x=100 -->
+  <rect x="103" y="143" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="100" y="139" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="126" y="163" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">O</text>
+  <text x="148" y="189" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">1</text>
+
+  <!-- E at x=157 -->
+  <rect x="160" y="143" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="157" y="139" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="183" y="163" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">E</text>
+  <text x="205" y="189" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">1</text>
+
+  <!-- D at x=214 -->
+  <rect x="217" y="143" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="214" y="139" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="240" y="163" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">D</text>
+  <text x="262" y="189" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">2</text>
+
+  <!-- H at x=271 -->
+  <rect x="274" y="143" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="271" y="139" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="297" y="163" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">H</text>
+  <text x="319" y="189" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">4</text>
+
+  <!-- I at x=328 -->
+  <rect x="331" y="143" width="52" height="62" rx="6" fill="#0a0b1e" opacity="0.35"/>
+  <rect x="328" y="139" width="52" height="62" rx="6" fill="url(#gc)" stroke="#c4a218" stroke-width="2"/>
+  <text x="354" y="163" font-size="26" font-weight="700" fill="#2a1a06" text-anchor="middle" dominant-baseline="middle">I</text>
+  <text x="376" y="189" font-size="9" font-family="'Courier New',monospace" fill="#6a5828" text-anchor="end">1</text>
+</svg>

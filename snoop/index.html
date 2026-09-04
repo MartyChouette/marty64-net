@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNOOP - A 1-bit Detective Game for Playdate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-raised: #1a1a1a;
+    --gold: #ffc800;
+    --orange: #ff6b35;
+    --text: #e8e8e8;
+    --dim: #777777;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'IBM Plex Serif', serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+section {
+    padding: 80px 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3, label, .mono {
+    font-family: var(--mono);
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 32px;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+p {
+    color: #ccc;
+    margin-bottom: 16px;
+    max-width: 640px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    padding: 120px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.hero-title {
+    font-family: var(--mono);
+    font-size: clamp(56px, 12vw, 120px);
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--dim);
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--dim);
+    letter-spacing: 0.5px;
+}
+
+.hero-stats span {
+    white-space: nowrap;
+}
+
+.hero-stats .sep {
+    color: #333;
+}
+
+/* ---------- The Game ---------- */
+
+.game-section p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* ---------- Spec Grid ---------- */
+
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.spec-card {
+    background: var(--surface);
+    border: 1px solid #222;
+    border-radius: 6px;
+    padding: 24px;
+    transition: border-color 0.2s;
+}
+
+.spec-card:hover {
+    border-color: #333;
+}
+
+.spec-card h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.spec-card p {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* ---------- Visitor Table ---------- */
+
+.visitor-intro {
+    margin-bottom: 32px;
+    max-width: 640px;
+}
+
+.visitor-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.visitor-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+}
+
+.visitor-table th {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #333;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.visitor-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    color: #bbb;
+    vertical-align: top;
+}
+
+.visitor-table tr:hover td {
+    background: var(--surface);
+}
+
+.visitor-table .type-name {
+    font-family: var(--mono);
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.threat-high {
+    color: var(--orange);
+    font-family: var(--mono);
+    font-weight: 600;
+}
+
+.threat-med {
+    color: var(--gold);
+    font-family: var(--mono);
+    font-weight: 600;
+}
+
+.threat-low {
+    color: #6c6;
+    font-family: var(--mono);
+    font-weight: 600;
+}
+
+.turnaround-note {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--dim);
+    font-style: italic;
+    font-family: var(--serif);
+}
+
+/* ---------- Evidence ---------- */
+
+.evidence-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 28px;
+}
+
+.evidence-stat {
+    text-align: center;
+}
+
+.evidence-stat .num {
+    font-family: var(--mono);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1.1;
+}
+
+.evidence-stat .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--dim);
+}
+
+/* ---------- Weaver ---------- */
+
+.weaver-section {
+    background: var(--surface);
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.weaver-header {
+    margin-bottom: 12px;
+}
+
+.weaver-header h2 {
+    margin-bottom: 8px;
+}
+
+.weaver-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--dim);
+    margin-bottom: 32px;
+    max-width: 640px;
+}
+
+.weaver-desc {
+    margin-bottom: 40px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--surface-raised);
+    border: 1px solid #252525;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.feature-item::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+/* ---------- Links ---------- */
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 560px;
+}
+
+.link-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid #282828;
+    border-radius: 6px;
+    padding: 28px 24px;
+    text-decoration: none;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.15s;
+}
+
+.link-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.link-card .link-title {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.link-card .link-desc {
+    font-size: 13px;
+    color: var(--dim);
+    margin-bottom: 0;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer p {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 1px;
+    max-width: none;
+    margin: 0 auto;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+    section {
+        padding: 56px 0;
+    }
+
+    .hero {
+        padding: 80px 0 56px;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .hero-stats .sep {
+        display: none;
+    }
+
+    .spec-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr;
+        max-width: none;
+    }
+
+    .evidence-stats {
+        gap: 24px;
+    }
+
+    .evidence-stat .num {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="container">
+        <h1 class="hero-title">SNOOP</h1>
+        <p class="hero-subtitle">A 1-bit detective game for Playdate</p>
+        <div class="hero-stats">
+            <span>50 Buildings</span>
+            <span class="sep">|</span>
+            <span>8 Districts</span>
+            <span class="sep">|</span>
+            <span>25 Clues</span>
+            <span class="sep">|</span>
+            <span>4300 Lines of C++</span>
+            <span class="sep">|</span>
+            <span>Zero Assets</span>
+        </div>
+    </div>
+</header>
+
+<!-- The Game -->
+<section class="game-section">
+    <div class="container">
+        <h2>The Game</h2>
+        <p>
+            Snoop is a detective game about breaking into buildings, searching through
+            drawers and filing cabinets, and uncovering a conspiracy that runs through
+            an entire city. You play as a private investigator working alone. Nobody
+            asked you to do this. The evidence started showing up and you followed it.
+        </p>
+        <p>
+            Every room uses a 4-wall mechanic. You face a desk, a window, a door, or a
+            closet, and rotate between them with the D-pad. Each wall has its own
+            interactive elements. The crank opens drawers, turns locks, and adjusts dials.
+            Everything you find goes onto a corkboard where connections between clues
+            reveal the larger picture.
+        </p>
+        <p>
+            Buildings have visitors. They arrive on timers, walk through the space, and
+            can catch you if you're standing in the wrong place. Different visitor types
+            behave differently. Some patrol. Some check specific rooms. Some turn around
+            at random. You listen for footsteps, hide in closets, and wait them out.
+        </p>
+        <p>
+            The story follows a 4-act structure. You start with isolated break-ins and
+            disconnected clues. By the final act you're inside The Architect's penthouse,
+            piecing together a city-wide operation. There are no sprites and no imported
+            images. Every visual in the game is drawn procedurally from lines, rectangles,
+            and ellipses. The entire game is a single C++ source file.
+        </p>
+    </div>
+</section>
+
+<!-- Technical -->
+<section>
+    <div class="container">
+        <h2>Technical</h2>
+        <div class="spec-grid">
+            <div class="spec-card">
+                <h3>Platform</h3>
+                <p>Playdate handheld. 400x240 screen, 1-bit display. Black and white only, no grayscale. Dither patterns used for all shading.</p>
+            </div>
+            <div class="spec-card">
+                <h3>Language</h3>
+                <p>C++17, compiled with MinGW. The entire game lives in a single source file. No engine, no framework, direct Playdate C API.</p>
+            </div>
+            <div class="spec-card">
+                <h3>Graphics</h3>
+                <p>All procedural draw calls. 299 total: 187 drawLine, 76 fillRect, plus ellipses and rects. No sprites, no bitmaps, no imported assets of any kind.</p>
+            </div>
+            <div class="spec-card">
+                <h3>Audio</h3>
+                <p>Two synth channels with 9 generated sound effects. Footsteps, drawer slides, lock clicks, paper rustling. All synthesized at runtime.</p>
+            </div>
+            <div class="spec-card">
+                <h3>Memory</h3>
+                <p>Zero dynamic allocation. All game state uses static arrays sized at compile time. No malloc, no new, no heap fragmentation.</p>
+            </div>
+            <div class="spec-card">
+                <h3>Build</h3>
+                <p>CMake + MinGW toolchain. Compiles to Snoop.pdx for the Playdate Simulator and hardware device.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Visitor AI -->
+<section>
+    <div class="container">
+        <h2>Visitor AI</h2>
+        <p class="visitor-intro">
+            Four visitor types patrol the buildings. Each type has different movement patterns,
+            threat levels, and countermeasures. When a visitor turns around unexpectedly, the
+            game pulls from a pool of flavor text lines to describe why, keeping the tension
+            unpredictable.
+        </p>
+        <div class="visitor-table-wrap">
+            <table class="visitor-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Threat</th>
+                        <th>Behavior</th>
+                        <th>Counter</th>
+                        <th>Turnaround</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="type-name">Security Guard</td>
+                        <td class="threat-high">High</td>
+                        <td>Fixed patrol route through all rooms. Checks corners and closets.</td>
+                        <td>Time the patrol loop. Hide before they reach your room.</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td class="type-name">Office Worker</td>
+                        <td class="threat-med">Medium</td>
+                        <td>Goes to a specific room, stays there, then leaves. Predictable path.</td>
+                        <td>Avoid their destination room. Wait for them to settle.</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td class="type-name">Janitor</td>
+                        <td class="threat-med">Medium</td>
+                        <td>Wanders between rooms at random. No fixed route. Slow movement.</td>
+                        <td>Listen for footsteps. Move when they move away.</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td class="type-name">Executive</td>
+                        <td class="threat-low">Low</td>
+                        <td>Walks directly to their office and stays. Rarely leaves.</td>
+                        <td>Stay out of the executive office. Search other rooms freely.</td>
+                        <td>10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="turnaround-note">
+            Turnaround chance is rolled each time a visitor reaches a waypoint.
+            When triggered, a random flavor text line plays to explain the reversal.
+        </p>
+    </div>
+</section>
+
+<!-- Evidence System -->
+<section>
+    <div class="container">
+        <h2>Evidence System</h2>
+        <div class="evidence-stats">
+            <div class="evidence-stat">
+                <span class="num">25</span>
+                <span class="label">Key Clues</span>
+            </div>
+            <div class="evidence-stat">
+                <span class="num">15</span>
+                <span class="label">Connections</span>
+            </div>
+            <div class="evidence-stat">
+                <span class="num">4</span>
+                <span class="label">Acts</span>
+            </div>
+        </div>
+        <p>
+            Clues are hidden inside drawers, filing cabinets, safes, and desk compartments
+            across the city's 50 buildings. Each clue is a physical object: a memo, a
+            photograph, a shipping receipt, a phone number scrawled on a napkin. When you
+            find one, it goes onto the corkboard.
+        </p>
+        <p>
+            The corkboard is the evidence board. Clues are pinned to it, and connections
+            between them are drawn as string links. Some connections unlock automatically
+            when you have both clues. Others require you to place them next to each other
+            and confirm the link. Each connection advances the story.
+        </p>
+        <p>
+            The conspiracy builds across 4 acts. Act 1 is isolated cases with no obvious
+            pattern. Act 2 reveals shared names and addresses. Act 3 exposes the network.
+            Act 4 takes you to The Architect's penthouse where the full scope of the
+            city-wide operation becomes clear.
+        </p>
+    </div>
+</section>
+
+<!-- Snoop Weaver -->
+<section class="weaver-section">
+    <div class="container">
+        <div class="weaver-header">
+            <h2>Snoop Weaver</h2>
+        </div>
+        <p class="weaver-tagline">
+            The authoring tool that manages every piece of the game's content.
+        </p>
+        <div class="weaver-desc">
+            <p>
+                Snoop Weaver is a single HTML file with no external dependencies. Over 3600
+                lines of code across 10 tabs. It handles building data, clue placement, NPC
+                dialogue, narrative structure, memory budgeting, and C++ code export. Everything
+                the game needs is authored and tested inside this one tool.
+            </p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-item">
+                Full building editor for all 50 buildings, every field
+            </div>
+            <div class="feature-item">
+                Clue lifecycle tracer: where hidden, how found, connections triggered
+            </div>
+            <div class="feature-item">
+                Playdate memory budget estimator with live 16MB heap calculation
+            </div>
+            <div class="feature-item">
+                C++ code export producing drop-in arrays for the game source
+            </div>
+            <div class="feature-item">
+                Mind map visualization of narrative connections
+            </div>
+            <div class="feature-item">
+                NPC dialogue editor with branching conversation trees
+            </div>
+            <div class="feature-item">
+                Playtest walkthrough mode for testing the full game flow
+            </div>
+            <div class="feature-item">
+                Real-time collaboration with live cursor avatars
+            </div>
+            <div class="feature-item">
+                CSV import/export for spreadsheet-based bulk editing
+            </div>
+            <div class="feature-item">
+                Undo/redo with named history entries
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Links -->
+<section>
+    <div class="container">
+        <h2>Links</h2>
+        <div class="links-grid">
+            <a href="story_planner.html" class="link-card">
+                <div class="link-title">Open Snoop Weaver</div>
+                <p class="link-desc">Launch the authoring tool in your browser</p>
+            </a>
+            <a href="#" class="link-card">
+                <div class="link-title">Game Design Document</div>
+                <p class="link-desc">Full design spec and narrative outline</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>SNOOP</p>
+    </div>
+</footer>
+
+</body>
+</html>

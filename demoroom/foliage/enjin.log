@@ -1,0 +1,197 @@
+[2026-09-03 07:06:22] [INFO ] [CORE  ] Log.cpp:43 (Enjin::Logger::Initialize) Logger initialized
+[2026-09-03 07:06:22] [INFO ] [CORE  ] Application.cpp:85 (Enjin::Application::InitializeEngine) Initializing Enjin Engine...
+[2026-09-03 07:06:23] [INFO ] [CORE  ] Input.cpp:526 (Enjin::Input::Initialize) Input system initialized
+[2026-09-03 07:06:23] [INFO ] [CORE  ] Application.cpp:143 (Enjin::Application::InitializeEngine) Engine initialized successfully
+[2026-09-03 07:06:23] [INFO ] [PLAYER] main.cpp:127 (GamePlayer::Initialize) Enjin Player starting...
+[2026-09-03 07:06:23] [INFO ] [BUILD ] AssetReader.cpp:209 (Enjin::Build::AssetReader::Open) Opened pack: D:\GitHub\marty64-net\marty64-net\demoroom\foliage\game.enjpak (10 files)
+[2026-09-03 07:06:23] [INFO ] [PLAYER] main.cpp:2639 (GamePlayer::ParseManifestJson) Game: Untitled (1280x720, 60 FPS, VSync: ON)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanRenderer.cpp:43 (Enjin::Renderer::VulkanRenderer::Initialize) Initializing Vulkan renderer...
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:37 (Enjin::Renderer::VulkanContext::Initialize) Initializing Vulkan context...
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:191 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice) Found 3 Vulkan device(s):
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:203 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice)   - Intel(R) RaptorLake-S Mobile Graphics Controller (Integrated GPU)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:203 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice)   - NVIDIA GeForce RTX 4070 Laptop GPU (Discrete GPU)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:203 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice)   - Intel(R) RaptorLake-S Mobile Graphics Controller (Integrated GPU)
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:55 (Enjin::Renderer::RTCapabilities::Query) Ray tracing not supported: AS=no, RTPipeline=no, DeferredOps=no, BDA=yes
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:84 (Enjin::Renderer::RTCapabilities::Query) Ray tracing supported: maxRecursion=31, handleSize=32, handleAlign=32, baseAlign=64
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:86 (Enjin::Renderer::RTCapabilities::Query)   AS limits: maxGeometry=16777215, maxInstance=16777215, maxPrimitive=536870911
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:55 (Enjin::Renderer::RTCapabilities::Query) Ray tracing not supported: AS=no, RTPipeline=no, DeferredOps=no, BDA=yes
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:249 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice) Selected physical device: NVIDIA GeForce RTX 4070 Laptop GPU
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:255 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice) GPU timestamp period: 1.00 ns (valid bits: 64)
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:84 (Enjin::Renderer::RTCapabilities::Query) Ray tracing supported: maxRecursion=31, handleSize=32, handleAlign=32, baseAlign=64
+[2026-09-03 07:06:23] [INFO ] [RENDER] RTCapabilities.cpp:86 (Enjin::Renderer::RTCapabilities::Query)   AS limits: maxGeometry=16777215, maxInstance=16777215, maxPrimitive=536870911
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:314 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice) VK_EXT_mesh_shader supported — mesh/task shaders available
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:332 (Enjin::Renderer::VulkanContext::SelectPhysicalDevice) VK_EXT_device_generated_commands supported
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:374 (Enjin::Renderer::VulkanContext::CreateLogicalDevice) Found dedicated compute queue family: 2
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:442 (Enjin::Renderer::VulkanContext::CreateLogicalDevice) Enabling 6 ray tracing device extensions
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:450 (Enjin::Renderer::VulkanContext::CreateLogicalDevice) Enabling VK_EXT_device_generated_commands (+ VK_KHR_maintenance5) extension
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:459 (Enjin::Renderer::VulkanContext::CreateLogicalDevice) Enabling VK_EXT_mesh_shader extension
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanContext.cpp:109 (Enjin::Renderer::VulkanContext::Initialize) Vulkan context initialized successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:191 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode)   Available present mode: FIFO
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:191 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode)   Available present mode: FIFO_RELAXED
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:191 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode)   Available present mode: MAILBOX
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:191 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode)   Available present mode: IMMEDIATE
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:191 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode)   Available present mode: UNKNOWN
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:206 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode) Selected present mode: MAILBOX (VSync OFF)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:315 (Enjin::Renderer::VulkanSwapchain::CreateSwapchain) Swapchain created: 1600x900, format: 50, images: 3
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:545 (Enjin::Renderer::VulkanSwapchain::CreateDepthResources) Depth buffer created: format 126, 1600x900
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:628 (Enjin::Renderer::VulkanSwapchain::CreateVelocityResources) Velocity buffer created: RG16F, 1600x900
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanRenderer.cpp:279 (Enjin::Renderer::VulkanRenderer::CreateRenderPass) Render pass created with velocity + depth attachments
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanRenderer.cpp:883 (Enjin::Renderer::VulkanRenderer::CreateComputeResources) Async compute resources initialized (queue family 2)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanRenderer.cpp:134 (Enjin::Renderer::VulkanRenderer::Initialize) Vulkan renderer initialized successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:801 (Enjin::Renderer::VulkanSwapchain::SetVSyncEnabled) VSync enabled, recreating swapchain...
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:198 (Enjin::Renderer::VulkanSwapchain::ChooseSwapPresentMode) Selected present mode: FIFO (VSync ON)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:315 (Enjin::Renderer::VulkanSwapchain::CreateSwapchain) Swapchain created: 1600x900, format: 50, images: 3
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:545 (Enjin::Renderer::VulkanSwapchain::CreateDepthResources) Depth buffer created: format 126, 1600x900
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanSwapchain.cpp:628 (Enjin::Renderer::VulkanSwapchain::CreateVelocityResources) Velocity buffer created: RG16F, 1600x900
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:3584 (Enjin::ECS::RenderSystem::Initialize) Initializing RenderSystem...
+[2026-09-03 07:06:23] [INFO ] [RENDER] BindlessResources.cpp:19 (Enjin::Renderer::BindlessResourceManager::Initialize) Initializing Bindless Resource Manager...
+[2026-09-03 07:06:23] [INFO ] [RENDER] BindlessResources.cpp:41 (Enjin::Renderer::BindlessResourceManager::Initialize) Bindless Resource Manager initialized (max textures: 1000000, max buffers: 100000)
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] ShadowMap.cpp:33 (Enjin::Renderer::ShadowMap::Initialize) Initializing cascaded shadow map (2048x2048, 4 cascades)...
+[2026-09-03 07:06:23] [INFO ] [RENDER] ShadowMap.cpp:56 (Enjin::Renderer::ShadowMap::Initialize) Cascaded shadow map initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] PointLightShadowMap.cpp:24 (Enjin::Renderer::PointLightShadowMap::Initialize) Initializing point light shadow map (1024x1024, 4 lights x 6 faces)...
+[2026-09-03 07:06:23] [INFO ] [RENDER] PointLightShadowMap.cpp:32 (Enjin::Renderer::PointLightShadowMap::Initialize) Point light shadow map initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] SpotLightShadowMap.cpp:24 (Enjin::Renderer::SpotLightShadowMap::Initialize) Initializing spot light shadow map (1024x1024, 4 lights)...
+[2026-09-03 07:06:23] [INFO ] [RENDER] SpotLightShadowMap.cpp:32 (Enjin::Renderer::SpotLightShadowMap::Initialize) Spot light shadow map initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanImage.cpp:357 (Enjin::Renderer::VulkanImage::CreateFromData) Created image from data: 1x1, format: 43
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:17701 (Enjin::ECS::RenderSystem::EnsureRTMaterialBuffer) RT material SSBO created/resized: 4096 entries (589824 bytes)
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:17774 (Enjin::ECS::RenderSystem::EnsureRTSimplifiedMaterialBuffer) RT simplified material SSBO created/resized: 4096 entries (262144 bytes)
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:17629 (Enjin::ECS::RenderSystem::CreateRTDummyResources) RT dummy resources, light UBOs, NEE light SSBOs, material SSBO, simplified material SSBO, and SDF SSBO created
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:10022 (Enjin::ECS::RenderSystem::SetupEntityBuffers) BONE CHECK: entity 1, 561 verts, hasBoneWeights=0
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:11382 (Enjin::ECS::RenderSystem::CreateDefaultMesh) Created default sphere entity: 1
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] WeatherRenderer.cpp:35 (Enjin::Effects::WeatherRenderer::Initialize) WeatherRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] ParticleRenderer.cpp:36 (Enjin::Effects::ParticleRenderer::Initialize) ParticleRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] FluidRenderer.cpp:35 (Enjin::Effects::FluidRenderer::Initialize) FluidRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] GrassRenderer.cpp:35 (Enjin::Effects::GrassRenderer::Initialize) GrassRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] ShrubRenderer.cpp:36 (Enjin::Effects::ShrubRenderer::Initialize) ShrubRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] TreeRenderer.cpp:39 (Enjin::Effects::TreeRenderer::Initialize) TreeRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:23] [INFO ] [RENDER] SpriteBatchRenderer.cpp:43 (Enjin::Effects::SpriteBatchRenderer::Initialize) SpriteBatchRenderer initialized
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:15520 (Enjin::ECS::RenderSystem::CreateSkyboxPipeline) CreateSkyboxPipeline called
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:15627 (Enjin::ECS::RenderSystem::CreateSkyboxPipeline) Skybox pipeline created
+[2026-09-03 07:06:23] [INFO ] [RENDER] RenderSystem.cpp:11169 (Enjin::ECS::RenderSystem::FindShaderDirectory) Shader hot-reload: shader source directory not found, hot-reload disabled
+[2026-09-03 07:06:24] [INFO ] [RENDER] MergedGeometryBuffer.cpp:62 (Enjin::Renderer::MergedGeometryBuffer::Initialize) MergedGeometryBuffer initialized: 1048576 vertices (136.0 MB), 2097152 indices (8.0 MB)
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUCulling.cpp:27 (Enjin::Renderer::GPUCullingSystem::Initialize) Initializing GPU Culling System...
+[2026-09-03 07:06:24] [WARN ] [RENDER] GPUCulling.cpp:496 (Enjin::Renderer::GPUCullingSystem::CreateComputePipeline) Compute shader not found at any path, GPU culling will use CPU fallback
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUCulling.cpp:497 (Enjin::Renderer::GPUCullingSystem::CreateComputePipeline) To enable GPU culling, compile: glslc Engine/shaders/cull.comp -o Engine/shaders/cull.comp.spv
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUCulling.cpp:37 (Enjin::Renderer::GPUCullingSystem::Initialize) GPU Culling System initialized (max objects: 100000)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:3891 (Enjin::ECS::RenderSystem::Initialize) GPU frustum culling enabled
+[2026-09-03 07:06:24] [INFO ] [RENDER] IndirectDrawBatcher.cpp:40 (Enjin::Renderer::IndirectDrawBatcher::Initialize) IndirectDrawBatcher initialized (max 100000 objects, 1953 KB buffer)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:3902 (Enjin::ECS::RenderSystem::Initialize) Texture-grouped indirect draw batching enabled
+[2026-09-03 07:06:24] [INFO ] [RENDER] AsyncComputeScheduler.cpp:110 (Enjin::Renderer::AsyncComputeScheduler::CreateSyncResources) AsyncComputeScheduler: Timeline semaphore created
+[2026-09-03 07:06:24] [INFO ] [RENDER] AsyncComputeScheduler.cpp:49 (Enjin::Renderer::AsyncComputeScheduler::Initialize) AsyncComputeScheduler initialized (queue family 2, timeline=yes)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:3932 (Enjin::ECS::RenderSystem::Initialize) Async compute scheduler enabled (RT/denoise overlap)
+[2026-09-03 07:06:24] [INFO ] [RENDER] CommandBufferPool.cpp:31 (Enjin::Renderer::CommandBufferPool::Initialize) CommandBufferPool initialized: 7 threads x 2 frames = 14 pools
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:15792 (Enjin::ECS::RenderSystem::InitializeRayTracing) Ray tracing disabled by configuration
+[2026-09-03 07:06:24] [INFO ] [RENDER] OITManager.cpp:509 (Enjin::Renderer::OITManager::CreateCompositeDescriptorSets) OIT composite descriptor sets created
+[2026-09-03 07:06:24] [INFO ] [RENDER] OITManager.cpp:665 (Enjin::Renderer::OITManager::CreateCompositePipeline) OIT composite pipeline created
+[2026-09-03 07:06:24] [INFO ] [RENDER] OITManager.cpp:54 (Enjin::Renderer::OITManager::Initialize) OIT manager initialized (1600x900)
+[2026-09-03 07:06:24] [INFO ] [RENDER] ClusteredLighting.cpp:45 (Enjin::Renderer::ClusteredLightingSystem::Initialize) ClusteredLighting initialized (16x9x24 = 3456 clusters, screen 1600x900)
+[2026-09-03 07:06:24] [INFO ] [RENDER] DDGIProbeSystem.cpp:367 (Enjin::Renderer::DDGIProbeSystem::CreateVoxelGrid) DDGI: created 64x64x64 voxel SDF (0.5 MB)
+[2026-09-03 07:06:24] [INFO ] [RENDER] DDGIProbeSystem.cpp:431 (Enjin::Renderer::DDGIProbeSystem::CreateProbeAtlas::<lambda_1>::operator ()) DDGI: created irradiance atlas 128x128 (256 probes, 8x8 oct)
+[2026-09-03 07:06:24] [INFO ] [RENDER] DDGIProbeSystem.cpp:431 (Enjin::Renderer::DDGIProbeSystem::CreateProbeAtlas::<lambda_1>::operator ()) DDGI: created depth atlas 128x128 (256 probes, 8x8 oct)
+[2026-09-03 07:06:24] [INFO ] [RENDER] DDGIProbeSystem.cpp:39 (Enjin::Renderer::DDGIProbeSystem::Initialize) DDGI initialized: 8x4x8 probes (spacing 4.0), voxel grid 64^3 (extent 50.0), 64 rays/probe, amort 1/8
+[2026-09-03 07:06:24] [INFO ] [RENDER] VolumetricFog.cpp:76 (Enjin::Renderer::VolumetricFogSystem::Initialize) VolumetricFog initialized: 160x90x64 froxels (2x 7.0 MB), density=0.020, anisotropy=0.30, temporal=0.90
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:4036 (Enjin::ECS::RenderSystem::Initialize) VolumetricFog: froxel volume bound to main pass (binding 23, 10 sets)
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUParticleSystem.cpp:34 (Enjin::Effects::GPUParticleSystem::Initialize) GPUParticleSystem initialized: max 65536 particles (6.0 MB SSBO)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:4083 (Enjin::ECS::RenderSystem::Initialize) RenderSystem initialized (bindless: enabled)
+[2026-09-03 07:06:24] [INFO ] [RENDER] AdaptiveQuality.cpp:31 (Enjin::Renderer::AdaptiveQualitySystem::Initialize) Adaptive quality initialized (target: 60 FPS, level: Ultra)
+[2026-09-03 07:06:24] [INFO ] [EDITOR] ImGuiLayer.cpp:151 (Enjin::GUI::ImGuiLayer::Initialize) ImGui initialized successfully
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptEngine.cpp:95 (Enjin::Scripting::ScriptEngine::Initialize) AngelScript 2.38.0 initialized
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptEngine.cpp:110 (Enjin::Scripting::ScriptEngine::Initialize) Context pool created with 4 contexts
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] FlashAPIShim.cpp:833 (Enjin::Scripting::RegisterFlashAPIBindings) Flash API shim registered: 48 global functions (DisplayObject, Stage, Mouse, Keyboard, TextField, Math, Sound, Timer)
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptBindings_MIDI.cpp:112 (Enjin::Scripting::RegisterMIDIBindings) MIDI bindings registered (12 functions)
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptBindings.cpp:1214 (Enjin::Scripting::RegisterAllBindings) AngelScript bindings registered successfully
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptEngine.cpp:696 (Enjin::Scripting::ScriptEngine::SetScriptDirectory) Script directory set to 'D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts'
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:444 (GamePlayer::Initialize) Script engine initialized
+[2026-09-03 07:06:24] [INFO ] [PHYS  ] JoltBackend.cpp:233 (Enjin::Physics::JoltBackend::InitializeJolt) Jolt Physics initialized (threads: 31, max bodies: 8192)
+[2026-09-03 07:06:24] [INFO ] [PHYS  ] PhysicsBackendFactory.cpp:27 (Enjin::Physics::CreatePhysicsBackend) Created physics backend: Jolt Physics
+[2026-09-03 07:06:24] [INFO ] [AUDIO ] SimpleAudio.cpp:207 (Enjin::Audio::SimpleAudio::Initialize) SimpleAudio initialized (miniaudio backend)
+[2026-09-03 07:06:24] [INFO ] [RENDER] ElementalSystem.cpp:77 (Enjin::Effects::ElementalSystem::Initialize) ElementalSystem initialized (max {} particles)
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:551 (GamePlayer::Initialize) Loaded 1 scenes from project manifest
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:665 (GamePlayer::Initialize) Gameplay systems initialized
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:691 (GamePlayer::Initialize) Player initialized
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:2733 (GamePlayer::LoadSceneFromPack) Loaded scene: scenes/Main.enjin (11 entities)
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:50 (Enjin::Renderer::PostProcessing::Initialize) Initializing post-processing (1600x900)
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:1084 (Enjin::Renderer::PostProcessing::CreateDescriptorSets) Post-process descriptor sets created
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:992 (Enjin::Renderer::PostProcessing::CreatePipeline) Post-process pipeline created
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:86 (Enjin::Renderer::PostProcessing::Initialize) PP pipeline created OK - handle=00000259866F78D0 renderPass=000002598036B350
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:2240 (Enjin::Renderer::PostProcessing::CreateTAAComputePipeline) TAA compute pipeline created
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:2074 (Enjin::Renderer::PostProcessing::CreateTAAResources) TAA resources created (1600x900)
+[2026-09-03 07:06:24] [INFO ] [RENDER] PostProcessing.cpp:99 (Enjin::Renderer::PostProcessing::Initialize) Post-processing initialized
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderTarget.cpp:38 (Enjin::Renderer::RenderTarget::Create) RenderTarget created (1600x900)
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUParticleSystem.cpp:394 (Enjin::Effects::GPUParticleSystem::EnsureDrawPipeline) GPUParticleSystem: draw pipeline created (1 attachment(s), 1 pass(es) cached)
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] RTHybridApply.cpp:80 (Enjin::Renderer::RTHybridApply::Initialize) RTHybridApply initialized (player hybrid overlay)
+[2026-09-03 07:06:24] [INFO ] [EDITOR] MIDIInput.cpp:19 (Enjin::InputSystem::MIDIInput::Initialize) MIDIInput initialized (1 devices found)
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:2987 (GamePlayer::LoadAccessibilitySettings) Loaded accessibility settings (colorblind=0, reducedMotion=OFF, fontScale=1.0, subtitles=OFF, dyslexia=OFF, dwellClick=OFF, stickyDrag=OFF, switchAccess=OFF, audioIndicators=OFF)
+[2026-09-03 07:06:24] [INFO ] [EDITOR] FontLibrary.cpp:34 (Enjin::Accessibility::FontLibrary::SetFont) FontLibrary: Set to Default font
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptApiNodes.cpp:307 (Enjin::VisualScript::RegisterScriptApiNodes) VisualScript API codegen: 947 nodes generated from 1173 bindings (205 already hand-made, 21 unmarshalable signatures)
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] VisualScriptSystem.cpp:39 (Enjin::ECS::VisualScriptSystem::Initialize) VisualScriptSystem initialized
+[2026-09-03 07:06:24] [INFO ] [EDITOR] BehaviorTreeSystem.cpp:21 (Enjin::ECS::BehaviorTreeSystem::Initialize) BehaviorTreeSystem initialized (0 trees)
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptEngine.cpp:260 (Enjin::Scripting::ScriptEngine::CompileScript) Compiling script 'D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as' as module 'scripts_FoliageWeather'
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptEngine.cpp:1258 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (14, 5): Compiling void FoliageWeather::OnUpdate(float)
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (21, 114): No matching symbol 'Wind_SetDirection'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (21, 148): No matching symbol 'Wind_SetStrength'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (22, 114): No matching symbol 'Wind_SetDirection'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (22, 148): No matching symbol 'Wind_SetStrength'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (23, 115): No matching symbol 'Wind_SetDirection'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (23, 149): No matching symbol 'Wind_SetStrength'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (24, 114): No matching symbol 'Wind_SetDirection'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:1247 (Enjin::Scripting::ScriptEngine::MessageCallback) D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (24, 148): No matching symbol 'Wind_SetStrength'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:326 (Enjin::Scripting::ScriptEngine::CompileScript) Compilation failed for module 'scripts_FoliageWeather': D:\GitHub\marty64-net\marty64-net\demoroom\foliage\scripts/FoliageWeather.as (24, 148): No matching symbol 'Wind_SetStrength'
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptEngine.cpp:444 (Enjin::Scripting::ScriptEngine::CreateInstance) Module 'scripts_FoliageWeather' not found
+[2026-09-03 07:06:24] [ERROR] [SCRIPT] ScriptSystem.cpp:269 (Enjin::Scripting::ScriptSystem::InitScript) Failed to create instance of FoliageWeather — Module 'scripts_FoliageWeather' not found
+[2026-09-03 07:06:24] [INFO ] [SCRIPT] ScriptSystem.cpp:334 (Enjin::Scripting::ScriptSystem::InitializeAllScripts) All scripts initialized
+[2026-09-03 07:06:24] [INFO ] [PLAYER] main.cpp:2390 (GamePlayer::EndSplashScreen) Splash screen ended, game loaded
+[2026-09-03 07:06:24] [INFO ] [RENDER] Skybox.cpp:209 (Enjin::Renderer::Skybox::CreateProcedural) Created procedural skybox (64x64 per face)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:13566 (Enjin::ECS::RenderSystem::InitComputeSkinning) Compute skinning pipeline initialized (2 frames in flight)
+[2026-09-03 07:06:24] [INFO ] [RENDER] VolumetricFog.cpp:131 (Enjin::Renderer::VolumetricFogSystem::Update) VolumetricFog: volumes neutral-cleared (one-shot)
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUParticleSystem.cpp:94 (Enjin::Effects::GPUParticleSystem::Simulate) GPUParticleSystem: dormant — no spawn source wired (Spawn has no callers) and no render path. Simulation UBO/dispatch are ready; the system runs once particles spawn.
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanImage.cpp:357 (Enjin::Renderer::VulkanImage::CreateFromData) Created image from data: 768x768, format: 43
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanImage.cpp:58 (Enjin::Renderer::VulkanImage::LoadFromFile) Loaded image: assets/Birch_Bark.png (768x768)
+[2026-09-03 07:06:24] [INFO ] [RENDER] Texture.cpp:29 (Enjin::Renderer::Texture::LoadFromFile) Loaded texture: assets/Birch_Bark.png (768x768)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:13228 (Enjin::ECS::RenderSystem::GetOrLoadTexture) Loaded texture: assets/Birch_Bark.png (768x768)
+[2026-09-03 07:06:24] [INFO ] [RENDER] RenderSystem.cpp:14570 (Enjin::ECS::RenderSystem::RenderGPUParticles) RenderGPUParticles: draw path active
+[2026-09-03 07:06:24] [INFO ] [RENDER] VulkanPipeline.cpp:555 (Enjin::Renderer::VulkanPipeline::CreatePipeline) Graphics pipeline created successfully
+[2026-09-03 07:06:24] [INFO ] [RENDER] GPUParticleSystem.cpp:394 (Enjin::Effects::GPUParticleSystem::EnsureDrawPipeline) GPUParticleSystem: draw pipeline created (2 attachment(s), 2 pass(es) cached)
+[2026-09-03 07:06:42] [INFO ] [PLAYER] main.cpp:695 (GamePlayer::Shutdown) Player shutting down...
+[2026-09-03 07:06:42] [INFO ] [SCRIPT] VisualScriptSystem.cpp:55 (Enjin::ECS::VisualScriptSystem::Shutdown) VisualScriptSystem shut down
+[2026-09-03 07:06:42] [INFO ] [AUDIO ] SimpleAudio.cpp:290 (Enjin::Audio::SimpleAudio::Shutdown) SimpleAudio shutdown
+[2026-09-03 07:06:42] [INFO ] [GAME  ] LevelStreaming.cpp:73 (Enjin::Scene::StreamingManager::ClearChunks) Cleared all streaming chunks
+[2026-09-03 07:06:42] [INFO ] [RENDER] PostProcessing.cpp:152 (Enjin::Renderer::PostProcessing::Shutdown) Post-processing shutdown
+[2026-09-03 07:06:42] [INFO ] [SCRIPT] ScriptSystem.cpp:372 (Enjin::Scripting::ScriptSystem::ShutdownAllScripts) All scripts shut down
+[2026-09-03 07:06:42] [INFO ] [SCRIPT] ScriptEngine.cpp:125 (Enjin::Scripting::ScriptEngine::Shutdown) Shutting down ScriptEngine...
+[2026-09-03 07:06:42] [INFO ] [SCRIPT] ScriptEngine.cpp:146 (Enjin::Scripting::ScriptEngine::Shutdown) ScriptEngine shut down
+[2026-09-03 07:06:42] [INFO ] [EDITOR] ImGuiLayer.cpp:178 (Enjin::GUI::ImGuiLayer::Shutdown) ImGui shut down
+[2026-09-03 07:06:42] [INFO ] [CORE  ] Application.cpp:147 (Enjin::Application::ShutdownEngine) Shutting down Enjin Engine...
+[2026-09-03 07:06:42] [INFO ] [CORE  ] Log.cpp:55 (Enjin::Logger::Shutdown) Logger shutting down

@@ -1,0 +1,924 @@
+{
+    "characters": [
+        {
+            "id": "nema",
+            "name": "Nema",
+            "color": "#c44569",
+            "role": "protagonist",
+            "personality": "The player character. Dates people through newspaper personals. Potential serial killer.",
+            "traits": {
+                "warm": 3,
+                "transparent": 1,
+                "playful": 2,
+                "bold": 4,
+                "romantic": 3
+            },
+            "likedTags": [],
+            "dislikedTags": [],
+            "outcomes": {
+                "success": "Date goes well. Person is charmed.",
+                "failure": "Date goes poorly. Person leaves disappointed.",
+                "disappearance": "After a very successful date (90+ affection), the person vanishes. A souvenir remains."
+            },
+            "arc": "Nema's arc is told through the accumulation of souvenirs and the apartment changing over time. The player slowly realizes what is happening.",
+            "notes": ""
+        },
+        {
+            "id": "mnvupmyse35a",
+            "name": "Paris",
+            "color": "#60a5fa",
+            "role": "date",
+            "personality": "",
+            "traits": [],
+            "likedTags": [],
+            "dislikedTags": [],
+            "outcomes": {
+                "success": "",
+                "failure": "",
+                "disappearance": ""
+            },
+            "arc": "",
+            "notes": "",
+            "profile": {
+                "adText": "",
+                "keywords": []
+            }
+        },
+        {
+            "id": "sterling",
+            "name": "Sterling",
+            "color": "#f5a623",
+            "role": "date",
+            "personality": "Finance bro. Confident, watches, gym, whiskey. Dislikes greenery.",
+            "traits": [],
+            "likedTags": [
+                "whiskey",
+                "watch",
+                "gym",
+                "book_finance",
+                "minimal"
+            ],
+            "dislikedTags": [
+                "plant",
+                "flower",
+                "incense",
+                "clutter"
+            ],
+            "outcomes": {
+                "success": "Impressed by clean apartment and good drink. Brags about himself.",
+                "failure": "Judges the clutter. Makes excuses to leave.",
+                "disappearance": "His monogrammed cufflink is on the kitchen counter. An empty whiskey glass sits beside it."
+            },
+            "arc": "",
+            "notes": "",
+            "profile": {
+                "adText": "",
+                "keywords": []
+            }
+        },
+        {
+            "id": "sage",
+            "name": "Sage",
+            "color": "#4ecdc4",
+            "role": "date",
+            "personality": "Psychic \/ intuitive. Reads people. Warm and perceptive. Likes incense and books.",
+            "traits": [],
+            "likedTags": [
+                "incense",
+                "plant",
+                "book_spiritual",
+                "perfume_earthy",
+                "crystal"
+            ],
+            "dislikedTags": [
+                "alcohol",
+                "loud_music",
+                "synthetic"
+            ],
+            "outcomes": {
+                "success": "Feels a deep connection. Reads Nema's palm. Sees something but doesn't say what.",
+                "failure": "Gets an uneasy feeling. Politely but firmly leaves.",
+                "disappearance": "A bundle of dried sage sits on the windowsill. A tarot card (The Tower) is face-up on the table."
+            },
+            "arc": "",
+            "notes": "",
+            "profile": {
+                "adText": "",
+                "keywords": []
+            }
+        },
+        {
+            "id": "clover",
+            "name": "Clover",
+            "color": "#a78bfa",
+            "role": "date",
+            "personality": "Soft, catlike, homemaker. Cooks from scratch. Appreciates peaceful, low-mood homes.",
+            "traits": [],
+            "likedTags": [
+                "plant",
+                "book_cooking",
+                "candle",
+                "knitting",
+                "quiet"
+            ],
+            "dislikedTags": [
+                "loud_music",
+                "alcohol",
+                "mess",
+                "perfume_strong"
+            ],
+            "outcomes": {
+                "success": "Curls up on the couch. Feels at home. Offers to cook next time.",
+                "failure": "Overwhelmed by noise or mess. Retreats into herself.",
+                "disappearance": "A hand-knit coaster sits on the side table. A pressed flower bookmark is in a cookbook."
+            },
+            "arc": "",
+            "notes": "",
+            "profile": {
+                "adText": "",
+                "keywords": []
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "wine_bottle",
+            "name": "Empty Wine Bottle",
+            "type": "mess",
+            "thread": "disappearances",
+            "mysteryLevel": 0,
+            "tags": [
+                "wine",
+                "glass",
+                "date_remnant"
+            ],
+            "description": "A bottle of red, mostly empty. The label is in French.",
+            "descriptions": {
+                "afterSecondDate": "The same label as last time. Or is it a different bottle?",
+                "afterThirdDisappearance": "How many bottles is that now? They keep appearing after good dates."
+            },
+            "discoveryCondition": "After a successful date where wine was served",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "crumpled_note",
+            "name": "Crumpled Note",
+            "type": "mystery",
+            "thread": "nema_past",
+            "mysteryLevel": 2,
+            "tags": [
+                "paper",
+                "handwriting",
+                "secret"
+            ],
+            "description": "A crumpled piece of paper. The handwriting is hurried. \"Don't forget to —\" The rest is torn off.",
+            "descriptions": {
+                "afterFindingSecondNote": "Another note. Same handwriting. \"They won't find —\" Torn again.",
+                "late": "You smooth out the crumples carefully. The paper smells faintly of garden soil."
+            },
+            "discoveryCondition": "Found in apartment, day 3+",
+            "notes": "Part of a series of notes that reveal Nema's inner thoughts",
+            "reactions": []
+        },
+        {
+            "id": "mystery_stain",
+            "name": "Mystery Stain",
+            "type": "mess",
+            "thread": "disappearances",
+            "mysteryLevel": 2,
+            "tags": [
+                "stain",
+                "suspicious",
+                "floor"
+            ],
+            "description": "A dark stain on the floor near the couch. Could be wine. Could be something else.",
+            "descriptions": {
+                "afterCleaning": "You scrubbed it but the shadow remains. It wasn't wine.",
+                "late": "The stain is shaped like a hand."
+            },
+            "discoveryCondition": "Appears after day 4",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "broken_glass",
+            "name": "Broken Glass",
+            "type": "mess",
+            "thread": "",
+            "mysteryLevel": 0,
+            "tags": [
+                "glass",
+                "sharp",
+                "mess"
+            ],
+            "description": "Shards of a broken glass. Watch your step.",
+            "descriptions": [],
+            "discoveryCondition": "Random mess spawn",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "tear_tissue",
+            "name": "Tear-Stained Tissue",
+            "type": "mess",
+            "thread": "nema_inner",
+            "mysteryLevel": 1,
+            "tags": [
+                "tissue",
+                "tears",
+                "nema"
+            ],
+            "description": "A tissue, stiff with dried tears. Nema's?",
+            "descriptions": {
+                "afterGoodDate": "Found on Nema's side of the bed. She was crying again."
+            },
+            "discoveryCondition": "Morning after certain events",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "livii_scarf",
+            "name": "Silk Scarf",
+            "type": "souvenir",
+            "thread": "disappearances",
+            "mysteryLevel": 2,
+            "tags": [
+                "clothing",
+                "livii",
+                "souvenir",
+                "silk"
+            ],
+            "description": "A beautiful silk scarf. It smells faintly of perfume.",
+            "descriptions": {
+                "initial": "Draped over the couch arm as if someone just set it down. They'll come back for it.",
+                "realization": "Livii's scarf. She never came back for it. She never will."
+            },
+            "discoveryCondition": "After Livii disappears (90+ affection date)",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "wilted_petals",
+            "name": "Wilted Petals",
+            "type": "apartment",
+            "thread": "the_garden",
+            "mysteryLevel": 0,
+            "tags": [
+                "plant",
+                "decay",
+                "natural"
+            ],
+            "description": "Petals that have dried and curled. They fell from the flower arrangement.",
+            "descriptions": {
+                "late": "The petals are from flowers that dates brought. Each petal a memory."
+            },
+            "discoveryCondition": "Flowers not watered",
+            "notes": "",
+            "reactions": []
+        },
+        {
+            "id": "sterling_cufflink",
+            "name": "Monogrammed Cufflink",
+            "type": "souvenir",
+            "thread": "disappearances",
+            "mysteryLevel": 2,
+            "tags": [
+                "jewelry",
+                "sterling",
+                "souvenir",
+                "metal"
+            ],
+            "description": "A single silver cufflink, monogrammed S.H.",
+            "descriptions": {
+                "initial": "Left on the kitchen counter. Sterling must have dropped it.",
+                "realization": "One cufflink. Just one. Where's the other? Where's Sterling?"
+            },
+            "discoveryCondition": "After Sterling disappears",
+            "notes": ""
+        },
+        {
+            "id": "sage_tarot",
+            "name": "Tarot Card (The Tower)",
+            "type": "souvenir",
+            "thread": "disappearances",
+            "mysteryLevel": 3,
+            "tags": [
+                "card",
+                "sage",
+                "souvenir",
+                "occult",
+                "paper"
+            ],
+            "description": "A tarot card: The Tower. Lightning strikes, figures fall.",
+            "descriptions": {
+                "initial": "Sage must have left this. The Tower — sudden upheaval, revelation.",
+                "realization": "Sage saw something. The Tower was a warning. For us or for her?",
+                "late": "The card feels heavier than it should. The figures falling look like they're reaching up."
+            },
+            "discoveryCondition": "After Sage disappears",
+            "notes": "The most narratively loaded souvenir. Sage sensed what was coming."
+        },
+        {
+            "id": "clover_coaster",
+            "name": "Hand-Knit Coaster",
+            "type": "souvenir",
+            "thread": "disappearances",
+            "mysteryLevel": 1,
+            "tags": [
+                "craft",
+                "clover",
+                "souvenir",
+                "knit"
+            ],
+            "description": "A small knitted coaster in soft green yarn. Clearly handmade with care.",
+            "descriptions": {
+                "initial": "Clover made this during the date. Said she'd make a whole set next time.",
+                "realization": "There won't be a next time. There never is."
+            },
+            "discoveryCondition": "After Clover disappears",
+            "notes": ""
+        },
+        {
+            "id": "garden_shears",
+            "name": "Garden Shears",
+            "type": "apartment",
+            "thread": "the_garden",
+            "mysteryLevel": 1,
+            "tags": [
+                "tool",
+                "garden",
+                "sharp",
+                "nema"
+            ],
+            "description": "Well-used garden shears. The blades are stained with chlorophyll. Probably.",
+            "descriptions": {
+                "afterDisappearance": "The shears have been cleaned recently. Very thoroughly.",
+                "late": "Chlorophyll doesn't stain like that."
+            },
+            "discoveryCondition": "Always in apartment",
+            "notes": "An item whose description shifts from innocent to sinister"
+        },
+        {
+            "id": "locked_drawer",
+            "name": "Locked Drawer",
+            "type": "mystery",
+            "thread": "nema_past",
+            "mysteryLevel": 3,
+            "tags": [
+                "locked",
+                "furniture",
+                "secret",
+                "nema"
+            ],
+            "description": "A drawer in Nema's desk. It's locked. You've never seen the key.",
+            "descriptions": {
+                "afterThreeDisappearances": "The drawer rattles when you bump the desk. Something inside shifts.",
+                "afterFindingKey": "Inside: a small leather journal. Every page is dated. Every date has a name."
+            },
+            "discoveryCondition": "Always visible, unlocked after finding key",
+            "notes": "The central mystery item."
+        },
+        {
+            "id": "small_key",
+            "name": "Small Brass Key",
+            "type": "mystery",
+            "thread": "nema_past",
+            "mysteryLevel": 2,
+            "tags": [
+                "key",
+                "brass",
+                "secret",
+                "tiny"
+            ],
+            "description": "A small brass key. It was hidden inside the soil of the oldest plant.",
+            "descriptions": [],
+            "discoveryCondition": "Item chain: repot the oldest plant after day 7",
+            "notes": "Unlocks the locked drawer"
+        },
+        {
+            "id": "nema_journal",
+            "name": "Nema's Journal",
+            "type": "mystery",
+            "thread": "nema_past",
+            "mysteryLevel": 3,
+            "tags": [
+                "book",
+                "journal",
+                "secret",
+                "nema",
+                "handwriting"
+            ],
+            "description": "A leather-bound journal. Every entry is a date. Every date has a name and a pressed flower.",
+            "descriptions": {
+                "initial": "The handwriting is meticulous. The flowers are perfectly preserved. There are so many names."
+            },
+            "discoveryCondition": "Found inside locked drawer",
+            "notes": "The final revelation item."
+        }
+    ],
+    "threads": [
+        {
+            "id": "disappearances",
+            "name": "The Disappearances",
+            "color": "#c44569",
+            "description": "Dates that go very well vanish. Their belongings remain as souvenirs. The pattern becomes horrifying.",
+            "notes": ""
+        },
+        {
+            "id": "nema_past",
+            "name": "Nema's Past",
+            "color": "#a78bfa",
+            "description": "Fragments of Nema's history revealed through hidden items, notes, and the locked drawer.",
+            "notes": ""
+        },
+        {
+            "id": "nema_inner",
+            "name": "Nema's Inner Life",
+            "color": "#f87171",
+            "description": "Nema's emotions shown through messes and small details.",
+            "notes": ""
+        },
+        {
+            "id": "the_garden",
+            "name": "The Garden",
+            "color": "#4ade80",
+            "description": "Plants, flowers, and growth. The garden is both literal and metaphorical.",
+            "notes": ""
+        }
+    ],
+    "beats": [
+        {
+            "id": "first_disappearance",
+            "name": "First Disappearance",
+            "thread": "disappearances",
+            "trigger": {
+                "type": "dateOutcome",
+                "params": {
+                    "outcome": "success",
+                    "affection": "90+",
+                    "count": 1
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "itemId": "",
+                        "note": "Character-specific souvenir appears"
+                    }
+                }
+            ],
+            "day": 0,
+            "notes": "Player might not notice yet."
+        },
+        {
+            "id": "second_disappearance",
+            "name": "Second Disappearance",
+            "thread": "disappearances",
+            "trigger": {
+                "type": "dateOutcome",
+                "params": {
+                    "outcome": "success",
+                    "affection": "90+",
+                    "count": 2
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "note": "Second souvenir appears"
+                    }
+                },
+                {
+                    "type": "descriptionChanges",
+                    "params": {
+                        "note": "First souvenir updates to \"they never came back\""
+                    }
+                }
+            ],
+            "day": 0,
+            "notes": "Pattern starts to emerge."
+        },
+        {
+            "id": "pattern_recognition",
+            "name": "The Pattern",
+            "thread": "disappearances",
+            "trigger": {
+                "type": "dateOutcome",
+                "params": {
+                    "outcome": "success",
+                    "count": 3
+                }
+            },
+            "effects": [
+                {
+                    "type": "descriptionChanges",
+                    "params": {
+                        "note": "All souvenirs update to \"realization\" descriptions"
+                    }
+                },
+                {
+                    "type": "nemaBehavior",
+                    "params": {
+                        "note": "Nema lingers on souvenirs when bored"
+                    }
+                }
+            ],
+            "day": 0,
+            "notes": "Three disappearances. The horror crystallizes."
+        },
+        {
+            "id": "notes_begin",
+            "name": "First Note Found",
+            "thread": "nema_past",
+            "trigger": {
+                "type": "dayReached",
+                "params": {
+                    "day": 3
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "itemId": "crumpled_note"
+                    }
+                }
+            ],
+            "day": 3,
+            "notes": ""
+        },
+        {
+            "id": "stain_appears",
+            "name": "The Stain",
+            "thread": "disappearances",
+            "trigger": {
+                "type": "dayReached",
+                "params": {
+                    "day": 4
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "itemId": "mystery_stain"
+                    }
+                }
+            ],
+            "day": 4,
+            "notes": ""
+        },
+        {
+            "id": "garden_discovery",
+            "name": "Something in the Soil",
+            "thread": "the_garden",
+            "trigger": {
+                "type": "itemCombined",
+                "params": {
+                    "items": [
+                        "oldest_plant",
+                        "repotting"
+                    ]
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "itemId": "small_key"
+                    }
+                }
+            ],
+            "day": 7,
+            "notes": "Key hidden in the garden"
+        },
+        {
+            "id": "drawer_opened",
+            "name": "The Drawer Opens",
+            "thread": "nema_past",
+            "trigger": {
+                "type": "itemCombined",
+                "params": {
+                    "items": [
+                        "small_key",
+                        "locked_drawer"
+                    ]
+                }
+            },
+            "effects": [
+                {
+                    "type": "itemAppears",
+                    "params": {
+                        "itemId": "nema_journal"
+                    }
+                },
+                {
+                    "type": "threadAdvance",
+                    "params": {
+                        "note": "All threads converge."
+                    }
+                }
+            ],
+            "day": 0,
+            "notes": "Climactic reveal."
+        },
+        {
+            "id": "mnw08rj57mer",
+            "name": "Newspaper",
+            "thread": "",
+            "trigger": {
+                "type": "dayReached",
+                "params": {
+                    "day": 1
+                }
+            },
+            "effects": [],
+            "day": 1,
+            "notes": "Created from timeline."
+        },
+        {
+            "id": "mnw096834he5",
+            "name": "Date Preperation",
+            "thread": "",
+            "trigger": {
+                "type": "dayReached",
+                "params": {
+                    "day": 1
+                }
+            },
+            "effects": [],
+            "day": 1,
+            "notes": "Created from timeline."
+        }
+    ],
+    "chains": [
+        {
+            "id": "drawer_chain",
+            "name": "The Locked Drawer",
+            "thread": "nema_past",
+            "steps": [
+                {
+                    "itemId": "locked_drawer",
+                    "action": "examine",
+                    "description": "Notice the locked drawer. No key visible.",
+                    "result": ""
+                },
+                {
+                    "itemId": "garden_shears",
+                    "action": "examine",
+                    "description": "The garden shears are suspiciously clean. Nema tends the oldest plant obsessively.",
+                    "result": ""
+                },
+                {
+                    "itemId": "small_key",
+                    "action": "discover",
+                    "description": "While repotting the oldest plant (day 7+), a small brass key falls from the root ball.",
+                    "result": "small_key"
+                },
+                {
+                    "itemId": "small_key",
+                    "action": "combine",
+                    "description": "Use the key on the locked drawer.",
+                    "result": "nema_journal"
+                },
+                {
+                    "itemId": "nema_journal",
+                    "action": "examine",
+                    "description": "Read the journal. Every date is logged. Every name has a pressed flower.",
+                    "result": ""
+                }
+            ],
+            "notes": "The central puzzle chain."
+        },
+        {
+            "id": "souvenir_pattern",
+            "name": "The Souvenir Collection",
+            "thread": "disappearances",
+            "steps": [
+                {
+                    "itemId": "livii_scarf",
+                    "action": "discover",
+                    "description": "Find Livii's scarf. \"She'll come back for it.\"",
+                    "result": ""
+                },
+                {
+                    "itemId": "sterling_cufflink",
+                    "action": "discover",
+                    "description": "Find Sterling's cufflink. Two souvenirs now.",
+                    "result": ""
+                },
+                {
+                    "itemId": "sage_tarot",
+                    "action": "discover",
+                    "description": "Find Sage's tarot card. The Tower. She knew.",
+                    "result": ""
+                },
+                {
+                    "itemId": "clover_coaster",
+                    "action": "discover",
+                    "description": "Find Clover's coaster. Four disappearances. Undeniable.",
+                    "result": ""
+                }
+            ],
+            "notes": "Not a puzzle — a slow accumulation of dread."
+        }
+    ],
+    "timeline": {
+        "days": [
+            {
+                "day": 1,
+                "pacing": "setup",
+                "events": [
+                    "First date available. Apartment exploration."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 2,
+                "pacing": "setup",
+                "events": [
+                    "Second date possible. Learning preferences."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 3,
+                "pacing": "tension",
+                "events": [
+                    "First crumpled note appears."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 4,
+                "pacing": "tension",
+                "events": [
+                    "Mystery stain appears."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 5,
+                "pacing": "reveal",
+                "events": [
+                    "Souvenir descriptions may update."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 6,
+                "pacing": "calm",
+                "events": [
+                    "A quiet day. Garden needs tending."
+                ],
+                "notes": "",
+                "linkedEntities": [],
+                "dreamText": ""
+            },
+            {
+                "day": 7,
+                "pacing": "reveal",
+                "events": [
+                    "Key can be found. Drawer can be opened."
+                ],
+                "notes": "",
+                "linkedEntities": []
+            }
+        ]
+    },
+    "mapPositions": {
+        "item_small_key": {
+            "x": -54.82574820303773,
+            "y": 316.34817521552446
+        },
+        "item_nema_journal": {
+            "x": 166.67979598872955,
+            "y": 291.82817786216617
+        },
+        "item_mystery_stain": {
+            "x": 1826.5341100745493,
+            "y": 886.8967624952502
+        },
+        "item_crumpled_note": {
+            "x": -179.1444618535066,
+            "y": -29.561109828949967
+        },
+        "item_broken_glass": {
+            "x": 1665.6118260937362,
+            "y": -25.73342374301116
+        },
+        "item_locked_drawer": {
+            "x": -227.7937342526729,
+            "y": 224.90281316336532
+        },
+        "item_garden_shears": {
+            "x": -139.87778458509493,
+            "y": 524.5523055790269
+        },
+        "item_wine_bottle": {
+            "x": 1587.4898173416093,
+            "y": 808.8845358894713
+        },
+        "item_lipstick_smear": {
+            "x": 558.9122349205828,
+            "y": 72.74722215251697
+        },
+        "char_nema": {
+            "x": 447.70028695443244,
+            "y": -440.09061216408884
+        },
+        "beat_drawer_opened": {
+            "x": 153.67617580904115,
+            "y": 75.20041391537237
+        },
+        "beat_nema_tears": {
+            "x": 1623.0478706213582,
+            "y": -241.8630148795407
+        },
+        "item_tear_tissue": {
+            "x": 1658.6631909312898,
+            "y": -115.2442043264897
+        },
+        "char_mnvupmyse35a": {
+            "x": 932.8458906586891,
+            "y": -441.92753591762005
+        },
+        "char_sage": {
+            "x": 634.9442341905633,
+            "y": 936.7816117778165
+        },
+        "char_sterling": {
+            "x": 1100.2796464064518,
+            "y": 1050.8363381459756
+        },
+        "beat_garden_discovery": {
+            "x": 41.679546056387025,
+            "y": 24.149612070329958
+        },
+        "beat_notes_begin": {
+            "x": -137.60742482448057,
+            "y": -225.48464967644298
+        },
+        "beat_stain_appears": {
+            "x": 2099.757860066169,
+            "y": 844.5036253027199
+        },
+        "char_clover": {
+            "x": 148.90253759287833,
+            "y": 1026.0790847395965
+        },
+        "item_clover_coaster": {
+            "x": 140.76505954819328,
+            "y": 1293.1030916774343
+        },
+        "item_sage_tarot": {
+            "x": 769.5104732817344,
+            "y": 1312.7486717644972
+        },
+        "item_sterling_cufflink": {
+            "x": 1238.3333333333335,
+            "y": 1366.6666666666667
+        },
+        "beat_mnw08rj57mer": {
+            "x": 920.146478517269,
+            "y": -253.83847333061075
+        },
+        "beat_pattern_recognition": {
+            "x": 2028.6882545884891,
+            "y": 631.6447388707286
+        },
+        "beat_second_disappearance": {
+            "x": 2057.2294791422755,
+            "y": 502.4440178206685
+        },
+        "beat_first_disappearance": {
+            "x": 2037.8481012658226,
+            "y": 367.65822784810126
+        },
+        "item_livii_scarf": {
+            "x": 1620.5699021189375,
+            "y": 1365.4640515987112
+        },
+        "item_wilted_petals": {
+            "x": 217.4109016892004,
+            "y": 524.9954451453182
+        },
+        "beat_mnw096834he5": {
+            "x": 927.5430360076729,
+            "y": -130.47184659639572
+        }
+    }
+}

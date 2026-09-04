@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workshop editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="journal.css">
+</head>
+<body>
+  <div class="editor-wrap">
+    <div class="editor-bar">
+      <h1>Workshop editor</h1>
+      <span class="status" id="folder-status">no folder connected</span>
+      <button class="btn" id="connect-btn">Connect journal folder</button>
+      <a class="btn" href="index.html">View log</a>
+    </div>
+
+    <div id="main" style="opacity:.4; pointer-events:none;">
+      <!-- game picker -->
+      <div class="row">
+        <div class="field">
+          <label>Game</label>
+          <select id="game-select"></select>
+        </div>
+        <div class="field" id="new-game-fields" style="display:none;">
+          <label>New game title</label>
+          <input id="new-game-title" placeholder="e.g. Spent Bloom">
+        </div>
+        <div class="field" id="new-game-accent-wrap" style="display:none;">
+          <label>Accent</label>
+          <input id="new-game-accent" type="color" value="#f59e0b" style="height:42px; padding:2px;">
+        </div>
+      </div>
+
+      <div class="editor-grid">
+        <!-- left: fields + markdown -->
+        <div>
+          <div class="field">
+            <label>Entry title</label>
+            <input id="entry-title" placeholder="The save corruption bug">
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Date</label>
+              <input id="entry-date" type="date">
+            </div>
+            <div class="field">
+              <label>Format</label>
+              <select id="entry-format">
+                <option value="log">log (mono)</option>
+                <option value="essay">essay (serif)</option>
+                <option value="gallery">gallery (image grid)</option>
+                <option value="raw">raw (plain)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tags (comma separated)</label>
+            <input id="entry-tags" placeholder="bug, save-system">
+          </div>
+          <div class="field">
+            <label>Body &mdash; markdown. Paste a screenshot right into this box.</label>
+            <textarea id="entry-body" placeholder="What happened, what you tried, what you found...&#10;&#10;Paste screenshots directly. Use ```code fences``` for bug snippets."></textarea>
+            <div class="hint">Ctrl/Cmd+V an image to drop it in as a real file. New entry slug is built from the date + title.</div>
+          </div>
+          <div class="editor-bar" style="border:none; margin:0;">
+            <button class="btn primary" id="save-btn">Save entry to disk</button>
+            <span class="status" id="save-status"></span>
+          </div>
+        </div>
+
+        <!-- right: live preview -->
+        <div>
+          <div class="preview">
+            <div class="preview-label">preview</div>
+            <div class="content" id="preview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- passphrase tool -->
+    <div class="tool-box">
+      <div class="preview-label">Set the viewer passphrase</div>
+      <div class="row" style="align-items:flex-end;">
+        <div class="field" style="margin:0;">
+          <label>New passphrase</label>
+          <input id="pass-input" placeholder="type a passphrase">
+        </div>
+        <button class="btn" id="pass-btn" style="margin-bottom:.9rem;">Make hash</button>
+      </div>
+      <p class="hint" id="pass-out"></p>
+    </div>
+  </div>
+
+  <script src="md.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

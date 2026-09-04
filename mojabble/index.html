@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MojAbble - Mahjong meets Scrabble</title>
+  <meta name="description" content="MojAbble is a word videogame fusing Mahjong Solitaire tile layouts with Scrabble letter scoring. Play free in your browser. Coming to iOS and Android.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0e27;
+      --bg-panel: #10163a;
+      --bg-panel-2: #151c47;
+      --gold: #ffd700;
+      --gold-dim: rgba(255,215,0,0.6);
+      --gold-faint: rgba(255,215,0,0.18);
+      --text: #e6e8f2;
+      --text-dim: #9aa0c0;
+      --tile-face: #e8d4a8;
+      --tile-edge: #b8960b;
+      --tile-ink: #2a1810;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--gold); }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 56px;
+      background:
+        radial-gradient(ellipse at 50% -20%, rgba(255,215,0,0.08), transparent 60%),
+        var(--bg);
+    }
+
+    .hero-tiles {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .tile {
+      width: 58px;
+      height: 68px;
+      background: var(--tile-face);
+      border: 1.5px solid var(--tile-edge);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-family: Georgia, serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--tile-ink);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .tile:nth-child(odd) { transform: translateY(-6px) rotate(-2deg); }
+    .tile:nth-child(even) { transform: translateY(4px) rotate(1.5deg); }
+
+    .tile .pts {
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(42,24,16,0.45);
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(255,215,0,0.35);
+    }
+
+    .hero .tagline {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-top: 6px;
+    }
+
+    .hero .pitch {
+      max-width: 620px;
+      margin: 24px auto 0;
+      color: var(--text-dim);
+      font-size: 17px;
+    }
+
+    .hero-cta {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-gold {
+      background: linear-gradient(180deg, #ffd700, #e6b800);
+      color: #1a1200;
+      box-shadow: 0 6px 20px rgba(255,215,0,0.25);
+    }
+
+    .btn-ghost {
+      border: 1.5px solid var(--gold-faint);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover { border-color: var(--gold-dim); }
+
+    /* ── Sections ─────────────────────────────────── */
+    section { padding: 56px 0; }
+
+    section h2 {
+      font-size: 26px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    section .lead {
+      color: var(--text-dim);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--bg-panel);
+      border: 1px solid rgba(255,215,0,0.08);
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    /* ── How it plays ─────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      counter-reset: step;
+    }
+
+    .step {
+      background: var(--bg-panel);
+      border: 1px solid rgba(255,215,0,0.08);
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold-faint);
+      color: var(--gold);
+      font-weight: 800;
+      text-align: center;
+      line-height: 32px;
+      margin-bottom: 12px;
+    }
+
+    .step p { font-size: 14px; color: var(--text-dim); }
+    .step strong { color: var(--text); }
+
+    /* ── Mobile signup ────────────────────────────── */
+    .signup-panel {
+      background: linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+      border: 1px solid rgba(255,215,0,0.15);
+      border-radius: 16px;
+      padding: 36px;
+      text-align: center;
+    }
+
+    .signup-panel h2 { margin-bottom: 8px; }
+
+    .signup-panel p {
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .platform-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .platform-btn {
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1.5px solid var(--gold-faint);
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .platform-btn.active {
+      background: var(--gold-faint);
+      border-color: var(--gold-dim);
+      color: var(--gold);
+    }
+
+    .signup-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .signup-form input {
+      background: var(--bg);
+      border: 1.5px solid rgba(255,215,0,0.2);
+      border-radius: 10px;
+      padding: 13px 18px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      width: min(320px, 100%);
+    }
+
+    .signup-form input:focus {
+      outline: none;
+      border-color: var(--gold-dim);
+    }
+
+    .signup-form button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    #signup-msg {
+      margin-top: 14px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    #signup-msg.ok { color: #4ade80; }
+    #signup-msg.err { color: #f87171; }
+
+    /* ── Community ────────────────────────────────── */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .community-card {
+      background: var(--bg-panel);
+      border: 1px solid rgba(255,215,0,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.15s, transform 0.12s;
+    }
+
+    .community-card:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+
+    .community-card .icon { font-size: 28px; margin-bottom: 10px; }
+    .community-card h3 { color: var(--text); font-size: 16px; margin-bottom: 4px; }
+    .community-card p { color: var(--text-dim); font-size: 13px; }
+
+    .community-card.soon {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .community-card.soon:hover { border-color: rgba(255,215,0,0.08); transform: none; }
+
+    .soon-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid var(--gold-faint);
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin-top: 8px;
+    }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(255,215,0,0.1);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    footer a { margin: 0 10px; }
+
+    @media (max-width: 560px) {
+      .hero h1 { font-size: 34px; }
+      .tile { width: 46px; height: 55px; font-size: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-tiles" aria-hidden="true">
+    <div class="tile">M<span class="pts">3</span></div>
+    <div class="tile">O<span class="pts">1</span></div>
+    <div class="tile">J<span class="pts">8</span></div>
+    <div class="tile">A<span class="pts">1</span></div>
+    <div class="tile">B<span class="pts">3</span></div>
+    <div class="tile">B<span class="pts">3</span></div>
+    <div class="tile">L<span class="pts">1</span></div>
+    <div class="tile">E<span class="pts">1</span></div>
+  </div>
+  <h1>MojAbble</h1>
+  <div class="tagline">Mahjong &times; Scrabble</div>
+  <p class="pitch">
+    A word videogame that fuses Mahjong Solitaire tile layouts with Scrabble letter scoring.
+    Pull free tiles off the board, build words, chain combos, and climb the global leaderboard.
+    Free in your browser, no install, no account.
+  </p>
+  <div class="hero-cta">
+    <a href="play.html" class="btn btn-gold">Play Now</a>
+    <a href="#mobile" class="btn btn-ghost">Get it on iOS &amp; Android</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="about">
+    <h2>The Videogame</h2>
+    <p class="lead">
+      Every board is a Mahjong Solitaire layout stacked with letter tiles. Only free tiles can be
+      taken, so every word you spell opens and closes routes through the stack. Scoring follows
+      Scrabble letter values with combo multipliers for consecutive valid words. Words are checked
+      against the full SOWPODS / Collins tournament dictionary: 267,627 words, 3 letters and up,
+      no length cap.
+    </p>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Tournament Dictionary</h3>
+        <p>The complete SOWPODS / Collins Scrabble Words list. If it plays in tournament Scrabble, it plays here.</p>
+      </div>
+      <div class="feature">
+        <h3>Combos &amp; Multipliers</h3>
+        <p>Consecutive valid words build a combo chain. Longer and rarer words score bigger bonuses.</p>
+      </div>
+      <div class="feature">
+        <h3>Difficulty Tiers</h3>
+        <p>Layouts range from gentle turtles to brutal towers. Pick your poison.</p>
+      </div>
+      <div class="feature">
+        <h3>Seeded Multiplayer Boards</h3>
+        <p>Share a room code and race friends on the exact same board with the same tile draw.</p>
+      </div>
+      <div class="feature">
+        <h3>Global Leaderboard</h3>
+        <p>High scores and rare-word finds persist to a global board. Bragging rights included.</p>
+      </div>
+      <div class="feature">
+        <h3>Instant &amp; Lightweight</h3>
+        <p>Vanilla JS, Canvas 2D, and procedural Web Audio. Zero dependencies, loads in seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How It Plays</h2>
+    <div class="steps">
+      <div class="step">
+        <p><strong>Scan the stack.</strong> Tiles are free when they have an open side and nothing on top, just like Mahjong Solitaire.</p>
+      </div>
+      <div class="step">
+        <p><strong>Pull letters.</strong> Click free tiles to move them to your rack. Choose carefully, digging changes what opens next.</p>
+      </div>
+      <div class="step">
+        <p><strong>Spell words.</strong> Submit any word of 3+ letters. The dictionary is the judge.</p>
+      </div>
+      <div class="step">
+        <p><strong>Chain combos.</strong> Back-to-back valid words multiply your score. Clear the board for the full bonus.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mobile">
+    <div class="signup-panel">
+      <h2>Coming to iOS &amp; Android</h2>
+      <p>
+        MojAbble is headed to the App Store and Google Play. Sign up and you'll get one email
+        when the beta opens on your platform. Nothing else, ever.
+      </p>
+      <div class="platform-row" role="group" aria-label="Choose platform">
+        <button type="button" class="platform-btn" data-platform="ios">iOS</button>
+        <button type="button" class="platform-btn" data-platform="android">Android</button>
+        <button type="button" class="platform-btn active" data-platform="both">Both</button>
+      </div>
+      <form class="signup-form" id="signup-form">
+        <input type="email" id="signup-email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="btn btn-gold">Notify Me</button>
+      </form>
+      <div id="signup-msg" role="status"></div>
+    </div>
+  </section>
+
+  <section id="community">
+    <h2>Community &amp; More</h2>
+    <div class="community-grid">
+      <a href="play.html" class="community-card">
+        <div class="icon">&#127922;</div>
+        <h3>Play in Browser</h3>
+        <p>The full videogame, free, right now.</p>
+      </a>
+      <a href="docs.html" class="community-card">
+        <div class="icon">&#128214;</div>
+        <h3>Systems Documentation</h3>
+        <p>Architecture, scoring math, board generation, and every system under the hood.</p>
+      </a>
+      <!-- Replace href with the real invite URL when the server is live, and remove the "soon" class and badge -->
+      <div class="community-card soon" aria-disabled="true">
+        <div class="icon">&#128172;</div>
+        <h3>Discord</h3>
+        <p>Strategy talk, rare-word flexing, and beta news.</p>
+        <span class="soon-badge">Coming Soon</span>
+      </div>
+      <a href="mailto:greatmartyscott@gmail.com?subject=MojAbble" class="community-card">
+        <div class="icon">&#9993;</div>
+        <h3>Contact</h3>
+        <p>Feedback, bug reports, or just say hi.</p>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>
+    <a href="play.html">Play</a>
+    <a href="docs.html">Docs</a>
+    <a href="../index.html">marty64.net</a>
+  </div>
+  <div style="margin-top:10px;">MojAbble &bull; a videogame by Marty Scott</div>
+</footer>
+
+<script>
+(function() {
+  var platform = 'both';
+  var buttons = document.querySelectorAll('.platform-btn');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      buttons.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      platform = btn.dataset.platform;
+    });
+  });
+
+  var form = document.getElementById('signup-form');
+  var msg = document.getElementById('signup-msg');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('signup-email').value.trim();
+    msg.className = '';
+    msg.textContent = 'Signing up...';
+    fetch('beta-signup.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, platform: platform })
+    }).then(function(r) { return r.json(); }).then(function(data) {
+      if (data.ok) {
+        msg.className = 'ok';
+        msg.textContent = data.msg === 'Already signed up'
+          ? 'You are already on the list!'
+          : 'You are on the list. See you at the beta!';
+        form.reset();
+      } else {
+        msg.className = 'err';
+        msg.textContent = data.error || 'Something went wrong. Try again?';
+      }
+    }).catch(function() {
+      msg.className = 'err';
+      msg.textContent = 'Could not reach the server. Try again in a bit.';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

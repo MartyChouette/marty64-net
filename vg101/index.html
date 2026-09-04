@@ -3,215 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VG101 Knowledge Base</title>
+  <title>VG101</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf8f0;
+      --text: #2c2c2c;
+      --text-muted: #6a6456;
+      --rule: #d5cdb8;
+      --accent-gold: #c49a2e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .plate {
+      width: 100%;
+      max-width: 620px;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2.25rem;
+    }
+    .wordmark {
+      font-family: 'Lora', Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      letter-spacing: 0.01em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .wordmark .num { color: var(--accent-gold); }
+    .rule {
+      width: 44px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin: 1.75rem auto;
+      opacity: 0.7;
+    }
+    .lede {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.55;
+      max-width: 30rem;
+      margin: 0 auto 2.5rem;
+    }
+    .status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 3rem;
+    }
+    .home-link {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .home-link:hover { color: var(--text); border-bottom-color: var(--accent-gold); }
+  </style>
 </head>
 <body>
-  <!-- Mobile Navigation -->
-  <button class="mobile-nav-toggle" aria-label="Open navigation menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="mobile-nav-overlay"></div>
-
-  <div class="site-container">
-    <nav class="sidebar">
-      <a href="../index.html" class="site-title">&larr; marty64.net</a>
-      <p class="site-subtitle">VG101 Knowledge Base</p>
-
-      <a href="index.html" class="nav-home">&larr; VG101 Home</a>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Core Framework</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/framework/gesture.html" class="nav-link">Gesture</a></li>
-          <li class="nav-item"><a href="pages/framework/the-four-as.html" class="nav-link">The 4 A's</a></li>
-          <li class="nav-item"><a href="pages/framework/aesthetic-heritage.html" class="nav-link">Aesthetic Heritage</a></li>
-          <li class="nav-item"><a href="pages/framework/permissions.html" class="nav-link">Permissions</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Foundations</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/foundations/what-makes-a-videogame.html" class="nav-link">What Makes a Videogame</a></li>
-          <li class="nav-item"><a href="pages/foundations/the-weekly-rhythm.html" class="nav-link">The Weekly Rhythm</a></li>
-          <li class="nav-item"><a href="pages/foundations/player-psychology.html" class="nav-link">Player Psychology</a></li>
-          <li class="nav-item"><a href="pages/foundations/the-design-lens.html" class="nav-link">The Design Lens</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Narrative</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/narrative/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/narrative/environmental-storytelling.html" class="nav-link">Environmental Storytelling</a></li>
-          <li class="nav-item"><a href="pages/narrative/branching-consequence.html" class="nav-link">Branching &amp; Consequence</a></li>
-          <li class="nav-item"><a href="pages/narrative/dialogue-systems.html" class="nav-link">Dialogue Systems</a></li>
-          <li class="nav-item"><a href="pages/narrative/ludonarrative-harmony.html" class="nav-link">Ludonarrative Harmony</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Level Design</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/level-design/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/level-design/spatial-communication.html" class="nav-link">Spatial Communication</a></li>
-          <li class="nav-item"><a href="pages/level-design/pacing-flow.html" class="nav-link">Pacing &amp; Flow</a></li>
-          <li class="nav-item"><a href="pages/level-design/guidance-without-handholding.html" class="nav-link">Guidance Without Hand-Holding</a></li>
-          <li class="nav-item"><a href="pages/level-design/verticality-sightlines.html" class="nav-link">Verticality &amp; Sight Lines</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Systems</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/systems/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/systems/economy-resources.html" class="nav-link">Economy &amp; Resources</a></li>
-          <li class="nav-item"><a href="pages/systems/progression-systems.html" class="nav-link">Progression Systems</a></li>
-          <li class="nav-item"><a href="pages/systems/balance-philosophy.html" class="nav-link">Balance Philosophy</a></li>
-          <li class="nav-item"><a href="pages/systems/emergent-behavior.html" class="nav-link">Emergent Behavior</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Pedagogy</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/pedagogy/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/play-name-make-reflect.html" class="nav-link">Play, Name, Make, Reflect</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/why-unity.html" class="nav-link">Why Unity</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/the-final-project.html" class="nav-link">The Final Project</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/debugging-as-literacy.html" class="nav-link">Debugging as Literacy</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/accessibility-as-craft.html" class="nav-link">Accessibility as Craft</a></li>
-          <li class="nav-item"><a href="pages/pedagogy/code-as-material.html" class="nav-link">Code as Material</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Code Bank</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/code-bank/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/code-bank/input-setup.html" class="nav-link">Input Setup</a></li>
-          <li class="nav-item"><a href="pages/code-bank/basic-jump.html" class="nav-link">Basic Jump</a></li>
-          <li class="nav-item"><a href="pages/code-bank/variable-jump.html" class="nav-link">Variable Jump</a></li>
-          <li class="nav-item"><a href="pages/code-bank/double-jump.html" class="nav-link">Double Jump</a></li>
-          <li class="nav-item"><a href="pages/code-bank/coyote-time.html" class="nav-link">Coyote Time</a></li>
-          <li class="nav-item"><a href="pages/code-bank/input-buffer.html" class="nav-link">Input Buffer</a></li>
-          <li class="nav-item"><a href="pages/code-bank/dash.html" class="nav-link">Dash</a></li>
-          <li class="nav-item"><a href="pages/code-bank/hitstop.html" class="nav-link">Hitstop</a></li>
-          <li class="nav-item"><a href="pages/code-bank/knockback.html" class="nav-link">Knockback</a></li>
-          <li class="nav-item"><a href="pages/code-bank/squash-stretch.html" class="nav-link">Squash &amp; Stretch</a></li>
-          <li class="nav-item"><a href="pages/code-bank/screen-shake.html" class="nav-link">Screen Shake</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Case Studies</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/case-studies/index.html" class="nav-link">Overview</a></li>
-          <li class="nav-item"><a href="pages/case-studies/celeste-dash.html" class="nav-link">Celeste: Dash</a></li>
-          <li class="nav-item"><a href="pages/case-studies/celeste-assist-mode.html" class="nav-link">Celeste: Assist Mode</a></li>
-          <li class="nav-item"><a href="pages/case-studies/dark-souls-bonfire.html" class="nav-link">Dark Souls: Bonfire</a></li>
-          <li class="nav-item"><a href="pages/case-studies/hades-god-mode.html" class="nav-link">Hades: God Mode</a></li>
-          <li class="nav-item"><a href="pages/case-studies/portal-level-one.html" class="nav-link">Portal: Level One</a></li>
-          <li class="nav-item"><a href="pages/case-studies/undertale-genocide.html" class="nav-link">Undertale: Genocide</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-section">
-        <div class="nav-section-title">Resources</div>
-        <ul class="nav-list">
-          <li class="nav-item"><a href="pages/glossary.html" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="pages/references.html" class="nav-link">References</a></li>
-        </ul>
-      </div>
-    </nav>
-    
-    <main class="main-content">
-      <div class="content-wrapper">
-        <h1>VG101: Videogames 101</h1>
-        <p class="lead">A videogame design of <strong>Gesture + Aesthetic Heritage</strong>.</p>
-        
-        <p>
-          This knowledge base teaches videogame design as its own medium. Not borrowed art theory, not programming-first, but videogames as a medium of action with a wide variety of inherited craft traditions.
-        </p>
-
-        <figure class="vg101-splash">
-          <img src="images/vg101-splash.jpg" alt="A mosaic of videogames discussed in VG101 - from Pong to Elden Ring">
-        </figure>
-
-        <hr>
-
-        <h2>Core Framework</h2>
-        
-        <div class="framework-overview">
-          <div class="framework-card">
-            <h3><a href="pages/framework/gesture.html">Gesture</a></h3>
-            <p>
-              The surface area of contact between player and videogame.
-              Often not a single action. Not a fixed size. The sum of everything happening when a videogame is being played.
-              It can be a micro-moment or an entire videogame.
-            </p>
-          </div>
-          
-          <div class="framework-card">
-            <h3><a href="pages/framework/the-four-as.html">The 4 A's</a></h3>
-            <p>What compose a Gesture, inseparable when played, separable when analyzed:</p>
-            <ul>
-              <li><strong>Action</strong>: What the videogame has the player do (including absence of interaction)</li>
-              <li><strong>Art</strong>: Art direction, lighting, staging, camera grammar, composition, sound design, and their heritage</li>
-              <li><strong>Arc</strong>: The amount of time. A micro-moment, a long moment, or an entire videogame</li>
-              <li><strong>Atmosphere</strong>: The feeling and vibe experienced from the videogame</li>
-            </ul>
-          </div>
-          
-          <div class="framework-card">
-            <h3><a href="pages/framework/aesthetic-heritage.html">Aesthetic Heritage</a></h3>
-            <p>
-              Where many of the influences in each "A" come from. The lineage. What the videogame inherits, quotes,
-              or transforms from other videogames and other media. Videogames are an aesthetic medium,
-              and all four "A's" are aesthetic choices with lineages.
-            </p>
-          </div>
-          
-          <div class="framework-card">
-            <h3><a href="pages/framework/permissions.html">Permissions</a></h3>
-            <p>
-              The limits and boundaries of the experience. What the system allows, requires, forbids, 
-              intentionally or not. The container the Gesture happens inside.
-            </p>
-          </div>
-        </div>
-        
-        <hr>
-        
-        <h2>Philosophy</h2>
-        <ul>
-          <li><strong>Accessibility is craft, not compliance.</strong> Good design is accessible design.</li>
-          <li><strong>Debugging is literacy.</strong> Understanding why things break makes you a better designer.</li>
-          <li><strong>Code is material.</strong> Like clay or paint, it has properties, resistances, possibilities.</li>
-          <li><strong>Videogames are neither just products nor just art.</strong> They are both and neither.</li>
-        </ul>
-        
-        <hr>
-        
-        <h2>Start Here</h2>
-        <ul>
-          <li><a href="pages/framework/gesture.html">Gesture</a>: The core unit of the framework</li>
-          <li><a href="pages/framework/the-four-as.html">The 4 A's</a>: What composes a Gesture</li>
-          <li><a href="pages/foundations/the-weekly-rhythm.html">The Weekly Rhythm</a>: Play → Name → Make → Reflect</li>
-          <li><a href="pages/glossary.html">Glossary</a>: Key terms and definitions</li>
-        </ul>
-        
-      </div>
-    </main>
-  </div>
-  
-  <div class="wip-badge">Under Construction</div>
-  <script src="js/main.js"></script>
+  <main class="plate">
+    <div class="eyebrow">A Videogame Design Text</div>
+    <div class="wordmark">VG<span class="num">101</span></div>
+    <div class="rule"></div>
+    <p class="lede">Built on Gesture and Aesthetic Heritage, a way to understand videogames as their own medium.</p>
+    <div class="status">Coming Soon</div>
+    <a href="../index.html" class="home-link">&larr; Return to marty64.net</a>
+  </main>
 </body>
 </html>

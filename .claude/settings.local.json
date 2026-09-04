@@ -21,7 +21,32 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Read(//c/Users/jerma/OneDrive/Desktop/Ink_Ribbon/Docs/Core_Docs/**)",
+      "Read(//c/Users/jerma/OneDrive/Desktop/Ink_Ribbon/Docs/**)",
+      "PowerShell(Start-Process \"D:\\\\GitHub\\\\marty64-net\\\\marty64-net\\\\ink-ribbon\\\\showcase.html\")",
+      "Bash(start *)",
+      "Bash(py -c \"print\\('hello'\\)\")",
+      "Bash(code *)",
+      "Skill(run)",
+      "PowerShell(Start-Process \"D:\\\\GitHub\\\\marty64-net\\\\marty64-net\\\\index.html\")",
+      "PowerShell(Get-ChildItem C:\\\\Users\\\\jerma\\\\Downloads, C:\\\\Users\\\\jerma\\\\Desktop -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -match '\\\\.\\(png|jpe?g|webp|gif\\)$' } | Sort-Object LastWriteTime -Descending | Select-Object -First 10 FullName, LastWriteTime, Length)",
+      "PowerShell(\\(Get-Command magick -ErrorAction SilentlyContinue\\)?.Source; \\(Get-Command ffmpeg -ErrorAction SilentlyContinue\\)?.Source; \\(Get-Command cwebp -ErrorAction SilentlyContinue\\)?.Source)",
+      "PowerShell(ffmpeg *)",
+      "Bash(pandoc --version)",
+      "Bash(pandoc gesture-unit-of-analysis.docx -t plain)",
+      "Bash(pandoc gesture-unit-of-analysis.odt -t plain)",
+      "Bash(awk 'f&&/^# References/{f=0} f{print} /^---$/{c++; if\\(c==2\\)f=1}' gesture-unit-of-analysis.md)",
+      "Bash(awk '/^# References/{f=0} f{print} /^---$/{c++; if\\(c==2\\)f=1}' gesture-unit-of-analysis.md)",
+      "Bash(pandoc gesture-unit-of-analysis.md -o build/gesture-unit-of-analysis.pdf --pdf-engine=xelatex)",
+      "Bash(pandoc gesture-unit-of-analysis.md -o gesture-unit-of-analysis.docx --reference-doc=build/reference.docx)",
+      "Bash(pandoc gesture-unit-of-analysis.md -o gesture-unit-of-analysis.odt)",
+      "Bash(explorer.exe D:\\\\GitHub\\\\marty64-net\\\\marty64-net\\\\writings\\\\papers *)",
+      "Bash(explorer.exe D:\\\\GitHub\\\\marty64-net\\\\marty64-net\\\\writings\\\\papers\\\\build *)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).createHash\\('sha256'\\).update\\('marty64'\\).digest\\('hex'\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(git rm *)",
+      "Bash(git mv *)"
     ]
   }
 }

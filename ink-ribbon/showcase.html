@@ -300,8 +300,18 @@
   .heat-line { font-family: 'Crimson Text', serif; font-size: 11.5px; font-style: italic; color: rgba(139,90,43,0); height: 0; overflow: hidden; transition: all 0.5s; margin: 0; line-height: 1.4; padding-left: 12px; }
   .revealed .heat-line { color: rgba(139,90,43,0.7); height: 18px; margin: 2px 0; }
 
-  .pin { position: absolute; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; display: none; }
+  .pin { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; border-radius: 50%; display: none; }
   .revealed .pin { display: block; background: radial-gradient(circle, rgba(201,168,76,0.85) 0%, rgba(201,168,76,0) 70%); box-shadow: 0 0 5px rgba(201,168,76,0.6); }
+
+  /* === PIN DECODER STICK === */
+  .decoder-stick-wrap { padding: 0 40px; max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s; margin: 0 0 4px; }
+  #letter-pins.revealed ~ .decoder-stick-wrap { max-height: 140px; opacity: 1; margin-top: 14px; }
+  .decoder-stick-label { font-family:'Special Elite',monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #8a7a68; margin-bottom: 6px; }
+  .decoder-stick { display: flex; border: 1px solid rgba(201,168,76,0.3); border-radius: 3px; background: rgba(201,168,76,0.06); }
+  .decoder-stick span { flex: 1 1 0; text-align: center; font-family:'Courier Prime',monospace; font-size: 11px; color: var(--text2); padding: 14px 0 6px; position: relative; }
+  .decoder-stick span + span { border-left: 1px solid rgba(196,181,154,0.12); }
+  .decoder-stick span.hit { color: #c9a84c; font-weight: bold; background: rgba(201,168,76,0.16); }
+  .decoder-stick span.hit::before { content: attr(data-order); position: absolute; top: 2px; left: 0; right: 0; font-family:'Special Elite',monospace; font-size: 8px; color: #c9a84c; }
 
   .crease-mark { position: absolute; top: 0; bottom: 0; width: 1px; pointer-events: none; }
   .fold-std { background: linear-gradient(180deg, transparent 3%, rgba(44,24,16,0.06) 12%, rgba(44,24,16,0.10) 50%, rgba(44,24,16,0.06) 88%, transparent 97%); }
@@ -668,15 +678,23 @@
           </div>
           <div class="letter-frame" id="letter-pins">
             <div class="letterhead"><div class="crest">&#9672; AGUIEN &#9672;</div><div class="office">Office of the Imperial Ambassador</div></div>
-            <div class="typed-line">The quarterly reports have been compiled and submitted.<span class="pin" style="left:38%;"></span></div>
-            <div class="typed-line">Every district office has confirmed its annual filings.<span class="pin" style="left:18%;"></span></div>
-            <div class="typed-line">No discrepancies were found in the current period.<span class="pin" style="left:52%;"></span></div>
-            <div class="typed-line">All records are available for inspection upon request.<span class="pin" style="left:62%;"></span></div>
-            <div class="typed-line">Municipal archives will remain open during regular hours.<span class="pin" style="left:28%;"></span></div>
-            <div class="typed-line">Please direct further inquiries to the chief clerk.<span class="pin" style="left:45%;"></span></div>
+            <div class="typed-line">The quarterly reports have been compiled and submitted.<span class="pin" style="left:13.46%;"></span></div>
+            <div class="typed-line">Every district office has confirmed its annual filings.<span class="pin" style="left:1.92%;"></span></div>
+            <div class="typed-line">No discrepancies were found in the current period.<span class="pin" style="left:51.92%;"></span></div>
+            <div class="typed-line">All records are available for inspection upon request.<span class="pin" style="left:25%;"></span></div>
+            <div class="typed-line">Municipal archives will remain open during regular hours.<span class="pin" style="left:17.31%;"></span></div>
+            <div class="typed-line">Please direct further inquiries to the chief clerk.<span class="pin" style="left:67.31%;"></span></div>
+          </div>
+          <!-- Decoder stick: 26 evenly-spaced letters across the same width as the holes.
+               Hole left% = (letterIndex + 0.5)/26 * 100, so each hole lands on one cell. -->
+          <div class="decoder-stick-wrap">
+            <div class="decoder-stick-label">Decoder stick &middot; lay it across the page: each hole falls under one letter</div>
+            <div class="decoder-stick">
+              <span class="hit" data-order="2">A</span><span>B</span><span>C</span><span class="hit" data-order="1">D</span><span class="hit" data-order="5">E</span><span>F</span><span class="hit" data-order="4">G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span class="hit" data-order="3">N</span><span>O</span><span>P</span><span>Q</span><span class="hit" data-order="6">R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span><span>X</span><span>Y</span><span>Z</span>
+            </div>
           </div>
           <div class="controls-row"><button class="reveal-btn" onclick="toggleReveal('pins')">Hold to candle</button></div>
-          <div class="decode-box" id="decode-pins"><div class="decode-label">Hidden Message</div><div class="decode-text">Six points of light, one per line. Each position maps to a letter, and the cipher key determines what they spell. Warm golden dots floating on the page where randomness should be.</div></div>
+          <div class="decode-box" id="decode-pins"><div class="decode-label">Hidden Message</div><div class="decode-text">D - A - N - G - E - R<br><br>Six points of light, one per line. The decoder stick is a strip marked with the alphabet, evenly spaced. Lay it across the page and each hole falls under one letter. Read top to bottom: D, A, N, G, E, R. Without the stick you see only golden dots where randomness should be. The spacing is the key.</div></div>
         </div>
 
         <!-- CREASE CODES -->
