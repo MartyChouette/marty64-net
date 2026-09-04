@@ -36,7 +36,7 @@
   <script>
     // Emscripten module configuration (WebGPU)
     var Module = {
-      locateFile: function(path, prefix) { return (prefix||'') + path + '?v=20260903z'; },
+      locateFile: function(path, prefix) { return (prefix||'') + path + '?v=20260904a'; },
       canvas: (function() {
         var c = document.getElementById('game-canvas');
         // Request WebGPU context (Emscripten's USE_WEBGPU=1 expects this)
@@ -117,6 +117,6 @@
     };
     document.getElementById('fullscreen-btn').addEventListener('click', window.enjinToggleFullscreen);
   </script>
-  <script src="EnjinPlayer.js?v=20260903z"></script>
+  <script src="EnjinPlayer.js?v=20260904a"></script>
 </body>
 </html>
