@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "type": "rich",
+  "provider_name": "TEGE",
+  "provider_url": "https://marty64.net/",
+  "title": "Potions",
+  "author_name": "Marty",
+  "author_url": "https://marty64.net/",
+  "thumbnail_url": "https://marty64.net/embed/posters/potions.jpg",
+  "thumbnail_width": 664,
+  "thumbnail_height": 373,
+  "width": 640,
+  "height": 360,
+  "html": "<iframe src=\"https://marty64.net/play/potions/\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"fullscreen; autoplay; gamepad\" allowfullscreen></iframe>"
+}

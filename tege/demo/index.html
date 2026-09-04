@@ -1,124 +1,140 @@
 <!DOCTYPE html>
-<html><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TEGE - Demo Scene</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:#111; display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; overflow:hidden; }
-#game-container { width:100%; height:100vh; position:relative; }
-#game-canvas { width:100%; height:100%; display:block; outline:none; }
-#loading { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; font-family:sans-serif; font-size:18px; z-index:10; }
-#error { color:#f44; font-family:sans-serif; font-size:16px; padding:20px; text-align:center; display:none; }
-#error a { color:#8af; }
-#hint {
-  position:fixed; bottom:12px; left:12px;
-  color:#aaa; font-family:monospace; font-size:13px;
-  background:rgba(0,0,0,0.55); padding:8px 12px; border-radius:6px;
-  pointer-events:none; user-select:none; z-index:5;
-}
-#hint b { color:#fff; }
-#perf-hud {
-  position:fixed; top:8px; left:8px; color:#0f0; font:12px monospace;
-  background:rgba(0,0,0,0.7); padding:6px 10px; z-index:999;
-  pointer-events:none; display:none;
-}
-</style>
-</head><body>
-<div id="game-container">
-  <div id="loading">Loading demo scene...</div>
-  <div id="error"></div>
-  <canvas id="game-canvas" tabindex="0"></canvas>
-</div>
-<div id="hint"><b>WASD</b> move &nbsp;·&nbsp; <b>Hold RMB</b> look &nbsp;·&nbsp; <b>Shift</b> sprint &nbsp;·&nbsp; <b>Gamepad</b> supported</div>
-<a id="back-link" href="../index.html" style="position:fixed;top:12px;right:12px;color:#aaa;font-family:monospace;font-size:13px;background:rgba(0,0,0,0.55);padding:8px 12px;border-radius:6px;text-decoration:none;z-index:5;">TEGE &rarr;</a>
-<div id="perf-hud"></div>
-<script>
-// Check WebGPU support before loading WASM. Checking navigator.gpu alone is not
-// enough: some browsers (e.g. Firefox on blocklisted drivers) expose the API but
-// return a null adapter, which would otherwise boot the engine into a dead canvas.
-function showNoWebGPU(detail) {
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('game-canvas').style.display = 'none';
-  var err = document.getElementById('error');
-  err.style.display = 'block';
-  err.innerHTML = '<h2>WebGPU Not Available</h2><p>' + detail + '</p>' +
-    '<p>Try <a href="https://www.google.com/chrome/">Chrome</a> or <a href="https://www.microsoft.com/edge">Edge</a> (v113+).</p>' +
-    '<p>If you are on one of those and still see this, check that hardware acceleration is enabled.</p>';
-}
-if (!navigator.gpu) {
-  showNoWebGPU('Your browser does not support WebGPU.');
-} else {
-  var canvas = document.getElementById('game-canvas');
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- iPhone true fullscreen: Add to Home Screen -> launch from icon runs standalone
+       with no Safari chrome (Fullscreen API is blocked for canvas in iPhone Safari). -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>TEGE — Web Demo</title>
+  <meta property="og:title" content="TEGE — Web Demo">
+  <meta property="og:type" content="game">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #webgpu-error { display:none; color:#eafffe; font-family:sans-serif; font-size:16px;
+      padding:40px; text-align:center; position:absolute; top:40%; left:50%;
+      transform:translate(-50%,-50%); z-index:20; }
+    #webgpu-error a { color:#35d5cf; }
+    #back-link { position:fixed; top:12px; right:12px; color:#8ff5ef;
+      font-family:monospace; font-size:13px; background:rgba(0,0,0,0.55);
+      padding:8px 12px; border-radius:6px; text-decoration:none; z-index:30; }
+    #showroom-link { position:fixed; top:12px; left:12px; color:#8ff5ef;
+      font-family:monospace; font-size:13px; background:rgba(0,0,0,0.55);
+      padding:8px 12px; border-radius:6px; text-decoration:none; z-index:30; }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas" tabindex="0" oncontextmenu="return false"></canvas>
+    <div id="preloader">
+      <div id="tege-wordmark">TEGE</div>
+      <div id="progress-container">
+        <div id="progress-bar"></div>
+        <div id="tege-cube"></div>
+      </div>
+      <div id="progress-text">loading engine</div>
+      <div id="click-to-play" style="display:none;">&#9654; &nbsp;Click to Play</div>
+    </div>
+    <div id="webgpu-error"></div>
+    <button id="fullscreen-btn" title="Fullscreen">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+        <path d="M3 3h5v2H5v3H3V3zm9 0h5v5h-2V5h-3V3zM3 12h2v3h3v2H3v-5zm12 3h-3v2h5v-5h-2v3z"/>
+      </svg>
+    </button>
+  </div>
+  <a id="showroom-link" href="../../demoroom/index.html">&larr; Demo Room</a>
+  <a id="back-link" href="../index.html">TEGE &rarr;</a>
 
-  // Responsive canvas via ResizeObserver - drives pixel dimensions from CSS layout
-  var _runtimeReady = false;
-  var resizeObserver = new ResizeObserver(function(entries) {
-    var r = entries[0].contentRect;
-    var dpr = window.devicePixelRatio || 1;
-    var w = Math.floor(r.width);
-    var h = Math.floor(r.height);
-    if (w <= 0 || h <= 0) return;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    if (_runtimeReady) {
-      Module._onCanvasResize(w, h, dpr);
+  <script src="preloader.js"></script>
+  <script>
+    // WebGPU gate: checking navigator.gpu alone is not enough — some browsers
+    // expose the API but return a null adapter (blocklisted drivers).
+    function showNoWebGPU(detail) {
+      var pre = document.getElementById('preloader');
+      if (pre) pre.style.display = 'none';
+      var err = document.getElementById('webgpu-error');
+      err.style.display = 'block';
+      err.innerHTML = '<h2>WebGPU Not Available</h2><p>' + detail + '</p>' +
+        '<p>Try <a href="https://www.google.com/chrome/">Chrome</a> or ' +
+        '<a href="https://www.microsoft.com/edge">Edge</a> (v113+).</p>' +
+        '<p>If you are on one of those and still see this, check that hardware acceleration is enabled.</p>';
     }
-  });
-  resizeObserver.observe(document.getElementById('game-container'));
 
-  // Debug overlay: add ?debug to the URL to see engine errors on screen
-  var _dbg = null;
-  if (location.search.includes('debug')) {
-    _dbg = document.createElement('pre');
-    _dbg.style.cssText = 'position:fixed;bottom:0;left:0;right:0;max-height:45vh;overflow:auto;margin:0;' +
-      'background:rgba(0,0,0,0.85);color:#f88;font:11px monospace;padding:8px;z-index:1000;white-space:pre-wrap;';
-    document.body.appendChild(_dbg);
-  }
-  function _dbgLog(prefix, msg) {
-    if (_dbg) _dbg.textContent += prefix + msg + '\n';
-  }
-  window.addEventListener('error', function(e) { _dbgLog('[js] ', e.message + ' @ ' + e.filename + ':' + e.lineno); });
-  window.addEventListener('unhandledrejection', function(e) { _dbgLog('[promise] ', String(e.reason)); });
-
-  var Module = {
-    canvas: canvas,
-    onRuntimeInitialized: function() {
-      _runtimeReady = true;
-      document.getElementById('loading').style.display = 'none';
-    },
-    setStatus: function(text) {
-      if (text) document.getElementById('loading').textContent = text;
-    },
-    print: function(text) { console.log(text); _dbgLog('[out] ', text); },
-    printErr: function(text) { console.error(text); _dbgLog('[err] ', text); }
-  };
-
-  // Opt-in performance HUD: add ?perf to URL
-  if (location.search.includes('perf')) {
-    var hud = document.getElementById('perf-hud');
-    hud.style.display = 'block';
-    setInterval(function() {
-      // Emscripten export stubs abort if called before runtime init
-      if (_runtimeReady && Module._getDrawCallCount) {
-        hud.textContent = 'DC: ' + Module._getDrawCallCount() +
-                          ' | Ent: ' + Module._getEntityCount();
+    // Cache-bust version — bump when redeploying so mobile picks up the new
+    // wasm/js/data instead of a stale cached copy. locateFile appends it to the
+    // .wasm the Emscripten runtime loads; the .js gets it on its <script> src.
+    var TEGE_V = '20260903e';
+    var Module = {
+      locateFile: function(path, prefix) { return (prefix || '') + path + '?v=' + TEGE_V; },
+      canvas: (function() {
+        var c = document.getElementById('game-canvas');
+        if (navigator.gpu) {
+          c.getContext('webgpu');
+        }
+        return c;
+      })(),
+      onRuntimeInitialized: function() {
+        _runtimeReady = true;
+        console.log('TEGE Web Demo - Engine initialized');
+        if (typeof hidePreloader === 'function') hidePreloader();
+      },
+      setStatus: function(text) {
+        if (text) console.log(text);
+        if (typeof updateProgress === 'function') {
+          var m = text.match(/([\d.]+)\/([\d.]+)/);
+          if (m) updateProgress(parseInt(m[1]) / parseInt(m[2]));
+        }
       }
-    }, 250);
-  }
+    };
 
-  // Only load the engine once the browser has actually granted an adapter
-  navigator.gpu.requestAdapter().then(function(adapter) {
-    if (!adapter) {
-      showNoWebGPU('Your browser supports WebGPU but did not provide a graphics adapter. This usually means the graphics driver is blocklisted.');
-      return;
+    var _runtimeReady = false;
+    var _ro = new ResizeObserver(function(entries) {
+      var r = entries[0].contentRect;
+      var dpr = window.devicePixelRatio || 1;
+      var w = Math.floor(r.width);
+      var h = Math.floor(r.height);
+      // Long-edge cap in DEVICE pixels. The old form floored eff at 1, so any
+      // container wider than the cap rendered at full window resolution and the
+      // cap did nothing at all - a 2560-wide window drew 3.7M pixels. Allowing
+      // eff below 1 is what actually bounds the cost; 0.55 keeps it from going
+      // soft enough to notice. 1280 keeps phones byte-identical to the tuning that
+      // fixed the mobile OOM; only oversized desktop windows change.
+      var ENJIN_MAX_EDGE = 1280;
+      var eff = Math.max(0.55, Math.min(dpr, ENJIN_MAX_EDGE / Math.max(w, h)));
+      // Ignore a collapsed box: layout reports one for a frame or two during
+      // fullscreen transitions and before CSS settles, and committing it makes
+      // the engine rebuild every render target at that size.
+      if (w < 64 || h < 64) return;
+      var c = document.getElementById('game-canvas');
+      c.width = Math.floor(w * eff);
+      c.height = Math.floor(h * eff);
+      if (_runtimeReady) Module._onCanvasResize(w, h, eff);
+    });
+    _ro.observe(document.getElementById('game-container'));
+
+    document.getElementById('fullscreen-btn').addEventListener('click', function() {
+      var el = document.getElementById('game-container');
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+    });
+
+    if (!navigator.gpu) {
+      showNoWebGPU('Your browser does not support WebGPU.');
+    } else {
+      navigator.gpu.requestAdapter().then(function(adapter) {
+        if (!adapter) showNoWebGPU('WebGPU is present but no graphics adapter was returned.');
+        else {
+          var s = document.createElement('script');
+          s.src = 'EnjinPlayer.js?v=' + TEGE_V;
+          document.body.appendChild(s);
+        }
+      }).catch(function() {
+        showNoWebGPU('WebGPU adapter request failed.');
+      });
     }
-    var s = document.createElement('script');
-    s.src = 'EnjinPlayer.js';
-    document.body.appendChild(s);
-  }).catch(function(e) {
-    showNoWebGPU('WebGPU adapter request failed: ' + e);
-  });
-}
-</script>
-</body></html>
+  </script>
+</body>
+</html>
